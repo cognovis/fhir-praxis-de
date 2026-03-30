@@ -58,11 +58,12 @@ for f in "$ROOT/fsh-generated/resources/"*.json; do
 done
 
 COUNT=$(ls "$DIST"/*.json | wc -l | tr -d ' ')
-echo "Package built: $DIST ($COUNT resources)"
-echo ""
-echo "To install locally into FHIR cache:"
-echo "  mkdir -p ~/.fhir/packages/${PACKAGE_ID}#${VERSION}/package"
-echo "  cp -r $DIST/* ~/.fhir/packages/${PACKAGE_ID}#${VERSION}/package/"
-echo ""
-echo "To create npm tarball:"
-echo "  cd $DIST && npm pack"
+echo "Package dir: $DIST ($COUNT resources)"
+
+# 6. Create tgz
+cd "$DIST"
+npm pack --pack-destination "$ROOT/dist"
+cd "$ROOT"
+
+TGZ="dist/${PACKAGE_ID}-${VERSION}.tgz"
+echo "Package built: $TGZ ($(du -h "$TGZ" | cut -f1))"
