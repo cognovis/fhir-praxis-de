@@ -64,6 +64,43 @@ Extensions specific to GOÄ (private fee schedule) billing.
 | `BgAktenzeichenExt` | string | BG-Aktenzeichen |
 | `BgUnfalltagExt` | date | BG-Unfalltag |
 
+## GOÄ Detail / Sachkosten
+
+Extensions for detailed GOÄ billing: ultrasound organs, time-of-day surcharges, material costs, and analog billing.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `GoaeOrganExt` | string | Ultraschall-Organ (GOÄ Kapitel C V) |
+| `GoaeUhrzeitExt` | time | Behandlungsuhrzeit (für Unzeitzuschläge GOÄ E/F) |
+| `GoaeSachkostenBezeichnungExt` | string | Sachkosten-Bezeichnung (GOÄ §10) |
+| `GoaeMaterialkostenExt` | Money | Materialkosten-Betrag (GOÄ §10) |
+| `SachkostenPriceExt` | Money | Sachkostenpauschale für GOÄ 0xxx-Ziffern |
+| `AnalogReferenceExt` | string | Analogziffer-Referenz (GOÄ §6 Abs. 2) |
+
+## Private Billing Workflow
+
+Extensions tracking review and release status of private invoices.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PrivatFreigabeStatusExt` | string | Freigabestatus (Entwurf, Freigegeben, Versendet) |
+| `PrivatReviewedStatusExt` | boolean | Ärztlich geprüft |
+| `PrivatReviewedAtExt` | dateTime | Zeitpunkt der ärztlichen Prüfung |
+| `ReviewedStatusExt` | string | Allgemeiner Prüfstatus einer Abrechnungsposition |
+| `ReviewedAtExt` | dateTime | Zeitpunkt der Prüfung |
+
+## EBM auf ChargeItem-Ebene
+
+EBM detail extensions on individual ChargeItems (complementing the catalog-level extensions on ChargeItemDefinition). The concrete billed values may differ from catalog values due to surcharges or deductions.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `EbmKapitelExt` | string | EBM-Kapitel der abgerechneten Leistung |
+| `EbmPunkteExt` | decimal | Konkret abgerechnete EBM-Punktzahl |
+| `EbmPruefzeitExt` | integer | Prüfzeit in Minuten |
+| `EbmRlvRelevanzExt` | boolean | RLV-Relevanz der Leistung |
+| `EbmEuroBetragExt` | Money | Euro-Betrag nach Orientierungspunktwert |
+
 ## RLV / Budget
 
 Extensions for physician capitation budget management (Regelleistungsvolumen).
@@ -118,6 +155,37 @@ Extensions for KBV time budget management (Prüfzeit).
 |-----------|------|-------------|
 | `ZeitbudgetMaxMinutenExt` | integer | Maximale Prüfzeit in Minuten pro Quartal |
 | `ZeitbudgetAbrechnungskreiseExt` | string | Zugehörige Abrechnungskreise |
+
+## HVG / Selektivverträge
+
+Extensions for selective contracts (§73b/§73c SGB V). Base contract data maps to the FHIR Contract resource; only genuinely additional fields are modeled as extensions.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `HvgFacharztvertragExt` | boolean | Facharztvertrag-Kennzeichen (§73c SGB V) |
+| `HvgKennungExt` | string | Eindeutige Vertragskennung beim Kostenträger |
+
+## BGT2001 / BG-Tarif
+
+Extensions for occupational accident tariff positions (supplements dguv.basis dependency).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BgtPunkteExt` | decimal | BGT-Punktzahl |
+| `BgtKatalogGruppeExt` | string | Obergruppe im BGT2001-Katalog |
+| `BgtKatalogUntergruppeExt` | string | Untergruppe im BGT2001-Katalog |
+
+## Price History
+
+Complex extension for historical pricing on ChargeItemDefinition catalog entries.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PriceHistoryExt` | complex | Container mit Gültigkeitszeitraum und historischen Werten |
+| `PriceHistoryExt.validFrom` | date | Gültig ab |
+| `PriceHistoryExt.validTo` | date | Gültig bis |
+| `PriceHistoryExt.points` | decimal | Historischer Punktwert |
+| `PriceHistoryExt.euroValue` | Money | Historischer Euro-Betrag |
 
 ## Condition / Diagnose
 

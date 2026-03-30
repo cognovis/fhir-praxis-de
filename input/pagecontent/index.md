@@ -8,9 +8,11 @@ FHIR R4 profiles and extensions for German ambulatory practice management (Vertr
 
 | Domain | Description |
 |--------|-------------|
-| **Billing (EBM/GOÄ)** | EBM-Ziffern, GOÄ-Faktoren, Scheinarten, Abrechnungsquartal, Statistikleistungen |
+| **Billing (EBM/GOÄ/BGT)** | EBM-Ziffern, GOÄ-Faktoren inkl. Sachkosten/Analogziffern, BGT2001, Scheinarten, Abrechnungsquartal |
+| **Selektivverträge (HZV)** | Generisches Katalogmodell für HZV/Facharztverträge aller KV-Regionen über ChargeItemDefinition |
 | **Budget Management (RLV/QZV)** | Regelleistungsvolumen, qualifikationsgebundene Zusatzvolumina, Entbudgetierung |
 | **Remittance (Honorarbescheid)** | KV-Honorarbescheide, Richtigstellungen, Auszahlungsbeträge |
+| **Private Billing Workflow** | Freigabe-/Review-Status für Privatrechnungen |
 | **Queue Management (Warteraum)** | Ankunftszeiten, Aufrufzeiten, R5-Encounter.subjectStatus-Backport |
 | **AI Provenance (EU AI Act)** | KI-Herkunftskennzeichnung gemäß Art. 50, Modellversion, menschliche Prüfung |
 | **Administrative Workflows** | Aufgaben, Genehmigungen, Überweisungen, Einweisungen, Einwilligungen, AU-Bescheinigungen |
@@ -19,6 +21,12 @@ FHIR R4 profiles and extensions for German ambulatory practice management (Vertr
 
 - **Encounter / Warteraum** — Queue management with arrival and call timestamps
 - **Billing / Abrechnung** — EBM and GOÄ billing, charge items, catalog metadata, Scheinpositionen
+- **GOÄ Detail / Sachkosten** — Ultrasound organs, material costs, analog billing (GOÄ §6/§10)
+- **EBM auf ChargeItem** — Concrete billed EBM values (Kapitel, Punkte, Prüfzeit, RLV-Relevanz)
+- **Private Billing Workflow** — Review and release status for private invoices
+- **HVG / Selektivverträge** — Selective contract extensions (§73b/§73c SGB V)
+- **BGT2001 / BG-Tarif** — Occupational accident tariff details (supplements dguv.basis)
+- **Price History** — Historical pricing on ChargeItemDefinition catalog entries
 - **RLV / Budget** — Contract-based physician capitation budget (Regelleistungsvolumen)
 - **Honorarbescheid / Remittance** — KV payment reconciliation and correction codes
 - **AI Provenance** — EU AI Act Art. 50 compliance: AI-generated content flagging, human review tracking

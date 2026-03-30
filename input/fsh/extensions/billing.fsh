@@ -261,3 +261,22 @@ Title: "BG-Unfalltag"
 Description: "Datum des Arbeitsunfalls für die BG-Abrechnung"
 Context: Claim
 * value[x] only date
+
+// ============================================================================
+// Price History Extension (on ChargeItemDefinition)
+// ============================================================================
+
+Extension: PriceHistoryExt
+Id: price-history
+Title: "Preishistorie"
+Description: "Historischer Preis-/Punktwert einer Leistungsziffer mit Gültigkeitszeitraum"
+Context: ChargeItemDefinition
+* extension contains
+    validFrom 1..1 and
+    validTo 0..1 and
+    points 0..1 and
+    euroValue 0..1
+* extension[validFrom].value[x] only date
+* extension[validTo].value[x] only date
+* extension[points].value[x] only decimal
+* extension[euroValue].value[x] only Money

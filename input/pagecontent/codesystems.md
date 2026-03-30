@@ -6,16 +6,19 @@ This IG defines custom CodeSystems for concepts specific to German ambulatory pr
 
 ### BillingTypeCS — Abrechnungsart
 
-Codes für Abrechnungsarten in der ambulanten Versorgung.
+Codes für Abrechnungsarten und Abrechnungskataloge in der ambulanten Versorgung. Dient als Diskriminator für ChargeItemDefinition-Kataloge. Regionale Selektivverträge nutzen den generischen Typ (z.B. `hzv`) — die KV-Region wird über `Contract.identifier` bzw. `ChargeItemDefinition.jurisdiction` abgebildet.
 
 | Code | Display | Beschreibung |
 |------|---------|--------------|
-| `goae` | GOÄ | Gebührenordnung für Ärzte |
-| `ebm` | EBM | Einheitlicher Bewertungsmaßstab |
-| `bema` | BEMA | Bewertungsmaßstab für zahnärztliche Leistungen |
-| `goz` | GOZ | Gebührenordnung für Zahnärzte |
-| `bg` | BG | Berufsgenossenschaft |
+| `ebm` | EBM | Einheitlicher Bewertungsmaßstab (GKV) |
+| `goae` | GOÄ | Gebührenordnung für Ärzte (PKV) |
+| `bema` | BEMA | Bewertungsmaßstab für zahnärztliche Leistungen (GKV) |
+| `goz` | GOZ | Gebührenordnung für Zahnärzte (PKV) |
+| `bgt2001` | BGT2001 | Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV) |
+| `hzv` | HZV | Hausarztzentrierte Versorgung (§73b SGB V) |
+| `facharztvertrag` | Facharztvertrag | Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V) |
 | `igel` | IGeL | Individuelle Gesundheitsleistung |
+| `bg` | BG | Berufsgenossenschaft (sonstige BG-Abrechnung) |
 
 ### CorrectionRuleCS — KVB Richtigstellungsgründe
 
@@ -114,6 +117,14 @@ Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
 | `ai-assisted` | KI-unterstützt | Inhalt wurde mit KI-Unterstützung erstellt |
 | `human-reviewed` | Menschlich geprüft | KI-Inhalt wurde durch einen Menschen geprüft |
 | `human-approved` | Menschlich freigegeben | KI-Inhalt wurde durch einen Menschen freigegeben |
+
+### ZuzahlungsstatusCS — Zuzahlungsstatus
+
+GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden per ETL aus den offiziellen eGK-VSD-Spezifikationen befüllt (`^content = #not-present`).
+
+### HvgVertragsartCS — HVG-Vertragsart
+
+Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, Besondere Versorgung). Inhalte werden per ETL befüllt (`^content = #not-present`).
 
 ## External CodeSystems
 
