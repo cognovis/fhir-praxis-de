@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Features
+
+- Add Da Vinci PAS DE artifacts — 3 Profiles, 3 CodeSystems, 4 ValueSets, 2 Extensions
+
 ## [0.3.0] - 2026-03-30
 
 ### Bug Fixes
@@ -17,6 +23,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - VERSION file as single source of truth, SemVer tag pattern
+- Bump version to 0.3.0
 
 ## [2026.03.1] - 2026-03-30
 
