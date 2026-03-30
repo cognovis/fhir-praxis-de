@@ -10,14 +10,21 @@ SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$SCRIPT_DIR/.."
 DIST="$ROOT/dist/package"
 
-# 1. Run SUSHI
+# 1. Read version from VERSION file (single source of truth)
+VERSION=$(tr -d '[:space:]' < "$ROOT/VERSION")
+PACKAGE_ID=$(grep '^id:' "$ROOT/sushi-config.yaml" | awk '{print $2}')
+
+# 2. Sync version into sushi-config.yaml before SUSHI runs
+if [[ "$(uname)" == "Darwin" ]]; then
+  sed -i '' "s/^version: .*/version: $VERSION/" "$ROOT/sushi-config.yaml"
+else
+  sed -i "s/^version: .*/version: $VERSION/" "$ROOT/sushi-config.yaml"
+fi
+
+# 3. Run SUSHI
 echo "Running SUSHI..."
 cd "$ROOT"
 npx sushi . 2>&1 | tail -5
-
-# 2. Read version from sushi-config.yaml
-VERSION=$(grep '^version:' sushi-config.yaml | awk '{print $2}')
-PACKAGE_ID=$(grep '^id:' sushi-config.yaml | awk '{print $2}')
 echo "Building $PACKAGE_ID@$VERSION"
 
 # 3. Create dist/package/ directory
