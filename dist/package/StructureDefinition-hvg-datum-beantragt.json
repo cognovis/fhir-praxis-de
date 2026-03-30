@@ -2,7 +2,7 @@
   "resourceType": "StructureDefinition",
   "id": "hvg-datum-beantragt",
   "url": "https://fhir.cognovis.de/praxis/StructureDefinition/hvg-datum-beantragt",
-  "name": "HvgDatumBeantragExt",
+  "name": "HvgDatumBeantragtExt",
   "title": "HVG Datum Beantragt",
   "status": "draft",
   "description": "Antragsdatum für die Einschreibung in den HVG-Selektivvertrag (§73b/§73c SGB V)",

@@ -31,7 +31,7 @@
             {
               "code": "420134006",
               "display": "Propensity to adverse reaction (finding)",
-              "equivalence": "equivalent"
+              "equivalence": "narrower"
             }
           ]
         },
@@ -42,7 +42,7 @@
             {
               "code": "418775008",
               "display": "Finding of tolerance or intolerance to treatment (finding)",
-              "equivalence": "equivalent"
+              "equivalence": "wider"
             }
           ]
         },
@@ -53,7 +53,7 @@
             {
               "code": "737470001",
               "display": "Clinical decision support intervention (procedure)",
-              "equivalence": "equivalent"
+              "equivalence": "relatedto"
             }
           ]
         }
