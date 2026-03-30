@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "bgt-katalog-gruppe",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-katalog-gruppe",
+  "name": "BgtKatalogGruppeExt",
+  "title": "BGT-Kataloggruppe",
+  "status": "draft",
+  "description": "Obergruppe im BGT2001-Katalog (z.B. Allgemeine Leistungen, Chirurgie)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItemDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "BGT-Kataloggruppe",
+        "definition": "Obergruppe im BGT2001-Katalog (z.B. Allgemeine Leistungen, Chirurgie)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-katalog-gruppe"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

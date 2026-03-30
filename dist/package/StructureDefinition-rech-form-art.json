@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rech-form-art",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/rech-form-art",
+  "name": "RechFormArtExt",
+  "title": "Rechnungsformular-Art",
+  "status": "draft",
+  "description": "Art des Rechnungsformulars (z.B. Privatliquidation, BG-Rechnung)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Claim",
+      "type": "element"
+    },
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Rechnungsformular-Art",
+        "definition": "Art des Rechnungsformulars (z.B. Privatliquidation, BG-Rechnung)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/rech-form-art"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "payment-patient-ref",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/payment-patient-ref",
+  "name": "PaymentPatientRefExt",
+  "title": "Zahlungs-Patientenreferenz",
+  "status": "draft",
+  "description": "Referenz auf den Patienten fuer die Zahlung",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "PaymentReconciliation",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Zahlungs-Patientenreferenz",
+        "definition": "Referenz auf den Patienten fuer die Zahlung"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/payment-patient-ref"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

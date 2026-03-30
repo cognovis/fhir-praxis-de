@@ -1,0 +1,29 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "PASTaskCodeCS",
+  "id": "pas-task-code",
+  "title": "PAS Task Code",
+  "description": "Codes fuer Genehmigungsworkflow-Tasks (Prior Authorization)",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code",
+  "concept": [
+    {
+      "code": "submit",
+      "display": "Antrag einreichen",
+      "definition": "Genehmigungsantrag an Kostentraeger senden"
+    },
+    {
+      "code": "inquire",
+      "display": "Status abfragen",
+      "definition": "Status des Genehmigungsantrags abfragen"
+    },
+    {
+      "code": "cancel",
+      "display": "Antrag stornieren",
+      "definition": "Genehmigungsantrag zurueckziehen"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 3
+}

@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "goae-uhrzeit",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/goae-uhrzeit",
+  "name": "GoaeUhrzeitExt",
+  "title": "Behandlungsuhrzeit",
+  "status": "draft",
+  "description": "Uhrzeit der Leistungserbringung (relevant für Zuschläge bei Unzeiten, GOÄ Buchstabe E/F)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    },
+    {
+      "expression": "Claim",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Behandlungsuhrzeit",
+        "definition": "Uhrzeit der Leistungserbringung (relevant für Zuschläge bei Unzeiten, GOÄ Buchstabe E/F)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/goae-uhrzeit"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "time"
+          }
+        ]
+      }
+    ]
+  }
+}

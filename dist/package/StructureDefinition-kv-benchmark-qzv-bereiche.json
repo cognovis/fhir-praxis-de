@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-benchmark-qzv-bereiche",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-qzv-bereiche",
+  "name": "KvBenchmarkQzvBereicheExt",
+  "title": "KV-Benchmark QZV-Bereiche",
+  "status": "draft",
+  "description": "QZV-Leistungsbereiche mit Fallwerten, Format: name:fallwert,name:fallwert",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark QZV-Bereiche",
+        "definition": "QZV-Leistungsbereiche mit Fallwerten, Format: name:fallwert,name:fallwert"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-qzv-bereiche"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

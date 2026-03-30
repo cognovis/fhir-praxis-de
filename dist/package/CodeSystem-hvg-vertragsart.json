@@ -1,0 +1,11 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "not-present",
+  "name": "HvgVertragsartCS",
+  "id": "hvg-vertragsart",
+  "title": "HVG-Vertragsart",
+  "description": "Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, besondere Versorgung). Inhalte werden per ETL befüllt.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart",
+  "caseSensitive": true
+}

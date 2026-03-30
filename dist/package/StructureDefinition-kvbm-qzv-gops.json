@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kvbm-qzv-gops",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kvbm-qzv-gops",
+  "name": "KvBenchmarkQzvGopsExt",
+  "title": "KV-Benchmark QZV-GOP-Zuordnung",
+  "status": "draft",
+  "description": "Zuordnung von QZV-Bereichen zu EBM-Gebührenordnungspositionen (GOPs). Format: Bereichsname:gop1,gop2|Bereichsname:gop3,gop4",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark QZV-GOP-Zuordnung",
+        "definition": "Zuordnung von QZV-Bereichen zu EBM-Gebührenordnungspositionen (GOPs). Format: Bereichsname:gop1,gop2|Bereichsname:gop3,gop4"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kvbm-qzv-gops"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

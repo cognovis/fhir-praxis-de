@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "referral-optimization-status",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/referral-optimization-status",
+  "name": "ReferralOptimizationStatusExt",
+  "title": "Referral Optimization Status",
+  "status": "draft",
+  "description": "Status der Ueberweisungsoptimierung.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ServiceRequest",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Referral Optimization Status",
+        "definition": "Status der Ueberweisungsoptimierung."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/referral-optimization-status"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

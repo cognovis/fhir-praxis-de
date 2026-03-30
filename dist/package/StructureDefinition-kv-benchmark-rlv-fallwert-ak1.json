@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-benchmark-rlv-fallwert-ak1",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-rlv-fallwert-ak1",
+  "name": "KvBenchmarkRlvFallwertAk1Ext",
+  "title": "KV-Benchmark RLV-Fallwert Altersklasse 1",
+  "status": "draft",
+  "description": "RLV-Fallwert Altersklasse 1 (bis 5. Lebensjahr)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark RLV-Fallwert Altersklasse 1",
+        "definition": "RLV-Fallwert Altersklasse 1 (bis 5. Lebensjahr)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-rlv-fallwert-ak1"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      }
+    ]
+  }
+}

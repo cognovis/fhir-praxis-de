@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "khe-icd",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/khe-icd",
+  "name": "KheIcdExt",
+  "title": "Einweisungs-ICD",
+  "status": "draft",
+  "description": "ICD-Code fuer die Krankenhauseinweisung.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ServiceRequest",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Einweisungs-ICD",
+        "definition": "ICD-Code fuer die Krankenhauseinweisung."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/khe-icd"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      }
+    ]
+  }
+}

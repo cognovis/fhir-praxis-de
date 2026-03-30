@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "manual-override",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/manual-override",
+  "name": "ManualOverrideExt",
+  "title": "Manuelle Überschreibung",
+  "status": "draft",
+  "description": "Kennzeichen, ob die Abrechnungsposition manuell überschrieben wurde",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Claim",
+      "type": "element"
+    },
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Manuelle Überschreibung",
+        "definition": "Kennzeichen, ob die Abrechnungsposition manuell überschrieben wurde"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/manual-override"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+}

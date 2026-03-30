@@ -1,0 +1,67 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pas-claim-response-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de",
+  "name": "PASClaimResponseDE",
+  "title": "PAS ClaimResponse DE",
+  "status": "draft",
+  "description": "Genehmigungsbescheid (Prior Authorization Response) fuer die deutsche ambulante Versorgung, angelehnt an Da Vinci PAS.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "ClaimResponse",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/ClaimResponse",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "ClaimResponse.status",
+        "path": "ClaimResponse.status",
+        "mustSupport": true
+      },
+      {
+        "id": "ClaimResponse.type",
+        "path": "ClaimResponse.type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "professional",
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "ClaimResponse.use",
+        "path": "ClaimResponse.use",
+        "patternCode": "preauthorization"
+      },
+      {
+        "id": "ClaimResponse.patient",
+        "path": "ClaimResponse.patient",
+        "mustSupport": true
+      },
+      {
+        "id": "ClaimResponse.insurer",
+        "path": "ClaimResponse.insurer",
+        "mustSupport": true
+      },
+      {
+        "id": "ClaimResponse.outcome",
+        "path": "ClaimResponse.outcome",
+        "mustSupport": true
+      },
+      {
+        "id": "ClaimResponse.item",
+        "path": "ClaimResponse.item",
+        "mustSupport": true
+      },
+      {
+        "id": "ClaimResponse.item.adjudication",
+        "path": "ClaimResponse.item.adjudication",
+        "mustSupport": true
+      }
+    ]
+  }
+}

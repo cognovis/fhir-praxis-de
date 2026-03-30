@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "ue-fachrichtung",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/ue-fachrichtung",
+  "name": "UeFachrichtungExt",
+  "title": "Ueberweisungs-Fachrichtung",
+  "status": "draft",
+  "description": "Fachrichtung, an die ueberwiesen wird.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ServiceRequest",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Ueberweisungs-Fachrichtung",
+        "definition": "Fachrichtung, an die ueberwiesen wird."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/ue-fachrichtung"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      }
+    ]
+  }
+}

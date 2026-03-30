@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "bgt-katalog-untergruppe",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-katalog-untergruppe",
+  "name": "BgtKatalogUntergruppeExt",
+  "title": "BGT-Kataloguntergruppe",
+  "status": "draft",
+  "description": "Untergruppe im BGT2001-Katalog",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItemDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "BGT-Kataloguntergruppe",
+        "definition": "Untergruppe im BGT2001-Katalog"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-katalog-untergruppe"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

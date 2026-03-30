@@ -1,0 +1,169 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pas-task-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de",
+  "name": "PASTaskDE",
+  "title": "PAS Task DE",
+  "status": "draft",
+  "description": "Workflow-Task fuer den KV-Genehmigungsprozess (Prior Authorization), angelehnt an Da Vinci PAS.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Task",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Task",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Task.status",
+        "path": "Task.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Task.intent",
+        "path": "Task.intent",
+        "patternCode": "order",
+        "mustSupport": true
+      },
+      {
+        "id": "Task.code",
+        "path": "Task.code",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/pas-task-code"
+        }
+      },
+      {
+        "id": "Task.for",
+        "path": "Task.for",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Task.requester",
+        "path": "Task.requester",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Practitioner",
+              "http://hl7.org/fhir/StructureDefinition/Organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Task.owner",
+        "path": "Task.owner",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Task.input",
+        "path": "Task.input",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "type"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Task.input:claimReference",
+        "path": "Task.input",
+        "sliceName": "claimReference",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Task.input:claimReference.type",
+        "path": "Task.input.type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "Reference",
+              "system": "http://terminology.hl7.org/CodeSystem/task-input-type"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Task.input:claimReference.value[x]",
+        "path": "Task.input.value[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-de"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Task.output",
+        "path": "Task.output",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "type"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Task.output:responseReference",
+        "path": "Task.output",
+        "sliceName": "responseReference",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Task.output:responseReference.type",
+        "path": "Task.output.type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "Reference",
+              "system": "http://terminology.hl7.org/CodeSystem/task-input-type"
+            }
+          ]
+        }
+      },
+      {
+        "id": "Task.output:responseReference.value[x]",
+        "path": "Task.output.value[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

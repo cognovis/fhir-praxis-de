@@ -1,0 +1,14 @@
+{
+  "name": "de.cognovis.fhir.praxis",
+  "version": "0.4.0",
+  "description": "German Practice Management FHIR Profiles (R4)",
+  "author": "cognovis GmbH",
+  "fhirVersions": ["4.0.1"],
+  "jurisdiction": "urn:iso:std:iso:3166#DE",
+  "canonical": "https://fhir.cognovis.de/praxis",
+  "url": "https://fhir.cognovis.de/praxis/ImplementationGuide/de.cognovis.fhir.praxis",
+  "dependencies": {
+    "hl7.fhir.r4.core": "4.0.1",
+    "de.basisprofil.r4": "1.5.0"
+}
+}

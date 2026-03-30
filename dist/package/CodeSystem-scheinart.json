@@ -1,0 +1,44 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "ScheinartCS",
+  "id": "scheinart",
+  "title": "Scheinart",
+  "description": "Abrechnungsschein-Typen in der ambulanten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/scheinart",
+  "concept": [
+    {
+      "code": "gkv",
+      "display": "GKV",
+      "definition": "Gesetzliche Krankenversicherung"
+    },
+    {
+      "code": "pkv",
+      "display": "PKV",
+      "definition": "Private Krankenversicherung"
+    },
+    {
+      "code": "bg",
+      "display": "BG",
+      "definition": "Berufsgenossenschaft"
+    },
+    {
+      "code": "ue",
+      "display": "Ueberweisung",
+      "definition": "Ueberweisungsschein"
+    },
+    {
+      "code": "not",
+      "display": "Notfall",
+      "definition": "Notfallschein"
+    },
+    {
+      "code": "igel",
+      "display": "IGeL",
+      "definition": "Individuelle Gesundheitsleistung"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 6
+}

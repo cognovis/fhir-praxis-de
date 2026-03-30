@@ -1,0 +1,26 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "DiagnoseSeiteCS",
+  "id": "diagnose-seite",
+  "title": "Diagnoseseite",
+  "description": "Seitenangabe fuer Diagnosen",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite",
+  "concept": [
+    {
+      "code": "L",
+      "display": "Links"
+    },
+    {
+      "code": "R",
+      "display": "Rechts"
+    },
+    {
+      "code": "B",
+      "display": "Beidseitig"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 3
+}

@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "diagnose-seite",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/diagnose-seite",
+  "name": "DiagnoseSeiteExt",
+  "title": "Diagnoseseite",
+  "status": "draft",
+  "description": "Seitenangabe der Diagnose (links/rechts/beidseitig). Ergaenzt die KBV bodySite-Kodierung.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Condition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Diagnoseseite",
+        "definition": "Seitenangabe der Diagnose (links/rechts/beidseitig). Ergaenzt die KBV bodySite-Kodierung."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/diagnose-seite"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ],
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/diagnose-seite"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,59 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "BillingTypeCS",
+  "id": "billing-type",
+  "title": "Abrechnungsart",
+  "description": "Codes für Abrechnungsarten in der ambulanten Versorgung. Dient als Diskriminator für ChargeItemDefinition-Kataloge. Regionale Selektivverträge nutzen den generischen Typ (z.B. hzv, facharztvertrag) — die KV-Region wird über Contract.identifier bzw. ChargeItemDefinition.jurisdiction abgebildet.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/billing-type",
+  "concept": [
+    {
+      "code": "ebm",
+      "display": "EBM",
+      "definition": "Einheitlicher Bewertungsmaßstab (GKV)"
+    },
+    {
+      "code": "goae",
+      "display": "GOÄ",
+      "definition": "Gebührenordnung für Ärzte (PKV)"
+    },
+    {
+      "code": "bema",
+      "display": "BEMA",
+      "definition": "Bewertungsmaßstab für zahnärztliche Leistungen (GKV)"
+    },
+    {
+      "code": "goz",
+      "display": "GOZ",
+      "definition": "Gebührenordnung für Zahnärzte (PKV)"
+    },
+    {
+      "code": "bgt2001",
+      "display": "BGT2001",
+      "definition": "Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV)"
+    },
+    {
+      "code": "hzv",
+      "display": "HZV",
+      "definition": "Hausarztzentrierte Versorgung (§73b SGB V)"
+    },
+    {
+      "code": "facharztvertrag",
+      "display": "Facharztvertrag",
+      "definition": "Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V)"
+    },
+    {
+      "code": "igel",
+      "display": "IGeL",
+      "definition": "Individuelle Gesundheitsleistung"
+    },
+    {
+      "code": "bg",
+      "display": "BG",
+      "definition": "Berufsgenossenschaft (sonstige BG-Abrechnung)"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 9
+}

@@ -1,0 +1,34 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "AiProvenanceCS",
+  "id": "ai-provenance",
+  "title": "AI Provenance",
+  "description": "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance",
+  "concept": [
+    {
+      "code": "ai-generated",
+      "display": "KI-generiert",
+      "definition": "Inhalt wurde durch ein KI-System erzeugt"
+    },
+    {
+      "code": "ai-assisted",
+      "display": "KI-unterstuetzt",
+      "definition": "Inhalt wurde mit KI-Unterstuetzung erstellt"
+    },
+    {
+      "code": "human-reviewed",
+      "display": "Menschlich geprueft",
+      "definition": "KI-Inhalt wurde durch einen Menschen geprueft"
+    },
+    {
+      "code": "human-approved",
+      "display": "Menschlich freigegeben",
+      "definition": "KI-Inhalt wurde durch einen Menschen freigegeben"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 4
+}

@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "honorarbescheid-patient-ref",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-ref",
+  "name": "HonorarbescheidPatientRefExt",
+  "title": "Honorarbescheid Patient-Referenz",
+  "status": "draft",
+  "description": "Referenz auf den zugeordneten FHIR-Patienten",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ClaimResponse",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Honorarbescheid Patient-Referenz",
+        "definition": "Referenz auf den zugeordneten FHIR-Patienten"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-ref"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

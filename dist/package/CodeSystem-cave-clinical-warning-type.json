@@ -1,0 +1,34 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "CaveClinicalWarningTypeCS",
+  "id": "cave-clinical-warning-type",
+  "title": "CAVE Clinical Warning Type",
+  "description": "Kurzschluessel fuer klinische Warnhinweistypen (CAVE-Eintraege) in deutschen Praxisverwaltungssystemen. PVS-uebergreifend standardisiert.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type",
+  "concept": [
+    {
+      "code": "K",
+      "display": "Kontraindikation",
+      "definition": "Medizinische Kontraindikation gegen ein Medikament oder eine Behandlung"
+    },
+    {
+      "code": "A",
+      "display": "Allergie",
+      "definition": "Arzneimittelallergie oder sonstige Allergie"
+    },
+    {
+      "code": "V",
+      "display": "Vertraeglichkeit",
+      "definition": "Bekannte Unvertraeglichkeit oder schlechte Vertraeglichkeit"
+    },
+    {
+      "code": "E",
+      "display": "Empfehlung",
+      "definition": "Klinische Empfehlung oder Hinweis (z.B. klinische Entscheidungsunterstuetzung)"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 4
+}

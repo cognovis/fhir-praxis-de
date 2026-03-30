@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "billing-leistungsinhalt",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/billing-leistungsinhalt",
+  "name": "BillingLeistungsinhaltExt",
+  "title": "Leistungsinhalt",
+  "status": "draft",
+  "description": "Obligater und fakultativer Leistungsinhalt der Gebührenordnungsposition",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItemDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Leistungsinhalt",
+        "definition": "Obligater und fakultativer Leistungsinhalt der Gebührenordnungsposition"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/billing-leistungsinhalt"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

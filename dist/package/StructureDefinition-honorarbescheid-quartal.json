@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "honorarbescheid-quartal",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-quartal",
+  "name": "HonorarbescheidQuartalExt",
+  "title": "Honorarbescheid Quartal",
+  "status": "draft",
+  "description": "Quartal des Honorarbescheids, z.B. 3/2025",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "PaymentReconciliation",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Honorarbescheid Quartal",
+        "definition": "Quartal des Honorarbescheids, z.B. 3/2025"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-quartal"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

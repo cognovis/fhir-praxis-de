@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "genehmigung-typ",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/genehmigung-typ",
+  "name": "GenehmigungenTypExt",
+  "title": "Genehmigungstyp",
+  "status": "draft",
+  "description": "Typ der KV-Genehmigung: kopfbezogen (arztgebunden) vs. betriebsstaette",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Genehmigungstyp",
+        "definition": "Typ der KV-Genehmigung: kopfbezogen (arztgebunden) vs. betriebsstaette"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/genehmigung-typ"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/genehmigung-typ"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-benchmark-auszahlungsquote",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-auszahlungsquote",
+  "name": "KvBenchmarkAuszahlungsquoteExt",
+  "title": "KV-Benchmark Auszahlungsquote",
+  "status": "draft",
+  "description": "Auszahlungsquote in Prozent",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark Auszahlungsquote",
+        "definition": "Auszahlungsquote in Prozent"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-auszahlungsquote"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      }
+    ]
+  }
+}

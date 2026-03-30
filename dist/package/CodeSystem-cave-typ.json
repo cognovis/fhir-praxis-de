@@ -1,0 +1,44 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "CaveTypCS",
+  "id": "cave-typ",
+  "title": "CAVE-Typ",
+  "description": "Typen von CAVE-Eintraegen (Cave, Achtung, Vorsicht, Empfehlung) in der Patientenakte",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/cave-typ",
+  "concept": [
+    {
+      "code": "allergie",
+      "display": "Allergie",
+      "definition": "Arzneimittelallergie oder sonstige Allergie"
+    },
+    {
+      "code": "unvertraeglichkeit",
+      "display": "Unvertraeglichkeit",
+      "definition": "Arzneimittelunvertraeglichkeit"
+    },
+    {
+      "code": "kontraindikation",
+      "display": "Kontraindikation",
+      "definition": "Medizinische Kontraindikation"
+    },
+    {
+      "code": "interaktion",
+      "display": "Interaktion",
+      "definition": "Arzneimittelinteraktion"
+    },
+    {
+      "code": "schwangerschaft",
+      "display": "Schwangerschaft",
+      "definition": "Schwangerschaftsbezogene Einschraenkung"
+    },
+    {
+      "code": "sonstiges",
+      "display": "Sonstiges",
+      "definition": "Sonstiger Warnhinweis"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 6
+}

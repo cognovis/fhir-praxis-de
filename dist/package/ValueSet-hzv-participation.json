@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "HzvParticipationVS",
+  "id": "hzv-participation",
+  "title": "HZV-Teilnahmestatus",
+  "description": "Teilnahmestatus an der hausarztzentrierten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/hzv-participation",
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation"
+      }
+    ]
+  }
+}

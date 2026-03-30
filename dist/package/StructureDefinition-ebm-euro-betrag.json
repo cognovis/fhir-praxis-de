@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "ebm-euro-betrag",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-euro-betrag",
+  "name": "EbmEuroBetragExt",
+  "title": "EBM-Euro-Betrag",
+  "status": "draft",
+  "description": "Konkreter Euro-Betrag der abgerechneten EBM-Leistung (nach Anwendung des Orientierungspunktwerts)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "EBM-Euro-Betrag",
+        "definition": "Konkreter Euro-Betrag der abgerechneten EBM-Leistung (nach Anwendung des Orientierungspunktwerts)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-euro-betrag"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "Money"
+          }
+        ]
+      }
+    ]
+  }
+}

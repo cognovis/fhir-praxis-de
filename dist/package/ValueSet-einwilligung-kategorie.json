@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "EinwilligungKategorieVS",
+  "id": "einwilligung-kategorie",
+  "title": "Einwilligung-Kategorie",
+  "description": "Kategorien fuer Patienteneinwilligungen",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/einwilligung-kategorie",
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie"
+      }
+    ]
+  }
+}

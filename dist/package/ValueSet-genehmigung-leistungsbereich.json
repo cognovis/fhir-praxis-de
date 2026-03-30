@@ -1,0 +1,16 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "GenehmigungenLeistungsbereichVS",
+  "id": "genehmigung-leistungsbereich",
+  "title": "Genehmigung Leistungsbereich",
+  "description": "KV-regulierte Leistungsbereiche mit Genehmigungspflicht",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/genehmigung-leistungsbereich",
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich"
+      }
+    ]
+  }
+}

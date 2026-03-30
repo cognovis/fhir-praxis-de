@@ -1,0 +1,67 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "draft",
+  "content": "complete",
+  "name": "GenehmigungenLeistungsbereichCS",
+  "id": "genehmigung-leistungsbereich",
+  "title": "Genehmigung Leistungsbereich",
+  "description": "KV-regulierte Leistungsbereiche mit Genehmigungspflicht",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich",
+  "concept": [
+    {
+      "code": "chirotherapie",
+      "display": "Chirotherapie"
+    },
+    {
+      "code": "psychosomatik",
+      "display": "Psychosomatik"
+    },
+    {
+      "code": "psychotherapie",
+      "display": "Psychotherapie"
+    },
+    {
+      "code": "akupunktur",
+      "display": "Akupunktur"
+    },
+    {
+      "code": "schmerztherapie",
+      "display": "Schmerztherapie"
+    },
+    {
+      "code": "sonographie",
+      "display": "Sonographie"
+    },
+    {
+      "code": "sono-abdomen",
+      "display": "Sono Abdomen"
+    },
+    {
+      "code": "langzeit-ekg",
+      "display": "Langzeit-EKG"
+    },
+    {
+      "code": "langzeit-blutdruck",
+      "display": "Langzeit-Blutdruck"
+    },
+    {
+      "code": "radiologie",
+      "display": "Radiologie"
+    },
+    {
+      "code": "allergologie",
+      "display": "Allergologie"
+    },
+    {
+      "code": "dmp",
+      "display": "DMP"
+    },
+    {
+      "code": "hks",
+      "display": "HKS",
+      "definition": "Herzschrittmacher-Kontrolle"
+    }
+  ],
+  "caseSensitive": true,
+  "count": 13
+}

@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "reviewed-at",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/reviewed-at",
+  "name": "ReviewedAtExt",
+  "title": "Prüfungszeitpunkt",
+  "status": "draft",
+  "description": "Zeitpunkt der Prüfung einer Abrechnungsposition",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    },
+    {
+      "expression": "Claim",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Prüfungszeitpunkt",
+        "definition": "Zeitpunkt der Prüfung einer Abrechnungsposition"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/reviewed-at"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ]
+      }
+    ]
+  }
+}

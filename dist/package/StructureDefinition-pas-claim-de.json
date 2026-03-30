@@ -1,0 +1,81 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "pas-claim-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-de",
+  "name": "PASClaimDE",
+  "title": "PAS Claim DE",
+  "status": "draft",
+  "description": "Genehmigungsantrag (Prior Authorization Request) fuer die deutsche ambulante Versorgung, angelehnt an Da Vinci PAS.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Claim",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Claim",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Claim.status",
+        "path": "Claim.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.type",
+        "path": "Claim.type",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "professional",
+              "system": "http://terminology.hl7.org/CodeSystem/claim-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.use",
+        "path": "Claim.use",
+        "patternCode": "preauthorization"
+      },
+      {
+        "id": "Claim.patient",
+        "path": "Claim.patient",
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.insurer",
+        "path": "Claim.insurer",
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.provider",
+        "path": "Claim.provider",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Practitioner",
+              "http://hl7.org/fhir/StructureDefinition/Organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.item",
+        "path": "Claim.item",
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.item.productOrService",
+        "path": "Claim.item.productOrService",
+        "mustSupport": true
+      },
+      {
+        "id": "Claim.item.quantity",
+        "path": "Claim.item.quantity",
+        "mustSupport": true
+      }
+    ]
+  }
+}

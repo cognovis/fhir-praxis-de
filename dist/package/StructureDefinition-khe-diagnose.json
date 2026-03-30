@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "khe-diagnose",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/khe-diagnose",
+  "name": "KheDiagnoseExt",
+  "title": "Einweisungsdiagnose",
+  "status": "draft",
+  "description": "Diagnosetext fuer die Krankenhauseinweisung.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ServiceRequest",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Einweisungsdiagnose",
+        "definition": "Diagnosetext fuer die Krankenhauseinweisung."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/khe-diagnose"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

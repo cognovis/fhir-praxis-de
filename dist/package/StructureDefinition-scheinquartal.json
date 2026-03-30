@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "scheinquartal",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/scheinquartal",
+  "name": "ScheinquartalExt",
+  "title": "Scheinquartal",
+  "status": "draft",
+  "description": "Abrechnungsquartal des Scheins im Format JJJJQ (z.B. 20261 fuer Q1/2026).",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Encounter",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Scheinquartal",
+        "definition": "Abrechnungsquartal des Scheins im Format JJJJQ (z.B. 20261 fuer Q1/2026)."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/scheinquartal"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

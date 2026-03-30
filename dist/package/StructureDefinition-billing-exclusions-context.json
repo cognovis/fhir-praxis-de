@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "billing-exclusions-context",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/billing-exclusions-context",
+  "name": "BillingExclusionsContextExt",
+  "title": "Ausschlüsse mit Bezugsraum",
+  "status": "draft",
+  "description": "Ausschlussregelungen mit Bezugsraum-Kontext, Format BF:01100,01101|AF:01955 (BF=Behandlungsfall, AF=Arztfall, SF=Sitzung, TG=Tag)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItemDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Ausschlüsse mit Bezugsraum",
+        "definition": "Ausschlussregelungen mit Bezugsraum-Kontext, Format BF:01100,01101|AF:01955 (BF=Behandlungsfall, AF=Arztfall, SF=Sitzung, TG=Tag)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/billing-exclusions-context"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}
