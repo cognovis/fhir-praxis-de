@@ -1,0 +1,26 @@
+node_modules/
+output/
+fsh-generated/
+temp/
+template/
+*.tgz
+.DS_Store
+input-cache/
+txCache/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+
+# Claude session logs
+logs/
+
+# Claude Code project config
+.claude/
+
+# Beads context files
+.beads/PRIME.md
+
+# IG Publisher artifacts in root
+Requirements-fromNarrative.json
