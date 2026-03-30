@@ -42,3 +42,10 @@ Title: "HVG-Vertragsnummer"
 Description: "Vertragsnummer des Selektivvertrags beim Kostentraeger"
 Context: Contract
 * value[x] only string
+
+Extension: HvgDatumBeantragExt
+Id: hvg-datum-beantragt
+Title: "HVG Datum Beantragt"
+Description: "Antragsdatum für die Einschreibung in den HVG-Selektivvertrag (§73b/§73c SGB V)"
+Context: EpisodeOfCare
+* value[x] only date
