@@ -14,3 +14,31 @@ Title: "HVG-Kennung"
 Description: "Eindeutige Kennung des Selektivvertrags beim Kostenträger"
 Context: Contract
 * value[x] only string
+
+Extension: HvgBezeichnungExt
+Id: hvg-bezeichnung
+Title: "HVG-Bezeichnung"
+Description: "Vollstaendige Bezeichnung des Selektivvertrags"
+Context: Contract
+* value[x] only string
+
+Extension: HvgKurzbezeichnungExt
+Id: hvg-kurzbezeichnung
+Title: "HVG-Kurzbezeichnung"
+Description: "Kurzbezeichnung des Selektivvertrags fuer Anzeige im PVS"
+Context: Contract
+* value[x] only string
+
+Extension: HvgDatumExt
+Id: hvg-datum
+Title: "HVG-Datum"
+Description: "Vertragsdatum des Selektivvertrags"
+Context: Contract
+* value[x] only date
+
+Extension: HvgVertragNummerExt
+Id: hvg-vertrag-nummer
+Title: "HVG-Vertragsnummer"
+Description: "Vertragsnummer des Selektivvertrags beim Kostentraeger"
+Context: Contract
+* value[x] only string
