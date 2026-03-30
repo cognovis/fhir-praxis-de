@@ -24,7 +24,25 @@ echo "Building $PACKAGE_ID@$VERSION"
 rm -rf "$DIST"
 mkdir -p "$DIST"
 
-# 4. Create package.json (FHIR package format)
+# 4. Create package.json (FHIR package format) — deps derived from sushi-config.yaml
+DEPS_JSON=$(python3 - <<'PYEOF'
+import re, json
+
+with open("sushi-config.yaml") as f:
+    content = f.read()
+
+match = re.search(r'^dependencies:\s*\n((?:  \S.*\n)*)', content, re.MULTILINE)
+deps = {"hl7.fhir.r4.core": "4.0.1"}
+if match:
+    for line in match.group(1).splitlines():
+        line = line.strip().split("#")[0].strip()
+        if ":" in line:
+            k, v = line.split(":", 1)
+            deps[k.strip()] = v.strip()
+print(json.dumps(deps, indent=4))
+PYEOF
+)
+
 cat > "$DIST/package.json" <<EOF
 {
   "name": "$PACKAGE_ID",
@@ -35,15 +53,7 @@ cat > "$DIST/package.json" <<EOF
   "jurisdiction": "urn:iso:std:iso:3166#DE",
   "canonical": "https://fhir.cognovis.de/praxis",
   "url": "https://fhir.cognovis.de/praxis/ImplementationGuide/de.cognovis.fhir.praxis",
-  "dependencies": {
-    "hl7.fhir.r4.core": "4.0.1",
-    "de.basisprofil.r4": "1.5.0",
-    "kbv.basis": "1.8.0",
-    "kbv.ita.for": "1.3.1",
-    "kbv.ita.aws": "1.2.0",
-    "kbv.all.st-combined": "1.32.0",
-    "dguv.basis": "1.4.0"
-  }
+  "dependencies": $DEPS_JSON
 }
 EOF
 
