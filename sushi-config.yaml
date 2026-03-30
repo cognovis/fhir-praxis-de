@@ -26,7 +26,7 @@ dependencies:
   kbv.ita.for: 1.3.1
   kbv.ita.aws: 1.2.0              # PVS-Archivierungs-/Wechselschnittstelle (Mahnung, Abrechnung)
   kbv.all.st-combined: 1.32.0     # KBV Schluesseltabellen (Scheinart, Fachgruppen, EBM RLV)
-  DGUV.Basis: 1.4.0               # BG/Arbeitsunfall
+  dguv.basis: 1.4.0               # BG/Arbeitsunfall
 
 pages:
   index.md:
