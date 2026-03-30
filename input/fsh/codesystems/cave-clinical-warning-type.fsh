@@ -8,6 +8,7 @@ Description: "Kurzschluessel fuer klinische Warnhinweistypen (CAVE-Eintraege) in
 * ^status = #draft
 * ^caseSensitive = true
 * ^content = #complete
+* ^count = 4
 * #K "Kontraindikation" "Medizinische Kontraindikation gegen ein Medikament oder eine Behandlung"
 * #A "Allergie" "Arzneimittelallergie oder sonstige Allergie"
 * #V "Vertraeglichkeit" "Bekannte Unvertraeglichkeit oder schlechte Vertraeglichkeit"
