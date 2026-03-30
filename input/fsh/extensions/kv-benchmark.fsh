@@ -74,3 +74,10 @@ Title: "KV-Benchmark QZV-Bereiche"
 Description: "QZV-Leistungsbereiche mit Fallwerten, Format: name:fallwert,name:fallwert"
 Context: Basic
 * value[x] only string
+
+Extension: KvBenchmarkQzvGopsExt
+Id: kvbm-qzv-gops
+Title: "KV-Benchmark QZV-GOP-Zuordnung"
+Description: "Zuordnung von QZV-Bereichen zu EBM-Gebührenordnungspositionen (GOPs). Format: Bereichsname:gop1,gop2|Bereichsname:gop3,gop4"
+Context: Basic
+* value[x] only string
