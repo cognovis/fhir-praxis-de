@@ -43,6 +43,9 @@ Description: "Vertragsnummer des Selektivvertrags beim Kostentraeger"
 Context: Contract
 * value[x] only string
 
+// Context: EpisodeOfCare — Antragsdatum ist eine patienten-spezifische Eigenschaft der Einschreibung,
+// nicht des Vertrags selbst. Der Vertrag (Contract) ist PVS-übergreifend gültig;
+// der Antragszeitpunkt variiert je Patient und Einschreibefall (EpisodeOfCare).
 Extension: HvgDatumBeantragtExt
 Id: hvg-datum-beantragt
 Title: "HVG Datum Beantragt"
