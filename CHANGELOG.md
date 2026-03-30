@@ -2,28 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.2.0] - 2026-03-30
+## [0.3.0] - 2026-03-30
+
+### Bug Fixes
+
+- Remove unused deps (kbv.basis, kbv.ita.for, kbv.ita.aws, kbv.all.st-combined, dguv.basis) — no FSH extension references them
 
 ### Features
 
-- 22 new Extensions: GOÄ detail/Sachkosten (6), Private billing workflow (5), EBM on ChargeItem (5), HVG/Selektivvertrag (2), BGT2001 BG-Tarif (3), Price history (1)
-- 2 new CodeSystem shells: Zuzahlungsstatus (eGK VSD), HVG-Vertragsart (Selektivverträge)
-- BillingType CodeSystem extended with generic catalog types (bgt2001, hzv, facharztvertrag) — regional HZV contracts use the generic `hzv` type with region via Contract/jurisdiction
-- GitHub Actions CI/CD workflow for IG Publisher build + GitHub Pages deployment
-- LICENSE (CC-BY-4.0), README, VERSION, cliff.toml
+- Add build-package.sh for FHIR npm package generation
+- CI/CD auto-release — tag v* triggers SUSHI + npm pack + GitHub Release with tgz
+- Add kvbm-qzv-gops extension for KV-Benchmark QZV-GOP mapping
 
-### Architecture
+### Miscellaneous
 
-- PVS-agnostic design: no PVS-specific knowledge in IG; all PVS mapping belongs in adapter code
-- Generic billing catalog model: regional Selektivverträge (HZV Bayern, BW, etc.) use ChargeItemDefinition + billing-system discriminator instead of per-region CodeSystems
-- CodeSystem shells use `^content = #not-present` for ETL-filled terminologies
+- VERSION file as single source of truth, SemVer tag pattern
 
-## [0.1.0] - 2026-03-30
+## [2026.03.1] - 2026-03-30
+
+### Bug Fixes
+
+- Lowercase DGUV.Basis dependency to avoid SUSHI warning
 
 ### Features
 
 - Initial scaffold for de.cognovis.fhir.praxis IG
-- 122 Extensions across 18 domains
-- 9 CodeSystems (Scheinart, BillingType, CorrectionRule, DiagnoseSeite, TaskType, Genehmigung, WbRolle, AiProvenance)
-- 7 ValueSets with bindings for all CodeSystems
+- Add LICENSE, README, CHANGELOG, CI/CD workflow, and VERSION
+- Add 22 extensions, 2 CodeSystem shells, extend BillingType — bump to v0.2.0
+
+### Miscellaneous
+
+- Clean up beads metadata
+
 
