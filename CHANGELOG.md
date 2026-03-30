@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Miscellaneous
+
+- Bump version to 0.5.0
+
+## [0.5.0] - 2026-03-30
+
 ### Bug Fixes
 
 - **mira-adapters-4p9**: Address review findings iteration 1
@@ -29,6 +35,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.4.0
+- Update changelog
 
 ## [0.4.0] - 2026-03-30
 
