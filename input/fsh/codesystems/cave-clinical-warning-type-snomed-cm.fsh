@@ -21,7 +21,7 @@ Description: "Mapping der CAVE-Warnhinweistyp-Kuerzel auf SNOMED-CT Konzepte"
 * group[0].element[1].display = "Allergie"
 * group[0].element[1].target[0].code = #420134006
 * group[0].element[1].target[0].display = "Propensity to adverse reaction (finding)"
-* group[0].element[1].target[0].equivalence = #narrower
+* group[0].element[1].target[0].equivalence = #wider
 * group[0].element[2].code = #V
 * group[0].element[2].display = "Vertraeglichkeit"
 * group[0].element[2].target[0].code = #418775008
