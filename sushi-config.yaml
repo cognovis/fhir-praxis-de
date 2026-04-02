@@ -21,7 +21,7 @@ publisher:
 jurisdiction: urn:iso:std:iso:3166#DE "Germany"
 
 dependencies:
-  de.basisprofil.r4: 1.5.0
+  de.basisprofil.r4: 1.6.0-ballot2
 
 pages:
   index.md:
