@@ -29,6 +29,7 @@
       "definition": "Teilnahme laeuft zum Ende des Quartals aus"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 4
 }

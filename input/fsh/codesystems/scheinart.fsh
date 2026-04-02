@@ -4,6 +4,7 @@ Title: "Scheinart"
 Description: "Abrechnungsschein-Typen in der ambulanten Versorgung"
 * ^url = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 * #gkv "GKV" "Gesetzliche Krankenversicherung"
 * #pkv "PKV" "Private Krankenversicherung"

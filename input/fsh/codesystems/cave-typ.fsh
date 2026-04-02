@@ -3,6 +3,7 @@ Id: cave-typ
 Title: "CAVE-Typ"
 Description: "Typen von CAVE-Eintraegen (Cave, Achtung, Vorsicht, Empfehlung) in der Patientenakte"
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 * #allergie "Allergie" "Arzneimittelallergie oder sonstige Allergie"
 * #unvertraeglichkeit "Unvertraeglichkeit" "Arzneimittelunvertraeglichkeit"

@@ -24,6 +24,7 @@
       "definition": "Genehmigungsantrag zurueckziehen"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 3
 }

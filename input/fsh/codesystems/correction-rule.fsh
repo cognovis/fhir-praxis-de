@@ -3,6 +3,7 @@ Id: kvb-richtigstellung
 Title: "KVB Richtigstellungsgrund"
 Description: "Codes für KV-Richtigstellungen im Honorarbescheid"
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 * #UV "UV" "Überschreitung Volumen"
 * #HO "HO" "Honoraroptimierung"

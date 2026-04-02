@@ -1,13 +1,14 @@
 {
   "resourceType": "ConceptMap",
-  "id": "CaveClinicalWarningTypeSnomedCM",
+  "id": "cave-clinical-warning-type-snomed",
   "url": "https://fhir.cognovis.de/praxis/ConceptMap/cave-clinical-warning-type-snomed",
   "title": "CAVE Clinical Warning Type → SNOMED-CT",
   "description": "Mapping der CAVE-Warnhinweistyp-Kuerzel auf SNOMED-CT Konzepte",
+  "name": "CaveClinicalWarningTypeSnomedCM",
   "status": "draft",
   "experimental": true,
   "sourceCanonical": "https://fhir.cognovis.de/praxis/ValueSet/cave-clinical-warning-type",
-  "targetCanonical": "http://snomed.info/sct",
+  "targetCanonical": "http://snomed.info/sct?fhir_vs",
   "group": [
     {
       "source": "https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type",

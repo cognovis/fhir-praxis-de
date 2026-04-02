@@ -44,6 +44,7 @@
       "definition": "Korrektur"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 7
 }

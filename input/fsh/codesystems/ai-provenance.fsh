@@ -3,6 +3,7 @@ Id: ai-provenance
 Title: "AI Provenance"
 Description: "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50"
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 * #ai-generated "KI-generiert" "Inhalt wurde durch ein KI-System erzeugt"
 * #ai-assisted "KI-unterstuetzt" "Inhalt wurde mit KI-Unterstuetzung erstellt"

@@ -1,0 +1,28 @@
+### ValueSet $expand: wb-rolle
+# @name expand-wb-rolle
+GET http://localhost:8080/ValueSet/wb-rolle/$expand
+Authorization: Basic basic:secret
+
+### $validate-code valid: wb-assistent
+# @name validate-valid-1-wb-rolle
+GET http://localhost:8080/ValueSet/$validate-code
+    ?url=https://fhir.cognovis.de/praxis/ValueSet/wb-rolle
+    &system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle
+    &code=wb-assistent
+Authorization: Basic basic:secret
+
+### $validate-code valid: sicherstellungsassistent
+# @name validate-valid-2-wb-rolle
+GET http://localhost:8080/ValueSet/$validate-code
+    ?url=https://fhir.cognovis.de/praxis/ValueSet/wb-rolle
+    &system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle
+    &code=sicherstellungsassistent
+Authorization: Basic basic:secret
+
+### $validate-code invalid: INVALID_XYZ
+# @name validate-invalid-wb-rolle
+GET http://localhost:8080/ValueSet/$validate-code
+    ?url=https://fhir.cognovis.de/praxis/ValueSet/wb-rolle
+    &system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle
+    &code=INVALID_XYZ
+Authorization: Basic basic:secret

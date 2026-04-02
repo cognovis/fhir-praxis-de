@@ -54,6 +54,7 @@
       "definition": "Berufsgenossenschaft (sonstige BG-Abrechnung)"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 9
 }

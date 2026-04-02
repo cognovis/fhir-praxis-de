@@ -29,6 +29,7 @@
       "definition": "KI-Inhalt wurde durch einen Menschen freigegeben"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 4
 }

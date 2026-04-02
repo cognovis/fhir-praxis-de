@@ -31,7 +31,7 @@
         "mustSupport": true,
         "binding": {
           "strength": "extensible",
-          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/pas-task-code"
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/pas-task-code-vs"
         }
       },
       {

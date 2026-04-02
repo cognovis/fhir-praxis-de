@@ -1,0 +1,17 @@
+### Test: $lookup (no valid codes — content=not-present, ETL-populated)
+# This CodeSystem has content=not-present. No concepts are defined in the FSH source.
+# Concepts are expected to be loaded via ETL from external sources.
+# RESULT: 0 concepts in Aidbox (expected for not-present CodeSystem without ETL data)
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart&code=INVALID_XYZ
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — count all concepts
+# Expected: 0 (no ETL data loaded)
+# RESULT: PASS — total=0
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart&_count=0
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart&code=INVALID_XYZ&_count=1
+Authorization: Basic basic:secret

@@ -1,0 +1,15 @@
+### ValueSet $expand: zuzahlungsstatus
+# @name expand-zuzahlungsstatus
+GET http://localhost:8080/ValueSet/zuzahlungsstatus/$expand
+Authorization: Basic basic:secret
+
+### NOTE: CodeSystem https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus has content=not-present (ETL-populated)
+### $expand returns empty contains array - no codes to validate
+
+### $validate-code invalid: INVALID_XYZ
+# @name validate-invalid-zuzahlungsstatus
+GET http://localhost:8080/ValueSet/$validate-code
+    ?url=https://fhir.cognovis.de/praxis/ValueSet/zuzahlungsstatus
+    &system=https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus
+    &code=INVALID_XYZ
+Authorization: Basic basic:secret

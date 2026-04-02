@@ -54,6 +54,7 @@
       "definition": "Einwilligung zum Recall-System"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 9
 }

@@ -1,0 +1,61 @@
+### Test: Validate VALID ClaimResponse against PAS ClaimResponse DE profile
+# Expected: OperationOutcome with "all ok" (no errors)
+# Fills: status (MS), type (MS, pattern=professional), use (pattern=preauthorization),
+#   patient (MS), insurer (MS), outcome (MS),
+#   item (MS) with adjudication (MS)
+POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "ClaimResponse",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "professional"
+    }]
+  },
+  "use": "preauthorization",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "insurer": {"reference": "Organization/mira-mvz"},
+  "outcome": "complete",
+  "item": [{
+    "itemSequence": 1,
+    "adjudication": [{
+      "category": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/adjudication",
+          "code": "benefit"
+        }]
+      },
+      "amount": {"value": 16.89, "currency": "EUR"}
+    }]
+  }]
+}
+
+### Test: Validate INVALID ClaimResponse against PAS ClaimResponse DE profile
+# Expected: OperationOutcome with errors for:
+#   - type.coding.code = "institutional" (pattern violation, must be "professional")
+#   - use = "claim" (pattern violation, must be "preauthorization")
+#   - outcome missing (required by base ClaimResponse, MS in profile)
+#   - item missing (MS in profile)
+POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "ClaimResponse",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "institutional"
+    }]
+  },
+  "use": "claim",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "insurer": {"reference": "Organization/mira-mvz"}
+}

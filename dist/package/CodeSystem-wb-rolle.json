@@ -18,6 +18,7 @@
       "display": "Sicherstellungsassistent"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 2
 }

@@ -3,6 +3,7 @@ Id: genehmigung-leistungsbereich
 Title: "Genehmigung Leistungsbereich"
 Description: "KV-regulierte Leistungsbereiche mit Genehmigungspflicht"
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 * #chirotherapie "Chirotherapie"
 * #psychosomatik "Psychosomatik"

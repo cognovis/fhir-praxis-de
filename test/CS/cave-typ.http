@@ -1,0 +1,39 @@
+### Test: $lookup valid code "allergie"
+# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=allergie
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "kontraindikation"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=kontraindikation
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "interaktion"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=interaktion
+Authorization: Basic basic:secret
+
+### Test: $lookup invalid code "INVALID_XYZ"
+# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=INVALID_XYZ
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "allergie"
+# RESULT: PASS — 6 concepts loaded, display=Allergie
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=allergie&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "kontraindikation"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=kontraindikation&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "interaktion"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=interaktion&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=INVALID_XYZ&_count=1
+Authorization: Basic basic:secret

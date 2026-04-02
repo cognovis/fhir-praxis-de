@@ -39,6 +39,7 @@
       "definition": "Individuelle Gesundheitsleistung"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 6
 }

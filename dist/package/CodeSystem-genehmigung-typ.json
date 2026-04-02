@@ -19,6 +19,7 @@
       "definition": "An die Betriebsstaette gebunden"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 2
 }

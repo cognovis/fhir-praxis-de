@@ -1,0 +1,39 @@
+### Test: $lookup valid code "dsgvo"
+# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dsgvo
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "hzv"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=hzv
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "telemedizin"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=telemedizin
+Authorization: Basic basic:secret
+
+### Test: $lookup invalid code "INVALID_XYZ"
+# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=INVALID_XYZ
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "dsgvo"
+# RESULT: PASS — 9 concepts loaded, display=DSGVO
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dsgvo&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "hzv"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=hzv&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "telemedizin"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=telemedizin&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=INVALID_XYZ&_count=1
+Authorization: Basic basic:secret

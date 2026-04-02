@@ -21,6 +21,7 @@
       "display": "Beidseitig"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 3
 }

@@ -3,6 +3,7 @@ Id: einwilligung-kategorie
 Title: "Einwilligung-Kategorie"
 Description: "Kategorien fuer Patienteneinwilligungen in der ambulanten Versorgung"
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 * #dsgvo "DSGVO" "Datenschutz-Grundverordnung Einwilligung"
 * #dmp "DMP" "Disease-Management-Programm Teilnahme"

@@ -1,15 +1,16 @@
 // ConceptMap: CAVE Clinical Warning Type → SNOMED-CT
 
-Instance: CaveClinicalWarningTypeSnomedCM
+Instance: cave-clinical-warning-type-snomed
 InstanceOf: ConceptMap
 Usage: #definition
 Title: "CAVE Clinical Warning Type → SNOMED-CT"
 Description: "Mapping der CAVE-Warnhinweistyp-Kuerzel auf SNOMED-CT Konzepte"
+* name = "CaveClinicalWarningTypeSnomedCM"
 * url = "https://fhir.cognovis.de/praxis/ConceptMap/cave-clinical-warning-type-snomed"
 * status = #draft
 * experimental = true
 * sourceCanonical = Canonical(CaveClinicalWarningTypeVS)
-* targetCanonical = "http://snomed.info/sct"
+* targetCanonical = "http://snomed.info/sct?fhir_vs"
 * group[0].source = Canonical(CaveClinicalWarningTypeCS)
 * group[0].target = "http://snomed.info/sct"
 * group[0].element[0].code = #K

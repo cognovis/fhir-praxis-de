@@ -1,0 +1,39 @@
+### Test: $lookup valid code "chirotherapie"
+# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=chirotherapie
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "akupunktur"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=akupunktur
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "radiologie"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=radiologie
+Authorization: Basic basic:secret
+
+### Test: $lookup invalid code "INVALID_XYZ"
+# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=INVALID_XYZ
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "chirotherapie"
+# RESULT: PASS — 13 concepts loaded, display=Chirotherapie
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=chirotherapie&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "akupunktur"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=akupunktur&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "radiologie"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=radiologie&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=INVALID_XYZ&_count=1
+Authorization: Basic basic:secret

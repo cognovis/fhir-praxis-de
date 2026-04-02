@@ -1,0 +1,39 @@
+### Test: $lookup valid code "submit"
+# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=submit
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "inquire"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=inquire
+Authorization: Basic basic:secret
+
+### Test: $lookup valid code "cancel"
+# RESULT: FAIL — returns {"total":0,"entry":[]}
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=cancel
+Authorization: Basic basic:secret
+
+### Test: $lookup invalid code "INVALID_XYZ"
+# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=INVALID_XYZ
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "submit"
+# RESULT: PASS — 3 concepts loaded, display=Antrag einreichen
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=submit&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "inquire"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=inquire&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify "cancel"
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=cancel&_count=1
+Authorization: Basic basic:secret
+
+### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
+# RESULT: PASS
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=INVALID_XYZ&_count=1
+Authorization: Basic basic:secret

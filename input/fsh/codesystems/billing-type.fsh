@@ -3,6 +3,7 @@ Id: billing-type
 Title: "Abrechnungsart"
 Description: "Codes für Abrechnungsarten in der ambulanten Versorgung. Dient als Diskriminator für ChargeItemDefinition-Kataloge. Regionale Selektivverträge nutzen den generischen Typ (z.B. hzv, facharztvertrag) — die KV-Region wird über Contract.identifier bzw. ChargeItemDefinition.jurisdiction abgebildet."
 * ^status = #draft
+* ^experimental = false
 * ^caseSensitive = true
 // Bundesweite Gebührenordnungen
 * #ebm "EBM" "Einheitlicher Bewertungsmaßstab (GKV)"

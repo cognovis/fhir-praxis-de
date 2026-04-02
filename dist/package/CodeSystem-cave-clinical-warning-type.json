@@ -29,6 +29,7 @@
       "definition": "Klinische Empfehlung oder Hinweis (z.B. klinische Entscheidungsunterstuetzung)"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 4
 }

@@ -39,6 +39,7 @@
       "definition": "Sonstiger Warnhinweis"
     }
   ],
+  "experimental": false,
   "caseSensitive": true,
   "count": 6
 }
