@@ -16,8 +16,9 @@ txCache/
 # Claude session logs
 logs/
 
-# Claude Code project config
-.claude/
+# Claude Code project config (keep commands/ tracked)
+.claude/*
+!.claude/commands/
 
 # Beads context files
 .beads/PRIME.md
