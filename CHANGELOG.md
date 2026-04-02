@@ -4,9 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **qa**: Add experimental=false, fix resource IDs, add httpyac tests
+
+### Features
+
+- Add Aidbox test infrastructure + Claude commands
+
+### Miscellaneous
+
+- Bump version to v0.5.1
+
+## [0.5.1] - 2026-03-30
+
 ### Miscellaneous
 
 - Bump version to 0.5.0
+- Update changelog
 
 ## [0.5.0] - 2026-03-30
 
