@@ -2,21 +2,21 @@ Extension: AuTypExt
 Id: au-typ
 Title: "AU-Typ"
 Description: "Typ der Arbeitsunfaehigkeitsbescheinigung"
-Context: ServiceRequest
+Context: Encounter
 * value[x] only string
 
 Extension: AuVonDatumExt
 Id: au-von-datum
 Title: "AU von Datum"
 Description: "Beginn der Arbeitsunfaehigkeit"
-Context: ServiceRequest
+Context: Encounter
 * value[x] only date
 
 Extension: AuBisDatumExt
 Id: au-bis-datum
 Title: "AU bis Datum"
 Description: "Ende der Arbeitsunfaehigkeit"
-Context: ServiceRequest
+Context: Encounter
 * value[x] only date
 
 Extension: AuEnddatumExt
@@ -30,5 +30,5 @@ Extension: AuArbeitsunfallExt
 Id: au-arbeitsunfall
 Title: "Arbeitsunfall"
 Description: "Kennzeichen ob ein Arbeitsunfall vorliegt"
-Context: ServiceRequest
+Context: Encounter
 * value[x] only boolean

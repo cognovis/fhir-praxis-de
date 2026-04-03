@@ -62,6 +62,14 @@ Usage: #example
 * extension[=].valueReference = Reference(example-organization)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-enddatum"
 * extension[=].valueDate = "2026-01-21"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-typ"
+* extension[=].valueString = "Erstbescheinigung"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-von-datum"
+* extension[=].valueDate = "2024-03-01"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-bis-datum"
+* extension[=].valueDate = "2024-03-08"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-arbeitsunfall"
+* extension[=].valueBoolean = false
 
 Instance: ExampleChargeItemGOAE
 InstanceOf: ChargeItem
@@ -108,18 +116,6 @@ Usage: #example
 * extension[=].valueDecimal = 2.2
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/statistikleistung"
 * extension[=].valueBoolean = false
-// EBM-Felder (leer bei GOÄ, aber zum Nachweis der Extension-Nutzung)
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-kapitel"
-* extension[=].valueString = "03"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-punkte"
-* extension[=].valueDecimal = 0
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-pruefzeit"
-* extension[=].valueInteger = 0
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-rlv-relevanz"
-* extension[=].valueBoolean = false
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-euro-betrag"
-* extension[=].valueMoney.value = 0
-* extension[=].valueMoney.currency = #EUR
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-punkte"
 * extension[=].valueDecimal = 0
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/reviewed-status"
