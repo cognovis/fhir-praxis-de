@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Documentation
+
+- Update CLAUDE.md, add QA analysis, switch beads to server mode
+
+### Miscellaneous
+
+- Bump version to 0.6.0
+- **deps**: Upgrade de.basisprofil.r4 1.5.0 → 1.6.0-ballot2
+
+### Test
+
+- Update Aidbox test suite for basisprofil 1.6.0-ballot2
+
+## [0.6.0] - 2026-04-02
+
 ### Bug Fixes
 
 - **qa**: Add experimental=false, fix resource IDs, add httpyac tests
@@ -15,6 +30,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to v0.5.1
+- Update changelog
 
 ## [0.5.1] - 2026-03-30
 
