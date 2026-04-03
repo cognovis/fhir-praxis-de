@@ -18,14 +18,14 @@ Description: "Workflow-Task fuer den KV-Genehmigungsprozess (Prior Authorization
 * owner MS
 * owner only Reference(Organization)
 * input MS
-* input ^slicing.discriminator.type = #pattern
+* input ^slicing.discriminator.type = #value
 * input ^slicing.discriminator.path = "type"
 * input ^slicing.rules = #open
 * input contains claimReference 0..1 MS
 * input[claimReference].type = PASTaskInputTypeCS#claim-reference
 * input[claimReference].value[x] only Reference(PASClaimDE)
 * output MS
-* output ^slicing.discriminator.type = #pattern
+* output ^slicing.discriminator.type = #value
 * output ^slicing.discriminator.path = "type"
 * output ^slicing.rules = #open
 * output contains responseReference 0..1 MS

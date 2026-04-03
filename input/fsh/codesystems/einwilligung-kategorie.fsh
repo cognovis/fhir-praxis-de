@@ -2,7 +2,7 @@ CodeSystem: EinwilligungKategorieCS
 Id: einwilligung-kategorie
 Title: "Einwilligung-Kategorie"
 Description: "Kategorien fuer Patienteneinwilligungen in der ambulanten Versorgung"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #dsgvo "DSGVO" "Datenschutz-Grundverordnung Einwilligung"

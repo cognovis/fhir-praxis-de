@@ -3,7 +3,7 @@ Id: scheinart
 Title: "Scheinart"
 Description: "Abrechnungsschein-Typen in der ambulanten Versorgung"
 * ^url = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #gkv "GKV" "Gesetzliche Krankenversicherung"

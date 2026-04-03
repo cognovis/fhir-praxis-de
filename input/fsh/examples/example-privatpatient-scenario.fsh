@@ -16,6 +16,8 @@ Usage: #example
 * extension[=].valueString = "Debeka Krankenversicherungsverein a.G."
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kassennummer"
 * extension[=].valueString = "168140050"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/hv-versicherten-nr"
+* extension[=].valueString = "A123456789"
 
 Instance: ExampleEncounterPrivat
 InstanceOf: Encounter
@@ -180,6 +182,15 @@ Usage: #example
 * extension[=].valueString = "approved"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/reviewed-at"
 * extension[=].valueDateTime = "2026-01-31T16:00:00+01:00"
+// Claim.item mit KV-Abrechnung Extensions
+* item[0].sequence = 1
+* item[0].productOrService.coding[0].system = "http://fhir.de/CodeSystem/goae"
+* item[0].productOrService.coding[0].code = #5
+* item[0].productOrService.coding[0].display = "Symptombezogene Untersuchung"
+* item[0].extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/abrech-satzart"
+* item[0].extension[=].valueString = "ACH"
+* item[0].extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/abrech-feldkennung"
+* item[0].extension[=].valueInteger = 5001
 
 Instance: ExampleAccountOP
 InstanceOf: Account

@@ -5,7 +5,7 @@ CodeSystem: CaveClinicalWarningTypeCS
 Id: cave-clinical-warning-type
 Title: "CAVE Clinical Warning Type"
 Description: "Kurzschluessel fuer klinische Warnhinweistypen (CAVE-Eintraege) in deutschen Praxisverwaltungssystemen. PVS-uebergreifend standardisiert."
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * ^content = #complete

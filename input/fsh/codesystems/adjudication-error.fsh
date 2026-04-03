@@ -2,7 +2,7 @@ CodeSystem: GenehmigungsFehlerCS
 Id: adjudication-error
 Title: "Genehmigungsfehler"
 Description: "Fehlercodes fuer abgelehnte Genehmigungsantraege im deutschen Praxiskontext"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #nicht-genehmigungspflichtig "Nicht genehmigungspflichtig" "Die beantragte Leistung bedarf keiner Vorabgenehmigung durch die Krankenkasse"

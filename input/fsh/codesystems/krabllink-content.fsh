@@ -2,7 +2,7 @@ CodeSystem: KrablLinkContentCS
 Id: krabllink-content
 Title: "KraBL-Link Content-Typ"
 Description: "Content-Typen für Krankenblatt-Links (KraBL) in der ambulanten Versorgung"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #pdf "PDF" "Portable Document Format (PDF)"

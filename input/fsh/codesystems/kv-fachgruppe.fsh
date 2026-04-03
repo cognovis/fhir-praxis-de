@@ -2,7 +2,7 @@ CodeSystem: KvFachgruppeCS
 Id: kv-fachgruppe
 Title: "KV Fachgruppe"
 Description: "Fachgruppen-Codes der Kassenärztlichen Vereinigungen für die Honorarverteilung"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #allgemeinmedizin "Allgemeinmedizin" "Fachärzte für Allgemeinmedizin"

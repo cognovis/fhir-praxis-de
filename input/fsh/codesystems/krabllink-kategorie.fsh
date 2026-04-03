@@ -2,7 +2,7 @@ CodeSystem: KrablLinkKategorieCS
 Id: krabllink-kategorie
 Title: "KraBL-Link Dokumentkategorie"
 Description: "Dokumentkategorien für Krankenblatt-Links (KraBL) in der ambulanten Versorgung"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #arztbrief "Arztbrief" "Arztbrief oder ärztlicher Entlassungsbericht"

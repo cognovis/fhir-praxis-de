@@ -2,7 +2,7 @@ CodeSystem: GenehmigungenLeistungsbereichCS
 Id: genehmigung-leistungsbereich
 Title: "Genehmigung Leistungsbereich"
 Description: "KV-regulierte Leistungsbereiche mit Genehmigungspflicht"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #chirotherapie "Chirotherapie"

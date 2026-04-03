@@ -2,7 +2,7 @@ CodeSystem: AiProvenanceCS
 Id: ai-provenance
 Title: "AI Provenance"
 Description: "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #ai-generated "KI-generiert" "Inhalt wurde durch ein KI-System erzeugt"

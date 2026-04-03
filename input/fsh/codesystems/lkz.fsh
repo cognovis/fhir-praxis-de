@@ -2,7 +2,7 @@ CodeSystem: LkzCS
 Id: lkz
 Title: "Löschkennzeichen"
 Description: "Löschkennzeichen für Datensätze in der ambulanten Versorgung"
-* ^status = #draft
+* ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * #aktiv "Aktiv" "Datensatz ist aktiv und gültig"
