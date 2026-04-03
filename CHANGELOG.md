@@ -4,9 +4,31 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-bua**: Address review findings iteration 1 — update ebm-chargeitem comment, verify sushi build clean
+- **fpde-bua**: Update examples to match corrected extension contexts (AU→Encounter, EBM→ChargeItemDefinition)
+- **fpde-bua**: Address review findings iteration 1 — catalog descriptions, rename ebm file, add AU/EBM examples
+- **fpde-bua**: Address review findings iteration 2 — remove instance-level wording from ebm-kapitel and ebm-pruefzeit descriptions
+
+### Features
+
+- **fpde-bua**: Fix extension context for AU (ServiceRequest→Encounter) and EBM (ChargeItem→ChargeItemDefinition)
+
+### Miscellaneous
+
+- Bump version to 0.12.0
+
+## [0.12.0] - 2026-04-03
+
 ### Miscellaneous
 
 - Bump version to 0.11.0
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-w60
 
 ## [0.11.0] - 2026-04-03
 
