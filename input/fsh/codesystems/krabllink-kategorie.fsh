@@ -11,6 +11,6 @@ Description: "Dokumentkategorien für Krankenblatt-Links (KraBL) in der ambulant
 * #labor "Labor" "Laborbefund"
 * #bild "Bild" "Bildgebende Diagnostik (z.B. Röntgen, CT, MRT)"
 * #einwilligung "Einwilligung" "Patienteneinwilligungserklärung"
-* #verordnung "Verordnung" "Arztliche Verordnung"
+* #verordnung "Verordnung" "Ärztliche Verordnung"
 * #ueberweisung "Überweisung" "Überweisungsschein"
 * #sonstiges "Sonstiges" "Sonstige Dokumente"
