@@ -35,7 +35,7 @@ Usage: #example
 * outcome = #error
 * error[0].code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/adjudication-error"
 * error[0].code.coding[0].code = #nicht-genehmigungspflichtig
-* error[0].code.coding[0].display = "Leistung nicht genehmigungspflichtig"
+* error[0].code.coding[0].display = "Nicht genehmigungspflichtig"
 * item[0].itemSequence = 1
 * item[0].adjudication[0].category.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication"
 * item[0].adjudication[0].category.coding[0].code = #ineligible
