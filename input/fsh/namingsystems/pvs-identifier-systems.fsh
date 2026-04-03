@@ -97,7 +97,7 @@ Usage: #definition
 * kind = #identifier
 * date = "2026-04-03"
 * publisher = "cognovis GmbH"
-* description = "Betriebsstaettennummer — lokaler Alias fuer http://fhir.de/sid/dkgev/bsnr. Enthalt Verweis auf die nationale Definition."
+* description = "Betriebsstaettennummer — lokaler Alias fuer http://fhir.de/sid/dkgev/bsnr. Enthaelt Verweis auf die nationale Definition."
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/bsnr"
 * uniqueId[0].preferred = true
