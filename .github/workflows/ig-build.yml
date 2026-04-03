@@ -72,6 +72,9 @@ jobs:
             dist/*.tgz
             output/full-ig.zip
 
+      - name: Copy package-list.json to output
+        run: cp package-list.json output/package-list.json
+
       - name: Setup Pages
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
         uses: actions/configure-pages@v5
