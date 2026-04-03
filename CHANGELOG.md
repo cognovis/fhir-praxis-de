@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-749a121b**: Address review findings iteration 1 — fix adjudication codes, description, LANR
+
+### Features
+
+- **fpde-749a121b**: Add FSH example instances for PASClaimDE, PASClaimResponseDE, PASTaskDE
+
+### Miscellaneous
+
+- Bump version to 0.6.1
+
+## [0.6.1] - 2026-04-03
+
 ### Documentation
 
 - Update CLAUDE.md, add QA analysis, switch beads to server mode
@@ -12,6 +26,7 @@ All notable changes to this project will be documented in this file.
 
 - Bump version to 0.6.0
 - **deps**: Upgrade de.basisprofil.r4 1.5.0 → 1.6.0-ballot2
+- Update changelog
 
 ### Test
 
