@@ -18,11 +18,11 @@ publisher:
   name: cognovis GmbH
   url: https://www.cognovis.de
   email: info@cognovis.de
-jurisdiction: urn:iso:std:iso:3166#DE "Deutschland"
+jurisdiction: urn:iso:std:iso:3166#DE "Germany"
 
 dependencies:
   de.basisprofil.r4: 1.6.0-ballot2
-  hl7.terminology.r4: 6.2.0
+  hl7.terminology.r4: 7.1.0
 
 pages:
   index.md:

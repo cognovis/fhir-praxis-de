@@ -59,3 +59,19 @@ This Implementation Guide is published under **CC-BY-4.0**.
 ## International Interoperability
 
 These profiles are designed with international FHIR concepts in mind. Where possible, they use standard R4 resources and documented mappings to international equivalents. See the [International Interoperability](international-interoperability.html) page for detailed mapping tables.
+
+## Dependencies
+
+{% include dependency-table.xhtml %}
+
+## Cross-Version Analysis
+
+{% include cross-version-analysis.xhtml %}
+
+## Global Profiles
+
+{% include globals-table.xhtml %}
+
+## IP Statements
+
+{% include ip-statements.xhtml %}

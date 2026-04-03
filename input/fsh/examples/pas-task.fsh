@@ -15,8 +15,8 @@ Usage: #example
 * authoredOn = "2024-03-01T09:00:00+01:00"
 * requester = Reference(PASClaimPractitionerExample)
 * owner = Reference(PASClaimInsurerExample)
-* input[claimReference].type.coding[0].system = "http://terminology.hl7.org/CodeSystem/task-input-type"
-* input[claimReference].type.coding[0].code = #Reference
+* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
+* input[claimReference].type.coding[0].code = #claim-reference
 * input[claimReference].valueReference = Reference(PASClaimExample)
 
 // Task: Antrag genehmigt — abgeschlossen mit Response
@@ -35,11 +35,11 @@ Usage: #example
 * lastModified = "2024-03-03T14:00:00+01:00"
 * requester = Reference(PASClaimPractitionerExample)
 * owner = Reference(PASClaimInsurerExample)
-* input[claimReference].type.coding[0].system = "http://terminology.hl7.org/CodeSystem/task-input-type"
-* input[claimReference].type.coding[0].code = #Reference
+* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
+* input[claimReference].type.coding[0].code = #claim-reference
 * input[claimReference].valueReference = Reference(PASClaimExample)
-* output[responseReference].type.coding[0].system = "http://terminology.hl7.org/CodeSystem/task-input-type"
-* output[responseReference].type.coding[0].code = #Reference
+* output[responseReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
+* output[responseReference].type.coding[0].code = #response-reference
 * output[responseReference].valueReference = Reference(PASClaimResponseApprovedExample)
 
 // Task: Status abfragen
@@ -57,6 +57,6 @@ Usage: #example
 * authoredOn = "2024-03-02T08:30:00+01:00"
 * requester = Reference(PASClaimPractitionerExample)
 * owner = Reference(PASClaimInsurerExample)
-* input[claimReference].type.coding[0].system = "http://terminology.hl7.org/CodeSystem/task-input-type"
-* input[claimReference].type.coding[0].code = #Reference
+* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
+* input[claimReference].type.coding[0].code = #claim-reference
 * input[claimReference].valueReference = Reference(PASClaimExample)

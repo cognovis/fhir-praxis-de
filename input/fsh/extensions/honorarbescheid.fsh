@@ -2,14 +2,14 @@ Extension: HonorarbescheidQuartalExt
 Id: honorarbescheid-quartal
 Title: "Honorarbescheid Quartal"
 Description: "Quartal des Honorarbescheids, z.B. 3/2025"
-Context: PaymentReconciliation
+Context: PaymentReconciliation, ClaimResponse
 * value[x] only string
 
 Extension: HonorarbescheidBsnrExt
 Id: honorarbescheid-bsnr
 Title: "Honorarbescheid BSNR"
 Description: "Betriebsstaettennummer der Praxis im Honorarbescheid"
-Context: PaymentReconciliation
+Context: PaymentReconciliation, ClaimResponse
 * value[x] only string
 
 Extension: HonorarbescheidPatientNameExt

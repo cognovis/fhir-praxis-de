@@ -1,0 +1,19 @@
+== Suppressed Messages ==
+
+# External German CodeSystems not resolvable by tx.fhir.org — these are valid systems
+# maintained by KBV, BfArM, and fhir.de but not registered on the international tx server
+A definition for CodeSystem 'https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM' could not be found, so the code cannot be validated
+Das CodeSystem https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM ist unbekannt
+A definition for CodeSystem 'http://fhir.de/CodeSystem/goae' could not be found, so the code cannot be validated
+A definition for CodeSystem 'http://fhir.de/CodeSystem/bfarm/ops' could not be found, so the code cannot be validated
+A definition for CodeSystem 'http://fhir.de/CodeSystem/bfarm/icd-10-gm' could not be found, so the code cannot be validated
+
+# External German NamingSystems not resolvable
+URL-Wert 'http://fhir.de/NamingSystem/arge-ik/iknr' löst nicht auf
+URL-Wert 'http://fhir.de/NamingSystem/gkv/kvid-10' löst nicht auf
+URL-Wert 'https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR' löst nicht auf
+
+# Own CodeSystems not on tx.fhir.org (expected for unpublished IG)
+A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart' could not be found, so the code cannot be validated
+A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus' could not be found, so the value set cannot be expanded
+A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart' could not be found, so the value set cannot be expanded

@@ -3,4 +3,5 @@ Id: hzv-participation
 Title: "HZV-Teilnahmestatus"
 Description: "Teilnahmestatus an der hausarztzentrierten Versorgung"
 * ^status = #draft
+* ^experimental = false
 * include codes from system HzvParticipationCS

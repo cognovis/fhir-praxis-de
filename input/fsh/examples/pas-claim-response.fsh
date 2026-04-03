@@ -17,7 +17,7 @@ Usage: #example
 * item[0].itemSequence = 1
 * item[0].adjudication[0].category.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication"
 * item[0].adjudication[0].category.coding[0].code = #eligible
-* item[0].adjudication[0].category.coding[0].display = "Eligible"
+* item[0].adjudication[0].category.coding[0].display = "Eligible Amount"
 
 // Abgelehnter Antrag (Edge Case)
 Instance: PASClaimResponseRejectedExample
@@ -38,5 +38,5 @@ Usage: #example
 * error[0].code.coding[0].display = "Nicht genehmigungspflichtig"
 * item[0].itemSequence = 1
 * item[0].adjudication[0].category.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication"
-* item[0].adjudication[0].category.coding[0].code = #ineligible
-* item[0].adjudication[0].category.coding[0].display = "Ineligible"
+* item[0].adjudication[0].category.coding[0].code = #submitted
+* item[0].adjudication[0].category.coding[0].display = "Submitted Amount"

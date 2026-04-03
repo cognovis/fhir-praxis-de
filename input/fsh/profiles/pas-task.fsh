@@ -21,13 +21,13 @@ Description: "Workflow-Task fuer den KV-Genehmigungsprozess (Prior Authorization
 * input ^slicing.discriminator.type = #pattern
 * input ^slicing.discriminator.path = "type"
 * input ^slicing.rules = #open
-* input contains claimReference 0..1
-* input[claimReference].type = http://terminology.hl7.org/CodeSystem/task-input-type#Reference
+* input contains claimReference 0..1 MS
+* input[claimReference].type = PASTaskInputTypeCS#claim-reference
 * input[claimReference].value[x] only Reference(PASClaimDE)
 * output MS
 * output ^slicing.discriminator.type = #pattern
 * output ^slicing.discriminator.path = "type"
 * output ^slicing.rules = #open
-* output contains responseReference 0..1
-* output[responseReference].type = http://terminology.hl7.org/CodeSystem/task-input-type#Reference
+* output contains responseReference 0..1 MS
+* output[responseReference].type = PASTaskInputTypeCS#response-reference
 * output[responseReference].value[x] only Reference(PASClaimResponseDE)

@@ -14,4 +14,5 @@ Id: pas-task-code-vs
 Title: "PAS Task Code"
 Description: "Codes fuer Genehmigungsworkflow-Tasks"
 * ^status = #draft
+* ^experimental = false
 * include codes from system PASTaskCodeCS

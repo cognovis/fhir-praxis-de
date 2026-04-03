@@ -15,8 +15,8 @@ Description: "Mapping der CAVE-Warnhinweistyp-Kuerzel auf SNOMED-CT Konzepte"
 * group[0].target = "http://snomed.info/sct"
 * group[0].element[0].code = #K
 * group[0].element[0].display = "Kontraindikation"
-* group[0].element[0].target[0].code = #103306003
-* group[0].element[0].target[0].display = "Contraindication to treatment (finding)"
+* group[0].element[0].target[0].code = #103306004
+* group[0].element[0].target[0].display = "Contraindication to (finding)"
 * group[0].element[0].target[0].equivalence = #equivalent
 * group[0].element[1].code = #A
 * group[0].element[1].display = "Allergie"
