@@ -11,7 +11,7 @@ Context: ChargeItemDefinition
 Extension: EbmPunkteExt
 Id: ebm-punkte
 Title: "EBM-Punkte"
-Description: "Konkret abgerechnete EBM-Punktzahl (kann durch Zuschläge/Abzüge vom Katalogwert abweichen)"
+Description: "EBM-Punktzahl laut Katalog"
 Context: ChargeItemDefinition
 * value[x] only decimal
 
@@ -32,6 +32,6 @@ Context: ChargeItemDefinition
 Extension: EbmEuroBetragExt
 Id: ebm-euro-betrag
 Title: "EBM-Euro-Betrag"
-Description: "Konkreter Euro-Betrag der abgerechneten EBM-Leistung (nach Anwendung des Orientierungspunktwerts)"
+Description: "Euro-Betrag laut EBM-Katalog (Orientierungspunktwert × Punkte)"
 Context: ChargeItemDefinition
 * value[x] only Money

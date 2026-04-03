@@ -62,6 +62,14 @@ Usage: #example
 * extension[=].valueReference = Reference(example-organization)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-enddatum"
 * extension[=].valueDate = "2026-01-21"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-typ"
+* extension[=].valueString = "Erstbescheinigung"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-von-datum"
+* extension[=].valueDate = "2024-03-01"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-bis-datum"
+* extension[=].valueDate = "2024-03-08"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-arbeitsunfall"
+* extension[=].valueBoolean = false
 
 Instance: ExampleChargeItemGOAE
 InstanceOf: ChargeItem
