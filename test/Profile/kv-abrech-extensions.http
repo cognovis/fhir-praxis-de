@@ -1,0 +1,67 @@
+### Claim with abrechSatzart and abrechFeldkennung on item
+# @name claim-with-abrech-extensions
+# Expected: OperationOutcome with "all ok" (no errors)
+# Validates ad-hoc usage of abrech-satzart and abrech-feldkennung extensions on Claim.item
+POST http://localhost:8080/fhir/Claim/$validate
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Claim",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "professional"
+    }]
+  },
+  "use": "claim",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "insurer": {"reference": "Organization/mira-mvz"},
+  "provider": {"reference": "Practitioner/prac-berger"},
+  "priority": {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/processpriority", "code": "normal"}]},
+  "insurance": [{"sequence": 1, "focal": true, "coverage": {"display": "GKV"}}],
+  "item": [{
+    "sequence": 1,
+    "extension": [
+      {
+        "url": "https://fhir.cognovis.de/praxis/StructureDefinition/abrech-satzart",
+        "valueString": "101"
+      },
+      {
+        "url": "https://fhir.cognovis.de/praxis/StructureDefinition/abrech-feldkennung",
+        "valueInteger": 3000
+      }
+    ],
+    "productOrService": {
+      "coding": [{
+        "system": "http://fhir.de/CodeSystem/ebm",
+        "code": "03220",
+        "display": "Versichertenpauschale"
+      }]
+    },
+    "quantity": {"value": 1}
+  }]
+}
+
+### Coverage with hvVersichertenNr
+# @name coverage-with-hv-versicherten-nr
+# Expected: OperationOutcome with "all ok" (no errors)
+# Validates ad-hoc usage of hv-versicherten-nr extension on Coverage
+POST http://localhost:8080/fhir/Coverage/$validate
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Coverage",
+  "extension": [
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/hv-versicherten-nr",
+      "valueString": "A123456789"
+    }
+  ],
+  "status": "active",
+  "beneficiary": {"reference": "Patient/pat-s1c-meyer"},
+  "payor": [{"reference": "Organization/mira-mvz"}]
+}
