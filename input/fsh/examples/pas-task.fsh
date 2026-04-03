@@ -8,14 +8,14 @@ Description: "Workflow-Task fuer das Einreichen des Genehmigungsantrags bei der 
 Usage: #example
 * status = #requested
 * intent = #order
-* code.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-code"
+* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code"
 * code.coding[0].code = #submit
 * code.coding[0].display = "Antrag einreichen"
 * for = Reference(PASClaimPatientExample)
 * authoredOn = "2024-03-01T09:00:00+01:00"
 * requester = Reference(PASClaimPractitionerExample)
 * owner = Reference(PASClaimInsurerExample)
-* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-input-type"
+* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
 * input[claimReference].type.coding[0].code = #claim-reference
 * input[claimReference].valueReference = Reference(PASClaimExample)
 
@@ -27,7 +27,7 @@ Description: "Abgeschlossener Workflow-Task nach positiver Genehmigung durch die
 Usage: #example
 * status = #completed
 * intent = #order
-* code.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-code"
+* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code"
 * code.coding[0].code = #submit
 * code.coding[0].display = "Antrag einreichen"
 * for = Reference(PASClaimPatientExample)
@@ -35,10 +35,10 @@ Usage: #example
 * lastModified = "2024-03-03T14:00:00+01:00"
 * requester = Reference(PASClaimPractitionerExample)
 * owner = Reference(PASClaimInsurerExample)
-* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-input-type"
+* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
 * input[claimReference].type.coding[0].code = #claim-reference
 * input[claimReference].valueReference = Reference(PASClaimExample)
-* output[responseReference].type.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-input-type"
+* output[responseReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
 * output[responseReference].type.coding[0].code = #response-reference
 * output[responseReference].valueReference = Reference(PASClaimResponseApprovedExample)
 
@@ -50,13 +50,13 @@ Description: "Workflow-Task fuer die Statusabfrage eines laufenden Genehmigungsa
 Usage: #example
 * status = #in-progress
 * intent = #order
-* code.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-code"
+* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code"
 * code.coding[0].code = #inquire
 * code.coding[0].display = "Status abfragen"
 * for = Reference(PASClaimPatientExample)
 * authoredOn = "2024-03-02T08:30:00+01:00"
 * requester = Reference(PASClaimPractitionerExample)
 * owner = Reference(PASClaimInsurerExample)
-* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/CodeSystem/pas-task-input-type"
+* input[claimReference].type.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type"
 * input[claimReference].type.coding[0].code = #claim-reference
 * input[claimReference].valueReference = Reference(PASClaimExample)
