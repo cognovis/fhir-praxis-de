@@ -4,7 +4,7 @@
 Extension: EbmKapitelExt
 Id: ebm-kapitel
 Title: "EBM-Kapitel"
-Description: "Kapitel des EBM, zu dem die abgerechnete Leistung gehört"
+Description: "Kapitel des EBM, zu dem die Leistung gehört"
 Context: ChargeItemDefinition
 * value[x] only string
 
@@ -18,7 +18,7 @@ Context: ChargeItemDefinition
 Extension: EbmPruefzeitExt
 Id: ebm-pruefzeit
 Title: "EBM-Prüfzeit"
-Description: "Prüfzeit in Minuten für die Plausibilitätsprüfung der abgerechneten Leistung"
+Description: "Prüfzeit in Minuten für die Plausibilitätsprüfung der Leistung"
 Context: ChargeItemDefinition
 * value[x] only integer
 
