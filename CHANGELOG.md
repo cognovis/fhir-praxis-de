@@ -6,7 +6,24 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **beads**: Switch to shared-server Dolt mode
+- **qa**: Fix jurisdiction display and add hl7.terminology dependency
+
+### Features
+
+- **registry**: Prepare IG for FHIR registry publication
+
+### Miscellaneous
+
+- Bump version to 0.7.0
+
+## [0.7.0] - 2026-04-03
+
+### Bug Fixes
+
 - **fpde-749a121b**: Address review findings iteration 1 — fix adjudication codes, description, LANR
+- **fpde-749a121b**: Address review findings iteration 2 — add adjudication-error CodeSystem
+- **fpde-749a121b**: Fix display text mismatch — match adjudication-error CodeSystem definition
 
 ### Features
 
@@ -15,6 +32,11 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.6.1
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-749a121b
 
 ## [0.6.1] - 2026-04-03
 
