@@ -2,12 +2,10 @@ CodeSystem: BGT2001CS
 Id: bgt2001
 Title: "BGT2001 Tarifpositionen"
 Description: "Berufsgenossenschaftliche Gebühren-Tarifpositionen (BGT2001) des DGUV-Gebührentarifs für die Abrechnung berufsgenossenschaftlicher Heilbehandlungen. Enthält repräsentative Tarifpositionen (Ziffern) als Codes."
-* ^url = "https://fhir.cognovis.de/praxis/CodeSystem/bgt2001"
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * ^content = #example
-* ^publisher = "cognovis GmbH"
 // Allgemeine Leistungen (100er)
 * #100 "Beratung" "Beratung des Versicherten, auch telefonisch"
 * #101 "Untersuchung" "Vollständige körperliche Untersuchung mit Dokumentation des Befundes"
