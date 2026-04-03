@@ -35,6 +35,8 @@ pages:
     title: Code Systems
   valuesets.md:
     title: Value Sets
+  namingsystems.md:
+    title: Naming Systems
   international-interoperability.md:
     title: International Interoperability
 
@@ -45,5 +47,6 @@ menu:
   Terminology:
     Code Systems: codesystems.html
     Value Sets: valuesets.html
+    Naming Systems: namingsystems.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html
