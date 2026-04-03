@@ -5,7 +5,8 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
-* description = "Generischer PVS-interner Identifier für Rückweg-Sync zwischen mira-adapters und dem PVS"
+* publisher = "cognovis GmbH"
+* description = "Generischer PVS-interner Identifier fuer Rueckweg-Sync zwischen FHIR-Adapter und dem PVS"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
 * uniqueId[0].preferred = true
@@ -17,7 +18,8 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
-* description = "KV-Abrechnungsnummer des Arztes"
+* publisher = "cognovis GmbH"
+* description = "KV-Abrechnungsnummer des Arztes (vollstaendiges Format)"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/abrechnungsnummer"
 * uniqueId[0].preferred = true
@@ -29,6 +31,7 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
+* publisher = "cognovis GmbH"
 * description = "PVS-interne Patientennummer"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-patient-nummer"
@@ -41,6 +44,7 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
+* publisher = "cognovis GmbH"
 * description = "Zahlungs-ID aus dem PVS"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/zahlung"
@@ -53,7 +57,8 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
-* description = "Kurzform KV-Abrechnungsnummer"
+* publisher = "cognovis GmbH"
+* description = "KV-Abrechnungsnummer im Kurzformat (PVS-spezifische Kurzbezeichnung)"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/abrechnr"
 * uniqueId[0].preferred = true
@@ -65,7 +70,8 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
-* description = "HVG Vertragsidentifier"
+* publisher = "cognovis GmbH"
+* description = "HVG Vertragstyp-Identifier (identifiziert den Vertragstyp)"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/hvg-vertrag"
 * uniqueId[0].preferred = true
@@ -77,7 +83,8 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
-* description = "Eindeutige HVG Vertrags-ID"
+* publisher = "cognovis GmbH"
+* description = "Eindeutige ID eines konkreten HVG-Vertrags (Instanz-Identifier)"
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/hvg-vertrags-id"
 * uniqueId[0].preferred = true
@@ -89,7 +96,8 @@ Usage: #definition
 * status = #draft
 * kind = #identifier
 * date = "2026-04-03"
-* description = "Betriebsstättennummer (Verweis auf fhir.de/sid/dkgev/bsnr)"
+* publisher = "cognovis GmbH"
+* description = "Betriebsstaettennummer — lokaler Alias fuer http://fhir.de/sid/dkgev/bsnr. Enthalt Verweis auf die nationale Definition."
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/bsnr"
 * uniqueId[0].preferred = true
