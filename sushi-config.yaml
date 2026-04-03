@@ -1,5 +1,5 @@
 id: de.cognovis.fhir.praxis
-canonical: https://fhir.cognovis.de/praxis
+canonical: https://fhir.cognovis.de
 name: GermanPracticeManagementProfiles
 title: German Practice Management FHIR Profiles (R4)
 description: >-
