@@ -14,15 +14,6 @@ Usage: #example
 * subject = Reference(example-patient)
 * requester = Reference(example-practitioner)
 * authoredOn = "2026-01-15"
-// AU-Extensions
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-typ"
-* extension[=].valueString = "Erstbescheinigung"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-von-datum"
-* extension[=].valueDate = "2026-01-15"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-bis-datum"
-* extension[=].valueDate = "2026-01-21"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-arbeitsunfall"
-* extension[=].valueBoolean = false
 // Ueberweisungs-Extensions
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ue-fachrichtung"
 * extension[=].valueCodeableConcept.text = "Nephrologie"
