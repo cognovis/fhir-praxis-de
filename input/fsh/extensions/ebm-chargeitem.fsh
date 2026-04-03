@@ -1,4 +1,4 @@
-// EBM ChargeItem-Level Extensions
+// EBM ChargeItemDefinition-Level Extensions
 // (Ergänzung zu den ChargeItemDefinition-Extensions in billing.fsh)
 
 Extension: EbmKapitelExt
