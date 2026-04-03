@@ -1,0 +1,14 @@
+### CodeSystem: krabllink-content - Valid code: pdf
+# @name valid_pdf
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/krabllink-content&code=pdf
+Authorization: Basic basic:secret
+
+### CodeSystem: krabllink-content - Valid code: hl7-cda
+# @name valid_hl7_cda
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/krabllink-content&code=hl7-cda
+Authorization: Basic basic:secret
+
+### CodeSystem: krabllink-content - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/krabllink-content&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

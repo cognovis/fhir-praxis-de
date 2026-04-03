@@ -126,6 +126,67 @@ GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden pe
 
 Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, Besondere Versorgung). Inhalte werden per ETL befüllt (`^content = #not-present`).
 
+### KvFachgruppeCS — KV-Fachgruppe
+
+KV-Fachgruppencodes für Honorarverteilung und Qualitätssicherung.
+
+| Code | Display |
+|------|---------|
+| `allgemeinmedizin` | Allgemeinmedizin |
+| `innere-medizin` | Innere Medizin |
+| `paediatrie` | Pädiatrie |
+| `gynaekologie` | Gynäkologie |
+| `chirurgie` | Chirurgie |
+| `orthopaedie` | Orthopädie |
+| `urologie` | Urologie |
+| `augenheilkunde` | Augenheilkunde |
+| `hno` | HNO |
+| `neurologie` | Neurologie |
+| `psychiatrie` | Psychiatrie |
+| `radiologie` | Radiologie |
+| `dermatologie` | Dermatologie |
+| `anaesthesiologie` | Anästhesiologie |
+
+### KrablLinkKategorieCS — KrablLink-Dokumentkategorie
+
+Dokumentkategorien für KrablLink-Dokumente (arztbrief, befund, labor, etc.).
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `arztbrief` | Arztbrief | Ärztlicher Brief |
+| `befund` | Befund | Medizinischer Befund |
+| `labor` | Labor | Laborbefund |
+| `bild` | Bild | Bildgebende Diagnostik (z.B. Röntgen, CT, MRT) |
+| `einwilligung` | Einwilligung | Einwilligungsdokument |
+| `verordnung` | Verordnung | Ärztliche Verordnung |
+| `ueberweisung` | Überweisung | Überweisungsdokument |
+| `sonstiges` | Sonstiges | Sonstiges Dokument |
+
+### KrablLinkContentCS — KrablLink-Content-Typ
+
+Content-Typen für KrablLink-Dokumente.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `pdf` | PDF | PDF-Dokument |
+| `hl7-cda` | HL7 CDA | HL7 Clinical Document Architecture |
+| `plaintext` | Plaintext | Einfacher Text |
+| `dicom` | DICOM | DICOM-Bilddaten |
+| `jpeg` | JPEG | JPEG-Bilddatei |
+| `png` | PNG | PNG-Bilddatei |
+| `hl7-fhir` | HL7 FHIR | HL7 FHIR-Ressource |
+
+### LkzCS — Löschkennzeichen
+
+Lifecycle-Status-Codes für Soft-Delete und Archivierung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `aktiv` | Aktiv | Eintrag ist aktiv |
+| `geloescht` | Gelöscht | Eintrag wurde gelöscht (Soft-Delete) |
+| `gesperrt` | Gesperrt | Eintrag ist gesperrt |
+| `archiviert` | Archiviert | Eintrag ist archiviert |
+
 ## External CodeSystems
 
 This IG also references the following external CodeSystems from the KBV Schlüsseltabellen (`kbv.all.st-combined`):
