@@ -4,6 +4,29 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **publishing**: Revert to path-based canonical URL with Caddy reverse proxy
+- **ci**: Remove package-list.json from IG output
+- Remove package-list.json from repo root
+- **fpde-9bx**: Address review findings iteration 1 — add http test for kv-abrech extensions
+
+### Features
+
+- **publishing**: Set up canonical URL and FHIR registry discovery
+- **ci**: Include package-list.json in GitHub Pages output
+- **fpde-9bx**: Green — add 3 FSH extensions: abrech-satzart, abrech-feldkennung, hv-versicherten-nr
+
+### Miscellaneous
+
+- Bump version to 0.9.0
+
+### Test
+
+- **fpde-9bx**: Red — 3 extensions missing: abrech-satzart, abrech-feldkennung, hv-versicherten-nr
+
+## [0.9.0] - 2026-04-03
+
 ### Features
 
 - **qa**: Zero errors - add 27 examples, PASTaskInputTypeCS, fix QA issues for registry publication
@@ -11,6 +34,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.8.0
+- Update changelog
 
 ## [0.8.0] - 2026-04-03
 
