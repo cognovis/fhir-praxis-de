@@ -6,6 +6,19 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **qa**: Reduce IG Publisher warnings and hints
+- **qa**: Suppress de-DE display name hints for international codes
+- **fpde-5fj**: Address review findings iteration 1
+- **fpde-5fj**: Use #draft status for BGT2001 ValueSet per project convention
+
+### Features
+
+- **fpde-5fj**: Add BGT2001 standalone CodeSystem and ValueSet
+
+## [0.13.0] - 2026-04-03
+
+### Bug Fixes
+
 - **fpde-bua**: Address review findings iteration 1 — update ebm-chargeitem comment, verify sushi build clean
 - **fpde-bua**: Update examples to match corrected extension contexts (AU→Encounter, EBM→ChargeItemDefinition)
 - **fpde-bua**: Address review findings iteration 1 — catalog descriptions, rename ebm file, add AU/EBM examples
@@ -18,6 +31,12 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.12.0
+- Update changelog
+- Bump version to 0.13.0
+
+### Merge
+
+- Worktree-bead-fpde-bua
 
 ## [0.12.0] - 2026-04-03
 
