@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **qa**: Zero errors - add 27 examples, PASTaskInputTypeCS, fix QA issues for registry publication
+
+### Miscellaneous
+
+- Bump version to 0.8.0
+
+## [0.8.0] - 2026-04-03
+
 ### Bug Fixes
 
 - **beads**: Switch to shared-server Dolt mode
@@ -16,6 +26,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.7.0
+- Update changelog
 
 ## [0.7.0] - 2026-04-03
 
