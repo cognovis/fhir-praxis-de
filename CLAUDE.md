@@ -20,8 +20,9 @@ sushi .                    # Compile FSH → FHIR JSON
 
 ## Local Testing with Aidbox
 
-Uses the local Aidbox instance on localhost:8080 (container: `mira-aidbox-1`).
-Do NOT enable strict validation globally — use `$validate` with explicit profile parameter instead.
+Uses the local Aidbox instance on localhost:8080.
+After IG migration: fresh Aidbox with strict validation enabled globally.
+Current state: shared container (`mira-aidbox-1`), use `$validate` with explicit profile parameter.
 
 ### IG Testing
 

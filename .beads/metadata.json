@@ -1,7 +1,5 @@
 {
-  "database": "dolt",
-  "backend": "dolt",
-  "dolt_mode": "embedded",
+  "dolt_mode": "server",
   "dolt_database": "fhir_praxis_de",
   "project_id": "bba07a08-1a41-4aff-9e40-7346cff6153c"
 }
