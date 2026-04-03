@@ -9,7 +9,7 @@ description: >-
   Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
   international interoperability mappings.
 status: active
-version: 0.10.0
+version: 0.11.0
 fhirVersion: 4.0.1
 copyrightYear: 2026+
 releaseLabel: STU1
