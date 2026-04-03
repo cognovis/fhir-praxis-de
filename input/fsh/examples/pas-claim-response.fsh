@@ -16,10 +16,8 @@ Usage: #example
 * outcome = #complete
 * item[0].itemSequence = 1
 * item[0].adjudication[0].category.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication"
-* item[0].adjudication[0].category.coding[0].code = #submitted
-* item[0].adjudication[0].reason.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication-reason"
-* item[0].adjudication[0].reason.coding[0].code = #ar002
-* item[0].adjudication[0].reason.coding[0].display = "Genehmigt"
+* item[0].adjudication[0].category.coding[0].code = #eligible
+* item[0].adjudication[0].category.coding[0].display = "Eligible"
 
 // Abgelehnter Antrag (Edge Case)
 Instance: PASClaimResponseRejectedExample
@@ -35,12 +33,10 @@ Usage: #example
 * insurer = Reference(PASClaimInsurerExample)
 * request = Reference(PASClaimHausarztExample)
 * outcome = #error
-* error[0].code.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication-error"
-* error[0].code.coding[0].code = #a001
+* error[0].code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/adjudication-error"
+* error[0].code.coding[0].code = #nicht-genehmigungspflichtig
 * error[0].code.coding[0].display = "Leistung nicht genehmigungspflichtig"
 * item[0].itemSequence = 1
 * item[0].adjudication[0].category.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication"
-* item[0].adjudication[0].category.coding[0].code = #submitted
-* item[0].adjudication[0].reason.coding[0].system = "http://terminology.hl7.org/CodeSystem/adjudication-reason"
-* item[0].adjudication[0].reason.coding[0].code = #ar001
-* item[0].adjudication[0].reason.coding[0].display = "Abgelehnt"
+* item[0].adjudication[0].category.coding[0].code = #ineligible
+* item[0].adjudication[0].category.coding[0].display = "Ineligible"

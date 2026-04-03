@@ -19,7 +19,7 @@ Title: "Beispiel-Arzt (PAS)"
 Description: "Beispiel-Arzt fuer den Genehmigungsantrag"
 Usage: #example
 * identifier[0].system = "https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR"
-* identifier[0].value = "123456789"
+* identifier[0].value = "456789012"
 * name[0].family = "Schmidt"
 * name[0].given[0] = "Maria"
 * name[0].prefix[0] = "Dr."
@@ -37,7 +37,7 @@ Usage: #example
 Instance: PASClaimExample
 InstanceOf: PASClaimDE
 Title: "Genehmigungsantrag Langzeittherapie"
-Description: "Beispiel eines Genehmigungsantrags fuer eine geriatrische Komplexbehandlung (EBM 13210), eingereicht von Dr. Schmidt an AOK Bayern."
+Description: "Beispiel eines Genehmigungsantrags fuer eine kardiovaskulaere Praevention (EBM 13210), eingereicht von Dr. Schmidt an AOK Bayern."
 Usage: #example
 * status = #active
 * type = http://terminology.hl7.org/CodeSystem/claim-type#professional
