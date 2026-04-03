@@ -2,7 +2,6 @@ CodeSystem: KrablLinkContentCS
 Id: krabllink-content
 Title: "KraBL-Link Content-Typ"
 Description: "Content-Typen für Krankenblatt-Links (KraBL) in der ambulanten Versorgung"
-* ^url = "https://fhir.cognovis.de/praxis/CodeSystem/krabllink-content"
 * ^status = #draft
 * ^experimental = false
 * ^caseSensitive = true

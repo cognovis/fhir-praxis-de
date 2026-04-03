@@ -145,6 +145,7 @@ KV-Fachgruppencodes für Honorarverteilung und Qualitätssicherung.
 | `psychiatrie` | Psychiatrie |
 | `radiologie` | Radiologie |
 | `dermatologie` | Dermatologie |
+| `anaesthesiologie` | Anästhesiologie |
 
 ### KrablLinkKategorieCS — KrablLink-Dokumentkategorie
 
@@ -155,7 +156,7 @@ Dokumentkategorien für KrablLink-Dokumente (arztbrief, befund, labor, etc.).
 | `arztbrief` | Arztbrief | Ärztlicher Brief |
 | `befund` | Befund | Medizinischer Befund |
 | `labor` | Labor | Laborbefund |
-| `bildgebung` | Bildgebung | Bildgebende Diagnostik |
+| `bild` | Bild | Bildgebende Diagnostik (z.B. Röntgen, CT, MRT) |
 | `einwilligung` | Einwilligung | Einwilligungsdokument |
 | `verordnung` | Verordnung | Ärztliche Verordnung |
 | `ueberweisung` | Überweisung | Überweisungsdokument |

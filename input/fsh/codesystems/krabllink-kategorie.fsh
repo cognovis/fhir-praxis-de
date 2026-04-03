@@ -2,7 +2,6 @@ CodeSystem: KrablLinkKategorieCS
 Id: krabllink-kategorie
 Title: "KraBL-Link Dokumentkategorie"
 Description: "Dokumentkategorien für Krankenblatt-Links (KraBL) in der ambulanten Versorgung"
-* ^url = "https://fhir.cognovis.de/praxis/CodeSystem/krabllink-kategorie"
 * ^status = #draft
 * ^experimental = false
 * ^caseSensitive = true

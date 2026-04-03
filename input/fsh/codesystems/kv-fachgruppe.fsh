@@ -2,7 +2,6 @@ CodeSystem: KvFachgruppeCS
 Id: kv-fachgruppe
 Title: "KV Fachgruppe"
 Description: "Fachgruppen-Codes der Kassenärztlichen Vereinigungen für die Honorarverteilung"
-* ^url = "https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe"
 * ^status = #draft
 * ^experimental = false
 * ^caseSensitive = true
@@ -19,4 +18,4 @@ Description: "Fachgruppen-Codes der Kassenärztlichen Vereinigungen für die Hon
 * #dermatologie "Dermatologie" "Fachärzte für Haut- und Geschlechtskrankheiten"
 * #urologie "Urologie" "Fachärzte für Urologie"
 * #radiologie "Radiologie" "Fachärzte für Radiologie"
-* #anaesthesie "Anästhesiologie" "Fachärzte für Anästhesiologie"
+* #anaesthesiologie "Anästhesiologie" "Fachärzte für Anästhesiologie"

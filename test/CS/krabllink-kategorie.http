@@ -1,0 +1,14 @@
+### CodeSystem: krabllink-kategorie - Valid code: arztbrief
+# @name valid_arztbrief
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/krabllink-kategorie&code=arztbrief
+Authorization: Basic basic:secret
+
+### CodeSystem: krabllink-kategorie - Valid code: labor
+# @name valid_labor
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/krabllink-kategorie&code=labor
+Authorization: Basic basic:secret
+
+### CodeSystem: krabllink-kategorie - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/krabllink-kategorie&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

@@ -1,0 +1,14 @@
+### CodeSystem: kv-fachgruppe - Valid code: allgemeinmedizin
+# @name valid_allgemeinmedizin
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe&code=allgemeinmedizin
+Authorization: Basic basic:secret
+
+### CodeSystem: kv-fachgruppe - Valid code: innere-medizin
+# @name valid_innere_medizin
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe&code=innere-medizin
+Authorization: Basic basic:secret
+
+### CodeSystem: kv-fachgruppe - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret
