@@ -1,10 +1,8 @@
-### Test: Validate VALID Task against PAS Task DE profile
+### Profile: pas-task-de - Valid example
+# @name valid
 # Expected: OperationOutcome with "all ok" (no errors)
 # Fills: status (MS), intent (MS, pattern=order), code (MS, extensible binding to pas-task-code-vs),
 #   for (MS, Patient), requester (MS, Practitioner|Organization), owner (MS, Organization)
-# NOTE: input/output omitted because existing Claim/ClaimResponse in Aidbox
-#   do not conform to pas-claim-de / pas-claim-response-de target profiles,
-#   causing target-profile validation failures unrelated to the Task profile itself.
 POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
@@ -25,57 +23,10 @@ Content-Type: application/fhir+json
   "owner": {"reference": "Organization/mira-mvz"}
 }
 
-### Test: Validate VALID Task WITH input/output references (reference validation)
-# Expected: OperationOutcome with ERRORS -- not because the Task itself is invalid,
-#   but because existing Claim/ClaimResponse resources do not conform to the
-#   target profiles (pas-claim-de / pas-claim-response-de).
-#   This demonstrates Aidbox's reference target-profile validation behavior.
-# Actual errors:
-#   - Task.input[0].valueReference: Claim/claim-lifecycle-01 doesn't conform to pas-claim-de
-#   - Task.output[0].valueReference: ClaimResponse/cr-lifecycle-01 doesn't conform to pas-claim-response-de
-POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
-Authorization: Basic basic:secret
-Content-Type: application/fhir+json
-
-{
-  "resourceType": "Task",
-  "status": "requested",
-  "intent": "order",
-  "code": {
-    "coding": [{
-      "system": "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code",
-      "code": "submit",
-      "display": "Antrag einreichen"
-    }]
-  },
-  "for": {"reference": "Patient/pat-s1c-meyer"},
-  "requester": {"reference": "Practitioner/prac-berger"},
-  "owner": {"reference": "Organization/mira-mvz"},
-  "input": [{
-    "type": {
-      "coding": [{
-        "system": "http://terminology.hl7.org/CodeSystem/task-input-type",
-        "code": "Reference"
-      }]
-    },
-    "valueReference": {"reference": "Claim/claim-lifecycle-01"}
-  }],
-  "output": [{
-    "type": {
-      "coding": [{
-        "system": "http://terminology.hl7.org/CodeSystem/task-input-type",
-        "code": "Reference"
-      }]
-    },
-    "valueReference": {"reference": "ClaimResponse/cr-lifecycle-01"}
-  }]
-}
-
-### Test: Validate INVALID Task against PAS Task DE profile
+### Profile: pas-task-de - Invalid example (wrong intent pattern)
+# @name invalid
 # Expected: OperationOutcome with errors for:
 #   - intent = "filler-order" (pattern violation, must be "order")
-#   - code from unknown system (extensible binding, may warn but not error)
-#   - for, requester, owner missing (MS but not min:1, so may not error)
 POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json

@@ -1,28 +1,19 @@
-### ValueSet $expand: billing-type
-# @name expand-billing-type
+### ValueSet: Billing Type - $expand
+# @name expand
 GET http://localhost:8080/ValueSet/billing-type/$expand
 Authorization: Basic basic:secret
 
-### $validate-code valid: ebm
-# @name validate-valid-1-billing-type
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/billing-type
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type
-    &code=ebm
+### ValueSet: Billing Type - $validate-code valid (ebm)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/billing-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=ebm
 Authorization: Basic basic:secret
 
-### $validate-code valid: goae
-# @name validate-valid-2-billing-type
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/billing-type
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type
-    &code=goae
+### ValueSet: Billing Type - $validate-code valid (goae)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/billing-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=goae
 Authorization: Basic basic:secret
 
-### $validate-code invalid: INVALID_XYZ
-# @name validate-invalid-billing-type
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/billing-type
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type
-    &code=INVALID_XYZ
+### ValueSet: Billing Type - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/billing-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

@@ -1,28 +1,19 @@
-### ValueSet $expand: scheinart
-# @name expand-scheinart
+### ValueSet: Scheinart - $expand
+# @name expand
 GET http://localhost:8080/ValueSet/scheinart/$expand
 Authorization: Basic basic:secret
 
-### $validate-code valid: gkv
-# @name validate-valid-1-scheinart
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/scheinart
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart
-    &code=gkv
+### ValueSet: Scheinart - $validate-code valid (gkv)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/scheinart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=gkv
 Authorization: Basic basic:secret
 
-### $validate-code valid: pkv
-# @name validate-valid-2-scheinart
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/scheinart
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart
-    &code=pkv
+### ValueSet: Scheinart - $validate-code valid (pkv)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/scheinart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=pkv
 Authorization: Basic basic:secret
 
-### $validate-code invalid: INVALID_XYZ
-# @name validate-invalid-scheinart
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/scheinart
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart
-    &code=INVALID_XYZ
+### ValueSet: Scheinart - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/scheinart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

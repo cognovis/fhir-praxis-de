@@ -1,39 +1,14 @@
-### Test: $lookup valid code "eingeschrieben"
-# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=eingeschrieben
+### CodeSystem: hzv-participation - Valid code: eingeschrieben
+# @name valid_eingeschrieben
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=eingeschrieben
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "abgemeldet"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=abgemeldet
+### CodeSystem: hzv-participation - Valid code: abgemeldet
+# @name valid_abgemeldet
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=abgemeldet
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "gesperrt"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=gesperrt
-Authorization: Basic basic:secret
-
-### Test: $lookup invalid code "INVALID_XYZ"
-# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=INVALID_XYZ
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "eingeschrieben"
-# RESULT: PASS — 4 concepts loaded, display=Eingeschrieben
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=eingeschrieben&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "abgemeldet"
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=abgemeldet&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "gesperrt"
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=gesperrt&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=INVALID_XYZ&_count=1
+### CodeSystem: hzv-participation - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

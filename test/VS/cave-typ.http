@@ -1,28 +1,19 @@
-### ValueSet $expand: cave-typ
-# @name expand-cave-typ
+### ValueSet: CAVE Typ - $expand
+# @name expand
 GET http://localhost:8080/ValueSet/cave-typ/$expand
 Authorization: Basic basic:secret
 
-### $validate-code valid: allergie
-# @name validate-valid-1-cave-typ
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/cave-typ
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ
-    &code=allergie
+### ValueSet: CAVE Typ - $validate-code valid (allergie)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/cave-typ/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=allergie
 Authorization: Basic basic:secret
 
-### $validate-code valid: unvertraeglichkeit
-# @name validate-valid-2-cave-typ
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/cave-typ
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ
-    &code=unvertraeglichkeit
+### ValueSet: CAVE Typ - $validate-code valid (unvertraeglichkeit)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/cave-typ/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=unvertraeglichkeit
 Authorization: Basic basic:secret
 
-### $validate-code invalid: INVALID_XYZ
-# @name validate-invalid-cave-typ
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/cave-typ
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ
-    &code=INVALID_XYZ
+### ValueSet: CAVE Typ - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/cave-typ/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

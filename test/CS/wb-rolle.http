@@ -1,29 +1,14 @@
-### Test: $lookup valid code "wb-assistent"
-# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=wb-assistent
+### CodeSystem: wb-rolle - Valid code: wb-assistent
+# @name valid_wb-assistent
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=wb-assistent
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "sicherstellungsassistent"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=sicherstellungsassistent
+### CodeSystem: wb-rolle - Valid code: sicherstellungsassistent
+# @name valid_sicherstellungsassistent
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=sicherstellungsassistent
 Authorization: Basic basic:secret
 
-### Test: $lookup invalid code "INVALID_XYZ"
-# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=INVALID_XYZ
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "wb-assistent"
-# RESULT: PASS — 2 concepts loaded, display=WB-Assistent
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=wb-assistent&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "sicherstellungsassistent"
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=sicherstellungsassistent&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=INVALID_XYZ&_count=1
+### CodeSystem: wb-rolle - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

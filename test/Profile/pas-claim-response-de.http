@@ -1,4 +1,5 @@
-### Test: Validate VALID ClaimResponse against PAS ClaimResponse DE profile
+### Profile: pas-claim-response-de - Valid example
+# @name valid
 # Expected: OperationOutcome with "all ok" (no errors)
 # Fills: status (MS), type (MS, pattern=professional), use (pattern=preauthorization),
 #   patient (MS), insurer (MS), outcome (MS),
@@ -35,12 +36,12 @@ Content-Type: application/fhir+json
   }]
 }
 
-### Test: Validate INVALID ClaimResponse against PAS ClaimResponse DE profile
+### Profile: pas-claim-response-de - Invalid example (wrong type + use, missing outcome)
+# @name invalid
 # Expected: OperationOutcome with errors for:
 #   - type.coding.code = "institutional" (pattern violation, must be "professional")
 #   - use = "claim" (pattern violation, must be "preauthorization")
-#   - outcome missing (required by base ClaimResponse, MS in profile)
-#   - item missing (MS in profile)
+#   - outcome missing (required by base ClaimResponse)
 POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json

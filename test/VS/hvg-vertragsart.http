@@ -1,15 +1,9 @@
-### ValueSet $expand: hvg-vertragsart
-# @name expand-hvg-vertragsart
+### ValueSet: HVG Vertragsart - $expand
+# @name expand
 GET http://localhost:8080/ValueSet/hvg-vertragsart/$expand
 Authorization: Basic basic:secret
 
-### NOTE: CodeSystem https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart has content=not-present (ETL-populated)
-### $expand returns empty contains array - no codes to validate
-
-### $validate-code invalid: INVALID_XYZ
-# @name validate-invalid-hvg-vertragsart
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/hvg-vertragsart
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart
-    &code=INVALID_XYZ
+### ValueSet: HVG Vertragsart - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/hvg-vertragsart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

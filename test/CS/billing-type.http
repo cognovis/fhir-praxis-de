@@ -1,43 +1,14 @@
-### Test: $lookup valid code "ebm"
-# Expected: FHIR $lookup returns empty bundle (Aidbox does not implement $lookup)
-# RESULT: FAIL — returns {"total":0,"entry":[]} instead of Parameters
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=ebm
+### CodeSystem: billing-type - Valid code: ebm
+# @name valid_ebm
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=ebm
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "goae"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=goae
+### CodeSystem: billing-type - Valid code: goae
+# @name valid_goae
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=goae
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "hzv"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=hzv
-Authorization: Basic basic:secret
-
-### Test: $lookup invalid code "INVALID_XYZ"
-# Expected: OperationOutcome error or empty result
-# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid codes)
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=INVALID_XYZ
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "ebm" exists
-# Expected: total=1, code=ebm, display=EBM
-# RESULT: PASS — 9 concepts loaded
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=ebm&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "goae" exists
-# Expected: total=1, display=GOA
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=goae&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "hzv" exists
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=hzv&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=INVALID_XYZ&_count=1
+### CodeSystem: billing-type - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

@@ -1,39 +1,14 @@
-### Test: $lookup valid code "callback"
-# RESULT: FAIL — Aidbox $lookup not implemented, returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=callback
+### CodeSystem: task-type - Valid code: callback
+# @name valid_callback
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=callback
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "urgent"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=urgent
+### CodeSystem: task-type - Valid code: urgent
+# @name valid_urgent
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=urgent
 Authorization: Basic basic:secret
 
-### Test: $lookup valid code "lab"
-# RESULT: FAIL — returns {"total":0,"entry":[]}
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=lab
-Authorization: Basic basic:secret
-
-### Test: $lookup invalid code "INVALID_XYZ"
-# RESULT: FAIL — returns {"total":0,"entry":[]} (same as valid)
-GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=INVALID_XYZ
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "callback"
-# RESULT: PASS — 5 concepts loaded, display=Rueckruf
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=callback&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "urgent"
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=urgent&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify "lab"
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=lab&_count=1
-Authorization: Basic basic:secret
-
-### Workaround: Aidbox Concept API — verify INVALID_XYZ not found
-# RESULT: PASS
-GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=INVALID_XYZ&_count=1
+### CodeSystem: task-type - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

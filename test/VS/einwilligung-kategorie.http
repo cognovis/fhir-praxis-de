@@ -1,28 +1,19 @@
-### ValueSet $expand: einwilligung-kategorie
-# @name expand-einwilligung-kategorie
+### ValueSet: Einwilligung Kategorie - $expand
+# @name expand
 GET http://localhost:8080/ValueSet/einwilligung-kategorie/$expand
 Authorization: Basic basic:secret
 
-### $validate-code valid: dsgvo
-# @name validate-valid-1-einwilligung-kategorie
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/einwilligung-kategorie
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie
-    &code=dsgvo
+### ValueSet: Einwilligung Kategorie - $validate-code valid (dsgvo)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dsgvo
 Authorization: Basic basic:secret
 
-### $validate-code valid: dmp
-# @name validate-valid-2-einwilligung-kategorie
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/einwilligung-kategorie
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie
-    &code=dmp
+### ValueSet: Einwilligung Kategorie - $validate-code valid (dmp)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dmp
 Authorization: Basic basic:secret
 
-### $validate-code invalid: INVALID_XYZ
-# @name validate-invalid-einwilligung-kategorie
-GET http://localhost:8080/ValueSet/$validate-code
-    ?url=https://fhir.cognovis.de/praxis/ValueSet/einwilligung-kategorie
-    &system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie
-    &code=INVALID_XYZ
+### ValueSet: Einwilligung Kategorie - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret
