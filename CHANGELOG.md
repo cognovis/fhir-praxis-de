@@ -6,7 +6,56 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
+- Ignore dolt server artifacts and config.yaml
+
+## [0.17.0] - 2026-04-04
+
+### Miscellaneous
+
+- Bump version to 0.16.0
+- Update changelog
+- Bump version to 0.17.0
+
+### Merge
+
+- Worktree-bead-fpde-0d1
+
+## [0.16.0] - 2026-04-04
+
+### Bug Fixes
+
+- **fpde-0d1**: Address review findings iteration 1
+- **fpde-0d1**: Address review findings iteration 2
+- **fpde-0d1**: Address cmux review findings — fix cardinality docs, remove redundant constraints, simplify category coding
+- **fpde-0d1**: Apply FSH shorthand to all participant role codings
+
+### Documentation
+
+- Update feature documentation for fpde-0d1
+- **fpde-pbh**: Add PatientSeitExt to extensions documentation
+- Improve PatientSeitExt documentation wording and add to profiles table
+
+### Features
+
+- **fpde-0d1**: Green — CareTeam-Profil fuer Behandler-Teams
+- **fpde-pbh**: Green — PatientSeitExt FSH extension, SUSHI compiles
+
+### Miscellaneous
+
 - Bump version to 0.15.0
+- Update changelog
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-04d
+- Worktree-bead-fpde-pbh
+
+### Test
+
+- **fpde-0d1**: Red — CareTeamDE profile references NonExistentValueSet to verify error detection
+- **fpde-pbh**: Red — patient.fsh does not exist yet
+- **fpde-pbh**: Green — httpyac validation test for patient-seit extension
 
 ## [0.15.0] - 2026-04-04
 

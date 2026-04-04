@@ -22,6 +22,9 @@ logs/
 
 # Beads context files
 .beads/PRIME.md
+.beads/dolt.disabled/
+.beads/embeddeddolt/
+config.yaml
 
 # IG Publisher artifacts in root
 Requirements-fromNarrative.json
