@@ -6,6 +6,25 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **qa**: Suppress remaining warnings and hints in IG Publisher QA
+- **qa**: Use exact message text for IG Publisher suppressions
+
+### Documentation
+
+- Update feature documentation for fpde-6no
+
+### Features
+
+- **fpde-6no**: Green — appointment-mode extension, ValueSet, CodeSystem
+
+### Test
+
+- **fpde-6no**: Red — appointment-mode extension with unresolved ValueSet reference
+
+## [0.13.1] - 2026-04-03
+
+### Bug Fixes
+
 - **qa**: Reduce IG Publisher warnings and hints
 - **qa**: Suppress de-DE display name hints for international codes
 - **fpde-5fj**: Address review findings iteration 1
@@ -14,6 +33,15 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-5fj**: Add BGT2001 standalone CodeSystem and ValueSet
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.13.1
+
+### Merge
+
+- Worktree-bead-fpde-5fj
 
 ## [0.13.0] - 2026-04-03
 

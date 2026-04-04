@@ -328,3 +328,11 @@ Extensions for certificates of incapacity for work (AU-Bescheinigung).
 | `AuBisDatumExt` | date | Voraussichtlich arbeitsunfähig bis |
 | `AuEnddatumExt` | date | Tatsächliches Ende der AU |
 | `AuArbeitsunfallExt` | boolean | Arbeitsunfall (BG-relevant) |
+
+## Appointment / Termin
+
+Extensions for appointment scheduling and mode of consultation.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `AppointmentModeExt` | code | Terminmodus (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch) |
