@@ -28,3 +28,7 @@ Description: "Profil fuer kassenspezifische und tarifspezifische Leistungsregeln
 * coverage.benefit MS
 * coverage.benefit.type MS
 * plan.specificCost MS
+* plan.specificCost.category MS
+* plan.specificCost.benefit MS
+* plan.specificCost.benefit.type MS
+* identifier MS

@@ -24,6 +24,8 @@ InstanceOf: InsurancePlanDE
 Title: "AOK Bayern — PZR Satzungsleistung"
 Description: "GKV-Tarif AOK Bayern mit Satzungsleistung Professionelle Zahnreinigung (PZR)."
 Usage: #example
+* identifier[0].system = "https://fhir.cognovis.de/praxis/sid/insurance-plan-id"
+* identifier[0].value = "aok-bayern-pzr"
 * name = "AOK Bayern — Basis + PZR Satzungsleistung"
 * status = #active
 * type = http://terminology.hl7.org/CodeSystem/v3-ActCode#PUBLICPOL "public healthcare"
@@ -45,6 +47,8 @@ InstanceOf: InsurancePlanDE
 Title: "Debeka — PKV Tarif mit GOÄ-Faktor 2.3"
 Description: "PKV-Tarif Debeka mit GOÄ-Faktor-Limit 2.3 fuer aerztliche Leistungen und Implantat-Erstattung."
 Usage: #example
+* identifier[0].system = "https://fhir.cognovis.de/praxis/sid/insurance-plan-id"
+* identifier[0].value = "debeka-plus"
 * name = "Debeka Premium Plus"
 * status = #active
 * type = http://terminology.hl7.org/CodeSystem/v3-ActCode#PRVPOL "private healthcare"
