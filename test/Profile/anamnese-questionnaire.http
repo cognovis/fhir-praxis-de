@@ -46,51 +46,45 @@ Content-Type: application/fhir+json
   "item": [
     {
       "linkId": "1",
-      "text": "Persoenliche Angaben",
+      "text": "Vorerkrankungen",
       "type": "group",
       "required": false,
       "item": [
         {
           "linkId": "1.1",
-          "text": "Geburtsdatum",
-          "type": "date",
-          "required": true
+          "text": "Bekannte Vorerkrankungen",
+          "type": "text",
+          "required": false
         },
         {
           "linkId": "1.2",
-          "text": "Geburtsort",
-          "type": "string",
+          "text": "Frueherer Krankenhausaufenthalt?",
+          "type": "boolean",
           "required": false
         },
         {
           "linkId": "1.3",
-          "text": "Staatsangehoerigkeit",
-          "type": "string",
+          "text": "Bekannte Allergien",
+          "type": "text",
           "required": false
         }
       ]
     },
     {
       "linkId": "2",
-      "text": "Aktuelle Beschwerden",
+      "text": "Medikation",
       "type": "group",
       "required": false,
       "item": [
         {
           "linkId": "2.1",
-          "text": "Hauptbeschwerde",
+          "text": "Aktuelle Dauermedikation",
           "type": "text",
-          "required": true
-        },
-        {
-          "linkId": "2.2",
-          "text": "Beschwerdedauer (in Tagen)",
-          "type": "integer",
           "required": false
         },
         {
-          "linkId": "2.3",
-          "text": "Schmerzen vorhanden?",
+          "linkId": "2.2",
+          "text": "Unvertraeglichkeiten bekannt?",
           "type": "boolean",
           "required": false
         }
@@ -98,26 +92,20 @@ Content-Type: application/fhir+json
     },
     {
       "linkId": "3",
-      "text": "Vorerkrankungen und Medikamente",
+      "text": "Sozialanamnese",
       "type": "group",
       "required": false,
       "item": [
         {
           "linkId": "3.1",
-          "text": "Bekannte Vorerkrankungen",
-          "type": "text",
+          "text": "Beruf",
+          "type": "string",
           "required": false
         },
         {
           "linkId": "3.2",
-          "text": "Aktuelle Dauermedikation",
-          "type": "text",
-          "required": false
-        },
-        {
-          "linkId": "3.3",
-          "text": "Bekannte Allergien",
-          "type": "text",
+          "text": "Raucherstatus",
+          "type": "string",
           "required": false
         }
       ]
