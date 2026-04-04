@@ -2,7 +2,41 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.14.0] - 2026-04-04
+
+### Bug Fixes
+
+- **qa**: Suppress remaining warnings and hints in IG Publisher QA
+- **qa**: Use exact message text for IG Publisher suppressions
+- **fpde-d8a**: Address review findings iteration 1 — add partial and multi bank-account examples
+
+### Documentation
+
+- Update extensions.md for fpde-d8a — add BankAccountExt Organization section
+- Update feature documentation for fpde-6no
+
+### Features
+
+- **fpde-d8a**: Green — BankAccountExt complex extension mit iban/bic/bankname/kontoinhaber
+- **fpde-d8a**: Green — example with full BankAccountExt usage
+- **fpde-6no**: Green — appointment-mode extension, ValueSet, CodeSystem
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.14.0
+
+### Merge
+
+- Worktree-bead-fpde-6no
+
+### Test
+
+- **fpde-d8a**: Red — stub BankAccountExt without sub-extensions
+- **fpde-d8a**: Red — example without bank-account extension
+- **fpde-6no**: Red — appointment-mode extension with unresolved ValueSet reference
+
+## [0.13.1] - 2026-04-03
 
 ### Bug Fixes
 
@@ -14,6 +48,15 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-5fj**: Add BGT2001 standalone CodeSystem and ValueSet
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.13.1
+
+### Merge
+
+- Worktree-bead-fpde-5fj
 
 ## [0.13.0] - 2026-04-03
 
