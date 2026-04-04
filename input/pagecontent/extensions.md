@@ -2,6 +2,14 @@
 
 This IG defines extensions grouped by clinical and administrative domain. All extensions use the canonical base URL `https://fhir.cognovis.de/praxis/StructureDefinition/`.
 
+## Patient / Allgemein
+
+Administrative extensions for patient management.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PatientSeitExt` | date | Datum seit wann der Patient in der Praxis in Behandlung ist (behandelt seit) |
+
 ## Encounter / Warteraum
 
 Queue management extensions for patient flow in the practice.
