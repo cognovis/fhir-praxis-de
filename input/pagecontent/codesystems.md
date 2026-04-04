@@ -187,6 +187,17 @@ Lifecycle-Status-Codes für Soft-Delete und Archivierung.
 | `gesperrt` | Gesperrt | Eintrag ist gesperrt |
 | `archiviert` | Archiviert | Eintrag ist archiviert |
 
+### AppointmentModeCS — Terminmodus
+
+Terminmodus für ambulante Konsultationen (R4-Erweiterung für FHIR R5 virtualService).
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `in-person` | Praxisbesuch | Patient erscheint persönlich in der Praxis |
+| `video` | Videosprechstunde | Termin findet per Videokonferenz statt |
+| `phone` | Telefontermin | Termin findet telefonisch statt |
+| `home-visit` | Hausbesuch | Arzt besucht den Patienten zu Hause |
+
 ## External CodeSystems
 
 This IG also references the following external CodeSystems from the KBV Schlüsseltabellen (`kbv.all.st-combined`):
