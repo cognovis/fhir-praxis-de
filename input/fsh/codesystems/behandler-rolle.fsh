@@ -8,6 +8,6 @@ Description: "Rollen der Mitglieder in einem Behandler-Team (CareTeam) in der de
 * #zahnarzt "Zahnarzt" "Zahnaerztin oder Zahnarzt"
 * #zfa "ZFA" "Zahnmedizinische Fachangestellte"
 * #mfa "MFA" "Medizinische Fachangestellte"
-* #arzt "Arzt" "Aertzin oder Arzt"
+* #arzt "Arzt" "Aerztin oder Arzt"
 * #wb-assistent "WB-Assistent" "Weiterbildungsassistent"
 * #physiotherapeut "Physiotherapeut" "Physiotherapeutin oder Physiotherapeut"
