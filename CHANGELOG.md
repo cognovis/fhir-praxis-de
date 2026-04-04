@@ -4,9 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Documentation
+
+- **fpde-pbh**: Add PatientSeitExt to extensions documentation
+
 ### Miscellaneous
 
 - Bump version to 0.15.0
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-04d
 
 ## [0.15.0] - 2026-04-04
 
@@ -35,6 +44,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-pbh**: Green — PatientSeitExt FSH extension, SUSHI compiles
 - **fpde-04d**: Green — InsurancePlanDE profile with GKV/PKV slicing
 - **fpde-04d**: Green — GKV/PKV InsurancePlan examples with Coverage-Referenz docs (AK2+AK3)
 - **fpde-d8a**: Green — BankAccountExt complex extension mit iban/bic/bankname/kontoinhaber
@@ -52,6 +62,8 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 
+- **fpde-pbh**: Red — patient.fsh does not exist yet
+- **fpde-pbh**: Green — httpyac validation test for patient-seit extension
 - **fpde-04d**: Red — InsurancePlanDE profile skeleton fails SUSHI
 - **fpde-04d**: Red — InsurancePlanDE examples fail SUSHI
 - **fpde-d8a**: Red — stub BankAccountExt without sub-extensions
