@@ -15,14 +15,18 @@ URL-Wert 'https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR' löst nicht auf
 
 # No German (de-DE) display names registered on tx.fhir.org for international codes
 # These are informational only — English default displays are used, which is correct
-There are no valid display names found for the code urn:iso:std:iso:3166#DE for language(s) 'de-DE'. The display is 'Germany' which is the default language display
-There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/v3-ActCode#AMB for language(s) 'de-DE'. The display is 'ambulatory' which is the default language display
-There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/v3-ActCode#PBILLACCT for language(s) 'de-DE'. The display is 'patient billing account' which is the default language display
-There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/adjudication#eligible for language(s) 'de-DE'. The display is 'Eligible Amount' which is the default language display
-There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/adjudication#submitted for language(s) 'de-DE'. The display is 'Submitted Amount' which is the default language display
-There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/payment-type#payment for language(s) 'de-DE'. The display is 'Payment' which is the default language display
+There are no valid display names found for the code
 
-# Own CodeSystems not on tx.fhir.org (expected for unpublished IG)
+# OID root not yet registered in FHIR IG Registry — will register at HL7 ballot
+The assigned auto-oid-root value
+
+# Pages without conformance language (SHALL/SHOULD/MAY) — expected for this IG scope
+No conformance term found in the text
+
+# Own CodeSystems with #not-present content — codes provided via ETL, not in IG
+# HVG-Vertragsart: KV-regional, no public standardized code list
+# Zuzahlungsstatus: gematik/KBV licensed, not embeddable
 A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart' could not be found, so the code cannot be validated
 A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus' could not be found, so the value set cannot be expanded
 A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart' could not be found, so the value set cannot be expanded
+The value set expansion is too large, and only a subset has been displayed
