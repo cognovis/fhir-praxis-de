@@ -1,15 +1,21 @@
+Invariant: anamnese-top-level-item
+Description: "Jedes top-level item muss entweder type = group sein oder einen nicht-leeren Fragetext haben."
+Expression: "item.all(type = 'group' or (text.exists() and text.length() > 0))"
+Severity: #warning
+
 Profile: AnamneseQuestionnaire
 Parent: Questionnaire
 Id: anamnese-questionnaire
 Title: "Anamnese-Questionnaire"
-Description: "Profil fuer ambulante Anamneseboegen (Erstanamnese, Schmerzanamnese, Praevention) als FHIR Questionnaire-Templates. Praxisrelevante item.type-Werte: group, display, boolean, decimal, integer, date, dateTime, time, string, text, url, choice, open-choice, attachment, reference, quantity."
+Description: "Profil fuer ambulante Anamneseboegen (Erstanamnese, Schmerzanamnese, Praevention) als FHIR Questionnaire-Templates. Praxisrelevante item.type-Werte: group, display, boolean, decimal, integer, date, dateTime, time, string, text, url, choice, open-choice, attachment, reference, quantity. Fuer publizierte Templates wird status = #active empfohlen."
+
+* obeys anamnese-top-level-item
 
 // Extension fuer Fachkategorie
 * extension contains QuestionnaireKategorieExt named kategorie 0..1 MS
 
 // Must-Support elements
 * status MS
-* status = #active
 * title 1..1 MS
 * date MS
 * publisher MS
@@ -32,3 +38,4 @@ Description: "Profil fuer ambulante Anamneseboegen (Erstanamnese, Schmerzanamnes
 * item.text MS
 * item.type 1..1 MS
 * item.required MS
+* item.item MS
