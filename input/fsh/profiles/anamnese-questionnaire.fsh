@@ -17,10 +17,11 @@ Description: "Profil fuer ambulante Anamneseboegen (Erstanamnese, Schmerzanamnes
 * subjectType = #Patient
 
 // useContext slice fuer Bogentyp
+// 1..* required: classifying the Bogentyp is the core purpose of this slice in an AnamneseQuestionnaire
 * useContext ^slicing.discriminator.type = #pattern
 * useContext ^slicing.discriminator.path = "code"
 * useContext ^slicing.rules = #open
-* useContext contains bogentyp 0..*
+* useContext contains bogentyp 1..*
 * useContext[bogentyp].code = http://terminology.hl7.org/CodeSystem/usage-context-type#workflow
 * useContext[bogentyp].value[x] only CodeableConcept
 * useContext[bogentyp].valueCodeableConcept from AnamneseBogentypVS (extensible)

@@ -2,6 +2,7 @@
 # @name validate-anamnese-questionnaire
 # Expected: OperationOutcome with "all ok" (no errors)
 # Validates AnamneseQuestionnaire example against custom profile
+# Fills: status, title, date, publisher, subjectType, item, item.linkId, item.text, item.type, item.required, useContext[bogentyp], extension[kategorie]
 POST http://localhost:8080/fhir/Questionnaire/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/anamnese-questionnaire
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
@@ -109,6 +110,53 @@ Content-Type: application/fhir+json
           "required": false
         }
       ]
+    }
+  ]
+}
+
+###
+
+### Negativ-Test: Questionnaire ohne title (1..1 MS) muss Fehler liefern
+# @name anamnese-questionnaire-missing-title
+# Expected: OperationOutcome with errors (title is 1..1)
+# Verifies that the profile constraint on title actually fires
+POST http://localhost:8080/fhir/Questionnaire/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/anamnese-questionnaire
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Questionnaire",
+  "id": "example-anamnese-missing-title",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/anamnese-questionnaire"]
+  },
+  "status": "active",
+  "date": "2026-01-01",
+  "publisher": "cognovis GmbH",
+  "subjectType": ["Patient"],
+  "useContext": [
+    {
+      "code": {
+        "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+        "code": "workflow"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://fhir.cognovis.de/praxis/CodeSystem/anamnese-bogentyp",
+            "code": "erstanamnese",
+            "display": "Erstanamnese"
+          }
+        ]
+      }
+    }
+  ],
+  "item": [
+    {
+      "linkId": "1",
+      "text": "Vorerkrankungen",
+      "type": "group",
+      "required": false
     }
   ]
 }
