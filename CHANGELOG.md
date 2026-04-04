@@ -6,7 +6,19 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
+- Ignore dolt server artifacts and config.yaml
+
+## [0.17.0] - 2026-04-04
+
+### Miscellaneous
+
 - Bump version to 0.16.0
+- Update changelog
+- Bump version to 0.17.0
+
+### Merge
+
+- Worktree-bead-fpde-0d1
 
 ## [0.16.0] - 2026-04-04
 
