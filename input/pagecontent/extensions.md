@@ -349,6 +349,14 @@ Extensions for certificates of incapacity for work (AU-Bescheinigung).
 | `AuEnddatumExt` | date | Tatsächliches Ende der AU |
 | `AuArbeitsunfallExt` | boolean | Arbeitsunfall (BG-relevant) |
 
+## Questionnaire / Anamneseboegen
+
+Extensions for history-taking questionnaire templates.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `QuestionnaireKategorieExt` | string | Fachliche Kategorie des Anamnesebogens (z.B. Allgemeinmedizin, Orthopädie) |
+
 ## Appointment / Termin
 
 Extensions for appointment scheduling and mode of consultation.

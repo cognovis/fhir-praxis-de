@@ -50,6 +50,43 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbAbrechnenderArztExt |
 | **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungTextExt, EinwilligungWiderrufMoeglichExt |
 
+## AnamneseQuestionnaire — Anamneseboegen-Profil
+
+The `AnamneseQuestionnaire` profile extends the base FHIR `Questionnaire` resource to standardize ambulatory history-taking forms (Anamneseboegen) in practice management systems. It supports multiple questionnaire types (initial intake, pain assessment, preventive health screening, and follow-up) with structured groups of clinical questions.
+
+### Supported Questionnaire Types
+
+| Type | Code | Usage |
+|------|------|-------|
+| **Erstanamnese** | `erstanamnese` | Comprehensive initial intake form for new patients |
+| **Schmerzanamnese** | `schmerzanamnese` | Focused pain assessment questionnaire |
+| **Praeventionsanamnese** | `praevention` | Preventive health screening form |
+| **Verlaufsanamnese** | `follow-up` | Repeat assessment during treatment course |
+| **Fachspezifisch** | `fachspezifisch` | Specialty-specific questionnaire template |
+
+### Profiling Rules
+
+- **status**: Required, must be `#active` for active templates
+- **title**: Required, human-readable name of the questionnaire
+- **subjectType**: Required, must be `#Patient`
+- **useContext[bogentyp]**: Required slice (1..*) to classify the questionnaire type via `AnamneseBogentypVS`
+- **extension[kategorie]**: Optional extension for clinical specialty (e.g., "Allgemeinmedizin", "Orthopädie")
+- **item**: Required (1..*), each item has linkId, type, and optional required flag
+
+### Supported Question Types
+
+Standard FHIR Questionnaire item types including: `group`, `display`, `boolean`, `decimal`, `integer`, `date`, `dateTime`, `time`, `string`, `text`, `url`, `choice`, `open-choice`, `attachment`, `reference`, `quantity`.
+
+### Integration with QuestionnaireResponse
+
+Patients complete these questionnaires via a QuestionnaireResponse-Builder interface. Each response is linked to the template via `QuestionnaireResponse.questionnaire` reference. PVS systems can then:
+- Extract structured data from responses (e.g., previous illnesses, medication, social history)
+- Pre-populate clinical note templates
+- Track questionnaire completion as part of encounter workflow
+- Support both paper-based and digital intake workflows
+
+See example `example-anamnese-erstanamnese` for a complete three-group Erstanamnese template (Previous Conditions, Medication, Social History).
+
 ## InsurancePlanDE — GKV/PKV Tarif-Profile
 
 The `InsurancePlanDE` profile extends the base FHIR `InsurancePlan` resource with slicing on `plan` to distinguish GKV (statutory health insurance) and PKV (private health insurance) tariffs.

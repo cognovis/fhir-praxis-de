@@ -76,6 +76,14 @@ Terminmodus für ambulante Konsultationen.
 - **Binding:** Used by `AppointmentModeExt` on Appointment (required)
 - **Usage:** Identifies the mode of consultation: in-person, video, phone, or home visit
 
+### AnamneseBogentypVS — Anamnesebogen-Typ
+
+Zulässige Werte für die Klassifizierung von Anamneseboegen.
+
+- **Includes:** All codes from [AnamneseBogentypCS](CodeSystem-anamnese-bogentyp.html)
+- **Binding:** Used by `useContext[bogentyp].valueCodeableConcept` on AnamneseQuestionnaire (extensible)
+- **Usage:** Classifies questionnaire templates by type: initial intake (Erstanamnese), pain assessment (Schmerzanamnese), preventive screening (Praeventionsanamnese), follow-up (Verlaufsanamnese), or specialty-specific (fachspezifisch)
+
 ## External ValueSets
 
 The IG does not define custom ValueSets for external code systems. Extensions referencing KBV Schlüsseltabellen (e.g. `KBV_CS_SFHIR_BAR2_FACHGRUPPENZUORDNUNG` for `RlvFachgruppeExt`) bind directly to the external CodeSystem from `kbv.all.st-combined`.

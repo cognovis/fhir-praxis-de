@@ -6,7 +6,14 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
+- Bump version to 0.17.1
+
+## [0.17.1] - 2026-04-04
+
+### Miscellaneous
+
 - Ignore dolt server artifacts and config.yaml
+- Update changelog
 
 ## [0.17.0] - 2026-04-04
 
@@ -24,6 +31,9 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **fpde-8m5**: Address review findings iteration 1
+- **fpde-8m5**: Address review findings iteration 2
+- **fpde-8m5**: Address review panel findings — invariant, status flexibility, item.item MS
 - **fpde-0d1**: Address review findings iteration 1
 - **fpde-0d1**: Address review findings iteration 2
 - **fpde-0d1**: Address cmux review findings — fix cardinality docs, remove redundant constraints, simplify category coding
@@ -31,12 +41,14 @@ All notable changes to this project will be documented in this file.
 
 ### Documentation
 
+- Update feature documentation for fpde-8m5
 - Update feature documentation for fpde-0d1
 - **fpde-pbh**: Add PatientSeitExt to extensions documentation
 - Improve PatientSeitExt documentation wording and add to profiles table
 
 ### Features
 
+- **fpde-8m5**: Green — AnamneseQuestionnaire profile, CS, VS, extensions, example
 - **fpde-0d1**: Green — CareTeam-Profil fuer Behandler-Teams
 - **fpde-pbh**: Green — PatientSeitExt FSH extension, SUSHI compiles
 
@@ -53,6 +65,7 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 
+- **fpde-8m5**: Red — httpyac test for AnamneseQuestionnaire validation
 - **fpde-0d1**: Red — CareTeamDE profile references NonExistentValueSet to verify error detection
 - **fpde-pbh**: Red — patient.fsh does not exist yet
 - **fpde-pbh**: Green — httpyac validation test for patient-seit extension
