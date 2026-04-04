@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>FHIR for Ambulatory Care &mdash; de.cognovis.fhir.praxis</title>
+<style>
+  :root {
+    --primary: #1a5276;
+    --accent: #2980b9;
+    --bg: #fafafa;
+    --text: #2c3e50;
+    --light: #ecf0f1;
+    --green: #27ae60;
+    --orange: #f39c12;
+    --red: #e74c3c;
+  }
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+  body { font-family: 'Segoe UI', system-ui, -apple-system, sans-serif; color: var(--text); background: var(--bg); }
+
+  .slide {
+    width: 100vw;
+    min-height: 100vh;
+    padding: 60px 80px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    page-break-after: always;
+  }
+
+  .slide h1 {
+    font-size: 2.8em;
+    color: var(--primary);
+    margin-bottom: 0.3em;
+    line-height: 1.1;
+  }
+  .slide h2 {
+    font-size: 2em;
+    color: var(--primary);
+    margin-bottom: 0.5em;
+    border-bottom: 3px solid var(--accent);
+    padding-bottom: 0.2em;
+  }
+  .slide h3 {
+    font-size: 1.4em;
+    color: var(--accent);
+    margin: 0.8em 0 0.3em;
+  }
+  .slide p, .slide li {
+    font-size: 1.3em;
+    line-height: 1.6;
+    margin-bottom: 0.4em;
+  }
+  .slide ul { padding-left: 1.5em; }
+  .slide .subtitle {
+    font-size: 1.5em;
+    color: var(--accent);
+    margin-bottom: 1.5em;
+  }
+  .slide .small { font-size: 0.9em; color: #7f8c8d; }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin: 1em 0;
+    font-size: 1.1em;
+  }
+  th {
+    background: var(--primary);
+    color: white;
+    padding: 12px 16px;
+    text-align: left;
+  }
+  td {
+    padding: 10px 16px;
+    border-bottom: 1px solid #ddd;
+  }
+  tr:nth-child(even) { background: var(--light); }
+
+  .stats-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 20px;
+    margin: 1.5em 0;
+  }
+  .stat-box {
+    background: white;
+    border: 2px solid var(--accent);
+    border-radius: 12px;
+    padding: 24px;
+    text-align: center;
+  }
+  .stat-box .number {
+    font-size: 3em;
+    font-weight: bold;
+    color: var(--primary);
+  }
+  .stat-box .label {
+    font-size: 1em;
+    color: var(--accent);
+    margin-top: 4px;
+  }
+
+  .two-col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 40px;
+    margin: 1em 0;
+  }
+
+  .highlight-box {
+    background: linear-gradient(135deg, var(--primary), var(--accent));
+    color: white;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 1em 0;
+  }
+  .highlight-box h3 { color: white; }
+  .highlight-box li { color: #ecf0f1; }
+
+  .tag {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 0.85em;
+    font-weight: bold;
+    margin: 2px 4px;
+  }
+  .tag-de { background: #fdebd0; color: #e67e22; }
+  .tag-intl { background: #d5f5e3; color: #27ae60; }
+  .tag-dach { background: #d6eaf8; color: #2980b9; }
+  .tag-eu { background: #f5b7b1; color: #c0392b; }
+
+  .arrow-flow {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    margin: 1.5em 0;
+    font-size: 1.2em;
+  }
+  .arrow-flow .box {
+    background: var(--light);
+    padding: 16px 24px;
+    border-radius: 8px;
+    border: 2px solid var(--accent);
+    text-align: center;
+    min-width: 160px;
+  }
+  .arrow-flow .arrow { font-size: 1.8em; color: var(--accent); }
+
+  .footer {
+    position: fixed;
+    bottom: 20px;
+    right: 40px;
+    font-size: 0.8em;
+    color: #bdc3c7;
+  }
+
+  @media print {
+    .slide { page-break-after: always; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ==================== SLIDE 1: Title ==================== -->
+<div class="slide" style="background: linear-gradient(135deg, #1a5276 0%, #2980b9 100%); color: white; text-align: center;">
+  <h1 style="color: white; font-size: 3.2em;">FHIR for Ambulatory Care</h1>
+  <p class="subtitle" style="color: #d6eaf8; font-size: 1.8em;">
+    A Standardized Data Model for Outpatient Practice Management
+  </p>
+  <p style="font-size: 1.3em; margin-top: 2em; color: #d6eaf8;">
+    de.cognovis.fhir.praxis &mdash; FHIR R4 Implementation Guide
+  </p>
+  <p style="font-size: 1.1em; margin-top: 1em; color: #aed6f1;">
+    Malte Sussdorff &middot; cognovis GmbH &middot; HeyDonto Workshop 2026
+  </p>
+</div>
+
+<!-- ==================== SLIDE 2: Problem ==================== -->
+<div class="slide">
+  <h2>The Problem</h2>
+  <div class="two-col">
+    <div>
+      <h3>Today: Every PMS Is an Island</h3>
+      <ul>
+        <li>Proprietary data models (GDT, BDT, xDT in Germany)</li>
+        <li>No standardized billing data model</li>
+        <li>No unified format for fee schedules (EBM/GOAe/BEMA/GOZ)</li>
+        <li>AI agents need structured data &mdash; it doesn't exist</li>
+      </ul>
+    </div>
+    <div>
+      <h3>Consequences</h3>
+      <ul>
+        <li>Every PMS switch = data loss</li>
+        <li>Every integration = custom build</li>
+        <li>AI billing assistants need a data model that doesn't exist</li>
+        <li>Internationally: zero comparability</li>
+      </ul>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 3: Solution ==================== -->
+<div class="slide">
+  <h2>The Solution: FHIR as a Common Language</h2>
+
+  <div class="arrow-flow">
+    <div class="box"><strong>PMS</strong><br>(Solutio, Dampsoft, CGM&hellip;)</div>
+    <div class="arrow">&rarr;</div>
+    <div class="box"><strong>FHIR Adapter</strong><br>xDT/API &rarr; FHIR R4</div>
+    <div class="arrow">&rarr;</div>
+    <div class="box"><strong>FHIR Server</strong><br>(Aidbox, HAPI&hellip;)</div>
+    <div class="arrow">&rarr;</div>
+    <div class="box"><strong>AI Agent</strong><br>Billing, Analytics</div>
+  </div>
+
+  <p style="text-align: center; font-size: 1.2em; margin-top: 1em;">
+    <strong>de.cognovis.fhir.praxis</strong> defines the data model in the middle &mdash;
+    the missing piece.
+  </p>
+</div>
+
+<!-- ==================== SLIDE 4: Numbers ==================== -->
+<div class="slide">
+  <h2>What's Inside?</h2>
+
+  <div class="stats-grid">
+    <div class="stat-box">
+      <div class="number">161</div>
+      <div class="label">Extensions</div>
+    </div>
+    <div class="stat-box">
+      <div class="number">27</div>
+      <div class="label">CodeSystems</div>
+    </div>
+    <div class="stat-box">
+      <div class="number">6</div>
+      <div class="label">Profiles</div>
+    </div>
+    <div class="stat-box">
+      <div class="number">40</div>
+      <div class="label">Tests</div>
+    </div>
+  </div>
+
+  <table>
+    <tr>
+      <th>Domain</th>
+      <th>What's Modeled</th>
+      <th>Scope</th>
+    </tr>
+    <tr>
+      <td>Billing</td>
+      <td>EBM, GOAe, BGT2001, BEMA/GOZ (via dental IG)</td>
+      <td><span class="tag tag-de">DE</span></td>
+    </tr>
+    <tr>
+      <td>Budget</td>
+      <td>RLV/QZV allocation, KV benchmarks, debudgetization</td>
+      <td><span class="tag tag-de">DE</span></td>
+    </tr>
+    <tr>
+      <td>Selective Contracts</td>
+      <td>HZV (&sect;73b), specialist contracts (&sect;73c)</td>
+      <td><span class="tag tag-de">DE</span></td>
+    </tr>
+    <tr>
+      <td>Scheduling</td>
+      <td>Mode (in-person/video/phone/home visit), queue mgmt</td>
+      <td><span class="tag tag-dach">DACH</span></td>
+    </tr>
+    <tr>
+      <td>Clinical</td>
+      <td>CAVE warnings, chronic diagnoses, laterality</td>
+      <td><span class="tag tag-dach">DACH</span></td>
+    </tr>
+    <tr>
+      <td>AI Provenance</td>
+      <td>EU AI Act Art. 50 &mdash; AI content labeling</td>
+      <td><span class="tag tag-eu">EU</span></td>
+    </tr>
+    <tr>
+      <td>Care Teams</td>
+      <td>CareTeam with practitioner role coding</td>
+      <td><span class="tag tag-intl">International</span></td>
+    </tr>
+    <tr>
+      <td>Intake Forms</td>
+      <td>Questionnaire templates (SDC-compatible)</td>
+      <td><span class="tag tag-intl">International</span></td>
+    </tr>
+  </table>
+</div>
+
+<!-- ==================== SLIDE 5: Why billing needs FHIR ==================== -->
+<div class="slide">
+  <h2>Why Billing Needs a Data Model</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>Without a Standard</h3>
+      <ul>
+        <li>Every PMS stores fee schedules differently</li>
+        <li>Billing rules live in proprietary code</li>
+        <li>AI agents must be retrained per PMS</li>
+        <li>No verifiability: &laquo;Is this bill correct?&raquo;</li>
+      </ul>
+    </div>
+    <div>
+      <h3>With a FHIR Standard</h3>
+      <ul>
+        <li>ChargeItemDefinition for every fee schedule code</li>
+        <li>Extensions for points, multipliers, exclusions</li>
+        <li>Claim/ClaimResponse for prior authorizations</li>
+        <li>AI agent works PMS-independently</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h3>Odontathon 2026: Winner &laquo;Best Business Concept&raquo;</h3>
+    <ul>
+      <li>AI billing assistant built on FHIR profiles</li>
+      <li>Rules encoded in FHIR ChargeItemDefinition + CDS Hooks</li>
+      <li>Works for EBM, GOAe, BEMA, GOZ &mdash; same architecture</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 6: International relevance ==================== -->
+<div class="slide">
+  <h2>International Transferability</h2>
+
+  <p>Analysis: Of 219 artifacts, ~30% are not Germany-specific.</p>
+
+  <table>
+    <tr>
+      <th>Artifact</th>
+      <th>Scope</th>
+      <th>International Relevance</th>
+    </tr>
+    <tr>
+      <td>AI Provenance (8 extensions)</td>
+      <td><span class="tag tag-eu">EU</span></td>
+      <td>EU AI Act applies EU-wide from 2026. No other IG has this.</td>
+    </tr>
+    <tr>
+      <td>CareTeam + Practitioner Roles</td>
+      <td><span class="tag tag-intl">International</span></td>
+      <td>Team structure is universal. Role CodeSystem is adaptable.</td>
+    </tr>
+    <tr>
+      <td>Questionnaire / Intake Forms</td>
+      <td><span class="tag tag-intl">International</span></td>
+      <td>SDC-compatible. Form templates are PMS-independent.</td>
+    </tr>
+    <tr>
+      <td>Appointment Mode</td>
+      <td><span class="tag tag-dach">DACH</span></td>
+      <td>Telehealth modes. R5 only has virtualService (Zoom link), not the mode itself.</td>
+    </tr>
+    <tr>
+      <td>CAVE Warning Types</td>
+      <td><span class="tag tag-dach">DACH</span></td>
+      <td>Standardized across PMS systems. AT/CH use similar codes.</td>
+    </tr>
+    <tr>
+      <td>Diagnosis Laterality (L/R/B)</td>
+      <td><span class="tag tag-intl">International</span></td>
+      <td>Clinically universal. No IG has profiled this yet.</td>
+    </tr>
+    <tr>
+      <td>Patient Consent</td>
+      <td><span class="tag tag-eu">EU</span></td>
+      <td>GDPR structure is transferable. Terminology is adaptable.</td>
+    </tr>
+  </table>
+
+  <p style="margin-top: 1em;">
+    <strong>For HeyDonto / Dental internationally:</strong> The billing architecture
+    (ChargeItemDefinition + Extensions) is transferable &mdash; only the tariff codes change.
+  </p>
+</div>
+
+<!-- ==================== SLIDE 7: DACH vision ==================== -->
+<div class="slide">
+  <h2>Vision: DACH Practice Profile</h2>
+
+  <div style="text-align: center; margin: 1em 0;">
+    <div class="arrow-flow" style="flex-direction: column; gap: 24px;">
+      <div class="box" style="background: var(--primary); color: white; min-width: 400px;">
+        <strong>fhir-praxis-core</strong><br>
+        AI Provenance &middot; CareTeam &middot; Questionnaire &middot; Appointment &middot; CAVE &middot; Consent
+      </div>
+      <div class="arrow" style="transform: rotate(90deg);">&rarr;</div>
+      <div style="display: flex; gap: 20px; justify-content: center;">
+        <div class="box" style="border-color: var(--orange);">
+          <strong>fhir-praxis-de</strong><br>
+          EBM/GOAe &middot; RLV/QZV<br>HZV &middot; KV Remittance
+        </div>
+        <div class="box" style="border-color: var(--green);">
+          <strong>fhir-praxis-at</strong><br>
+          Honorarordnung<br>OeGK &middot; ELGA
+        </div>
+        <div class="box" style="border-color: var(--red);">
+          <strong>fhir-praxis-ch</strong><br>
+          TARMED/TARDOC<br>Grundversicherung
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <p style="text-align: center; font-size: 1.2em;">
+    Architecture is ready &mdash; split happens when a partner in AT/CH joins.
+    <br>Current approach: monolith, cleanly structured, separable at any time.
+  </p>
+</div>
+
+<!-- ==================== SLIDE 8: Dental connection ==================== -->
+<div class="slide">
+  <h2>Connection to Dental / HeyDonto</h2>
+
+  <div class="two-col">
+    <div>
+      <h3>fhir-praxis-de (this IG)</h3>
+      <ul>
+        <li>Generic practice infrastructure</li>
+        <li>Billing: EBM, GOAe, BGT2001</li>
+        <li>Budget, scheduling, consent</li>
+        <li>AI Provenance for AI agents</li>
+        <li><strong>The Foundation</strong></li>
+      </ul>
+    </div>
+    <div>
+      <h3>fhir-dental-de (sibling IG)</h3>
+      <ul>
+        <li>Dental-specific profiles</li>
+        <li>Billing: BEMA, GOZ, BEL II</li>
+        <li>Treatment plans (HKP)</li>
+        <li>Tooth chart, periodontal status</li>
+        <li><strong>The Specialization</strong></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="highlight-box">
+    <h3>Relevant for HeyDonto</h3>
+    <ul>
+      <li><strong>Ontology alignment:</strong> Our CodeSystems (practitioner roles, CAVE types, billing types)
+        can be mapped to HeyDonto concepts</li>
+      <li><strong>Billing as a data model:</strong> The ChargeItemDefinition architecture is
+        tariff-agnostic &mdash; EBM, GOAe, BEMA, GOZ all use the same pattern</li>
+      <li><strong>International:</strong> Dental ontologies + FHIR data model = exportable to AT/CH
+        and beyond</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ==================== SLIDE 9: Next steps ==================== -->
+<div class="slide">
+  <h2>Next Steps</h2>
+
+  <table>
+    <tr>
+      <th>What</th>
+      <th>When</th>
+      <th>Who</th>
+    </tr>
+    <tr>
+      <td>Presentation at HL7 DE Interoperability Forum</td>
+      <td>Q2/Q3 2026</td>
+      <td>cognovis + partners</td>
+    </tr>
+    <tr>
+      <td>Upstream proposal: 10 CodeSystems for de.basisprofil</td>
+      <td>after Interop Forum</td>
+      <td>TC FHIR balloting</td>
+    </tr>
+    <tr>
+      <td>DMEA 2026: Conversations with KBV, gematik, PMS vendors</td>
+      <td>April 21&ndash;23</td>
+      <td>cognovis</td>
+    </tr>
+    <tr>
+      <td>HeyDonto alignment: Ontology mapping to FHIR CodeSystems</td>
+      <td>ongoing</td>
+      <td>HeyDonto + cognovis</td>
+    </tr>
+    <tr>
+      <td>AI billing agent: Production pilot project</td>
+      <td>2026</td>
+      <td>cognovis</td>
+    </tr>
+  </table>
+
+  <div style="text-align: center; margin-top: 2em;">
+    <p style="font-size: 1.4em; color: var(--primary);">
+      <strong>https://cognovis.github.io/fhir-praxis-de/</strong>
+    </p>
+    <p style="font-size: 1.1em; color: var(--accent);">
+      Open Source &middot; CC-BY-4.0 &middot; FHIR R4 &middot; STU1
+    </p>
+    <p style="margin-top: 1em;">
+      Malte Sussdorff &middot; malte.sussdorff@cognovis.de
+    </p>
+  </div>
+</div>
+
+</body>
+</html>
