@@ -60,6 +60,14 @@ Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
 - **Binding:** Used by `AiGeneratedExt` on Provenance
 - **Usage:** Tracks the level of AI involvement in content generation (KI-generiert, KI-unterstützt, menschlich geprüft, menschlich freigegeben)
 
+### AppointmentModeVS — Terminmodus
+
+Terminmodus für ambulante Konsultationen.
+
+- **Includes:** All codes from [AppointmentModeCS](CodeSystem-appointment-mode.html)
+- **Binding:** Used by `AppointmentModeExt` on Appointment (required)
+- **Usage:** Identifies the mode of consultation: in-person, video, phone, or home visit
+
 ## External ValueSets
 
 The IG does not define custom ValueSets for external code systems. Extensions referencing KBV Schlüsseltabellen (e.g. `KBV_CS_SFHIR_BAR2_FACHGRUPPENZUORDNUNG` for `RlvFachgruppeExt`) bind directly to the external CodeSystem from `kbv.all.st-combined`.
