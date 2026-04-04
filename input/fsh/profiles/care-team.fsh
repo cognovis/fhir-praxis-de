@@ -4,18 +4,21 @@ Id: care-team-de
 Title: "CareTeam DE"
 Description: "Profil fuer Behandler-Teams in der deutschen ambulanten Versorgung (z.B. interdisziplinaere Versorgungsteams)."
 
-// RED: intentionally referencing a non-existent ValueSet to trigger an error
+// Slicing on participant by role
 * participant ^slicing.discriminator.type = #pattern
 * participant ^slicing.discriminator.path = "role"
 * participant ^slicing.rules = #open
 * participant contains
     behandler 0..*
 
-* participant[behandler].role from NonExistentValueSetThatDoesNotExist (required)
+// Behandler-slice: Rollenkodierung via BehandlerRolleVS
+* participant[behandler].role from BehandlerRolleVS (required)
 * participant[behandler].role MS
 * participant[behandler].member MS
+* participant[behandler].member only Reference(Practitioner or PractitionerRole or Organization)
 * participant[behandler].period 0..1
 
+// Must Support Felder
 * status MS
 * category MS
 * name MS
