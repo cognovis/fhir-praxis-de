@@ -2,12 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Miscellaneous
+
+- Bump version to 0.15.0
+
+## [0.15.0] - 2026-04-04
+
+### Miscellaneous
+
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-d8a
+
 ## [0.14.0] - 2026-04-04
 
 ### Bug Fixes
 
 - **qa**: Suppress remaining warnings and hints in IG Publisher QA
 - **qa**: Use exact message text for IG Publisher suppressions
+- **fpde-04d**: Address review findings iteration 1
+- **fpde-04d**: Address review findings iteration 2
 - **fpde-d8a**: Address review findings iteration 1 — add partial and multi bank-account examples
 
 ### Documentation
@@ -17,6 +35,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-04d**: Green — InsurancePlanDE profile with GKV/PKV slicing
+- **fpde-04d**: Green — GKV/PKV InsurancePlan examples with Coverage-Referenz docs (AK2+AK3)
 - **fpde-d8a**: Green — BankAccountExt complex extension mit iban/bic/bankname/kontoinhaber
 - **fpde-d8a**: Green — example with full BankAccountExt usage
 - **fpde-6no**: Green — appointment-mode extension, ValueSet, CodeSystem
@@ -32,6 +52,8 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 
+- **fpde-04d**: Red — InsurancePlanDE profile skeleton fails SUSHI
+- **fpde-04d**: Red — InsurancePlanDE examples fail SUSHI
 - **fpde-d8a**: Red — stub BankAccountExt without sub-extensions
 - **fpde-d8a**: Red — example without bank-account extension
 - **fpde-6no**: Red — appointment-mode extension with unresolved ValueSet reference

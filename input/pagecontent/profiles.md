@@ -48,6 +48,38 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbAbrechnenderArztExt |
 | **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungTextExt, EinwilligungWiderrufMoeglichExt |
 
+## InsurancePlanDE — GKV/PKV Tarif-Profile
+
+The `InsurancePlanDE` profile extends the base FHIR `InsurancePlan` resource with slicing on `plan` to distinguish GKV (statutory health insurance) and PKV (private health insurance) tariffs.
+
+### Plan Slices
+
+| Slice | Type Code | Usage |
+|-------|-----------|-------|
+| `plan[gkv]` | `InsurancePlanType#gkv` | GKV Satzungsleistungen und kassenindividuelle Leistungen |
+| `plan[pkv]` | `InsurancePlanType#pkv` | PKV GOÄ-Faktoren und Erstattungsregeln |
+
+### Coverage.class → InsurancePlan Reference Pattern (AK3)
+
+FHIR R4 does not provide a direct reference element from `Coverage` to `InsurancePlan`. The recommended pattern for this IG is to use `Coverage.class` to link a patient's Coverage to the specific InsurancePlan tariff by identifier:
+
+```
+Coverage.class[type=plan].value  →  InsurancePlan.identifier (Tarif-Identifier)
+Coverage.class[type=plan].name   →  InsurancePlan.name (human-readable label)
+```
+
+**Example:** A GKV patient with AOK Bayern PZR Satzungsleistung:
+
+```
+Coverage.class[0].type  = http://terminology.hl7.org/CodeSystem/coverage-class#plan
+Coverage.class[0].value = "aok-bayern-pzr"
+Coverage.class[0].name  = "AOK Bayern — Basis + PZR Satzungsleistung"
+```
+
+The value `"aok-bayern-pzr"` matches the `InsurancePlan.identifier` of the corresponding `InsurancePlanDE` instance. Systems can look up the full tariff details (benefit limits, GOÄ-Faktoren, Satzungsleistungen) from the referenced InsurancePlan resource using this identifier.
+
+See `example-coverage-aok-tarif` for a complete example.
+
 ## Note on Resource Choice
 
 The choice of base resource follows FHIR R4 semantics:
