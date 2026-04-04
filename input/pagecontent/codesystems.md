@@ -34,6 +34,19 @@ Codes für KV-Richtigstellungen im Honorarbescheid.
 | `ST` | ST | Storno |
 | `KO` | KO | Korrektur |
 
+### BehandlerRolleCS — Behandler-Rolle
+
+Rollen der Mitglieder in einem Behandler-Team (CareTeam) in der deutschen ambulanten Versorgung. Wird für die Rollenkodierung im CareTeamDE-Profil verwendet (Slicing von CareTeam.participant).
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `zahnarzt` | Zahnarzt | Zahnärztin oder Zahnarzt |
+| `arzt` | Arzt | Ärztin oder Arzt |
+| `zfa` | ZFA | Zahnmedizinische Fachangestellte |
+| `mfa` | MFA | Medizinische Fachangestellte |
+| `wb-assistent` | WB-Assistent | Weiterbildungsassistent |
+| `physiotherapeut` | Physiotherapeut | Physiotherapeutin oder Physiotherapeut |
+
 ### ScheinartCS — Scheintypen
 
 Abrechnungsschein-Typen in der ambulanten Versorgung.

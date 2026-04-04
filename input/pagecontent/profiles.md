@@ -38,6 +38,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **Condition** | Diagnoses with German-specific metadata | DauerdiagnoseExt, DiagnoseSeiteExt |
 | **ServiceRequest** | Überweisungen (referrals) | UeFachrichtungExt, ReferralSugTypeExt, ReferralOptimizationStatusExt |
 | **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
+| **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
 
 ### Administrative
 
@@ -80,6 +81,54 @@ Coverage.class[0].name  = "AOK Bayern — Basis + PZR Satzungsleistung"
 The value `"aok-bayern-pzr"` matches the `InsurancePlan.identifier` of the corresponding `InsurancePlanDE` instance. Systems can look up the full tariff details (benefit limits, GOÄ-Faktoren, Satzungsleistungen) from the referenced InsurancePlan resource using this identifier.
 
 See `example-coverage-aok-tarif` for a complete example.
+
+## CareTeamDE — Behandler-Teams
+
+The `CareTeamDE` profile models treatment teams (Behandler-Teams) in German ambulatory care. It supports interdisciplinary care coordination with role-based participant slicing.
+
+### Core Structure
+
+| Element | Cardinality | Profile Constraint |
+|---------|-------------|-------------------|
+| `status` | 0..1 | MS; proposed \| active \| suspended \| inactive \| entered-in-error |
+| `category` | 0..* | MS; typically LOINC LA27975-4 (Encounter-focused care team) |
+| `name` | 0..1 | MS; human-readable team name (e.g. "Zahnarztpraxis Dr. Mueller") |
+| `subject` | 0..1 | MS; Reference(Patient) — the patient for whom the team provides care |
+| `period` | 0..1 | MS; start and end times for team engagement |
+| `participant` | 0..* | MS; sliced by role (BehandlerRolleVS) |
+| `participant[behandler].member` | 0..1 | MS; Reference(Practitioner \| PractitionerRole \| Organization) |
+| `participant[behandler].role` | 0..* | MS; bound to [BehandlerRolleVS](ValueSet-behandler-rolle.html) (required) |
+| `managingOrganization` | 0..* | Reference(Organization) — the practice or facility managing the team |
+
+### Participant Slicing
+
+Participants are sliced on the `role` element to distinguish treatment roles:
+
+| Slice | Role CodeSystem | Usage |
+|-------|---|---|
+| `participant[behandler]` | BehandlerRolleCS | Individual health professionals or organizations with a clinical role on the team |
+
+Each `participant[behandler]` slice must include:
+- A `role` from `BehandlerRolleVS` (Zahnarzt, Arzt, ZFA, MFA, WB-Assistent, Physiotherapeut)
+- A `member` Reference to the Practitioner, PractitionerRole, or Organization holding that role
+- Optionally, a `period` (start/end) for that participant's engagement
+
+### Use Cases
+
+1. **Dental Practice Team:** A Zahnarztpraxis with a dentist (Zahnarzt), dental assistant (ZFA), and training resident (WB-Assistent), covering Q1 2024.
+2. **General Medical Team:** A GP practice with physician (Arzt) and medical assistant (MFA).
+3. **Inactive Historical Team:** An archived team from 2023 with status=inactive.
+4. **Multidisciplinary Center (MVZ):** An MVZ with 5+ participants across dental, medical, physiotherapy disciplines.
+
+### PVS Integration Pattern
+
+A PVS adapter should:
+1. Create a `CareTeamDE` instance for each patient-facing treatment team.
+2. Populate participant slices by extracting role information from the PVS's internal role/function tables.
+3. Use `period.start` / `period.end` to track when the team composition was active.
+4. Reference patient, practitioners, and the managing organization via FHIR identifiers.
+
+See examples: `example-care-team`, `example-care-team-small`, `example-care-team-inactive`, `example-care-team-mvz`.
 
 ## Note on Resource Choice
 
