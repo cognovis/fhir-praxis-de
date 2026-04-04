@@ -1,0 +1,33 @@
+Profile: AnamneseQuestionnaire
+Parent: Questionnaire
+Id: anamnese-questionnaire
+Title: "Anamnese-Questionnaire"
+Description: "Profil fuer ambulante Anamneseboegen (Erstanamnese, Schmerzanamnese, Praevention) als FHIR Questionnaire-Templates. Praxisrelevante item.type-Werte: group, display, boolean, decimal, integer, date, dateTime, time, string, text, url, choice, open-choice, attachment, reference, quantity."
+
+// Extension fuer Fachkategorie
+* extension contains QuestionnaireKategorieExt named kategorie 0..1 MS
+
+// Must-Support elements
+* status MS
+* status = #active
+* title 1..1 MS
+* date MS
+* publisher MS
+* subjectType 1..* MS
+* subjectType = #Patient
+
+// useContext slice fuer Bogentyp
+* useContext ^slicing.discriminator.type = #pattern
+* useContext ^slicing.discriminator.path = "code"
+* useContext ^slicing.rules = #open
+* useContext contains bogentyp 0..*
+* useContext[bogentyp].code = http://terminology.hl7.org/CodeSystem/usage-context-type#workflow
+* useContext[bogentyp].value[x] only CodeableConcept
+* useContext[bogentyp].valueCodeableConcept from AnamneseBogentypVS (extensible)
+
+// Items
+* item 1..* MS
+* item.linkId 1..1 MS
+* item.text MS
+* item.type 1..1 MS
+* item.required MS
