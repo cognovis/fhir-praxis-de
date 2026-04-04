@@ -289,6 +289,18 @@ Extensions for referral management and optimization.
 | `ReferralOptimizationStatusExt` | code | Optimierungsstatus (z.B. Budget-Impact) |
 | `ReferralOptimizationDeltaExt` | Money | Budget-Delta der Überweisungsoptimierung |
 
+## Organization / Betriebsstätte
+
+Extensions for practice-level administrative data on Organization resources.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BankAccountExt` | Complex | Bankverbindung der Praxis (wiederholbar — mehrere Konten möglich) |
+| `BankAccountExt.iban` | string (1..1) | IBAN (Pflichtfeld) |
+| `BankAccountExt.bic` | string (0..1) | BIC / SWIFT-Code |
+| `BankAccountExt.bankname` | string (0..1) | Name des Kreditinstituts |
+| `BankAccountExt.kontoinhaber` | string (0..1) | Kontoinhaber |
+
 ## Hospital Admission / Krankenhauseinweisung
 
 Extensions for hospital admission forms (Einweisungsschein).
