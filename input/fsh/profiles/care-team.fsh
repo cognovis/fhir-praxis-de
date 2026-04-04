@@ -17,7 +17,6 @@ Description: "Profil fuer Behandler-Teams in der deutschen ambulanten Versorgung
 * participant[behandler].role MS
 * participant[behandler].member MS
 * participant[behandler].member only Reference(Practitioner or PractitionerRole or Organization)
-* participant[behandler].period 0..1
 * participant[behandler].period MS
 
 // Must Support Felder
@@ -27,5 +26,3 @@ Description: "Profil fuer Behandler-Teams in der deutschen ambulanten Versorgung
 * subject MS
 * subject only Reference(Patient)
 * period MS
-* managingOrganization 0..*
-* managingOrganization only Reference(Organization)

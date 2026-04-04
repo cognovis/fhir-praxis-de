@@ -89,14 +89,14 @@ The `CareTeamDE` profile models treatment teams (Behandler-Teams) in German ambu
 
 | Element | Cardinality | Profile Constraint |
 |---------|-------------|-------------------|
-| `status` | 1..1 | MS (Mandatory, Supported) |
-| `category` | 1..1 | MS; typically LOINC LA27975-4 (Encounter-focused care team) |
-| `name` | 1..1 | MS; human-readable team name (e.g. "Zahnarztpraxis Dr. Mueller") |
-| `subject` | 1..1 | MS; Reference(Patient) — the patient for whom the team provides care |
-| `period` | 1..1 | MS; start and end times for team engagement |
-| `participant` | 1..* | MS; sliced by role (BehandlerRolleVS) |
-| `participant[behandler].member` | 1..1 | MS; Reference(Practitioner \| PractitionerRole \| Organization) |
-| `participant[behandler].role` | 1..1 | MS; bound to [BehandlerRolleVS](ValueSet-behandler-rolle.html) |
+| `status` | 0..1 | MS; proposed \| active \| suspended \| inactive \| entered-in-error |
+| `category` | 0..* | MS; typically LOINC LA27975-4 (Encounter-focused care team) |
+| `name` | 0..1 | MS; human-readable team name (e.g. "Zahnarztpraxis Dr. Mueller") |
+| `subject` | 0..1 | MS; Reference(Patient) — the patient for whom the team provides care |
+| `period` | 0..1 | MS; start and end times for team engagement |
+| `participant` | 0..* | MS; sliced by role (BehandlerRolleVS) |
+| `participant[behandler].member` | 0..1 | MS; Reference(Practitioner \| PractitionerRole \| Organization) |
+| `participant[behandler].role` | 0..* | MS; bound to [BehandlerRolleVS](ValueSet-behandler-rolle.html) (required) |
 | `managingOrganization` | 0..* | Reference(Organization) — the practice or facility managing the team |
 
 ### Participant Slicing

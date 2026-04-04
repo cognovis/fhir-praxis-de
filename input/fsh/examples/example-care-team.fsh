@@ -10,9 +10,7 @@ Description: "Behandlungsteam der Zahnarztpraxis Dr. Mueller fuer Q1 2024."
 Usage: #example
 
 * status = #active
-* category.coding.system = "http://loinc.org"
-* category.coding.code = #LA27975-4
-* category.coding.display = "Encounter-focused care team"
+* category = http://loinc.org#LA27975-4 "Encounter-focused care team"
 * name = "Behandlungsteam Zahnarztpraxis Dr. Mueller"
 * subject = Reference(example-patient)
 * period.start = "2024-01-01"
@@ -54,9 +52,7 @@ Description: "Kleines Behandler-Team mit einem Arzt und einer MFA."
 Usage: #example
 
 * status = #active
-* category.coding.system = "http://loinc.org"
-* category.coding.code = #LA27975-4
-* category.coding.display = "Encounter-focused care team"
+* category = http://loinc.org#LA27975-4 "Encounter-focused care team"
 * name = "Kleines Behandler-Team"
 * subject = Reference(example-patient)
 * period.start = "2024-01-01"
@@ -83,9 +79,7 @@ Description: "Abgeschlossenes Behandler-Team aus dem Jahr 2023."
 Usage: #example
 
 * status = #inactive
-* category.coding.system = "http://loinc.org"
-* category.coding.code = #LA27975-4
-* category.coding.display = "Encounter-focused care team"
+* category = http://loinc.org#LA27975-4 "Encounter-focused care team"
 * name = "Behandler-Team 2023"
 * subject = Reference(example-patient)
 * period.start = "2023-01-01"
@@ -109,9 +103,7 @@ Description: "Interdisziplinaeres Behandlungsteam eines Medizinischen Versorgung
 Usage: #example
 
 * status = #active
-* category.coding.system = "http://loinc.org"
-* category.coding.code = #LA27975-4
-* category.coding.display = "Encounter-focused care team"
+* category = http://loinc.org#LA27975-4 "Encounter-focused care team"
 * name = "Behandlungsteam MVZ Musterstadt"
 * subject = Reference(example-patient)
 * period.start = "2024-01-01"
