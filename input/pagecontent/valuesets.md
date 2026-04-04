@@ -12,6 +12,14 @@ Alle zulässigen Abrechnungsarten in der ambulanten Versorgung.
 - **Binding:** Used by `BillingSystemExt`, `BillingCategoryExt`
 - **Usage:** Identifies whether a charge item is billed under EBM, GOÄ, BG, IGeL, etc.
 
+### BehandlerRolleVS — Behandler-Rolle
+
+Rollen der Mitglieder in einem Behandler-Team in der deutschen ambulanten Versorgung.
+
+- **Includes:** All codes from [BehandlerRolleCS](CodeSystem-behandler-rolle.html)
+- **Binding:** Used by `CareTeamDE.participant[behandler].role` (required)
+- **Usage:** Identifies the clinical role of each team participant (Zahnarzt, Arzt, ZFA, MFA, WB-Assistent, Physiotherapeut)
+
 ### ScheinartVS — Scheinart
 
 Abrechnungsschein-Typen in der ambulanten Versorgung.
