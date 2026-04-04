@@ -4,11 +4,11 @@ This IG defines extensions grouped by clinical and administrative domain. All ex
 
 ## Patient / Allgemein
 
-Administrative extensions for patient management.
+Patient-level administrative metadata extensions.
 
 | Extension | Type | Description |
 |-----------|------|-------------|
-| `PatientSeitExt` | date | Datum seit wann der Patient in der Praxis in Behandlung ist (behandelt seit) |
+| `PatientSeitExt` | date | Datum seit wann der Patient in der Praxis in Behandlung ist |
 
 ## Encounter / Warteraum
 

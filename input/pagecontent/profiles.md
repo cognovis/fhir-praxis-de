@@ -43,6 +43,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
+| **Patient** | Patient demographics and administration | PatientSeitExt |
 | **Provenance** | AI provenance tracking (EU AI Act) | AiGeneratedExt, AiModelExt, HumanReviewedExt |
 | **Coverage** | Insurance information | KassennameExt, KassennummerExt |
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbAbrechnenderArztExt |
