@@ -2,6 +2,14 @@
 
 This IG defines extensions grouped by clinical and administrative domain. All extensions use the canonical base URL `https://fhir.cognovis.de/praxis/StructureDefinition/`.
 
+## Patient / Allgemein
+
+Patient-level administrative metadata extensions.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PatientSeitExt` | date | Datum seit wann der Patient in der Praxis in Behandlung ist |
+
 ## Encounter / Warteraum
 
 Queue management extensions for patient flow in the practice.
@@ -340,6 +348,14 @@ Extensions for certificates of incapacity for work (AU-Bescheinigung).
 | `AuBisDatumExt` | date | Voraussichtlich arbeitsunfähig bis |
 | `AuEnddatumExt` | date | Tatsächliches Ende der AU |
 | `AuArbeitsunfallExt` | boolean | Arbeitsunfall (BG-relevant) |
+
+## Questionnaire / Anamneseboegen
+
+Extensions for history-taking questionnaire templates.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `QuestionnaireKategorieExt` | string | Fachliche Kategorie des Anamnesebogens (z.B. Allgemeinmedizin, Orthopädie) |
 
 ## Appointment / Termin
 

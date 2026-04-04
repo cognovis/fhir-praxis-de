@@ -198,6 +198,18 @@ Terminmodus für ambulante Konsultationen (R4-Erweiterung für FHIR R5 virtualSe
 | `phone` | Telefontermin | Termin findet telefonisch statt |
 | `home-visit` | Hausbesuch | Arzt besucht den Patienten zu Hause |
 
+### AnamneseBogentypCS — Anamnesebogen-Typ
+
+Codes für die Klassifizierung von Anamneseboegen (Fragebögen zur Erfassung der Patientenanamnese) in der ambulanten Praxisverwaltung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `erstanamnese` | Erstanamnese | Vollständige Erstanamnese bei Neuaufnahme des Patienten |
+| `schmerzanamnese` | Schmerzanamnese | Gezielte Anamnese zu Schmerzsymptomatik |
+| `praevention` | Praeventionsanamnese | Anamnese im Rahmen von Vorsorgeuntersuchungen |
+| `follow-up` | Verlaufsanamnese | Wiederholte Anamnese im Behandlungsverlauf |
+| `fachspezifisch` | Fachspezifisch | Fachspezifischer Anamnesebogen |
+
 ## External CodeSystems
 
 This IG also references the following external CodeSystems from the KBV Schlüsseltabellen (`kbv.all.st-combined`):
