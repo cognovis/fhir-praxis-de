@@ -4,9 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Documentation
+
+- Add DMEA 2026 materials and strategic IG analysis docs
+
+### Miscellaneous
+
+- Bump version to 0.18.0
+
+## [0.18.0] - 2026-04-04
+
 ### Miscellaneous
 
 - Bump version to 0.17.1
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-8m5
 
 ## [0.17.1] - 2026-04-04
 
