@@ -4,6 +4,16 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
+
+### Test
+
+- **fpde-98l**: Red — xDT NamingSystems draft with validation error
+
+## [0.21.0] - 2026-04-05
+
 ### Bug Fixes
 
 - **fpde-ria**: Address review findings iteration 1 — CHANGELOG ordering
@@ -17,6 +27,15 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-ria**: Green — add medication extensions, CodeSystems, NamingSystem + version bump
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.21.0
+
+### Merge
+
+- Worktree-bead-fpde-ria
 
 ### Test
 
