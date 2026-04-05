@@ -8,16 +8,17 @@ Description: "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabell
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
+* ^content = #complete
 * #00 "Behandlungsausweis" "Primärfall, ambulant kurativ-Hausarzt"
 * #01 "Überweisungsschein" "Kurativ-Arzt"
-* #10 "Behandlungsschein ambulante Notfallbehandlung"
+* #10 "Behandlungsschein ambulante Notfallbehandlung" "Notfall- oder Vertretungsfall"
 * #21 "Überweisungsschein zur Mitbehandlung" "Kurativ-spezialärztlich"
-* #22 "Überweisungsschein zur Konsiliaruntersuchung"
-* #23 "Überweisungsschein zur Auftragsleistung"
-* #24 "Überweisungsschein zur Weiterbehandlung"
-* #25 "Überweisungsschein zur Mitbehandlung bei Schwangerschaft"
-* #27 "Überweisungsschein Labor"
-* #28 "Überweisungsschein Pathologie"
-* #31 "Überweisungsschein zur belegärztlichen Behandlung" "Aufnahme"
-* #32 "Belegärztliche Notaufnahme"
-* #41 "Notfallschein"
+* #22 "Überweisungsschein zur Konsiliaruntersuchung" "Konsiliaruntersuchung durch Facharzt"
+* #23 "Überweisungsschein zur Auftragsleistung" "Laborauftrag oder Einzelleistungsauftrag"
+* #24 "Überweisungsschein zur Weiterbehandlung" "Weiterbehandlung durch anderen Arzt"
+* #25 "Überweisungsschein zur Mitbehandlung bei Schwangerschaft" "Schwangerschaftsbegleitende Mitbehandlung"
+* #27 "Überweisungsschein Labor" "Laborüberweisung"
+* #28 "Überweisungsschein Pathologie" "Pathologieüberweisung"
+* #31 "Überweisungsschein zur belegärztlichen Behandlung" "Aufnahme zur stationären Behandlung"
+* #32 "Belegärztliche Notaufnahme" "Notfallaufnahme durch Belegarzt"
+* #41 "Notfallschein" "Ambulante Notfallbehandlung"

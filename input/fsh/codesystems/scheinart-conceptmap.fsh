@@ -14,8 +14,8 @@ Usage: #definition
 * group[0].element[0].display = "GKV"
 * group[0].element[0].target[0].code = #00
 * group[0].element[0].target[0].display = "Behandlungsausweis"
-* group[0].element[0].target[0].equivalence = #relatedto
-* group[0].element[0].target[0].comment = "Beide decken GKV Primärschein ab"
+* group[0].element[0].target[0].equivalence = #wider
+* group[0].element[0].target[0].comment = "#gkv umfasst alle GKV-Scheine; #00 ist nur der Primär-/Hausarztschein — daher wider (gkv ist breiter)"
 * group[0].element[1].code = #ue
 * group[0].element[1].display = "Ueberweisung"
 * group[0].element[1].target[0].code = #21
