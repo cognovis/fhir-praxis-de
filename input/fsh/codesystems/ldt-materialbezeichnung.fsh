@@ -10,6 +10,7 @@ Description: "Probenmaterial-Bezeichnungen gemaess LDT3-Schluessel (Feldkennung 
 * ^status = #active
 * ^content = #fragment
 * ^caseSensitive = true
+* ^experimental = false
 
 * #EDTA-Blut "EDTA-Blut" "Venaeses Blut in EDTA-Roehrchen (Haematologie, klinische Chemie)"
 * #Serum "Serum" "Blutserum (klinische Chemie, Serologie)"
