@@ -39,6 +39,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **ServiceRequest** | Überweisungen (referrals) | UeFachrichtungExt, ReferralSugTypeExt, ReferralOptimizationStatusExt |
 | **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
+| **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
 
 ### Administrative
 
@@ -227,6 +228,43 @@ A PVS adapter should:
 4. Reference patient, practitioners, and the managing organization via FHIR identifiers.
 
 See examples: `example-care-team`, `example-care-team-small`, `example-care-team-inactive`, `example-care-team-mvz`.
+
+## ProcedureAmbulantDE — Ambulante Eingriffe mit OPS-Kodierung
+
+The `ProcedureAmbulantDE` profile extends the base FHIR `Procedure` resource to support ambulatory procedures (Eingriffe) in German practice management. Procedure coding uses the OPS (Operationen- und Prozedurenschlüssel) via the `CodingOPS` profile from `de.basisprofil.r4`, which includes the Seitenlokalisation extension for laterality.
+
+### Must-Support Elements
+
+| Element | Cardinality | Description |
+|---------|-------------|-------------|
+| `status` | 1..1 | MS; procedure status (e.g., `completed`, `in-progress`) |
+| `code` | 1..1 | MS; procedure code — sliced to allow OPS coding |
+| `code.coding[ops]` | 0..1 | MS; OPS coding using `CodingOPS` profile from de.basisprofil.r4 |
+| `code.coding[ops].system` | 1..1 | Fixed: `http://fhir.de/CodeSystem/bfarm/ops` |
+| `code.coding[ops].version` | 1..1 | OPS catalog year (e.g., `"2024"`) — required by CodingOPS |
+| `code.coding[ops].code` | 1..1 | OPS code (e.g., `1-650.1`) |
+| `subject` | 1..1 | MS; Reference(Patient) |
+| `performed[x]` | 0..1 | MS; date or period when the procedure was performed |
+| `bodySite` | 0..* | MS; detailed body site (supplementary to Seitenlokalisation in OPS coding) |
+
+### OPS Seitenlokalisation
+
+Laterality (Seitenlokalisation) is modeled as an extension on the `code.coding[ops]` element, as defined by the `CodingOPS` profile:
+
+```
+code.coding[ops].extension[seitenlokalisation].valueCoding
+  system: https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION
+  code: L | R | B
+```
+
+The `bodySite` element may additionally carry more granular anatomical location information (e.g., for multi-site procedures).
+
+### Use Cases
+
+1. **Ambulante Koloskopie:** A diagnostic colonoscopy coded as OPS 1-650.1, status completed, linked to a GKV patient.
+2. **Wundversorgung links:** A wound care procedure (OPS 5-916.00) with `Seitenlokalisation = L` (links) recorded as an extension on the OPS coding.
+
+See examples: `example-procedure-koloskopie`, `example-procedure-wundversorgung-links`.
 
 ## Note on Resource Choice
 
