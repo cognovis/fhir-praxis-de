@@ -21,13 +21,14 @@ Description: "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO
 * identifier 0..* MS
 
 // Probenmaterial: SNOMED-CT Pflichtcoding + optionaler LDT-Code
-* type MS
+* type 1..1 MS
 * type.coding MS
 * type.coding ^slicing.discriminator.type = #value
 * type.coding ^slicing.discriminator.path = "system"
 * type.coding ^slicing.rules = #open
 * type.coding contains snomed 1..1 MS and ldt 0..1
 
+* type.coding[snomed] from ProbenmaterialSnomedVS (extensible)
 * type.coding[snomed].system = "http://snomed.info/sct"
 * type.coding[snomed].system MS
 * type.coding[snomed].code MS
@@ -37,6 +38,7 @@ Description: "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO
 * type.coding[ldt].code MS
 
 // Must-Support Pflichtfelder
+* subject only Reference(Patient)
 * subject MS
 * collection MS
 * collection.collectedDateTime MS
