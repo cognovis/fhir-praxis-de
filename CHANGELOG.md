@@ -4,6 +4,37 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-orv**: Address review findings iteration 1
+- **fpde-orv**: Address review findings iteration 1
+- **fpde-orv**: Address review findings iteration 2
+- **fpde-orv**: Correct resultsInterpreter comment to match constraint
+- **fpde-orv**: Address review panel findings iteration 1
+- **fpde-orv**: Address review panel findings iteration 2
+
+### Documentation
+
+- Update feature documentation for fpde-4zh
+- Update feature documentation for fpde-orv
+
+### Features
+
+- **fpde-4zh**: Green — Lab Observation profile + 3 examples
+- **fpde-orv**: Add PraxisLabDiagnosticReport profile
+- **fpde-orv**: Add lab DiagnosticReport example instances (4 scenarios)
+- **fpde-orv**: Green -- PraxisLabDiagnosticReport profile with LAB/MB/PAT category slices and 4 example instances
+
+### Miscellaneous
+
+- Bump version to 0.28.0
+
+### Test
+
+- **fpde-orv**: Red -- stub DiagnosticReport profile and example trigger sushi error
+
+## [0.28.0] - 2026-04-05
+
 ### Features
 
 - **fpde-oz2**: Complete KvdtScheinuntergruppeCS with all 21 KBV V1.02 codes
@@ -11,6 +42,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.27.0
+- Update changelog
 
 ## [0.27.0] - 2026-04-05
 
