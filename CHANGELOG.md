@@ -4,12 +4,97 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Miscellaneous
+
+- Bump version to 0.25.0
+
+## [0.25.0] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-csw**: Address review findings iteration 1
+- **fpde-csw**: Address review findings iteration 2
+- **fpde-oz2**: Address review findings iteration 1 — ConceptMap source canonical, code #10 display
+- **fpde-oz2**: Address review findings iteration 2 — content=complete, consistent descriptions, equivalence #wider for gkv→#00
+
 ### Features
 
-- **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
+- **fpde-csw**: Add Specimen profile, ValueSet, and example instances
+- **fpde-oz2**: Green — KVDT Scheinuntergruppe CS with OID and ConceptMap
+
+### Miscellaneous
+
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-oz2
 
 ### Test
 
+- **fpde-oz2**: Red — KVDT Scheinuntergruppe CS and ConceptMap (incomplete)
+
+## [0.24.0] - 2026-04-05
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.24.0
+
+### Merge
+
+- Worktree-bead-fpde-1q9
+
+## [0.23.0] - 2026-04-05
+
+### Miscellaneous
+
+- Bump version to 0.22.0
+- Update changelog
+- Bump version to 0.23.0
+
+### Merge
+
+- Worktree-bead-fpde-76c
+
+## [0.22.0] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-g25**: Address review findings iteration 1
+- **fpde-g25**: Address review findings iteration 2 — complete scenario examples
+- **fpde-g25**: Address review panel findings — preferred URI, LOINC 6690-2, doc wording
+- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
+- **fpde-1q9**: Address review findings iteration 1
+- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
+- **fpde-76c**: Address review findings iteration 1
+- **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
+
+### Documentation
+
+- Update feature documentation for fpde-g25
+- Update feature documentation for fpde-1q9
+
+### Features
+
+- **fpde-g25**: Green — NamingSystems ldt-testkennungen + ldt-auftragsnummer
+- **fpde-g25**: Green — ValueSet LabInterpretation using v3-ObservationInterpretation
+- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
+- **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
+- **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
+
+### Miscellaneous
+
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-98l
+
+### Test
+
+- **fpde-1q9**: Red — validate PraxisCondition profile
+- **fpde-76c**: Red — Procedure profile not yet defined
 - **fpde-98l**: Red — xDT NamingSystems draft with validation error
 
 ## [0.21.0] - 2026-04-05

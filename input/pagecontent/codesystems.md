@@ -243,6 +243,21 @@ Kategorie der Medikation hinsichtlich der Einnahmedauer.
 | `dauermedikation` | Dauermedikation | Medikament wird dauerhaft eingenommen |
 | `bedarfsmedikation` | Bedarfsmedikation | Medikament wird nur bei Bedarf eingenommen |
 
+### LdtMaterialbezeichnungCS — LDT Materialbezeichnung (FK 8428)
+
+Probenmaterial-Bezeichnungen gemäss LDT3-Schlüssel (Feldkennung 8428). Wird für die optionale Codierung von Specimentypen im PraxisSpecimen-Profil verwendet. Erfasst die haeufigsten Probenmaterialien, die in der ambulanten Praxis anfallen. Quelle: KBV LDT3-Spezifikation.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `EDTA-Blut` | EDTA-Blut | Venaeses Blut in EDTA-Roehrchen (Haematologie, klinische Chemie) |
+| `Serum` | Serum | Blutserum (klinische Chemie, Serologie) |
+| `Urin-MSU` | Urin-MSU | Mittelstrahlurin (Urinalyse, Urinkultur) |
+| `Abstrich` | Abstrich | Abstrich (Mikrobiologie) |
+| `Liquor` | Liquor | Liquor cerebrospinalis |
+| `Stuhl` | Stuhl | Stuhlprobe (Mikrobiologie, Parasitologie) |
+
+**Note:** This CodeSystem is marked as `#fragment` — only the most common material types are included. If other LDT material designations are needed, they should be added via FHIR tooling or extension mapping per site.
+
 ## External CodeSystems
 
 This IG also references the following external CodeSystems from the KBV Schlüsseltabellen (`kbv.all.st-combined`):

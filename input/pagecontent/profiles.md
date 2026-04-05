@@ -39,6 +39,8 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **ServiceRequest** | Überweisungen (referrals) | UeFachrichtungExt, ReferralSugTypeExt, ReferralOptimizationStatusExt |
 | **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
+| **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
+| **[PraxisSpecimen](StructureDefinition-praxis-specimen.html)** | Probenmaterial für xDT-Adapter (LDT/GDT) | — (SNOMED-CT + optional LDT-Code) |
 
 ### Administrative
 
@@ -49,6 +51,67 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **Coverage** | Insurance information | KassennameExt, KassennummerExt |
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbAbrechnenderArztExt |
 | **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungTextExt, EinwilligungWiderrufMoeglichExt |
+
+## PraxisCondition — ICD-10-GM mit Diagnosesicherheit
+
+The `PraxisCondition` profile extends the base FHIR `Condition` resource to standardize diagnosis recording in German ambulatory practice with mandatory KV billing requirements (KVDT 6.06).
+
+### Core Elements
+
+| Element | Cardinality | Notes |
+|---------|-------------|-------|
+| `code` | 1..1 | Must-Support. ICD-10-GM coding from BFARM CodeSystem. |
+| `code.coding[icd10gm]` | 1..* | Sliced by system. Must include at least one ICD-10-GM coding. |
+| `code.coding[icd10gm].extension[diagnosesicherheit]` | 0..1 | Must-Support. Upstream extension binding to KBV_VS_SFHIR_ICD_DIAGNOSESICHERHEIT (A/G/V/Z). **Required by KV for billing claims.** |
+| `clinicalStatus` | 0..1 | Must-Support. Active, recurrence, remission, resolved. |
+| `verificationStatus` | 0..1 | Must-Support. Unconfirmed, provisional, differential, confirmed, refuted, entered-in-error. |
+| `subject` | 1..1 | Reference(Patient). The patient who has the condition. |
+
+### Praxis Extensions
+
+| Extension | Type | Cardinality | Description |
+|-----------|------|-------------|-------------|
+| `dauerdiagnose` | boolean | 0..1 | Must-Support. Marks chronic/persistent diagnoses that auto-roll to next quarters. |
+| `diagnoseSeite` | CodeableConcept | 0..1 | Must-Support. Side specification (links/rechts/beidseitig). Binds to DiagnoseSeiteVS. Complements KBV bodySite coding. |
+
+### ICD-10-GM Diagnosesicherheit (KVDT 6.06 Compliance)
+
+The KV requires all diagnoses submitted in billing claims to carry a diagnosesicherheit code:
+
+| Code | Meaning | Clinical Status | Verification Status |
+|------|---------|-----------------|-------------------|
+| **G** | Gesichert (Confirmed) | active / resolved / remission | confirmed |
+| **A** | Ausschluss (Ruled out) | — | refuted |
+| **V** | Verdacht (Suspected) | active / provisional | provisional |
+| **Z** | Zustand nach (History of) | resolved | confirmed |
+
+PVS systems must extract and populate this extension on every diagnosis before sending the claim to the KV. The binding is **required**.
+
+### Integration with German Base Profiles
+
+`PraxisCondition` applies to the standard FHIR R4 `Condition` resource (from `de.basisprofil.r4` or FHIR R4 core). It does not constrain base Condition elements, but requires support for:
+- ICD-10-GM coding via BFARM CodeSystem
+- Upstream KBV extension for diagnosesicherheit
+- Two local extensions (dauerdiagnose, diagnoseSeite)
+
+### Example Use Cases
+
+1. **Confirmed diagnosis for KV claim:** A patient with diabetes mellitus Type 2 (E11.9) marked as gesichert (G), dauerdiagnose=true.
+2. **Ruled-out differential:** A suspected infection ruled out during workup, marked as ausgeschlossen (A).
+3. **Suspected condition pending confirmation:** A provisional diagnosis marked as verdacht (V).
+4. **Post-treatment status:** Patient with resolved fractured arm marked as zustand nach (Z).
+
+### PVS Implementation Note
+
+When recording a diagnosis in the PVS:
+1. Create or retrieve a Condition resource
+2. Populate ICD-10-GM code from the EBM/clinical context
+3. **Always set the diagnosesicherheit extension** based on clinical judgment (G/A/V/Z)
+4. If chronic: set dauerdiagnose=true so EHR auto-carries to next quarter
+5. If bilateral or sided: set diagnoseSeite (links, rechts, beidseitig)
+6. Validate against PraxisCondition profile before submission
+
+See example `example-diagnose` for a complete instance.
 
 ## AnamneseQuestionnaire — Anamneseboegen-Profil
 
@@ -208,6 +271,131 @@ A PVS adapter should:
 2. Populate the `identifier[gdtId].value` with the GDT device identifier from the PVS.
 3. Use `deviceName`, `manufacturer`, `modelNumber`, `version`, and `type` to encode device metadata.
 4. Update device status (`active` / `inactive`) to reflect the device's current operational state in the practice.
+
+## ProcedureAmbulantDE — Ambulante Eingriffe mit OPS-Kodierung
+
+The `ProcedureAmbulantDE` profile extends the base FHIR `Procedure` resource to support ambulatory procedures (Eingriffe) in German practice management. Procedure coding uses the OPS (Operationen- und Prozedurenschlüssel) via the `CodingOPS` profile from `de.basisprofil.r4`, which includes the Seitenlokalisation extension for laterality.
+
+### Must-Support Elements
+
+| Element | Cardinality | Description |
+|---------|-------------|-------------|
+| `status` | 1..1 | MS; procedure status (e.g., `completed`, `in-progress`) |
+| `code` | 1..1 | MS; procedure code — sliced to allow OPS coding |
+| `code.coding[ops]` | 0..1 | MS; OPS coding using `CodingOPS` profile from de.basisprofil.r4 |
+| `code.coding[ops].system` | 1..1 | Fixed: `http://fhir.de/CodeSystem/bfarm/ops` |
+| `code.coding[ops].version` | 1..1 | OPS catalog year (e.g., `"2024"`) — required by CodingOPS |
+| `code.coding[ops].code` | 1..1 | OPS code (e.g., `1-650.1`) |
+| `subject` | 1..1 | MS; Reference(Patient) |
+| `performed[x]` | 0..1 | MS; date or period when the procedure was performed |
+| `bodySite` | 0..* | MS; detailed body site (supplementary to Seitenlokalisation in OPS coding) |
+
+### OPS Seitenlokalisation
+
+Laterality (Seitenlokalisation) is modeled as an extension on the `code.coding[ops]` element, as defined by the `CodingOPS` profile:
+
+```
+code.coding[ops].extension[seitenlokalisation].valueCoding
+  system: https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION
+  code: L | R | B
+```
+
+The `bodySite` element may additionally carry more granular anatomical location information (e.g., for multi-site procedures).
+
+### Use Cases
+
+1. **Ambulante Koloskopie:** A diagnostic colonoscopy coded as OPS 1-650.1, status completed, linked to a GKV patient.
+2. **Wundversorgung links:** A wound care procedure (OPS 5-916.00) with `Seitenlokalisation = L` (links) recorded as an extension on the OPS coding.
+
+See examples: `example-procedure-koloskopie`, `example-procedure-wundversorgung-links`.
+
+## PraxisSpecimen — Probenmaterial für xDT-Adapter
+
+The `PraxisSpecimen` profile extends the base FHIR `Specimen` resource to standardize specimen (Probenmaterial) documentation in German ambulatory practice. It is designed for xDT adapters (LDT, GDT 3.5) that exchange laboratory order and result information. The profile ensures that specimen identifiers and material types are captured in a PVS-agnostic manner, compatible with laboratory systems.
+
+### Core Elements
+
+| Element | Cardinality | Profile Constraint |
+|---------|-------------|-------------------|
+| `identifier` | 0..* | Optional; labs may assign their own specimen identifiers using system-specific URLs |
+| `type` | 1..1 | MS; sliced by coding system (SNOMED-CT + optional LDT) |
+| `type.coding[snomed]` | 1..1 | MS; SNOMED-CT coding (required) using [ProbenmaterialSnomedVS](ValueSet-probenmaterial-snomed.html) |
+| `type.coding[snomed].system` | 1..1 | Fixed: `http://snomed.info/sct` |
+| `type.coding[snomed].code` | 1..1 | MS; SNOMED-CT code for specimen material |
+| `type.coding[ldt]` | 0..1 | Optional; LDT FK 8428 material designation using [LdtMaterialbezeichnungCS](CodeSystem-ldt-materialbezeichnung.html) |
+| `type.coding[ldt].system` | 1..1 | Fixed: `https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung` |
+| `type.coding[ldt].code` | 1..1 | LDT FK 8428 code (e.g., EDTA-Blut, Serum, Urin-MSU) |
+| `subject` | 1..1 | MS; Reference(Patient) — the patient providing the specimen |
+| `collection` | 0..1 | MS; capture collection method, timing, and body site |
+| `collection.collectedDateTime` | 0..1 | MS; when the specimen was collected |
+| `collection.method` | 0..1 | MS; SNOMED-CT or LDT code for collection technique (venipuncture, swab, etc.) |
+| `collection.bodySite` | 0..1 | MS; anatomical location of specimen collection |
+| `container` | 0..* | MS; tube type and container information |
+| `container.type` | 0..1 | MS; SNOMED-CT code for container type (EDTA tube, serum separator, etc.) |
+
+### Specimen Identifier Pattern (No Shared NamingSystem)
+
+Specimen identifiers are **lab-specific**. No shared NamingSystem is defined for specimen identifiers. Each laboratory assigns identifiers using its own system URL:
+
+```
+identifier[0].system = "https://<lab-specific-url>/proben-id"
+identifier[0].value  = "<lab-specific-specimen-id>"
+```
+
+**Example:** A specimen from "Labor Beispiel" might use:
+```
+system = "https://labor-beispiel.de/proben-id"
+value  = "BL-2026-00147"
+```
+
+Different laboratories can have different URL structures; there is no registry of these URLs — they are internal to each laboratory system.
+
+### Material Type Coding: SNOMED-CT + LDT
+
+**SNOMED-CT** (required) provides internationally recognized coding for specimen types:
+- `122555007` — Venous blood specimen
+- `122575003` — Urine specimen
+- `258529004` — Throat swab
+- etc. (see [ProbenmaterialSnomedVS](ValueSet-probenmaterial-snomed.html))
+
+**LDT FK 8428** (optional) adds German-specific material designation from the KBV LDT3 specification:
+- `EDTA-Blut` — EDTA-Blut (venous blood in EDTA tube)
+- `Serum` — Blutserum
+- `Urin-MSU` — Mittelstrahl urine
+- `Abstrich` — Swab / smear
+- `Liquor` — Cerebrospinal fluid
+- `Stuhl` — Stool sample
+
+Both coding systems can coexist; SNOMED-CT is mandatory, LDT is optional. xDT adapters can map between the two at transformation time.
+
+### Integration with KBV Labor Befund
+
+The `kbv.mio.laborbefund` (KBV MIO Laboratory Report) ImplementationGuide defines specimen handling for laboratory results in Germany. `PraxisSpecimen` is inspired by `KBV_PR_MIO_LAB_Specimen` but is **not constrained to it** because:
+
+1. The KBV parent profile lacks a published snapshot in some package versions
+2. `PraxisSpecimen` must remain **PVS-agnostic** — applicable to any ambulatory practice system, not tied to a specific MIO workflow
+3. The profile uses the base FHIR `Specimen` resource as parent, ensuring broad compatibility
+
+Refer to the KBV MIO Laboratory Report guide for context on laboratory workflow integration.
+
+### PVS Implementation Note
+
+When capturing specimen information in a PVS:
+1. Create a `Specimen` resource
+2. **Always populate `type.coding[snomed]`** with the appropriate SNOMED-CT code
+3. Optionally add `type.coding[ldt]` if the PVS maintains LDT material designations
+4. Populate `subject` with a reference to the patient
+5. Record collection metadata (`collection.collectedDateTime`, `collection.method`, `collection.bodySite`)
+6. Container information (`container.type`) aids downstream laboratory processing
+7. Validate the instance against `PraxisSpecimen` before transmission
+
+### Use Cases
+
+1. **Venous blood for laboratory analysis:** SNOMED-CT `122555007` (Venous blood specimen) + LDT `EDTA-Blut` (EDTA-Blut), collected by venipuncture, in EDTA tube.
+2. **Urine culture:** SNOMED-CT `122575003` (Urine specimen) + LDT `Urin-MSU` (Mittelstrahl urine), mid-stream collection.
+3. **Throat swab for microbiology:** SNOMED-CT `258529004` (Throat swab), collected by swab technique from pharynx.
+
+See examples: `example-specimen-blut-edta`, `example-specimen-urin-msu`, `example-specimen-rachenabstrich`.
 
 ## Note on Resource Choice
 

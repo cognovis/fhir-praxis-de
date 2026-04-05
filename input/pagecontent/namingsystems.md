@@ -96,6 +96,30 @@ GDT 3.5 Gerätekennung (Feldkennung 8402) — uniquely identifies a medical devi
 
 **Usage:** Device.identifier[gdtId] in the PraxisDevice profile to establish the bidirectional link between FHIR device records and PVS-managed devices. The practice management system uses this identifier to route lab orders to specific analyzers and to match results to devices.
 
+## Lab Terminology
+
+### ldt-testkennungen — LDT Test Codes
+
+LDT-Testkennungen (LDT laboratory test codes) als Identifier-System. Diese werden in Observation.code.coding verwendet, um LDT-spezifische Labortestergebnisse im Kontext von deutschen Laboratorien zu kodieren. Parallele LOINC-Kodierungen ermöglichen interoperable Mappings zu internationalen Standards.
+
+**Canonical URI:** `https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen`
+
+**OID:** `1.2.276.0.76.4.78` (Official LDT 3.2.19 test codes OID)
+
+**Kind:** `codesystem`
+
+**Usage:** Observation.code.coding for lab test results in LDT workflows. Often used alongside LOINC for dual coding (LDT-spezifisches System + internationales LOINC-Mapping).
+
+### ldt-auftragsnummer — LDT Lab Order Number
+
+Laborauftragsnummer (lab order/request identifier) nach LDT-Standard. Diese dient der Verfolgung von Laboraufträgen zwischen Praxis und Labor sowie für die Integration von Laborergebnissen mit dem ursprünglichen Auftrag.
+
+**Canonical URI:** `https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer`
+
+**Kind:** `identifier`
+
+**Usage:** ServiceRequest.identifier to link lab orders and results back to the original request in LDT workflows.
+
 ## Architecture Notes
 
 All NamingSystems are defined with `kind: identifier` and use URI-based uniqueIds. They serve as metadata for the FHIR adapter to:
