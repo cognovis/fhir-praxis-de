@@ -2,6 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.20.0] - 2026-04-05
+
+### Added
+
+- Medication extensions: `aut-idem`, `is-erezept` (MedicationRequest flags), `is-dauermedikation` (MedicationStatement flag)
+- Medication price extensions: `avp` (Apothekenverkaufspreis) and `festbetrag` (GKV-Festbetrag) on MedicationRequest
+- CodeSystem `rezept-typ`: gkv, privat, btm, t-rezept
+- CodeSystem `medikation-kategorie`: dauermedikation, bedarfsmedikation
+- NamingSystem `scheindiagnosen`: Identifier-System fuer Scheindiagnosen (Condition.identifier)
+- Documentation comment in `genehmigung.fsh` explaining sub-extension addressing convention
+
 ## [unreleased]
 
 ### Documentation
