@@ -63,7 +63,7 @@ Description: "Laborbefund-Profil fuer die ambulante Praxis. Unterstuetzt Standar
 
 // Laborarzt oder Facharzt-Rolle; PractitionerRole erlaubt fuer Speziallabore
 * resultsInterpreter MS
-* resultsInterpreter only Reference(Practitioner or PractitionerRole)
+* resultsInterpreter only Reference(Practitioner or Organization)
 
 // Probe: Verweis auf PraxisSpecimen
 * specimen MS
