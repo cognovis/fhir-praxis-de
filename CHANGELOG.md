@@ -4,14 +4,6 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
-### Documentation
-
-- Add DMEA 2026 materials and strategic IG analysis docs
-
-### Miscellaneous
-
-- Bump version to 0.18.0
-
 ## [0.20.0] - 2026-04-05
 
 ### Added
@@ -22,6 +14,13 @@ All notable changes to this project will be documented in this file.
 - CodeSystem `medikation-kategorie`: dauermedikation, bedarfsmedikation
 - NamingSystem `scheindiagnosen`: Identifier-System fuer Scheindiagnosen (Condition.identifier)
 - Documentation comment in `genehmigung.fsh` explaining sub-extension addressing convention
+
+## [0.19.0] - 2026-04-05
+
+### Added
+
+- Custom device order extensions: `ManufacturingDeadline`, `DigitalWorkflow` on DeviceRequest
+- Workshop presentation for Heidonto workshop with device order examples and dental lab orders
 
 ## [0.18.0] - 2026-04-04
 
