@@ -364,3 +364,15 @@ Extensions for appointment scheduling and mode of consultation.
 | Extension | Type | Description |
 |-----------|------|-------------|
 | `AppointmentModeExt` | code | Terminmodus (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch) |
+
+## Medication / Verordnung
+
+Extensions for prescription and medication management.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `AutIdemExt` | boolean | Kennzeichen, ob der Arzt die Substitution durch ein wirkstoffgleiches Präparat ausgeschlossen hat (aut-idem-Kreuz) |
+| `IsErezeptExt` | boolean | Kennzeichen, ob das Rezept als E-Rezept (elektronisches Rezept) ausgestellt wurde |
+| `IsDauermedikationExt` | boolean | Kennzeichen, ob das Medikament zur Dauermedikation des Patienten gehört |
+| `AvpExt` | Money | Apothekenverkaufspreis (AVP) des verordneten Medikaments |
+| `FestbetragExt` | Money | GKV-Festbetrag für das verordnete Medikament |
