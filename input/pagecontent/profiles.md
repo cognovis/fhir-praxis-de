@@ -40,6 +40,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
 | **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
+| **[PraxisSpecimen](StructureDefinition-praxis-specimen.html)** | Probenmaterial für xDT-Adapter (LDT/GDT) | — (SNOMED-CT + optional LDT-Code) |
 
 ### Administrative
 
@@ -265,6 +266,94 @@ The `bodySite` element may additionally carry more granular anatomical location 
 2. **Wundversorgung links:** A wound care procedure (OPS 5-916.00) with `Seitenlokalisation = L` (links) recorded as an extension on the OPS coding.
 
 See examples: `example-procedure-koloskopie`, `example-procedure-wundversorgung-links`.
+
+## PraxisSpecimen — Probenmaterial für xDT-Adapter
+
+The `PraxisSpecimen` profile extends the base FHIR `Specimen` resource to standardize specimen (Probenmaterial) documentation in German ambulatory practice. It is designed for xDT adapters (LDT, GDT 3.5) that exchange laboratory order and result information. The profile ensures that specimen identifiers and material types are captured in a PVS-agnostic manner, compatible with laboratory systems.
+
+### Core Elements
+
+| Element | Cardinality | Profile Constraint |
+|---------|-------------|-------------------|
+| `identifier` | 0..* | Optional; labs may assign their own specimen identifiers using system-specific URLs |
+| `type` | 1..1 | MS; sliced by coding system (SNOMED-CT + optional LDT) |
+| `type.coding[snomed]` | 1..1 | MS; SNOMED-CT coding (required) using [ProbenmaterialSnomedVS](ValueSet-probenmaterial-snomed.html) |
+| `type.coding[snomed].system` | 1..1 | Fixed: `http://snomed.info/sct` |
+| `type.coding[snomed].code` | 1..1 | MS; SNOMED-CT code for specimen material |
+| `type.coding[ldt]` | 0..1 | Optional; LDT FK 8428 material designation using [LdtMaterialbezeichnungCS](CodeSystem-ldt-materialbezeichnung.html) |
+| `type.coding[ldt].system` | 1..1 | Fixed: `https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung` |
+| `type.coding[ldt].code` | 1..1 | LDT FK 8428 code (e.g., EDTA-Blut, Serum, Urin-MSU) |
+| `subject` | 1..1 | MS; Reference(Patient) — the patient providing the specimen |
+| `collection` | 0..1 | MS; capture collection method, timing, and body site |
+| `collection.collectedDateTime` | 0..1 | MS; when the specimen was collected |
+| `collection.method` | 0..1 | MS; SNOMED-CT or LDT code for collection technique (venipuncture, swab, etc.) |
+| `collection.bodySite` | 0..1 | MS; anatomical location of specimen collection |
+| `container` | 0..* | MS; tube type and container information |
+| `container.type` | 0..1 | MS; SNOMED-CT code for container type (EDTA tube, serum separator, etc.) |
+
+### Specimen Identifier Pattern (No Shared NamingSystem)
+
+Specimen identifiers are **lab-specific**. No shared NamingSystem is defined for specimen identifiers. Each laboratory assigns identifiers using its own system URL:
+
+```
+identifier[0].system = "https://<lab-specific-url>/proben-id"
+identifier[0].value  = "<lab-specific-specimen-id>"
+```
+
+**Example:** A specimen from "Labor Beispiel" might use:
+```
+system = "https://labor-beispiel.de/proben-id"
+value  = "BL-2026-00147"
+```
+
+Different laboratories can have different URL structures; there is no registry of these URLs — they are internal to each laboratory system.
+
+### Material Type Coding: SNOMED-CT + LDT
+
+**SNOMED-CT** (required) provides internationally recognized coding for specimen types:
+- `122555007` — Venous blood specimen
+- `122575003` — Urine specimen
+- `258529004` — Throat swab
+- etc. (see [ProbenmaterialSnomedVS](ValueSet-probenmaterial-snomed.html))
+
+**LDT FK 8428** (optional) adds German-specific material designation from the KBV LDT3 specification:
+- `EDTA-Blut` — EDTA-Blut (venous blood in EDTA tube)
+- `Serum` — Blutserum
+- `Urin-MSU` — Mittelstrahl urine
+- `Abstrich` — Swab / smear
+- `Liquor` — Cerebrospinal fluid
+- `Stuhl` — Stool sample
+
+Both coding systems can coexist; SNOMED-CT is mandatory, LDT is optional. xDT adapters can map between the two at transformation time.
+
+### Integration with KBV Labor Befund
+
+The `kbv.mio.laborbefund` (KBV MIO Laboratory Report) ImplementationGuide defines specimen handling for laboratory results in Germany. `PraxisSpecimen` is inspired by `KBV_PR_MIO_LAB_Specimen` but is **not constrained to it** because:
+
+1. The KBV parent profile lacks a published snapshot in some package versions
+2. `PraxisSpecimen` must remain **PVS-agnostic** — applicable to any ambulatory practice system, not tied to a specific MIO workflow
+3. The profile uses the base FHIR `Specimen` resource as parent, ensuring broad compatibility
+
+Refer to the KBV MIO Laboratory Report guide for context on laboratory workflow integration.
+
+### PVS Implementation Note
+
+When capturing specimen information in a PVS:
+1. Create a `Specimen` resource
+2. **Always populate `type.coding[snomed]`** with the appropriate SNOMED-CT code
+3. Optionally add `type.coding[ldt]` if the PVS maintains LDT material designations
+4. Populate `subject` with a reference to the patient
+5. Record collection metadata (`collection.collectedDateTime`, `collection.method`, `collection.bodySite`)
+6. Container information (`container.type`) aids downstream laboratory processing
+7. Validate the instance against `PraxisSpecimen` before transmission
+
+### Use Cases
+
+1. **Venous blood for laboratory analysis:** SNOMED-CT `122555007` (Venous blood specimen) + LDT `EDTA-Blut` (EDTA-Blut), collected by venipuncture, in EDTA tube.
+2. **Urine culture:** SNOMED-CT `122575003` (Urine specimen) + LDT `Urin-MSU` (Mittelstrahl urine), mid-stream collection.
+3. **Throat swab for microbiology:** SNOMED-CT `258529004` (Throat swab), collected by swab technique from pharynx.
+
+See examples: `example-specimen-blut-edta`, `example-specimen-urin-msu`, `example-specimen-rachenabstrich`.
 
 ## Note on Resource Choice
 
