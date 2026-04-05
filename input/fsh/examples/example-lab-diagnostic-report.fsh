@@ -74,6 +74,23 @@ Usage: #example
 * valueCodeableConcept.coding[0].code = #112283007
 * valueCodeableConcept.coding[0].display = "Escherichia coli"
 
+// --- Hilfsobservation: Antibiogramm Ciprofloxacin (Urinkultur) ---
+Instance: lab-obs-example-antibiogramm-cipro
+InstanceOf: PraxisLabObservation
+Title: "Lab Observation: Antibiogramm Ciprofloxacin"
+Description: "Antibiogramm-Observation fuer Ciprofloxacin-Empfindlichkeit. LOINC 18907-0."
+Usage: #example
+* status = #final
+* category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
+* code.coding[loinc].system = "http://loinc.org"
+* code.coding[loinc].code = #18907-0
+* code.coding[loinc].display = "Ciprofloxacin [Susceptibility]"
+* subject = Reference(example-patient)
+* effectiveDateTime = "2026-04-02"
+* valueCodeableConcept.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
+* valueCodeableConcept.coding[0].code = #S
+* valueCodeableConcept.coding[0].display = "Susceptible"
+
 // --- Beispiel 2: Mikrobiologie Urinkultur ---
 // Kategorie MB, Nachweis E. coli, Ergebnis als Freitext (conclusion) + Keimnachweis-Observation
 Instance: example-lab-dr-urinkultur
@@ -90,6 +107,7 @@ Usage: #example
 * effectiveDateTime = "2026-04-02"
 * result[0] = Reference(lab-obs-example-leukozyten-urin)
 * result[1] = Reference(lab-obs-example-ecoli-keim)
+* result[2] = Reference(lab-obs-example-antibiogramm-cipro)
 * specimen[0] = Reference(example-specimen-urin-msu)
 * conclusion = "E. coli >10^5, sensibel auf Ciprofloxacin und Nitrofurantoin"
 
@@ -199,5 +217,23 @@ Usage: #example
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05"
 * issued = "2026-04-05T14:00:00+02:00"
+* result[0] = Reference(lab-obs-example-hba1c)
+* specimen[0] = Reference(example-specimen-blut-edta)
+
+// --- Beispiel 7: Kumulativbefund HbA1c Juli ---
+// Dritter Messpunkt im Kumulativbefund-Pattern — vervollstaendigt die Quartalsverlaufsreihe
+Instance: example-lab-dr-hba1c-q3
+InstanceOf: PraxisLabDiagnosticReport
+Title: "Lab DiagnosticReport: HbA1c Kumulativbefund Juli 2026"
+Description: "Kumulativbefund HbA1c Juli 2026. Dritter Messpunkt — zeigt Quartalsverlauf HbA1c Q1/Q2/Q3. LOINC 4548-4."
+Usage: #example
+* status = #final
+* category[lab] = http://terminology.hl7.org/CodeSystem/v2-0074#LAB
+* code.coding[0].system = "http://loinc.org"
+* code.coding[0].code = #4548-4
+* code.coding[0].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* subject = Reference(example-patient)
+* effectiveDateTime = "2026-07-10"
+* issued = "2026-07-10T12:00:00+02:00"
 * result[0] = Reference(lab-obs-example-hba1c)
 * specimen[0] = Reference(example-specimen-blut-edta)

@@ -16,8 +16,8 @@
 
 Invariant: praxis-lab-dr-category
 Description: "Mindestens eine der bekannten Kategorien (LAB, MB, PAT) muss gesetzt sein."
-Expression: "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/v2-0074').where(code = 'LAB' or code = 'MB' or code = 'PAT').exists()"
-Severity: #warning
+Expression: "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/v2-0074' and (code = 'LAB' or code = 'MB' or code = 'PAT')).exists()"
+Severity: #error
 
 Profile: PraxisLabDiagnosticReport
 Parent: DiagnosticReport
