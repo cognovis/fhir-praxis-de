@@ -4,9 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **fpde-oz2**: Complete KvdtScheinuntergruppeCS with all 21 KBV V1.02 codes
+
+### Miscellaneous
+
+- Bump version to 0.27.0
+
+## [0.27.0] - 2026-04-05
+
+### Miscellaneous
+
+- Update changelog
+
 ### Merge
 
 - Resolve conflict in profiles.md (keep both FPDEPatient/GKV and PraxisSpecimen sections)
+- Worktree-bead-fpde-d5d
 
 ## [0.26.0] - 2026-04-05
 
