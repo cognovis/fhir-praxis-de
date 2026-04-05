@@ -4,6 +4,41 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-ria**: Address review findings iteration 1 — CHANGELOG ordering
+- **fpde-ria**: Address review findings iteration 2 — add 0.19.0 section, clear stale unreleased
+- **fpde-ria**: Correct CHANGELOG — ServiceRequest (not DeviceRequest), restore 0.19.0 items
+
+### Documentation
+
+- Update feature documentation for fpde-ria
+
+### Features
+
+- **fpde-ria**: Green — add medication extensions, CodeSystems, NamingSystem + version bump
+
+### Test
+
+- **fpde-ria**: Red — add FSH definitions for 8 medication artifacts (pre-compile)
+
+## [0.19.0] - 2026-04-04
+
+### Documentation
+
+- Update workshop presentation with custom device order extensions and dental lab orders
+
+### Features
+
+- Add custom device order extensions (ManufacturingDeadline, DigitalWorkflow)
+
+### Miscellaneous
+
+- Bump version to 0.18.1
+- Bump version to 0.19.0
+
+## [0.18.1] - 2026-04-04
+
 ### Documentation
 
 - Add DMEA 2026 materials and strategic IG analysis docs
@@ -11,6 +46,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.18.0
+- Update changelog
 
 ## [0.18.0] - 2026-04-04
 

@@ -223,6 +223,26 @@ Codes für die Klassifizierung von Anamneseboegen (Fragebögen zur Erfassung der
 | `follow-up` | Verlaufsanamnese | Wiederholte Anamnese im Behandlungsverlauf |
 | `fachspezifisch` | Fachspezifisch | Fachspezifischer Anamnesebogen |
 
+### RezeptTypCS — Rezepttyp
+
+Typ des Rezepts in der ambulanten Versorgung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `gkv` | GKV-Rezept | Rezept für gesetzlich versicherte Patienten (Muster 16) |
+| `privat` | Privatrezept | Rezept für privat versicherte Patienten |
+| `btm` | BTM-Rezept | Betäubungsmittelrezept nach BtMVV |
+| `t-rezept` | T-Rezept | Thalidomid-Rezept (THALIX/Lenalidomid) |
+
+### MedikationKategorieCS — Medikationskategorie
+
+Kategorie der Medikation hinsichtlich der Einnahmedauer.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `dauermedikation` | Dauermedikation | Medikament wird dauerhaft eingenommen |
+| `bedarfsmedikation` | Bedarfsmedikation | Medikament wird nur bei Bedarf eingenommen |
+
 ## External CodeSystems
 
 This IG also references the following external CodeSystems from the KBV Schlüsseltabellen (`kbv.all.st-combined`):

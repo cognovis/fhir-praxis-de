@@ -74,6 +74,16 @@ Betriebsstättennummer — the official German facility/site number assigned by 
 
 **Usage:** Organization.identifier for a practice site/facility to establish its official registration with the German insurance system.
 
+## Diagnosis Identifiers
+
+### scheindiagnosen — Scheindiagnosen Identifier System
+
+Identifier-System für Scheindiagnosen (Diagnosen auf Abrechnungsscheinen). Dient der PVS-internen Verfolgung von Diagnosepositionen, die einem Schein zugeordnet sind.
+
+**Canonical URI:** `https://fhir.cognovis.de/praxis/NamingSystem/scheindiagnosen`
+
+**Usage:** Condition.identifier to link diagnosis records to billing forms (Scheine) for reverse-path synchronization.
+
 ## Architecture Notes
 
 All NamingSystems are defined with `kind: identifier` and use URI-based uniqueIds. They serve as metadata for the FHIR adapter to:
