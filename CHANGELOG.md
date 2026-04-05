@@ -6,7 +6,38 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
+- Bump version to 0.25.1
+
+### Merge
+
+- Resolve conflict — keep PraxisDevice + LDT/ProcedureAmbulantDE/PraxisSpecimen docs from main
+
+## [0.25.1] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-g25**: Address review findings iteration 1
+- **fpde-g25**: Address review findings iteration 2 — complete scenario examples
+- **fpde-g25**: Address review panel findings — preferred URI, LOINC 6690-2, doc wording
+
+### Documentation
+
+- Update IG documentation for PraxisSpecimen profile (fpde-csw)
+- Update feature documentation for fpde-g25
+
+### Features
+
+- **fpde-g25**: Green — NamingSystems ldt-testkennungen + ldt-auftragsnummer
+- **fpde-g25**: Green — ValueSet LabInterpretation using v3-ObservationInterpretation
+
+### Miscellaneous
+
 - Bump version to 0.25.0
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-g25
 
 ## [0.25.0] - 2026-04-05
 
@@ -47,6 +78,27 @@ All notable changes to this project will be documented in this file.
 
 ## [0.23.0] - 2026-04-05
 
+### Bug Fixes
+
+- **fpde-2te**: Address review findings iteration 1
+- **fpde-2te**: Address review findings iteration 1 (FK 8402 context, ASCII umlauts, FK 8410 out-of-scope note)
+- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
+- **fpde-1q9**: Address review findings iteration 1
+- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
+- **fpde-76c**: Address review findings iteration 1
+- **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
+
+### Documentation
+
+- Update feature documentation for fpde-2te (PraxisDevice profile + gdt-device-id NamingSystem)
+- Update feature documentation for fpde-1q9
+
+### Features
+
+- **fpde-2te**: Green — PraxisDevice profile for medical devices/lab analyzers
+- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
+- **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
+
 ### Miscellaneous
 
 - Bump version to 0.22.0
@@ -57,30 +109,16 @@ All notable changes to this project will be documented in this file.
 
 - Worktree-bead-fpde-76c
 
+### Test
+
+- **fpde-2te**: Red — Device example references PraxisDevice profile (not yet defined)
+- **fpde-1q9**: Red — validate PraxisCondition profile
+- **fpde-76c**: Red — Procedure profile not yet defined
+
 ## [0.22.0] - 2026-04-05
-
-### Bug Fixes
-
-- **fpde-g25**: Address review findings iteration 1
-- **fpde-g25**: Address review findings iteration 2 — complete scenario examples
-- **fpde-g25**: Address review panel findings — preferred URI, LOINC 6690-2, doc wording
-- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
-- **fpde-1q9**: Address review findings iteration 1
-- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
-- **fpde-76c**: Address review findings iteration 1
-- **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
-
-### Documentation
-
-- Update feature documentation for fpde-g25
-- Update feature documentation for fpde-1q9
 
 ### Features
 
-- **fpde-g25**: Green — NamingSystems ldt-testkennungen + ldt-auftragsnummer
-- **fpde-g25**: Green — ValueSet LabInterpretation using v3-ObservationInterpretation
-- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
-- **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
 - **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
 
 ### Miscellaneous
@@ -93,8 +131,6 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 
-- **fpde-1q9**: Red — validate PraxisCondition profile
-- **fpde-76c**: Red — Procedure profile not yet defined
 - **fpde-98l**: Red — xDT NamingSystems draft with validation error
 
 ## [0.21.0] - 2026-04-05
