@@ -769,7 +769,7 @@ When capturing lab reports in a PVS:
 - **CBC (Blutbild) Einzelbefund:** `example-lab-dr-blutbild` — LAB category, LOINC 58410-2, final status, EDTA blood specimen
 - **Urine Culture Mikrobiologie:** `example-lab-dr-urinkultur` — MB category, E. coli with antibiogram, final status
 - **Skin Histology Pathologie:** `example-lab-dr-histologie` — PAT category, basal cell carcinoma diagnosis, PDF report, final status
-- **HbA1c Preliminary:** `example-lab-dr-preliminary` — LAB category, preliminary status (result not yet complete)
+- **Kreatinin Preliminary:** `example-lab-dr-preliminary` — LAB category, preliminary status (result not yet complete)
 - **HbA1c Kumulativbefund Q1:** `example-lab-dr-hba1c-jan` — LAB category, final, Q1 2026 date
 - **HbA1c Kumulativbefund Q2:** `example-lab-dr-hba1c-apr` — LAB category, final, Q2 2026 date (demonstrates trend pattern)
 - **HbA1c Kumulativbefund Q3:** `example-lab-dr-hba1c-q3` — LAB category, final, Q3 2026 date (completes quarterly series)

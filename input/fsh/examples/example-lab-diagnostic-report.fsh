@@ -107,6 +107,7 @@ Usage: #example
 * code.coding[0].display = "Bacteria identified in Urine by Culture"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
+* issued = "2026-04-02T16:00:00+02:00"
 * result[0] = Reference(lab-obs-example-ecoli-keim)
 * result[1] = Reference(lab-obs-example-antibiogramm-cipro)
 * specimen[0] = Reference(example-specimen-urin-msu)
@@ -161,6 +162,7 @@ Usage: #example
 * code.coding[0].display = "Pathology Synoptic report"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-03"
+* issued = "2026-04-03T15:00:00+02:00"
 * result[0] = Reference(lab-obs-example-bcc-histologie)
 * specimen[0] = Reference(example-specimen-biopsy-haut)
 * resultsInterpreter[0] = Reference(example-practitioner)
