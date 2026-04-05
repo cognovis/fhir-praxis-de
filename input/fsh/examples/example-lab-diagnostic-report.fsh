@@ -93,6 +93,8 @@ Usage: #example
 
 // --- Beispiel 2: Mikrobiologie Urinkultur ---
 // Kategorie MB, Nachweis E. coli, Ergebnis als Freitext (conclusion) + Keimnachweis-Observation
+// result[] enthaelt nur kulturspezifische Observations (Keim + Antibiogramm),
+// kein Urinalyse-Screening-Ergebnis (gehoert in separaten LAB-Befund).
 Instance: example-lab-dr-urinkultur
 InstanceOf: PraxisLabDiagnosticReport
 Title: "Lab DiagnosticReport: Urinkultur (Mikrobiologie)"
@@ -105,9 +107,8 @@ Usage: #example
 * code.coding[0].display = "Bacteria identified in Urine by Culture"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
-* result[0] = Reference(lab-obs-example-leukozyten-urin)
-* result[1] = Reference(lab-obs-example-ecoli-keim)
-* result[2] = Reference(lab-obs-example-antibiogramm-cipro)
+* result[0] = Reference(lab-obs-example-ecoli-keim)
+* result[1] = Reference(lab-obs-example-antibiogramm-cipro)
 * specimen[0] = Reference(example-specimen-urin-msu)
 * conclusion = "E. coli >10^5, sensibel auf Ciprofloxacin und Nitrofurantoin"
 
@@ -181,11 +182,79 @@ Usage: #example
 * code.coding[0].code = #2160-0
 * code.coding[0].display = "Creatinine [Mass/volume] in Serum or Plasma"
 * subject = Reference(example-patient)
-* effectiveDateTime = "2026-04-05"
+* effectiveDateTime = "2026-04-03"
 * issued = "2026-04-03T11:30:00+02:00"
 
+// --- Hilfsobservation: HbA1c Januar 2026 ---
+// Separate Observation pro Messzeitpunkt — jede Instanz hat eigenes Datum und Messwert
+Instance: lab-obs-example-hba1c-jan
+InstanceOf: PraxisLabObservation
+Title: "Lab Observation: HbA1c Januar 2026 (7.8%)"
+Description: "HbA1c-Messung Januar 2026. Ausgangswert 7.8% (erhoeht). Separate Instanz fuer Kumulativbefund-Pattern."
+Usage: #example
+* status = #final
+* category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
+* code.coding[loinc].system = "http://loinc.org"
+* code.coding[loinc].code = #4548-4
+* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* subject = Reference(example-patient)
+* effectiveDateTime = "2026-01-15T08:30:00+01:00"
+* valueQuantity.value = 7.8
+* valueQuantity.unit = "%"
+* valueQuantity.system = "http://unitsofmeasure.org"
+* valueQuantity.code = #%
+* interpretation.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
+* interpretation.coding[0].code = #H
+* interpretation.coding[0].display = "High"
+* specimen = Reference(example-specimen-blut-edta)
+
+// --- Hilfsobservation: HbA1c April 2026 ---
+Instance: lab-obs-example-hba1c-apr
+InstanceOf: PraxisLabObservation
+Title: "Lab Observation: HbA1c April 2026 (7.2%)"
+Description: "HbA1c-Messung April 2026. Verbesserter Wert 7.2% nach Therapieanpassung. Separate Instanz fuer Kumulativbefund-Pattern."
+Usage: #example
+* status = #final
+* category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
+* code.coding[loinc].system = "http://loinc.org"
+* code.coding[loinc].code = #4548-4
+* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* subject = Reference(example-patient)
+* effectiveDateTime = "2026-04-05T08:30:00+02:00"
+* valueQuantity.value = 7.2
+* valueQuantity.unit = "%"
+* valueQuantity.system = "http://unitsofmeasure.org"
+* valueQuantity.code = #%
+* interpretation.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
+* interpretation.coding[0].code = #H
+* interpretation.coding[0].display = "High"
+* specimen = Reference(example-specimen-blut-edta)
+
+// --- Hilfsobservation: HbA1c Juli 2026 ---
+Instance: lab-obs-example-hba1c-q3
+InstanceOf: PraxisLabObservation
+Title: "Lab Observation: HbA1c Juli 2026 (6.9%)"
+Description: "HbA1c-Messung Juli 2026. Weiterer Rueckgang auf 6.9% — nahezu Zielbereich. Separate Instanz fuer Kumulativbefund-Pattern."
+Usage: #example
+* status = #final
+* category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
+* code.coding[loinc].system = "http://loinc.org"
+* code.coding[loinc].code = #4548-4
+* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* subject = Reference(example-patient)
+* effectiveDateTime = "2026-07-10T08:30:00+02:00"
+* valueQuantity.value = 6.9
+* valueQuantity.unit = "%"
+* valueQuantity.system = "http://unitsofmeasure.org"
+* valueQuantity.code = #%
+* interpretation.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
+* interpretation.coding[0].code = #H
+* interpretation.coding[0].display = "High"
+* specimen = Reference(example-specimen-blut-edta)
+
 // --- Beispiel 5: Kumulativbefund HbA1c Januar ---
-// Zeigt das "separate DiagnosticReports pro Datum"-Pattern fuer Kumulativbefunde
+// Zeigt das "separate DiagnosticReports pro Datum"-Pattern fuer Kumulativbefunde.
+// WICHTIG: Jeder Report referenziert eine eigene Observation mit passendem Datum und Messwert.
 Instance: example-lab-dr-hba1c-jan
 InstanceOf: PraxisLabDiagnosticReport
 Title: "Lab DiagnosticReport: HbA1c Kumulativbefund Januar 2026"
@@ -199,7 +268,7 @@ Usage: #example
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-01-15"
 * issued = "2026-01-15T14:00:00+01:00"
-* result[0] = Reference(lab-obs-example-hba1c)
+* result[0] = Reference(lab-obs-example-hba1c-jan)
 * specimen[0] = Reference(example-specimen-blut-edta)
 
 // --- Beispiel 6: Kumulativbefund HbA1c April ---
@@ -217,7 +286,7 @@ Usage: #example
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05"
 * issued = "2026-04-05T14:00:00+02:00"
-* result[0] = Reference(lab-obs-example-hba1c)
+* result[0] = Reference(lab-obs-example-hba1c-apr)
 * specimen[0] = Reference(example-specimen-blut-edta)
 
 // --- Beispiel 7: Kumulativbefund HbA1c Juli ---
@@ -235,5 +304,5 @@ Usage: #example
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-07-10"
 * issued = "2026-07-10T12:00:00+02:00"
-* result[0] = Reference(lab-obs-example-hba1c)
+* result[0] = Reference(lab-obs-example-hba1c-q3)
 * specimen[0] = Reference(example-specimen-blut-edta)
