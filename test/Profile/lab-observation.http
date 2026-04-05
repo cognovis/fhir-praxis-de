@@ -1,0 +1,249 @@
+### Validate PraxisLabObservation — HbA1c quantitativ (LOINC + LDT, interpretation H)
+# @name validate-lab-obs-hba1c
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: dual coding LOINC+LDT, valueQuantity, referenceRange low/high UCUM, interpretation H, specimen reference
+POST http://localhost:8080/fhir/Observation/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation"]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "4548-4",
+        "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+      },
+      {
+        "system": "https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen",
+        "code": "03034000",
+        "display": "HbA1c"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "effectiveDateTime": "2026-04-05T08:30:00+02:00",
+  "valueQuantity": {
+    "value": 6.1,
+    "unit": "%",
+    "system": "http://unitsofmeasure.org",
+    "code": "%"
+  },
+  "interpretation": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+          "code": "H",
+          "display": "High"
+        }
+      ]
+    }
+  ],
+  "referenceRange": [
+    {
+      "low": {
+        "value": 4.0,
+        "unit": "%",
+        "system": "http://unitsofmeasure.org",
+        "code": "%"
+      },
+      "high": {
+        "value": 6.0,
+        "unit": "%",
+        "system": "http://unitsofmeasure.org",
+        "code": "%"
+      }
+    }
+  ],
+  "specimen": { "reference": "Specimen/example-specimen-blut-edta" }
+}
+
+?? status == 200
+
+
+### Validate PraxisLabObservation — Leukozyten Urin qualitativ (LOINC + LDT, valueString, interpretation N)
+# @name validate-lab-obs-leukozyten-urin
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: dual coding LOINC+LDT, valueString (qualitativ), no referenceRange, interpretation N, specimen reference
+POST http://localhost:8080/fhir/Observation/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation"]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "5799-2",
+        "display": "Leukocytes [Presence] in Urine by Test strip"
+      },
+      {
+        "system": "https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen",
+        "code": "03059000",
+        "display": "Leukozyten (Urin)"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "effectiveDateTime": "2026-04-05T09:15:00+02:00",
+  "valueString": "negativ",
+  "interpretation": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+          "code": "N",
+          "display": "Normal"
+        }
+      ]
+    }
+  ],
+  "specimen": { "reference": "Specimen/example-specimen-urin-msu" }
+}
+
+?? status == 200
+
+
+### Validate PraxisLabObservation — Praxisspezifischer Schnelltest LDT-only (kein LOINC)
+# @name validate-lab-obs-ldt-only
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: LDT-only coding (LOINC absent), valueQuantity mg/dL, referenceRange, interpretation N, kein specimen
+POST http://localhost:8080/fhir/Observation/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation"]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen",
+        "code": "03302000",
+        "display": "Praxisspezifischer Schnelltest XY"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "effectiveDateTime": "2026-04-05T10:00:00+02:00",
+  "valueQuantity": {
+    "value": 42.0,
+    "unit": "mg/dL",
+    "system": "http://unitsofmeasure.org",
+    "code": "mg/dL"
+  },
+  "interpretation": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+          "code": "N",
+          "display": "Normal"
+        }
+      ]
+    }
+  ],
+  "referenceRange": [
+    {
+      "low": {
+        "value": 10.0,
+        "unit": "mg/dL",
+        "system": "http://unitsofmeasure.org",
+        "code": "mg/dL"
+      },
+      "high": {
+        "value": 50.0,
+        "unit": "mg/dL",
+        "system": "http://unitsofmeasure.org",
+        "code": "mg/dL"
+      }
+    }
+  ]
+}
+
+?? status == 200
+
+
+### Validate PraxisLabObservation — Invalid: kein coding (Invariant praxis-lab-obs-code muss scheitern)
+# @name validate-lab-obs-no-coding
+# Expected: OperationOutcome mit Fehler (Invariant erfordert mind. LOINC oder LDT-Coding)
+POST http://localhost:8080/fhir/Observation/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation"]
+  },
+  "status": "final",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/observation-category",
+          "code": "laboratory"
+        }
+      ]
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "365616006",
+        "display": "Some SNOMED code (no LOINC, no LDT)"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "effectiveDateTime": "2026-04-05T10:00:00+02:00",
+  "valueString": "positiv"
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"

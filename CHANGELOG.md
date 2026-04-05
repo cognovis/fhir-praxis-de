@@ -12,6 +12,7 @@ All notable changes to this project will be documented in this file.
 - **fpde-orv**: Correct resultsInterpreter comment to match constraint
 - **fpde-orv**: Address review panel findings iteration 1
 - **fpde-orv**: Address review panel findings iteration 2
+- **fpde-4zh**: Address review findings iteration 2 — add httpyac profile test
 
 ### Documentation
 
