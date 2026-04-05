@@ -12,8 +12,8 @@ Usage: #example
 * name[0].given[0] = "Anna"
 * name[1].use = #maiden
 * name[1].family = "Schmidt"
-* name[1]._family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-own-name"
-* name[1]._family.extension[0].valueString = "Schmidt"
+* name[1].family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-own-name"
+* name[1].family.extension[0].valueString = "Schmidt"
 * birthDate = "1985-04-22"
 
 Instance: example-patient-ohne-geburtsname
