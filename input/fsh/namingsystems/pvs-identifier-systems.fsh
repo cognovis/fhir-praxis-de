@@ -104,3 +104,16 @@ Usage: #definition
 * uniqueId[1].type = #uri
 * uniqueId[1].value = "http://fhir.de/sid/dkgev/bsnr"
 * uniqueId[1].preferred = false
+
+Instance: scheindiagnosen
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "Scheindiagnosen"
+* status = #draft
+* kind = #identifier
+* date = "2026-04-05"
+* publisher = "cognovis GmbH"
+* description = "Identifier-System fuer Scheindiagnosen (Condition.identifier)"
+* uniqueId[0].type = #uri
+* uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/scheindiagnosen"
+* uniqueId[0].preferred = true

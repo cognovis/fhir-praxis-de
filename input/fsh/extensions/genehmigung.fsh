@@ -1,3 +1,14 @@
+// ============================================================================
+// Sub-Extension Convention (ADR)
+// Sub-extensions are defined with relative names inside the parent extension
+// definition (e.g., leistungsbereich, genehmigungsdatum, ablaufdatum).
+// Adapter code addresses them via the full canonical URL of the parent plus
+// a '#' fragment, e.g.:
+//   https://fhir.cognovis.de/praxis/StructureDefinition/genehmigung-eintrag#ablaufdatum
+// This is standard FHIR sub-extension addressing and requires no changes to
+// this file. PVS-specific adapter code handles the full URL construction.
+// ============================================================================
+
 Extension: GenehmigungenExt
 Id: genehmigung-eintrag
 Title: "Genehmigungseintrag"
