@@ -77,3 +77,48 @@ Usage: #example
 * collection.bodySite.coding[0].system = "http://snomed.info/sct"
 * collection.bodySite.coding[0].code = #54066008
 * collection.bodySite.coding[0].display = "Pharyngeal structure"
+
+
+// Instanz 4: Variante 5 — Collection ohne method (nur collectedDateTime + bodySite)
+// Deckt ab: method ist optional, nur Zeitstempel und Entnahmestelle reichen
+Instance: example-specimen-serum-nomethod
+InstanceOf: PraxisSpecimen
+Title: "Specimen: Serum (ohne collection.method)"
+Description: "Serumprobe mit collectedDateTime und bodySite, aber ohne collection.method — validiert korrekt da method optional."
+Usage: #example
+
+* identifier[0].system = "https://labor-beispiel.de/proben-id"
+* identifier[0].value = "SE-2026-00150"
+
+* type.coding[snomed].system = "http://snomed.info/sct"
+* type.coding[snomed].code = #119361006
+* type.coding[snomed].display = "Plasma specimen"
+
+* subject = Reference(example-patient)
+
+* collection.collectedDateTime = "2026-04-05T11:00:00+02:00"
+* collection.bodySite.coding[0].system = "http://snomed.info/sct"
+* collection.bodySite.coding[0].code = #368209003
+* collection.bodySite.coding[0].display = "Right arm"
+// collection.method bewusst weggelassen — Variante 5: Collection ohne method
+
+
+// Instanz 5: Variante 6 — Observation referenziert Specimen
+// Deckt ab: referentielle Integritaet Observation.specimen → PraxisSpecimen
+Instance: example-observation-hb-specimen-ref
+InstanceOf: Observation
+Title: "Observation: Haemoglobin mit Specimen-Referenz"
+Description: "Haemoglobin-Messung mit Referenz auf example-specimen-blut-edta — prueft referentielle Integritaet Observation.specimen."
+Usage: #example
+
+* status = #final
+* code.coding[0].system = "http://loinc.org"
+* code.coding[0].code = #718-7
+* code.coding[0].display = "Hemoglobin [Mass/volume] in Blood"
+* subject = Reference(example-patient)
+* effectiveDateTime = "2026-04-05T08:30:00+02:00"
+* valueQuantity.value = 14.2
+* valueQuantity.unit = "g/dL"
+* valueQuantity.system = "http://unitsofmeasure.org"
+* valueQuantity.code = #g/dL
+* specimen = Reference(example-specimen-blut-edta)

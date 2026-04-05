@@ -277,7 +277,7 @@ The `PraxisSpecimen` profile extends the base FHIR `Specimen` resource to standa
 |---------|-------------|-------------------|
 | `identifier` | 0..* | Optional; labs may assign their own specimen identifiers using system-specific URLs |
 | `type` | 1..1 | MS; sliced by coding system (SNOMED-CT + optional LDT) |
-| `type.coding[snomed]` | 1..1 | MS; SNOMED-CT coding (required) using [ProbenmaterialSnomedVS](ValueSet-probenmaterial-snomed.html) |
+| `type.coding[snomed]` | 1..1 | MS; SNOMED-CT coding (extensible) using [ProbenmaterialSnomedVS](ValueSet-probenmaterial-snomed.html) |
 | `type.coding[snomed].system` | 1..1 | Fixed: `http://snomed.info/sct` |
 | `type.coding[snomed].code` | 1..1 | MS; SNOMED-CT code for specimen material |
 | `type.coding[ldt]` | 0..1 | Optional; LDT FK 8428 material designation using [LdtMaterialbezeichnungCS](CodeSystem-ldt-materialbezeichnung.html) |
@@ -310,7 +310,7 @@ Different laboratories can have different URL structures; there is no registry o
 
 ### Material Type Coding: SNOMED-CT + LDT
 
-**SNOMED-CT** (required) provides internationally recognized coding for specimen types:
+**SNOMED-CT** (extensible) provides internationally recognized coding for specimen types:
 - `122555007` — Venous blood specimen
 - `122575003` — Urine specimen
 - `258529004` — Throat swab

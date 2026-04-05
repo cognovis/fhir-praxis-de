@@ -1,6 +1,6 @@
 // LDT Materialbezeichnung CodeSystem (FK 8428)
 // Minimale Definition der haeufigsten Probenmaterial-Bezeichnungen gemaess LDT3-Schluessel.
-// Quelle: KBV LDT3 Spezifikation (Felkennung 8428 — Materialbezeichnung)
+// Quelle: KBV LDT3 Spezifikation (Feldkennung 8428 — Materialbezeichnung)
 
 CodeSystem: LdtMaterialbezeichnungCS
 Id: ldt-materialbezeichnung

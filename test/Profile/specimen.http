@@ -1,0 +1,189 @@
+### Validate PraxisSpecimen — Venaeses Blut EDTA (SNOMED + LDT dual coding)
+# @name validate-specimen-blut-edta
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: dual coding SNOMED+LDT, identifier, collection.method, container.type
+POST http://localhost:8080/fhir/Specimen/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Specimen",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen"]
+  },
+  "identifier": [
+    {
+      "system": "https://labor-beispiel.de/proben-id",
+      "value": "BL-2026-00147"
+    }
+  ],
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "122555007",
+        "display": "Venous blood specimen"
+      },
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung",
+        "code": "EDTA-Blut",
+        "display": "EDTA-Blut"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "collection": {
+    "collectedDateTime": "2026-04-05T08:30:00+02:00",
+    "method": {
+      "coding": [{ "system": "http://snomed.info/sct", "code": "28520004", "display": "Venipuncture" }]
+    }
+  },
+  "container": [
+    {
+      "type": {
+        "coding": [{ "system": "http://snomed.info/sct", "code": "702281005", "display": "EDTA tube" }]
+      }
+    }
+  ]
+}
+
+?? status == 200
+
+
+### Validate PraxisSpecimen — Urin MSU (SNOMED only, no LDT)
+# @name validate-specimen-urin-msu
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: SNOMED-only coding (LDT optional), identifier present
+POST http://localhost:8080/fhir/Specimen/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Specimen",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen"]
+  },
+  "identifier": [
+    {
+      "system": "https://labor-beispiel.de/proben-id",
+      "value": "UR-2026-00148"
+    }
+  ],
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "122575003",
+        "display": "Urine specimen"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "collection": {
+    "collectedDateTime": "2026-04-05T09:15:00+02:00",
+    "method": {
+      "coding": [{ "system": "http://snomed.info/sct", "code": "38034000", "display": "Midstream clean-catch collection of urine" }]
+    }
+  }
+}
+
+?? status == 200
+
+
+### Validate PraxisSpecimen — Rachenabstrich (kein identifier)
+# @name validate-specimen-rachenabstrich
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: missing identifier (optional 0..*), bodySite present
+POST http://localhost:8080/fhir/Specimen/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Specimen",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen"]
+  },
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "258529004",
+        "display": "Throat swab"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "collection": {
+    "collectedDateTime": "2026-04-05T10:00:00+02:00",
+    "method": {
+      "coding": [{ "system": "http://snomed.info/sct", "code": "257261003", "display": "Swab" }]
+    },
+    "bodySite": {
+      "coding": [{ "system": "http://snomed.info/sct", "code": "54066008", "display": "Pharyngeal structure" }]
+    }
+  }
+}
+
+?? status == 200
+
+
+### Validate PraxisSpecimen — Serum ohne collection.method (Variante 5)
+# @name validate-specimen-no-method
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: collection without method — method is optional, only collectedDateTime + bodySite
+POST http://localhost:8080/fhir/Specimen/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Specimen",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen"]
+  },
+  "identifier": [
+    {
+      "system": "https://labor-beispiel.de/proben-id",
+      "value": "SE-2026-00150"
+    }
+  ],
+  "type": {
+    "coding": [
+      {
+        "system": "http://snomed.info/sct",
+        "code": "119361006",
+        "display": "Plasma specimen"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "collection": {
+    "collectedDateTime": "2026-04-05T11:00:00+02:00",
+    "bodySite": {
+      "coding": [{ "system": "http://snomed.info/sct", "code": "368209003", "display": "Right arm" }]
+    }
+  }
+}
+
+?? status == 200
+
+
+### Validate PraxisSpecimen — Invalid: fehlende type (muss scheitern)
+# @name validate-specimen-missing-type
+# Expected: OperationOutcome mit Fehler (type ist 1..1 Pflichtfeld)
+POST http://localhost:8080/fhir/Specimen/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Specimen",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen"]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "collection": {
+    "collectedDateTime": "2026-04-05T08:00:00+02:00"
+  }
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"
