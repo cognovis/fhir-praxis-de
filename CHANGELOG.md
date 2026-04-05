@@ -2,21 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.23.0] - 2026-04-05
 
 ### Miscellaneous
 
 - Bump version to 0.22.0
+- Update changelog
+- Bump version to 0.23.0
+
+### Merge
+
+- Worktree-bead-fpde-76c
 
 ## [0.22.0] - 2026-04-05
 
 ### Bug Fixes
 
+- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
+- **fpde-1q9**: Address review findings iteration 1
+- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
 - **fpde-76c**: Address review findings iteration 1
 - **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
 
+### Documentation
+
+- Update feature documentation for fpde-1q9
+
 ### Features
 
+- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
 - **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
 - **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
 
@@ -30,6 +44,7 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 
+- **fpde-1q9**: Red — validate PraxisCondition profile
 - **fpde-76c**: Red — Procedure profile not yet defined
 - **fpde-98l**: Red — xDT NamingSystems draft with validation error
 
