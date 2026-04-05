@@ -22,11 +22,11 @@ Usage: #example
 * collection.collectedDateTime = "2026-04-05T08:30:00+02:00"
 * collection.method.coding[0].system = "http://snomed.info/sct"
 * collection.method.coding[0].code = #28520004
-* collection.method.coding[0].display = "Venipuncture"
+* collection.method.coding[0].display = "Venipuncture for blood test"
 
 * container[0].type.coding[0].system = "http://snomed.info/sct"
-* container[0].type.coding[0].code = #702281005
-* container[0].type.coding[0].display = "EDTA tube"
+* container[0].type.coding[0].code = #706049005
+* container[0].type.coding[0].display = "Blood tube"
 
 
 // Instanz 2: Urin Mittelstrahl
@@ -47,12 +47,12 @@ Usage: #example
 
 * collection.collectedDateTime = "2026-04-05T09:15:00+02:00"
 * collection.method.coding[0].system = "http://snomed.info/sct"
-* collection.method.coding[0].code = #38034000
-* collection.method.coding[0].display = "Midstream clean-catch collection of urine"
+* collection.method.coding[0].code = #225271002
+* collection.method.coding[0].display = "Collection of mid-stream specimen of urine"
 
 * container[0].type.coding[0].system = "http://snomed.info/sct"
 * container[0].type.coding[0].code = #706054001
-* container[0].type.coding[0].display = "Urine container"
+* container[0].type.coding[0].display = "Urine specimen container"
 
 
 // Instanz 3: Rachenabstrich
@@ -65,8 +65,8 @@ Usage: #example
 // Kein identifier — Labor hat noch keinen Proben-ID vergeben
 
 * type.coding[snomed].system = "http://snomed.info/sct"
-* type.coding[snomed].code = #258529004
-* type.coding[snomed].display = "Throat swab"
+* type.coding[snomed].code = #119389009
+* type.coding[snomed].display = "Specimen from throat"
 
 * subject = Reference(example-patient)
 
@@ -76,7 +76,7 @@ Usage: #example
 * collection.method.coding[0].display = "Swab"
 * collection.bodySite.coding[0].system = "http://snomed.info/sct"
 * collection.bodySite.coding[0].code = #54066008
-* collection.bodySite.coding[0].display = "Pharyngeal structure"
+* collection.bodySite.coding[0].display = "Pharynx"
 
 
 // Instanz 4: Variante 5 — Collection ohne method (nur collectedDateTime + bodySite)
@@ -99,7 +99,7 @@ Usage: #example
 * collection.collectedDateTime = "2026-04-05T11:00:00+02:00"
 * collection.bodySite.coding[0].system = "http://snomed.info/sct"
 * collection.bodySite.coding[0].code = #368209003
-* collection.bodySite.coding[0].display = "Right arm"
+* collection.bodySite.coding[0].display = "Right upper arm"
 // collection.method bewusst weggelassen — Variante 5: Collection ohne method
 
 
@@ -114,7 +114,7 @@ Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #718-7
-* code.coding[0].display = "Hemoglobin [Mass/volume] in Blood"
+* code.coding[0].display = "Hämoglobin [Masse/Volumen] in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T08:30:00+02:00"
 * valueQuantity.value = 14.2

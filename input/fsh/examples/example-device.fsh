@@ -15,7 +15,7 @@ Usage: #example
 * manufacturer = "Roche Diagnostics GmbH"
 * modelNumber = "Cobas 6000"
 * version[0].value = "3.5.1"
-* type = http://snomed.info/sct#706689003 "Automated analyzer (physical object)"
+* type = http://snomed.info/sct#30234008 "Medical laboratory analyzer"
 
 Instance: example-schiller-at102
 InstanceOf: PraxisDevice

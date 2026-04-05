@@ -6,10 +6,10 @@ Usage: #definition
 * url = "https://fhir.cognovis.de/praxis/ConceptMap/scheinart-to-kvdt"
 * status = #active
 * experimental = false
-* sourceCanonical = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
-* targetCanonical = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
+* sourceCanonical = "https://fhir.cognovis.de/praxis/ValueSet/scheinart"
+* targetCanonical = "https://fhir.cognovis.de/praxis/ValueSet/kvdt-scheinuntergruppe"
 * group[0].source = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
-* group[0].target = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
+* group[0].target = "https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe"
 * group[0].element[0].code = #gkv
 * group[0].element[0].display = "GKV"
 * group[0].element[0].target[0].code = #00
@@ -48,9 +48,9 @@ Usage: #definition
 * url = "https://fhir.cognovis.de/praxis/ConceptMap/kvdt-to-scheinart"
 * status = #active
 * experimental = false
-* sourceCanonical = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
-* targetCanonical = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
-* group[0].source = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
+* sourceCanonical = "https://fhir.cognovis.de/praxis/ValueSet/kvdt-scheinuntergruppe"
+* targetCanonical = "https://fhir.cognovis.de/praxis/ValueSet/scheinart"
+* group[0].source = "https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe"
 * group[0].target = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
 // Primärfall → gkv
 * group[0].element[0].code = #00

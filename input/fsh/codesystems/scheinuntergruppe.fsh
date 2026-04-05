@@ -1,8 +1,8 @@
 CodeSystem: KvdtScheinuntergruppeCS
 Id: kvdt-scheinuntergruppe
 Title: "KVDT Scheinuntergruppe (KBV Schlüsseltabelle)"
-Description: "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabelle S_KBV_SCHEINART V1.02. Intentionaler lokaler Spiegel von KBV_CS_SFHIR_KBV_SCHEINART (OID 1.2.276.0.76.5.235): Die KBV-Canonical-URL wird bewusst als ^url verwendet, damit Codes systemkonform gegen das offizielle KBV-System validiert werden können."
-* ^url = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
+Description: "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabelle S_KBV_SCHEINART V1.02. Lokaler Spiegel von KBV_CS_SFHIR_KBV_SCHEINART (OID 1.2.276.0.76.5.235)."
+* ^url = "https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe"
 * ^version = "1.02"
 * ^identifier.system = "urn:ietf:rfc:3986"
 * ^identifier.value = "urn:oid:1.2.276.0.76.5.235"

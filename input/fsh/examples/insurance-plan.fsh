@@ -31,7 +31,7 @@ Usage: #example
 * type = http://terminology.hl7.org/CodeSystem/v3-ActCode#PUBLICPOL "public healthcare"
 * coverageArea[0].display = "Bayern"
 // GKV plan: Satzungsleistung PZR
-* plan[gkv].type = https://fhir.cognovis.de/praxis/CodeSystem/InsurancePlanType#gkv "GKV"
+* plan[gkv].type = https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type#gkv "GKV"
 * plan[gkv].specificCost[0].category.text = "Satzungsleistung"
 * plan[gkv].specificCost[0].benefit[0].type.text = "Professionelle Zahnreinigung (PZR)"
 * plan[gkv].specificCost[0].benefit[0].cost[0].type.text = "Kassenleistung"
@@ -51,9 +51,9 @@ Usage: #example
 * identifier[0].value = "debeka-plus"
 * name = "Debeka Premium Plus"
 * status = #active
-* type = http://terminology.hl7.org/CodeSystem/v3-ActCode#PRVPOL "private healthcare"
+* type = http://terminology.hl7.org/CodeSystem/v3-ActCode#EHCPOL "extended healthcare"
 // PKV plan: GOÄ-Faktor-Limit
-* plan[pkv].type = https://fhir.cognovis.de/praxis/CodeSystem/InsurancePlanType#pkv "PKV"
+* plan[pkv].type = https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type#pkv "PKV"
 * plan[pkv].specificCost[0].category.text = "GOÄ-Faktor-Limit"
 * plan[pkv].specificCost[0].benefit[0].type.text = "GOÄ-Faktor 2.3"
 * plan[pkv].specificCost[0].benefit[0].cost[0].type.text = "Maximaler GOÄ-Faktor"

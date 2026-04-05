@@ -4,7 +4,7 @@ InstanceOf: ProcedureAmbulantDE
 Title: "Test: Ambulante Koloskopie"
 Description: "Testinstanz für ProcedureAmbulantDE — validiert OPS-Kodierung mit Koloskopie."
 * status = #completed
-* subject = Reference(Patient/test-patient-1)
+* subject = Reference(example-patient)
 * code.coding[ops].system = "http://fhir.de/CodeSystem/bfarm/ops"
 * code.coding[ops].version = "2024"
 * code.coding[ops].code = #1-650.1

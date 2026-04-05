@@ -11,7 +11,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #4548-4
-* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * code.coding[ldt].system = "https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen"
 * code.coding[ldt].code = #03034000
 * code.coding[ldt].display = "HbA1c"
@@ -44,7 +44,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #5799-2
-* code.coding[loinc].display = "Leukocytes [Presence] in Urine by Test strip"
+* code.coding[loinc].display = "Leukozytenesterase [Nachweis] in Urin mittels Teststreifen"
 * code.coding[ldt].system = "https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen"
 * code.coding[ldt].code = #03059000
 * code.coding[ldt].display = "Leukozyten (Urin)"
@@ -93,7 +93,7 @@ Usage: #example
 * intent = #order
 * identifier[0].system = "https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer"
 * identifier[0].value = "LAB-2025-00123"
-* subject = Reference(Patient/example)
+* subject = Reference(example-patient)
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #2160-0
-* code.coding[0].display = "Creatinine [Mass/volume] in Serum or Plasma"
+* code.coding[0].display = "Creatinin [Masse/Volumen] in Serum oder Plasma"

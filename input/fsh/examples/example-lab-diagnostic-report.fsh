@@ -15,7 +15,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #6690-2
-* code.coding[loinc].display = "Leukocytes [#/volume] in Blood by Automated count"
+* code.coding[loinc].display = "Leukozyten [#/Volumen] in Blut mittels automatisierter Zählung"
 * code.coding[ldt].system = "https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen"
 * code.coding[ldt].code = #03001000
 * code.coding[ldt].display = "Leukozyten"
@@ -49,7 +49,7 @@ Usage: #example
 * category[lab] = http://terminology.hl7.org/CodeSystem/v2-0074#LAB
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #58410-2
-* code.coding[0].display = "CBC panel - Blood by Automated count"
+* code.coding[0].display = "Kleines Blutbild (Liste) - Blut mittels automatisierter Zählung"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-01"
 * issued = "2026-04-01T14:00:00+02:00"
@@ -67,7 +67,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #6463-4
-* code.coding[loinc].display = "Bacteria identified in Urine by Culture"
+* code.coding[loinc].display = "Bakterien identifiziert in Probenmaterial mittels Kultur"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
 * valueCodeableConcept.coding[0].system = "http://snomed.info/sct"
@@ -83,8 +83,8 @@ Usage: #example
 * status = #final
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
-* code.coding[loinc].code = #18907-0
-* code.coding[loinc].display = "Ciprofloxacin [Susceptibility]"
+* code.coding[loinc].code = #185-9
+* code.coding[loinc].display = "Ciprofloxacin [Empfindlichkeit] mittels Bestimmung der minimalen Hemmkonzentration (MHK)"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
 * valueCodeableConcept.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
@@ -104,7 +104,7 @@ Usage: #example
 * category[mb] = http://terminology.hl7.org/CodeSystem/v2-0074#MB
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #630-4
-* code.coding[0].display = "Bacteria identified in Urine by Culture"
+* code.coding[0].display = "Bakterien identifiziert in Urin mittels Kultur"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
 * issued = "2026-04-02T16:00:00+02:00"
@@ -123,7 +123,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #60568-3
-* code.coding[loinc].display = "Pathology Synoptic report"
+* code.coding[loinc].display = "Pathology synoptic report"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-03"
 * valueCodeableConcept.coding[0].system = "http://snomed.info/sct"
@@ -142,11 +142,11 @@ Usage: #example
 * subject = Reference(example-patient)
 * collection.collectedDateTime = "2026-04-03T09:00:00+02:00"
 * collection.method.coding[0].system = "http://snomed.info/sct"
-* collection.method.coding[0].code = #301480002
-* collection.method.coding[0].display = "Shave biopsy"
+* collection.method.coding[0].code = #86273004
+* collection.method.coding[0].display = "Biopsy"
 * collection.bodySite.coding[0].system = "http://snomed.info/sct"
 * collection.bodySite.coding[0].code = #368209003
-* collection.bodySite.coding[0].display = "Right arm"
+* collection.bodySite.coding[0].display = "Right upper arm"
 
 // --- Beispiel 3: Pathologie Histologie ---
 // Kategorie PAT, Befundbericht als PDF (presentedForm) + narrative conclusion + SNOMED Observation + Biopsie-Specimen
@@ -159,7 +159,7 @@ Usage: #example
 * category[pat] = http://terminology.hl7.org/CodeSystem/v2-0074#PAT
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #60568-3
-* code.coding[0].display = "Pathology Synoptic report"
+* code.coding[0].display = "Pathology synoptic report"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-03"
 * issued = "2026-04-03T15:00:00+02:00"
@@ -182,7 +182,7 @@ Usage: #example
 * category[lab] = http://terminology.hl7.org/CodeSystem/v2-0074#LAB
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #2160-0
-* code.coding[0].display = "Creatinine [Mass/volume] in Serum or Plasma"
+* code.coding[0].display = "Creatinin [Masse/Volumen] in Serum oder Plasma"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-03"
 * issued = "2026-04-03T11:30:00+02:00"
@@ -198,7 +198,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #4548-4
-* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-01-15T08:30:00+01:00"
 * valueQuantity.value = 7.8
@@ -220,7 +220,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #4548-4
-* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T08:30:00+02:00"
 * valueQuantity.value = 7.2
@@ -242,7 +242,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #4548-4
-* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-07-10T08:30:00+02:00"
 * valueQuantity.value = 6.9
@@ -266,7 +266,7 @@ Usage: #example
 * category[lab] = http://terminology.hl7.org/CodeSystem/v2-0074#LAB
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #4548-4
-* code.coding[0].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[0].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-01-15"
 * issued = "2026-01-15T14:00:00+01:00"
@@ -284,7 +284,7 @@ Usage: #example
 * category[lab] = http://terminology.hl7.org/CodeSystem/v2-0074#LAB
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #4548-4
-* code.coding[0].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[0].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05"
 * issued = "2026-04-05T14:00:00+02:00"
@@ -302,7 +302,7 @@ Usage: #example
 * category[lab] = http://terminology.hl7.org/CodeSystem/v2-0074#LAB
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #4548-4
-* code.coding[0].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[0].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-07-10"
 * issued = "2026-07-10T12:00:00+02:00"

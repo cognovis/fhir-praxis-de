@@ -13,11 +13,11 @@ Description: "Profil fuer kassenspezifische und tarifspezifische Leistungsregeln
     pkv 0..*
 
 // GKV slice: Satzungsleistungen, kassenindividuelle Leistungen
-* plan[gkv].type = https://fhir.cognovis.de/praxis/CodeSystem/InsurancePlanType#gkv
+* plan[gkv].type = https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type#gkv
 * plan[gkv].type MS
 
 // PKV slice: GOÄ-Faktoren, Erstattungsregeln
-* plan[pkv].type = https://fhir.cognovis.de/praxis/CodeSystem/InsurancePlanType#pkv
+* plan[pkv].type = https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type#pkv
 * plan[pkv].type MS
 
 // Must support fields
