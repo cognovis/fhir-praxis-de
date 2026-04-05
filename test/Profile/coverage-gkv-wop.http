@@ -1,0 +1,132 @@
+### GKV-Coverage mit WOP Nordrhein
+# @name coverage-gkv-wop-nordrhein
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK3: WOP Extension (http://fhir.de/StructureDefinition/gkv/wop) aus de.basisprofil.r4
+# Extension wird NICHT neu definiert — direkt aus Upstream-Paket verwendet
+POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Coverage",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://fhir.de/CodeSystem/versicherungsart-de-basis",
+      "code": "GKV",
+      "display": "gesetzliche Krankenversicherung"
+    }]
+  },
+  "beneficiary": {
+    "reference": "Patient/example"
+  },
+  "payor": [{
+    "display": "AOK Rheinland/Hamburg"
+  }],
+  "extension": [{
+    "url": "http://fhir.de/StructureDefinition/gkv/wop",
+    "valueCoding": {
+      "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP",
+      "code": "38",
+      "display": "Nordrhein"
+    }
+  }]
+}
+
+###
+
+### GKV-Coverage mit WOP Westfalen-Lippe
+# @name coverage-gkv-wop-westfalen
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK3: WOP mit anderem Wert (17 = Westfalen-Lippe)
+POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Coverage",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://fhir.de/CodeSystem/versicherungsart-de-basis",
+      "code": "GKV"
+    }]
+  },
+  "beneficiary": {
+    "reference": "Patient/example"
+  },
+  "payor": [{
+    "display": "Techniker Krankenkasse"
+  }],
+  "extension": [{
+    "url": "http://fhir.de/StructureDefinition/gkv/wop",
+    "valueCoding": {
+      "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP",
+      "code": "17",
+      "display": "Westfalen-Lippe"
+    }
+  }]
+}
+
+###
+
+### Negativ-Test: Coverage mit ungültigem WOP-Code muss Fehler liefern
+# @name coverage-gkv-wop-invalid
+# Expected: OperationOutcome with errors (code "99" is not in KBV_VS_SFHIR_ITA_WOP)
+# Note: Only validates if Aidbox has KBV terminology loaded (may pass with warning if not)
+POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Coverage",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://fhir.de/CodeSystem/versicherungsart-de-basis",
+      "code": "GKV",
+      "display": "gesetzliche Krankenversicherung"
+    }]
+  },
+  "beneficiary": {
+    "reference": "Patient/example"
+  },
+  "payor": [{
+    "display": "AOK Rheinland/Hamburg"
+  }],
+  "extension": [{
+    "url": "http://fhir.de/StructureDefinition/gkv/wop",
+    "valueCoding": {
+      "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP",
+      "code": "99",
+      "display": "Ungültig"
+    }
+  }]
+}
+
+###
+
+### GKV-Coverage ohne WOP (muss weiterhin valide sein)
+# @name coverage-gkv-ohne-wop
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK3: WOP ist optional — Coverage ohne WOP muss valide bleiben
+POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Coverage",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://fhir.de/CodeSystem/versicherungsart-de-basis",
+      "code": "GKV"
+    }]
+  },
+  "beneficiary": {
+    "reference": "Patient/example"
+  },
+  "payor": [{
+    "display": "BARMER"
+  }]
+}

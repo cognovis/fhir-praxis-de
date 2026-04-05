@@ -46,9 +46,9 @@ Future versions may introduce constrained profiles where invariants or slicing a
 
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
-| **Patient** | Patient demographics and administration | PatientSeitExt |
+| **[FPDEPatient](StructureDefinition-fpde-patient.html)** | Patient demographics with maiden name and district support | humanname-own-name, iso21090-ADXP-precinct |
 | **Provenance** | AI provenance tracking (EU AI Act) | AiGeneratedExt, AiModelExt, HumanReviewedExt |
-| **Coverage** | Insurance information | KassennameExt, KassennummerExt |
+| **[FPDECoverageGKV](StructureDefinition-fpde-coverage-gkv.html)** | GKV insurance with Wohnortprinzip (WOP) | gkv/wop |
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbAbrechnenderArztExt |
 | **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungTextExt, EinwilligungWiderrufMoeglichExt |
 
@@ -308,6 +308,123 @@ The `bodySite` element may additionally carry more granular anatomical location 
 2. **Wundversorgung links:** A wound care procedure (OPS 5-916.00) with `Seitenlokalisation = L` (links) recorded as an extension on the OPS coding.
 
 See examples: `example-procedure-koloskopie`, `example-procedure-wundversorgung-links`.
+
+## FPDEPatient — Patient-Demografie-Erweiterungen
+
+The `FPDEPatient` profile extends the base FHIR `Patient` resource to support German-specific demographic attributes required by practice management systems. It adds support for maiden name (Geburtsname) and district/neighborhood (Ortsteil) information.
+
+### Core Elements
+
+| Element | Cardinality | Extension | Description |
+|---------|-------------|-----------|-------------|
+| `name` | 0..* | | MS; supports official, nickname, and maiden name uses |
+| `name[].use` | 0..1 | | Can be `#official`, `#nickname`, `#maiden`, etc. |
+| `name[].family` | 0..1 | `humanname-own-name` | MS; family name. When use=maiden, the `humanname-own-name` extension captures the original maiden name |
+| `address` | 0..* | | MS; patient's residential address |
+| `address[].extension` | 0..* | `iso21090-ADXP-precinct` | MS; neighborhood/district (Ortsteil, Stadtteil) of the address |
+
+### Supported Extensions
+
+#### `humanname-own-name` — Maiden Name (Geburtsname)
+
+The FHIR standard extension `http://hl7.org/fhir/StructureDefinition/humanname-own-name` is used to capture the patient's maiden name when `name.use = #maiden`. This extension is defined in the base FHIR specification and allows recording the original family name before marriage.
+
+**Example:**
+```
+name[1].use = #maiden
+name[1].family = "Schmidt"
+name[1]._family.extension[0].url = "http://hl7.org/fhir/StructureDefinition/humanname-own-name"
+name[1]._family.extension[0].valueString = "Schmidt"
+```
+
+#### `iso21090-ADXP-precinct` — District/Neighborhood (Ortsteil)
+
+The ISO 21090 standard extension `http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct` is used to capture the neighborhood or district (Ortsteil, Stadtteil) as part of the patient's address. This is a German-common requirement where practices need to differentiate between districts of larger cities.
+
+**Example:**
+```
+address[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct"
+address[0].extension[0].valueString = "Kreuzberg"
+```
+
+### Use Cases
+
+1. **Patient with maiden name:** Anna Mueller (official) formerly Schmidt (maiden) — recorded with two name entries, the second using `use=maiden` with the `humanname-own-name` extension.
+2. **Patient with district:** Maria Gonzalez living in Berlin-Kreuzberg — the Ortsteil is captured in the address extension.
+3. **Patient with both:** Patient has official name, maiden name, and resides in a specific neighborhood — all three attributes are captured.
+4. **Patient without maiden name:** Thomas Bauer — maiden name is optional; patients without it validate correctly.
+
+### PVS Implementation Note
+
+When recording patient demographics in a PVS:
+1. Create a `Patient` resource
+2. Populate `name[0]` with the official name (use=official)
+3. If the patient provides a maiden name, add `name[1]` with `use=maiden` and populate `name[1].family` with the maiden name. Add the `humanname-own-name` extension to `name[1]._family` to explicitly store the value.
+4. For the address, populate standard address elements (`line`, `city`, `postalCode`, `country`).
+5. If the patient's residence includes a district/neighborhood, add the `iso21090-ADXP-precinct` extension to `address[].extension`.
+6. Validate the instance against `FPDEPatient` before submission.
+
+See examples: `example-patient-geburtsname`, `example-patient-ohne-geburtsname`, `example-patient-ortsteil`.
+
+## FPDECoverageGKV — GKV Insurance with Wohnortprinzip (WOP)
+
+The `FPDECoverageGKV` profile extends the base FHIR `Coverage` resource to support German statutory health insurance (GKV — gesetzliche Krankenversicherung) with the Wohnortprinzip (WOP — residence-based principle) designation. The WOP indicates the regional KV (Kassenärztliche Vereinigung) responsible for the patient's care based on their place of residence.
+
+### Core Elements
+
+| Element | Cardinality | Extension | Description |
+|---------|-------------|-----------|-------------|
+| `status` | 0..1 | | Coverage status (active, inactive, entered-in-error, etc.) |
+| `type` | 1..1 | | Must code GKV using `http://fhir.de/CodeSystem/versicherungsart-de-basis` |
+| `beneficiary` | 1..1 | | Reference(Patient) — the insured patient |
+| `payor` | 1..* | | Reference to the insurance carrier (Krankenkasse) |
+| `extension` | 0..* | `gkv/wop` | MS; Wohnortprinzip (WOP) code from KBV CodeSystem |
+
+### Supported Extension
+
+#### `gkv/wop` — Wohnortprinzip (WOP)
+
+The extension `http://fhir.de/StructureDefinition/gkv/wop` from `de.basisprofil.r4` is used to specify the regional KV responsible for the patient. The value is a Coding from the KBV CodeSystem `https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP`, which lists all German KV regions (e.g., 38 = Nordrhein, 17 = Westfalen-Lippe).
+
+**Example:**
+```
+extension[0].url = "http://fhir.de/StructureDefinition/gkv/wop"
+extension[0].valueCoding.system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP"
+extension[0].valueCoding.code = "38"
+extension[0].valueCoding.display = "Nordrhein"
+```
+
+### WOP Codes (Auswahl)
+
+| Code | Display | Region |
+|------|---------|--------|
+| **38** | Nordrhein | Nordrhein (North Rhine) |
+| **17** | Westfalen-Lippe | Westfalen-Lippe (Westphalia-Lippe) |
+| **33** | Baden-Württemberg | Baden-Württemberg |
+| **52** | Saarland | Saarland |
+| (and others) | | See KBV CodeSystem for complete list |
+
+### Use Cases
+
+1. **Patient with GKV coverage in Nordrhein:** Coverage for AOK Rheinland/Hamburg with WOP=38 (Nordrhein).
+2. **Patient moving to different KV region:** Update coverage with new WOP code reflecting the new region of residence.
+3. **Multi-regional insurance:** A patient may have multiple Coverage entries with different WOP codes if they have special arrangements.
+4. **Coverage without WOP:** GKV coverage may be recorded without a WOP extension (WOP is optional); the profile validates correctly in both cases.
+
+### PVS Implementation Note
+
+When recording GKV coverage in a PVS:
+1. Create a `Coverage` resource
+2. Set `status = #active` (or appropriate status)
+3. Populate `type` with GKV coding from `http://fhir.de/CodeSystem/versicherungsart-de-basis`
+4. Set `beneficiary` to a Reference(Patient)
+5. Set `payor` to the insurance carrier (Krankenkasse) name or reference
+6. If the patient's residence is within a specific KV region, add the `gkv/wop` extension with the appropriate WOP code
+7. Validate the instance against `FPDECoverageGKV` before submission
+
+**Upstream Dependency:** The `gkv/wop` extension is provided by the `de.basisprofil.r4` package and is **not redefined** in this IG. It is reused as-is.
+
+See examples: `example-coverage-gkv-wop`, `example-coverage-gkv-wop-west`.
 
 ## PraxisSpecimen — Probenmaterial für xDT-Adapter
 

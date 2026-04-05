@@ -1,0 +1,121 @@
+### Patient mit Geburtsnamen (use=maiden + humanname-own-name Extension)
+# @name patient-geburtsname
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK1: Geburtsname via use=maiden und humanname-own-name Extension (de.basisprofil.r4)
+POST http://localhost:8080/fhir/Patient/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-patient
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "name": [
+    {
+      "use": "official",
+      "family": "Mueller",
+      "given": ["Anna"]
+    },
+    {
+      "use": "maiden",
+      "family": "Schmidt",
+      "_family": {
+        "extension": [{
+          "url": "http://hl7.org/fhir/StructureDefinition/humanname-own-name",
+          "valueString": "Schmidt"
+        }]
+      }
+    }
+  ],
+  "birthDate": "1985-04-22"
+}
+
+###
+
+### Patient ohne Geburtsnamen (muss weiterhin valide sein)
+# @name patient-ohne-geburtsname
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK1: Geburtsname ist optional — Patient ohne maiden name muss valide bleiben
+POST http://localhost:8080/fhir/Patient/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-patient
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "name": [{
+    "use": "official",
+    "family": "Bauer",
+    "given": ["Thomas"]
+  }],
+  "birthDate": "1970-11-05"
+}
+
+###
+
+### Patient mit Ortsteil/Stadtteil in Adresse (iso21090-ADXP-precinct auf Address.extension)
+# @name patient-ortsteil
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK2: Ortsteil via iso21090-ADXP-precinct Extension auf Address.extension (nicht Address.line.extension!)
+POST http://localhost:8080/fhir/Patient/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-patient
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "name": [{
+    "use": "official",
+    "family": "Gonzalez",
+    "given": ["Maria"]
+  }],
+  "birthDate": "1992-08-14",
+  "address": [{
+    "line": ["Oranienstrasse 42"],
+    "city": "Berlin",
+    "postalCode": "10999",
+    "country": "DE",
+    "extension": [{
+      "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct",
+      "valueString": "Kreuzberg"
+    }]
+  }]
+}
+
+###
+
+### Patient mit Geburtsname UND Ortsteil (kombiniertes Szenario)
+# @name patient-geburtsname-und-ortsteil
+# Expected: OperationOutcome with "all ok" (no errors)
+# AK1 + AK2 kombiniert
+POST http://localhost:8080/fhir/Patient/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-patient
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "name": [
+    {
+      "use": "official",
+      "family": "Weber",
+      "given": ["Sabine"]
+    },
+    {
+      "use": "maiden",
+      "family": "Klein",
+      "_family": {
+        "extension": [{
+          "url": "http://hl7.org/fhir/StructureDefinition/humanname-own-name",
+          "valueString": "Klein"
+        }]
+      }
+    }
+  ],
+  "birthDate": "1978-03-15",
+  "address": [{
+    "line": ["Schwanenstrasse 7"],
+    "city": "Hamburg",
+    "postalCode": "20249",
+    "country": "DE",
+    "extension": [{
+      "url": "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct",
+      "valueString": "Eppendorf"
+    }]
+  }]
+}
