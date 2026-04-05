@@ -4,13 +4,41 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Merge
+
+- Resolve conflict in profiles.md (keep both FPDEPatient/GKV and PraxisSpecimen sections)
+
+## [0.26.0] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-csw**: Address review panel findings iteration 1
+- **fpde-csw**: Address review panel findings iteration 2
+- **fpde-2te**: Address review findings iteration 1
+- **fpde-2te**: Address review findings iteration 1 (FK 8402 context, ASCII umlauts, FK 8410 out-of-scope note)
+
+### Documentation
+
+- Update feature documentation for fpde-2te (PraxisDevice profile + gdt-device-id NamingSystem)
+
+### Features
+
+- **fpde-2te**: Green — PraxisDevice profile for medical devices/lab analyzers
+
 ### Miscellaneous
 
 - Bump version to 0.25.1
+- Update changelog
+- Bump version to 0.26.0
 
 ### Merge
 
 - Resolve conflict — keep PraxisDevice + LDT/ProcedureAmbulantDE/PraxisSpecimen docs from main
+- Worktree-bead-fpde-2te
+
+### Test
+
+- **fpde-2te**: Red — Device example references PraxisDevice profile (not yet defined)
 
 ## [0.25.1] - 2026-04-05
 
@@ -67,6 +95,24 @@ All notable changes to this project will be documented in this file.
 
 ## [0.24.0] - 2026-04-05
 
+### Bug Fixes
+
+- **fpde-d5d**: Address review findings iteration 1
+- **fpde-d5d**: Address review findings iteration 2
+- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
+- **fpde-1q9**: Address review findings iteration 1
+- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
+
+### Documentation
+
+- Update feature documentation for fpde-d5d
+- Update feature documentation for fpde-1q9
+
+### Features
+
+- **fpde-d5d**: Green — Geburtsname, Ortsteil, WOP demografie extensions
+- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
+
 ### Miscellaneous
 
 - Update changelog
@@ -76,28 +122,12 @@ All notable changes to this project will be documented in this file.
 
 - Worktree-bead-fpde-1q9
 
+### Test
+
+- **fpde-d5d**: Red — FSH examples for Geburtsname, Ortsteil, WOP
+- **fpde-1q9**: Red — validate PraxisCondition profile
+
 ## [0.23.0] - 2026-04-05
-
-### Bug Fixes
-
-- **fpde-2te**: Address review findings iteration 1
-- **fpde-2te**: Address review findings iteration 1 (FK 8402 context, ASCII umlauts, FK 8410 out-of-scope note)
-- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
-- **fpde-1q9**: Address review findings iteration 1
-- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
-- **fpde-76c**: Address review findings iteration 1
-- **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
-
-### Documentation
-
-- Update feature documentation for fpde-2te (PraxisDevice profile + gdt-device-id NamingSystem)
-- Update feature documentation for fpde-1q9
-
-### Features
-
-- **fpde-2te**: Green — PraxisDevice profile for medical devices/lab analyzers
-- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
-- **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
 
 ### Miscellaneous
 
@@ -109,16 +139,16 @@ All notable changes to this project will be documented in this file.
 
 - Worktree-bead-fpde-76c
 
-### Test
-
-- **fpde-2te**: Red — Device example references PraxisDevice profile (not yet defined)
-- **fpde-1q9**: Red — validate PraxisCondition profile
-- **fpde-76c**: Red — Procedure profile not yet defined
-
 ## [0.22.0] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-76c**: Address review findings iteration 1
+- **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
 
 ### Features
 
+- **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
 - **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
 
 ### Miscellaneous
@@ -131,6 +161,7 @@ All notable changes to this project will be documented in this file.
 
 ### Test
 
+- **fpde-76c**: Red — Procedure profile not yet defined
 - **fpde-98l**: Red — xDT NamingSystems draft with validation error
 
 ## [0.21.0] - 2026-04-05
