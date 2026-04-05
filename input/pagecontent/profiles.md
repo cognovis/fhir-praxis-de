@@ -177,7 +177,7 @@ The `ProcedureAmbulantDE` profile extends the base FHIR `Procedure` resource to 
 | Element | Cardinality | Description |
 |---------|-------------|-------------|
 | `status` | 1..1 | MS; procedure status (e.g., `completed`, `in-progress`) |
-| `code` | 0..1 | MS; procedure code — sliced to allow OPS coding |
+| `code` | 1..1 | MS; procedure code — sliced to allow OPS coding |
 | `code.coding[ops]` | 0..1 | MS; OPS coding using `CodingOPS` profile from de.basisprofil.r4 |
 | `code.coding[ops].system` | 1..1 | Fixed: `http://fhir.de/CodeSystem/bfarm/ops` |
 | `code.coding[ops].version` | 1..1 | OPS catalog year (e.g., `"2024"`) — required by CodingOPS |
