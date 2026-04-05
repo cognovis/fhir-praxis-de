@@ -40,6 +40,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
 | **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
+| **[PraxisLabDiagnosticReport](StructureDefinition-praxis-lab-diagnostic-report.html)** | Laborbefund mit LAB/MB/PAT Varianten | category slicing, result/specimen references, supports Einzelbefund/Kumulativbefund/Mikrobiologie/Pathologie |
 | **[PraxisLabObservation](StructureDefinition-praxis-lab-observation.html)** | Laborergebnisse mit LOINC/LDT-Codierung | Observation status, category, code slicing, referenceRange, interpretation |
 | **[PraxisSpecimen](StructureDefinition-praxis-specimen.html)** | Probenmaterial für xDT-Adapter (LDT/GDT) | — (SNOMED-CT + optional LDT-Code) |
 
@@ -633,6 +634,147 @@ When capturing lab results in a PVS:
 - **Practice Rapid Test (LDT-only):** `lab-obs-example-ldt-only-custom` — LDT coding only, quantitative in mg/dL, custom test without LOINC
 
 See examples: `lab-obs-example-hba1c`, `lab-obs-example-leukozyten-urin`, `lab-obs-example-ldt-only-custom`.
+
+## PraxisLabDiagnosticReport — Laborbefund-Profil
+
+The `PraxisLabDiagnosticReport` profile extends the base FHIR `DiagnosticReport` resource to standardize laboratory result reporting in German ambulatory practice. It supports multiple laboratory report variants (standard lab, microbiology, pathology) via category slices, and accommodates both single-point and cumulative reporting patterns through separate DiagnosticReport instances.
+
+### Core Structure
+
+| Element | Cardinality | Profile Constraint |
+|---------|-------------|-------------------|
+| `status` | 1..1 | MS; final \| preliminary \| amended \| corrected (typically `#final` or `#preliminary`) |
+| `category` | 1..* | MS; sliced by HL7 v2 Table 0074 (LAB, MB, PAT); at least one slice must be present |
+| `category[lab]` | 0..1 | MS; fixed to `http://terminology.hl7.org/CodeSystem/v2-0074#LAB` (standard laboratory reports) |
+| `category[mb]` | 0..1 | MS; fixed to `http://terminology.hl7.org/CodeSystem/v2-0074#MB` (microbiology reports) |
+| `category[pat]` | 0..1 | MS; fixed to `http://terminology.hl7.org/CodeSystem/v2-0074#PAT` (pathology/histology reports) |
+| `category` Invariant | — | `praxis-lab-dr-category`; at least one category slice must be present (error level) |
+| `code` | 1..1 | MS; report code (typically LOINC panel code; not constrained to LOINC only to allow laboratory-specific codes) |
+| `subject` | 1..1 | MS; Reference(Patient) — the patient for whom the report was generated |
+| `effective[x]` | 0..1 | MS; only `dateTime` allowed; specimen collection or report generation date |
+| `issued` | 0..1 | MS; when the report was issued/authorized |
+| `performer` | 0..* | MS; Reference(Practitioner \| Organization) — performing lab or technician |
+| `resultsInterpreter` | 0..* | MS; Reference(Practitioner \| Organization) — physician/specialist responsible for interpretation |
+| `specimen` | 0..* | MS; Reference(PraxisSpecimen) — specimens analyzed in this report |
+| `result` | 0..* | MS; Reference(PraxisLabObservation) — individual test results |
+| `conclusion` | 0..1 | MS; narrative summary or clinical interpretation text |
+| `presentedForm` | 0..* | MS; attached PDF/document representation of the report |
+| `basedOn` | 0..* | MS; Reference(ServiceRequest) — orders underlying this report (useful for cumulative report linkage) |
+
+### Category Slicing — LAB / MB / PAT
+
+The profile enforces report classification via open slicing on category with three named slices:
+
+**LAB (Standard Laboratory):**
+- Fixed value: `http://terminology.hl7.org/CodeSystem/v2-0074#LAB`
+- Use case: routine blood work, chemistry panels, routine urinalysis, blood cultures
+- Example code: LOINC 58410-2 (CBC panel)
+
+**MB (Microbiology):**
+- Fixed value: `http://terminology.hl7.org/CodeSystem/v2-0074#MB`
+- Use case: bacterial/fungal/viral identification, antibiogram, culture results
+- Example code: LOINC 630-4 (Bacteria identified in Urine by Culture)
+
+**PAT (Pathology):**
+- Fixed value: `http://terminology.hl7.org/CodeSystem/v2-0074#PAT`
+- Use case: histology, cytology, tissue diagnosis
+- Example code: LOINC 60568-3 (Pathology Synoptic report)
+
+**Invariant `praxis-lab-dr-category`:**
+```
+category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/v2-0074' 
+  and (code = 'LAB' or code = 'MB' or code = 'PAT')).exists()
+```
+At least one category slice must be present; severity is `#error`.
+
+### Report Variants Supported
+
+1. **Einzelbefund (Single-Point Report):** A complete lab report from a single collection date.
+   - One DiagnosticReport instance per specimen collection
+   - Status typically `#final`
+   - Common for acute workup or routine panel
+
+2. **Kumulativbefund (Cumulative Report):** Multiple measurements of the same analyte over time.
+   - Represented as **separate DiagnosticReport instances, one per time point**
+   - All instances reference the same test code (e.g., LOINC 4548-4 for HbA1c)
+   - Same patient, different `effectiveDateTime` values
+   - Allows practices to display trend data by querying all DiagnosticReports for that code
+   - No special FHIR grouping mechanism needed — temporal ordering is implicit
+
+3. **Mikrobiologie (Microbiology Report):** Culture and sensitivity results.
+   - Category slice `[mb]` set to `#MB`
+   - Results include organism identification + antibiogram
+   - PraxisLabObservation results use SNOMED-CT or coded interpretation
+
+4. **Pathologie (Pathology/Histology Report):** Tissue diagnosis.
+   - Category slice `[pat]` set to `#PAT`
+   - `presentedForm` typically contains detailed PDF report
+   - May include gross description + microscopic findings + diagnosis conclusion
+
+### Reference Constraints
+
+**Specimen References:**
+- `specimen` must reference only `PraxisSpecimen` resources
+- Multiple specimens allowed (e.g., serum + urine in same panel)
+
+**Result References:**
+- `result` must reference only `PraxisLabObservation` resources
+- Each Observation should match the category of the report (e.g., microbiology Observations for MB category)
+
+### Cumulative Reporting Pattern
+
+For practices tracking longitudinal trends (e.g., quarterly HbA1c, monthly INR):
+
+1. Create a new `DiagnosticReport` instance for each measurement date
+2. Use the same test code (LOINC) in all instances
+3. Vary only `effectiveDateTime` and `issued`
+4. Link via `basedOn` references if part of a managed condition (e.g., diabetes follow-up order)
+5. Query pattern: `GET /fhir/DiagnosticReport?code=4548-4&subject=Patient/123&sort=-date`
+
+This pattern avoids FHIR-level grouping complexity and relies on clients to assemble trends via code + date filtering.
+
+### Use Cases
+
+1. **Routine Blood Panel (LAB):** Complete blood count with differential, chemistry panel, single collection.
+2. **Urine Culture (MB):** Bacterial culture with organism identification and antibiogram; multiple result Observations.
+3. **Skin Biopsy Histology (PAT):** Tissue diagnosis (basal cell carcinoma); presentedForm contains detailed pathology PDF.
+4. **HbA1c Trend (LAB, Kumulativbefund):** Three DiagnosticReport instances for Q1, Q2, Q3 with same code but different dates.
+5. **Partial Result (LAB, preliminary):** Early report while additional tests are in progress; status `#preliminary`, no presenter form yet.
+
+### PVS Implementation Note
+
+When capturing lab reports in a PVS:
+
+1. Create a `DiagnosticReport` resource of type `PraxisLabDiagnosticReport`
+2. Set `status` to `#final` (for complete reports) or `#preliminary` (for partial/early reports)
+3. Populate `category`:
+   - For routine/blood/chemistry: use `category[lab]`
+   - For cultures/microbiology: use `category[mb]`
+   - For histology/tissue: use `category[pat]`
+   - **At least one category slice must be present**
+4. Set `code` to the report code (typically LOINC, e.g., 58410-2 for CBC)
+5. Set `subject` to Reference(Patient)
+6. Populate `effective[x]` with specimen collection date as `dateTime`
+7. Populate `issued` with report authorization/release date
+8. Link `result` to all relevant `PraxisLabObservation` resources
+9. Link `specimen` to all relevant `PraxisSpecimen` resources
+10. Add `resultsInterpreter` Reference for the responsible physician
+11. Optionally add `conclusion` with clinical summary or interpretation
+12. If report is attached (PDF): add `presentedForm` with contentType + URL or base64
+13. For cumulative reports: create separate DiagnosticReport instances per date (not grouped in one instance)
+14. Validate the instance against `PraxisLabDiagnosticReport` before submission
+
+### Examples
+
+- **CBC (Blutbild) Einzelbefund:** `example-lab-dr-blutbild` — LAB category, LOINC 58410-2, final status, EDTA blood specimen
+- **Urine Culture Mikrobiologie:** `example-lab-dr-urinkultur` — MB category, E. coli with antibiogram, final status
+- **Skin Histology Pathologie:** `example-lab-dr-histologie` — PAT category, basal cell carcinoma diagnosis, PDF report, final status
+- **HbA1c Preliminary:** `example-lab-dr-preliminary` — LAB category, preliminary status (result not yet complete)
+- **HbA1c Kumulativbefund Q1:** `example-lab-dr-hba1c-jan` — LAB category, final, Q1 2026 date
+- **HbA1c Kumulativbefund Q2:** `example-lab-dr-hba1c-apr` — LAB category, final, Q2 2026 date (demonstrates trend pattern)
+- **HbA1c Kumulativbefund Q3:** `example-lab-dr-hba1c-q3` — LAB category, final, Q3 2026 date (completes quarterly series)
+
+See examples: `example-lab-dr-blutbild`, `example-lab-dr-urinkultur`, `example-lab-dr-histologie`, `example-lab-dr-preliminary`, `example-lab-dr-hba1c-jan`, `example-lab-dr-hba1c-apr`, `example-lab-dr-hba1c-q3`.
 
 ## Note on Resource Choice
 
