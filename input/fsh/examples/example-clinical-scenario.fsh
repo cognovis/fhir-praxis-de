@@ -47,21 +47,20 @@ Usage: #example
 * extension[=].valueBoolean = false
 
 Instance: ExampleDiagnose
-InstanceOf: Condition
+InstanceOf: PraxisCondition
 Title: "Diabetes mellitus Typ 2 — Dauerdiagnose rechts"
-Description: "Gesicherte Dauerdiagnose mit Seitenlokalisation (rechts = Beispiel fuer Extension)."
+Description: "Gesicherte Dauerdiagnose mit Seitenlokalisation (rechts = Beispiel fuer Extension) und ICD-10-GM Diagnosesicherheit G (gesichert)."
 Usage: #example
 * clinicalStatus = http://terminology.hl7.org/CodeSystem/condition-clinical#active
 * verificationStatus = http://terminology.hl7.org/CodeSystem/condition-ver-status#confirmed
-* code.coding[0].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
-* code.coding[0].code = #E11.9
-* code.coding[0].display = "Diabetes mellitus, Typ 2, ohne Komplikationen"
+* code.coding[icd10gm].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
+* code.coding[icd10gm].code = #E11.9
+* code.coding[icd10gm].display = "Diabetes mellitus, Typ 2, ohne Komplikationen"
+* code.coding[icd10gm].extension[diagnosesicherheit].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_DIAGNOSESICHERHEIT#G "gesicherte Diagnose"
 * subject = Reference(example-patient)
 * recordedDate = "2020-03-15"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/dauerdiagnose"
-* extension[=].valueBoolean = true
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/diagnose-seite"
-* extension[=].valueCodeableConcept = DiagnoseSeiteCS#B "Beidseitig"
+* extension[dauerdiagnose].valueBoolean = true
+* extension[diagnoseSeite].valueCodeableConcept = DiagnoseSeiteCS#R "Rechts"
 
 Instance: ExampleAiProvenance
 InstanceOf: Provenance

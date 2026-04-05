@@ -2,7 +2,77 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.24.0] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-oz2**: Address review findings iteration 1 — ConceptMap source canonical, code #10 display
+- **fpde-oz2**: Address review findings iteration 2 — content=complete, consistent descriptions, equivalence #wider for gkv→#00
+- **fpde-1q9**: Address review findings iteration 1 — remove incorrectly contexted FHIRPath invariants
+- **fpde-1q9**: Address review findings iteration 1
+- **fpde-1q9**: Address review findings iteration 2 — correct code cardinality to 1..1 in docs
+
+### Documentation
+
+- Update feature documentation for fpde-1q9
+
+### Features
+
+- **fpde-oz2**: Green — KVDT Scheinuntergruppe CS with OID and ConceptMap
+- **fpde-1q9**: Green — PraxisCondition profile with ICD-10-GM Diagnosesicherheit
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.24.0
+
+### Merge
+
+- Worktree-bead-fpde-1q9
+
+### Test
+
+- **fpde-oz2**: Red — KVDT Scheinuntergruppe CS and ConceptMap (incomplete)
+- **fpde-1q9**: Red — validate PraxisCondition profile
+
+## [0.23.0] - 2026-04-05
+
+### Miscellaneous
+
+- Bump version to 0.22.0
+- Update changelog
+- Bump version to 0.23.0
+
+### Merge
+
+- Worktree-bead-fpde-76c
+
+## [0.22.0] - 2026-04-05
+
+### Bug Fixes
+
+- **fpde-76c**: Address review findings iteration 1
+- **fpde-76c**: Correct code cardinality to 1..1 in profiles.md documentation
+
+### Features
+
+- **fpde-76c**: Green — Procedure profile ambulant DE with OPS coding
+- **fpde-98l**: Green — xDT NamingSystems (gdt-anforderungs-ident, kvdt-fallnummer, gdt-device-id)
+
+### Miscellaneous
+
+- Update changelog
+
+### Merge
+
+- Worktree-bead-fpde-98l
+
+### Test
+
+- **fpde-76c**: Red — Procedure profile not yet defined
+- **fpde-98l**: Red — xDT NamingSystems draft with validation error
+
+## [0.21.0] - 2026-04-05
 
 ### Bug Fixes
 
@@ -17,6 +87,15 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-ria**: Green — add medication extensions, CodeSystems, NamingSystem + version bump
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.21.0
+
+### Merge
+
+- Worktree-bead-fpde-ria
 
 ### Test
 
