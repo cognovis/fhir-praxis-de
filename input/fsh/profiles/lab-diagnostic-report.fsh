@@ -14,11 +14,18 @@
 //
 // ASCII-safe: keine Umlaute in Kommentaren (ae, ue, oe, ss statt Umlauten).
 
+Invariant: praxis-lab-dr-category
+Description: "Mindestens eine der bekannten Kategorien (LAB, MB, PAT) muss gesetzt sein."
+Expression: "category.coding.where(system = 'http://terminology.hl7.org/CodeSystem/v2-0074').where(code = 'LAB' or code = 'MB' or code = 'PAT').exists()"
+Severity: #warning
+
 Profile: PraxisLabDiagnosticReport
 Parent: DiagnosticReport
 Id: praxis-lab-diagnostic-report
 Title: "Praxis Lab DiagnosticReport"
 Description: "Laborbefund-Profil fuer die ambulante Praxis. Unterstuetzt Standard-Labor (LAB), Mikrobiologie (MB) und Pathologie (PAT) ueber category-Slices (HL7 v2 Table 0074). Referenziert PraxisLabObservation (Einzelergebnisse) und PraxisSpecimen (Probe). Kumulativbefunde werden als separate DiagnosticReports pro Zeitpunkt abgebildet. Angelehnt an KBV_PR_MIO_LAB_DiagnosticReport_Laboratory_Study (kbv.mio.laborbefund), Parent ist base FHIR DiagnosticReport da kein Snapshot im KBV MIO Paket vorhanden."
+
+* obeys praxis-lab-dr-category
 
 // Status: Pflichtfeld — final, preliminary, amended, corrected
 * status MS
@@ -54,9 +61,9 @@ Description: "Laborbefund-Profil fuer die ambulante Praxis. Unterstuetzt Standar
 * performer MS
 * performer only Reference(Practitioner or Organization)
 
-// Befundinterpretierende: nur Arzt
+// Laborarzt oder Facharzt-Rolle; PractitionerRole erlaubt fuer Speziallabore
 * resultsInterpreter MS
-* resultsInterpreter only Reference(Practitioner)
+* resultsInterpreter only Reference(Practitioner or PractitionerRole)
 
 // Probe: Verweis auf PraxisSpecimen
 * specimen MS
