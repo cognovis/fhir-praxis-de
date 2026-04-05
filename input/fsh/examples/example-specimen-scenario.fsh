@@ -91,8 +91,8 @@ Usage: #example
 * identifier[0].value = "SE-2026-00150"
 
 * type.coding[snomed].system = "http://snomed.info/sct"
-* type.coding[snomed].code = #119361006
-* type.coding[snomed].display = "Plasma specimen"
+* type.coding[snomed].code = #119364003
+* type.coding[snomed].display = "Serum specimen"
 
 * subject = Reference(example-patient)
 

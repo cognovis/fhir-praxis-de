@@ -31,12 +31,12 @@ Description: "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO
 * type.coding[snomed] from ProbenmaterialSnomedVS (extensible)
 * type.coding[snomed].system = "http://snomed.info/sct"
 * type.coding[snomed].system MS
-* type.coding[snomed].code MS
+* type.coding[snomed].code 1..1 MS
 * type.coding[snomed].display MS
 
 * type.coding[ldt].system = "https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung"
 * type.coding[ldt].system MS
-* type.coding[ldt].code MS
+* type.coding[ldt].code 1..1 MS
 * type.coding[ldt].display MS
 
 // Must-Support Pflichtfelder
