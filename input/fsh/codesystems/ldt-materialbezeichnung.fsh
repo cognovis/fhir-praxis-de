@@ -18,3 +18,4 @@ Description: "Probenmaterial-Bezeichnungen gemaess LDT3-Schluessel (Feldkennung 
 * #Abstrich "Abstrich" "Abstrich (Mikrobiologie)"
 * #Liquor "Liquor" "Liquor cerebrospinalis"
 * #Stuhl "Stuhl" "Stuhlprobe (Mikrobiologie, Parasitologie)"
+* #Urin "Urin" "Urin (ungeklaert, Streifentest)"
