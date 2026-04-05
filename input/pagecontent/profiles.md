@@ -40,6 +40,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
 | **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
+| **[PraxisLabObservation](StructureDefinition-praxis-lab-observation.html)** | Laborergebnisse mit LOINC/LDT-Codierung | Observation status, category, code slicing, referenceRange, interpretation |
 | **[PraxisSpecimen](StructureDefinition-praxis-specimen.html)** | Probenmaterial für xDT-Adapter (LDT/GDT) | — (SNOMED-CT + optional LDT-Code) |
 
 ### Administrative
@@ -513,6 +514,125 @@ When capturing specimen information in a PVS:
 3. **Throat swab for microbiology:** SNOMED-CT `258529004` (Throat swab), collected by swab technique from pharynx.
 
 See examples: `example-specimen-blut-edta`, `example-specimen-urin-msu`, `example-specimen-rachenabstrich`.
+
+## PraxisLabObservation — Laborergebnisse mit LOINC/LDT-Codierung
+
+The `PraxisLabObservation` profile extends the base FHIR `Observation` resource to standardize laboratory result documentation in German ambulatory practice. It is designed for in-practice and rapid laboratory testing with flexible result types (quantitative, qualitative, coded) and dual coding support for LOINC and LDT test identifiers.
+
+### Core Structure
+
+| Element | Cardinality | Profile Constraint |
+|---------|-------------|-------------------|
+| `status` | 1..1 | MS; final \| preliminary \| registered \| amended (typically `#final` or `#preliminary`) |
+| `category` | 1..* | MS; sliced to require laboratory (1..1) |
+| `category[laboratory]` | 1..1 | MS; fixed to `http://terminology.hl7.org/CodeSystem/observation-category#laboratory` |
+| `code` | 1..1 | MS; test code — sliced with LOINC and LDT-Testkennung (FK 8420) |
+| `code.coding[loinc]` | 0..1 | MS; LOINC coding; system fixed to `http://loinc.org` |
+| `code.coding[ldt]` | 0..1 | MS; LDT test identifier; system fixed to `https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen` |
+| `code` Invariant | — | `praxis-lab-obs-code`; at least one of LOINC or LDT coding required (error level) |
+| `subject` | 1..1 | MS; Reference(Patient) — the patient for whom the test was performed |
+| `effective[x]` | 0..1 | MS; only `dateTime` allowed; when the measurement/test was performed |
+| `value[x]` | 0..1 | MS; only `Quantity` \| `string` \| `CodeableConcept` (quantitative, qualitative, or coded results) |
+| `interpretation` | 0..* | MS; result interpretation (H/L/N etc.); extensibly bound to HL7 ObservationInterpretation ValueSet |
+| `referenceRange` | 0..* | MS; normal range with UCUM-constrained low/high values |
+| `referenceRange.low` | 0..1 | MS; lower bound; system fixed to `http://unitsofmeasure.org` |
+| `referenceRange.high` | 0..1 | MS; upper bound; system fixed to `http://unitsofmeasure.org` |
+| `specimen` | 0..1 | MS; Reference(PraxisSpecimen) — the specimen analyzed (optional) |
+
+### Code Slicing — LOINC + LDT-Testkennung
+
+The profile enforces flexible coding with at least one code slice present:
+
+**LOINC (Slice: loinc):**
+- System: `http://loinc.org`
+- International standard codes (e.g., `4548-4` for HbA1c)
+- Recommended where LOINC mappings exist
+
+**LDT FK 8420 (Slice: ldt):**
+- System: `https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen`
+- German KBV LDT3 test identifiers (e.g., `03034000` for HbA1c)
+- Supports practice-specific tests without LOINC mappings
+
+**Invariant `praxis-lab-obs-code`:**
+```
+code.coding.where(system = 'http://loinc.org').exists() 
+  OR code.coding.where(system = 'https://fhir.cognovis.de/praxis/NamingSystem/ldt-testkennungen').exists()
+```
+At least one coding slice must be present; severity is `#error`.
+
+### Result Value Types
+
+The profile allows three forms of result representation:
+
+1. **Quantitative (valueQuantity):** Numeric value with unit (UCUM).
+   - Example: HbA1c = 6.1 %
+   - Must comply with UCUM for unit system
+
+2. **Qualitative (valueString):** Free text or predefined text result.
+   - Example: "negativ" (negative), "Leukozyten: gering" (slight)
+   - Used for rapid tests or text-based findings
+
+3. **Coded (valueCodeableConcept):** Structured coded result.
+   - Example: SNOMED-CT or local CodeSystem for presence/absence
+   - Used when specific result codes are defined
+
+### Interpretation and Reference Ranges
+
+**Interpretation (MS):**
+- Binds to HL7 ObservationInterpretation ValueSet (extensible)
+- Common codes: `H` (High), `L` (Low), `N` (Normal), `NEG` (Negative), `POS` (Positive)
+- Maps to clinical judgment: abnormal high, abnormal low, normal, critical, etc.
+
+**Reference Range (MS):**
+- Both `low` and `high` bounds must use UCUM-constrained units
+- System is fixed to `http://unitsofmeasure.org`
+- Supports age-specific or gender-specific ranges via `referenceRange.age` (optional)
+
+### Integration with LDT/GDT
+
+The profile is designed for xDT adapter workflows:
+
+- **LDT Result Mapping (Satzart 6310):** Incoming results from LDT order/result systems map to `PraxisLabObservation`:
+  - FK 8420 (test code) → `code.coding[ldt]`
+  - FK 8421 (result value) → `value[x]` (Quantity, string, or CodeableConcept)
+  - FK 8410 (collection date) → `specimen.collection.collectedDateTime`
+  - FK 8450 (result interpretation) → `interpretation`
+
+- **GDT Device Reference:** Lab analyzers (PraxisDevice) can be identified via `device` extension (future work)
+
+### Use Cases
+
+1. **Point-of-Care HbA1c:** In-practice LOINC-coded quantitative result with reference range and high interpretation.
+2. **Rapid Urine Test:** Qualitative (string) result "negativ", SNOMED-CT and LDT coding, no reference range.
+3. **Practice-Specific Rapid Test:** LDT-only coding (no LOINC), quantitative result, typical when commercial rapid tests lack LOINC mappings.
+4. **Historical Lab Result:** Imported lab result with both LOINC and LDT coding, full metadata (specimen, device, range).
+
+### PVS Implementation Note
+
+When capturing lab results in a PVS:
+
+1. Create an `Observation` resource of type `PraxisLabObservation`
+2. Populate `status` as `#final` (or `#preliminary` if not yet verified)
+3. Set `category[laboratory]` to the fixed laboratory code
+4. Populate `code.coding`:
+   - Add `code.coding[loinc]` if a LOINC mapping exists for the test
+   - Add `code.coding[ldt]` if the test is identified by LDT FK 8420 code
+   - **At least one must be present**
+5. Set `subject` to Reference(Patient)
+6. Populate `effective[x]` with the test date/time
+7. Populate `value[x]` with the appropriate result type (Quantity, string, or CodeableConcept)
+8. Add `interpretation` (e.g., `#H`, `#L`, `#N`) if provided by the analyzer or lab
+9. If quantitative: populate `referenceRange` with normal range limits using UCUM units
+10. If specimen was collected: Reference it via `specimen = Reference(PraxisSpecimen)`
+11. Validate the instance against `PraxisLabObservation` before submission
+
+### Examples
+
+- **HbA1c (Quantitative):** `lab-obs-example-hba1c` — LOINC + LDT coding, 6.1 %, high interpretation, EDTA-Blut specimen
+- **Urine Leukocytes (Qualitative):** `lab-obs-example-leukozyten-urin` — LOINC + LDT coding, "negativ" result, normal interpretation
+- **Practice Rapid Test (LDT-only):** `lab-obs-example-ldt-only-custom` — LDT coding only, quantitative in mg/dL, custom test without LOINC
+
+See examples: `lab-obs-example-hba1c`, `lab-obs-example-leukozyten-urin`, `lab-obs-example-ldt-only-custom`.
 
 ## Note on Resource Choice
 
