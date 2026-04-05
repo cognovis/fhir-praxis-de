@@ -365,6 +365,17 @@ Extensions for appointment scheduling and mode of consultation.
 |-----------|------|-------------|
 | `AppointmentModeExt` | code | Terminmodus (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch) |
 
+## Condition / Diagnose
+
+Extensions for German-specific diagnosis metadata and ICD-10-GM diagnosesicherheit (KVDT 6.06).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `DauerdiagnoseExt` | boolean | Kennzeichnung einer Dauerdiagnose (chronische Diagnose). Diagnosen mit diesem Flag werden automatisch in Folgequartale übernommen. |
+| `DiagnoseSeiteExt` | CodeableConcept | Seitenangabe der Diagnose (links/rechts/beidseitig). Ergänzt die KBV bodySite-Kodierung. Bindet an DiagnoseSeiteVS. |
+
+**Note:** ICD-10-GM Diagnosesicherheit (A/G/V/Z) ist Pflichtfeld bei KV-Abrechnung und wird via upstream Extension `http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit` auf Coding-Ebene gespeichert. Diese Extension bindet automatisch an KBV_VS_SFHIR_ICD_DIAGNOSESICHERHEIT und muss vom PVS bei jeder Diagnose gesetzt werden.
+
 ## Medication / Verordnung
 
 Extensions for prescription and medication management.
