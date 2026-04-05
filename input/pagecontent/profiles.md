@@ -167,6 +167,48 @@ A PVS adapter should:
 
 See examples: `example-care-team`, `example-care-team-small`, `example-care-team-inactive`, `example-care-team-mvz`.
 
+## PraxisDevice — Medizingeräte und Laboranalyzatoren
+
+The `PraxisDevice` profile extends the base FHIR `Device` resource for medical devices and lab analyzers in German ambulatory practice. It integrates with GDT 3.5 device data (Feldkennung 8402 Gerätename, FK 8402 Gerätekennung) and provides structured coding for device identification.
+
+### Core Structure
+
+| Element | Cardinality | Profile Constraint |
+|---------|-------------|-------------------|
+| `status` | 0..1 | MS; active \| inactive \| entered-in-error |
+| `identifier` | 0..* | MS; sliced by system (gdtId) |
+| `identifier[gdtId]` | 0..1 | MS; GDT device identifier (FK 8402) with system = gdt-device-id |
+| `deviceName` | 0..* | MS; device name(s) with type classification |
+| `deviceName.name` | 1..1 | MS; human-readable device name |
+| `deviceName.type` | 1..1 | MS; manufacturer-name \| user-friendly-name \| patient-reported-name |
+| `manufacturer` | 0..1 | MS; device manufacturer (e.g., "Roche Diagnostics") |
+| `modelNumber` | 0..1 | MS; device model (e.g., "Cobas 6000") |
+| `version` | 0..* | MS; software/firmware version (optional but recommended) |
+| `type` | 0..1 | MS; device type, preferably SNOMED-CT (e.g., automated analyzer, ECG device) |
+
+### Use Cases
+
+1. **Lab Analyzer:** A fully-automated clinical chemistry analyzer (e.g., Roche Cobas 6000) with complete identification and version tracking.
+2. **ECG Device:** A portable EKG device (e.g., Schiller AT-102) with minimal required fields.
+3. **PVS Device Registry:** Practice management systems maintain a registry of devices with GDT identifiers for test ordering and result routing.
+
+### GDT Integration Pattern
+
+GDT 3.5 device data (FK 8402 Gerätekennung) maps to `PraxisDevice.identifier[gdtId].value`. The practice management system uses this identifier to:
+- Route lab orders to the correct device
+- Match incoming GDT results (Satzart 6310) to the originating device
+- Track device metadata (manufacturer, model, version) for quality assurance
+
+See examples: `example-cobas-6000`, `example-schiller-at102`.
+
+### PVS Integration Pattern
+
+A PVS adapter should:
+1. Create a `PraxisDevice` instance for each device managed by the practice.
+2. Populate the `identifier[gdtId].value` with the GDT device identifier from the PVS.
+3. Use `deviceName`, `manufacturer`, `modelNumber`, `version`, and `type` to encode device metadata.
+4. Update device status (`active` / `inactive`) to reflect the device's current operational state in the practice.
+
 ## Note on Resource Choice
 
 The choice of base resource follows FHIR R4 semantics:
@@ -175,3 +217,4 @@ The choice of base resource follows FHIR R4 semantics:
 - **Basic** for KV benchmarks: Benchmark data has no natural FHIR resource; Basic is the designated catch-all.
 - **PaymentReconciliation** for Honorarbescheid: This normative R4 resource represents payment advice from a payer, which is the function of the Honorarbescheid.
 - **Provenance** for AI tracking: Provenance records "who did what" — an AI system generating content is a provenance event.
+- **Device** for medical equipment: Device is the FHIR R4 standard resource for medical instruments, analyzers, and other equipment used in clinical care. The PraxisDevice profile constrains it for German ambulatory practice with GDT integration.

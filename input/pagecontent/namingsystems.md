@@ -84,6 +84,18 @@ Identifier-System für Scheindiagnosen (Diagnosen auf Abrechnungsscheinen). Dien
 
 **Usage:** Condition.identifier to link diagnosis records to billing forms (Scheine) for reverse-path synchronization.
 
+## Device Identifiers
+
+### gdt-device-id — GDT Device Identifier (FK 8402)
+
+GDT 3.5 Gerätekennung (Feldkennung 8402) — uniquely identifies a medical device or lab analyzer within GDT data streams. Used to link incoming GDT lab results (Satzart 6310) to the originating device and to maintain a PVS device registry.
+
+**Canonical URI:** `https://fhir.cognovis.de/praxis/NamingSystem/gdt-device-id`
+
+**GDT Reference:** FK 8402 (Gerätekennung) in GDT 3.5 specification
+
+**Usage:** Device.identifier[gdtId] in the PraxisDevice profile to establish the bidirectional link between FHIR device records and PVS-managed devices. The practice management system uses this identifier to route lab orders to specific analyzers and to match results to devices.
+
 ## Architecture Notes
 
 All NamingSystems are defined with `kind: identifier` and use URI-based uniqueIds. They serve as metadata for the FHIR adapter to:
