@@ -1,0 +1,34 @@
+// WOP (Wohnortprinzip) auf Coverage
+// AK3: WOP Extension aus de.basisprofil.r4 (http://fhir.de/StructureDefinition/gkv/wop)
+// Extension wird NICHT neu definiert — sie kommt direkt aus dem Upstream-Paket
+
+Instance: example-coverage-gkv-wop
+InstanceOf: Coverage
+Title: "GKV-Coverage mit WOP Nordrhein"
+Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=38 Nordrhein) aus de.basisprofil.r4."
+Usage: #example
+* status = #active
+* type.coding[0].system = "http://fhir.de/CodeSystem/versicherungsart-de-basis"
+* type.coding[0].code = #GKV
+* type.coding[0].display = "gesetzliche Krankenversicherung"
+* beneficiary = Reference(example-patient)
+* payor[0].display = "AOK Rheinland/Hamburg"
+* extension[0].url = "http://fhir.de/StructureDefinition/gkv/wop"
+* extension[0].valueCoding.system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP"
+* extension[0].valueCoding.code = #38
+* extension[0].valueCoding.display = "Nordrhein"
+
+Instance: example-coverage-gkv-wop-west
+InstanceOf: Coverage
+Title: "GKV-Coverage mit WOP Westfalen-Lippe"
+Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=17 Westfalen-Lippe)."
+Usage: #example
+* status = #active
+* type.coding[0].system = "http://fhir.de/CodeSystem/versicherungsart-de-basis"
+* type.coding[0].code = #GKV
+* beneficiary = Reference(example-patient)
+* payor[0].display = "Techniker Krankenkasse"
+* extension[0].url = "http://fhir.de/StructureDefinition/gkv/wop"
+* extension[0].valueCoding.system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP"
+* extension[0].valueCoding.code = #17
+* extension[0].valueCoding.display = "Westfalen-Lippe"
