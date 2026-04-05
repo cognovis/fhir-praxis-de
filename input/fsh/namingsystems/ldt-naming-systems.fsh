@@ -3,7 +3,7 @@ InstanceOf: NamingSystem
 Usage: #definition
 * name = "LdtTestkennungen"
 * status = #draft
-* kind = #identifier
+* kind = #codesystem
 * date = "2026-04-05"
 * publisher = "cognovis GmbH"
 * description = "LDT-Testkennungen (Labor-Ergebnis-Codes) gemaess LDT-Standard. OID 1.2.276.0.76.4.78 ist die offizielle OID fuer LDT-Testkennungen in Deutschland."
