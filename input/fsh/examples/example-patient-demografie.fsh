@@ -3,7 +3,7 @@
 // AK2: Ortsteil/Stadtteil mit iso21090-ADXP-precinct Extension auf Address.extension
 
 Instance: example-patient-geburtsname
-InstanceOf: Patient
+InstanceOf: FPDEPatient
 Title: "Anna Mueller geb. Schmidt — Patient mit Geburtsnamen"
 Description: "Patientenprofil mit offiziellem Namen und Geburtsnamen (use=maiden), demonstriert humanname-own-name Extension aus de.basisprofil.r4."
 Usage: #example
@@ -17,7 +17,7 @@ Usage: #example
 * birthDate = "1985-04-22"
 
 Instance: example-patient-ohne-geburtsname
-InstanceOf: Patient
+InstanceOf: FPDEPatient
 Title: "Thomas Bauer — Patient ohne Geburtsnamen"
 Description: "Patientenprofil ohne Geburtsnamen (Validierung muss weiterhin erfolgreich sein)."
 Usage: #example
@@ -27,7 +27,7 @@ Usage: #example
 * birthDate = "1970-11-05"
 
 Instance: example-patient-ortsteil
-InstanceOf: Patient
+InstanceOf: FPDEPatient
 Title: "Maria Gonzalez — Patient mit Ortsteil/Stadtteil in Adresse"
 Description: "Patientenprofil mit Stadtteil-Extension (iso21090-ADXP-precinct) auf Address.extension, wie in AddressDeBasis vorgesehen."
 Usage: #example

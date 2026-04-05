@@ -70,6 +70,42 @@ Content-Type: application/fhir+json
 
 ###
 
+### Negativ-Test: Coverage mit ungültigem WOP-Code muss Fehler liefern
+# @name coverage-gkv-wop-invalid
+# Expected: OperationOutcome with errors (code "99" is not in KBV_VS_SFHIR_ITA_WOP)
+# Note: Only validates if Aidbox has KBV terminology loaded (may pass with warning if not)
+POST http://localhost:8080/fhir/Coverage/$validate
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Coverage",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://fhir.de/CodeSystem/versicherungsart-de-basis",
+      "code": "GKV",
+      "display": "gesetzliche Krankenversicherung"
+    }]
+  },
+  "beneficiary": {
+    "reference": "Patient/example"
+  },
+  "payor": [{
+    "display": "AOK Rheinland/Hamburg"
+  }],
+  "extension": [{
+    "url": "http://fhir.de/StructureDefinition/gkv/wop",
+    "valueCoding": {
+      "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP",
+      "code": "99",
+      "display": "Ungültig"
+    }
+  }]
+}
+
+###
+
 ### GKV-Coverage ohne WOP (muss weiterhin valide sein)
 # @name coverage-gkv-ohne-wop
 # Expected: OperationOutcome with "all ok" (no errors)

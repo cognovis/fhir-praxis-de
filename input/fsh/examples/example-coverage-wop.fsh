@@ -3,7 +3,7 @@
 // Extension wird NICHT neu definiert — sie kommt direkt aus dem Upstream-Paket
 
 Instance: example-coverage-gkv-wop
-InstanceOf: Coverage
+InstanceOf: FPDECoverageGKV
 Title: "GKV-Coverage mit WOP Nordrhein"
 Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=38 Nordrhein) aus de.basisprofil.r4."
 Usage: #example
@@ -19,7 +19,7 @@ Usage: #example
 * extension[0].valueCoding.display = "Nordrhein"
 
 Instance: example-coverage-gkv-wop-west
-InstanceOf: Coverage
+InstanceOf: FPDECoverageGKV
 Title: "GKV-Coverage mit WOP Westfalen-Lippe"
 Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=17 Westfalen-Lippe)."
 Usage: #example
