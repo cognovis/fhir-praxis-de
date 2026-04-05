@@ -41,8 +41,8 @@ InstanceOf: Observation
 Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #1234-5
-* code.coding[0].display = "Leucocytes [#/volume] in Blood"
+* code.coding[0].code = #6690-2
+* code.coding[0].display = "Leukocytes [#/volume] in Blood by Automated count"
 * subject = Reference(Patient/example)
 * effectiveDateTime = "2025-07-15"
 * valueQuantity.value = 6.8

@@ -88,7 +88,7 @@ Zulässige Werte für die Klassifizierung von Anamneseboegen.
 
 Laborspezifische Interpretationscodes für Laborbefunde (Observation.interpretation). Diese ValueSet referenziert die HL7 v3-ObservationInterpretation CodeSystem, die international standardisierte Codes für die klinische Interpretation von Laborergebnissen bereitstellt.
 
-- **Includes:** All codes from [HL7 v3-ObservationInterpretation](http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation): N (Normal), H (High), L (Low), HH (Critical high), LL (Critical low), A (Abnormal), AA (Critical abnormal), POS (Positive), NEG (Negative)
+- **Includes:** Selected lab-relevant codes from [HL7 v3-ObservationInterpretation](http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation): N (Normal), H (High), L (Low), HH (Critical high), LL (Critical low), A (Abnormal), AA (Critical abnormal), POS (Positive), NEG (Negative)
 - **Binding:** Used by Observation.interpretation in lab result workflows
 - **Usage:** Provides standardized interpretation flags for lab test results across German and international lab systems
 
