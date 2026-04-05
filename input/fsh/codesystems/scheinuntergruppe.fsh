@@ -1,4 +1,4 @@
-// INTENTIONAL SYNTAX ERROR FOR RED PHASE — missing CodeSystem keyword
+CodeSystem: KvdtScheinuntergruppeCS
 Id: kvdt-scheinuntergruppe
 Title: "KVDT Scheinuntergruppe (KBV Schlüsseltabelle)"
 Description: "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabelle. Spiegelt KBV_CS_SFHIR_KBV_SCHEINART wider (OID 1.2.276.0.76.5.235)."
