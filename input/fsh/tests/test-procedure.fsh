@@ -1,8 +1,8 @@
-// Test: Ambulante Koloskopie — RED phase (profile not yet defined)
+// Test: Ambulante Koloskopie
 Instance: test-procedure-koloskopie
 InstanceOf: ProcedureAmbulantDE
 Title: "Test: Ambulante Koloskopie"
-Description: "Testinstanz für ProcedureAmbulantDE — erwartet Fehler bis Profil implementiert ist."
+Description: "Testinstanz für ProcedureAmbulantDE — validiert OPS-Kodierung mit Koloskopie."
 * status = #completed
 * subject = Reference(Patient/test-patient-1)
 * code.coding[ops].system = "http://fhir.de/CodeSystem/bfarm/ops"

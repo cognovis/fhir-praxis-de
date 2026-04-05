@@ -6,7 +6,7 @@ InstanceOf: ProcedureAmbulantDE
 Title: "Beispiel: Ambulante Koloskopie"
 Description: "Diagnostische Koloskopie (OPS 1-650.1) als ambulanter Eingriff."
 * status = #completed
-* subject = Reference(Patient/example-patient-gkv)
+* subject = Reference(Patient/example-patient)
 * performedDateTime = "2024-03-15"
 * code.coding[ops].system = "http://fhir.de/CodeSystem/bfarm/ops"
 * code.coding[ops].version = "2024"
@@ -19,7 +19,7 @@ InstanceOf: ProcedureAmbulantDE
 Title: "Beispiel: Wundversorgung links"
 Description: "Wundversorgung (OPS 5-916.00) mit Seitenlokalisation links."
 * status = #completed
-* subject = Reference(Patient/example-patient-gkv)
+* subject = Reference(Patient/example-patient)
 * performedDateTime = "2024-03-20"
 * code.coding[ops].system = "http://fhir.de/CodeSystem/bfarm/ops"
 * code.coding[ops].version = "2024"
