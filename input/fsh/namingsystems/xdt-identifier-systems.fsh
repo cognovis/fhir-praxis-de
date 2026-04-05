@@ -3,7 +3,6 @@ InstanceOf: NamingSystem
 Usage: #definition
 * name = "GdtAnforderungsIdent"
 * status = #draft
-* unknownInvalidField = "this-field-does-not-exist"
 * kind = #identifier
 * date = "2026-04-05"
 * publisher = "cognovis GmbH"
@@ -16,7 +15,7 @@ Instance: kvdt-fallnummer
 InstanceOf: NamingSystem
 Usage: #definition
 * name = "KvdtFallnummer"
-* status = #INVALID_STATUS
+* status = #draft
 * kind = #identifier
 * date = "2026-04-05"
 * publisher = "cognovis GmbH"
@@ -29,7 +28,7 @@ Instance: gdt-device-id
 InstanceOf: NamingSystem
 Usage: #definition
 * name = "GdtDeviceId"
-* status = #INVALID_STATUS
+* status = #draft
 * kind = #identifier
 * date = "2026-04-05"
 * publisher = "cognovis GmbH"
