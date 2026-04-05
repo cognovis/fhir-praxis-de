@@ -113,6 +113,7 @@ Content-Type: application/fhir+json
   },
   "subject": { "reference": "Patient/example-patient" },
   "extension": [
+    { "url": "https://fhir.cognovis.de/praxis/StructureDefinition/dauerdiagnose", "valueBoolean": true },
     {
       "url": "https://fhir.cognovis.de/praxis/StructureDefinition/diagnose-seite",
       "valueCodeableConcept": {

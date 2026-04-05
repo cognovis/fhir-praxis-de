@@ -59,7 +59,7 @@ The `PraxisCondition` profile extends the base FHIR `Condition` resource to stan
 | Element | Cardinality | Notes |
 |---------|-------------|-------|
 | `code` | 1..* | Must-Support. ICD-10-GM coding from BFARM CodeSystem. |
-| `code.coding[icd10gm]` | 0..* | Sliced by system. Must include at least one ICD-10-GM coding. |
+| `code.coding[icd10gm]` | 1..* | Sliced by system. Must include at least one ICD-10-GM coding. |
 | `code.coding[icd10gm].extension[diagnosesicherheit]` | 0..1 | Must-Support. Upstream extension binding to KBV_VS_SFHIR_ICD_DIAGNOSESICHERHEIT (A/G/V/Z). **Required by KV for billing claims.** |
 | `clinicalStatus` | 0..1 | Must-Support. Active, recurrence, remission, resolved. |
 | `verificationStatus` | 0..1 | Must-Support. Unconfirmed, provisional, differential, confirmed, refuted, entered-in-error. |

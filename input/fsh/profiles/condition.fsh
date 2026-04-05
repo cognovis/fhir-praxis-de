@@ -8,7 +8,7 @@ Title: "Praxis Condition"
 Description: "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM Diagnosesicherheit (KVDT 6.06), Dauerdiagnose und Diagnoseseite."
 
 // Must-Support elements
-* code MS
+* code 1..1 MS
 * code.coding MS
 * clinicalStatus MS
 * verificationStatus MS
@@ -17,7 +17,7 @@ Description: "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM D
 * code.coding ^slicing.discriminator.type = #value
 * code.coding ^slicing.discriminator.path = "system"
 * code.coding ^slicing.rules = #open
-* code.coding contains icd10gm 0..* MS
+* code.coding contains icd10gm 1..* MS
 
 * code.coding[icd10gm].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
 * code.coding[icd10gm].extension contains

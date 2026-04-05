@@ -60,7 +60,7 @@ Usage: #example
 * subject = Reference(example-patient)
 * recordedDate = "2020-03-15"
 * extension[dauerdiagnose].valueBoolean = true
-* extension[diagnoseSeite].valueCodeableConcept = DiagnoseSeiteCS#B "Beidseitig"
+* extension[diagnoseSeite].valueCodeableConcept = DiagnoseSeiteCS#R "Rechts"
 
 Instance: ExampleAiProvenance
 InstanceOf: Provenance
