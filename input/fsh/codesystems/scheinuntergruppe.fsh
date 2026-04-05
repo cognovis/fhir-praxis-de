@@ -1,24 +1,40 @@
 CodeSystem: KvdtScheinuntergruppeCS
 Id: kvdt-scheinuntergruppe
 Title: "KVDT Scheinuntergruppe (KBV Schlüsseltabelle)"
-Description: "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabelle. Intentionaler lokaler Spiegel von KBV_CS_SFHIR_KBV_SCHEINART (OID 1.2.276.0.76.5.235): Die KBV-Canonical-URL wird bewusst als ^url verwendet, damit Codes systemkonform gegen das offizielle KBV-System validiert werden können."
+Description: "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabelle S_KBV_SCHEINART V1.02. Intentionaler lokaler Spiegel von KBV_CS_SFHIR_KBV_SCHEINART (OID 1.2.276.0.76.5.235): Die KBV-Canonical-URL wird bewusst als ^url verwendet, damit Codes systemkonform gegen das offizielle KBV-System validiert werden können."
 * ^url = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
+* ^version = "1.02"
 * ^identifier.system = "urn:ietf:rfc:3986"
 * ^identifier.value = "urn:oid:1.2.276.0.76.5.235"
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
 * ^content = #complete
+// 00er: Primärfall
 * #00 "Behandlungsausweis" "Primärfall, ambulant kurativ-Hausarzt"
-* #01 "Überweisungsschein" "Kurativ-Arzt"
+// 01xx: Kurativ-Arzt (zweistellige Untertypen)
+* #0101 "Überweisungsschein" "Kurativ-Arzt"
+* #0102 "Überweisungsschein Vertretung" "Kurativ-Arzt Vertretung"
+* #0104 "Überweisungsschein Notfall" "Kurativ-Arzt Notfall"
+// 10: Notfall-/Vertretungsfall
 * #10 "Behandlungsschein ambulante Notfallbehandlung" "Notfall- oder Vertretungsfall"
+// 20er: Überweisung
+* #20 "Überweisungsschein" "Allgemeine Überweisung"
 * #21 "Überweisungsschein zur Mitbehandlung" "Kurativ-spezialärztlich"
 * #22 "Überweisungsschein zur Konsiliaruntersuchung" "Konsiliaruntersuchung durch Facharzt"
 * #23 "Überweisungsschein zur Auftragsleistung" "Laborauftrag oder Einzelleistungsauftrag"
 * #24 "Überweisungsschein zur Weiterbehandlung" "Weiterbehandlung durch anderen Arzt"
 * #25 "Überweisungsschein zur Mitbehandlung bei Schwangerschaft" "Schwangerschaftsbegleitende Mitbehandlung"
+* #26 "Überweisungsschein zur Mitbehandlung Psychiatrie" "Psychiatrische Mitbehandlung"
 * #27 "Überweisungsschein Labor" "Laborüberweisung"
 * #28 "Überweisungsschein Pathologie" "Pathologieüberweisung"
+// 30er: Belegärztlich
 * #31 "Überweisungsschein zur belegärztlichen Behandlung" "Aufnahme zur stationären Behandlung"
 * #32 "Belegärztliche Notaufnahme" "Notfallaufnahme durch Belegarzt"
+// 40er: Notfall
 * #41 "Notfallschein" "Ambulante Notfallbehandlung"
+* #42 "Notfallschein Unfall" "Notfallbehandlung bei Unfall"
+* #43 "Notfallschein Arbeitsunfall" "Notfallbehandlung Arbeitsunfall (BG)"
+* #44 "Notfallschein Bereitschaftsdienst" "Bereitschaftsdienstnotfall"
+* #45 "Notfallschein KV-Notfallpraxis" "KV-Notfallpraxis"
+* #46 "Notfallschein Krankenhausnotaufnahme" "Notfallbehandlung in Krankenhausambulanz"
