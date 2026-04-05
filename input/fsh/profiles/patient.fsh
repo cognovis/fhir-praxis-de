@@ -8,6 +8,6 @@ Id: fpde-patient
 Title: "FPDE Patient"
 Description: "Patient-Profil der deutschen Praxisverwaltung. Unterstützt Geburtsname (use=maiden), Ortsteil/Stadtteil und Stammdaten."
 * name.family.extension contains
-    http://hl7.org/fhir/StructureDefinition/humanname-own-name named eigenname 0..1 MS
+    http://hl7.org/fhir/StructureDefinition/humanname-own-name|5.2.0 named eigenname 0..1 MS
 * address.extension contains
-    http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct named stadtteil 0..1 MS
+    http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct|5.2.0 named stadtteil 0..1 MS

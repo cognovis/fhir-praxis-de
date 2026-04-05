@@ -10,7 +10,7 @@ Description: "Profil fuer Behandler-Teams in der deutschen ambulanten Versorgung
 * participant ^slicing.discriminator.path = "role"
 * participant ^slicing.rules = #open
 * participant contains
-    behandler 0..*
+    behandler 0..* MS
 
 // Behandler-slice: Rollenkodierung via BehandlerRolleVS
 * participant[behandler].role from BehandlerRolleVS (required)

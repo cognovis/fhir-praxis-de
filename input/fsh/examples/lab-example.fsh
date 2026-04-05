@@ -17,6 +17,7 @@ Usage: #example
 * code.coding[ldt].display = "HbA1c"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T08:30:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 6.1
 * valueQuantity.unit = "%"
 * valueQuantity.system = "http://unitsofmeasure.org"
@@ -50,6 +51,7 @@ Usage: #example
 * code.coding[ldt].display = "Leukozyten (Urin)"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T09:15:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueString = "negativ"
 * interpretation.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
 * interpretation.coding[0].code = #N
@@ -69,6 +71,7 @@ Usage: #example
 * code.coding[ldt].display = "Praxisspezifischer Schnelltest XY"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T10:00:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 42.0
 * valueQuantity.unit = "mg/dL"
 * valueQuantity.system = "http://unitsofmeasure.org"
@@ -88,6 +91,8 @@ Usage: #example
 // ServiceRequest example kept for reference (LDT Auftragsnummer)
 Instance: ldt-servicerequest-example
 InstanceOf: ServiceRequest
+Title: "ServiceRequest: LDT Laborauftrag"
+Description: "Laborauftrag mit LDT-Auftragsnummer fuer Kreatinin-Bestimmung."
 Usage: #example
 * status = #completed
 * intent = #order

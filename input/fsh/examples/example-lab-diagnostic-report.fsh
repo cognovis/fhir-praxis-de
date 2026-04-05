@@ -21,6 +21,7 @@ Usage: #example
 * code.coding[ldt].display = "Leukozyten"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-01T08:30:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 7.2
 * valueQuantity.unit = "10*3/uL"
 * valueQuantity.system = "http://unitsofmeasure.org"
@@ -70,6 +71,7 @@ Usage: #example
 * code.coding[loinc].display = "Bakterien identifiziert in Probenmaterial mittels Kultur"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
+* performer[0] = Reference(example-practitioner)
 * valueCodeableConcept.coding[0].system = "http://snomed.info/sct"
 * valueCodeableConcept.coding[0].code = #112283007
 * valueCodeableConcept.coding[0].display = "Escherichia coli"
@@ -87,6 +89,7 @@ Usage: #example
 * code.coding[loinc].display = "Ciprofloxacin [Empfindlichkeit] mittels Bestimmung der minimalen Hemmkonzentration (MHK)"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-02"
+* performer[0] = Reference(example-practitioner)
 * valueCodeableConcept.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation"
 * valueCodeableConcept.coding[0].code = #S
 * valueCodeableConcept.coding[0].display = "Susceptible"
@@ -126,6 +129,7 @@ Usage: #example
 * code.coding[loinc].display = "Pathology synoptic report"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-03"
+* performer[0] = Reference(example-practitioner)
 * valueCodeableConcept.coding[0].system = "http://snomed.info/sct"
 * valueCodeableConcept.coding[0].code = #254701007
 * valueCodeableConcept.coding[0].display = "Basal cell carcinoma of skin"
@@ -168,7 +172,7 @@ Usage: #example
 * resultsInterpreter[0] = Reference(example-practitioner)
 * conclusion = "Basalzellkarzinom, nodulaerer Typ, R0"
 * presentedForm[0].contentType = #application/pdf
-* presentedForm[0].url = "https://befunde.labor-beispiel.de/pat-2026-00099.pdf"
+* presentedForm[0].url = "http://example.org/lab/reports/pat-2026-00099.pdf"
 * presentedForm[0].title = "Histologiebericht Basalzellkarzinom"
 
 // --- Beispiel 4: Teilbefund (preliminary status) ---
@@ -201,6 +205,7 @@ Usage: #example
 * code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-01-15T08:30:00+01:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 7.8
 * valueQuantity.unit = "%"
 * valueQuantity.system = "http://unitsofmeasure.org"
@@ -223,6 +228,7 @@ Usage: #example
 * code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T08:30:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 7.2
 * valueQuantity.unit = "%"
 * valueQuantity.system = "http://unitsofmeasure.org"
@@ -245,6 +251,7 @@ Usage: #example
 * code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-07-10T08:30:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 6.9
 * valueQuantity.unit = "%"
 * valueQuantity.system = "http://unitsofmeasure.org"

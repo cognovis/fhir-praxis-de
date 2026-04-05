@@ -3,6 +3,7 @@ InstanceOf: ConceptMap
 Title: "ScheinartCS → KVDT Scheinuntergruppe"
 Description: "Mappt PVS-interne Scheinart-Codes (ScheinartCS) auf KVDT-offizielle Scheinuntergruppe-Codes (KBV_CS_SFHIR_KBV_SCHEINART). Nur GKV-relevante Codes (gkv, ue, not) haben eine Entsprechung; pkv, bg, igel sind nicht in der KBV Schlüsseltabelle."
 Usage: #definition
+* name = "ScheinartToKvdtCM"
 * url = "https://fhir.cognovis.de/praxis/ConceptMap/scheinart-to-kvdt"
 * status = #active
 * experimental = false
@@ -45,6 +46,7 @@ InstanceOf: ConceptMap
 Title: "KVDT Scheinuntergruppe → ScheinartCS"
 Description: "Reverse-Mapping: KVDT-offizielle Scheinuntergruppe-Codes (KBV_CS_SFHIR_KBV_SCHEINART) auf PVS-interne Scheinart-Codes (ScheinartCS). Für KVDT-Import: Adapter nutzt diese Map um empfangene KVDT-Codes in interne Scheinart-Codes zu übersetzen."
 Usage: #definition
+* name = "KvdtToScheinartCM"
 * url = "https://fhir.cognovis.de/praxis/ConceptMap/kvdt-to-scheinart"
 * status = #active
 * experimental = false

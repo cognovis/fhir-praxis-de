@@ -15,7 +15,7 @@ Profile: PraxisSpecimen
 Parent: Specimen
 Id: praxis-specimen
 Title: "Praxis Specimen"
-Description: "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO_LAB_Specimen (kbv.mio.laborbefund). SNOMED-CT ist Pflichtcoding (type.coding[snomed]); zusaetzlicher LDT-Code (FK 8428) optional. Labore vergeben Proben-Identifier mit eigener System-URL (z.B. https://labor-beispiel.de/proben-id)."
+Description: "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO_LAB_Specimen (kbv.mio.laborbefund). SNOMED-CT ist Pflichtcoding (type.coding[snomed]); zusaetzlicher LDT-Code (FK 8428) optional. Labore vergeben Proben-Identifier mit eigener System-URL (z.B. http://example.org/lab/specimen-id)."
 
 // Proben-Identifier: optional, labs vergeben eigene Identifier
 * identifier 0..* MS
@@ -26,7 +26,7 @@ Description: "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO
 * type.coding ^slicing.discriminator.type = #value
 * type.coding ^slicing.discriminator.path = "system"
 * type.coding ^slicing.rules = #open
-* type.coding contains snomed 1..1 MS and ldt 0..1
+* type.coding contains snomed 1..1 MS and ldt 0..1 MS
 
 * type.coding[snomed] from ProbenmaterialSnomedVS (extensible)
 * type.coding[snomed].system = "http://snomed.info/sct"

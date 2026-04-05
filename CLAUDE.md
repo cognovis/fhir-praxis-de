@@ -38,6 +38,12 @@ Always invoke `/aidbox` before manually curl-debugging — it contains learnings
 - **Validation:** `POST /fhir/{ResourceType}/$validate`
 - **ValueSet Expand:** `GET /fhir/ValueSet/$expand?url=...`
 
+## Downstream Dependencies
+
+When publishing a new version of fhir-praxis-de:
+- **fhir-dental-de** pins `de.cognovis.fhir.praxis` in `sushi-config.yaml` → must be updated to the new version
+- **mira-adapters** (`packages/fhir-de/scripts/generate.ts`) fetches praxis via `fromPackageRef` from GitHub Pages → picks up latest automatically after IG Publisher deploys, no manual update needed
+
 ## Conventions
 
 - All profiles are written in FSH (FHIR Shorthand) in `input/fsh/`

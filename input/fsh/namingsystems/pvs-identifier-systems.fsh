@@ -117,3 +117,16 @@ Usage: #definition
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/scheindiagnosen"
 * uniqueId[0].preferred = true
+
+Instance: insurance-plan-id
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "InsurancePlanId"
+* status = #draft
+* kind = #identifier
+* date = "2026-04-05"
+* publisher = "cognovis GmbH"
+* description = "PVS-interner Identifier fuer InsurancePlan-Ressourcen (Kassentarife, PKV-Tarife)"
+* uniqueId[0].type = #uri
+* uniqueId[0].value = "https://fhir.cognovis.de/praxis/sid/insurance-plan-id"
+* uniqueId[0].preferred = true

@@ -3,6 +3,7 @@ Id: lab-interpretation-vs
 Title: "Lab Interpretation Value Set"
 Description: "Laborspezifische Interpretationscodes aus FHIR v3-ObservationInterpretation fuer den Einsatz in deutschen Labor-Befunden (Observation.interpretation)"
 * ^status = #draft
+* ^experimental = false
 * ^date = "2026-04-05"
 * ^publisher = "cognovis GmbH"
 * http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation#N "Normal"

@@ -7,7 +7,7 @@ Title: "Specimen: Venaeses Blut (EDTA)"
 Description: "EDTA-Blutprobe fuer Haematologie und klinische Chemie."
 Usage: #example
 
-* identifier[0].system = "https://labor-beispiel.de/proben-id"
+* identifier[0].system = "http://example.org/lab/specimen-id"
 * identifier[0].value = "BL-2026-00147"
 
 * type.coding[snomed].system = "http://snomed.info/sct"
@@ -36,7 +36,7 @@ Title: "Specimen: Urin Mittelstrahl"
 Description: "Mittelstrahlurin (MSU) fuer Urinalyse und Urinkultur."
 Usage: #example
 
-* identifier[0].system = "https://labor-beispiel.de/proben-id"
+* identifier[0].system = "http://example.org/lab/specimen-id"
 * identifier[0].value = "UR-2026-00148"
 
 * type.coding[snomed].system = "http://snomed.info/sct"
@@ -87,7 +87,7 @@ Title: "Specimen: Serum (ohne collection.method)"
 Description: "Serumprobe mit collectedDateTime und bodySite, aber ohne collection.method — validiert korrekt da method optional."
 Usage: #example
 
-* identifier[0].system = "https://labor-beispiel.de/proben-id"
+* identifier[0].system = "http://example.org/lab/specimen-id"
 * identifier[0].value = "SE-2026-00150"
 
 * type.coding[snomed].system = "http://snomed.info/sct"
@@ -117,6 +117,7 @@ Usage: #example
 * code.coding[0].display = "Hämoglobin [Masse/Volumen] in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-05T08:30:00+02:00"
+* performer[0] = Reference(example-practitioner)
 * valueQuantity.value = 14.2
 * valueQuantity.unit = "g/dL"
 * valueQuantity.system = "http://unitsofmeasure.org"
