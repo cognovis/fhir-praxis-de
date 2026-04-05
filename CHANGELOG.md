@@ -4,23 +4,40 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
-## [0.20.0] - 2026-04-05
+### Bug Fixes
 
-### Added
+- **fpde-ria**: Address review findings iteration 1 — CHANGELOG ordering
+- **fpde-ria**: Address review findings iteration 2 — add 0.19.0 section, clear stale unreleased
+- **fpde-ria**: Correct CHANGELOG — ServiceRequest (not DeviceRequest), restore 0.19.0 items
 
-- Medication extensions: `aut-idem`, `is-erezept` (MedicationRequest flags), `is-dauermedikation` (MedicationStatement flag)
-- Medication price extensions: `avp` (Apothekenverkaufspreis) and `festbetrag` (GKV-Festbetrag) on MedicationRequest
-- CodeSystem `rezept-typ`: gkv, privat, btm, t-rezept
-- CodeSystem `medikation-kategorie`: dauermedikation, bedarfsmedikation
-- NamingSystem `scheindiagnosen`: Identifier-System fuer Scheindiagnosen (Condition.identifier)
-- Documentation comment in `genehmigung.fsh` explaining sub-extension addressing convention
+### Documentation
 
-## [0.19.0] - 2026-04-05
+- Update feature documentation for fpde-ria
 
-### Added
+### Features
 
-- Custom device order extensions: `ManufacturingDeadline`, `DigitalWorkflow` on ServiceRequest
-- Workshop presentation for Heidonto workshop with device order examples and dental lab orders
+- **fpde-ria**: Green — add medication extensions, CodeSystems, NamingSystem + version bump
+
+### Test
+
+- **fpde-ria**: Red — add FSH definitions for 8 medication artifacts (pre-compile)
+
+## [0.19.0] - 2026-04-04
+
+### Documentation
+
+- Update workshop presentation with custom device order extensions and dental lab orders
+
+### Features
+
+- Add custom device order extensions (ManufacturingDeadline, DigitalWorkflow)
+
+### Miscellaneous
+
+- Bump version to 0.18.1
+- Bump version to 0.19.0
+
+## [0.18.1] - 2026-04-04
 
 ### Documentation
 
@@ -29,6 +46,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.18.0
+- Update changelog
 
 ## [0.18.0] - 2026-04-04
 
