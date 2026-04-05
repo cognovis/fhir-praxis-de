@@ -4,6 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-4zh**: Address review findings iteration 2 — add httpyac profile test
+
+### Documentation
+
+- Update feature documentation for fpde-4zh
+
+### Features
+
+- **fpde-4zh**: Green — Lab Observation profile + 3 examples
+
+### Miscellaneous
+
+- Bump version to 0.28.0
+
+## [0.28.0] - 2026-04-05
+
 ### Features
 
 - **fpde-oz2**: Complete KvdtScheinuntergruppeCS with all 21 KBV V1.02 codes
@@ -11,6 +29,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.27.0
+- Update changelog
 
 ## [0.27.0] - 2026-04-05
 
