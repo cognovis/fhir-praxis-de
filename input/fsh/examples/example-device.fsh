@@ -1,5 +1,6 @@
-// Beispiele für medizinische Geräte und Laboranalyzatoren
-// Basierend auf GDT 3.5 Gerätedaten (FK 8402 Gerätename, FK 8410 Test-Ident)
+// Beispiele fuer medizinische Geraete und Laboranalyzatoren
+// Basierend auf GDT 3.5 Geraetedaten (FK 8402 Geraetekennung)
+// Hinweis: FK 8410 Test-Ident ist nicht im Scope dieses Profils
 
 Instance: example-cobas-6000
 InstanceOf: PraxisDevice

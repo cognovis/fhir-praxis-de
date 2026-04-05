@@ -2,20 +2,20 @@ Profile: PraxisDevice
 Parent: Device
 Id: praxis-device
 Title: "Praxis Device"
-Description: "Profil für medizinische Geräte und Laboranalyzatoren in der deutschen ambulanten Praxis. Basiert auf GDT 3.5 Gerätedaten (FK 8402 Gerätename, FK 8410 Test-Ident)."
+Description: "Profil fuer medizinische Geraete und Laboranalyzatoren in der deutschen ambulanten Praxis. Basiert auf GDT 3.5 Geraetedaten (FK 8402 Geraetekennung)."
 
-// GDT Gerätekennung (FK 8402) als Identifier-Slice
+// GDT Geraetekennung (FK 8402) als Identifier-Slice
 * identifier MS
 * identifier ^slicing.discriminator.type = #pattern
 * identifier ^slicing.discriminator.path = "system"
 * identifier ^slicing.rules = #open
 * identifier contains gdtId 0..1 MS
-* identifier[gdtId] ^short = "GDT Gerätekennung (Feldkennung 8402)"
+* identifier[gdtId] ^short = "GDT Geraetekennung (Feldkennung 8402)"
 
 * identifier[gdtId].system = "https://fhir.cognovis.de/praxis/NamingSystem/gdt-device-id"
 * identifier[gdtId].value MS
 
-// Gerätename (FK 8402)
+// Geraetename (freitext, vom Hersteller)
 * deviceName MS
 * deviceName.name MS
 * deviceName.type MS
@@ -28,7 +28,7 @@ Description: "Profil für medizinische Geräte und Laboranalyzatoren in der deut
 * version MS
 * version.value MS
 
-// Gerätetyp (SNOMED-CT bevorzugt)
+// Geraetetyp (SNOMED-CT bevorzugt)
 * type MS
 
 // Status

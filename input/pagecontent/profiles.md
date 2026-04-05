@@ -169,7 +169,7 @@ See examples: `example-care-team`, `example-care-team-small`, `example-care-team
 
 ## PraxisDevice — Medizingeräte und Laboranalyzatoren
 
-The `PraxisDevice` profile extends the base FHIR `Device` resource for medical devices and lab analyzers in German ambulatory practice. It integrates with GDT 3.5 device data (Feldkennung 8402 Gerätename, FK 8402 Gerätekennung) and provides structured coding for device identification.
+The `PraxisDevice` profile extends the base FHIR `Device` resource for medical devices and lab analyzers in German ambulatory practice. It integrates with GDT 3.5 device data (FK 8402 Gerätekennung) and provides structured coding for device identification.
 
 ### Core Structure
 
