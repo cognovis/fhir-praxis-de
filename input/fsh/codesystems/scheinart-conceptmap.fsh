@@ -6,7 +6,7 @@ Usage: #definition
 * url = "https://fhir.cognovis.de/praxis/ConceptMap/scheinart-to-kvdt"
 * status = #active
 * experimental = false
-* sourceCanonical = "https://fhir.cognovis.de/praxis/ValueSet/scheinart"
+* sourceCanonical = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
 * targetCanonical = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
 * group[0].source = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
 * group[0].target = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART"
