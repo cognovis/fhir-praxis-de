@@ -19,8 +19,16 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- Custom device order extensions: `ManufacturingDeadline`, `DigitalWorkflow` on DeviceRequest
+- Custom device order extensions: `ManufacturingDeadline`, `DigitalWorkflow` on ServiceRequest
 - Workshop presentation for Heidonto workshop with device order examples and dental lab orders
+
+### Documentation
+
+- Add DMEA 2026 materials and strategic IG analysis docs
+
+### Miscellaneous
+
+- Bump version to 0.18.0
 
 ## [0.18.0] - 2026-04-04
 
