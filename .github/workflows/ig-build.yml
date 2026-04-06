@@ -104,6 +104,11 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
       - name: Read version
         id: version
         run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
@@ -122,3 +127,17 @@ jobs:
           files: artifacts/dist/*.tgz
           generate_release_notes: true
           make_latest: true
+
+      - name: Publish to FHIR Package Registry
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+        run: |
+          # Configure npm for cognovis FHIR registry
+          echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}" >> ~/.npmrc
+          echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
+          echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc
+
+          # Find the built package
+          PKG=$(ls artifacts/dist/*.tgz | head -1)
+          echo "Publishing ${PKG} to npm.cognovis.de..."
+          npm publish "${PKG}" --registry https://npm.cognovis.de || echo "Package version may already exist"
