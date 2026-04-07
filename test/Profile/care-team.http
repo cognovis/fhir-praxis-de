@@ -1,0 +1,183 @@
+### Validate CareTeamDE — Vollständiges Behandlungsteam (3 Behandler)
+# @name validate-care-team-full
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: participant[behandler] slices, status, category, subject, period, managingOrganization
+POST http://localhost:8080/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "CareTeam",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de"]
+  },
+  "status": "active",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "LA27975-4",
+          "display": "Event-focused care team"
+        }
+      ]
+    }
+  ],
+  "name": "Behandlungsteam Zahnarztpraxis Dr. Mueller",
+  "subject": { "reference": "Patient/example-patient" },
+  "period": {
+    "start": "2024-01-01",
+    "end": "2024-03-31"
+  },
+  "participant": [
+    {
+      "role": [
+        {
+          "coding": [
+            {
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+              "code": "zahnarzt",
+              "display": "Zahnarzt"
+            }
+          ]
+        }
+      ],
+      "member": { "reference": "Practitioner/example-practitioner" },
+      "period": { "start": "2024-01-01", "end": "2024-03-31" }
+    },
+    {
+      "role": [
+        {
+          "coding": [
+            {
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+              "code": "zfa",
+              "display": "ZFA"
+            }
+          ]
+        }
+      ],
+      "member": { "display": "Frau Schmidt" },
+      "period": { "start": "2024-01-01", "end": "2024-03-31" }
+    },
+    {
+      "role": [
+        {
+          "coding": [
+            {
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+              "code": "wb-assistent",
+              "display": "WB-Assistent"
+            }
+          ]
+        }
+      ],
+      "member": { "display": "Herr Weber" },
+      "period": { "start": "2024-01-01", "end": "2024-03-31" }
+    }
+  ],
+  "managingOrganization": [
+    { "reference": "Organization/example-organization" }
+  ]
+}
+
+?? status == 200
+
+
+### Validate CareTeamDE — Kleines 2-Personen-Team (Arzt + MFA)
+# @name validate-care-team-small
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: minimal valid team with 2 behandler participants, no managingOrganization
+POST http://localhost:8080/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "CareTeam",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de"]
+  },
+  "status": "active",
+  "category": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "LA27975-4",
+          "display": "Event-focused care team"
+        }
+      ]
+    }
+  ],
+  "name": "Kleines Behandler-Team",
+  "subject": { "reference": "Patient/example-patient" },
+  "period": { "start": "2024-01-01" },
+  "participant": [
+    {
+      "role": [
+        {
+          "coding": [
+            {
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+              "code": "arzt",
+              "display": "Arzt"
+            }
+          ]
+        }
+      ],
+      "member": { "reference": "Practitioner/example-practitioner" }
+    },
+    {
+      "role": [
+        {
+          "coding": [
+            {
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+              "code": "mfa",
+              "display": "MFA"
+            }
+          ]
+        }
+      ],
+      "member": { "display": "Sabine Huber" }
+    }
+  ]
+}
+
+?? status == 200
+
+
+### Validate CareTeamDE — Invalid: fehlender status (muss scheitern)
+# @name validate-care-team-missing-status
+# Expected: OperationOutcome mit Fehler (status ist Pflichtfeld im FHIR R4 CareTeam)
+POST http://localhost:8080/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "CareTeam",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de"]
+  },
+  "name": "Team ohne Status",
+  "subject": { "reference": "Patient/example-patient" },
+  "participant": [
+    {
+      "role": [
+        {
+          "coding": [
+            {
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+              "code": "arzt",
+              "display": "Arzt"
+            }
+          ]
+        }
+      ],
+      "member": { "reference": "Practitioner/example-practitioner" }
+    }
+  ]
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"

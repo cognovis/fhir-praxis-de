@@ -10,7 +10,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
-| **ChargeItem** | Individual billable service (EBM-Ziffer, GOÄ-Leistung) | BillingSystem, BillingCode, BillingPoints, Faktor, GoaeFaktor, LeistungsdatumExt |
+| **ChargeItem** | Individual billable service (EBM-Ziffer, GOÄ-Leistung) | BillingSystem, BillingCode, BillingPoints, GoaeFaktor, BillingRlvRelevanz |
 | **ChargeItemDefinition** | Billing catalog entry (EBM/GOÄ catalog) | MultiplierMin/Default/Max, BillingRequirements, BillingExclusions, BillingPruefzeit, BillingFachgruppen |
 | **Claim** | Submitted billing claim per Schein | AbrechnungsquartalExt, ScheinPositionExt, RabStatusExt |
 | **ClaimResponse** | KV response to submitted claims | HonorarbescheidCorrectionSign |
@@ -27,17 +27,17 @@ Future versions may introduce constrained profiles where invariants or slicing a
 
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
-| **PaymentReconciliation** | KV quarterly payment statement | HonorarbescheidQuartal, HonorarbescheidBsnr |
+| **PaymentReconciliation** | KV quarterly payment statement | HonorarbescheidQuartal |
 | **ClaimResponse** | Individual line-item corrections | HonorarbescheidCorrectionSign |
 
 ### Clinical
 
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
-| **Encounter** | Patient visit with queue management | ArrivalTimeExt, EncounterCalledExt, ScheintypExt |
-| **Condition** | Diagnoses with German-specific metadata | DauerdiagnoseExt, DiagnoseSeiteExt |
-| **ServiceRequest** | Überweisungen (referrals) | UeFachrichtungExt, ReferralSugTypeExt, ReferralOptimizationStatusExt |
-| **Communication** | Einweisungen (hospital admissions) | KheKrankenhausExt, KheDiagnoseExt, KheBelegarztExt |
+| **Encounter** | Patient visit with queue management | ArrivalTimeExt, EncounterCalledExt, EncounterCreatedAtExt |
+| **Condition** | Diagnoses with German-specific metadata | DauerdiagnoseExt |
+| **ServiceRequest** | Überweisungen (referrals) | ReferralSugTypeExt, ReferralOptimizationStatusExt |
+| **Communication** | Einweisungen (hospital admissions) | KheBelegarztExt, KheNotfallExt, KheUnfallExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
 | **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
 | **[PraxisLabDiagnosticReport](StructureDefinition-praxis-lab-diagnostic-report.html)** | Laborbefund mit LAB/MB/PAT Varianten | category slicing, result/specimen references, supports Einzelbefund/Kumulativbefund/Mikrobiologie/Pathologie |
@@ -52,7 +52,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 | **Provenance** | AI provenance tracking (EU AI Act) | AiGeneratedExt, AiModelExt, HumanReviewedExt |
 | **[FPDECoverageGKV](StructureDefinition-fpde-coverage-gkv.html)** | GKV insurance with Wohnortprinzip (WOP) | gkv/wop |
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbAbrechnenderArztExt |
-| **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungTextExt, EinwilligungWiderrufMoeglichExt |
+| **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungWiderrufMoeglichExt, EinwilligungAuswahlExt |
 
 ## PraxisCondition — ICD-10-GM mit Diagnosesicherheit
 
@@ -74,7 +74,6 @@ The `PraxisCondition` profile extends the base FHIR `Condition` resource to stan
 | Extension | Type | Cardinality | Description |
 |-----------|------|-------------|-------------|
 | `dauerdiagnose` | boolean | 0..1 | Must-Support. Marks chronic/persistent diagnoses that auto-roll to next quarters. |
-| `diagnoseSeite` | CodeableConcept | 0..1 | Must-Support. Side specification (links/rechts/beidseitig). Binds to `body-site-laterality` (FHIR core, extensible). Complements KBV bodySite coding. |
 
 ### ICD-10-GM Diagnosesicherheit (KVDT 6.06 Compliance)
 
@@ -94,7 +93,7 @@ PVS systems must extract and populate this extension on every diagnosis before s
 `PraxisCondition` applies to the standard FHIR R4 `Condition` resource (from `de.basisprofil.r4` or FHIR R4 core). It does not constrain base Condition elements, but requires support for:
 - ICD-10-GM coding via BFARM CodeSystem
 - Upstream KBV extension for diagnosesicherheit
-- Two local extensions (dauerdiagnose, diagnoseSeite)
+- One local extension (dauerdiagnose)
 
 ### Example Use Cases
 
@@ -110,8 +109,7 @@ When recording a diagnosis in the PVS:
 2. Populate ICD-10-GM code from the EBM/clinical context
 3. **Always set the diagnosesicherheit extension** based on clinical judgment (G/A/V/Z)
 4. If chronic: set dauerdiagnose=true so EHR auto-carries to next quarter
-5. If bilateral or sided: set diagnoseSeite (links, rechts, beidseitig)
-6. Validate against PraxisCondition profile before submission
+5. Validate against PraxisCondition profile before submission
 
 See example `example-diagnose` for a complete instance.
 

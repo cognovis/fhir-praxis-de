@@ -1,12 +1,5 @@
 // Referral / Ueberweisung extensions
 
-Extension: UeFachrichtungExt
-Id: ue-fachrichtung
-Title: "Ueberweisungs-Fachrichtung"
-Description: "Fachrichtung, an die ueberwiesen wird."
-Context: ServiceRequest
-* value[x] only CodeableConcept
-
 Extension: UeUnfallExt
 Id: ue-unfall
 Title: "Ueberweisung Unfall"

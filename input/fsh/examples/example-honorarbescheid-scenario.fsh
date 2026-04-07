@@ -17,13 +17,9 @@ Usage: #example
 // Honorarbescheid-Kopfdaten
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-quartal"
 * extension[=].valueString = "3/2025"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-bsnr"
-* extension[=].valueString = "660815200"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-correction-sign"
 * extension[=].valueString = "SR"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-name"
 * extension[=].valueString = "Mueller, Hans"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-birthdate"
 * extension[=].valueDate = "1958-03-22"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-ref"
-* extension[=].valueReference = Reference(example-patient)

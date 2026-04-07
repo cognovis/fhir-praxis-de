@@ -7,7 +7,7 @@ Title: "Procedure Ambulant DE"
 Description: "Ambulanter Eingriff in der deutschen Praxisverwaltung. Eingriffskodierung per OPS (Operationen- und Prozedurenschlüssel). Verwendet das CodingOPS-Profil aus de.basisprofil.r4, das die Seitenlokalisation als Extension auf der OPS-Coding einschließt."
 * status MS
 * code 1..1 MS
-* code.coding ^slicing.discriminator.type = #pattern
+* code.coding ^slicing.discriminator.type = #value
 * code.coding ^slicing.discriminator.path = "system"
 * code.coding ^slicing.rules = #open
 * code.coding contains ops 0..1 MS

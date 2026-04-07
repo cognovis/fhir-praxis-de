@@ -25,7 +25,7 @@ Rollen der Mitglieder in einem Behandler-Team in der deutschen ambulanten Versor
 Abrechnungsschein-Typen in der ambulanten Versorgung.
 
 - **Includes:** All codes from [ScheinartCS](CodeSystem-scheinart.html)
-- **Binding:** Used by `ScheintypExt` on Encounter
+- **Binding:** Available for use in Encounter-based billing classification workflows
 - **Usage:** Classifies encounters by billing type (GKV, PKV, BG, Überweisung, Notfall, IGeL)
 
 ### GenehmigungenLeistungsbereichVS — Genehmigung Leistungsbereich

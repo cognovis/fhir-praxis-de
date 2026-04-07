@@ -6,7 +6,7 @@ Description: "Profil fuer medizinische Geraete und Laboranalyzatoren in der deut
 
 // GDT Geraetekennung (FK 8402) als Identifier-Slice
 * identifier MS
-* identifier ^slicing.discriminator.type = #pattern
+* identifier ^slicing.discriminator.type = #value
 * identifier ^slicing.discriminator.path = "system"
 * identifier ^slicing.rules = #open
 * identifier contains gdtId 0..1 MS
@@ -32,4 +32,4 @@ Description: "Profil fuer medizinische Geraete und Laboranalyzatoren in der deut
 * type MS
 
 // Status
-* status MS
+* status 1..1 MS

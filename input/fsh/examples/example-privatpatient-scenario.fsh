@@ -12,10 +12,6 @@ Usage: #example
 * subscriber = Reference(example-patient)
 * beneficiary = Reference(example-patient)
 * payor[0].display = "Debeka PKV"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kassenname"
-* extension[=].valueString = "Debeka Krankenversicherungsverein a.G."
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kassennummer"
-* extension[=].valueString = "168140050"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/hv-versicherten-nr"
 * extension[=].valueString = "A123456789"
 
@@ -52,24 +48,14 @@ Usage: #example
 * extension[=].valueDateTime = "2026-01-14T09:28:00+01:00"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/arrival-time"
 * extension[=].valueDateTime = "2026-01-14T09:15:00+01:00"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/scheintyp"
-* extension[=].valueCodeableConcept = ScheinartCS#pkv "PKV"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/scheinquartal"
-* extension[=].valueString = "1/2026"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/abrechnungsquartal"
 * extension[=].valueString = "1/2026"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/linked-document"
 * extension[=].valueReference = Reference(example-documentreference)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/cross-ak-billed-under"
 * extension[=].valueReference = Reference(example-organization)
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-enddatum"
-* extension[=].valueDate = "2026-01-21"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-typ"
 * extension[=].valueString = "Erstbescheinigung"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-von-datum"
-* extension[=].valueDate = "2024-03-01"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-bis-datum"
-* extension[=].valueDate = "2024-03-08"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/au-arbeitsunfall"
 * extension[=].valueBoolean = false
 
@@ -108,14 +94,10 @@ Usage: #example
 * extension[=].valueMoney.currency = #EUR
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/analog-reference"
 * extension[=].valueString = "A420"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/leistungsdatum"
-* extension[=].valueDate = "2026-01-14"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/manual-override"
 * extension[=].valueBoolean = false
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/schein-position"
 * extension[=].valueInteger = 1
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/faktor"
-* extension[=].valueDecimal = 2.2
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/statistikleistung"
 * extension[=].valueBoolean = false
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-punkte"
@@ -160,8 +142,6 @@ Usage: #example
 * extension[=].valueMoney.currency = #EUR
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/analog-reference"
 * extension[=].valueString = "A420"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/leistungsdatum"
-* extension[=].valueDate = "2026-01-14"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/rab-status"
 * extension[=].valueString = "sent"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/rab-ref"
@@ -258,5 +238,3 @@ Usage: #example
 * extension[=].valueReference = Reference(example-patient)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-quartal"
 * extension[=].valueString = "3/2025"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-bsnr"
-* extension[=].valueString = "260200201"
