@@ -60,16 +60,6 @@ Abrechnungsschein-Typen in der ambulanten Versorgung.
 | `not` | Notfall | Notfallschein |
 | `igel` | IGeL | Individuelle Gesundheitsleistung |
 
-### DiagnoseSeiteCS — Seitenangabe
-
-Seitenangabe für Diagnosen (Lateralität).
-
-| Code | Display |
-|------|---------|
-| `L` | Links |
-| `R` | Rechts |
-| `B` | Beidseitig |
-
 ### TaskTypeCS — Praxis-Aufgabentypen
 
 Typen für Praxis-Aufgaben in der Aufgabenverwaltung.
@@ -160,9 +150,9 @@ KV-Fachgruppencodes für Honorarverteilung und Qualitätssicherung.
 | `dermatologie` | Dermatologie |
 | `anaesthesiologie` | Anästhesiologie |
 
-### KrablLinkKategorieCS — KrablLink-Dokumentkategorie
+### DokumentKategorieCS — Dokumentkategorie
 
-Dokumentkategorien für KrablLink-Dokumente (arztbrief, befund, labor, etc.).
+Dokumentkategorien für verlinkte Dokumente (arztbrief, befund, labor, etc.).
 
 | Code | Display | Beschreibung |
 |------|---------|--------------|
@@ -174,20 +164,6 @@ Dokumentkategorien für KrablLink-Dokumente (arztbrief, befund, labor, etc.).
 | `verordnung` | Verordnung | Ärztliche Verordnung |
 | `ueberweisung` | Überweisung | Überweisungsdokument |
 | `sonstiges` | Sonstiges | Sonstiges Dokument |
-
-### KrablLinkContentCS — KrablLink-Content-Typ
-
-Content-Typen für KrablLink-Dokumente.
-
-| Code | Display | Beschreibung |
-|------|---------|--------------|
-| `pdf` | PDF | PDF-Dokument |
-| `hl7-cda` | HL7 CDA | HL7 Clinical Document Architecture |
-| `plaintext` | Plaintext | Einfacher Text |
-| `dicom` | DICOM | DICOM-Bilddaten |
-| `jpeg` | JPEG | JPEG-Bilddatei |
-| `png` | PNG | PNG-Bilddatei |
-| `hl7-fhir` | HL7 FHIR | HL7 FHIR-Ressource |
 
 ### LkzCS — Löschkennzeichen
 

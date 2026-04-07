@@ -74,7 +74,7 @@ The `PraxisCondition` profile extends the base FHIR `Condition` resource to stan
 | Extension | Type | Cardinality | Description |
 |-----------|------|-------------|-------------|
 | `dauerdiagnose` | boolean | 0..1 | Must-Support. Marks chronic/persistent diagnoses that auto-roll to next quarters. |
-| `diagnoseSeite` | CodeableConcept | 0..1 | Must-Support. Side specification (links/rechts/beidseitig). Binds to DiagnoseSeiteVS. Complements KBV bodySite coding. |
+| `diagnoseSeite` | CodeableConcept | 0..1 | Must-Support. Side specification (links/rechts/beidseitig). Binds to `body-site-laterality` (FHIR core, extensible). Complements KBV bodySite coding. |
 
 ### ICD-10-GM Diagnosesicherheit (KVDT 6.06 Compliance)
 
