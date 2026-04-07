@@ -6,7 +6,39 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- Resolve all 48 IG Publisher QA errors
+- Reduce QA warnings from 48 to 15
+- **fpde-5z0**: Address review findings iteration 1
 - **fpde-5z0**: Address review findings iteration 2
+- **fpde-5z0**: Address review panel findings iteration 1
+
+### CI/CD
+
+- Publish FHIR package to npm.cognovis.de on release
+
+### Miscellaneous
+
+- Bump version to 0.30.0
+
+### Refactoring
+
+- **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
+
+## [0.30.0] - 2026-04-05
+
+### Miscellaneous
+
+- Bump version to 0.29.0
+- Merge origin/main - resolve CHANGELOG conflict
+
+### Merge
+
+- Worktree-bead-fpde-orv
+
+## [0.29.0] - 2026-04-05
+
+### Bug Fixes
+
 - **fpde-orv**: Address review findings iteration 1
 - **fpde-orv**: Address review findings iteration 1
 - **fpde-orv**: Address review findings iteration 2
@@ -30,29 +62,12 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.28.0
+- Update changelog
+- Update changelog
 
 ### Test
 
 - **fpde-orv**: Red -- stub DiagnosticReport profile and example trigger sushi error
-
-## [0.31.0] - 2026-04-07
-
-### Breaking Changes
-
-- **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
-  - Deleted: `ScheintypExt` (encounter.fsh) — use `Encounter.class` / `Encounter.type`
-  - Deleted: `ScheinquartalExt` (scheinquartal.fsh) — use `Encounter.period`
-  - Deleted: `AuVonDatumExt`, `AuBisDatumExt`, `AuEnddatumExt` (au.fsh) — use `Encounter.period`
-  - Deleted: `UeFachrichtungExt` (referral.fsh) — use `ServiceRequest.specialty`
-  - Deleted: `FaktorExt`, `LeistungsdatumExt` (billing.fsh) — use `ChargeItem.factorOverride`, `ChargeItem.occurrence`
-  - Deleted: `AutIdemExt` (medication.fsh) — use `MedicationRequest.substitution.allowedBoolean`
-  - Deleted: `HonorarbescheidBsnrExt`, `HonorarbescheidPatientRefExt` (honorarbescheid.fsh) — use standard FHIR references
-  - Deleted: `DiagnoseSeiteExt` (condition.fsh) — use `Condition.bodySite`
-  - Deleted: `KassennameExt`, `KassennummerExt` (insurance.fsh deleted) — use `Coverage.payor` display / identifier
-  - Deleted: `EbmKapitelExt`, `EbmPunkteExt`, `EbmPruefzeitExt`, `EbmEuroBetragExt` (ebm-chargeitemdefinition.fsh deleted) — use `BillingPointsExt`, `BillingEuroValueExt`, `BillingPruefzeitExt`, `BillingCategoryExt`
-  - Deleted: `EinwilligungTextExt` (consent.fsh) — use `Consent.source[x]`
-  - Deleted: `KheKrankenhausExt`, `KheDiagnoseExt`, `KheIcdExt` (hospital-admission.fsh) — use `ServiceRequest.performer`, `ServiceRequest.reasonCode`, `ServiceRequest.reasonReference`
-  - Migrated: `EbmRlvRelevanzExt` → `BillingRlvRelevanzExt` (moved to billing.fsh, Id: billing-rlv-relevanz)
 
 ## [0.28.0] - 2026-04-05
 
