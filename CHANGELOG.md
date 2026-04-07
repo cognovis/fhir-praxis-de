@@ -7,7 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Breaking Changes
 
 - **fpde-za3**: Remove `KrablLinkContentCS` (krabllink-content) — no profile or example references
-- **fpde-za3**: Rename `KrablLinkKategorieCS` → `DocumentKategorieCS` (Id: `dokument-kategorie`) — PVS-agnostische Benennung
+- **fpde-za3**: Rename `KrablLinkKategorieCS` → `DokumentKategorieCS` (Id: `dokument-kategorie`) — PVS-agnostische Benennung
 - **fpde-za3**: Rename extension `KrabllinkRefExt` (Id: `krabllink-ref`) → `LinkedDocumentExt` (Id: `linked-document`) — update all example URLs accordingly
 - **fpde-za3**: Remove `bsnr` NamingSystem (lokaler Alias) — upstream canonical `http://fhir.de/sid/dkgev/bsnr` direkt verwenden
 - **fpde-za3**: Remove `DiagnoseSeiteCS` and `DiagnoseSeiteVS` — Extension binding geöffnet, Beispiel auf SNOMED CT umgestellt (consistent mit fpde-5z0)
