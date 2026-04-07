@@ -142,6 +142,13 @@ Description: "KBV-Prüfzeit in Minuten für die Plausibilitätsprüfung"
 Context: ChargeItemDefinition
 * value[x] only integer
 
+Extension: BillingRlvRelevanzExt
+Id: billing-rlv-relevanz
+Title: "RLV-Relevanz"
+Description: "Kennzeichen, ob die Leistung RLV-relevant ist (Regelleistungsvolumen)"
+Context: ChargeItemDefinition
+* value[x] only boolean
+
 Extension: BillingFachgruppenExt
 Id: billing-fachgruppen
 Title: "Fachgruppen"
@@ -181,13 +188,6 @@ Description: "Position der Leistung auf dem Abrechnungsschein"
 Context: ChargeItem
 * value[x] only integer
 
-Extension: FaktorExt
-Id: faktor
-Title: "Faktor"
-Description: "Abrechnungsfaktor bzw. Steigerungsfaktor der Leistung"
-Context: ChargeItem
-* value[x] only decimal
-
 Extension: StatistikleistungExt
 Id: statistikleistung
 Title: "Statistikleistung"
@@ -212,13 +212,6 @@ Title: "GOÄ-Punkte"
 Description: "Punktzahl der GOÄ-Leistungsziffer"
 Context: Claim, ChargeItem
 * value[x] only decimal
-
-Extension: LeistungsdatumExt
-Id: leistungsdatum
-Title: "Leistungsdatum"
-Description: "Datum der Leistungserbringung"
-Context: Claim, ChargeItem
-* value[x] only date
 
 Extension: RabStatusExt
 Id: rab-status

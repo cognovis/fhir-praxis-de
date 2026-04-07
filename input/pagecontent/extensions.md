@@ -19,7 +19,6 @@ Queue management extensions for patient flow in the practice.
 | `ArrivalTimeExt` | dateTime | Zeitpunkt der Ankunft des Patienten im Warteraum |
 | `EncounterCalledExt` | dateTime | Zeitpunkt des Aufrufs in das Behandlungszimmer |
 | `EncounterCreatedAtExt` | dateTime | Erstellungszeitpunkt des Scheins im PVS |
-| `ScheintypExt` | Coding | Scheinart (GKV, PKV, BG, IGeL, etc.) |
 | `KrabllinkRefExt` | Reference | Referenz auf den zugehörigen Krabllink-Datensatz |
 
 ## Billing / Abrechnung GKV
@@ -58,13 +57,11 @@ Extensions specific to GOÄ (private fee schedule) billing.
 
 | Extension | Type | Description |
 |-----------|------|-------------|
-| `FaktorExt` | decimal | Steigerungsfaktor (allgemein) |
 | `GoaeFaktorExt` | decimal | GOÄ-Steigerungsfaktor (1,0 - 3,5) |
 | `GoaePunkteExt` | integer | GOÄ-Punktzahl |
 | `MultiplierMinExt` | decimal | Minimaler Steigerungsfaktor (1,0) |
 | `MultiplierDefaultExt` | decimal | Schwellenwert (z.B. 2,3) |
 | `MultiplierMaxExt` | decimal | Höchstsatz (z.B. 3,5) |
-| `LeistungsdatumExt` | date | Datum der Leistungserbringung |
 | `RabStatusExt` | code | Status der rechnerischen Abrechnung |
 | `RabRefExt` | Reference | Referenz auf den RAB-Vorgang |
 | `RechFormArtExt` | code | Rechnungsformart |
@@ -99,15 +96,11 @@ Extensions tracking review and release status of private invoices.
 
 ## EBM auf ChargeItem-Ebene
 
-EBM detail extensions on individual ChargeItems (complementing the catalog-level extensions on ChargeItemDefinition). The concrete billed values may differ from catalog values due to surcharges or deductions.
+EBM detail extensions on individual ChargeItems. The concrete billed values may differ from catalog values due to surcharges or deductions.
 
 | Extension | Type | Description |
 |-----------|------|-------------|
-| `EbmKapitelExt` | string | EBM-Kapitel der abgerechneten Leistung |
-| `EbmPunkteExt` | decimal | Konkret abgerechnete EBM-Punktzahl |
-| `EbmPruefzeitExt` | integer | Prüfzeit in Minuten |
-| `EbmRlvRelevanzExt` | boolean | RLV-Relevanz der Leistung |
-| `EbmEuroBetragExt` | Money | Euro-Betrag nach Orientierungspunktwert |
+| `BillingRlvRelevanzExt` | boolean | RLV-Relevanz der abgerechneten Leistung |
 
 ## RLV / Budget
 
@@ -131,10 +124,8 @@ Extensions for KV quarterly payment statements.
 | Extension | Type | Description |
 |-----------|------|-------------|
 | `HonorarbescheidQuartalExt` | string | Abrechnungsquartal des Honorarbescheids |
-| `HonorarbescheidBsnrExt` | string | Betriebsstättennummer |
 | `HonorarbescheidPatientNameExt` | string | Patientenname (aus Honorarbescheid) |
 | `HonorarbescheidPatientBirthDateExt` | date | Geburtsdatum (aus Honorarbescheid) |
-| `HonorarbescheidPatientRefExt` | Reference | Referenz auf den Patienten |
 | `HonorarbescheidCorrectionSignExt` | code | Richtigstellungskennzeichen |
 
 ## KV Benchmark
@@ -202,7 +193,6 @@ Extensions for German-specific diagnosis metadata.
 | Extension | Type | Description |
 |-----------|------|-------------|
 | `DauerdiagnoseExt` | boolean | Kennzeichnung als Dauerdiagnose |
-| `DiagnoseSeiteExt` | Coding | Seitenangabe (Links, Rechts, Beidseitig) |
 
 ## AI Provenance
 
@@ -250,15 +240,6 @@ Extensions for training physicians and locum doctors.
 | `WbRolleExt` | Coding | Rolle: WB-Assistent oder Sicherstellungsassistent |
 | `WbAbrechnenderArztExt` | Reference | Abrechnender Arzt (Supervisor) |
 
-## Insurance / Kasse
-
-Extensions for health insurance fund metadata.
-
-| Extension | Type | Description |
-|-----------|------|-------------|
-| `KassennameExt` | string | Name der Krankenkasse |
-| `KassennummerExt` | string | IK-Nummer der Krankenkasse |
-
 ## Accounts Receivable / Offene Posten
 
 Extensions for managing open invoices and dunning.
@@ -290,7 +271,6 @@ Extensions for referral management and optimization.
 
 | Extension | Type | Description |
 |-----------|------|-------------|
-| `UeFachrichtungExt` | Coding | Ziel-Fachrichtung der Überweisung |
 | `UeUnfallExt` | boolean | Überweisungskennzeichen: Unfall |
 | `ReferralSugTypeExt` | code | Überweisungstyp (Auftragsleistung, Konsiliarauftrag, etc.) |
 | `ReferralCrossArztgruppeExt` | Coding | Fachgruppenübergreifende Überweisung |
@@ -315,9 +295,6 @@ Extensions for hospital admission forms (Einweisungsschein).
 
 | Extension | Type | Description |
 |-----------|------|-------------|
-| `KheKrankenhausExt` | string | Name des Krankenhauses |
-| `KheDiagnoseExt` | string | Einweisungsdiagnose (Freitext) |
-| `KheIcdExt` | Coding | Einweisungsdiagnose (ICD-10-GM) |
 | `KheBelegarztExt` | boolean | Belegärztliche Behandlung |
 | `KheNotfallExt` | boolean | Notfalleinweisung |
 | `KheUnfallExt` | boolean | Unfallbedingte Einweisung |
@@ -335,7 +312,6 @@ Extensions for patient consent management in the practice.
 | `EinwilligungGueltigkeitsdauerExt` | Duration | Gültigkeitsdauer der Einwilligung |
 | `EinwilligungAuswahlExt` | code | Auswahl des Patienten (Ja/Nein) |
 | `EinwilligungScheinNummerExt` | string | Zugehörige Scheinnummer |
-| `EinwilligungTextExt` | string | Einwilligungstext |
 
 ## AU / Arbeitsunfähigkeit
 
@@ -344,9 +320,6 @@ Extensions for certificates of incapacity for work (AU-Bescheinigung).
 | Extension | Type | Description |
 |-----------|------|-------------|
 | `AuTypExt` | code | AU-Typ (Erstbescheinigung, Folgebescheinigung) |
-| `AuVonDatumExt` | date | AU-Beginn (Feststellungsdatum) |
-| `AuBisDatumExt` | date | Voraussichtlich arbeitsunfähig bis |
-| `AuEnddatumExt` | date | Tatsächliches Ende der AU |
 | `AuArbeitsunfallExt` | boolean | Arbeitsunfall (BG-relevant) |
 
 ## Questionnaire / Anamneseboegen
@@ -372,7 +345,6 @@ Extensions for German-specific diagnosis metadata and ICD-10-GM diagnosesicherhe
 | Extension | Type | Description |
 |-----------|------|-------------|
 | `DauerdiagnoseExt` | boolean | Kennzeichnung einer Dauerdiagnose (chronische Diagnose). Diagnosen mit diesem Flag werden automatisch in Folgequartale übernommen. |
-| `DiagnoseSeiteExt` | CodeableConcept | Seitenangabe der Diagnose (links/rechts/beidseitig). Ergänzt die KBV bodySite-Kodierung. Bindet an DiagnoseSeiteVS. |
 
 **Note:** ICD-10-GM Diagnosesicherheit (A/G/V/Z) ist Pflichtfeld bei KV-Abrechnung und wird via upstream Extension `http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit` auf Coding-Ebene gespeichert. Diese Extension bindet automatisch an KBV_VS_SFHIR_ICD_DIAGNOSESICHERHEIT und muss vom PVS bei jeder Diagnose gesetzt werden.
 
@@ -382,7 +354,6 @@ Extensions for prescription and medication management.
 
 | Extension | Type | Description |
 |-----------|------|-------------|
-| `AutIdemExt` | boolean | Kennzeichen, ob der Arzt die Substitution durch ein wirkstoffgleiches Präparat ausgeschlossen hat (aut-idem-Kreuz) |
 | `IsErezeptExt` | boolean | Kennzeichen, ob das Rezept als E-Rezept (elektronisches Rezept) ausgestellt wurde |
 | `IsDauermedikationExt` | boolean | Kennzeichen, ob das Medikament zur Dauermedikation des Patienten gehört |
 | `AvpExt` | Money | Apothekenverkaufspreis (AVP) des verordneten Medikaments |

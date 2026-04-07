@@ -1,26 +1,5 @@
 // Krankenhauseinweisung extensions
 
-Extension: KheKrankenhausExt
-Id: khe-krankenhaus
-Title: "Krankenhaus"
-Description: "Name des Krankenhauses fuer die Einweisung."
-Context: ServiceRequest
-* value[x] only string
-
-Extension: KheDiagnoseExt
-Id: khe-diagnose
-Title: "Einweisungsdiagnose"
-Description: "Diagnosetext fuer die Krankenhauseinweisung."
-Context: ServiceRequest
-* value[x] only string
-
-Extension: KheIcdExt
-Id: khe-icd
-Title: "Einweisungs-ICD"
-Description: "ICD-Code fuer die Krankenhauseinweisung."
-Context: ServiceRequest
-* value[x] only CodeableConcept
-
 Extension: KheBelegarztExt
 Id: khe-belegarzt
 Title: "Belegarzt"

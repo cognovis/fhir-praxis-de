@@ -42,9 +42,3 @@ Description: "Verknuepfte Encounter- oder Scheinnummer der Einwilligung."
 Context: Consent
 * value[x] only string
 
-Extension: EinwilligungTextExt
-Id: einwilligung-text
-Title: "Einwilligung Text"
-Description: "Vollstaendiger Text der Einwilligung."
-Context: Consent
-* value[x] only markdown

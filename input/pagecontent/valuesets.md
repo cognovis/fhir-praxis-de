@@ -25,7 +25,7 @@ Rollen der Mitglieder in einem Behandler-Team in der deutschen ambulanten Versor
 Abrechnungsschein-Typen in der ambulanten Versorgung.
 
 - **Includes:** All codes from [ScheinartCS](CodeSystem-scheinart.html)
-- **Binding:** Used by `ScheintypExt` on Encounter
+- **Binding:** Available for use in Encounter-based billing classification workflows
 - **Usage:** Classifies encounters by billing type (GKV, PKV, BG, Überweisung, Notfall, IGeL)
 
 ### DiagnoseSeiteVS — Diagnoseseite
@@ -33,7 +33,7 @@ Abrechnungsschein-Typen in der ambulanten Versorgung.
 Seitenangabe für Diagnosen (Lateralität).
 
 - **Includes:** All codes from [DiagnoseSeiteCS](CodeSystem-diagnose-seite.html)
-- **Binding:** Used by `DiagnoseSeiteExt` on Condition
+- **Binding:** Available for use in diagnosis laterality workflows (e.g. via bodySite or future extensions)
 - **Usage:** Supplements ICD-10-GM coding with laterality (Links, Rechts, Beidseitig)
 
 ### GenehmigungenLeistungsbereichVS — Genehmigung Leistungsbereich

@@ -5,7 +5,7 @@ Profile: PraxisCondition
 Parent: Condition
 Id: praxis-condition
 Title: "Praxis Condition"
-Description: "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM Diagnosesicherheit (KVDT 6.06), Dauerdiagnose und Diagnoseseite."
+Description: "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM Diagnosesicherheit (KVDT 6.06) und Dauerdiagnose."
 
 // Must-Support elements
 * code 1..1 MS
@@ -29,6 +29,5 @@ Description: "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM D
 
 // Praxis-Extensions
 * extension contains
-    DauerdiagnoseExt named dauerdiagnose 0..1 MS and
-    DiagnoseSeiteExt named diagnoseSeite 0..1 MS
+    DauerdiagnoseExt named dauerdiagnose 0..1 MS
 

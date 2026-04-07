@@ -1,5 +1,5 @@
 // Beispielinstanzen fuer Extensions ohne bisherige Beispiele
-// Deckt ab: appointment-mode, aut-idem, avp, festbetrag, is-erezept,
+// Deckt ab: appointment-mode, avp, festbetrag, is-erezept,
 //           is-dauermedikation, digital-workflow, manufacturing-deadline, patient-seit
 
 // ---------------------------------------------------------------------------
@@ -21,12 +21,12 @@ Usage: #example
 * extension[=].valueCode = AppointmentModeCS#video
 
 // ---------------------------------------------------------------------------
-// 2. MedicationRequest mit aut-idem, avp, festbetrag, is-erezept
+// 2. MedicationRequest mit avp, festbetrag, is-erezept
 // ---------------------------------------------------------------------------
 Instance: ExampleMedicationRequestMetformin
 InstanceOf: MedicationRequest
 Title: "E-Rezept Metformin 1000mg — Weber"
-Description: "Kassenrezept fuer Metformin mit aut-idem-Kreuz, AVP, Festbetrag und E-Rezept-Kennzeichen."
+Description: "Kassenrezept fuer Metformin mit AVP, Festbetrag und E-Rezept-Kennzeichen."
 Usage: #example
 * status = #active
 * intent = #order
@@ -37,9 +37,6 @@ Usage: #example
 * requester = Reference(example-practitioner)
 * authoredOn = "2026-04-05"
 * dosageInstruction[0].text = "1-0-1 zu den Mahlzeiten"
-// aut-idem: Substitution ausgeschlossen
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/aut-idem"
-* extension[=].valueBoolean = true
 // AVP (Apothekenverkaufspreis)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/avp"
 * extension[=].valueMoney.value = 18.42
