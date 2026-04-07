@@ -1,6 +1,6 @@
-CodeSystem: DocumentKategorieCS
+CodeSystem: DokumentKategorieCS
 Id: dokument-kategorie
-Title: "Dokumentkategorie"
+Title: "Dokument Kategorie"
 Description: "Kategorien fuer verlinkte Dokumente in der ambulanten Versorgung (z.B. Arztbriefe, Befunde, Labor)"
 * ^status = #active
 * ^experimental = false

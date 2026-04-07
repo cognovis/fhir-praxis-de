@@ -13,3 +13,4 @@ Title: "Diagnoseseite"
 Description: "Seitenangabe der Diagnose (links/rechts/beidseitig). Ergaenzt die KBV bodySite-Kodierung."
 Context: Condition
 * value[x] only CodeableConcept
+* valueCodeableConcept from http://hl7.org/fhir/ValueSet/body-site-laterality (extensible)
