@@ -29,6 +29,5 @@ Description: "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM D
 
 // Praxis-Extensions
 * extension contains
-    DauerdiagnoseExt named dauerdiagnose 0..1 MS and
-    DiagnoseSeiteExt named diagnoseSeite 0..1 MS
+    DauerdiagnoseExt named dauerdiagnose 0..1 MS
 

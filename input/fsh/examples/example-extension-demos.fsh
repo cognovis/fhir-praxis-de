@@ -37,9 +37,6 @@ Usage: #example
 * requester = Reference(example-practitioner)
 * authoredOn = "2026-04-05"
 * dosageInstruction[0].text = "1-0-1 zu den Mahlzeiten"
-// aut-idem: Substitution ausgeschlossen
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/aut-idem"
-* extension[=].valueBoolean = true
 // AVP (Apothekenverkaufspreis)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/avp"
 * extension[=].valueMoney.value = 18.42

@@ -2,6 +2,25 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.31.0] - 2026-04-07
+
+### Breaking Changes
+
+- **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
+  - Deleted: `ScheintypExt` (encounter.fsh) — use `Encounter.class` / `Encounter.type`
+  - Deleted: `ScheinquartalExt` (scheinquartal.fsh) — use `Encounter.period`
+  - Deleted: `AuVonDatumExt`, `AuBisDatumExt`, `AuEnddatumExt` (au.fsh) — use `Encounter.period`
+  - Deleted: `UeFachrichtungExt` (referral.fsh) — use `ServiceRequest.specialty`
+  - Deleted: `FaktorExt`, `LeistungsdatumExt` (billing.fsh) — use `ChargeItem.factorOverride`, `ChargeItem.occurrence`
+  - Deleted: `AutIdemExt` (medication.fsh) — use `MedicationRequest.substitution.allowedBoolean`
+  - Deleted: `HonorarbescheidBsnrExt`, `HonorarbescheidPatientRefExt` (honorarbescheid.fsh) — use standard FHIR references
+  - Deleted: `DiagnoseSeiteExt` (condition.fsh) — use `Condition.bodySite`
+  - Deleted: `KassennameExt`, `KassennummerExt` (insurance.fsh deleted) — use `Coverage.payor` display / identifier
+  - Deleted: `EbmKapitelExt`, `EbmPunkteExt`, `EbmPruefzeitExt`, `EbmEuroBetragExt` (ebm-chargeitemdefinition.fsh deleted) — use `BillingPointsExt`, `BillingEuroValueExt`, `BillingPruefzeitExt`, `BillingCategoryExt`
+  - Deleted: `EinwilligungTextExt` (consent.fsh) — use `Consent.source[x]`
+  - Deleted: `KheKrankenhausExt`, `KheDiagnoseExt`, `KheIcdExt` (hospital-admission.fsh) — use `ServiceRequest.performer`, `ServiceRequest.reasonCode`, `ServiceRequest.reasonReference`
+  - Migrated: `EbmRlvRelevanzExt` → `BillingRlvRelevanzExt` (moved to billing.fsh, Id: billing-rlv-relevanz)
+
 ## [unreleased]
 
 ### Bug Fixes

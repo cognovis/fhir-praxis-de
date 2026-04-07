@@ -2,13 +2,6 @@
 // Medication / Prescription Extensions
 // ============================================================================
 
-Extension: AutIdemExt
-Id: aut-idem
-Title: "Aut-idem"
-Description: "Kennzeichen, ob der Arzt die Substitution durch ein wirkstoffgleiches Praeparat ausgeschlossen hat (aut-idem-Kreuz)"
-Context: MedicationRequest
-* value[x] only boolean
-
 Extension: IsErezeptExt
 Id: is-erezept
 Title: "E-Rezept"

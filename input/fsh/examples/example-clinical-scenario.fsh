@@ -15,8 +15,6 @@ Usage: #example
 * requester = Reference(example-practitioner)
 * authoredOn = "2026-01-15"
 // Ueberweisungs-Extensions
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ue-fachrichtung"
-* extension[=].valueCodeableConcept.text = "Nephrologie"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ue-unfall"
 * extension[=].valueBoolean = false
 // Referral-Optimierung
@@ -29,14 +27,6 @@ Usage: #example
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/referral-optimization-delta"
 * extension[=].valueDecimal = -12.50
 // KHE-Extensions (Krankenhauseinweisung)
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/khe-krankenhaus"
-* extension[=].valueString = "Klinikum Nuernberg Sued"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/khe-diagnose"
-* extension[=].valueString = "Diabetische Nephropathie"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/khe-icd"
-* extension[=].valueCodeableConcept.coding[0].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
-* extension[=].valueCodeableConcept.coding[0].code = #E11.2
-* extension[=].valueCodeableConcept.coding[0].display = "Diabetes mellitus Typ 2 mit Nierenkomplikationen"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/khe-belegarzt"
 * extension[=].valueBoolean = false
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/khe-notfall"
@@ -60,7 +50,6 @@ Usage: #example
 * subject = Reference(example-patient)
 * recordedDate = "2020-03-15"
 * extension[dauerdiagnose].valueBoolean = true
-* extension[diagnoseSeite].valueCodeableConcept = DiagnoseSeiteCS#R "Rechts"
 
 Instance: ExampleAiProvenance
 InstanceOf: Provenance
@@ -100,8 +89,6 @@ Usage: #example
 * policyRule = http://terminology.hl7.org/CodeSystem/v3-ActCode#OPTIN
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/einwilligung-kuerzel"
 * extension[=].valueString = "DMP-DM2"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/einwilligung-text"
-* extension[=].valueMarkdown = "Ich willige in die Teilnahme am Disease Management Programm Diabetes mellitus Typ 2 ein und stimme der Uebermittlung meiner Behandlungsdaten an die zustaendige Krankenkasse zu."
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/einwilligung-zielgruppe"
 * extension[=].valueString = "Patienten mit gesichertem Diabetes mellitus Typ 2"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/einwilligung-gueltigkeitsdauer"
@@ -151,18 +138,8 @@ Usage: #example
 * extension[=].valueBoolean = false
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-pruefzeit"
 * extension[=].valueInteger = 6
-// EBM-spezifische Extensions
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-kapitel"
-* extension[=].valueString = "13"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-punkte"
-* extension[=].valueDecimal = 195
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-pruefzeit"
-* extension[=].valueInteger = 10
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-rlv-relevanz"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-rlv-relevanz"
 * extension[=].valueBoolean = true
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/ebm-euro-betrag"
-* extension[=].valueMoney.value = 20.33
-* extension[=].valueMoney.currency = #EUR
 // Katalog-Metadaten
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/catalog-is-active"
 * extension[=].valueBoolean = true
