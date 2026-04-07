@@ -32,4 +32,4 @@ Description: "Profil fuer medizinische Geraete und Laboranalyzatoren in der deut
 * type MS
 
 // Status
-* status MS
+* status 1..1 MS

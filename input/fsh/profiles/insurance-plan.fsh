@@ -21,6 +21,7 @@ Description: "Profil fuer kassenspezifische und tarifspezifische Leistungsregeln
 * plan[pkv].type MS
 
 // Must support fields
+* status 1..1 MS
 * name MS
 * type MS
 * coverageArea MS
