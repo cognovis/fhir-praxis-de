@@ -1,0 +1,187 @@
+### Validate InsurancePlanDE — AOK Bayern GKV-Tarif
+# @name validate-insurance-plan-aok
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: plan[gkv] slice, identifier, name, type, coverageArea, coverage, specificCost
+POST http://localhost:8080/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "InsurancePlan",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de"]
+  },
+  "identifier": [
+    {
+      "system": "https://fhir.cognovis.de/praxis/sid/insurance-plan-id",
+      "value": "aok-bayern-pzr"
+    }
+  ],
+  "status": "active",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "PUBLICPOL",
+          "display": "public healthcare"
+        }
+      ]
+    }
+  ],
+  "name": "AOK Bayern — Basis + PZR Satzungsleistung",
+  "coverageArea": [
+    { "display": "Bayern" }
+  ],
+  "coverage": [
+    {
+      "type": { "text": "Zahnleistungen" },
+      "benefit": [
+        { "type": { "text": "Professionelle Zahnreinigung (PZR)" } }
+      ]
+    }
+  ],
+  "plan": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type",
+            "code": "gkv",
+            "display": "GKV"
+          }
+        ]
+      },
+      "specificCost": [
+        {
+          "category": { "text": "Satzungsleistung" },
+          "benefit": [
+            {
+              "type": { "text": "Professionelle Zahnreinigung (PZR)" },
+              "cost": [
+                { "type": { "text": "Kassenleistung" } }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+?? status == 200
+
+
+### Validate InsurancePlanDE — Debeka PKV-Tarif mit GOÄ-Faktor-Limit
+# @name validate-insurance-plan-debeka
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: plan[pkv] slice, GOÄ-Faktor value, Implantat-Erstattung
+POST http://localhost:8080/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "InsurancePlan",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de"]
+  },
+  "identifier": [
+    {
+      "system": "https://fhir.cognovis.de/praxis/sid/insurance-plan-id",
+      "value": "debeka-plus"
+    }
+  ],
+  "status": "active",
+  "type": [
+    {
+      "coding": [
+        {
+          "system": "http://terminology.hl7.org/CodeSystem/v3-ActCode",
+          "code": "EHCPOL",
+          "display": "extended healthcare"
+        }
+      ]
+    }
+  ],
+  "name": "Debeka Premium Plus",
+  "coverage": [
+    {
+      "type": { "text": "Aerztliche Leistungen" },
+      "benefit": [
+        { "type": { "text": "GOÄ-Positionen bis Faktor 2.3" } }
+      ]
+    }
+  ],
+  "plan": [
+    {
+      "type": {
+        "coding": [
+          {
+            "system": "https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type",
+            "code": "pkv",
+            "display": "PKV"
+          }
+        ]
+      },
+      "specificCost": [
+        {
+          "category": { "text": "GOÄ-Faktor-Limit" },
+          "benefit": [
+            {
+              "type": { "text": "GOÄ-Faktor 2.3" },
+              "cost": [
+                {
+                  "type": { "text": "Maximaler GOÄ-Faktor" },
+                  "value": {
+                    "value": 2.3,
+                    "system": "http://unitsofmeasure.org",
+                    "code": "1"
+                  }
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "category": { "text": "Implantate" },
+          "benefit": [
+            {
+              "type": { "text": "Implantatversorgung" },
+              "cost": [
+                {
+                  "type": { "text": "Erstattung" },
+                  "value": {
+                    "value": 100,
+                    "system": "http://unitsofmeasure.org",
+                    "code": "%"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
+
+?? status == 200
+
+
+### Validate InsurancePlanDE — Invalid: fehlender status (muss scheitern)
+# @name validate-insurance-plan-missing-status
+# Expected: OperationOutcome mit Fehler (status ist Pflichtfeld im FHIR R4 InsurancePlan)
+POST http://localhost:8080/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "InsurancePlan",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de"]
+  },
+  "name": "Plan ohne Status"
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"

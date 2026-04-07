@@ -1,0 +1,91 @@
+### Validate ProcedureAmbulantDE — Koloskopie mit OPS-Kodierung
+# @name validate-procedure-koloskopie
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: code.coding[ops] slice, OPS system/version/code, status, subject, performedDateTime
+POST http://localhost:8080/fhir/Procedure/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Procedure",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de"]
+  },
+  "status": "completed",
+  "subject": { "reference": "Patient/example-patient" },
+  "performedDateTime": "2024-03-15",
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "version": "2024",
+        "code": "1-650.1",
+        "display": "Diagnostische Koloskopie: Total, bis Zökum"
+      }
+    ]
+  }
+}
+
+?? status == 200
+
+
+### Validate ProcedureAmbulantDE — Wundversorgung links (mit Seitenlokalisation)
+# @name validate-procedure-wundversorgung
+# Expected: OperationOutcome with "all ok" (no errors)
+# Covers: OPS code with Seitenlokalisation extension
+POST http://localhost:8080/fhir/Procedure/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Procedure",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de"]
+  },
+  "status": "completed",
+  "subject": { "reference": "Patient/example-patient" },
+  "performedDateTime": "2024-03-20",
+  "code": {
+    "coding": [
+      {
+        "extension": [
+          {
+            "url": "http://fhir.de/StructureDefinition/seitenlokalisation",
+            "valueCoding": {
+              "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION",
+              "code": "L",
+              "display": "Links"
+            }
+          }
+        ],
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "version": "2024",
+        "code": "5-916.00",
+        "display": "Wundversorgung: Sekundäre Wundversorgung: Ohne weitere Maßnahmen"
+      }
+    ]
+  }
+}
+
+?? status == 200
+
+
+### Validate ProcedureAmbulantDE — Invalid: fehlender code (muss scheitern)
+# @name validate-procedure-missing-code
+# Expected: OperationOutcome mit Fehler (code ist 1..1 Pflichtfeld)
+POST http://localhost:8080/fhir/Procedure/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Procedure",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de"]
+  },
+  "status": "completed",
+  "subject": { "reference": "Patient/example-patient" },
+  "performedDateTime": "2024-03-15"
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"
