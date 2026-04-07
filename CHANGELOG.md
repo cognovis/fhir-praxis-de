@@ -4,21 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
-### Breaking Changes
+### Merge
 
-- **fpde-za3**: Remove `KrablLinkContentCS` (krabllink-content) — no profile or example references
-- **fpde-za3**: Rename `KrablLinkKategorieCS` → `DokumentKategorieCS` (Id: `dokument-kategorie`) — PVS-agnostische Benennung
-- **fpde-za3**: Rename extension `KrabllinkRefExt` (Id: `krabllink-ref`) → `LinkedDocumentExt` (Id: `linked-document`) — update all example URLs accordingly
-- **fpde-za3**: Remove `bsnr` NamingSystem (lokaler Alias) — upstream canonical `http://fhir.de/sid/dkgev/bsnr` direkt verwenden
-- **fpde-za3**: Remove `DiagnoseSeiteCS` and `DiagnoseSeiteVS` — Extension binding geöffnet, Beispiel auf SNOMED CT umgestellt (consistent mit fpde-5z0)
-- **fpde-za3**: Remove `LabInterpretationVS` — Lab-Profil nutzt bereits HL7-Standard-VS `http://hl7.org/fhir/ValueSet/observation-interpretation` direkt
-- **fpde-za3**: `FPDECoverageGKV` Parent von `Coverage` auf `http://fhir.de/StructureDefinition/coverage-de-gkv` (de.basisprofil.r4 1.6.0-ballot2) umgestellt — Beispiele erfordern jetzt `identifier[KrankenversichertenID]`
+- Resolve conflicts with origin/main (fpde-5z0/5nx changes)
+
+## [0.31.2] - 2026-04-07
 
 ### Miscellaneous
 
-- **fpde-za3**: `KvdtScheinuntergruppeCS` bleibt als lokaler Mirror (KBV-Paket nicht in Dependencies verfügbar)
-- **fpde-za3**: `InsurancePlanTypeCS`, `KvFachgruppeCS`, `ZuzahlungsstatusCS`, `LdtMaterialbezeichnungCS`, `ProbenmaterialSnomedVS`, NamingSystems `abrechnr`/`ldt-testkennungen`/`ldt-auftragsnummer` behalten — kein upstream-Duplikat
 - Bump version to 0.31.1
+- Update changelog
+- Bump version to 0.31.2
+
+### Merge
+
+- Worktree-bead-fpde-5nx
 
 ## [0.31.1] - 2026-04-07
 
@@ -26,6 +26,9 @@ All notable changes to this project will be documented in this file.
 
 - Resolve all 48 IG Publisher QA errors
 - Reduce QA warnings from 48 to 15
+- **fpde-za3**: Address review findings iteration 1
+- **fpde-za3**: Address review findings iteration 2 — update pagecontent docs
+- **fpde-za3**: Correct DokumentKategorieCS name in CHANGELOG
 - **fpde-5nx**: Address review findings iteration 1 — tighten status cardinality, fix false-positive negative tests
 - **fpde-5z0**: Address review findings iteration 1
 - **fpde-5z0**: Address review findings iteration 2
@@ -43,6 +46,7 @@ All notable changes to this project will be documented in this file.
 
 ### Refactoring
 
+- **fpde-za3**: IG cleanup — PVS-agnostik, remove duplicates, update coverage parent
 - **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
 
 ### Merge
