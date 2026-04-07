@@ -4,10 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Miscellaneous
+
+- Bump version to 0.31.1
+
+## [0.31.1] - 2026-04-07
+
 ### Bug Fixes
 
 - Resolve all 48 IG Publisher QA errors
 - Reduce QA warnings from 48 to 15
+- **fpde-5nx**: Address review findings iteration 1 — tighten status cardinality, fix false-positive negative tests
 - **fpde-5z0**: Address review findings iteration 1
 - **fpde-5z0**: Address review findings iteration 2
 - **fpde-5z0**: Address review panel findings iteration 1
@@ -19,10 +26,16 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.30.0
+- **fpde-5nx**: IG quality — tests, package-list.json, SNOMED fix, R5 slicing
+- Update changelog
 
 ### Refactoring
 
 - **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
+
+### Merge
+
+- Worktree-bead-fpde-5z0
 
 ## [0.30.0] - 2026-04-05
 

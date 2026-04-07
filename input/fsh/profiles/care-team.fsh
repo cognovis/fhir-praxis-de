@@ -20,7 +20,7 @@ Description: "Profil fuer Behandler-Teams in der deutschen ambulanten Versorgung
 * participant[behandler].period MS
 
 // Must Support Felder
-* status MS
+* status 1..1 MS
 * category MS
 * name MS
 * subject MS
