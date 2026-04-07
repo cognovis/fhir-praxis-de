@@ -4,6 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Breaking Changes
+
+- **fpde-za3**: Remove `KrablLinkContentCS` (krabllink-content) — no profile or example references
+- **fpde-za3**: Rename `KrablLinkKategorieCS` → `DocumentKategorieCS` (Id: `dokument-kategorie`) — PVS-agnostische Benennung
+- **fpde-za3**: Rename extension `KrabllinkRefExt` (Id: `krabllink-ref`) → `LinkedDocumentExt` (Id: `linked-document`) — update all example URLs accordingly
+- **fpde-za3**: Remove `bsnr` NamingSystem (lokaler Alias) — upstream canonical `http://fhir.de/sid/dkgev/bsnr` direkt verwenden
+- **fpde-za3**: Remove `DiagnoseSeiteCS` and `DiagnoseSeiteVS` — Extension binding geöffnet, Beispiel auf SNOMED CT umgestellt (consistent mit fpde-5z0)
+- **fpde-za3**: Remove `LabInterpretationVS` — Lab-Profil nutzt bereits HL7-Standard-VS `http://hl7.org/fhir/ValueSet/observation-interpretation` direkt
+- **fpde-za3**: `FPDECoverageGKV` Parent von `Coverage` auf `http://fhir.de/StructureDefinition/coverage-de-gkv` (de.basisprofil.r4 1.6.0-ballot2) umgestellt — Beispiele erfordern jetzt `identifier[KrankenversichertenID]`
+
+### Miscellaneous
+
+- **fpde-za3**: `KvdtScheinuntergruppeCS` bleibt als lokaler Mirror (KBV-Paket nicht in Dependencies verfügbar)
+- **fpde-za3**: `InsurancePlanTypeCS`, `KvFachgruppeCS`, `ZuzahlungsstatusCS`, `LdtMaterialbezeichnungCS`, `ProbenmaterialSnomedVS`, NamingSystems `abrechnr`/`ldt-testkennungen`/`ldt-auftragsnummer` behalten — kein upstream-Duplikat
+
 ### Bug Fixes
 
 - **fpde-orv**: Address review findings iteration 1

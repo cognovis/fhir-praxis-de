@@ -1,11 +1,9 @@
-// FPDECoverageGKV — GKV-Versicherung mit Wohnortprinzip (WOP)
-// AK3: WOP Extension aus de.basisprofil.r4 (http://fhir.de/StructureDefinition/gkv/wop)
-// Extension wird NICHT neu definiert — direkt aus Upstream-Paket verwendet
+// FPDECoverageGKV — GKV-Versicherung
+// Parent: coverage-de-gkv aus de.basisprofil.r4 1.6.0-ballot2
+// Die WOP-Extension ist bereits im Parent definiert — keine lokale Neudefinition noetig.
 
 Profile: FPDECoverageGKV
-Parent: Coverage
+Parent: http://fhir.de/StructureDefinition/coverage-de-gkv
 Id: fpde-coverage-gkv
 Title: "FPDE Coverage GKV"
-Description: "GKV-Versicherung mit Wohnortprinzip (WOP). Erweitert Coverage um die GKV-WOP-Extension aus de.basisprofil.r4."
-* extension contains
-    http://fhir.de/StructureDefinition/gkv/wop named wop 0..1 MS
+Description: "GKV-Versicherung. Basiert auf coverage-de-gkv aus de.basisprofil.r4 (inkl. WOP und KrankenversichertenID)."

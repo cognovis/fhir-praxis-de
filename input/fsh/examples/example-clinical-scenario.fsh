@@ -60,7 +60,9 @@ Usage: #example
 * subject = Reference(example-patient)
 * recordedDate = "2020-03-15"
 * extension[dauerdiagnose].valueBoolean = true
-* extension[diagnoseSeite].valueCodeableConcept = DiagnoseSeiteCS#R "Rechts"
+* extension[diagnoseSeite].valueCodeableConcept.coding[0].system = "http://snomed.info/sct"
+* extension[diagnoseSeite].valueCodeableConcept.coding[0].code = #24028007
+* extension[diagnoseSeite].valueCodeableConcept.coding[0].display = "Right"
 
 Instance: ExampleAiProvenance
 InstanceOf: Provenance

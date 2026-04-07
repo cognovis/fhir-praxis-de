@@ -29,9 +29,9 @@ Context: Encounter
 * value[x] only CodeableConcept
 * valueCodeableConcept from ScheinartVS (extensible)
 
-Extension: KrabllinkRefExt
-Id: krabllink-ref
-Title: "KRABL-Link Referenz"
+Extension: LinkedDocumentExt
+Id: linked-document
+Title: "Verlinktes Dokument"
 Description: "Referenz auf ein verlinktes Dokument (DocumentReference)."
 Context: ChargeItem, Encounter
 * value[x] only Reference(DocumentReference)

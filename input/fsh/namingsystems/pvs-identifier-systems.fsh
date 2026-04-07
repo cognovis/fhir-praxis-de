@@ -89,22 +89,6 @@ Usage: #definition
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/hvg-vertrags-id"
 * uniqueId[0].preferred = true
 
-Instance: bsnr
-InstanceOf: NamingSystem
-Usage: #definition
-* name = "Bsnr"
-* status = #draft
-* kind = #identifier
-* date = "2026-04-03"
-* publisher = "cognovis GmbH"
-* description = "Betriebsstaettennummer — lokaler Alias fuer http://fhir.de/sid/dkgev/bsnr. Enthaelt Verweis auf die nationale Definition."
-* uniqueId[0].type = #uri
-* uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/bsnr"
-* uniqueId[0].preferred = true
-* uniqueId[1].type = #uri
-* uniqueId[1].value = "http://fhir.de/sid/dkgev/bsnr"
-* uniqueId[1].preferred = false
-
 Instance: scheindiagnosen
 InstanceOf: NamingSystem
 Usage: #definition

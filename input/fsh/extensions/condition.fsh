@@ -13,4 +13,3 @@ Title: "Diagnoseseite"
 Description: "Seitenangabe der Diagnose (links/rechts/beidseitig). Ergaenzt die KBV bodySite-Kodierung."
 Context: Condition
 * value[x] only CodeableConcept
-* valueCodeableConcept from DiagnoseSeiteVS (extensible)

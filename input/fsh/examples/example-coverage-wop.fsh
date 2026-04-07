@@ -8,6 +8,8 @@ Title: "GKV-Coverage mit WOP Nordrhein"
 Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=38 Nordrhein) aus de.basisprofil.r4."
 Usage: #example
 * status = #active
+* identifier[KrankenversichertenID].system = "http://fhir.de/sid/gkv/kvid-10"
+* identifier[KrankenversichertenID].value = "A123456789"
 * type.coding[0].system = "http://fhir.de/CodeSystem/versicherungsart-de-basis"
 * type.coding[0].code = #GKV
 * type.coding[0].display = "gesetzliche Krankenversicherung"
@@ -24,6 +26,8 @@ Title: "GKV-Coverage mit WOP Westfalen-Lippe"
 Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=17 Westfalen-Lippe)."
 Usage: #example
 * status = #active
+* identifier[KrankenversichertenID].system = "http://fhir.de/sid/gkv/kvid-10"
+* identifier[KrankenversichertenID].value = "B987654321"
 * type.coding[0].system = "http://fhir.de/CodeSystem/versicherungsart-de-basis"
 * type.coding[0].code = #GKV
 * beneficiary = Reference(example-patient)
