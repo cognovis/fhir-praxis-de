@@ -27,7 +27,7 @@ Future versions may introduce constrained profiles where invariants or slicing a
 
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
-| **PaymentReconciliation** | KV quarterly payment statement | HonorarbescheidQuartal, HonorarbescheidBsnr |
+| **PaymentReconciliation** | KV quarterly payment statement | HonorarbescheidQuartal |
 | **ClaimResponse** | Individual line-item corrections | HonorarbescheidCorrectionSign |
 
 ### Clinical
