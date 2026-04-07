@@ -1,7 +1,7 @@
-CodeSystem: KrablLinkKategorieCS
-Id: krabllink-kategorie
-Title: "KraBL-Link Dokumentkategorie"
-Description: "Dokumentkategorien für Krankenblatt-Links (KraBL) in der ambulanten Versorgung"
+CodeSystem: DokumentKategorieCS
+Id: dokument-kategorie
+Title: "Dokument Kategorie"
+Description: "Kategorien fuer verlinkte Dokumente in der ambulanten Versorgung (z.B. Arztbriefe, Befunde, Labor)"
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true

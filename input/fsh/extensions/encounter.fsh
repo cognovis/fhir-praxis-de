@@ -21,9 +21,17 @@ Description: "Zeitpunkt der Erstellung des Encounters im PVS."
 Context: Encounter
 * value[x] only dateTime
 
-Extension: KrabllinkRefExt
-Id: krabllink-ref
-Title: "KRABL-Link Referenz"
+Extension: ScheintypExt
+Id: scheintyp
+Title: "Scheintyp"
+Description: "Abrechnungsscheintyp des Encounters (z.B. GKV, PKV, BG)."
+Context: Encounter
+* value[x] only CodeableConcept
+* valueCodeableConcept from ScheinartVS (extensible)
+
+Extension: LinkedDocumentExt
+Id: linked-document
+Title: "Verlinktes Dokument"
 Description: "Referenz auf ein verlinktes Dokument (DocumentReference)."
 Context: ChargeItem, Encounter
 * value[x] only Reference(DocumentReference)

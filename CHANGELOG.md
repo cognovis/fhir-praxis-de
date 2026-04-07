@@ -4,9 +4,21 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Merge
+
+- Resolve conflicts with origin/main (fpde-5z0/5nx changes)
+
+## [0.31.2] - 2026-04-07
+
 ### Miscellaneous
 
 - Bump version to 0.31.1
+- Update changelog
+- Bump version to 0.31.2
+
+### Merge
+
+- Worktree-bead-fpde-5nx
 
 ## [0.31.1] - 2026-04-07
 
@@ -14,6 +26,9 @@ All notable changes to this project will be documented in this file.
 
 - Resolve all 48 IG Publisher QA errors
 - Reduce QA warnings from 48 to 15
+- **fpde-za3**: Address review findings iteration 1
+- **fpde-za3**: Address review findings iteration 2 — update pagecontent docs
+- **fpde-za3**: Correct DokumentKategorieCS name in CHANGELOG
 - **fpde-5nx**: Address review findings iteration 1 — tighten status cardinality, fix false-positive negative tests
 - **fpde-5z0**: Address review findings iteration 1
 - **fpde-5z0**: Address review findings iteration 2
@@ -31,6 +46,7 @@ All notable changes to this project will be documented in this file.
 
 ### Refactoring
 
+- **fpde-za3**: IG cleanup — PVS-agnostik, remove duplicates, update coverage parent
 - **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
 
 ### Merge

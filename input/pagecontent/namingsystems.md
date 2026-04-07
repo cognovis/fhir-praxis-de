@@ -62,18 +62,6 @@ Unique identifier for a concrete HVG contract instance. Identifies not just the 
 
 **Usage:** Contract.identifier to uniquely identify a single contract agreement.
 
-## Facility Identifiers
-
-### bsnr — Betriebsstättennummer (Facility Number)
-
-Betriebsstättennummer — the official German facility/site number assigned by the insurance authority (DKGEV). This IG defines it as a local alias that cross-references the national definition at `http://fhir.de/sid/dkgev/bsnr`.
-
-**Canonical URI:** `https://fhir.cognovis.de/praxis/NamingSystem/bsnr`
-
-**National Reference:** `http://fhir.de/sid/dkgev/bsnr` (DE base profile)
-
-**Usage:** Organization.identifier for a practice site/facility to establish its official registration with the German insurance system.
-
 ## Diagnosis Identifiers
 
 ### scheindiagnosen — Scheindiagnosen Identifier System

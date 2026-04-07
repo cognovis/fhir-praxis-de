@@ -28,14 +28,6 @@ Abrechnungsschein-Typen in der ambulanten Versorgung.
 - **Binding:** Available for use in Encounter-based billing classification workflows
 - **Usage:** Classifies encounters by billing type (GKV, PKV, BG, Überweisung, Notfall, IGeL)
 
-### DiagnoseSeiteVS — Diagnoseseite
-
-Seitenangabe für Diagnosen (Lateralität).
-
-- **Includes:** All codes from [DiagnoseSeiteCS](CodeSystem-diagnose-seite.html)
-- **Binding:** Available for use in diagnosis laterality workflows (e.g. via bodySite or future extensions)
-- **Usage:** Supplements ICD-10-GM coding with laterality (Links, Rechts, Beidseitig)
-
 ### GenehmigungenLeistungsbereichVS — Genehmigung Leistungsbereich
 
 KV-regulierte Leistungsbereiche mit Genehmigungspflicht.
@@ -91,14 +83,6 @@ SNOMED-CT codes for common laboratory specimen types encountered in ambulatory p
 - **Includes:** SNOMED-CT codes: 122555007 (Venous blood), 122575003 (Urine), 258529004 (Throat swab), 119361006 (Plasma), 119297000 (Blood), 119342007 (Saliva), 445447003 (Specimen from skin), 258580003 (Whole blood)
 - **Binding:** Used by `PraxisSpecimen.type.coding[snomed]` (required)
 - **Usage:** Identifies specimen material type using the international SNOMED Clinical Terms standard; combined with optional LDT FK 8428 coding in the PraxisSpecimen profile
-
-### LabInterpretationVS — Lab Result Interpretation
-
-Laborspezifische Interpretationscodes für Laborbefunde (Observation.interpretation). Diese ValueSet referenziert die HL7 v3-ObservationInterpretation CodeSystem, die international standardisierte Codes für die klinische Interpretation von Laborergebnissen bereitstellt.
-
-- **Includes:** Selected lab-relevant codes from [HL7 v3-ObservationInterpretation](http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation): N (Normal), H (High), L (Low), HH (Critical high), LL (Critical low), A (Abnormal), AA (Critical abnormal), POS (Positive), NEG (Negative)
-- **Binding:** Used by Observation.interpretation in lab result workflows
-- **Usage:** Provides standardized interpretation flags for lab test results across German and international lab systems
 
 ## External ValueSets
 

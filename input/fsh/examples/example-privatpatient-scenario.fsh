@@ -50,7 +50,7 @@ Usage: #example
 * extension[=].valueDateTime = "2026-01-14T09:15:00+01:00"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/abrechnungsquartal"
 * extension[=].valueString = "1/2026"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/krabllink-ref"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/linked-document"
 * extension[=].valueReference = Reference(example-documentreference)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/cross-ak-billed-under"
 * extension[=].valueReference = Reference(example-organization)
@@ -106,7 +106,7 @@ Usage: #example
 * extension[=].valueString = "pending"
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/reviewed-at"
 * extension[=].valueDateTime = "2026-01-14T17:00:00+01:00"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/krabllink-ref"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/linked-document"
 * extension[=].valueReference = Reference(example-documentreference)
 
 Instance: ExampleClaimPrivat
