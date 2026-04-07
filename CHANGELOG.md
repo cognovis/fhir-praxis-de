@@ -6,6 +6,39 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- Resolve all 48 IG Publisher QA errors
+- Reduce QA warnings from 48 to 15
+- **fpde-5z0**: Address review findings iteration 1
+- **fpde-5z0**: Address review findings iteration 2
+- **fpde-5z0**: Address review panel findings iteration 1
+
+### CI/CD
+
+- Publish FHIR package to npm.cognovis.de on release
+
+### Miscellaneous
+
+- Bump version to 0.30.0
+
+### Refactoring
+
+- **fpde-5z0**: Remove redundant extensions that duplicate standard FHIR fields
+
+## [0.30.0] - 2026-04-05
+
+### Miscellaneous
+
+- Bump version to 0.29.0
+- Merge origin/main - resolve CHANGELOG conflict
+
+### Merge
+
+- Worktree-bead-fpde-orv
+
+## [0.29.0] - 2026-04-05
+
+### Bug Fixes
+
 - **fpde-orv**: Address review findings iteration 1
 - **fpde-orv**: Address review findings iteration 1
 - **fpde-orv**: Address review findings iteration 2
@@ -29,6 +62,8 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.28.0
+- Update changelog
+- Update changelog
 
 ### Test
 
