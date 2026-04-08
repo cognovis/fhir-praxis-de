@@ -38,11 +38,19 @@ Always invoke `/aidbox` before manually curl-debugging — it contains learnings
 - **Validation:** `POST /fhir/{ResourceType}/$validate`
 - **ValueSet Expand:** `GET /fhir/ValueSet/$expand?url=...`
 
+## Versioning
+
+**Two files must always have the same version:**
+- `VERSION` — source of truth for CI/CD (release workflow reads this)
+- `sushi-config.yaml` `version:` field — source of truth for SUSHI/IG Publisher (package.tgz version)
+
+When bumping the version, update BOTH files. If they diverge, the published package will have the wrong version.
+
 ## Downstream Dependencies
 
 When publishing a new version of fhir-praxis-de:
 - **fhir-dental-de** pins `de.cognovis.fhir.praxis` in `sushi-config.yaml` → must be updated to the new version
-- **mira-adapters** (`packages/fhir-de/scripts/generate.ts`) fetches praxis via `fromPackageRef` from GitHub Pages → picks up latest automatically after IG Publisher deploys, no manual update needed
+- **mira-adapters** (`packages/fhir-de/scripts/generate.ts`) fetches `@latest` from GitHub Pages → picks up new version automatically after IG Publisher deploys, but codegen must be re-run (`cd packages/fhir-de && bun run generate`) to regenerate TypeScript types
 
 ## Conventions
 
