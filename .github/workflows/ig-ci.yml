@@ -128,7 +128,7 @@ jobs:
           echo "{\"resourceType\":\"Bundle\",\"type\":\"transaction\",\"entry\":[$ENTRIES]}" > /tmp/sd-bundle.json
           echo "Uploading $COUNT StructureDefinitions as transaction bundle..."
           HTTP_CODE=$(curl -s -o /tmp/sd-response.json -w "%{http_code}" \
-            -X POST http://localhost:8080/fhir/ \
+            -X POST http://localhost:8080/ \
             -u "basic:secret" \
             -H "Content-Type: application/json" \
             -d @/tmp/sd-bundle.json)
