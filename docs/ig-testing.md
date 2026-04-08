@@ -7,7 +7,7 @@ getestet wird. Alle Tests sind als [httpyac](https://httpyac.github.io/)-Dateien
 ## Voraussetzungen
 
 - Aidbox läuft auf `http://localhost:8080`
-- Aidbox Basic-Auth: `basic:secret`
+- Aidbox Basic-Auth: `basic:secret` *(Lokale Entwicklungsumgebung — nicht für Produktion)*
 - httpyac CLI installiert: `npm install -g httpyac` oder via `npx httpyac`
 
 ## IG als Package in Aidbox installieren
@@ -136,17 +136,18 @@ Alle Tests verwenden `POST /fhir/{Resource}/$validate?profile=<url>` mit einem J
 Jedes Kernprofil hat mindestens einen Negativ-Test, der prüft, ob das Profil ungültige Ressourcen
 korrekt ablehnt. Folgende Negativ-Tests sind vorhanden:
 
-| Profil | Test-Name | Erwarteter Fehler |
-|--------|-----------|-------------------|
-| PraxisCondition | `validate-condition-wrong-system` | ICD-10-GM-Slice nicht erfüllt (SNOMED statt ICD-10-GM) |
-| PraxisLabObservation | `validate-lab-obs-missing-category` | `category 1..*` verletzt |
-| PraxisLabObservation | `validate-lab-obs-no-coding` | Invariant `praxis-lab-obs-code` verletzt |
-| ProcedureAmbulantDE | `validate-procedure-missing-code` | `code 1..1` verletzt |
-| ProcedureAmbulantDE | `validate-procedure-ops-missing-version` | OPS `version 1..1` verletzt |
-| PraxisDevice | `validate-device-missing-status` | `status 1..1` verletzt |
-| FPDEPatient | `validate-patient-invalid-birthdate` | FHIR `date`-Typ ungültig |
-| PraxisSpecimen | *(in specimen.http)* | `type 1..1` verletzt |
-| CareTeamDE | *(in care-team.http)* | `status 1..1` verletzt |
+| Profil | Test-Name (`@name`) | Datei | Erwarteter Fehler |
+|--------|---------------------|-------|-------------------|
+| PraxisCondition | `validate-condition-wrong-system` | condition.http | ICD-10-GM-Slice nicht erfüllt (SNOMED statt ICD-10-GM) |
+| PraxisLabObservation | `validate-lab-obs-missing-category` | lab-observation.http | `category 1..*` verletzt |
+| PraxisLabObservation | `validate-lab-obs-no-coding` | lab-observation.http | Invariant `praxis-lab-obs-code` verletzt |
+| ProcedureAmbulantDE | `validate-procedure-missing-code` | procedure.http | `code 1..1` verletzt |
+| ProcedureAmbulantDE | `validate-procedure-ops-missing-version` | procedure.http | OPS `version 1..1` verletzt |
+| PraxisDevice | `validate-device-missing-status` | device.http | `status 1..1` verletzt (FHIR R4 Base) |
+| FPDEPatient | `validate-patient-invalid-birthdate` | patient-demografie.http | FHIR `date`-Typ ungültig |
+| PraxisSpecimen | `validate-specimen-missing-type` | specimen.http | `type 1..1` verletzt |
+| CareTeamDE | `validate-care-team-missing-status` | care-team.http | `status 1..1` verletzt |
+| InsurancePlanDE | `validate-insurance-plan-missing-status` | insurance-plan.http | `status 1..1` verletzt |
 
 ## Bekannte Aidbox-Besonderheiten
 
