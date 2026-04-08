@@ -72,9 +72,6 @@ jobs:
       - name: Install SUSHI
         run: npm install -g fsh-sushi
 
-      - name: Run SUSHI
-        run: sushi .
-
       - name: Wait for Aidbox
         run: |
           echo "Waiting for Aidbox to be ready..."
