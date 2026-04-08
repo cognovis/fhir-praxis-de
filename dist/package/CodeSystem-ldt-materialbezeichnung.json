@@ -1,0 +1,76 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "ldt-materialbezeichnung",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem ldt-materialbezeichnung</b></p><a name=\"ldt-materialbezeichnung\"> </a><a name=\"hcldt-materialbezeichnung\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung</code> provides <b>a fragment</b> that includes following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">EDTA-Blut<a name=\"ldt-materialbezeichnung-EDTA-Blut\"> </a></td><td>Venaeses Blut in EDTA-Roehrchen (Haematologie, klinische Chemie)</td></tr><tr><td style=\"white-space:nowrap\">Serum<a name=\"ldt-materialbezeichnung-Serum\"> </a></td><td>Blutserum (klinische Chemie, Serologie)</td></tr><tr><td style=\"white-space:nowrap\">Urin-MSU<a name=\"ldt-materialbezeichnung-Urin-MSU\"> </a></td><td>Mittelstrahlurin (Urinalyse, Urinkultur)</td></tr><tr><td style=\"white-space:nowrap\">Abstrich<a name=\"ldt-materialbezeichnung-Abstrich\"> </a></td><td>Abstrich (Mikrobiologie)</td></tr><tr><td style=\"white-space:nowrap\">Liquor<a name=\"ldt-materialbezeichnung-Liquor\"> </a></td><td>Liquor cerebrospinalis</td></tr><tr><td style=\"white-space:nowrap\">Stuhl<a name=\"ldt-materialbezeichnung-Stuhl\"> </a></td><td>Stuhlprobe (Mikrobiologie, Parasitologie)</td></tr><tr><td style=\"white-space:nowrap\">Urin<a name=\"ldt-materialbezeichnung-Urin\"> </a></td><td>Urin (ungeklaert, Streifentest)</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.22"
+  }],
+  "version" : "0.30.0",
+  "name" : "LdtMaterialbezeichnungCS",
+  "title" : "LDT Materialbezeichnung (FK 8428)",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Probenmaterial-Bezeichnungen gemaess LDT3-Schluessel (Feldkennung 8428). PVS-agnostische Auswahl haeufiger Materialien.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "fragment",
+  "concept" : [{
+    "code" : "EDTA-Blut",
+    "display" : "EDTA-Blut",
+    "definition" : "Venaeses Blut in EDTA-Roehrchen (Haematologie, klinische Chemie)"
+  },
+  {
+    "code" : "Serum",
+    "display" : "Serum",
+    "definition" : "Blutserum (klinische Chemie, Serologie)"
+  },
+  {
+    "code" : "Urin-MSU",
+    "display" : "Urin-MSU",
+    "definition" : "Mittelstrahlurin (Urinalyse, Urinkultur)"
+  },
+  {
+    "code" : "Abstrich",
+    "display" : "Abstrich",
+    "definition" : "Abstrich (Mikrobiologie)"
+  },
+  {
+    "code" : "Liquor",
+    "display" : "Liquor",
+    "definition" : "Liquor cerebrospinalis"
+  },
+  {
+    "code" : "Stuhl",
+    "display" : "Stuhl",
+    "definition" : "Stuhlprobe (Mikrobiologie, Parasitologie)"
+  },
+  {
+    "code" : "Urin",
+    "display" : "Urin",
+    "definition" : "Urin (ungeklaert, Streifentest)"
+  }]
+}

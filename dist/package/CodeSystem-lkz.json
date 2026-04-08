@@ -1,0 +1,62 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "lkz",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem lkz</b></p><a name=\"lkz\"> </a><a name=\"hclkz\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/lkz</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">aktiv<a name=\"lkz-aktiv\"> </a></td><td>Aktiv</td><td>Datensatz ist aktiv und gültig</td></tr><tr><td style=\"white-space:nowrap\">geloescht<a name=\"lkz-geloescht\"> </a></td><td>Gelöscht</td><td>Datensatz ist als gelöscht markiert</td></tr><tr><td style=\"white-space:nowrap\">gesperrt<a name=\"lkz-gesperrt\"> </a></td><td>Gesperrt</td><td>Datensatz ist gesperrt und nicht verwendbar</td></tr><tr><td style=\"white-space:nowrap\">archiviert<a name=\"lkz-archiviert\"> </a></td><td>Archiviert</td><td>Datensatz ist archiviert</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/lkz",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.23"
+  }],
+  "version" : "0.30.0",
+  "name" : "LkzCS",
+  "title" : "Löschkennzeichen",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Löschkennzeichen für Datensätze in der ambulanten Versorgung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 4,
+  "concept" : [{
+    "code" : "aktiv",
+    "display" : "Aktiv",
+    "definition" : "Datensatz ist aktiv und gültig"
+  },
+  {
+    "code" : "geloescht",
+    "display" : "Gelöscht",
+    "definition" : "Datensatz ist als gelöscht markiert"
+  },
+  {
+    "code" : "gesperrt",
+    "display" : "Gesperrt",
+    "definition" : "Datensatz ist gesperrt und nicht verwendbar"
+  },
+  {
+    "code" : "archiviert",
+    "display" : "Archiviert",
+    "definition" : "Datensatz ist archiviert"
+  }]
+}

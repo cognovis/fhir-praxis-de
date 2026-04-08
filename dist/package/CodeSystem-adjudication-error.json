@@ -1,0 +1,52 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "adjudication-error",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem adjudication-error</b></p><a name=\"adjudication-error\"> </a><a name=\"hcadjudication-error\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/adjudication-error</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">nicht-genehmigungspflichtig<a name=\"adjudication-error-nicht-genehmigungspflichtig\"> </a></td><td>Nicht genehmigungspflichtig</td><td>Die beantragte Leistung bedarf keiner Vorabgenehmigung durch die Krankenkasse</td></tr><tr><td style=\"white-space:nowrap\">unbekannt<a name=\"adjudication-error-unbekannt\"> </a></td><td>Unbekannt</td><td>Fehlerursache unbekannt oder nicht naeher spezifiziert</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/adjudication-error",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.1"
+  }],
+  "version" : "0.30.0",
+  "name" : "GenehmigungsFehlerCS",
+  "title" : "Genehmigungsfehler",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Fehlercodes fuer abgelehnte Genehmigungsantraege im deutschen Praxiskontext",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 2,
+  "concept" : [{
+    "code" : "nicht-genehmigungspflichtig",
+    "display" : "Nicht genehmigungspflichtig",
+    "definition" : "Die beantragte Leistung bedarf keiner Vorabgenehmigung durch die Krankenkasse"
+  },
+  {
+    "code" : "unbekannt",
+    "display" : "Unbekannt",
+    "definition" : "Fehlerursache unbekannt oder nicht naeher spezifiziert"
+  }]
+}

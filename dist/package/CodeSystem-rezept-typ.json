@@ -1,0 +1,62 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "rezept-typ",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem rezept-typ</b></p><a name=\"rezept-typ\"> </a><a name=\"hcrezept-typ\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/rezept-typ</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">gkv<a name=\"rezept-typ-gkv\"> </a></td><td>GKV-Rezept</td><td>Rezept fuer gesetzlich versicherte Patienten (Muster 16)</td></tr><tr><td style=\"white-space:nowrap\">privat<a name=\"rezept-typ-privat\"> </a></td><td>Privatrezept</td><td>Rezept fuer privat versicherte Patienten</td></tr><tr><td style=\"white-space:nowrap\">btm<a name=\"rezept-typ-btm\"> </a></td><td>BTM-Rezept</td><td>Betaeubungsmittelrezept nach BtMVV</td></tr><tr><td style=\"white-space:nowrap\">t-rezept<a name=\"rezept-typ-t-rezept\"> </a></td><td>T-Rezept</td><td>Thalidomid-Rezept (THALIX/Lenalidomid)</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/rezept-typ",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.27"
+  }],
+  "version" : "0.30.0",
+  "name" : "RezeptTypCS",
+  "title" : "Rezepttyp",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Typ des Rezepts in der ambulanten Versorgung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 4,
+  "concept" : [{
+    "code" : "gkv",
+    "display" : "GKV-Rezept",
+    "definition" : "Rezept fuer gesetzlich versicherte Patienten (Muster 16)"
+  },
+  {
+    "code" : "privat",
+    "display" : "Privatrezept",
+    "definition" : "Rezept fuer privat versicherte Patienten"
+  },
+  {
+    "code" : "btm",
+    "display" : "BTM-Rezept",
+    "definition" : "Betaeubungsmittelrezept nach BtMVV"
+  },
+  {
+    "code" : "t-rezept",
+    "display" : "T-Rezept",
+    "definition" : "Thalidomid-Rezept (THALIX/Lenalidomid)"
+  }]
+}

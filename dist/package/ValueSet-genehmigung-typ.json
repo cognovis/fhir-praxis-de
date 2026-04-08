@@ -1,16 +1,44 @@
 {
-  "resourceType": "ValueSet",
-  "status": "draft",
-  "name": "GenehmigungenTypVS",
-  "id": "genehmigung-typ",
-  "title": "Genehmigungstyp",
-  "description": "Typ der KV-Genehmigung: kopfbezogen vs. betriebsstaette",
-  "url": "https://fhir.cognovis.de/praxis/ValueSet/genehmigung-typ",
-  "compose": {
-    "include": [
-      {
-        "system": "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ"
-      }
-    ]
+  "resourceType" : "ValueSet",
+  "id" : "genehmigung-typ",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet genehmigung-typ</b></p><a name=\"genehmigung-typ\"> </a><a name=\"hcgenehmigung-typ\"> </a><ul><li>Include all codes defined in <a href=\"CodeSystem-genehmigung-typ.html\"><code>https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ</code></a><span title=\"Version is not explicitly stated, which means it is fixed to the version provided in this specification\"> version &#x1F4E6;0.30.0</span></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/genehmigung-typ",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.13"
+  }],
+  "version" : "0.30.0",
+  "name" : "GenehmigungenTypVS",
+  "title" : "Genehmigungstyp",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Typ der KV-Genehmigung: kopfbezogen vs. betriebsstaette",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ"
+    }]
   }
 }

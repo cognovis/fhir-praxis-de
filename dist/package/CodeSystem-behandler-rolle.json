@@ -1,0 +1,72 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "behandler-rolle",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem behandler-rolle</b></p><a name=\"behandler-rolle\"> </a><a name=\"hcbehandler-rolle\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">zahnarzt<a name=\"behandler-rolle-zahnarzt\"> </a></td><td>Zahnarzt</td><td>Zahnaerztin oder Zahnarzt</td></tr><tr><td style=\"white-space:nowrap\">zfa<a name=\"behandler-rolle-zfa\"> </a></td><td>ZFA</td><td>Zahnmedizinische Fachangestellte</td></tr><tr><td style=\"white-space:nowrap\">mfa<a name=\"behandler-rolle-mfa\"> </a></td><td>MFA</td><td>Medizinische Fachangestellte</td></tr><tr><td style=\"white-space:nowrap\">arzt<a name=\"behandler-rolle-arzt\"> </a></td><td>Arzt</td><td>Aerztin oder Arzt</td></tr><tr><td style=\"white-space:nowrap\">wb-assistent<a name=\"behandler-rolle-wb-assistent\"> </a></td><td>WB-Assistent</td><td>Weiterbildungsassistent</td></tr><tr><td style=\"white-space:nowrap\">physiotherapeut<a name=\"behandler-rolle-physiotherapeut\"> </a></td><td>Physiotherapeut</td><td>Physiotherapeutin oder Physiotherapeut</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.5"
+  }],
+  "version" : "0.30.0",
+  "name" : "BehandlerRolleCS",
+  "title" : "Behandler-Rolle",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Rollen der Mitglieder in einem Behandler-Team (CareTeam) in der deutschen ambulanten Versorgung.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 6,
+  "concept" : [{
+    "code" : "zahnarzt",
+    "display" : "Zahnarzt",
+    "definition" : "Zahnaerztin oder Zahnarzt"
+  },
+  {
+    "code" : "zfa",
+    "display" : "ZFA",
+    "definition" : "Zahnmedizinische Fachangestellte"
+  },
+  {
+    "code" : "mfa",
+    "display" : "MFA",
+    "definition" : "Medizinische Fachangestellte"
+  },
+  {
+    "code" : "arzt",
+    "display" : "Arzt",
+    "definition" : "Aerztin oder Arzt"
+  },
+  {
+    "code" : "wb-assistent",
+    "display" : "WB-Assistent",
+    "definition" : "Weiterbildungsassistent"
+  },
+  {
+    "code" : "physiotherapeut",
+    "display" : "Physiotherapeut",
+    "definition" : "Physiotherapeutin oder Physiotherapeut"
+  }]
+}

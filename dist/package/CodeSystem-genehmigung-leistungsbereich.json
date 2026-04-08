@@ -1,68 +1,95 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "GenehmigungenLeistungsbereichCS",
-  "id": "genehmigung-leistungsbereich",
-  "title": "Genehmigung Leistungsbereich",
-  "description": "KV-regulierte Leistungsbereiche mit Genehmigungspflicht",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich",
-  "concept": [
-    {
-      "code": "chirotherapie",
-      "display": "Chirotherapie"
+  "resourceType" : "CodeSystem",
+  "id" : "genehmigung-leistungsbereich",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem genehmigung-leistungsbereich</b></p><a name=\"genehmigung-leistungsbereich\"> </a><a name=\"hcgenehmigung-leistungsbereich\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">chirotherapie<a name=\"genehmigung-leistungsbereich-chirotherapie\"> </a></td><td>Chirotherapie</td><td/></tr><tr><td style=\"white-space:nowrap\">psychosomatik<a name=\"genehmigung-leistungsbereich-psychosomatik\"> </a></td><td>Psychosomatik</td><td/></tr><tr><td style=\"white-space:nowrap\">psychotherapie<a name=\"genehmigung-leistungsbereich-psychotherapie\"> </a></td><td>Psychotherapie</td><td/></tr><tr><td style=\"white-space:nowrap\">akupunktur<a name=\"genehmigung-leistungsbereich-akupunktur\"> </a></td><td>Akupunktur</td><td/></tr><tr><td style=\"white-space:nowrap\">schmerztherapie<a name=\"genehmigung-leistungsbereich-schmerztherapie\"> </a></td><td>Schmerztherapie</td><td/></tr><tr><td style=\"white-space:nowrap\">sonographie<a name=\"genehmigung-leistungsbereich-sonographie\"> </a></td><td>Sonographie</td><td/></tr><tr><td style=\"white-space:nowrap\">sono-abdomen<a name=\"genehmigung-leistungsbereich-sono-abdomen\"> </a></td><td>Sono Abdomen</td><td/></tr><tr><td style=\"white-space:nowrap\">langzeit-ekg<a name=\"genehmigung-leistungsbereich-langzeit-ekg\"> </a></td><td>Langzeit-EKG</td><td/></tr><tr><td style=\"white-space:nowrap\">langzeit-blutdruck<a name=\"genehmigung-leistungsbereich-langzeit-blutdruck\"> </a></td><td>Langzeit-Blutdruck</td><td/></tr><tr><td style=\"white-space:nowrap\">radiologie<a name=\"genehmigung-leistungsbereich-radiologie\"> </a></td><td>Radiologie</td><td/></tr><tr><td style=\"white-space:nowrap\">allergologie<a name=\"genehmigung-leistungsbereich-allergologie\"> </a></td><td>Allergologie</td><td/></tr><tr><td style=\"white-space:nowrap\">dmp<a name=\"genehmigung-leistungsbereich-dmp\"> </a></td><td>DMP</td><td/></tr><tr><td style=\"white-space:nowrap\">hks<a name=\"genehmigung-leistungsbereich-hks\"> </a></td><td>HKS</td><td>Herzschrittmacher-Kontrolle</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.13"
+  }],
+  "version" : "0.30.0",
+  "name" : "GenehmigungenLeistungsbereichCS",
+  "title" : "Genehmigung Leistungsbereich",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "psychosomatik",
-      "display": "Psychosomatik"
-    },
-    {
-      "code": "psychotherapie",
-      "display": "Psychotherapie"
-    },
-    {
-      "code": "akupunktur",
-      "display": "Akupunktur"
-    },
-    {
-      "code": "schmerztherapie",
-      "display": "Schmerztherapie"
-    },
-    {
-      "code": "sonographie",
-      "display": "Sonographie"
-    },
-    {
-      "code": "sono-abdomen",
-      "display": "Sono Abdomen"
-    },
-    {
-      "code": "langzeit-ekg",
-      "display": "Langzeit-EKG"
-    },
-    {
-      "code": "langzeit-blutdruck",
-      "display": "Langzeit-Blutdruck"
-    },
-    {
-      "code": "radiologie",
-      "display": "Radiologie"
-    },
-    {
-      "code": "allergologie",
-      "display": "Allergologie"
-    },
-    {
-      "code": "dmp",
-      "display": "DMP"
-    },
-    {
-      "code": "hks",
-      "display": "HKS",
-      "definition": "Herzschrittmacher-Kontrolle"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 13
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "KV-regulierte Leistungsbereiche mit Genehmigungspflicht",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 13,
+  "concept" : [{
+    "code" : "chirotherapie",
+    "display" : "Chirotherapie"
+  },
+  {
+    "code" : "psychosomatik",
+    "display" : "Psychosomatik"
+  },
+  {
+    "code" : "psychotherapie",
+    "display" : "Psychotherapie"
+  },
+  {
+    "code" : "akupunktur",
+    "display" : "Akupunktur"
+  },
+  {
+    "code" : "schmerztherapie",
+    "display" : "Schmerztherapie"
+  },
+  {
+    "code" : "sonographie",
+    "display" : "Sonographie"
+  },
+  {
+    "code" : "sono-abdomen",
+    "display" : "Sono Abdomen"
+  },
+  {
+    "code" : "langzeit-ekg",
+    "display" : "Langzeit-EKG"
+  },
+  {
+    "code" : "langzeit-blutdruck",
+    "display" : "Langzeit-Blutdruck"
+  },
+  {
+    "code" : "radiologie",
+    "display" : "Radiologie"
+  },
+  {
+    "code" : "allergologie",
+    "display" : "Allergologie"
+  },
+  {
+    "code" : "dmp",
+    "display" : "DMP"
+  },
+  {
+    "code" : "hks",
+    "display" : "HKS",
+    "definition" : "Herzschrittmacher-Kontrolle"
+  }]
 }

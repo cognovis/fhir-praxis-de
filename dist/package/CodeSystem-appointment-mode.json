@@ -1,0 +1,62 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "appointment-mode",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem appointment-mode</b></p><a name=\"appointment-mode\"> </a><a name=\"hcappointment-mode\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/appointment-mode</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">in-person<a name=\"appointment-mode-in-person\"> </a></td><td>Praxisbesuch</td><td>Patient erscheint persönlich in der Praxis</td></tr><tr><td style=\"white-space:nowrap\">video<a name=\"appointment-mode-video\"> </a></td><td>Videosprechstunde</td><td>Termin findet per Videokonferenz statt</td></tr><tr><td style=\"white-space:nowrap\">phone<a name=\"appointment-mode-phone\"> </a></td><td>Telefontermin</td><td>Termin findet telefonisch statt</td></tr><tr><td style=\"white-space:nowrap\">home-visit<a name=\"appointment-mode-home-visit\"> </a></td><td>Hausbesuch</td><td>Arzt besucht den Patienten zu Hause</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/appointment-mode",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.4"
+  }],
+  "version" : "0.30.0",
+  "name" : "AppointmentModeCS",
+  "title" : "Appointment Mode",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes für die Durchführungsart eines Termins (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch).",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 4,
+  "concept" : [{
+    "code" : "in-person",
+    "display" : "Praxisbesuch",
+    "definition" : "Patient erscheint persönlich in der Praxis"
+  },
+  {
+    "code" : "video",
+    "display" : "Videosprechstunde",
+    "definition" : "Termin findet per Videokonferenz statt"
+  },
+  {
+    "code" : "phone",
+    "display" : "Telefontermin",
+    "definition" : "Termin findet telefonisch statt"
+  },
+  {
+    "code" : "home-visit",
+    "display" : "Hausbesuch",
+    "definition" : "Arzt besucht den Patienten zu Hause"
+  }]
+}

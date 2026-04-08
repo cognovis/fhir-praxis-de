@@ -1,35 +1,62 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "HzvParticipationCS",
-  "id": "hzv-participation",
-  "title": "HZV-Teilnahmestatus",
-  "description": "Teilnahmestatus des Patienten an der hausarztzentrierten Versorgung (§73b SGB V)",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation",
-  "concept": [
-    {
-      "code": "eingeschrieben",
-      "display": "Eingeschrieben",
-      "definition": "Patient ist aktuell in HZV eingeschrieben"
+  "resourceType" : "CodeSystem",
+  "id" : "hzv-participation",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem hzv-participation</b></p><a name=\"hzv-participation\"> </a><a name=\"hchzv-participation\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">eingeschrieben<a name=\"hzv-participation-eingeschrieben\"> </a></td><td>Eingeschrieben</td><td>Patient ist aktuell in HZV eingeschrieben</td></tr><tr><td style=\"white-space:nowrap\">abgemeldet<a name=\"hzv-participation-abgemeldet\"> </a></td><td>Abgemeldet</td><td>Patient hat sich aus HZV abgemeldet</td></tr><tr><td style=\"white-space:nowrap\">gesperrt<a name=\"hzv-participation-gesperrt\"> </a></td><td>Gesperrt</td><td>Teilnahme wegen Sperrfrist nicht moeglich</td></tr><tr><td style=\"white-space:nowrap\">auslaufend<a name=\"hzv-participation-auslaufend\"> </a></td><td>Auslaufend</td><td>Teilnahme laeuft zum Ende des Quartals aus</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.16"
+  }],
+  "version" : "0.30.0",
+  "name" : "HzvParticipationCS",
+  "title" : "HZV-Teilnahmestatus",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "abgemeldet",
-      "display": "Abgemeldet",
-      "definition": "Patient hat sich aus HZV abgemeldet"
-    },
-    {
-      "code": "gesperrt",
-      "display": "Gesperrt",
-      "definition": "Teilnahme wegen Sperrfrist nicht moeglich"
-    },
-    {
-      "code": "auslaufend",
-      "display": "Auslaufend",
-      "definition": "Teilnahme laeuft zum Ende des Quartals aus"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 4
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Teilnahmestatus des Patienten an der hausarztzentrierten Versorgung (§73b SGB V)",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 4,
+  "concept" : [{
+    "code" : "eingeschrieben",
+    "display" : "Eingeschrieben",
+    "definition" : "Patient ist aktuell in HZV eingeschrieben"
+  },
+  {
+    "code" : "abgemeldet",
+    "display" : "Abgemeldet",
+    "definition" : "Patient hat sich aus HZV abgemeldet"
+  },
+  {
+    "code" : "gesperrt",
+    "display" : "Gesperrt",
+    "definition" : "Teilnahme wegen Sperrfrist nicht moeglich"
+  },
+  {
+    "code" : "auslaufend",
+    "display" : "Auslaufend",
+    "definition" : "Teilnahme laeuft zum Ende des Quartals aus"
+  }]
 }

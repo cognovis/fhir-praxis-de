@@ -1,0 +1,112 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "kv-fachgruppe",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem kv-fachgruppe</b></p><a name=\"kv-fachgruppe\"> </a><a name=\"hckv-fachgruppe\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">allgemeinmedizin<a name=\"kv-fachgruppe-allgemeinmedizin\"> </a></td><td>Allgemeinmedizin</td><td>Fachärzte für Allgemeinmedizin</td></tr><tr><td style=\"white-space:nowrap\">innere-medizin<a name=\"kv-fachgruppe-innere-medizin\"> </a></td><td>Innere Medizin</td><td>Fachärzte für Innere Medizin</td></tr><tr><td style=\"white-space:nowrap\">paediatrie<a name=\"kv-fachgruppe-paediatrie\"> </a></td><td>Pädiatrie</td><td>Fachärzte für Kinder- und Jugendmedizin</td></tr><tr><td style=\"white-space:nowrap\">gynaekologie<a name=\"kv-fachgruppe-gynaekologie\"> </a></td><td>Gynäkologie</td><td>Fachärzte für Frauenheilkunde und Geburtshilfe</td></tr><tr><td style=\"white-space:nowrap\">chirurgie<a name=\"kv-fachgruppe-chirurgie\"> </a></td><td>Chirurgie</td><td>Fachärzte für Chirurgie</td></tr><tr><td style=\"white-space:nowrap\">orthopaedie<a name=\"kv-fachgruppe-orthopaedie\"> </a></td><td>Orthopädie</td><td>Fachärzte für Orthopädie</td></tr><tr><td style=\"white-space:nowrap\">neurologie<a name=\"kv-fachgruppe-neurologie\"> </a></td><td>Neurologie</td><td>Fachärzte für Neurologie</td></tr><tr><td style=\"white-space:nowrap\">psychiatrie<a name=\"kv-fachgruppe-psychiatrie\"> </a></td><td>Psychiatrie</td><td>Fachärzte für Psychiatrie und Psychotherapie</td></tr><tr><td style=\"white-space:nowrap\">augenheilkunde<a name=\"kv-fachgruppe-augenheilkunde\"> </a></td><td>Augenheilkunde</td><td>Fachärzte für Augenheilkunde</td></tr><tr><td style=\"white-space:nowrap\">hno<a name=\"kv-fachgruppe-hno\"> </a></td><td>HNO</td><td>Fachärzte für Hals-Nasen-Ohrenheilkunde</td></tr><tr><td style=\"white-space:nowrap\">dermatologie<a name=\"kv-fachgruppe-dermatologie\"> </a></td><td>Dermatologie</td><td>Fachärzte für Haut- und Geschlechtskrankheiten</td></tr><tr><td style=\"white-space:nowrap\">urologie<a name=\"kv-fachgruppe-urologie\"> </a></td><td>Urologie</td><td>Fachärzte für Urologie</td></tr><tr><td style=\"white-space:nowrap\">radiologie<a name=\"kv-fachgruppe-radiologie\"> </a></td><td>Radiologie</td><td>Fachärzte für Radiologie</td></tr><tr><td style=\"white-space:nowrap\">anaesthesiologie<a name=\"kv-fachgruppe-anaesthesiologie\"> </a></td><td>Anästhesiologie</td><td>Fachärzte für Anästhesiologie</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.20"
+  }],
+  "version" : "0.30.0",
+  "name" : "KvFachgruppeCS",
+  "title" : "KV Fachgruppe",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Fachgruppen-Codes der Kassenärztlichen Vereinigungen für die Honorarverteilung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 14,
+  "concept" : [{
+    "code" : "allgemeinmedizin",
+    "display" : "Allgemeinmedizin",
+    "definition" : "Fachärzte für Allgemeinmedizin"
+  },
+  {
+    "code" : "innere-medizin",
+    "display" : "Innere Medizin",
+    "definition" : "Fachärzte für Innere Medizin"
+  },
+  {
+    "code" : "paediatrie",
+    "display" : "Pädiatrie",
+    "definition" : "Fachärzte für Kinder- und Jugendmedizin"
+  },
+  {
+    "code" : "gynaekologie",
+    "display" : "Gynäkologie",
+    "definition" : "Fachärzte für Frauenheilkunde und Geburtshilfe"
+  },
+  {
+    "code" : "chirurgie",
+    "display" : "Chirurgie",
+    "definition" : "Fachärzte für Chirurgie"
+  },
+  {
+    "code" : "orthopaedie",
+    "display" : "Orthopädie",
+    "definition" : "Fachärzte für Orthopädie"
+  },
+  {
+    "code" : "neurologie",
+    "display" : "Neurologie",
+    "definition" : "Fachärzte für Neurologie"
+  },
+  {
+    "code" : "psychiatrie",
+    "display" : "Psychiatrie",
+    "definition" : "Fachärzte für Psychiatrie und Psychotherapie"
+  },
+  {
+    "code" : "augenheilkunde",
+    "display" : "Augenheilkunde",
+    "definition" : "Fachärzte für Augenheilkunde"
+  },
+  {
+    "code" : "hno",
+    "display" : "HNO",
+    "definition" : "Fachärzte für Hals-Nasen-Ohrenheilkunde"
+  },
+  {
+    "code" : "dermatologie",
+    "display" : "Dermatologie",
+    "definition" : "Fachärzte für Haut- und Geschlechtskrankheiten"
+  },
+  {
+    "code" : "urologie",
+    "display" : "Urologie",
+    "definition" : "Fachärzte für Urologie"
+  },
+  {
+    "code" : "radiologie",
+    "display" : "Radiologie",
+    "definition" : "Fachärzte für Radiologie"
+  },
+  {
+    "code" : "anaesthesiologie",
+    "display" : "Anästhesiologie",
+    "definition" : "Fachärzte für Anästhesiologie"
+  }]
+}

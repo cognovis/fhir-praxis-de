@@ -1,0 +1,45 @@
+{
+  "resourceType" : "NamingSystem",
+  "id" : "ldt-auftragsnummer",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: NamingSystem ldt-auftragsnummer</b></p><a name=\"ldt-auftragsnummer\"> </a><a name=\"hcldt-auftragsnummer\"> </a><h3>Summary</h3><table class=\"grid\"><tr><td>Defining URL</td><td>https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer</td></tr><tr><td>Version</td><td>0.30.0</td></tr><tr><td>Name</td><td>LdtAuftragsnummer</td></tr><tr><td>Status</td><td>draft</td></tr><tr><td>Definition</td><td><div><p>Laborauftragsnummer gemaess LDT-Standard fuer ServiceRequest.identifier</p>\n</div></td></tr><tr><td>Publisher</td><td>cognovis GmbH</td></tr><tr><td>OID</td><td>2.16.840.1.113883.3.7985.31.10 (for OID based terminology systems)</td></tr></table><h3>Identifiers</h3><table class=\"grid\"><tr><td><b>Type</b></td><td><b>Value</b></td><td><b>Preferred</b></td></tr><tr><td>URI</td><td>https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer</td><td>true</td></tr></table></div>"
+  },
+  "extension" : [{
+    "url" : "http://hl7.org/fhir/5.0/StructureDefinition/extension-NamingSystem.url",
+    "valueUri" : "https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer"
+  },
+  {
+    "url" : "http://hl7.org/fhir/5.0/StructureDefinition/extension-NamingSystem.version",
+    "valueString" : "0.30.0"
+  }],
+  "name" : "LdtAuftragsnummer",
+  "status" : "draft",
+  "kind" : "identifier",
+  "date" : "2026-04-05",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Laborauftragsnummer gemaess LDT-Standard fuer ServiceRequest.identifier",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "uniqueId" : [{
+    "type" : "uri",
+    "value" : "https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer",
+    "preferred" : true
+  }]
+}

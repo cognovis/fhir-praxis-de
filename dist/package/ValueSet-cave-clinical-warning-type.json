@@ -1,16 +1,44 @@
 {
-  "resourceType": "ValueSet",
-  "status": "draft",
-  "name": "CaveClinicalWarningTypeVS",
-  "id": "cave-clinical-warning-type",
-  "title": "CAVE Clinical Warning Type",
-  "description": "Werte fuer CAVE-Warnhinweistypen in deutschen PVS",
-  "url": "https://fhir.cognovis.de/praxis/ValueSet/cave-clinical-warning-type",
-  "compose": {
-    "include": [
-      {
-        "system": "https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type"
-      }
-    ]
+  "resourceType" : "ValueSet",
+  "id" : "cave-clinical-warning-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet cave-clinical-warning-type</b></p><a name=\"cave-clinical-warning-type\"> </a><a name=\"hccave-clinical-warning-type\"> </a><ul><li>Include all codes defined in <a href=\"CodeSystem-cave-clinical-warning-type.html\"><code>https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type</code></a><span title=\"Version is not explicitly stated, which means it is fixed to the version provided in this specification\"> version &#x1F4E6;0.30.0</span></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/cave-clinical-warning-type",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.7"
+  }],
+  "version" : "0.30.0",
+  "name" : "CaveClinicalWarningTypeVS",
+  "title" : "CAVE Clinical Warning Type",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Werte fuer CAVE-Warnhinweistypen in deutschen PVS",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type"
+    }]
   }
 }

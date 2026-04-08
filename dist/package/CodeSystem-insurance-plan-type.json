@@ -1,0 +1,52 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "insurance-plan-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem insurance-plan-type</b></p><a name=\"insurance-plan-type\"> </a><a name=\"hcinsurance-plan-type\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">gkv<a name=\"insurance-plan-type-gkv\"> </a></td><td>GKV</td><td>Gesetzliche Krankenversicherung — Satzungsleistungen und kassenindividuelle Leistungen</td></tr><tr><td style=\"white-space:nowrap\">pkv<a name=\"insurance-plan-type-pkv\"> </a></td><td>PKV</td><td>Private Krankenversicherung — GOÄ-Faktoren und Erstattungsregeln</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.17"
+  }],
+  "version" : "0.30.0",
+  "name" : "InsurancePlanTypeCS",
+  "title" : "Versicherungsplan-Typ",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Unterscheidung zwischen gesetzlicher (GKV) und privater (PKV) Krankenversicherung fuer InsurancePlan-Profile.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 2,
+  "concept" : [{
+    "code" : "gkv",
+    "display" : "GKV",
+    "definition" : "Gesetzliche Krankenversicherung — Satzungsleistungen und kassenindividuelle Leistungen"
+  },
+  {
+    "code" : "pkv",
+    "display" : "PKV",
+    "definition" : "Private Krankenversicherung — GOÄ-Faktoren und Erstattungsregeln"
+  }]
+}

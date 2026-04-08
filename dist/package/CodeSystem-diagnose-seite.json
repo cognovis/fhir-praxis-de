@@ -1,27 +1,54 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "DiagnoseSeiteCS",
-  "id": "diagnose-seite",
-  "title": "Diagnoseseite",
-  "description": "Seitenangabe fuer Diagnosen",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite",
-  "concept": [
-    {
-      "code": "L",
-      "display": "Links"
+  "resourceType" : "CodeSystem",
+  "id" : "diagnose-seite",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem diagnose-seite</b></p><a name=\"diagnose-seite\"> </a><a name=\"hcdiagnose-seite\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td></tr><tr><td style=\"white-space:nowrap\">L<a name=\"diagnose-seite-L\"> </a></td><td>Links</td></tr><tr><td style=\"white-space:nowrap\">R<a name=\"diagnose-seite-R\"> </a></td><td>Rechts</td></tr><tr><td style=\"white-space:nowrap\">B<a name=\"diagnose-seite-B\"> </a></td><td>Beidseitig</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.10"
+  }],
+  "version" : "0.30.0",
+  "name" : "DiagnoseSeiteCS",
+  "title" : "Diagnoseseite",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "R",
-      "display": "Rechts"
-    },
-    {
-      "code": "B",
-      "display": "Beidseitig"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 3
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Seitenangabe fuer Diagnosen",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 3,
+  "concept" : [{
+    "code" : "L",
+    "display" : "Links"
+  },
+  {
+    "code" : "R",
+    "display" : "Rechts"
+  },
+  {
+    "code" : "B",
+    "display" : "Beidseitig"
+  }]
 }

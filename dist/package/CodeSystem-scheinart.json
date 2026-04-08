@@ -1,45 +1,72 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "ScheinartCS",
-  "id": "scheinart",
-  "title": "Scheinart",
-  "description": "Abrechnungsschein-Typen in der ambulanten Versorgung",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/scheinart",
-  "concept": [
-    {
-      "code": "gkv",
-      "display": "GKV",
-      "definition": "Gesetzliche Krankenversicherung"
+  "resourceType" : "CodeSystem",
+  "id" : "scheinart",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem scheinart</b></p><a name=\"scheinart\"> </a><a name=\"hcscheinart\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/scheinart</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">gkv<a name=\"scheinart-gkv\"> </a></td><td>GKV</td><td>Gesetzliche Krankenversicherung</td></tr><tr><td style=\"white-space:nowrap\">pkv<a name=\"scheinart-pkv\"> </a></td><td>PKV</td><td>Private Krankenversicherung</td></tr><tr><td style=\"white-space:nowrap\">bg<a name=\"scheinart-bg\"> </a></td><td>BG</td><td>Berufsgenossenschaft</td></tr><tr><td style=\"white-space:nowrap\">ue<a name=\"scheinart-ue\"> </a></td><td>Ueberweisung</td><td>Ueberweisungsschein</td></tr><tr><td style=\"white-space:nowrap\">not<a name=\"scheinart-not\"> </a></td><td>Notfall</td><td>Notfallschein</td></tr><tr><td style=\"white-space:nowrap\">igel<a name=\"scheinart-igel\"> </a></td><td>IGeL</td><td>Individuelle Gesundheitsleistung</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/scheinart",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.28"
+  }],
+  "version" : "0.30.0",
+  "name" : "ScheinartCS",
+  "title" : "Scheinart",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "pkv",
-      "display": "PKV",
-      "definition": "Private Krankenversicherung"
-    },
-    {
-      "code": "bg",
-      "display": "BG",
-      "definition": "Berufsgenossenschaft"
-    },
-    {
-      "code": "ue",
-      "display": "Ueberweisung",
-      "definition": "Ueberweisungsschein"
-    },
-    {
-      "code": "not",
-      "display": "Notfall",
-      "definition": "Notfallschein"
-    },
-    {
-      "code": "igel",
-      "display": "IGeL",
-      "definition": "Individuelle Gesundheitsleistung"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 6
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Abrechnungsschein-Typen in der ambulanten Versorgung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 6,
+  "concept" : [{
+    "code" : "gkv",
+    "display" : "GKV",
+    "definition" : "Gesetzliche Krankenversicherung"
+  },
+  {
+    "code" : "pkv",
+    "display" : "PKV",
+    "definition" : "Private Krankenversicherung"
+  },
+  {
+    "code" : "bg",
+    "display" : "BG",
+    "definition" : "Berufsgenossenschaft"
+  },
+  {
+    "code" : "ue",
+    "display" : "Ueberweisung",
+    "definition" : "Ueberweisungsschein"
+  },
+  {
+    "code" : "not",
+    "display" : "Notfall",
+    "definition" : "Notfallschein"
+  },
+  {
+    "code" : "igel",
+    "display" : "IGeL",
+    "definition" : "Individuelle Gesundheitsleistung"
+  }]
 }

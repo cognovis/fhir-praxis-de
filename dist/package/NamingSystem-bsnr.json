@@ -1,0 +1,50 @@
+{
+  "resourceType" : "NamingSystem",
+  "id" : "bsnr",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: NamingSystem bsnr</b></p><a name=\"bsnr\"> </a><a name=\"hcbsnr\"> </a><h3>Summary</h3><table class=\"grid\"><tr><td>Defining URL</td><td>https://fhir.cognovis.de/praxis/NamingSystem/bsnr</td></tr><tr><td>Version</td><td>0.30.0</td></tr><tr><td>Name</td><td>Bsnr</td></tr><tr><td>Status</td><td>draft</td></tr><tr><td>Definition</td><td><div><p>Betriebsstaettennummer — lokaler Alias fuer http://fhir.de/sid/dkgev/bsnr. Enthaelt Verweis auf die nationale Definition.</p>\n</div></td></tr><tr><td>Publisher</td><td>cognovis GmbH</td></tr><tr><td>OID</td><td>2.16.840.1.113883.3.7985.31.3 (for OID based terminology systems)</td></tr></table><h3>Identifiers</h3><table class=\"grid\"><tr><td><b>Type</b></td><td><b>Value</b></td><td><b>Preferred</b></td></tr><tr><td>URI</td><td>https://fhir.cognovis.de/praxis/NamingSystem/bsnr</td><td>true</td></tr><tr><td>URI</td><td>http://fhir.de/sid/dkgev/bsnr</td><td>false</td></tr></table></div>"
+  },
+  "extension" : [{
+    "url" : "http://hl7.org/fhir/5.0/StructureDefinition/extension-NamingSystem.url",
+    "valueUri" : "https://fhir.cognovis.de/praxis/NamingSystem/bsnr"
+  },
+  {
+    "url" : "http://hl7.org/fhir/5.0/StructureDefinition/extension-NamingSystem.version",
+    "valueString" : "0.30.0"
+  }],
+  "name" : "Bsnr",
+  "status" : "draft",
+  "kind" : "identifier",
+  "date" : "2026-04-03",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Betriebsstaettennummer — lokaler Alias fuer http://fhir.de/sid/dkgev/bsnr. Enthaelt Verweis auf die nationale Definition.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "uniqueId" : [{
+    "type" : "uri",
+    "value" : "https://fhir.cognovis.de/praxis/NamingSystem/bsnr",
+    "preferred" : true
+  },
+  {
+    "type" : "uri",
+    "value" : "http://fhir.de/sid/dkgev/bsnr",
+    "preferred" : false
+  }]
+}

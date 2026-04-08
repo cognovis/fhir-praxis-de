@@ -1,0 +1,57 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "digital-workflow",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem digital-workflow</b></p><a name=\"digital-workflow\"> </a><a name=\"hcdigital-workflow\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/digital-workflow</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">digital<a name=\"digital-workflow-digital\"> </a></td><td>Digital</td><td>Volldigitaler Workflow (z.B. Intraoralscan, CAD/CAM-Fertigung)</td></tr><tr><td style=\"white-space:nowrap\">conventional<a name=\"digital-workflow-conventional\"> </a></td><td>Konventionell</td><td>Konventioneller Workflow (z.B. Alginatabformung, Gipsmodell, Handarbeit)</td></tr><tr><td style=\"white-space:nowrap\">hybrid<a name=\"digital-workflow-hybrid\"> </a></td><td>Hybrid</td><td>Kombination aus digitalem und konventionellem Workflow</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/digital-workflow",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.11"
+  }],
+  "version" : "0.30.0",
+  "name" : "DigitalWorkflowCS",
+  "title" : "Digitaler Workflow",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Art des Herstellungsworkflows fuer individuell gefertigte Medizinprodukte.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 3,
+  "concept" : [{
+    "code" : "digital",
+    "display" : "Digital",
+    "definition" : "Volldigitaler Workflow (z.B. Intraoralscan, CAD/CAM-Fertigung)"
+  },
+  {
+    "code" : "conventional",
+    "display" : "Konventionell",
+    "definition" : "Konventioneller Workflow (z.B. Alginatabformung, Gipsmodell, Handarbeit)"
+  },
+  {
+    "code" : "hybrid",
+    "display" : "Hybrid",
+    "definition" : "Kombination aus digitalem und konventionellem Workflow"
+  }]
+}

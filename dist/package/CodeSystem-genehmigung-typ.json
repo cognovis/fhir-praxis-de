@@ -1,25 +1,52 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "GenehmigungenTypCS",
-  "id": "genehmigung-typ",
-  "title": "Genehmigungstyp",
-  "description": "Typ der KV-Genehmigung: kopfbezogen (arztgebunden) vs. betriebsstaette",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ",
-  "concept": [
-    {
-      "code": "kopfbezogen",
-      "display": "Kopfbezogen",
-      "definition": "An den einzelnen Arzt gebunden"
+  "resourceType" : "CodeSystem",
+  "id" : "genehmigung-typ",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem genehmigung-typ</b></p><a name=\"genehmigung-typ\"> </a><a name=\"hcgenehmigung-typ\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">kopfbezogen<a name=\"genehmigung-typ-kopfbezogen\"> </a></td><td>Kopfbezogen</td><td>An den einzelnen Arzt gebunden</td></tr><tr><td style=\"white-space:nowrap\">betriebsstaette<a name=\"genehmigung-typ-betriebsstaette\"> </a></td><td>Betriebsstaette</td><td>An die Betriebsstaette gebunden</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.14"
+  }],
+  "version" : "0.30.0",
+  "name" : "GenehmigungenTypCS",
+  "title" : "Genehmigungstyp",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "betriebsstaette",
-      "display": "Betriebsstaette",
-      "definition": "An die Betriebsstaette gebunden"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 2
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Typ der KV-Genehmigung: kopfbezogen (arztgebunden) vs. betriebsstaette",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 2,
+  "concept" : [{
+    "code" : "kopfbezogen",
+    "display" : "Kopfbezogen",
+    "definition" : "An den einzelnen Arzt gebunden"
+  },
+  {
+    "code" : "betriebsstaette",
+    "display" : "Betriebsstaette",
+    "definition" : "An die Betriebsstaette gebunden"
+  }]
 }

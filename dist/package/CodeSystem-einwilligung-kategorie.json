@@ -1,60 +1,87 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "EinwilligungKategorieCS",
-  "id": "einwilligung-kategorie",
-  "title": "Einwilligung-Kategorie",
-  "description": "Kategorien fuer Patienteneinwilligungen in der ambulanten Versorgung",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie",
-  "concept": [
-    {
-      "code": "dsgvo",
-      "display": "DSGVO",
-      "definition": "Datenschutz-Grundverordnung Einwilligung"
+  "resourceType" : "CodeSystem",
+  "id" : "einwilligung-kategorie",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem einwilligung-kategorie</b></p><a name=\"einwilligung-kategorie\"> </a><a name=\"hceinwilligung-kategorie\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">dsgvo<a name=\"einwilligung-kategorie-dsgvo\"> </a></td><td>DSGVO</td><td>Datenschutz-Grundverordnung Einwilligung</td></tr><tr><td style=\"white-space:nowrap\">dmp<a name=\"einwilligung-kategorie-dmp\"> </a></td><td>DMP</td><td>Disease-Management-Programm Teilnahme</td></tr><tr><td style=\"white-space:nowrap\">hzv<a name=\"einwilligung-kategorie-hzv\"> </a></td><td>HZV</td><td>Hausarztzentrierte Versorgung</td></tr><tr><td style=\"white-space:nowrap\">selektivvertrag<a name=\"einwilligung-kategorie-selektivvertrag\"> </a></td><td>Selektivvertrag</td><td>Teilnahme an Selektivvertrag</td></tr><tr><td style=\"white-space:nowrap\">forschung<a name=\"einwilligung-kategorie-forschung\"> </a></td><td>Forschung</td><td>Einwilligung zur Nutzung fuer Forschungszwecke</td></tr><tr><td style=\"white-space:nowrap\">telemedizin<a name=\"einwilligung-kategorie-telemedizin\"> </a></td><td>Telemedizin</td><td>Einwilligung zur Videosprechstunde</td></tr><tr><td style=\"white-space:nowrap\">email<a name=\"einwilligung-kategorie-email\"> </a></td><td>E-Mail</td><td>Einwilligung zum E-Mail-Versand</td></tr><tr><td style=\"white-space:nowrap\">sms<a name=\"einwilligung-kategorie-sms\"> </a></td><td>SMS</td><td>Einwilligung zum SMS-Versand</td></tr><tr><td style=\"white-space:nowrap\">recall<a name=\"einwilligung-kategorie-recall\"> </a></td><td>Recall</td><td>Einwilligung zum Recall-System</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.12"
+  }],
+  "version" : "0.30.0",
+  "name" : "EinwilligungKategorieCS",
+  "title" : "Einwilligung-Kategorie",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "dmp",
-      "display": "DMP",
-      "definition": "Disease-Management-Programm Teilnahme"
-    },
-    {
-      "code": "hzv",
-      "display": "HZV",
-      "definition": "Hausarztzentrierte Versorgung"
-    },
-    {
-      "code": "selektivvertrag",
-      "display": "Selektivvertrag",
-      "definition": "Teilnahme an Selektivvertrag"
-    },
-    {
-      "code": "forschung",
-      "display": "Forschung",
-      "definition": "Einwilligung zur Nutzung fuer Forschungszwecke"
-    },
-    {
-      "code": "telemedizin",
-      "display": "Telemedizin",
-      "definition": "Einwilligung zur Videosprechstunde"
-    },
-    {
-      "code": "email",
-      "display": "E-Mail",
-      "definition": "Einwilligung zum E-Mail-Versand"
-    },
-    {
-      "code": "sms",
-      "display": "SMS",
-      "definition": "Einwilligung zum SMS-Versand"
-    },
-    {
-      "code": "recall",
-      "display": "Recall",
-      "definition": "Einwilligung zum Recall-System"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 9
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Kategorien fuer Patienteneinwilligungen in der ambulanten Versorgung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 9,
+  "concept" : [{
+    "code" : "dsgvo",
+    "display" : "DSGVO",
+    "definition" : "Datenschutz-Grundverordnung Einwilligung"
+  },
+  {
+    "code" : "dmp",
+    "display" : "DMP",
+    "definition" : "Disease-Management-Programm Teilnahme"
+  },
+  {
+    "code" : "hzv",
+    "display" : "HZV",
+    "definition" : "Hausarztzentrierte Versorgung"
+  },
+  {
+    "code" : "selektivvertrag",
+    "display" : "Selektivvertrag",
+    "definition" : "Teilnahme an Selektivvertrag"
+  },
+  {
+    "code" : "forschung",
+    "display" : "Forschung",
+    "definition" : "Einwilligung zur Nutzung fuer Forschungszwecke"
+  },
+  {
+    "code" : "telemedizin",
+    "display" : "Telemedizin",
+    "definition" : "Einwilligung zur Videosprechstunde"
+  },
+  {
+    "code" : "email",
+    "display" : "E-Mail",
+    "definition" : "Einwilligung zum E-Mail-Versand"
+  },
+  {
+    "code" : "sms",
+    "display" : "SMS",
+    "definition" : "Einwilligung zum SMS-Versand"
+  },
+  {
+    "code" : "recall",
+    "display" : "Recall",
+    "definition" : "Einwilligung zum Recall-System"
+  }]
 }

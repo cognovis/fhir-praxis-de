@@ -1,0 +1,91 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "bgt2001",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem bgt2001</b></p><a name=\"bgt2001\"> </a><a name=\"hcbgt2001\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/bgt2001</code> provides some codes <b>that are example only</b>:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">100<a name=\"bgt2001-100\"> </a></td><td>Beratung</td><td>Beratung des Versicherten, auch telefonisch</td></tr><tr><td style=\"white-space:nowrap\">101<a name=\"bgt2001-101\"> </a></td><td>Untersuchung</td><td>Vollständige körperliche Untersuchung mit Dokumentation des Befundes</td></tr><tr><td style=\"white-space:nowrap\">102<a name=\"bgt2001-102\"> </a></td><td>Nachuntersuchung</td><td>Nachuntersuchung im Rahmen des Heilverfahrens</td></tr><tr><td style=\"white-space:nowrap\">200<a name=\"bgt2001-200\"> </a></td><td>Wundversorgung</td><td>Versorgung einer Wunde, einfach</td></tr><tr><td style=\"white-space:nowrap\">201<a name=\"bgt2001-201\"> </a></td><td>Wundversorgung, aufwändig</td><td>Versorgung einer Wunde, aufwändig (z.B. mit Débridement)</td></tr><tr><td style=\"white-space:nowrap\">300<a name=\"bgt2001-300\"> </a></td><td>Operativer Eingriff, klein</td><td>Kleinchirurgischer Eingriff (z.B. Naht, Abszessspaltung)</td></tr><tr><td style=\"white-space:nowrap\">301<a name=\"bgt2001-301\"> </a></td><td>Operativer Eingriff, mittelgroß</td><td>Mittlerer operativer Eingriff unter Lokalanästhesie</td></tr><tr><td style=\"white-space:nowrap\">400<a name=\"bgt2001-400\"> </a></td><td>Verband</td><td>Anlegen eines Verbandes</td></tr><tr><td style=\"white-space:nowrap\">500<a name=\"bgt2001-500\"> </a></td><td>Injektion</td><td>Injektion, subkutan oder intramuskulär</td></tr><tr><td style=\"white-space:nowrap\">800<a name=\"bgt2001-800\"> </a></td><td>Physiotherapie</td><td>Physiotherapeutische Behandlungseinheit</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/bgt2001",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.6"
+  }],
+  "version" : "0.30.0",
+  "name" : "BGT2001CS",
+  "title" : "BGT2001 Tarifpositionen",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Berufsgenossenschaftliche Gebühren-Tarifpositionen (BGT2001) des DGUV-Gebührentarifs für die Abrechnung berufsgenossenschaftlicher Heilbehandlungen. Enthält repräsentative Tarifpositionen (Ziffern) als Codes.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "example",
+  "concept" : [{
+    "code" : "100",
+    "display" : "Beratung",
+    "definition" : "Beratung des Versicherten, auch telefonisch"
+  },
+  {
+    "code" : "101",
+    "display" : "Untersuchung",
+    "definition" : "Vollständige körperliche Untersuchung mit Dokumentation des Befundes"
+  },
+  {
+    "code" : "102",
+    "display" : "Nachuntersuchung",
+    "definition" : "Nachuntersuchung im Rahmen des Heilverfahrens"
+  },
+  {
+    "code" : "200",
+    "display" : "Wundversorgung",
+    "definition" : "Versorgung einer Wunde, einfach"
+  },
+  {
+    "code" : "201",
+    "display" : "Wundversorgung, aufwändig",
+    "definition" : "Versorgung einer Wunde, aufwändig (z.B. mit Débridement)"
+  },
+  {
+    "code" : "300",
+    "display" : "Operativer Eingriff, klein",
+    "definition" : "Kleinchirurgischer Eingriff (z.B. Naht, Abszessspaltung)"
+  },
+  {
+    "code" : "301",
+    "display" : "Operativer Eingriff, mittelgroß",
+    "definition" : "Mittlerer operativer Eingriff unter Lokalanästhesie"
+  },
+  {
+    "code" : "400",
+    "display" : "Verband",
+    "definition" : "Anlegen eines Verbandes"
+  },
+  {
+    "code" : "500",
+    "display" : "Injektion",
+    "definition" : "Injektion, subkutan oder intramuskulär"
+  },
+  {
+    "code" : "800",
+    "display" : "Physiotherapie",
+    "definition" : "Physiotherapeutische Behandlungseinheit"
+  }]
+}

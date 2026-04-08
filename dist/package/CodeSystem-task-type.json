@@ -1,40 +1,67 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "TaskTypeCS",
-  "id": "task-type",
-  "title": "Aufgabentyp",
-  "description": "Typen fuer Praxis-Aufgaben (Rueckruf, Dringend, etc.)",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/task-type",
-  "concept": [
-    {
-      "code": "callback",
-      "display": "Rueckruf",
-      "definition": "Patient bittet um Rueckruf"
+  "resourceType" : "CodeSystem",
+  "id" : "task-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem task-type</b></p><a name=\"task-type\"> </a><a name=\"hctask-type\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/task-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">callback<a name=\"task-type-callback\"> </a></td><td>Rueckruf</td><td>Patient bittet um Rueckruf</td></tr><tr><td style=\"white-space:nowrap\">urgent<a name=\"task-type-urgent\"> </a></td><td>Dringend</td><td>Dringende Aufgabe</td></tr><tr><td style=\"white-space:nowrap\">lab<a name=\"task-type-lab\"> </a></td><td>Labor</td><td>Labor-Ergebnis bearbeiten</td></tr><tr><td style=\"white-space:nowrap\">recipe<a name=\"task-type-recipe\"> </a></td><td>Rezept</td><td>Rezeptanforderung</td></tr><tr><td style=\"white-space:nowrap\">referral<a name=\"task-type-referral\"> </a></td><td>Ueberweisung</td><td>Ueberweisungsanforderung</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/task-type",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.29"
+  }],
+  "version" : "0.30.0",
+  "name" : "TaskTypeCS",
+  "title" : "Aufgabentyp",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "urgent",
-      "display": "Dringend",
-      "definition": "Dringende Aufgabe"
-    },
-    {
-      "code": "lab",
-      "display": "Labor",
-      "definition": "Labor-Ergebnis bearbeiten"
-    },
-    {
-      "code": "recipe",
-      "display": "Rezept",
-      "definition": "Rezeptanforderung"
-    },
-    {
-      "code": "referral",
-      "display": "Ueberweisung",
-      "definition": "Ueberweisungsanforderung"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 5
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Typen fuer Praxis-Aufgaben (Rueckruf, Dringend, etc.)",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 5,
+  "concept" : [{
+    "code" : "callback",
+    "display" : "Rueckruf",
+    "definition" : "Patient bittet um Rueckruf"
+  },
+  {
+    "code" : "urgent",
+    "display" : "Dringend",
+    "definition" : "Dringende Aufgabe"
+  },
+  {
+    "code" : "lab",
+    "display" : "Labor",
+    "definition" : "Labor-Ergebnis bearbeiten"
+  },
+  {
+    "code" : "recipe",
+    "display" : "Rezept",
+    "definition" : "Rezeptanforderung"
+  },
+  {
+    "code" : "referral",
+    "display" : "Ueberweisung",
+    "definition" : "Ueberweisungsanforderung"
+  }]
 }

@@ -1,50 +1,77 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "CorrectionRuleCS",
-  "id": "kvb-richtigstellung",
-  "title": "KVB Richtigstellungsgrund",
-  "description": "Codes für KV-Richtigstellungen im Honorarbescheid",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung",
-  "concept": [
-    {
-      "code": "UV",
-      "display": "UV",
-      "definition": "Überschreitung Volumen"
+  "resourceType" : "CodeSystem",
+  "id" : "kvb-richtigstellung",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem kvb-richtigstellung</b></p><a name=\"kvb-richtigstellung\"> </a><a name=\"hckvb-richtigstellung\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">UV<a name=\"kvb-richtigstellung-UV\"> </a></td><td>Überschreitung Volumen</td></tr><tr><td style=\"white-space:nowrap\">HO<a name=\"kvb-richtigstellung-HO\"> </a></td><td>Honoraroptimierung</td></tr><tr><td style=\"white-space:nowrap\">GHO<a name=\"kvb-richtigstellung-GHO\"> </a></td><td>Gruppenhonorar-Optimierung</td></tr><tr><td style=\"white-space:nowrap\">PL<a name=\"kvb-richtigstellung-PL\"> </a></td><td>Plausibilitätsprüfung</td></tr><tr><td style=\"white-space:nowrap\">WP<a name=\"kvb-richtigstellung-WP\"> </a></td><td>Wirtschaftlichkeitsprüfung</td></tr><tr><td style=\"white-space:nowrap\">ST<a name=\"kvb-richtigstellung-ST\"> </a></td><td>Storno</td></tr><tr><td style=\"white-space:nowrap\">KO<a name=\"kvb-richtigstellung-KO\"> </a></td><td>Korrektur</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.21"
+  }],
+  "version" : "0.30.0",
+  "name" : "CorrectionRuleCS",
+  "title" : "KVB Richtigstellungsgrund",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "HO",
-      "display": "HO",
-      "definition": "Honoraroptimierung"
-    },
-    {
-      "code": "GHO",
-      "display": "GHO",
-      "definition": "Gruppenhonorar-Optimierung"
-    },
-    {
-      "code": "PL",
-      "display": "PL",
-      "definition": "Plausibilitätsprüfung"
-    },
-    {
-      "code": "WP",
-      "display": "WP",
-      "definition": "Wirtschaftlichkeitsprüfung"
-    },
-    {
-      "code": "ST",
-      "display": "ST",
-      "definition": "Storno"
-    },
-    {
-      "code": "KO",
-      "display": "KO",
-      "definition": "Korrektur"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 7
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes für KV-Richtigstellungen im Honorarbescheid",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 7,
+  "concept" : [{
+    "code" : "UV",
+    "display" : "UV",
+    "definition" : "Überschreitung Volumen"
+  },
+  {
+    "code" : "HO",
+    "display" : "HO",
+    "definition" : "Honoraroptimierung"
+  },
+  {
+    "code" : "GHO",
+    "display" : "GHO",
+    "definition" : "Gruppenhonorar-Optimierung"
+  },
+  {
+    "code" : "PL",
+    "display" : "PL",
+    "definition" : "Plausibilitätsprüfung"
+  },
+  {
+    "code" : "WP",
+    "display" : "WP",
+    "definition" : "Wirtschaftlichkeitsprüfung"
+  },
+  {
+    "code" : "ST",
+    "display" : "ST",
+    "definition" : "Storno"
+  },
+  {
+    "code" : "KO",
+    "display" : "KO",
+    "definition" : "Korrektur"
+  }]
 }

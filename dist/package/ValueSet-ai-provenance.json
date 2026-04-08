@@ -1,16 +1,44 @@
 {
-  "resourceType": "ValueSet",
-  "status": "draft",
-  "name": "AiProvenanceVS",
-  "id": "ai-provenance",
-  "title": "AI Provenance",
-  "description": "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50",
-  "url": "https://fhir.cognovis.de/praxis/ValueSet/ai-provenance",
-  "compose": {
-    "include": [
-      {
-        "system": "https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance"
-      }
-    ]
+  "resourceType" : "ValueSet",
+  "id" : "ai-provenance",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet ai-provenance</b></p><a name=\"ai-provenance\"> </a><a name=\"hcai-provenance\"> </a><ul><li>Include all codes defined in <a href=\"CodeSystem-ai-provenance.html\"><code>https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance</code></a><span title=\"Version is not explicitly stated, which means it is fixed to the version provided in this specification\"> version &#x1F4E6;0.30.0</span></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/ai-provenance",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.1"
+  }],
+  "version" : "0.30.0",
+  "name" : "AiProvenanceVS",
+  "title" : "AI Provenance",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance"
+    }]
   }
 }

@@ -1,45 +1,72 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "CaveTypCS",
-  "id": "cave-typ",
-  "title": "CAVE-Typ",
-  "description": "Typen von CAVE-Eintraegen (Cave, Achtung, Vorsicht, Empfehlung) in der Patientenakte",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/cave-typ",
-  "concept": [
-    {
-      "code": "allergie",
-      "display": "Allergie",
-      "definition": "Arzneimittelallergie oder sonstige Allergie"
+  "resourceType" : "CodeSystem",
+  "id" : "cave-typ",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem cave-typ</b></p><a name=\"cave-typ\"> </a><a name=\"hccave-typ\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/cave-typ</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">allergie<a name=\"cave-typ-allergie\"> </a></td><td>Allergie</td><td>Arzneimittelallergie oder sonstige Allergie</td></tr><tr><td style=\"white-space:nowrap\">unvertraeglichkeit<a name=\"cave-typ-unvertraeglichkeit\"> </a></td><td>Unvertraeglichkeit</td><td>Arzneimittelunvertraeglichkeit</td></tr><tr><td style=\"white-space:nowrap\">kontraindikation<a name=\"cave-typ-kontraindikation\"> </a></td><td>Kontraindikation</td><td>Medizinische Kontraindikation</td></tr><tr><td style=\"white-space:nowrap\">interaktion<a name=\"cave-typ-interaktion\"> </a></td><td>Interaktion</td><td>Arzneimittelinteraktion</td></tr><tr><td style=\"white-space:nowrap\">schwangerschaft<a name=\"cave-typ-schwangerschaft\"> </a></td><td>Schwangerschaft</td><td>Schwangerschaftsbezogene Einschraenkung</td></tr><tr><td style=\"white-space:nowrap\">sonstiges<a name=\"cave-typ-sonstiges\"> </a></td><td>Sonstiges</td><td>Sonstiger Warnhinweis</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/cave-typ",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.9"
+  }],
+  "version" : "0.30.0",
+  "name" : "CaveTypCS",
+  "title" : "CAVE-Typ",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "unvertraeglichkeit",
-      "display": "Unvertraeglichkeit",
-      "definition": "Arzneimittelunvertraeglichkeit"
-    },
-    {
-      "code": "kontraindikation",
-      "display": "Kontraindikation",
-      "definition": "Medizinische Kontraindikation"
-    },
-    {
-      "code": "interaktion",
-      "display": "Interaktion",
-      "definition": "Arzneimittelinteraktion"
-    },
-    {
-      "code": "schwangerschaft",
-      "display": "Schwangerschaft",
-      "definition": "Schwangerschaftsbezogene Einschraenkung"
-    },
-    {
-      "code": "sonstiges",
-      "display": "Sonstiges",
-      "definition": "Sonstiger Warnhinweis"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 6
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Typen von CAVE-Eintraegen (Cave, Achtung, Vorsicht, Empfehlung) in der Patientenakte",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 6,
+  "concept" : [{
+    "code" : "allergie",
+    "display" : "Allergie",
+    "definition" : "Arzneimittelallergie oder sonstige Allergie"
+  },
+  {
+    "code" : "unvertraeglichkeit",
+    "display" : "Unvertraeglichkeit",
+    "definition" : "Arzneimittelunvertraeglichkeit"
+  },
+  {
+    "code" : "kontraindikation",
+    "display" : "Kontraindikation",
+    "definition" : "Medizinische Kontraindikation"
+  },
+  {
+    "code" : "interaktion",
+    "display" : "Interaktion",
+    "definition" : "Arzneimittelinteraktion"
+  },
+  {
+    "code" : "schwangerschaft",
+    "display" : "Schwangerschaft",
+    "definition" : "Schwangerschaftsbezogene Einschraenkung"
+  },
+  {
+    "code" : "sonstiges",
+    "display" : "Sonstiges",
+    "definition" : "Sonstiger Warnhinweis"
+  }]
 }

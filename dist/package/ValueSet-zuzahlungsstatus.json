@@ -1,16 +1,44 @@
 {
-  "resourceType": "ValueSet",
-  "status": "draft",
-  "name": "ZuzahlungsstatusVS",
-  "id": "zuzahlungsstatus",
-  "title": "Zuzahlungsstatus",
-  "description": "Zulässige Werte für den GKV-Zuzahlungsstatus",
-  "url": "https://fhir.cognovis.de/praxis/ValueSet/zuzahlungsstatus",
-  "compose": {
-    "include": [
-      {
-        "system": "https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus"
-      }
-    ]
+  "resourceType" : "ValueSet",
+  "id" : "zuzahlungsstatus",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet zuzahlungsstatus</b></p><a name=\"zuzahlungsstatus\"> </a><a name=\"hczuzahlungsstatus\"> </a><ul><li>Include all codes defined in <a href=\"CodeSystem-zuzahlungsstatus.html\"><code>https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus</code></a><span title=\"Version is not explicitly stated. No matching Code System found\"> version Not Stated (use latest from terminology server)</span></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/zuzahlungsstatus",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.22"
+  }],
+  "version" : "0.30.0",
+  "name" : "ZuzahlungsstatusVS",
+  "title" : "Zuzahlungsstatus",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Zulässige Werte für den GKV-Zuzahlungsstatus",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus"
+    }]
   }
 }

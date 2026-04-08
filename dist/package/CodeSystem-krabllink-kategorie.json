@@ -1,0 +1,82 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "krabllink-kategorie",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem krabllink-kategorie</b></p><a name=\"krabllink-kategorie\"> </a><a name=\"hckrabllink-kategorie\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/krabllink-kategorie</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">arztbrief<a name=\"krabllink-kategorie-arztbrief\"> </a></td><td>Arztbrief</td><td>Arztbrief oder ärztlicher Entlassungsbericht</td></tr><tr><td style=\"white-space:nowrap\">befund<a name=\"krabllink-kategorie-befund\"> </a></td><td>Befund</td><td>Befundbericht einer diagnostischen Untersuchung</td></tr><tr><td style=\"white-space:nowrap\">labor<a name=\"krabllink-kategorie-labor\"> </a></td><td>Labor</td><td>Laborbefund</td></tr><tr><td style=\"white-space:nowrap\">bild<a name=\"krabllink-kategorie-bild\"> </a></td><td>Bild</td><td>Bildgebende Diagnostik (z.B. Röntgen, CT, MRT)</td></tr><tr><td style=\"white-space:nowrap\">einwilligung<a name=\"krabllink-kategorie-einwilligung\"> </a></td><td>Einwilligung</td><td>Patienteneinwilligungserklärung</td></tr><tr><td style=\"white-space:nowrap\">verordnung<a name=\"krabllink-kategorie-verordnung\"> </a></td><td>Verordnung</td><td>Ärztliche Verordnung</td></tr><tr><td style=\"white-space:nowrap\">ueberweisung<a name=\"krabllink-kategorie-ueberweisung\"> </a></td><td>Überweisung</td><td>Überweisungsschein</td></tr><tr><td style=\"white-space:nowrap\">sonstiges<a name=\"krabllink-kategorie-sonstiges\"> </a></td><td>Sonstiges</td><td>Sonstige Dokumente</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/krabllink-kategorie",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.19"
+  }],
+  "version" : "0.30.0",
+  "name" : "KrablLinkKategorieCS",
+  "title" : "KraBL-Link Dokumentkategorie",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Dokumentkategorien für Krankenblatt-Links (KraBL) in der ambulanten Versorgung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 8,
+  "concept" : [{
+    "code" : "arztbrief",
+    "display" : "Arztbrief",
+    "definition" : "Arztbrief oder ärztlicher Entlassungsbericht"
+  },
+  {
+    "code" : "befund",
+    "display" : "Befund",
+    "definition" : "Befundbericht einer diagnostischen Untersuchung"
+  },
+  {
+    "code" : "labor",
+    "display" : "Labor",
+    "definition" : "Laborbefund"
+  },
+  {
+    "code" : "bild",
+    "display" : "Bild",
+    "definition" : "Bildgebende Diagnostik (z.B. Röntgen, CT, MRT)"
+  },
+  {
+    "code" : "einwilligung",
+    "display" : "Einwilligung",
+    "definition" : "Patienteneinwilligungserklärung"
+  },
+  {
+    "code" : "verordnung",
+    "display" : "Verordnung",
+    "definition" : "Ärztliche Verordnung"
+  },
+  {
+    "code" : "ueberweisung",
+    "display" : "Überweisung",
+    "definition" : "Überweisungsschein"
+  },
+  {
+    "code" : "sonstiges",
+    "display" : "Sonstiges",
+    "definition" : "Sonstige Dokumente"
+  }]
+}

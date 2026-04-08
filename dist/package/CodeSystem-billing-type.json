@@ -1,60 +1,87 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "BillingTypeCS",
-  "id": "billing-type",
-  "title": "Abrechnungsart",
-  "description": "Codes für Abrechnungsarten in der ambulanten Versorgung. Dient als Diskriminator für ChargeItemDefinition-Kataloge. Regionale Selektivverträge nutzen den generischen Typ (z.B. hzv, facharztvertrag) — die KV-Region wird über Contract.identifier bzw. ChargeItemDefinition.jurisdiction abgebildet.",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/billing-type",
-  "concept": [
-    {
-      "code": "ebm",
-      "display": "EBM",
-      "definition": "Einheitlicher Bewertungsmaßstab (GKV)"
+  "resourceType" : "CodeSystem",
+  "id" : "billing-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem billing-type</b></p><a name=\"billing-type\"> </a><a name=\"hcbilling-type\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/billing-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">ebm<a name=\"billing-type-ebm\"> </a></td><td>EBM</td><td>Einheitlicher Bewertungsmaßstab (GKV)</td></tr><tr><td style=\"white-space:nowrap\">goae<a name=\"billing-type-goae\"> </a></td><td>GOÄ</td><td>Gebührenordnung für Ärzte (PKV)</td></tr><tr><td style=\"white-space:nowrap\">bema<a name=\"billing-type-bema\"> </a></td><td>BEMA</td><td>Bewertungsmaßstab für zahnärztliche Leistungen (GKV)</td></tr><tr><td style=\"white-space:nowrap\">goz<a name=\"billing-type-goz\"> </a></td><td>GOZ</td><td>Gebührenordnung für Zahnärzte (PKV)</td></tr><tr><td style=\"white-space:nowrap\">bgt2001<a name=\"billing-type-bgt2001\"> </a></td><td>BGT2001</td><td>Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV)</td></tr><tr><td style=\"white-space:nowrap\">hzv<a name=\"billing-type-hzv\"> </a></td><td>HZV</td><td>Hausarztzentrierte Versorgung (§73b SGB V)</td></tr><tr><td style=\"white-space:nowrap\">facharztvertrag<a name=\"billing-type-facharztvertrag\"> </a></td><td>Facharztvertrag</td><td>Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V)</td></tr><tr><td style=\"white-space:nowrap\">igel<a name=\"billing-type-igel\"> </a></td><td>IGeL</td><td>Individuelle Gesundheitsleistung</td></tr><tr><td style=\"white-space:nowrap\">bg<a name=\"billing-type-bg\"> </a></td><td>BG</td><td>Berufsgenossenschaft (sonstige BG-Abrechnung)</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/billing-type",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.7"
+  }],
+  "version" : "0.30.0",
+  "name" : "BillingTypeCS",
+  "title" : "Abrechnungsart",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "goae",
-      "display": "GOÄ",
-      "definition": "Gebührenordnung für Ärzte (PKV)"
-    },
-    {
-      "code": "bema",
-      "display": "BEMA",
-      "definition": "Bewertungsmaßstab für zahnärztliche Leistungen (GKV)"
-    },
-    {
-      "code": "goz",
-      "display": "GOZ",
-      "definition": "Gebührenordnung für Zahnärzte (PKV)"
-    },
-    {
-      "code": "bgt2001",
-      "display": "BGT2001",
-      "definition": "Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV)"
-    },
-    {
-      "code": "hzv",
-      "display": "HZV",
-      "definition": "Hausarztzentrierte Versorgung (§73b SGB V)"
-    },
-    {
-      "code": "facharztvertrag",
-      "display": "Facharztvertrag",
-      "definition": "Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V)"
-    },
-    {
-      "code": "igel",
-      "display": "IGeL",
-      "definition": "Individuelle Gesundheitsleistung"
-    },
-    {
-      "code": "bg",
-      "display": "BG",
-      "definition": "Berufsgenossenschaft (sonstige BG-Abrechnung)"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 9
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes für Abrechnungsarten in der ambulanten Versorgung. Dient als Diskriminator für ChargeItemDefinition-Kataloge. Regionale Selektivverträge nutzen den generischen Typ (z.B. hzv, facharztvertrag) — die KV-Region wird über Contract.identifier bzw. ChargeItemDefinition.jurisdiction abgebildet.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 9,
+  "concept" : [{
+    "code" : "ebm",
+    "display" : "EBM",
+    "definition" : "Einheitlicher Bewertungsmaßstab (GKV)"
+  },
+  {
+    "code" : "goae",
+    "display" : "GOÄ",
+    "definition" : "Gebührenordnung für Ärzte (PKV)"
+  },
+  {
+    "code" : "bema",
+    "display" : "BEMA",
+    "definition" : "Bewertungsmaßstab für zahnärztliche Leistungen (GKV)"
+  },
+  {
+    "code" : "goz",
+    "display" : "GOZ",
+    "definition" : "Gebührenordnung für Zahnärzte (PKV)"
+  },
+  {
+    "code" : "bgt2001",
+    "display" : "BGT2001",
+    "definition" : "Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV)"
+  },
+  {
+    "code" : "hzv",
+    "display" : "HZV",
+    "definition" : "Hausarztzentrierte Versorgung (§73b SGB V)"
+  },
+  {
+    "code" : "facharztvertrag",
+    "display" : "Facharztvertrag",
+    "definition" : "Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V)"
+  },
+  {
+    "code" : "igel",
+    "display" : "IGeL",
+    "definition" : "Individuelle Gesundheitsleistung"
+  },
+  {
+    "code" : "bg",
+    "display" : "BG",
+    "definition" : "Berufsgenossenschaft (sonstige BG-Abrechnung)"
+  }]
 }

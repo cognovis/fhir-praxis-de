@@ -1,35 +1,62 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "AiProvenanceCS",
-  "id": "ai-provenance",
-  "title": "AI Provenance",
-  "description": "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance",
-  "concept": [
-    {
-      "code": "ai-generated",
-      "display": "KI-generiert",
-      "definition": "Inhalt wurde durch ein KI-System erzeugt"
+  "resourceType" : "CodeSystem",
+  "id" : "ai-provenance",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem ai-provenance</b></p><a name=\"ai-provenance\"> </a><a name=\"hcai-provenance\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">ai-generated<a name=\"ai-provenance-ai-generated\"> </a></td><td>KI-generiert</td><td>Inhalt wurde durch ein KI-System erzeugt</td></tr><tr><td style=\"white-space:nowrap\">ai-assisted<a name=\"ai-provenance-ai-assisted\"> </a></td><td>KI-unterstuetzt</td><td>Inhalt wurde mit KI-Unterstuetzung erstellt</td></tr><tr><td style=\"white-space:nowrap\">human-reviewed<a name=\"ai-provenance-human-reviewed\"> </a></td><td>Menschlich geprueft</td><td>KI-Inhalt wurde durch einen Menschen geprueft</td></tr><tr><td style=\"white-space:nowrap\">human-approved<a name=\"ai-provenance-human-approved\"> </a></td><td>Menschlich freigegeben</td><td>KI-Inhalt wurde durch einen Menschen freigegeben</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.2"
+  }],
+  "version" : "0.30.0",
+  "name" : "AiProvenanceCS",
+  "title" : "AI Provenance",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "ai-assisted",
-      "display": "KI-unterstuetzt",
-      "definition": "Inhalt wurde mit KI-Unterstuetzung erstellt"
-    },
-    {
-      "code": "human-reviewed",
-      "display": "Menschlich geprueft",
-      "definition": "KI-Inhalt wurde durch einen Menschen geprueft"
-    },
-    {
-      "code": "human-approved",
-      "display": "Menschlich freigegeben",
-      "definition": "KI-Inhalt wurde durch einen Menschen freigegeben"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 4
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes fuer KI-Herkunftskennzeichnung gemaess EU AI Act Art. 50",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 4,
+  "concept" : [{
+    "code" : "ai-generated",
+    "display" : "KI-generiert",
+    "definition" : "Inhalt wurde durch ein KI-System erzeugt"
+  },
+  {
+    "code" : "ai-assisted",
+    "display" : "KI-unterstuetzt",
+    "definition" : "Inhalt wurde mit KI-Unterstuetzung erstellt"
+  },
+  {
+    "code" : "human-reviewed",
+    "display" : "Menschlich geprueft",
+    "definition" : "KI-Inhalt wurde durch einen Menschen geprueft"
+  },
+  {
+    "code" : "human-approved",
+    "display" : "Menschlich freigegeben",
+    "definition" : "KI-Inhalt wurde durch einen Menschen freigegeben"
+  }]
 }

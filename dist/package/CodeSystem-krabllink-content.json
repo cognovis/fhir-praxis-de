@@ -1,0 +1,77 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "krabllink-content",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem krabllink-content</b></p><a name=\"krabllink-content\"> </a><a name=\"hckrabllink-content\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/krabllink-content</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">pdf<a name=\"krabllink-content-pdf\"> </a></td><td>PDF</td><td>Portable Document Format (PDF)</td></tr><tr><td style=\"white-space:nowrap\">hl7-cda<a name=\"krabllink-content-hl7-cda\"> </a></td><td>HL7 CDA</td><td>HL7 Clinical Document Architecture (CDA)</td></tr><tr><td style=\"white-space:nowrap\">plaintext<a name=\"krabllink-content-plaintext\"> </a></td><td>Plaintext</td><td>Unformatierter Text</td></tr><tr><td style=\"white-space:nowrap\">dicom<a name=\"krabllink-content-dicom\"> </a></td><td>DICOM</td><td>Digital Imaging and Communications in Medicine</td></tr><tr><td style=\"white-space:nowrap\">jpeg<a name=\"krabllink-content-jpeg\"> </a></td><td>JPEG</td><td>JPEG-Bild</td></tr><tr><td style=\"white-space:nowrap\">png<a name=\"krabllink-content-png\"> </a></td><td>PNG</td><td>PNG-Bild</td></tr><tr><td style=\"white-space:nowrap\">hl7-fhir<a name=\"krabllink-content-hl7-fhir\"> </a></td><td>HL7 FHIR</td><td>HL7 FHIR Ressource (JSON oder XML)</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/krabllink-content",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.18"
+  }],
+  "version" : "0.30.0",
+  "name" : "KrablLinkContentCS",
+  "title" : "KraBL-Link Content-Typ",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Content-Typen für Krankenblatt-Links (KraBL) in der ambulanten Versorgung",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 7,
+  "concept" : [{
+    "code" : "pdf",
+    "display" : "PDF",
+    "definition" : "Portable Document Format (PDF)"
+  },
+  {
+    "code" : "hl7-cda",
+    "display" : "HL7 CDA",
+    "definition" : "HL7 Clinical Document Architecture (CDA)"
+  },
+  {
+    "code" : "plaintext",
+    "display" : "Plaintext",
+    "definition" : "Unformatierter Text"
+  },
+  {
+    "code" : "dicom",
+    "display" : "DICOM",
+    "definition" : "Digital Imaging and Communications in Medicine"
+  },
+  {
+    "code" : "jpeg",
+    "display" : "JPEG",
+    "definition" : "JPEG-Bild"
+  },
+  {
+    "code" : "png",
+    "display" : "PNG",
+    "definition" : "PNG-Bild"
+  },
+  {
+    "code" : "hl7-fhir",
+    "display" : "HL7 FHIR",
+    "definition" : "HL7 FHIR Ressource (JSON oder XML)"
+  }]
+}

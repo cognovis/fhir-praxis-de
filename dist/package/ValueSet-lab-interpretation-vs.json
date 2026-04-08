@@ -1,0 +1,80 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "lab-interpretation-vs",
+  "text" : {
+    "status" : "extensions",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet lab-interpretation-vs</b></p><a name=\"lab-interpretation-vs\"> </a><a name=\"hclab-interpretation-vs\"> </a><ul><li>Include these codes as defined in <a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html\"><code>http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation</code></a><span title=\"Version is not explicitly stated, which means it is fixed to 4.0.0, the version found through the package references\"> version &#x1F4E6;4.0.0</span><table class=\"none\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-N\">N</a></td><td>Normal</td><td>The result or observation value is within the reference range or expected norm (as defined for the respective test procedure).<br/><br/>\\[Note: Applies to numeric or non-numeric results.\\]</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-H\">H</a></td><td>High</td><td>The result for a quantitative observation is above the upper limit of the reference range (as defined for the respective test procedure).<br/><br/>Synonym: Above high normal</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-L\">L</a></td><td>Low</td><td>The result for a quantitative observation is below the lower limit of the reference range (as defined for the respective test procedure).<br/><br/>Synonym: Below low normal</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-HH\">HH</a></td><td>Critical high</td><td>The result for a quantitative observation is above a reference level at which immediate action should be considered for patient safety (as defined for the respective test procedure).<br/><br/>Synonym: Above upper panic limits.</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-LL\">LL</a></td><td>Critical low</td><td>The result for a quantitative observation is below a reference level at which immediate action should be considered for patient safety (as defined for the respective test procedure).<br/><br/>Synonym: Below lower panic limits.</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-A\">A</a></td><td>Abnormal</td><td>The result or observation value is outside the reference range or expected norm (as defined for the respective test procedure).<br/><br/>\\[Note: Typically applies to non-numeric results.\\]</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-AA\">AA</a></td><td>Critical abnormal</td><td>The result or observation value is outside a reference range or expected norm at a level at which immediate action should be considered for patient safety (as defined for the respective test procedure).<br/><br/>\\[Note: Typically applies to non-numeric results. Analogous to critical/panic limits for numeric results.\\]</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-POS\">POS</a></td><td>Positive</td><td>A presence finding of the specified component / analyte, organism or clinical sign based on the established threshold of the performed test or procedure.</td></tr><tr><td><a href=\"http://terminology.hl7.org/7.1.0/CodeSystem-v3-ObservationInterpretation.html#v3-ObservationInterpretation-NEG\">NEG</a></td><td>Negative</td><td>An absence finding of the specified component / analyte, organism or clinical sign based on the established threshold of the performed test or procedure.<br/><br/>\\[Note: Negative does not necessarily imply the complete absence of the specified item.\\]</td></tr></table></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/lab-interpretation-vs",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.17"
+  }],
+  "version" : "0.30.0",
+  "name" : "LabInterpretationVS",
+  "title" : "Lab Interpretation Value Set",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Laborspezifische Interpretationscodes aus FHIR v3-ObservationInterpretation fuer den Einsatz in deutschen Labor-Befunden (Observation.interpretation)",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "http://terminology.hl7.org/CodeSystem/v3-ObservationInterpretation",
+      "concept" : [{
+        "code" : "N",
+        "display" : "Normal"
+      },
+      {
+        "code" : "H",
+        "display" : "High"
+      },
+      {
+        "code" : "L",
+        "display" : "Low"
+      },
+      {
+        "code" : "HH",
+        "display" : "Critical high"
+      },
+      {
+        "code" : "LL",
+        "display" : "Critical low"
+      },
+      {
+        "code" : "A",
+        "display" : "Abnormal"
+      },
+      {
+        "code" : "AA",
+        "display" : "Critical abnormal"
+      },
+      {
+        "code" : "POS",
+        "display" : "Positive"
+      },
+      {
+        "code" : "NEG",
+        "display" : "Negative"
+      }]
+    }]
+  }
+}

@@ -1,12 +1,41 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "not-present",
-  "name": "HvgVertragsartCS",
-  "id": "hvg-vertragsart",
-  "title": "HVG-Vertragsart",
-  "description": "Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, besondere Versorgung). Inhalte werden per ETL befüllt.",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart",
-  "experimental": false,
-  "caseSensitive": true
+  "resourceType" : "CodeSystem",
+  "id" : "hvg-vertragsart",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem hvg-vertragsart</b></p><a name=\"hvg-vertragsart\"> </a><a name=\"hchvg-vertragsart\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart</code> defines codes, but no codes are represented here</p></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.15"
+  }],
+  "version" : "0.30.0",
+  "name" : "HvgVertragsartCS",
+  "title" : "HVG-Vertragsart",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, besondere Versorgung). Inhalte werden per ETL befüllt.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "not-present"
 }

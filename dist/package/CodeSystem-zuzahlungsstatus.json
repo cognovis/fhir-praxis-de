@@ -1,12 +1,41 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "not-present",
-  "name": "ZuzahlungsstatusCS",
-  "id": "zuzahlungsstatus",
-  "title": "Zuzahlungsstatus",
-  "description": "GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden per ETL aus den offiziellen eGK-VSD-Spezifikationen befüllt.",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus",
-  "experimental": false,
-  "caseSensitive": true
+  "resourceType" : "CodeSystem",
+  "id" : "zuzahlungsstatus",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem zuzahlungsstatus</b></p><a name=\"zuzahlungsstatus\"> </a><a name=\"hczuzahlungsstatus\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus</code> defines codes, but no codes are represented here</p></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.31"
+  }],
+  "version" : "0.30.0",
+  "name" : "ZuzahlungsstatusCS",
+  "title" : "Zuzahlungsstatus",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden per ETL aus den offiziellen eGK-VSD-Spezifikationen befüllt.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "not-present"
 }

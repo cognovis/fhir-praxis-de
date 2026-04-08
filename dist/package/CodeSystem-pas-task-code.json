@@ -1,30 +1,57 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "PASTaskCodeCS",
-  "id": "pas-task-code",
-  "title": "PAS Task Code",
-  "description": "Codes fuer Genehmigungsworkflow-Tasks (Prior Authorization)",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code",
-  "concept": [
-    {
-      "code": "submit",
-      "display": "Antrag einreichen",
-      "definition": "Genehmigungsantrag an Kostentraeger senden"
+  "resourceType" : "CodeSystem",
+  "id" : "pas-task-code",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem pas-task-code</b></p><a name=\"pas-task-code\"> </a><a name=\"hcpas-task-code\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">submit<a name=\"pas-task-code-submit\"> </a></td><td>Antrag einreichen</td><td>Genehmigungsantrag an Kostentraeger senden</td></tr><tr><td style=\"white-space:nowrap\">inquire<a name=\"pas-task-code-inquire\"> </a></td><td>Status abfragen</td><td>Status des Genehmigungsantrags abfragen</td></tr><tr><td style=\"white-space:nowrap\">cancel<a name=\"pas-task-code-cancel\"> </a></td><td>Antrag stornieren</td><td>Genehmigungsantrag zurueckziehen</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.25"
+  }],
+  "version" : "0.30.0",
+  "name" : "PASTaskCodeCS",
+  "title" : "PAS Task Code",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "inquire",
-      "display": "Status abfragen",
-      "definition": "Status des Genehmigungsantrags abfragen"
-    },
-    {
-      "code": "cancel",
-      "display": "Antrag stornieren",
-      "definition": "Genehmigungsantrag zurueckziehen"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 3
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes fuer Genehmigungsworkflow-Tasks (Prior Authorization)",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 3,
+  "concept" : [{
+    "code" : "submit",
+    "display" : "Antrag einreichen",
+    "definition" : "Genehmigungsantrag an Kostentraeger senden"
+  },
+  {
+    "code" : "inquire",
+    "display" : "Status abfragen",
+    "definition" : "Status des Genehmigungsantrags abfragen"
+  },
+  {
+    "code" : "cancel",
+    "display" : "Antrag stornieren",
+    "definition" : "Genehmigungsantrag zurueckziehen"
+  }]
 }

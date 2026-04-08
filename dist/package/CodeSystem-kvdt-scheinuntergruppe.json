@@ -1,0 +1,152 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "kvdt-scheinuntergruppe",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem kvdt-scheinuntergruppe</b></p><a name=\"kvdt-scheinuntergruppe\"> </a><a name=\"hckvdt-scheinuntergruppe\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">00<a name=\"kvdt-scheinuntergruppe-00\"> </a></td><td>Behandlungsausweis</td><td>Primärfall, ambulant kurativ-Hausarzt</td></tr><tr><td style=\"white-space:nowrap\">0101<a name=\"kvdt-scheinuntergruppe-0101\"> </a></td><td>Überweisungsschein</td><td>Kurativ-Arzt</td></tr><tr><td style=\"white-space:nowrap\">0102<a name=\"kvdt-scheinuntergruppe-0102\"> </a></td><td>Überweisungsschein Vertretung</td><td>Kurativ-Arzt Vertretung</td></tr><tr><td style=\"white-space:nowrap\">0104<a name=\"kvdt-scheinuntergruppe-0104\"> </a></td><td>Überweisungsschein Notfall</td><td>Kurativ-Arzt Notfall</td></tr><tr><td style=\"white-space:nowrap\">10<a name=\"kvdt-scheinuntergruppe-10\"> </a></td><td>Behandlungsschein ambulante Notfallbehandlung</td><td>Notfall- oder Vertretungsfall</td></tr><tr><td style=\"white-space:nowrap\">20<a name=\"kvdt-scheinuntergruppe-20\"> </a></td><td>Überweisungsschein</td><td>Allgemeine Überweisung</td></tr><tr><td style=\"white-space:nowrap\">21<a name=\"kvdt-scheinuntergruppe-21\"> </a></td><td>Überweisungsschein zur Mitbehandlung</td><td>Kurativ-spezialärztlich</td></tr><tr><td style=\"white-space:nowrap\">22<a name=\"kvdt-scheinuntergruppe-22\"> </a></td><td>Überweisungsschein zur Konsiliaruntersuchung</td><td>Konsiliaruntersuchung durch Facharzt</td></tr><tr><td style=\"white-space:nowrap\">23<a name=\"kvdt-scheinuntergruppe-23\"> </a></td><td>Überweisungsschein zur Auftragsleistung</td><td>Laborauftrag oder Einzelleistungsauftrag</td></tr><tr><td style=\"white-space:nowrap\">24<a name=\"kvdt-scheinuntergruppe-24\"> </a></td><td>Überweisungsschein zur Weiterbehandlung</td><td>Weiterbehandlung durch anderen Arzt</td></tr><tr><td style=\"white-space:nowrap\">25<a name=\"kvdt-scheinuntergruppe-25\"> </a></td><td>Überweisungsschein zur Mitbehandlung bei Schwangerschaft</td><td>Schwangerschaftsbegleitende Mitbehandlung</td></tr><tr><td style=\"white-space:nowrap\">26<a name=\"kvdt-scheinuntergruppe-26\"> </a></td><td>Überweisungsschein zur Mitbehandlung Psychiatrie</td><td>Psychiatrische Mitbehandlung</td></tr><tr><td style=\"white-space:nowrap\">27<a name=\"kvdt-scheinuntergruppe-27\"> </a></td><td>Überweisungsschein Labor</td><td>Laborüberweisung</td></tr><tr><td style=\"white-space:nowrap\">28<a name=\"kvdt-scheinuntergruppe-28\"> </a></td><td>Überweisungsschein Pathologie</td><td>Pathologieüberweisung</td></tr><tr><td style=\"white-space:nowrap\">31<a name=\"kvdt-scheinuntergruppe-31\"> </a></td><td>Überweisungsschein zur belegärztlichen Behandlung</td><td>Aufnahme zur stationären Behandlung</td></tr><tr><td style=\"white-space:nowrap\">32<a name=\"kvdt-scheinuntergruppe-32\"> </a></td><td>Belegärztliche Notaufnahme</td><td>Notfallaufnahme durch Belegarzt</td></tr><tr><td style=\"white-space:nowrap\">41<a name=\"kvdt-scheinuntergruppe-41\"> </a></td><td>Notfallschein</td><td>Ambulante Notfallbehandlung</td></tr><tr><td style=\"white-space:nowrap\">42<a name=\"kvdt-scheinuntergruppe-42\"> </a></td><td>Notfallschein Unfall</td><td>Notfallbehandlung bei Unfall</td></tr><tr><td style=\"white-space:nowrap\">43<a name=\"kvdt-scheinuntergruppe-43\"> </a></td><td>Notfallschein Arbeitsunfall</td><td>Notfallbehandlung Arbeitsunfall (BG)</td></tr><tr><td style=\"white-space:nowrap\">44<a name=\"kvdt-scheinuntergruppe-44\"> </a></td><td>Notfallschein Bereitschaftsdienst</td><td>Bereitschaftsdienstnotfall</td></tr><tr><td style=\"white-space:nowrap\">45<a name=\"kvdt-scheinuntergruppe-45\"> </a></td><td>Notfallschein KV-Notfallpraxis</td><td>KV-Notfallpraxis</td></tr><tr><td style=\"white-space:nowrap\">46<a name=\"kvdt-scheinuntergruppe-46\"> </a></td><td>Notfallschein Krankenhausnotaufnahme</td><td>Notfallbehandlung in Krankenhausambulanz</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:1.2.276.0.76.5.235"
+  }],
+  "version" : "0.30.0",
+  "name" : "KvdtScheinuntergruppeCS",
+  "title" : "KVDT Scheinuntergruppe (KBV Schlüsseltabelle)",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "KVDT-konforme Scheinuntergruppe-Codes gemäß KBV Schlüsseltabelle S_KBV_SCHEINART V1.02. Lokaler Spiegel von KBV_CS_SFHIR_KBV_SCHEINART (OID 1.2.276.0.76.5.235).",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 22,
+  "concept" : [{
+    "code" : "00",
+    "display" : "Behandlungsausweis",
+    "definition" : "Primärfall, ambulant kurativ-Hausarzt"
+  },
+  {
+    "code" : "0101",
+    "display" : "Überweisungsschein",
+    "definition" : "Kurativ-Arzt"
+  },
+  {
+    "code" : "0102",
+    "display" : "Überweisungsschein Vertretung",
+    "definition" : "Kurativ-Arzt Vertretung"
+  },
+  {
+    "code" : "0104",
+    "display" : "Überweisungsschein Notfall",
+    "definition" : "Kurativ-Arzt Notfall"
+  },
+  {
+    "code" : "10",
+    "display" : "Behandlungsschein ambulante Notfallbehandlung",
+    "definition" : "Notfall- oder Vertretungsfall"
+  },
+  {
+    "code" : "20",
+    "display" : "Überweisungsschein",
+    "definition" : "Allgemeine Überweisung"
+  },
+  {
+    "code" : "21",
+    "display" : "Überweisungsschein zur Mitbehandlung",
+    "definition" : "Kurativ-spezialärztlich"
+  },
+  {
+    "code" : "22",
+    "display" : "Überweisungsschein zur Konsiliaruntersuchung",
+    "definition" : "Konsiliaruntersuchung durch Facharzt"
+  },
+  {
+    "code" : "23",
+    "display" : "Überweisungsschein zur Auftragsleistung",
+    "definition" : "Laborauftrag oder Einzelleistungsauftrag"
+  },
+  {
+    "code" : "24",
+    "display" : "Überweisungsschein zur Weiterbehandlung",
+    "definition" : "Weiterbehandlung durch anderen Arzt"
+  },
+  {
+    "code" : "25",
+    "display" : "Überweisungsschein zur Mitbehandlung bei Schwangerschaft",
+    "definition" : "Schwangerschaftsbegleitende Mitbehandlung"
+  },
+  {
+    "code" : "26",
+    "display" : "Überweisungsschein zur Mitbehandlung Psychiatrie",
+    "definition" : "Psychiatrische Mitbehandlung"
+  },
+  {
+    "code" : "27",
+    "display" : "Überweisungsschein Labor",
+    "definition" : "Laborüberweisung"
+  },
+  {
+    "code" : "28",
+    "display" : "Überweisungsschein Pathologie",
+    "definition" : "Pathologieüberweisung"
+  },
+  {
+    "code" : "31",
+    "display" : "Überweisungsschein zur belegärztlichen Behandlung",
+    "definition" : "Aufnahme zur stationären Behandlung"
+  },
+  {
+    "code" : "32",
+    "display" : "Belegärztliche Notaufnahme",
+    "definition" : "Notfallaufnahme durch Belegarzt"
+  },
+  {
+    "code" : "41",
+    "display" : "Notfallschein",
+    "definition" : "Ambulante Notfallbehandlung"
+  },
+  {
+    "code" : "42",
+    "display" : "Notfallschein Unfall",
+    "definition" : "Notfallbehandlung bei Unfall"
+  },
+  {
+    "code" : "43",
+    "display" : "Notfallschein Arbeitsunfall",
+    "definition" : "Notfallbehandlung Arbeitsunfall (BG)"
+  },
+  {
+    "code" : "44",
+    "display" : "Notfallschein Bereitschaftsdienst",
+    "definition" : "Bereitschaftsdienstnotfall"
+  },
+  {
+    "code" : "45",
+    "display" : "Notfallschein KV-Notfallpraxis",
+    "definition" : "KV-Notfallpraxis"
+  },
+  {
+    "code" : "46",
+    "display" : "Notfallschein Krankenhausnotaufnahme",
+    "definition" : "Notfallbehandlung in Krankenhausambulanz"
+  }]
+}

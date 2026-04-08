@@ -1,0 +1,52 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "medikation-kategorie",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem medikation-kategorie</b></p><a name=\"medikation-kategorie\"> </a><a name=\"hcmedikation-kategorie\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/medikation-kategorie</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">dauermedikation<a name=\"medikation-kategorie-dauermedikation\"> </a></td><td>Dauermedikation</td><td>Medikament wird dauerhaft eingenommen</td></tr><tr><td style=\"white-space:nowrap\">bedarfsmedikation<a name=\"medikation-kategorie-bedarfsmedikation\"> </a></td><td>Bedarfsmedikation</td><td>Medikament wird nur bei Bedarf eingenommen</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/medikation-kategorie",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.24"
+  }],
+  "version" : "0.30.0",
+  "name" : "MedikationKategorieCS",
+  "title" : "Medikationskategorie",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Kategorie der Medikation hinsichtlich der Einnahmedauer",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 2,
+  "concept" : [{
+    "code" : "dauermedikation",
+    "display" : "Dauermedikation",
+    "definition" : "Medikament wird dauerhaft eingenommen"
+  },
+  {
+    "code" : "bedarfsmedikation",
+    "display" : "Bedarfsmedikation",
+    "definition" : "Medikament wird nur bei Bedarf eingenommen"
+  }]
+}

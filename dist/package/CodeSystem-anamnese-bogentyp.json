@@ -1,0 +1,67 @@
+{
+  "resourceType" : "CodeSystem",
+  "id" : "anamnese-bogentyp",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem anamnese-bogentyp</b></p><a name=\"anamnese-bogentyp\"> </a><a name=\"hcanamnese-bogentyp\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/anamnese-bogentyp</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">erstanamnese<a name=\"anamnese-bogentyp-erstanamnese\"> </a></td><td>Erstanamnese</td><td>Vollstaendige Erstanamnese bei Neuaufnahme des Patienten</td></tr><tr><td style=\"white-space:nowrap\">schmerzanamnese<a name=\"anamnese-bogentyp-schmerzanamnese\"> </a></td><td>Schmerzanamnese</td><td>Gezielte Anamnese zu Schmerzsymptomatik</td></tr><tr><td style=\"white-space:nowrap\">praevention<a name=\"anamnese-bogentyp-praevention\"> </a></td><td>Praeventionsanamnese</td><td>Anamnese im Rahmen von Vorsorgeuntersuchungen</td></tr><tr><td style=\"white-space:nowrap\">follow-up<a name=\"anamnese-bogentyp-follow-up\"> </a></td><td>Verlaufsanamnese</td><td>Wiederholte Anamnese im Behandlungsverlauf</td></tr><tr><td style=\"white-space:nowrap\">fachspezifisch<a name=\"anamnese-bogentyp-fachspezifisch\"> </a></td><td>Fachspezifisch</td><td>Fachspezifischer Anamnesebogen</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/anamnese-bogentyp",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.3"
+  }],
+  "version" : "0.30.0",
+  "name" : "AnamneseBogentypCS",
+  "title" : "Anamnese-Bogentyp",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Codes fuer den Typ eines ambulanten Anamnesebogens in der Praxisverwaltung.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 5,
+  "concept" : [{
+    "code" : "erstanamnese",
+    "display" : "Erstanamnese",
+    "definition" : "Vollstaendige Erstanamnese bei Neuaufnahme des Patienten"
+  },
+  {
+    "code" : "schmerzanamnese",
+    "display" : "Schmerzanamnese",
+    "definition" : "Gezielte Anamnese zu Schmerzsymptomatik"
+  },
+  {
+    "code" : "praevention",
+    "display" : "Praeventionsanamnese",
+    "definition" : "Anamnese im Rahmen von Vorsorgeuntersuchungen"
+  },
+  {
+    "code" : "follow-up",
+    "display" : "Verlaufsanamnese",
+    "definition" : "Wiederholte Anamnese im Behandlungsverlauf"
+  },
+  {
+    "code" : "fachspezifisch",
+    "display" : "Fachspezifisch",
+    "definition" : "Fachspezifischer Anamnesebogen"
+  }]
+}

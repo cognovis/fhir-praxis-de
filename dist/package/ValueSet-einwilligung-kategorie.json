@@ -1,16 +1,44 @@
 {
-  "resourceType": "ValueSet",
-  "status": "draft",
-  "name": "EinwilligungKategorieVS",
-  "id": "einwilligung-kategorie",
-  "title": "Einwilligung-Kategorie",
-  "description": "Kategorien fuer Patienteneinwilligungen",
-  "url": "https://fhir.cognovis.de/praxis/ValueSet/einwilligung-kategorie",
-  "compose": {
-    "include": [
-      {
-        "system": "https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie"
-      }
-    ]
+  "resourceType" : "ValueSet",
+  "id" : "einwilligung-kategorie",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet einwilligung-kategorie</b></p><a name=\"einwilligung-kategorie\"> </a><a name=\"hceinwilligung-kategorie\"> </a><ul><li>Include all codes defined in <a href=\"CodeSystem-einwilligung-kategorie.html\"><code>https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie</code></a><span title=\"Version is not explicitly stated, which means it is fixed to the version provided in this specification\"> version &#x1F4E6;0.30.0</span></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/einwilligung-kategorie",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.11"
+  }],
+  "version" : "0.30.0",
+  "name" : "EinwilligungKategorieVS",
+  "title" : "Einwilligung-Kategorie",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Kategorien fuer Patienteneinwilligungen",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie"
+    }]
   }
 }

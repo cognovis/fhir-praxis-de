@@ -1,35 +1,62 @@
 {
-  "resourceType": "CodeSystem",
-  "status": "draft",
-  "content": "complete",
-  "name": "CaveClinicalWarningTypeCS",
-  "id": "cave-clinical-warning-type",
-  "title": "CAVE Clinical Warning Type",
-  "description": "Kurzschluessel fuer klinische Warnhinweistypen (CAVE-Eintraege) in deutschen Praxisverwaltungssystemen. PVS-uebergreifend standardisiert.",
-  "url": "https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type",
-  "concept": [
-    {
-      "code": "K",
-      "display": "Kontraindikation",
-      "definition": "Medizinische Kontraindikation gegen ein Medikament oder eine Behandlung"
+  "resourceType" : "CodeSystem",
+  "id" : "cave-clinical-warning-type",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: CodeSystem cave-clinical-warning-type</b></p><a name=\"cave-clinical-warning-type\"> </a><a name=\"hccave-clinical-warning-type\"> </a><p>This case-sensitive code system <code>https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type</code> defines the following codes:</p><table class=\"codes\"><tr><td style=\"white-space:nowrap\"><b>Code</b></td><td><b>Display</b></td><td><b>Definition</b></td></tr><tr><td style=\"white-space:nowrap\">K<a name=\"cave-clinical-warning-type-K\"> </a></td><td>Kontraindikation</td><td>Medizinische Kontraindikation gegen ein Medikament oder eine Behandlung</td></tr><tr><td style=\"white-space:nowrap\">A<a name=\"cave-clinical-warning-type-A\"> </a></td><td>Allergie</td><td>Arzneimittelallergie oder sonstige Allergie</td></tr><tr><td style=\"white-space:nowrap\">V<a name=\"cave-clinical-warning-type-V\"> </a></td><td>Vertraeglichkeit</td><td>Bekannte Unvertraeglichkeit oder schlechte Vertraeglichkeit</td></tr><tr><td style=\"white-space:nowrap\">E<a name=\"cave-clinical-warning-type-E\"> </a></td><td>Empfehlung</td><td>Klinische Empfehlung oder Hinweis (z.B. klinische Entscheidungsunterstuetzung)</td></tr></table></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.16.8"
+  }],
+  "version" : "0.30.0",
+  "name" : "CaveClinicalWarningTypeCS",
+  "title" : "CAVE Clinical Warning Type",
+  "status" : "active",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
     },
     {
-      "code": "A",
-      "display": "Allergie",
-      "definition": "Arzneimittelallergie oder sonstige Allergie"
-    },
-    {
-      "code": "V",
-      "display": "Vertraeglichkeit",
-      "definition": "Bekannte Unvertraeglichkeit oder schlechte Vertraeglichkeit"
-    },
-    {
-      "code": "E",
-      "display": "Empfehlung",
-      "definition": "Klinische Empfehlung oder Hinweis (z.B. klinische Entscheidungsunterstuetzung)"
-    }
-  ],
-  "experimental": false,
-  "caseSensitive": true,
-  "count": 4
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Kurzschluessel fuer klinische Warnhinweistypen (CAVE-Eintraege) in deutschen Praxisverwaltungssystemen. PVS-uebergreifend standardisiert.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "caseSensitive" : true,
+  "content" : "complete",
+  "count" : 4,
+  "concept" : [{
+    "code" : "K",
+    "display" : "Kontraindikation",
+    "definition" : "Medizinische Kontraindikation gegen ein Medikament oder eine Behandlung"
+  },
+  {
+    "code" : "A",
+    "display" : "Allergie",
+    "definition" : "Arzneimittelallergie oder sonstige Allergie"
+  },
+  {
+    "code" : "V",
+    "display" : "Vertraeglichkeit",
+    "definition" : "Bekannte Unvertraeglichkeit oder schlechte Vertraeglichkeit"
+  },
+  {
+    "code" : "E",
+    "display" : "Empfehlung",
+    "definition" : "Klinische Empfehlung oder Hinweis (z.B. klinische Entscheidungsunterstuetzung)"
+  }]
 }

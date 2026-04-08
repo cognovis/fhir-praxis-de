@@ -1,0 +1,44 @@
+{
+  "resourceType" : "ValueSet",
+  "id" : "bgt2001",
+  "text" : {
+    "status" : "generated",
+    "div" : "<div xmlns=\"http://www.w3.org/1999/xhtml\"><p class=\"res-header-id\"><b>Generated Narrative: ValueSet bgt2001</b></p><a name=\"bgt2001\"> </a><a name=\"hcbgt2001\"> </a><ul><li>Include all codes defined in <a href=\"CodeSystem-bgt2001.html\"><code>https://fhir.cognovis.de/praxis/CodeSystem/bgt2001</code></a><span title=\"Version is not explicitly stated, which means it is fixed to the version provided in this specification\"> version &#x1F4E6;0.30.0</span></li></ul></div>"
+  },
+  "url" : "https://fhir.cognovis.de/praxis/ValueSet/bgt2001",
+  "identifier" : [{
+    "system" : "urn:ietf:rfc:3986",
+    "value" : "urn:oid:2.16.840.1.113883.3.7985.48.5"
+  }],
+  "version" : "0.30.0",
+  "name" : "BGT2001VS",
+  "title" : "BGT2001 Tarifpositionen",
+  "status" : "draft",
+  "experimental" : false,
+  "date" : "2026-04-05T21:04:56+02:00",
+  "publisher" : "cognovis GmbH",
+  "contact" : [{
+    "name" : "cognovis GmbH",
+    "telecom" : [{
+      "system" : "url",
+      "value" : "https://www.cognovis.de"
+    },
+    {
+      "system" : "email",
+      "value" : "info@cognovis.de"
+    }]
+  }],
+  "description" : "Alle Tarifpositionen (Ziffern) aus dem BGT2001-Gebührentarif der DGUV für die Abrechnung berufsgenossenschaftlicher Heilbehandlungen.",
+  "jurisdiction" : [{
+    "coding" : [{
+      "system" : "urn:iso:std:iso:3166",
+      "code" : "DE",
+      "display" : "Germany"
+    }]
+  }],
+  "compose" : {
+    "include" : [{
+      "system" : "https://fhir.cognovis.de/praxis/CodeSystem/bgt2001"
+    }]
+  }
+}
