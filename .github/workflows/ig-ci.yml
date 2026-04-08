@@ -89,13 +89,21 @@ jobs:
 
       - name: POST init-bundle.json to Aidbox
         run: |
-          # Aidbox accepts "Basic basic:secret" as a literal convenience shortcut
-          # (not standard HTTP Basic auth encoding) — matches local dev setup
-          curl -sf -X POST http://localhost:8080/ \
-            -H "Authorization: Basic basic:secret" \
-            -H "Content-Type: application/json" \
-            -d @init-bundle.json
-          echo "init-bundle POSTed successfully"
+          # Aidbox /health can return OK before it's fully ready to process requests.
+          # Retry the POST a few times to handle this race condition.
+          for attempt in 1 2 3 4 5; do
+            if curl -sf -X POST http://localhost:8080/ \
+              -H "Authorization: Basic basic:secret" \
+              -H "Content-Type: application/json" \
+              -d @init-bundle.json; then
+              echo "init-bundle POSTed successfully (attempt $attempt)"
+              exit 0
+            fi
+            echo "Attempt $attempt failed, retrying in 10s..."
+            sleep 10
+          done
+          echo "init-bundle POST failed after 5 attempts"
+          exit 1
 
       - name: Build FHIR package
         run: bash scripts/build-package.sh
