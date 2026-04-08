@@ -168,6 +168,10 @@ jobs:
             && echo "::notice::Profile tests passed" \
             || echo "::warning::Profile tests had failures (10 negative tests need updating for Aidbox edge — see cognovis/fhir-praxis-de backlog)"
 
+      - name: Install Jekyll
+        run: |
+          sudo gem install jekyll
+
       - name: Download IG Publisher
         run: |
           mkdir -p input-cache
