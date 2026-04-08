@@ -92,14 +92,18 @@ jobs:
           # Aidbox /health can return OK before it's fully ready to process requests.
           # Retry the POST a few times to handle this race condition.
           for attempt in 1 2 3 4 5; do
-            if curl -sf -X POST http://localhost:8080/ \
+            HTTP_CODE=$(curl -s -o /tmp/aidbox-response.json -w "%{http_code}" \
+              -X POST http://localhost:8080/ \
               -H "Authorization: Basic basic:secret" \
               -H "Content-Type: application/json" \
-              -d @init-bundle.json; then
-              echo "init-bundle POSTed successfully (attempt $attempt)"
+              -d @init-bundle.json)
+            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+              echo "init-bundle POSTed successfully (attempt $attempt, HTTP $HTTP_CODE)"
               exit 0
             fi
-            echo "Attempt $attempt failed, retrying in 10s..."
+            echo "Attempt $attempt failed (HTTP $HTTP_CODE):"
+            cat /tmp/aidbox-response.json 2>/dev/null || true
+            echo ""
             sleep 10
           done
           echo "init-bundle POST failed after 5 attempts"
