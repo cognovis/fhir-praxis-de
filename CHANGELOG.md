@@ -2,43 +2,100 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- Include snapshots in FHIR package by using IG Publisher output
+- **ci**: Use RELEASE_PAT for auto-tag to trigger release workflow
+
+### Miscellaneous
+
+- Bump version to 0.32.3
+- Update dist/package with IG Publisher snapshots (v0.32.2)
+
 ## [0.32.2] - 2026-04-08
 
-### CI/CD
+### Bug Fixes
 
-- **fpde-csk**: Add `ig-ci.yml` — CI pipeline with Aidbox Docker service validation, httpyac profile tests, IG Publisher QA report
-- **fpde-csk**: Add `ig-release.yml` — Release pipeline on tag `v*` with GitHub Release, npm publish, Pages deploy, repository_dispatch to mira-adapters
-- **fpde-csk**: Remove `ig-build.yml` (replaced by ig-ci.yml + ig-release.yml)
+- Sync sushi-config.yaml version to 0.32.2 matching VERSION file
+- **ci**: Add retry logic for Aidbox init-bundle POST
+- **ci**: Show Aidbox response body on init-bundle failure
+- **ci**: Use curl -u for proper Basic auth encoding
+- **ci**: Use Aidbox-native endpoint for StructureDefinition upload
+- **ci**: Use admin credentials for StructureDefinition upload
+- **ci**: Upload StructureDefinitions via FHIR transaction bundle
+- **ci**: Use /fhir/ with trailing slash for transaction bundle POST
+- **ci**: POST SD bundle to root endpoint like init-bundle
+- **ci**: Update httpyac package name (@httpyac/cli -> httpyac)
+- **ci**: Make profile validation tests non-blocking
+- **ci**: Install Jekyll for IG Publisher HTML generation
+- **ci**: Use --ignore-scripts for npm publish of FHIR packages
+- **ci**: Use absolute path for npm publish to avoid git URL resolution
+
+### Features
+
+- **ci**: Auto-tag releases and version sync enforcement
+
+### Miscellaneous
+
+- Bump version to 0.32.2
 
 ## [0.32.1] - 2026-04-08
 
-### Tests
+### Bug Fixes
 
-- **fpde-a52**: Add negative tests for PraxisCondition, PraxisLabObservation, ProcedureAmbulantDE, FPDEPatient profiles
-- **fpde-a52**: Add ValueSet $expand + $validate-code tests for KvdtScheinuntergruppeVS
-- **fpde-a52**: Add Concept-API tests for DokumentKategorieCS
+- **fpde-csk**: Address review findings iteration 1
+- **fpde-csk**: Address review findings iteration 2
+- **fpde-csk**: Address cmux review findings iteration 1
+- **fpde-csk**: Address cmux review findings iteration 2
+- **fpde-a52**: Address review findings iteration 1
+- **fpde-a52**: Address review findings iteration 2
+- **fpde-a52**: Address cmux-reviewer findings
+- **fpde-5z0**: Remove ScheintypExt missed during bead implementation
 
 ### Documentation
 
-- **fpde-a52**: Add `docs/ig-testing.md` — IG testing guide for Aidbox setup and httpyac test execution
+- **fpde-a52**: Add IG testing guide for Aidbox setup and httpyac test execution
 
-## [unreleased]
+### Features
+
+- **fpde-csk**: Add ig-ci.yml + ig-release.yml, replace ig-build.yml
+- **fpde-a52**: Add negative tests for condition, lab-obs, procedure, patient profiles
+- **fpde-a52**: Add CS and VS tests for dokument-kategorie and scheinuntergruppe
+
+### Miscellaneous
+
+- Bump version to 0.32.1
+
+## [0.32.0] - 2026-04-07
+
+### Miscellaneous
+
+- Update changelog
+- Bump version to 0.32.0
 
 ### Merge
 
 - Resolve conflicts with origin/main (fpde-5z0/5nx changes)
+- Worktree-bead-fpde-za3
 
 ## [0.31.2] - 2026-04-07
 
 ### Miscellaneous
 
-- Bump version to 0.31.1
 - Update changelog
 - Bump version to 0.31.2
 
 ### Merge
 
 - Worktree-bead-fpde-5nx
+
+## [0.31.0] - 2026-04-07
+
+### Miscellaneous
+
+- Bump version to 0.31.1
 
 ## [0.31.1] - 2026-04-07
 
