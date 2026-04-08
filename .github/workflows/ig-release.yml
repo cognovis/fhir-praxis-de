@@ -34,6 +34,17 @@ jobs:
         id: version
         run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
 
+      - name: Verify tag matches VERSION file
+        run: |
+          TAG_VERSION="${{ github.ref_name }}"
+          TAG_VERSION="${TAG_VERSION#v}"
+          FILE_VERSION=$(tr -d '[:space:]' < VERSION)
+          if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
+            echo "ERROR: Tag ${TAG_VERSION} does not match VERSION file ${FILE_VERSION}"
+            exit 1
+          fi
+          echo "Version match confirmed: ${FILE_VERSION}"
+
       - name: Install SUSHI
         run: npm install -g fsh-sushi
 
@@ -75,7 +86,16 @@ jobs:
           # Find the built package
           PKG=$(ls dist/*.tgz | head -1)
           echo "Publishing ${PKG} to npm.cognovis.de..."
-          npm publish "${PKG}" --registry https://npm.cognovis.de || echo "Package version may already exist"
+          npm publish "${PKG}" --registry https://npm.cognovis.de 2>&1 | tee /tmp/npm-publish.log
+          EXIT=${PIPESTATUS[0]}
+          if [ "$EXIT" -ne 0 ]; then
+            if grep -q "EPUBLISHCONFLICT\|already_published\|409" /tmp/npm-publish.log; then
+              echo "::warning::Package version already exists in registry — skipping"
+            else
+              cat /tmp/npm-publish.log
+              exit "$EXIT"
+            fi
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
@@ -111,9 +131,10 @@ jobs:
         env:
           MIRA_DISPATCH_TOKEN: ${{ secrets.MIRA_DISPATCH_TOKEN }}
         run: |
-          curl -X POST \
+          curl -sf -X POST \
             -H "Authorization: Bearer ${MIRA_DISPATCH_TOKEN}" \
             -H "Accept: application/vnd.github+json" \
+            -H "Content-Type: application/json" \
             https://api.github.com/repos/cognovis/mira-adapters/dispatches \
             -d '{
               "event_type": "ig-published",

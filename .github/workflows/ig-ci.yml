@@ -3,6 +3,7 @@ name: IG CI — Validate & Build
 on:
   push:
     branches: ['**']
+    tags-ignore: ['v*']
   pull_request:
     branches: [main]
 
@@ -127,20 +128,26 @@ jobs:
 
       - name: Run CodeSystem tests
         run: |
-          # CS tests may depend on terminology server — run informatively
-          httpyac run test/CS/ --all --output short --env CI || true
+          # CS expansion tests call tx.health-samurai.io (external terminology server).
+          # This service is rate-limited/unavailable in CI. Run informatively only.
+          httpyac run test/CS/ --all --output short --env CI \
+            && echo "::notice::CS tests passed" \
+            || echo "::warning::CS tests had failures (terminology server unavailable in CI — informational only)"
 
       - name: Run ValueSet tests
         run: |
-          # VS tests may depend on terminology server — run informatively
-          httpyac run test/VS/ --all --output short --env CI || true
+          # VS expansion tests call tx.health-samurai.io (external terminology server).
+          # This service is rate-limited/unavailable in CI. Run informatively only.
+          httpyac run test/VS/ --all --output short --env CI \
+            && echo "::notice::VS tests passed" \
+            || echo "::warning::VS tests had failures (terminology server unavailable in CI — informational only)"
 
       - name: Run Profile validation tests
         run: |
           # Profile validation tests MUST pass
           httpyac run test/Profile/ --all --output short --env CI
 
-      # TODO(fpde-a52): Run negative tests here once fpde-a52 is implemented
+      # Negative tests are tracked in bead fpde-a52 and will be added once that bead is implemented.
 
       - name: Download IG Publisher
         run: |
