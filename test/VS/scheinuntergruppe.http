@@ -1,0 +1,29 @@
+### ValueSet: KvdtScheinuntergruppe - $expand
+# @name expand
+# Expected: Bundle mit allen Codes aus KvdtScheinuntergruppeCS (S_KBV_SCHEINART V1.02)
+GET http://localhost:8080/ValueSet/kvdt-scheinuntergruppe/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: KvdtScheinuntergruppe - $validate-code valid (00 = Behandlungsausweis)
+# @name validate_valid_1
+# Expected: Parameters mit result=true
+GET http://localhost:8080/ValueSet/kvdt-scheinuntergruppe/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe&code=00
+Authorization: Basic basic:secret
+
+### ValueSet: KvdtScheinuntergruppe - $validate-code valid (0101 = Überweisungsschein Kurativ-Arzt)
+# @name validate_valid_2
+# Expected: Parameters mit result=true
+GET http://localhost:8080/ValueSet/kvdt-scheinuntergruppe/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe&code=0101
+Authorization: Basic basic:secret
+
+### ValueSet: KvdtScheinuntergruppe - $validate-code valid (10 = Notfall)
+# @name validate_valid_3
+# Expected: Parameters mit result=true
+GET http://localhost:8080/ValueSet/kvdt-scheinuntergruppe/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe&code=10
+Authorization: Basic basic:secret
+
+### ValueSet: KvdtScheinuntergruppe - $validate-code invalid
+# @name validate_invalid
+# Expected: Parameters mit result=false (Code nicht im ValueSet)
+GET http://localhost:8080/ValueSet/kvdt-scheinuntergruppe/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret
