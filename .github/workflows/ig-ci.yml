@@ -94,7 +94,7 @@ jobs:
           for attempt in 1 2 3 4 5; do
             HTTP_CODE=$(curl -s -o /tmp/aidbox-response.json -w "%{http_code}" \
               -X POST http://localhost:8080/ \
-              -H "Authorization: Basic basic:secret" \
+              -u "basic:secret" \
               -H "Content-Type: application/json" \
               -d @init-bundle.json)
             if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
@@ -120,7 +120,7 @@ jobs:
             ID=$(jq -r '.id' "$f")
             HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
               -X PUT "http://localhost:8080/fhir/StructureDefinition/${ID}" \
-              -H "Authorization: Basic basic:secret" \
+              -u "basic:secret" \
               -H "Content-Type: application/json" \
               -d "@$f")
             if [ "$HTTP_STATUS" -ge 400 ]; then
