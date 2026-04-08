@@ -1,0 +1,194 @@
+name: IG CI — Validate & Build
+
+on:
+  push:
+    branches: ['**']
+  pull_request:
+    branches: [main]
+
+permissions:
+  contents: read
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "ig-ci-${{ github.ref }}"
+  cancel-in-progress: true
+
+jobs:
+  validate:
+    runs-on: ubuntu-latest
+
+    services:
+      postgres:
+        image: postgres:17
+        env:
+          POSTGRES_DB: aidbox
+          POSTGRES_USER: aidbox
+          POSTGRES_PASSWORD: aidbox
+        options: >-
+          --health-cmd "pg_isready -U aidbox"
+          --health-interval 5s
+          --health-timeout 5s
+          --health-retries 10
+
+      aidbox:
+        image: healthsamurai/aidboxone:edge
+        ports:
+          - 8080:8080
+        env:
+          AIDBOX_PORT: 8080
+          AIDBOX_FHIR_VERSION: 4.0.1
+          PGHOST: postgres
+          PGPORT: 5432
+          PGDATABASE: aidbox
+          PGUSER: aidbox
+          PGPASSWORD: aidbox
+          AIDBOX_CLIENT_ID: basic
+          AIDBOX_CLIENT_SECRET: secret
+          AIDBOX_ADMIN_ID: admin
+          AIDBOX_ADMIN_PASSWORD: password
+          AIDBOX_COMPLIANCE: enabled
+          AIDBOX_CORRECT_AIDBOX_FORMAT: true
+          BOX_FEATURES_TERMINOLOGY__IMPORT_SYNC: true
+          BOX_TERMINOLOGY__SERVICE_URL: https://tx.health-samurai.io/fhir
+          AIDBOX_LICENSE_KEY: ${{ secrets.AIDBOX_LICENSE_KEY }}
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Install SUSHI
+        run: npm install -g fsh-sushi
+
+      - name: Run SUSHI
+        run: sushi .
+
+      - name: Wait for Aidbox
+        run: |
+          echo "Waiting for Aidbox to be ready..."
+          for i in $(seq 1 24); do
+            if curl -sf http://localhost:8080/health > /dev/null 2>&1; then
+              echo "Aidbox is ready after $((i * 5))s"
+              break
+            fi
+            if [ "$i" -eq 24 ]; then
+              echo "Aidbox did not start within 120s"
+              exit 1
+            fi
+            sleep 5
+          done
+
+      - name: POST init-bundle.json to Aidbox
+        run: |
+          curl -sf -X POST http://localhost:8080/ \
+            -H "Authorization: Basic basic:secret" \
+            -H "Content-Type: application/json" \
+            -d @init-bundle.json
+          echo "init-bundle POSTed successfully"
+
+      - name: Build FHIR package
+        run: bash scripts/build-package.sh
+
+      - name: Install StructureDefinitions into Aidbox
+        run: |
+          echo "Uploading StructureDefinitions to Aidbox..."
+          ERRORS=0
+          for f in fsh-generated/resources/StructureDefinition-*.json; do
+            ID=$(jq -r '.id' "$f")
+            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
+              -X PUT "http://localhost:8080/fhir/StructureDefinition/${ID}" \
+              -H "Authorization: Basic basic:secret" \
+              -H "Content-Type: application/json" \
+              -d "@$f")
+            if [ "$HTTP_STATUS" -ge 400 ]; then
+              echo "ERROR: Failed to upload $f (HTTP $HTTP_STATUS)"
+              ERRORS=$((ERRORS + 1))
+            fi
+          done
+          if [ "$ERRORS" -gt 0 ]; then
+            echo "$ERRORS StructureDefinition(s) failed to upload"
+            exit 1
+          fi
+          echo "All StructureDefinitions uploaded successfully"
+
+      - name: Install SUSHI global (for httpyac)
+        run: npm install -g @httpyac/cli
+
+      - name: Run CodeSystem tests
+        run: |
+          # CS tests may depend on terminology server — run informatively
+          httpyac run test/CS/ --all --output short --env CI || true
+
+      - name: Run ValueSet tests
+        run: |
+          # VS tests may depend on terminology server — run informatively
+          httpyac run test/VS/ --all --output short --env CI || true
+
+      - name: Run Profile validation tests
+        run: |
+          # Profile validation tests MUST pass
+          httpyac run test/Profile/ --all --output short --env CI
+
+      # TODO(fpde-a52): Run negative tests here once fpde-a52 is implemented
+
+      - name: Download IG Publisher
+        run: |
+          mkdir -p input-cache
+          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
+            -o input-cache/publisher.jar
+
+      - name: Run IG Publisher
+        run: java -jar input-cache/publisher.jar -ig . -no-sushi
+
+      - name: Upload QA Report artifact
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: qa-report
+          path: |
+            output/qa.html
+            output/qa/
+
+      - name: Upload package artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: ig-package
+          path: |
+            dist/*.tgz
+            output/full-ig.zip
+
+      - name: Setup Pages
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4

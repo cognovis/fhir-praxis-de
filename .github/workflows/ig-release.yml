@@ -1,0 +1,125 @@
+name: IG Release — Publish & Deploy
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+  pages: write
+  id-token: write
+
+concurrency:
+  group: "ig-release"
+  cancel-in-progress: false
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Read version
+        id: version
+        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
+
+      - name: Install SUSHI
+        run: npm install -g fsh-sushi
+
+      - name: Run SUSHI
+        run: sushi .
+
+      - name: Build FHIR package
+        run: bash scripts/build-package.sh
+
+      - name: Download IG Publisher
+        run: |
+          mkdir -p input-cache
+          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
+            -o input-cache/publisher.jar
+
+      - name: Run IG Publisher
+        run: java -jar input-cache/publisher.jar -ig . -no-sushi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: |
+            dist/*.tgz
+            output/full-ig.zip
+          generate_release_notes: true
+          make_latest: true
+
+      - name: Publish to FHIR Package Registry
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+        run: |
+          # Configure npm for cognovis FHIR registry
+          echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}" >> ~/.npmrc
+          echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
+          echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc
+
+          # Find the built package
+          PKG=$(ls dist/*.tgz | head -1)
+          echo "Publishing ${PKG} to npm.cognovis.de..."
+          npm publish "${PKG}" --registry https://npm.cognovis.de || echo "Package version may already exist"
+
+      - name: Setup Pages
+        uses: actions/configure-pages@v5
+
+      - name: Upload Pages artifact
+        uses: actions/upload-pages-artifact@v3
+        with:
+          path: output
+
+  deploy:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    permissions:
+      pages: write
+      id-token: write
+    steps:
+      - name: Deploy to GitHub Pages
+        id: deployment
+        uses: actions/deploy-pages@v4
+
+  dispatch:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read version
+        id: version
+        run: echo "version=$(echo ${{ github.ref_name }} | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+
+      - name: Send repository_dispatch to mira-adapters
+        env:
+          MIRA_DISPATCH_TOKEN: ${{ secrets.MIRA_DISPATCH_TOKEN }}
+        run: |
+          curl -X POST \
+            -H "Authorization: Bearer ${MIRA_DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github+json" \
+            https://api.github.com/repos/cognovis/mira-adapters/dispatches \
+            -d '{
+              "event_type": "ig-published",
+              "client_payload": {
+                "version": "${{ steps.version.outputs.version }}",
+                "package_id": "de.cognovis.fhir.praxis"
+              }
+            }'
+          echo "repository_dispatch sent to mira-adapters"
