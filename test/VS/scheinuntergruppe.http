@@ -5,6 +5,7 @@ GET http://localhost:8080/ValueSet/kvdt-scheinuntergruppe/$expand
 Authorization: Basic basic:secret
 
 ?? status == 200
+?? body.expansion.total > 0
 
 ### ValueSet: KvdtScheinuntergruppe - $validate-code valid (00 = Behandlungsausweis)
 # @name validate_valid_1

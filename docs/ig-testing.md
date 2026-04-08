@@ -7,7 +7,10 @@ getestet wird. Alle Tests sind als [httpyac](https://httpyac.github.io/)-Dateien
 ## Voraussetzungen
 
 - Aidbox läuft auf `http://localhost:8080`
-- Aidbox Basic-Auth: `basic:secret` *(Lokale Entwicklungsumgebung — nicht für Produktion)*
+- Aidbox Basic-Auth: `basic:secret`
+
+> **Warnung:** Diese Zugangsdaten gelten nur für die lokale Entwicklungsumgebung.
+> Für Staging/Produktion eigene Credentials verwenden.
 - httpyac CLI installiert: `npm install -g httpyac` oder via `npx httpyac`
 
 ## IG als Package in Aidbox installieren
@@ -135,6 +138,8 @@ Alle Tests verwenden `POST /fhir/{Resource}/$validate?profile=<url>` mit einem J
 
 Jedes Kernprofil hat mindestens einen Negativ-Test, der prüft, ob das Profil ungültige Ressourcen
 korrekt ablehnt. Folgende Negativ-Tests sind vorhanden:
+
+<!-- Tabelle manuell gepflegt — bei Änderungen an Negativ-Tests in test/Profile/ bitte hier aktualisieren -->
 
 | Profil | Test-Name (`@name`) | Datei | Erwarteter Fehler |
 |--------|---------------------|-------|-------------------|
