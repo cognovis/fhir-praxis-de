@@ -89,7 +89,9 @@ jobs:
           echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
           echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc
 
-          npm publish "${PKG}" --registry https://npm.cognovis.de --ignore-scripts 2>&1 | tee /tmp/npm-publish.log
+          # Use absolute path — npm can misinterpret relative paths as package specs
+          ABSPKG="$(pwd)/${PKG}"
+          npm publish "${ABSPKG}" --registry https://npm.cognovis.de --ignore-scripts 2>&1 | tee /tmp/npm-publish.log
           EXIT=${PIPESTATUS[0]}
           if [ "$EXIT" -ne 0 ]; then
             if grep -q "EPUBLISHCONFLICT\|already_published\|409\|cannot publish over" /tmp/npm-publish.log; then
