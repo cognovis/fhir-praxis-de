@@ -124,3 +124,30 @@ Content-Type: application/fhir+json
 }
 
 ?? status == 200
+
+### Validate PraxisCondition — Invalid: kein ICD-10-GM code (SNOMED statt ICD-10-GM)
+# @name validate-condition-wrong-system
+# Expected: OperationOutcome mit Fehler
+# Profil erfordert code.coding[icd10gm] mit system=http://fhir.de/CodeSystem/bfarm/icd-10-gm (1..*).
+# SNOMED-Code erfüllt diesen Slice nicht → Validation-Fehler erwartet.
+POST http://localhost:8080/fhir/Condition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-condition
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Condition",
+  "meta": { "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-condition"] },
+  "clinicalStatus": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/condition-clinical", "code": "active" }] },
+  "verificationStatus": { "coding": [{ "system": "http://terminology.hl7.org/CodeSystem/condition-ver-status", "code": "confirmed" }] },
+  "code": {
+    "coding": [{
+      "system": "http://snomed.info/sct",
+      "code": "44054006",
+      "display": "Diabetes mellitus type 2 (disorder)"
+    }]
+  },
+  "subject": { "reference": "Patient/example-patient" }
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"

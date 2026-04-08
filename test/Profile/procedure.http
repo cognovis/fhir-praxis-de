@@ -89,3 +89,34 @@ Content-Type: application/fhir+json
 
 ?? status == 200
 ?? body.issue[0].severity == "error"
+
+### Validate ProcedureAmbulantDE — Invalid: OPS-Code ohne Version (version 1..1 verletzt)
+# @name validate-procedure-ops-missing-version
+# Expected: OperationOutcome mit Fehler
+# Profil erzwingt code.coding[ops].version 1..1 via CodingOPS-Profil (de.basisprofil.r4).
+# OPS-Code ohne version-Feld verletzt diese Constraint.
+POST http://localhost:8080/fhir/Procedure/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Procedure",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de"]
+  },
+  "status": "completed",
+  "subject": { "reference": "Patient/example-patient" },
+  "performedDateTime": "2024-03-15",
+  "code": {
+    "coding": [
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "code": "1-650.1",
+        "display": "Diagnostische Koloskopie: Total, bis Zökum"
+      }
+    ]
+  }
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"

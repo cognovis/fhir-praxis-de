@@ -247,3 +247,40 @@ Content-Type: application/fhir+json
 
 ?? status == 200
 ?? body.issue[0].severity == "error"
+
+### Validate PraxisLabObservation — Invalid: fehlende category (laboratory Pflicht-Slice)
+# @name validate-lab-obs-missing-category
+# Expected: OperationOutcome mit Fehler
+# Profil erzwingt category 1..* mit Slice laboratory 1..1 MS.
+# Fehlende category verletzt diese Constraint.
+POST http://localhost:8080/fhir/Observation/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Observation",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-lab-observation"]
+  },
+  "status": "final",
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "4548-4",
+        "display": "Hemoglobin A1c/Hemoglobin.total in Blood"
+      }
+    ]
+  },
+  "subject": { "reference": "Patient/example-patient" },
+  "effectiveDateTime": "2026-04-05T08:30:00+02:00",
+  "valueQuantity": {
+    "value": 6.1,
+    "unit": "%",
+    "system": "http://unitsofmeasure.org",
+    "code": "%"
+  }
+}
+
+?? status == 200
+?? body.issue[0].severity == "error"
