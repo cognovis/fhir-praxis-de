@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.32.1] - 2026-04-08
+
+### Tests
+
+- **fpde-a52**: Add negative tests for PraxisCondition, PraxisLabObservation, ProcedureAmbulantDE, FPDEPatient profiles
+- **fpde-a52**: Add ValueSet $expand + $validate-code tests for KvdtScheinuntergruppeVS
+- **fpde-a52**: Add Concept-API tests for DokumentKategorieCS
+
+### Documentation
+
+- **fpde-a52**: Add `docs/ig-testing.md` — IG testing guide for Aidbox setup and httpyac test execution
+
 ## [unreleased]
 
 ### Merge
