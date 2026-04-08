@@ -79,19 +79,20 @@ jobs:
         env:
           VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
         run: |
-          # Configure npm for cognovis FHIR registry
-          # VERDACCIO_TOKEN must be a Base64-encoded password (as stored in GitHub Secrets)
+          # FHIR packages have non-npm dependencies that confuse npm publish.
+          # Use npm pack + publish with --ignore-scripts to skip dependency resolution.
+          PKG=$(ls dist/*.tgz | head -1)
+          echo "Publishing ${PKG} to npm.cognovis.de..."
+
+          # Create minimal .npmrc with auth
           echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}" >> ~/.npmrc
           echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
           echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc
 
-          # Find the built package
-          PKG=$(ls dist/*.tgz | head -1)
-          echo "Publishing ${PKG} to npm.cognovis.de..."
-          npm publish "${PKG}" --registry https://npm.cognovis.de 2>&1 | tee /tmp/npm-publish.log
+          npm publish "${PKG}" --registry https://npm.cognovis.de --ignore-scripts 2>&1 | tee /tmp/npm-publish.log
           EXIT=${PIPESTATUS[0]}
           if [ "$EXIT" -ne 0 ]; then
-            if grep -q "EPUBLISHCONFLICT\|already_published\|409" /tmp/npm-publish.log; then
+            if grep -q "EPUBLISHCONFLICT\|already_published\|409\|cannot publish over" /tmp/npm-publish.log; then
               echo "::warning::Package version already exists in registry — skipping"
             else
               cat /tmp/npm-publish.log
