@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.32.2] - 2026-04-08
+
+### CI/CD
+
+- **fpde-csk**: Add `ig-ci.yml` — CI pipeline with Aidbox Docker service validation, httpyac profile tests, IG Publisher QA report
+- **fpde-csk**: Add `ig-release.yml` — Release pipeline on tag `v*` with GitHub Release, npm publish, Pages deploy, repository_dispatch to mira-adapters
+- **fpde-csk**: Remove `ig-build.yml` (replaced by ig-ci.yml + ig-release.yml)
+
 ## [0.32.1] - 2026-04-08
 
 ### Tests
