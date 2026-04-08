@@ -21,14 +21,6 @@ Description: "Zeitpunkt der Erstellung des Encounters im PVS."
 Context: Encounter
 * value[x] only dateTime
 
-Extension: ScheintypExt
-Id: scheintyp
-Title: "Scheintyp"
-Description: "Abrechnungsscheintyp des Encounters (z.B. GKV, PKV, BG)."
-Context: Encounter
-* value[x] only CodeableConcept
-* valueCodeableConcept from ScheinartVS (extensible)
-
 Extension: LinkedDocumentExt
 Id: linked-document
 Title: "Verlinktes Dokument"
