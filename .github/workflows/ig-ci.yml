@@ -129,7 +129,7 @@ jobs:
         run: |
           # CS expansion tests call tx.health-samurai.io (external terminology server).
           # This service is rate-limited/unavailable in CI. Run informatively only.
-          httpyac run test/CS/ --all --output short --env CI \
+          httpyac run test/CS/ --all --output short \
             && echo "::notice::CS tests passed" \
             || echo "::warning::CS tests had failures (terminology server unavailable in CI — informational only)"
 
@@ -137,15 +137,14 @@ jobs:
         run: |
           # VS expansion tests call tx.health-samurai.io (external terminology server).
           # This service is rate-limited/unavailable in CI. Run informatively only.
-          httpyac run test/VS/ --all --output short --env CI \
+          httpyac run test/VS/ --all --output short \
             && echo "::notice::VS tests passed" \
             || echo "::warning::VS tests had failures (terminology server unavailable in CI — informational only)"
 
       - name: Run Profile validation tests
         run: |
           # Profile validation tests MUST pass
-          httpyac run test/Profile/ --all --output short --env CI
-
+          httpyac run test/Profile/ --all --output short
 
       - name: Download IG Publisher
         run: |

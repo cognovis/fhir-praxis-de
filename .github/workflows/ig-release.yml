@@ -131,17 +131,11 @@ jobs:
       - name: Send repository_dispatch to mira-adapters
         env:
           MIRA_DISPATCH_TOKEN: ${{ secrets.MIRA_DISPATCH_TOKEN }}
+          IG_VERSION: ${{ steps.version.outputs.version }}
         run: |
           curl -sf -X POST \
-            -H "Authorization: Bearer ${MIRA_DISPATCH_TOKEN}" \
-            -H "Accept: application/vnd.github+json" \
-            -H "Content-Type: application/json" \
+            -H "Authorization: token ${MIRA_DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
             https://api.github.com/repos/cognovis/mira-adapters/dispatches \
-            -d '{
-              "event_type": "ig-published",
-              "client_payload": {
-                "version": "${{ steps.version.outputs.version }}",
-                "package_id": "de.cognovis.fhir.praxis"
-              }
-            }'
+            -d "{\"event_type\": \"ig-published\", \"client_payload\": {\"version\": \"${IG_VERSION}\", \"package_id\": \"de.cognovis.fhir.praxis\"}}"
           echo "repository_dispatch sent to mira-adapters"
