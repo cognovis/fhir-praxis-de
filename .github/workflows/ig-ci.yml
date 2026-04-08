@@ -8,7 +8,7 @@ on:
     branches: [main]
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -57,6 +57,18 @@ jobs:
 
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0  # Need tags for auto-tag step
+
+      - name: Verify version sync
+        run: |
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          SUSHI_VERSION=$(grep '^version:' sushi-config.yaml | awk '{print $2}')
+          if [ "$VERSION" != "$SUSHI_VERSION" ]; then
+            echo "::error::VERSION ($VERSION) and sushi-config.yaml ($SUSHI_VERSION) are out of sync!"
+            exit 1
+          fi
+          echo "Versions in sync: $VERSION"
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -222,3 +234,27 @@ jobs:
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4
+
+  auto-tag:
+    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
+    needs: validate
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Create release tag if VERSION is newer
+        run: |
+          VERSION=$(tr -d '[:space:]' < VERSION)
+          TAG="v${VERSION}"
+          if git rev-parse "$TAG" >/dev/null 2>&1; then
+            echo "Tag $TAG already exists — skipping"
+          else
+            echo "Creating tag $TAG..."
+            git tag "$TAG"
+            git push origin "$TAG"
+            echo "Tag $TAG pushed — ig-release.yml will handle the release"
+          fi

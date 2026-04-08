@@ -52,6 +52,9 @@ jobs:
       - name: Build FHIR package
         run: bash scripts/build-package.sh
 
+      - name: Install Jekyll
+        run: sudo gem install jekyll
+
       - name: Download IG Publisher
         run: |
           mkdir -p input-cache
