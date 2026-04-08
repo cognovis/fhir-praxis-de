@@ -79,6 +79,7 @@ jobs:
           VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
         run: |
           # Configure npm for cognovis FHIR registry
+          # VERDACCIO_TOKEN must be a Base64-encoded password (as stored in GitHub Secrets)
           echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}" >> ~/.npmrc
           echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
           echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc

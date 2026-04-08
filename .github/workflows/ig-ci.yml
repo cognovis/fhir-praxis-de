@@ -92,6 +92,8 @@ jobs:
 
       - name: POST init-bundle.json to Aidbox
         run: |
+          # Aidbox accepts "Basic basic:secret" as a literal convenience shortcut
+          # (not standard HTTP Basic auth encoding) — matches local dev setup
           curl -sf -X POST http://localhost:8080/ \
             -H "Authorization: Basic basic:secret" \
             -H "Content-Type: application/json" \
@@ -123,7 +125,7 @@ jobs:
           fi
           echo "All StructureDefinitions uploaded successfully"
 
-      - name: Install SUSHI global (for httpyac)
+      - name: Install httpyac CLI
         run: npm install -g @httpyac/cli
 
       - name: Run CodeSystem tests
@@ -147,7 +149,6 @@ jobs:
           # Profile validation tests MUST pass
           httpyac run test/Profile/ --all --output short --env CI
 
-      # Negative tests are tracked in bead fpde-a52 and will be added once that bead is implemented.
 
       - name: Download IG Publisher
         run: |
