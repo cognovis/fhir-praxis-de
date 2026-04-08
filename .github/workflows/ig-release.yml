@@ -49,8 +49,8 @@ jobs:
       - name: Install SUSHI
         run: npm install -g fsh-sushi
 
-      - name: Build FHIR package
-        run: bash scripts/build-package.sh
+      - name: Run SUSHI
+        run: sushi .
 
       - name: Install Jekyll
         run: sudo gem install jekyll
@@ -63,6 +63,9 @@ jobs:
 
       - name: Run IG Publisher
         run: java -jar input-cache/publisher.jar -ig . -no-sushi
+
+      - name: Build FHIR package
+        run: bash scripts/build-package.sh --skip-sushi
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2

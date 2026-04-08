@@ -9,6 +9,11 @@ set -euo pipefail
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 ROOT="$SCRIPT_DIR/.."
 DIST="$ROOT/dist/package"
+SKIP_SUSHI=false
+
+if [[ "${1:-}" == "--skip-sushi" ]]; then
+  SKIP_SUSHI=true
+fi
 
 # 1. Read version from VERSION file (single source of truth)
 VERSION=$(tr -d '[:space:]' < "$ROOT/VERSION")
@@ -21,10 +26,15 @@ else
   sed -i "s/^version: .*/version: $VERSION/" "$ROOT/sushi-config.yaml"
 fi
 
-# 3. Run SUSHI
-echo "Running SUSHI..."
-cd "$ROOT"
-npx sushi . 2>&1 | tail -5
+# 3. Run SUSHI (unless --skip-sushi, e.g. when called after IG Publisher)
+if [ "$SKIP_SUSHI" = false ]; then
+  echo "Running SUSHI..."
+  cd "$ROOT"
+  npx sushi . 2>&1 | tail -5
+else
+  echo "Skipping SUSHI (--skip-sushi)"
+  cd "$ROOT"
+fi
 echo "Building $PACKAGE_ID@$VERSION"
 
 # 3. Create dist/package/ directory
@@ -65,13 +75,28 @@ cat > "$DIST/package.json" <<EOF
 EOF
 
 # 5. Copy all StructureDefinition, CodeSystem, ValueSet JSONs (flat, like KBV packages)
-for f in "$ROOT/fsh-generated/resources/"*.json; do
+#    Prefer IG Publisher output (has snapshots) over raw SUSHI output (differentials only).
+#    Downstream consumers (e.g. fhir-dental-de) need snapshots for import.
+if [ -d "$ROOT/output" ] && ls "$ROOT/output/"StructureDefinition-*.json &>/dev/null; then
+  RESOURCE_DIR="$ROOT/output"
+  echo "Using IG Publisher output (with snapshots)"
+else
+  RESOURCE_DIR="$ROOT/fsh-generated/resources"
+  echo "Warning: Using SUSHI output (no snapshots) — run IG Publisher first for full packages"
+fi
+
+for f in "$RESOURCE_DIR/"*.json; do
   basename=$(basename "$f")
-  # Skip ImplementationGuide resource itself
+  # Skip ImplementationGuide resource and non-conformance resources
   if [[ "$basename" == ImplementationGuide-* ]]; then
     continue
   fi
-  cp "$f" "$DIST/$basename"
+  # Only include conformance resources (StructureDefinition, CodeSystem, ValueSet, NamingSystem, SearchParameter)
+  case "$basename" in
+    StructureDefinition-*|CodeSystem-*|ValueSet-*|NamingSystem-*|SearchParameter-*)
+      cp "$f" "$DIST/$basename"
+      ;;
+  esac
 done
 
 COUNT=$(ls "$DIST"/*.json | wc -l | tr -d ' ')
