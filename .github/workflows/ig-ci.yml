@@ -114,27 +114,31 @@ jobs:
 
       - name: Install StructureDefinitions into Aidbox
         run: |
-          echo "Uploading StructureDefinitions to Aidbox..."
-          ERRORS=0
+          echo "Building StructureDefinition transaction bundle..."
+          # Build a FHIR transaction bundle from all generated StructureDefinitions
+          ENTRIES=""
+          COUNT=0
           for f in fsh-generated/resources/StructureDefinition-*.json; do
             ID=$(jq -r '.id' "$f")
-            # Use FHIR endpoint with admin credentials for SD upload
-            HTTP_STATUS=$(curl -s -o /tmp/sd-response.json -w "%{http_code}" \
-              -X PUT "http://localhost:8080/fhir/StructureDefinition/${ID}" \
-              -u "admin:password" \
-              -H "Content-Type: application/json" \
-              -d "@$f")
-            if [ "$HTTP_STATUS" -ge 400 ]; then
-              echo "ERROR: Failed to upload $f (HTTP $HTTP_STATUS)"
-              cat /tmp/sd-response.json 2>/dev/null | head -1 || true
-              ERRORS=$((ERRORS + 1))
-            fi
+            RESOURCE=$(cat "$f")
+            if [ -n "$ENTRIES" ]; then ENTRIES="$ENTRIES,"; fi
+            ENTRIES="$ENTRIES{\"resource\":$RESOURCE,\"request\":{\"method\":\"PUT\",\"url\":\"StructureDefinition/$ID\"}}"
+            COUNT=$((COUNT + 1))
           done
-          if [ "$ERRORS" -gt 0 ]; then
-            echo "$ERRORS StructureDefinition(s) failed to upload"
+          echo "{\"resourceType\":\"Bundle\",\"type\":\"transaction\",\"entry\":[$ENTRIES]}" > /tmp/sd-bundle.json
+          echo "Uploading $COUNT StructureDefinitions as transaction bundle..."
+          HTTP_CODE=$(curl -s -o /tmp/sd-response.json -w "%{http_code}" \
+            -X POST http://localhost:8080/fhir \
+            -u "basic:secret" \
+            -H "Content-Type: application/json" \
+            -d @/tmp/sd-bundle.json)
+          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
+            echo "All $COUNT StructureDefinitions uploaded successfully (HTTP $HTTP_CODE)"
+          else
+            echo "StructureDefinition bundle upload failed (HTTP $HTTP_CODE):"
+            cat /tmp/sd-response.json 2>/dev/null | jq . 2>/dev/null || cat /tmp/sd-response.json 2>/dev/null || true
             exit 1
           fi
-          echo "All StructureDefinitions uploaded successfully"
 
       - name: Install httpyac CLI
         run: npm install -g @httpyac/cli
