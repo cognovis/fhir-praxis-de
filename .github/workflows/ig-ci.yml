@@ -118,13 +118,16 @@ jobs:
           ERRORS=0
           for f in fsh-generated/resources/StructureDefinition-*.json; do
             ID=$(jq -r '.id' "$f")
-            HTTP_STATUS=$(curl -s -o /dev/null -w "%{http_code}" \
-              -X PUT "http://localhost:8080/fhir/StructureDefinition/${ID}" \
+            # Use Aidbox-native endpoint (not /fhir/) — compliance mode
+            # blocks PUT-as-create on the FHIR endpoint
+            HTTP_STATUS=$(curl -s -o /tmp/sd-response.json -w "%{http_code}" \
+              -X PUT "http://localhost:8080/StructureDefinition/${ID}" \
               -u "basic:secret" \
               -H "Content-Type: application/json" \
               -d "@$f")
             if [ "$HTTP_STATUS" -ge 400 ]; then
               echo "ERROR: Failed to upload $f (HTTP $HTTP_STATUS)"
+              cat /tmp/sd-response.json 2>/dev/null | head -1 || true
               ERRORS=$((ERRORS + 1))
             fi
           done
