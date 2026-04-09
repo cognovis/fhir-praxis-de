@@ -6,6 +6,27 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **ci**: Remove redundant Pages deploy from release workflow
+
+### Documentation
+
+- Add IG development skills to session start instructions
+- Add samurai-skills to session start, remove consumer-side install docs
+
+### Features
+
+- **ci**: Auto-update package-list.json on release, bump to 0.33.0
+
+## [0.32.5] - 2026-04-09
+
+### Bug Fixes
+
+- **build**: Parse nested YAML deps in build-package.sh
+
+## [0.32.4] - 2026-04-08
+
+### Bug Fixes
+
 - Include snapshots in FHIR package by using IG Publisher output
 - **ci**: Use RELEASE_PAT for auto-tag to trigger release workflow
 
@@ -13,6 +34,8 @@ All notable changes to this project will be documented in this file.
 
 - Bump version to 0.32.3
 - Update dist/package with IG Publisher snapshots (v0.32.2)
+- Update changelog
+- Bump version to 0.32.4
 
 ## [0.32.2] - 2026-04-08
 
