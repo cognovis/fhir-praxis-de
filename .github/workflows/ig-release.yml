@@ -6,8 +6,6 @@ on:
 
 permissions:
   contents: write
-  pages: write
-  id-token: write
 
 concurrency:
   group: "ig-release"
@@ -105,30 +103,10 @@ jobs:
             fi
           fi
 
-      - name: Setup Pages
-        uses: actions/configure-pages@v5
-
-      - name: Upload Pages artifact
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: output
-
-  deploy:
-    needs: build-and-release
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    permissions:
-      pages: write
-      id-token: write
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v4
+      # Pages deployment handled by ig-ci.yml on main push — not needed here
 
   update-package-list:
-    needs: deploy
+    needs: build-and-release
     runs-on: ubuntu-latest
     steps:
       - name: Read version
