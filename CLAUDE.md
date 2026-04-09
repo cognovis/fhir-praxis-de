@@ -38,6 +38,7 @@ Current state: shared container (`mira-aidbox-1`), use `$validate` with explicit
 All IG testing (install, test-cs, test-vs, test-profile, review-qa) is handled by the global `/aidbox` skill (`references/ig-testing.md`).
 Always invoke `/aidbox` before manually curl-debugging — it contains learnings that prevent common errors.
 
+
 ### Aidbox Access
 
 - **URL:** http://localhost:8080
