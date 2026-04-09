@@ -43,19 +43,17 @@ mkdir -p "$DIST"
 
 # 4. Create package.json (FHIR package format) — deps derived from sushi-config.yaml
 DEPS_JSON=$(python3 - <<'PYEOF'
-import re, json
+import json, yaml
 
 with open("sushi-config.yaml") as f:
-    content = f.read()
+    config = yaml.safe_load(f)
 
-match = re.search(r'^dependencies:\s*\n((?:  \S.*\n)*)', content, re.MULTILINE)
 deps = {"hl7.fhir.r4.core": "4.0.1"}
-if match:
-    for line in match.group(1).splitlines():
-        line = line.strip().split("#")[0].strip()
-        if ":" in line:
-            k, v = line.split(":", 1)
-            deps[k.strip()] = v.strip()
+for pkg, val in config.get("dependencies", {}).items():
+    if isinstance(val, dict):
+        deps[pkg] = val.get("version", "")
+    else:
+        deps[pkg] = str(val)
 print(json.dumps(deps, indent=4))
 PYEOF
 )
