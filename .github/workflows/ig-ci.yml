@@ -51,8 +51,9 @@ jobs:
           AIDBOX_ADMIN_PASSWORD: password
           AIDBOX_COMPLIANCE: enabled
           AIDBOX_CORRECT_AIDBOX_FORMAT: true
-          BOX_FEATURES_TERMINOLOGY__IMPORT_SYNC: true
-          BOX_TERMINOLOGY__SERVICE_URL: https://tx.health-samurai.io/fhir
+          BOX_FHIR_TERMINOLOGY_ENGINE: hybrid
+          BOX_FHIR_TERMINOLOGY_ENGINE_HYBRID_EXTERNAL_TX_SERVER: https://tx.health-samurai.io/fhir
+          BOX_BOOTSTRAP_FHIR_PACKAGES: hl7.fhir.r4.core#4.0.1:hl7.terminology.r4#6.4.0
           AIDBOX_LICENSE_KEY: ${{ secrets.AIDBOX_LICENSE_KEY }}
 
     steps:
