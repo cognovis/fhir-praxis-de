@@ -6,6 +6,20 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **ci**: Switch Aidbox terminology engine from legacy to hybrid mode
+
+### Features
+
+- **fpde-1pz**: Add Basic profiles and extensions for KV billing data (RLV, Punktwert, HVGMandant)
+
+### Miscellaneous
+
+- Update changelog
+
+## [0.33.0] - 2026-04-09
+
+### Bug Fixes
+
 - **ci**: Remove redundant Pages deploy from release workflow
 
 ### Documentation
@@ -25,6 +39,14 @@ All notable changes to this project will be documented in this file.
 
 ## [0.32.4] - 2026-04-08
 
+### Miscellaneous
+
+- Update dist/package with IG Publisher snapshots (v0.32.2)
+- Update changelog
+- Bump version to 0.32.4
+
+## [0.32.3] - 2026-04-08
+
 ### Bug Fixes
 
 - Include snapshots in FHIR package by using IG Publisher output
@@ -33,9 +55,6 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Bump version to 0.32.3
-- Update dist/package with IG Publisher snapshots (v0.32.2)
-- Update changelog
-- Bump version to 0.32.4
 
 ## [0.32.2] - 2026-04-08
 
