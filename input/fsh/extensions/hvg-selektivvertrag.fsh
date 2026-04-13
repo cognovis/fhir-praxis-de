@@ -43,6 +43,34 @@ Description: "Vertragsnummer des Selektivvertrags beim Kostentraeger"
 Context: Contract
 * value[x] only string
 
+Extension: HvgMandantStatusExt
+Id: hvg-mandant-status
+Title: "HVG Mandant Status"
+Description: "Status des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only code
+
+Extension: HvgMandantDatumFreischaltungExt
+Id: hvg-mandant-datum-freischaltung
+Title: "HVG Mandant Datum Freischaltung"
+Description: "Freischaltungsdatum des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only date
+
+Extension: HvgMandantDatumBeginnExt
+Id: hvg-mandant-datum-beginn
+Title: "HVG Mandant Datum Beginn"
+Description: "Beginndatum des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only date
+
+Extension: HvgMandantDatumEndeExt
+Id: hvg-mandant-datum-ende
+Title: "HVG Mandant Datum Ende"
+Description: "Enddatum des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only date
+
 // Context: EpisodeOfCare — Antragsdatum ist eine patienten-spezifische Eigenschaft der Einschreibung,
 // nicht des Vertrags selbst. Der Vertrag (Contract) ist PVS-übergreifend gültig;
 // der Antragszeitpunkt variiert je Patient und Einschreibefall (EpisodeOfCare).

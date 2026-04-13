@@ -19,3 +19,11 @@ Description: "Fachgruppen-Codes der Kassenärztlichen Vereinigungen für die Hon
 * #urologie "Urologie" "Fachärzte für Urologie"
 * #radiologie "Radiologie" "Fachärzte für Radiologie"
 * #anaesthesiologie "Anästhesiologie" "Fachärzte für Anästhesiologie"
+
+ValueSet: KvFachgruppeVS
+Id: kv-fachgruppe-vs
+Title: "KV Fachgruppe"
+Description: "Fachgruppen-Codes der Kassenärztlichen Vereinigungen fuer die Honorarverteilung"
+* ^status = #active
+* ^experimental = false
+* include codes from system KvFachgruppeCS

@@ -7,8 +7,7 @@ InstanceOf: Basic
 Title: "RLV-Konfiguration — Dr. Schoell"
 Description: "Regelleistungsvolumen-Konfiguration: Allgemeinmedizin Bayern, Fallwert 42.50 EUR, entbudgetiert."
 Usage: #example
-* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/task-type"
-* code.coding[0].code = #callback
+* code = BasicResourceTypeCS#rlv-budget
 * subject = Reference(example-practitioner)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-kv-region"
 * extension[=].valueString = "71"
@@ -32,8 +31,7 @@ InstanceOf: Basic
 Title: "KV-Benchmark — Allgemeinmedizin Bayern 2026"
 Description: "KV-Benchmarkdaten: Durchschnittliche Fallzahl, Honorar je Fall, Auszahlungsquote, RLV-Fallwerte nach Altersklassen."
 Usage: #example
-* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/task-type"
-* code.coding[0].code = #callback
+* code = BasicResourceTypeCS#kv-benchmark
 * subject = Reference(example-organization)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-kv-region"
 * extension[=].valueString = "Bayern"
@@ -65,8 +63,7 @@ InstanceOf: Basic
 Title: "Aerztliche Genehmigungen — Dr. Schmidt"
 Description: "KV-Genehmigungen fuer Langzeit-EKG, Langzeit-Blutdruck und Sonografie Abdomen mit Aktenzeichen und Laufzeiten."
 Usage: #example
-* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/task-type"
-* code.coding[0].code = #callback
+* code = BasicResourceTypeCS#genehmigung
 * subject = Reference(example-practitioner)
 // Genehmigung 1: Langzeit-EKG
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/genehmigung-eintrag"
@@ -97,8 +94,7 @@ InstanceOf: Basic
 Title: "WB-Zuordnung — Dr. Mueller unter Dr. Schoell"
 Description: "Weiterbildungsassistent Dr. Mueller rechnet unter dem Hauptarzt Dr. Schoell ab."
 Usage: #example
-* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/task-type"
-* code.coding[0].code = #callback
+* code = BasicResourceTypeCS#wb-zuordnung
 * subject = Reference(example-practitioner-wb)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/wb-rolle"
 * extension[=].valueCode = #wb-assistent
@@ -110,8 +106,7 @@ InstanceOf: Basic
 Title: "Zeitbudget-Konfiguration — Dr. Schoell"
 Description: "Zeitbudget 72.000 Minuten pro Quartal, Abrechnungskreise AK1 und AK2."
 Usage: #example
-* code.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/task-type"
-* code.coding[0].code = #callback
+* code = BasicResourceTypeCS#zeitbudget
 * subject = Reference(example-practitioner)
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/zeitbudget-max-minuten"
 * extension[=].valueInteger = 72000
