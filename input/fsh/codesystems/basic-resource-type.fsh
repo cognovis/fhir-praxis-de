@@ -14,3 +14,5 @@ Description: "Typen fuer Basic-Ressourcen in der deutschen ambulanten Versorgung
 * #genehmigung "Genehmigung" "Aerztliche Genehmigung durch die KV"
 * #wb-zuordnung "WB-Zuordnung" "Weiterbildungszuordnung eines Assistenzarztes"
 * #zeitbudget "Zeitbudget" "Zeitbudget-Konfiguration fuer einen Arzt"
+* #kv-budget-freie-lz "KV-Budget Freie Leistung" "Extrabudgetaere EBM-Leistung ausserhalb RLV/QZV"
+* #hvg-mandant-beteiligung "HVG-Mandant-Beteiligung" "Beteiligung eines Mandanten an einem HVG-Selektivvertrag"

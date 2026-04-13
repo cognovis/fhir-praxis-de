@@ -11,4 +11,5 @@ Description: "Profil fuer detaillierte RLV-Fallwert-Informationen mit Zuschlaege
     RlvFallzahlExt named rlvFallzahl 0..1 and
     RlvZuschlagsgruppeExt named rlvZuschlagsgruppe 0..1 and
     RlvVerrechnungExt named rlvVerrechnung 0..1 and
-    RlvParentIdExt named rlvParentId 0..1
+    RlvParentIdExt named rlvParentId 0..1 and
+    RlvLzZifferExt named rlvLzZiffer 0..*

@@ -32,3 +32,10 @@ Title: "RLV Parent-ID"
 Description: "Referenz auf die uebergeordnete RLV-Ressource"
 Context: Basic
 * value[x] only string
+
+Extension: RlvLzZifferExt
+Id: rlv-lz-ziffer
+Title: "RLV LZ-Ziffer"
+Description: "EBM-Gebuehrenordnungsposition (GOP) die zum Regelleistungsvolumen dieses Fallwert-Details zaehlt"
+Context: Basic
+* value[x] only string
