@@ -191,6 +191,30 @@ jobs:
           curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
             -o input-cache/publisher.jar
 
+      - name: Pre-load previous FHIR package from private registry
+        run: |
+          CURRENT=$(tr -d '[:space:]' < VERSION)
+          REGISTRY_DATA=$(curl -sf "https://npm.cognovis.de/de.cognovis.fhir.praxis" || echo '{}')
+          PREV_VERSION=$(echo "$REGISTRY_DATA" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          current = tuple(int(x) for x in '${CURRENT}'.split('.'))
+          versions = list(data.get('versions', {}).keys())
+          older = [v for v in versions if tuple(int(x) for x in v.split('.')) < current]
+          older.sort(key=lambda v: tuple(int(x) for x in v.split('.')))
+          print(older[-1] if older else '')
+          ")
+          if [ -z "$PREV_VERSION" ]; then
+            echo "No previous version found on npm.cognovis.de — skipping pre-load"
+            exit 0
+          fi
+          echo "Pre-loading de.cognovis.fhir.praxis#${PREV_VERSION} into FHIR cache..."
+          CACHE_DIR="${HOME}/.fhir/packages/de.cognovis.fhir.praxis#${PREV_VERSION}"
+          mkdir -p "$CACHE_DIR"
+          curl -sL "https://npm.cognovis.de/de.cognovis.fhir.praxis/-/de.cognovis.fhir.praxis-${PREV_VERSION}.tgz" \
+            | tar -xz -C "$CACHE_DIR"
+          echo "Installed $(ls "$CACHE_DIR/package/" | wc -l) files to $CACHE_DIR"
+
       - name: Run IG Publisher
         run: java -jar input-cache/publisher.jar -ig . -no-sushi
 
