@@ -4,9 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **ig**: Add RLV LZ-Ziffer extension, KvBudgetFreieLz and HvgMandantBeteiligung profiles
+
+## [0.34.0] - 2026-04-13
+
 ### Bug Fixes
 
 - **ci**: Switch Aidbox terminology engine from legacy to hybrid mode
+- **ci**: Pre-load previous FHIR package from npm.cognovis.de before IG Publisher run
+- **ci**: Point package-list.json to fhir.cognovis.de, tolerate PublicationChecker NPE
 
 ### Features
 
@@ -15,6 +23,12 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Update changelog
+- Update changelog
+- Bump version to 0.34.0
+
+### Merge
+
+- Worktree-bead-fpde-1pz
 
 ## [0.33.0] - 2026-04-09
 
