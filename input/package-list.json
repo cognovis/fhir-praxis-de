@@ -6,7 +6,7 @@
   "list": [
     {
       "version": "current",
-      "path": "https://cognovis.github.io/fhir-praxis-de/",
+      "path": "https://fhir.cognovis.de/praxis",
       "status": "ci-build",
       "sequence": "ci-build",
       "fhirversion": "4.0.1",

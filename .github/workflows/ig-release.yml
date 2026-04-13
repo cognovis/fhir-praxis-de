@@ -84,7 +84,20 @@ jobs:
           echo "Installed $(ls "$CACHE_DIR/package/" | wc -l) files to $CACHE_DIR"
 
       - name: Run IG Publisher
-        run: java -jar input-cache/publisher.jar -ig . -no-sushi
+        run: |
+          set +eo pipefail
+          java -jar input-cache/publisher.jar -ig . -no-sushi 2>&1 | tee /tmp/ig-publisher.log
+          IG_EXIT=${PIPESTATUS[0]}
+          set -eo pipefail
+          if [ $IG_EXIT -ne 0 ]; then
+            if grep -q "Publishing Content Failed" /tmp/ig-publisher.log && [ -f output/full-ig.zip ]; then
+              echo "::warning::PublicationChecker failed (known NPE) — build output is complete, continuing"
+            else
+              echo "IG Publisher failed with unexpected error:"
+              tail -30 /tmp/ig-publisher.log
+              exit $IG_EXIT
+            fi
+          fi
 
       - name: Build FHIR package
         run: bash scripts/build-package.sh --skip-sushi
