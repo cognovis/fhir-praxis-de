@@ -10,6 +10,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-cpw.3**: **ImagingDiagnosticReport** profile with IHE IMR base, KDL radiology categories (Röntgen, CT, MRT, Sonographie), LOINC report codes, and performer slicing for radiologist roles
+- **fpde-cpw.3**: New **report-distribution** extension for tracking distribution events (KIM, E-Mail, Fax) and **report-substatus** extension for workflow state (dictated, read-pending, signed)
 - **fpde-cpw.1b**: Migrate cpw.1 terminology to external imaging package
 
 ### Miscellaneous
