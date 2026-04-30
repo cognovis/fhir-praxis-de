@@ -41,7 +41,9 @@ Description: "Bildgebungstermin-Profil fuer die deutsche ambulante Praxis. Erbt 
 * basedOn only Reference(ImagingServiceRequestPraxisDe)
 
 // Participant-Slicing: modalityDevice + mtrPractitioner
-* participant ^slicing.discriminator.type = #type
+// Use #profile discriminator on actor.resolve() for reliable FHIR validator enforcement.
+// #type discriminator is ambiguous for resolve()-based reference slicing in R4 validators.
+* participant ^slicing.discriminator.type = #profile
 * participant ^slicing.discriminator.path = "actor.resolve()"
 * participant ^slicing.rules = #open
 
