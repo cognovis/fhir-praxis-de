@@ -1,14 +1,25 @@
 # Changelog
 
-## [Unreleased]
+All notable changes to this project will be documented in this file.
 
-### Changed
+## [unreleased]
 
-- **Imaging-Terminologie** auf externes Paket `de.cognovis.terminology.imaging@2026.0.0` ausgelagert; lokale CodeSystems und ValueSets (RadiationRelevantBillingCodeVS, ContrastAgentTypeCS) deprecated mit Verweis auf externe Artefakte
+### Bug Fixes
 
-### Deprecated
+- **fpde-cpw.1b**: Address review findings iteration 1
 
-- `ContrastAgentTypeCS` — Status `deprecated`; verwende stattdessen Artefakte aus de.cognovis.terminology.imaging
-- `RadiationRelevantBillingCodeVS` — Status `retired`; cpw.6 bindet auf externe ValueSet
+### Features
 
-Release notes for this public Implementation Guide are maintained on GitHub Releases.
+- **fpde-cpw.1b**: Migrate cpw.1 terminology to external imaging package
+
+### Miscellaneous
+
+- **fpde-cpw.1b**: Update changelog for imaging terminology migration
+
+## [0.41.1] - 2026-04-30
+
+### Miscellaneous
+
+- Vendor-clear public baseline v0.41.1
+
+
