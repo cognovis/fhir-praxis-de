@@ -20,8 +20,8 @@ The suggestion-table ConceptMaps are defined in the external package `de.cognovi
 
 | ConceptMap | Canonical URL | Mapping |
 |-----------|--------------|---------|
-| ModalityToGoaeSuggestion | `https://fhir.cognovis.de/imaging/ConceptMap/modality-to-goae-suggestion` | DICOM CID 29 Modality + Body-Part → GOA billing suggestion |
-| ImagingStudyToEbmGop | `https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop` | Modality + Body-Part → EBM GOP suggestion |
+| ModalityToGoaeSuggestion | `https://fhir.cognovis.de/imaging/ConceptMap/modality-to-goae-suggestion` | DICOM CID 29 Modality → GOA billing suggestion (future: body-part extension planned upstream) |
+| ImagingStudyToEbmGop | `https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop` | Modality → EBM GOP suggestion (future: body-part extension planned upstream) |
 | GoaeContrastAgentBilling | `https://fhir.cognovis.de/imaging/ConceptMap/goae-contrast-agent-billing` | Contrast Agent → GOA billing code |
 
 PVS adapters and MIRA use `ConceptMap/$translate` to look up initial billing code candidates. These suggestions feed into the ChargeItemDefinition catalog lookup and the MIRA rule engine for final validation.
@@ -69,14 +69,14 @@ Three Subscription templates are defined as examples in this IG:
 | Instance | Criteria | Downstream Target | Purpose |
 |----------|---------|------------------|---------|
 | `example-subscription-report-distributed` | `DiagnosticReport?status=final` | Webhook distribution service | Automated report delivery (PDF, referrer notification) |
-| `example-subscription-study-signed` | `DiagnosticReport?status=preliminary` | Workflow engine | Radiologist sign-off handoff |
+| `example-subscription-study-signed` | `DiagnosticReport?status=final` | Workflow engine | Radiologist sign-off handoff |
 | `example-subscription-appointment-arrived` | `Appointment?status=arrived` | Worklist service | DICOM MWL update on patient arrival |
 
 ### R4 Extension Filtering Limitation (SubscriptionStudySigned)
 
 The `report-substatus` extension on `DiagnosticReport` carries substatus values such as `signed`, `draft`, and `amended`. R4 Subscription criteria cannot filter by extension values — only by standard search parameters.
 
-The `example-subscription-study-signed` template uses `DiagnosticReport?status=preliminary` as the broad trigger. The MIRA subscription handler post-filters by the `report-substatus` extension value (`signed`) after receiving the notification. Only reports with `status=preliminary AND report-substatus=signed` are processed as signed study events.
+The `example-subscription-study-signed` template uses `DiagnosticReport?status=final` as the trigger. This is correct per the IG: `report-substatus#signed` is only valid when `DiagnosticReport.status=final`. The MIRA subscription handler post-filters by the `report-substatus` extension value (`signed`) after receiving the notification, since R4 criteria cannot filter by extension values. Only reports with `status=final AND report-substatus=signed` are processed as signed study events.
 
 This is a known limitation of the R4 pattern. R5 `SubscriptionTopic` will allow extension-based filter criteria.
 
