@@ -7,10 +7,18 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - **fpde-cpw.4**: Address codex adversarial findings - use #profile discriminator for participant slicing
+- **fpde-cpw.2**: Fix binding paths and endpoint payloadType for SUSHI compilation
+- **fpde-cpw.2**: Address review findings iteration 1
+- **fpde-cpw.2**: Address codex adversarial findings
 
 ### Features
 
 - **fpde-cpw.4**: Green -- imaging workflow profiles ServiceRequest, Appointment, Device
+- **fpde-cpw.2**: Add hl7.fhir.uv.ips 1.1.0 dependency
+- **fpde-cpw.2**: Add image-km-administration extension
+- **fpde-cpw.2**: Add technique-parameter extension
+- **fpde-cpw.2**: Add ImagingStudyPraxisDe profile on IPS ImagingStudy-uv-ips
+- **fpde-cpw.2**: Add ImagingStudy examples (MRT Knie KM, CT Abdomen)
 
 ### Test
 
