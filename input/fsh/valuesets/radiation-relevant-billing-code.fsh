@@ -1,41 +1,53 @@
-// RadiationRelevantBillingCodeVS — Billing codes triggering radiation dose documentation
-// Used by cpw.6 (radiation dose tracking) to identify encounters requiring
-// radiation exposure documentation under German Strahlenschutzgesetz (StrlSchG).
+// RadiationRelevantBillingCodeVS — DEPRECATED
 //
-// Intended scope (full system includes used — no FHIR filter support declared by source CSes):
-//   EBM  Chapter 34    — Radiologische Leistungen (diagnostic radiology, codes 34xxx)
-//   GOÄ  §§5000-5855   — Strahlendiagnostik und -therapie (private billing)
-//   BEMA Chapter 4     — Zahnaerztlich-radiologische Leistungen (dental X-ray, OPG, DVT)
-//   GOZ  §§5000-5099   — Zahnaerztliche Roentgenleistungen (private dental radiology)
+// Superseded by:
+//   https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
+//   from package: de.cognovis.terminology.imaging 2026.0.0
 //
-// Binding: extensible — additional radiation billing systems (e.g. DGUV) may be used.
-// Note: These systems do not declare FHIR filter support; full system includes are used.
-// IMPORTANT: When expanded, these includes return the full referenced code systems.
-// Implementers MUST apply scope filters in application logic using the ranges above.
+// Migration notes:
+//   cpw.6 (radiation dose tracking):
+//     BIND to https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
+//     (extensible binding — additional radiation billing systems such as DGUV may be used)
+//   cpw.2 (imaging order / Radiologieanforderung):
+//     REFERENCE https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
+//     to determine whether an ordered procedure triggers dose documentation
+//   cpw.4 (imaging study / ImagingStudy-Profil):
+//     REFERENCE https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
+//     when linking billing codes to completed imaging procedures requiring StrlSchG documentation
+//
+// The external VS covers the same scope:
+//   EBM  Chapter 34    — Radiologische Leistungen (34xxx)
+//   GOÄ  §§5000-5855   — Strahlendiagnostik und -therapie
+//   BEMA Chapter 4     — Zahnaerztlich-radiologische Leistungen (OPG, DVT)
+//   GOZ  §§5000-5099   — Zahnaerztliche Roentgenleistungen
+//
+// Do NOT use this local VS in new profiles. It is retained as a deprecated stub
+// for backward compatibility only.
 
 ValueSet: RadiationRelevantBillingCodeVS
 Id: radiation-relevant-billing-code
-Title: "Radiation Relevant Billing Code"
-Description: "Billing codes that trigger radiation dose documentation requirements under the German Strahlenschutzgesetz (StrlSchG). Intended scope: EBM Chapter 34 (codes starting with 34 — radiologische Leistungen), GOÄ §§5000-5855 (Strahlendiagnostik/therapie), BEMA Chapter 4 (dental radiology, OPG, DVT), and GOZ §§5000-5099 (private dental radiology). Full system includes are used because the referenced code systems do not declare FHIR filter support. Used by radiation dose tracking workflows (cpw.6)."
+Title: "Radiation Relevant Billing Code (Deprecated)"
+Description: "DEPRECATED. Superseded by https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes from de.cognovis.terminology.imaging. cpw.6 (radiation dose tracking) SHOULD bind to the external VS directly. cpw.2 and cpw.4 SHOULD reference the external VS for radiation trigger detection. Billing codes that trigger radiation dose documentation requirements under the German Strahlenschutzgesetz (StrlSchG): EBM Chapter 34 (Radiologie), GOÄ §§5000-5855 (Strahlendiagnostik/therapie), BEMA Chapter 4 (dental radiology, OPG, DVT), and GOZ §§5000-5099 (private dental radiology)."
 * ^url = "https://fhir.cognovis.de/praxis/ValueSet/radiation-relevant-billing-code"
-* ^status = #active
+* ^status = #retired
 * ^experimental = false
+
+// cpw.6 consumption note: bind to https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
+// cpw.2 consumption note: reference https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
+// cpw.4 consumption note: reference https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes
 
 // SCOPE: EBM Chapter 34 (Radiologie/Nuklearmedizin) only.
 // Filter: codes starting with "34" per KBV EBM chapter numbering.
-// TODO: replace with chapter filter once KBV CS declares filter support.
 // Full system include used — no filter support declared by KBV_CS_SFHIR_EBM.
 * include codes from system https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM
 
 // SCOPE: GOÄ §§5000-5855 (radiological procedures) only.
-// Range: 5000-5855 covers Strahlendiagnostik, Nuklearmedizin, MRT, Strahlentherapie
-// (PKV private billing for radiation procedures).
+// Range: 5000-5855 covers Strahlendiagnostik, Nuklearmedizin, MRT, Strahlentherapie.
 // Full system include used — numeric range filters not supported in FSH.
 * include codes from system https://fhir.de/CodeSystem/bak/goae
 
 // SCOPE: BEMA Chapter 4 — Zahnaerztlich-radiologische Leistungen only.
-// Covers: intraoral X-ray (Ä1), panoramic (OPG), cephalometric, DVT
-// (GKV dental radiology — KZBV SFHIR system).
+// Covers: intraoral X-ray (Ä1), panoramic (OPG), cephalometric, DVT.
 // Full system include used — chapter filter not declared by KBV_CS_SFHIR_BEMA.
 * include codes from system https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA
 
