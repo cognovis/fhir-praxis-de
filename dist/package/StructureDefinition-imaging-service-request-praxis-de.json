@@ -1,0 +1,120 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "imaging-service-request-praxis-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-service-request-praxis-de",
+  "name": "ImagingServiceRequestPraxisDe",
+  "title": "Imaging ServiceRequest (Praxis DE)",
+  "status": "active",
+  "description": "Bildgebungsauftrag-Profil fuer die deutsche ambulante Praxis. Erbt von IHE IMR ServiceRequest (imr-servicerequest). Erweitert um ICD-10-GM Indikations-Slicing (reasonCode), Coverage-Referenz (GKV/Privat), Prior-Study supportingInfo und LOINC Imaging Procedure Code Binding.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "ServiceRequest",
+  "baseDefinition": "https://profiles.ihe.net/RAD/IMR/StructureDefinition/imr-servicerequest",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "ServiceRequest.priority",
+        "path": "ServiceRequest.priority",
+        "short": "Prioritaet des Auftrags (routine, urgent, asap, stat) — required binding auf http://hl7.org/fhir/ValueSet/request-priority",
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.code",
+        "path": "ServiceRequest.code",
+        "short": "Bildgebungsverfahren-Code (LOINC, z.B. 36803-5 MRI of knee)",
+        "mustSupport": true,
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/imaging-request-code"
+        }
+      },
+      {
+        "id": "ServiceRequest.subject",
+        "path": "ServiceRequest.subject",
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.requester",
+        "path": "ServiceRequest.requester",
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.reasonCode",
+        "path": "ServiceRequest.reasonCode",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "coding.system"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.reasonCode:icd10gm",
+        "path": "ServiceRequest.reasonCode",
+        "sliceName": "icd10gm",
+        "short": "ICD-10-GM Indikation fuer die Bildgebung",
+        "min": 0,
+        "max": "*",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/imaging-indication-icd10"
+        }
+      },
+      {
+        "id": "ServiceRequest.reasonCode:icd10gm.coding",
+        "path": "ServiceRequest.reasonCode.coding",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.reasonCode:icd10gm.coding.system",
+        "path": "ServiceRequest.reasonCode.coding.system",
+        "min": 1,
+        "patternUri": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.reasonCode:icd10gm.coding.code",
+        "path": "ServiceRequest.reasonCode.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.insurance",
+        "path": "ServiceRequest.insurance",
+        "short": "Versicherungsreferenz (GKV: FPDECoverageGKV oder Privat: FPDECoveragePrivat)",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv",
+              "https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "ServiceRequest.supportingInfo",
+        "path": "ServiceRequest.supportingInfo",
+        "short": "Voruntersuchungen fuer Vergleichsbefundung (ImagingStudy)",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/ImagingStudy"
+            ]
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

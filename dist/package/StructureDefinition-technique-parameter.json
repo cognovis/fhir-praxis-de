@@ -1,0 +1,210 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "technique-parameter",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/technique-parameter",
+  "name": "TechniqueParameterExt",
+  "title": "Technique Parameter",
+  "status": "active",
+  "experimental": false,
+  "description": "Workflow-relevante Aufnahmetechnik-Parameter einer Bildserie. Erfasst kV und mAs fuer Roentgen/CT, TR und TE fuer MRT, Schichtdicke und optionale Freitext-Notizen. Keine Duplikation von DICOM-Header-Daten — nur workflow-relevante Felder.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "type": "element",
+      "expression": "ImagingStudy.series"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Technique Parameter",
+        "definition": "Workflow-relevante Aufnahmetechnik-Parameter einer Bildserie. Erfasst kV und mAs fuer Roentgen/CT, TR und TE fuer MRT, Schichtdicke und optionale Freitext-Notizen. Keine Duplikation von DICOM-Header-Daten — nur workflow-relevante Felder."
+      },
+      {
+        "id": "Extension.extension:kv",
+        "path": "Extension.extension",
+        "sliceName": "kv",
+        "short": "Spitzenspannung (kV)",
+        "definition": "Spitzenspannung der Roentgenroehre in Kilovolt (kV). Relevant fuer Roentgen- und CT-Aufnahmen.",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:kv.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:kv.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "kv"
+      },
+      {
+        "id": "Extension.extension:kv.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:mas",
+        "path": "Extension.extension",
+        "sliceName": "mas",
+        "short": "Milliamperesekunden (mAs)",
+        "definition": "Roehrenladung in Milliamperesekunden (mAs). Relevant fuer Roentgen- und CT-Aufnahmen.",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:mas.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:mas.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "mas"
+      },
+      {
+        "id": "Extension.extension:mas.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:tr-ms",
+        "path": "Extension.extension",
+        "sliceName": "tr-ms",
+        "short": "Repetitionszeit TR (ms)",
+        "definition": "Repetitionszeit (Repetition Time, TR) in Millisekunden fuer MRT-Sequenzen.",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:tr-ms.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:tr-ms.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "tr-ms"
+      },
+      {
+        "id": "Extension.extension:tr-ms.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:te-ms",
+        "path": "Extension.extension",
+        "sliceName": "te-ms",
+        "short": "Echozeit TE (ms)",
+        "definition": "Echozeit (Echo Time, TE) in Millisekunden fuer MRT-Sequenzen.",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:te-ms.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:te-ms.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "te-ms"
+      },
+      {
+        "id": "Extension.extension:te-ms.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:slice-thickness-mm",
+        "path": "Extension.extension",
+        "sliceName": "slice-thickness-mm",
+        "short": "Schichtdicke (mm)",
+        "definition": "Schichtdicke der Bildserie in Millimeter. Relevant fuer Schichtaufnahmen (CT, MRT).",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:slice-thickness-mm.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:slice-thickness-mm.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "slice-thickness-mm"
+      },
+      {
+        "id": "Extension.extension:slice-thickness-mm.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:modality-specific-notes",
+        "path": "Extension.extension",
+        "sliceName": "modality-specific-notes",
+        "short": "Modalitaets-spezifische Techniknotizen",
+        "definition": "Optionale Freitext-Notizen zu modalitaets-spezifischen Technikparametern, die durch die strukturierten Felder nicht abgedeckt werden.",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:modality-specific-notes.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:modality-specific-notes.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "modality-specific-notes"
+      },
+      {
+        "id": "Extension.extension:modality-specific-notes.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/technique-parameter"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "max": "0"
+      }
+    ]
+  }
+}

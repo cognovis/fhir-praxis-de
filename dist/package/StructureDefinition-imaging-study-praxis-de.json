@@ -1,0 +1,125 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "imaging-study-praxis-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-study-praxis-de",
+  "name": "ImagingStudyPraxisDe",
+  "title": "ImagingStudy (Praxis DE)",
+  "status": "active",
+  "description": "Bildgebungs-Studie-Profil fuer die deutsche ambulante Praxis. Erbt von IPS ImagingStudy-uv-ips. Erweitert um DICOM-Modalitaet (required Binding), Koerperregion- und Lateralitaets-Slices, Ueberweiser-Tracking (referrer 1..1 fuer KV-Abrechnung), WADO-RS Endpoint, Kontrastmittel-Gabe-Extension und Aufnahmetechnik-Parameter-Extension.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "ImagingStudy",
+  "baseDefinition": "http://hl7.org/fhir/uv/ips/StructureDefinition/ImagingStudy-uv-ips",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "ImagingStudy.extension",
+        "path": "ImagingStudy.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "ImagingStudy.extension:kmAdministration",
+        "path": "ImagingStudy.extension",
+        "sliceName": "kmAdministration",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/image-km-administration"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "ImagingStudy.modality",
+        "path": "ImagingStudy.modality",
+        "short": "Bildgebungsmodalitaet (DICOM CID 29, required)",
+        "definition": "Modalitaet der Bildgebungsstudie gemaess DICOM CID 29 Acquisition Modality. Required Binding.",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/dicom-modality"
+        }
+      },
+      {
+        "id": "ImagingStudy.referrer",
+        "path": "ImagingStudy.referrer",
+        "short": "Ueberweisender Arzt (Pflichtfeld fuer KV-Abrechnung)",
+        "definition": "Ueberweisender Arzt oder Ueberweiserin. Pflichtfeld fuer das KV-Abrechnungs-Tracking (Ueberweiser-Statistik und Qualitaetssicherung).",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "ImagingStudy.endpoint",
+        "path": "ImagingStudy.endpoint",
+        "short": "WADO-RS Endpunkt fuer DICOM-Studie",
+        "definition": "Verbindungsendpunkt fuer den Abruf der DICOM-Bilddaten. Connection type SHOULD be `dicom-wado-rs` (WADO-RS) for PACS retrieval. Constraint not enforced at profile level to allow future DICOMweb endpoint variants (QIDO-RS, STOW-RS).",
+        "mustSupport": true
+      },
+      {
+        "id": "ImagingStudy.series.extension",
+        "path": "ImagingStudy.series.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "ImagingStudy.series.extension:techniqueParameter",
+        "path": "ImagingStudy.series.extension",
+        "sliceName": "techniqueParameter",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/technique-parameter"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "ImagingStudy.series.bodySite",
+        "path": "ImagingStudy.series.bodySite",
+        "short": "Koerperregion der Bildserie (SNOMED CT, preferred)",
+        "definition": "Koerperregion/anatomische Lokalisation der Bildserie. Preferred Binding auf SNOMED CT body-site ValueSet.",
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/body-site"
+        }
+      },
+      {
+        "id": "ImagingStudy.series.laterality",
+        "path": "ImagingStudy.series.laterality",
+        "short": "Seitenangabe (preferred Binding: bodysite-laterality)",
+        "definition": "Seitenangabe (links/rechts/bilateral) der Bildserie. Preferred Binding auf FHIR bodysite-laterality ValueSet.",
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "http://hl7.org/fhir/ValueSet/bodysite-laterality"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,133 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "imaging-device-praxis-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de",
+  "name": "ImagingDevicePraxisDe",
+  "title": "Imaging Device (Praxis DE)",
+  "status": "active",
+  "description": "Bildgebungsgeraet-Profil fuer die deutsche ambulante Praxis. Erbt von R4 Device. Enthaelt DICOM AE-Title Identifier (PACS-Routing), Modalitaets-Typ (DicomModalityVS), Standort-Referenz und Wartungsstatus-Extension.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Device",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Device",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Device.extension",
+        "path": "Device.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Device.extension:deviceMaintenanceStatus",
+        "path": "Device.extension",
+        "sliceName": "deviceMaintenanceStatus",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/device-maintenance-status"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Device.identifier",
+        "path": "Device.identifier",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Device.identifier:aeTitle",
+        "path": "Device.identifier",
+        "sliceName": "aeTitle",
+        "short": "DICOM Application Entity Title (AE-Title) fuer PACS-Routing",
+        "min": 1,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.identifier:aeTitle.system",
+        "path": "Device.identifier.system",
+        "min": 1,
+        "patternUri": "https://fhir.cognovis.de/praxis/NamingSystem/dicom-ae-title",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.identifier:aeTitle.value",
+        "path": "Device.identifier.value",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Device.status",
+        "path": "Device.status",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Device.manufacturer",
+        "path": "Device.manufacturer",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.deviceName",
+        "path": "Device.deviceName",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.deviceName.name",
+        "path": "Device.deviceName.name",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.deviceName.type",
+        "path": "Device.deviceName.type",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.modelNumber",
+        "path": "Device.modelNumber",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.type",
+        "path": "Device.type",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/dicom-modality"
+        }
+      },
+      {
+        "id": "Device.location",
+        "path": "Device.location",
+        "short": "Standort des Geraets (Praxis-Raum, z.B. MRT-Raum 1)",
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "appointment-readiness",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-readiness",
+  "name": "AppointmentReadinessExt",
+  "title": "Appointment Readiness",
+  "status": "active",
+  "description": "Post-Check-in-Bereitschaftsstatus fuer Bildgebungstermine. Repraesentiert den Zustand des Patienten nach Appointment.status=checked-in und vor dem Modalitaets-Aufruf.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Appointment",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Appointment Readiness",
+        "definition": "Post-Check-in-Bereitschaftsstatus fuer Bildgebungstermine. Repraesentiert den Zustand des Patienten nach Appointment.status=checked-in und vor dem Modalitaets-Aufruf."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-readiness"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/appointment-readiness"
+        }
+      }
+    ]
+  }
+}

@@ -1,0 +1,125 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "appointment-preparation",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-preparation",
+  "name": "AppointmentPreparationExt",
+  "title": "Appointment Preparation",
+  "status": "active",
+  "description": "Vorbereitungs- und Nachbereitungszeiten sowie Patientenhinweise fuer Bildgebungstermine. Enthaelt Vorbereitungszeit, Erholungszeit und freitextliche Patientenanweisungen.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Appointment",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Appointment Preparation",
+        "definition": "Vorbereitungs- und Nachbereitungszeiten sowie Patientenhinweise fuer Bildgebungstermine. Enthaelt Vorbereitungszeit, Erholungszeit und freitextliche Patientenanweisungen."
+      },
+      {
+        "id": "Extension.extension:prepDuration",
+        "path": "Extension.extension",
+        "sliceName": "prepDuration",
+        "short": "Vorbereitungszeit vor dem Bildgebungstermin (z.B. Kontrastmittel-Vorbereitung)",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Extension.extension:prepDuration.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:prepDuration.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "prepDuration"
+      },
+      {
+        "id": "Extension.extension:prepDuration.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "Duration"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:recoveryDuration",
+        "path": "Extension.extension",
+        "sliceName": "recoveryDuration",
+        "short": "Erholungszeit nach dem Bildgebungstermin (z.B. nach Kontrastmittelgabe)",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Extension.extension:recoveryDuration.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:recoveryDuration.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "recoveryDuration"
+      },
+      {
+        "id": "Extension.extension:recoveryDuration.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "Duration"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:patientInstruction",
+        "path": "Extension.extension",
+        "sliceName": "patientInstruction",
+        "short": "Freitextliche Hinweise an den Patienten (z.B. keine metallischen Gegenstaende)",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Extension.extension:patientInstruction.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:patientInstruction.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "patientInstruction"
+      },
+      {
+        "id": "Extension.extension:patientInstruction.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-preparation"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "max": "0"
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "RadiologyRoleVS",
+  "id": "radiology-role",
+  "title": "Radiology Role",
+  "description": "ValueSet der Radiologierollen fuer PractitionerRole.code. Enthaelt MTR, Radiologin, Reading Radiologist und Supervising Radiologist.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/radiology-role",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/radiology-role"
+      }
+    ]
+  }
+}

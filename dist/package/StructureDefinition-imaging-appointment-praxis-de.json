@@ -1,0 +1,183 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "imaging-appointment-praxis-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-appointment-praxis-de",
+  "name": "ImagingAppointmentPraxisDe",
+  "title": "Imaging Appointment (Praxis DE)",
+  "status": "active",
+  "description": "Bildgebungstermin-Profil fuer die deutsche ambulante Praxis. Erbt von R4 Appointment. Erweitert um DICOM-Modalitaet (AppointmentModalityExt), Vorbereitungszeiten (AppointmentPreparationExt), Bereitschaftsstatus (AppointmentReadinessExt) und Participant-Slicing fuer Geraet und MTR.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Appointment",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Appointment",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Appointment.extension",
+        "path": "Appointment.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Appointment.extension:appointmentModality",
+        "path": "Appointment.extension",
+        "sliceName": "appointmentModality",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-modality"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.extension:appointmentPreparation",
+        "path": "Appointment.extension",
+        "sliceName": "appointmentPreparation",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-preparation"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.extension:appointmentReadiness",
+        "path": "Appointment.extension",
+        "sliceName": "appointmentReadiness",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-readiness"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.status",
+        "path": "Appointment.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.serviceType",
+        "path": "Appointment.serviceType",
+        "short": "Typ des Bildgebungstermins (z.B. LOINC 36803-5 MRI of knee)",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.start",
+        "path": "Appointment.start",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.end",
+        "path": "Appointment.end",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.basedOn",
+        "path": "Appointment.basedOn",
+        "short": "Verweis auf den ImagingServiceRequest",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-service-request-praxis-de"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.participant",
+        "path": "Appointment.participant",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "profile",
+              "path": "actor.resolve()"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Appointment.participant:modalityDevice",
+        "path": "Appointment.participant",
+        "sliceName": "modalityDevice",
+        "short": "Bildgebungsgeraet (ImagingDevicePraxisDe)",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.participant:modalityDevice.actor",
+        "path": "Appointment.participant.actor",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.participant:modalityDevice.status",
+        "path": "Appointment.participant.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.participant:mtrPractitioner",
+        "path": "Appointment.participant",
+        "sliceName": "mtrPractitioner",
+        "short": "MTR (Medizinisch-Technische-Radiologieassistent)",
+        "min": 0,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.participant:mtrPractitioner.actor",
+        "path": "Appointment.participant.actor",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Practitioner"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Appointment.participant:mtrPractitioner.status",
+        "path": "Appointment.participant.status",
+        "mustSupport": true
+      }
+    ]
+  }
+}

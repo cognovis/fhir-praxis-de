@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "DeviceMaintenanceStatusVS",
+  "id": "device-maintenance-status",
+  "title": "Device Maintenance Status",
+  "description": "ValueSet der Wartungsstatus-Codes fuer Bildgebungsgeraete. Backed by DeviceMaintenanceStatusCS.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/device-maintenance-status",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/device-maintenance-status"
+      }
+    ]
+  }
+}

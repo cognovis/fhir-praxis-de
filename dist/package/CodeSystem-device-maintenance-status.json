@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "DeviceMaintenanceStatusCS",
+  "id": "device-maintenance-status",
+  "title": "Device Maintenance Status",
+  "description": "Wartungsstatus-Codes fuer Bildgebungsgeraete in der deutschen ambulanten Praxis. Kodiert den aktuellen Betriebszustand (in-service, scheduled-maintenance, out-of-service, quality-control).",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/device-maintenance-status",
+  "concept": [
+    {
+      "code": "in-service",
+      "display": "In Service",
+      "definition": "Geraet ist betriebsbereit"
+    },
+    {
+      "code": "scheduled-maintenance",
+      "display": "Scheduled Maintenance",
+      "definition": "Geraet ist fuer Wartung eingeplant"
+    },
+    {
+      "code": "out-of-service",
+      "display": "Out of Service",
+      "definition": "Geraet ist ausser Betrieb"
+    },
+    {
+      "code": "quality-control",
+      "display": "Quality Control",
+      "definition": "Geraet wird auf Qualitaetssicherung geprueft"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

@@ -49,6 +49,7 @@
       {
         "id": "DiagnosticReport.status",
         "path": "DiagnosticReport.status",
+        "comment": "FHIR-native Status-Maschine fuer Radiologiebefunde: registered (Befund angelegt, kein Inhalt) -> partial (Teilbefund, Inhalt unvollstaendig) -> preliminary (vorlaeufig; Diktat/Lesung, noch nicht final freigegeben) -> final (freigegeben, gesetzlich bindend) -> amended (nachtraeglich geaendert, neue Version). Der Sub-Status (Extension reportSubstatus) verfeinert 'preliminary': dictation-pending, dictated, read-pending. Der Code #signed ist nur gueltig bei status=final.",
         "mustSupport": true
       },
       {
@@ -62,6 +63,10 @@
             }
           ],
           "rules": "open"
+        },
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/kdl-radiology-category"
         }
       },
       {

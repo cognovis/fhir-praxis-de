@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "ImagingIndicationICD10VS",
+  "id": "imaging-indication-icd10",
+  "title": "Imaging Indication ICD-10-GM",
+  "description": "ICD-10-GM Indikationscodes fuer Bildgebungsanforderungen. Required binding fuer reasonCode[icd10gm] in ImagingServiceRequestPraxisDe. Enthaelt alle Codes aus dem ICD-10-GM CodeSystem (BFARM).",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/imaging-indication-icd10",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
+      }
+    ]
+  }
+}

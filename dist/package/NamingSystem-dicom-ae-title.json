@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "dicom-ae-title",
+  "name": "DicomAeTitle",
+  "status": "active",
+  "kind": "identifier",
+  "date": "2026-04-30",
+  "publisher": "cognovis GmbH",
+  "description": "DICOM Application Entity Title (AE-Title) — eindeutiger Bezeichner fuer DICOM-Geraete im PACS-Netzwerk. Pflicht-Identifier fuer PACS-Routing in ImagingDevicePraxisDe.",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/dicom-ae-title",
+      "preferred": true
+    }
+  ]
+}

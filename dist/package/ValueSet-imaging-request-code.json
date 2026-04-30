@@ -1,0 +1,71 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "ImagingRequestCodeVS",
+  "id": "imaging-request-code",
+  "title": "Imaging Request Code",
+  "description": "LOINC-Codes fuer Bildgebungsanforderungen in der deutschen ambulanten Praxis. Preferred binding fuer ServiceRequest.code in ImagingServiceRequestPraxisDe.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/imaging-request-code",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "http://loinc.org",
+        "concept": [
+          {
+            "code": "36803-5",
+            "display": "MRI of knee"
+          },
+          {
+            "code": "24558-9",
+            "display": "MRI of head"
+          },
+          {
+            "code": "36643-5",
+            "display": "CT of thorax"
+          },
+          {
+            "code": "24727-0",
+            "display": "MRI of pelvis"
+          },
+          {
+            "code": "24629-8",
+            "display": "CT of chest"
+          },
+          {
+            "code": "24648-8",
+            "display": "CT of abdomen"
+          },
+          {
+            "code": "36218-5",
+            "display": "MRI of spine"
+          },
+          {
+            "code": "24565-4",
+            "display": "MRI of shoulder"
+          },
+          {
+            "code": "24698-3",
+            "display": "MRI of abdomen"
+          },
+          {
+            "code": "24605-8",
+            "display": "CT of head"
+          },
+          {
+            "code": "24747-8",
+            "display": "XR chest"
+          },
+          {
+            "code": "24539-9",
+            "display": "US Abdomen"
+          },
+          {
+            "code": "24691-8",
+            "display": "NM Bone"
+          }
+        ]
+      }
+    ]
+  }
+}

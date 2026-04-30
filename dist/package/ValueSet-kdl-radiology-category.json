@@ -1,0 +1,35 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "KdlRadiologyCategoryVS",
+  "id": "kdl-radiology-category",
+  "title": "KDL Radiologie-Kategorien",
+  "description": "ValueSet der KDL-Klinischen Dokumentenlenkung Codes fuer Radiologiebefund-Kategorien. Enthaelt Roentgenbefund, CT-Befund, MRT-Befund und Sonographiebefund.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/kdl-radiology-category",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "http://dvmd.de/fhir/CodeSystem/kdl",
+        "concept": [
+          {
+            "code": "DG020110",
+            "display": "Roentgenbefund"
+          },
+          {
+            "code": "DG020103",
+            "display": "CT-Befund"
+          },
+          {
+            "code": "DG020107",
+            "display": "MRT-Befund"
+          },
+          {
+            "code": "DG020111",
+            "display": "Sonographiebefund"
+          }
+        ]
+      }
+    ]
+  }
+}
