@@ -56,6 +56,8 @@ pages:
     title: International Interoperability
   architecture.md:
     title: Architecture Decisions
+  imaging-billing-architecture.md:
+    title: Imaging Billing Architecture
 
 menu:
   Home: index.html
@@ -68,5 +70,6 @@ menu:
   Architecture:
     Plan-Library Boundary: plan-library-boundary.html
     All Decisions: architecture.html
+    Imaging Billing: imaging-billing-architecture.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html
