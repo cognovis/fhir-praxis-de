@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ZuzahlungsstatusVS",
+  "id": "zuzahlungsstatus",
+  "title": "Zuzahlungsstatus",
+  "description": "Zulässige Werte für den GKV-Zuzahlungsstatus",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/zuzahlungsstatus",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus"
+      }
+    ]
+  }
+}

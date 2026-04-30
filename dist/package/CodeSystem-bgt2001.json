@@ -1,0 +1,64 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "example",
+  "name": "BGT2001CS",
+  "id": "bgt2001",
+  "title": "BGT2001 Tarifpositionen",
+  "description": "Berufsgenossenschaftliche Gebühren-Tarifpositionen (BGT2001) des DGUV-Gebührentarifs für die Abrechnung berufsgenossenschaftlicher Heilbehandlungen. Enthält repräsentative Tarifpositionen (Ziffern) als Codes.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/bgt2001",
+  "concept": [
+    {
+      "code": "100",
+      "display": "Beratung",
+      "definition": "Beratung des Versicherten, auch telefonisch"
+    },
+    {
+      "code": "101",
+      "display": "Untersuchung",
+      "definition": "Vollständige körperliche Untersuchung mit Dokumentation des Befundes"
+    },
+    {
+      "code": "102",
+      "display": "Nachuntersuchung",
+      "definition": "Nachuntersuchung im Rahmen des Heilverfahrens"
+    },
+    {
+      "code": "200",
+      "display": "Wundversorgung",
+      "definition": "Versorgung einer Wunde, einfach"
+    },
+    {
+      "code": "201",
+      "display": "Wundversorgung, aufwändig",
+      "definition": "Versorgung einer Wunde, aufwändig (z.B. mit Débridement)"
+    },
+    {
+      "code": "300",
+      "display": "Operativer Eingriff, klein",
+      "definition": "Kleinchirurgischer Eingriff (z.B. Naht, Abszessspaltung)"
+    },
+    {
+      "code": "301",
+      "display": "Operativer Eingriff, mittelgroß",
+      "definition": "Mittlerer operativer Eingriff unter Lokalanästhesie"
+    },
+    {
+      "code": "400",
+      "display": "Verband",
+      "definition": "Anlegen eines Verbandes"
+    },
+    {
+      "code": "500",
+      "display": "Injektion",
+      "definition": "Injektion, subkutan oder intramuskulär"
+    },
+    {
+      "code": "800",
+      "display": "Physiotherapie",
+      "definition": "Physiotherapeutische Behandlungseinheit"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true
+}

@@ -1,0 +1,64 @@
+### Profile: pas-claim-de - Valid example
+# @name valid
+# Expected: OperationOutcome with "all ok" (no errors)
+# Fills: status (MS), type (MS, pattern=professional), use (pattern=preauthorization),
+#   patient (MS), insurer (MS), provider (MS, Practitioner|Organization),
+#   item (MS) with productOrService (MS) and quantity (MS)
+POST http://localhost:8080/fhir/Claim/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Claim",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "professional"
+    }]
+  },
+  "use": "preauthorization",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "insurer": {"reference": "Organization/example-mvz"},
+  "provider": {"reference": "Practitioner/prac-berger"},
+  "priority": {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/processpriority", "code": "normal"}]},
+  "insurance": [{"sequence": 1, "focal": true, "coverage": {"display": "GKV"}}],
+  "item": [{
+    "sequence": 1,
+    "productOrService": {
+      "coding": [{
+        "system": "http://fhir.de/CodeSystem/ebm",
+        "code": "03220",
+        "display": "Versichertenpauschale"
+      }]
+    },
+    "quantity": {"value": 1}
+  }]
+}
+
+### Profile: pas-claim-de - Invalid example (wrong type + use pattern)
+# @name invalid
+# Expected: OperationOutcome with errors for:
+#   - type.coding.code = "institutional" (pattern violation, must be "professional")
+#   - use = "claim" (pattern violation, must be "preauthorization")
+POST http://localhost:8080/fhir/Claim/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Claim",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "institutional"
+    }]
+  },
+  "use": "claim",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "provider": {"reference": "Practitioner/prac-berger"},
+  "priority": {"coding": [{"system": "http://terminology.hl7.org/CodeSystem/processpriority", "code": "normal"}]},
+  "insurance": [{"sequence": 1, "focal": true, "coverage": {"display": "GKV"}}]
+}

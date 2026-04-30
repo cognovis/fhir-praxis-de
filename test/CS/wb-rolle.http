@@ -1,0 +1,14 @@
+### CodeSystem: wb-rolle - Valid code: wb-assistent
+# @name valid_wb-assistent
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=wb-assistent
+Authorization: Basic basic:secret
+
+### CodeSystem: wb-rolle - Valid code: sicherstellungsassistent
+# @name valid_sicherstellungsassistent
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=sicherstellungsassistent
+Authorization: Basic basic:secret
+
+### CodeSystem: wb-rolle - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

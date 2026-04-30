@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "insurance-plan-id",
+  "name": "InsurancePlanId",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-05",
+  "publisher": "cognovis GmbH",
+  "description": "PVS-interner Identifier fuer InsurancePlan-Ressourcen (Kassentarife, PKV-Tarife)",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/sid/insurance-plan-id",
+      "preferred": true
+    }
+  ]
+}

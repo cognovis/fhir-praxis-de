@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "hvg-kennung",
+  "name": "HvgKennung",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-26",
+  "publisher": "cognovis GmbH",
+  "description": "HVG-Kennung (2-char Kurzkennung des Selektivvertrags, z.B. 'BY' fuer Bayern). Modelliert als Contract.identifier, nicht als Extension.",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/hvg-kennung",
+      "preferred": true
+    }
+  ]
+}

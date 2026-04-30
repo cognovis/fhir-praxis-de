@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "AppointmentReadinessCS",
+  "id": "appointment-readiness",
+  "title": "Appointment Readiness",
+  "description": "Post-check-in readiness states for imaging appointments in German radiology workflows. Covers states AFTER Appointment.status=checked-in and before the patient is called to the modality. Does not duplicate Appointment.status — checked-in state is tracked natively on Appointment.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness",
+  "concept": [
+    {
+      "code": "preparation-complete",
+      "display": "Preparation Complete",
+      "definition": "All pre-imaging preparation steps completed (e.g. contrast consent, patient history, IV access if needed); patient ready to be called to modality"
+    },
+    {
+      "code": "waiting-for-modality",
+      "display": "Waiting for Modality",
+      "definition": "Patient preparation complete; waiting for modality to become available for exam start"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

@@ -1,0 +1,14 @@
+### CodeSystem: hzv-participation - Valid code: eingeschrieben
+# @name valid_eingeschrieben
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=eingeschrieben
+Authorization: Basic basic:secret
+
+### CodeSystem: hzv-participation - Valid code: abgemeldet
+# @name valid_abgemeldet
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=abgemeldet
+Authorization: Basic basic:secret
+
+### CodeSystem: hzv-participation - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

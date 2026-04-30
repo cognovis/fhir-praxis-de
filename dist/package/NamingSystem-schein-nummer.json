@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "schein-nummer",
+  "name": "ScheinNummer",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-25",
+  "publisher": "cognovis GmbH",
+  "description": "PVS-interne Scheinnummer (Encounter.identifier). Eindeutiger Identifier eines Abrechnungsscheins im PVS.",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/sid/scheinNummer",
+      "preferred": true
+    }
+  ]
+}

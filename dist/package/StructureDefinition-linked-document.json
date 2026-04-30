@@ -1,0 +1,57 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "linked-document",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/linked-document",
+  "name": "LinkedDocumentExt",
+  "title": "Verlinktes Dokument",
+  "status": "active",
+  "description": "Referenz auf ein verlinktes Dokument (DocumentReference).",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    },
+    {
+      "expression": "Encounter",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Verlinktes Dokument",
+        "definition": "Referenz auf ein verlinktes Dokument (DocumentReference)."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/linked-document"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/DocumentReference"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

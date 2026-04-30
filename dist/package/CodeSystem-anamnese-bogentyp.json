@@ -1,0 +1,40 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "AnamneseBogentypCS",
+  "id": "anamnese-bogentyp",
+  "title": "Anamnese-Bogentyp",
+  "description": "Codes fuer den Typ eines ambulanten Anamnesebogens in der Praxisverwaltung.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/anamnese-bogentyp",
+  "concept": [
+    {
+      "code": "erstanamnese",
+      "display": "Erstanamnese",
+      "definition": "Vollstaendige Erstanamnese bei Neuaufnahme des Patienten"
+    },
+    {
+      "code": "schmerzanamnese",
+      "display": "Schmerzanamnese",
+      "definition": "Gezielte Anamnese zu Schmerzsymptomatik"
+    },
+    {
+      "code": "praevention",
+      "display": "Praeventionsanamnese",
+      "definition": "Anamnese im Rahmen von Vorsorgeuntersuchungen"
+    },
+    {
+      "code": "follow-up",
+      "display": "Verlaufsanamnese",
+      "definition": "Wiederholte Anamnese im Behandlungsverlauf"
+    },
+    {
+      "code": "fachspezifisch",
+      "display": "Fachspezifisch",
+      "definition": "Fachspezifischer Anamnesebogen"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 5
+}

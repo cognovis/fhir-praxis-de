@@ -1,0 +1,14 @@
+### CodeSystem: genehmigung-leistungsbereich - Valid code: chirotherapie
+# @name valid_chirotherapie
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=chirotherapie
+Authorization: Basic basic:secret
+
+### CodeSystem: genehmigung-leistungsbereich - Valid code: psychosomatik
+# @name valid_psychosomatik
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=psychosomatik
+Authorization: Basic basic:secret
+
+### CodeSystem: genehmigung-leistungsbereich - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

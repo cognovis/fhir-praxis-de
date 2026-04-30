@@ -1,0 +1,19 @@
+### ValueSet: Billing Type - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/billing-type/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: Billing Type - $validate-code valid (ebm)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/billing-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=ebm
+Authorization: Basic basic:secret
+
+### ValueSet: Billing Type - $validate-code valid (goae)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/billing-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=goae
+Authorization: Basic basic:secret
+
+### ValueSet: Billing Type - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/billing-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

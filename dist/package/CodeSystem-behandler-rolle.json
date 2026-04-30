@@ -1,0 +1,45 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "BehandlerRolleCS",
+  "id": "behandler-rolle",
+  "title": "Behandler-Rolle",
+  "description": "Rollen der Mitglieder in einem Behandler-Team (CareTeam) in der deutschen ambulanten Versorgung.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle",
+  "concept": [
+    {
+      "code": "zahnarzt",
+      "display": "Zahnarzt",
+      "definition": "Zahnaerztin oder Zahnarzt"
+    },
+    {
+      "code": "zfa",
+      "display": "ZFA",
+      "definition": "Zahnmedizinische Fachangestellte"
+    },
+    {
+      "code": "mfa",
+      "display": "MFA",
+      "definition": "Medizinische Fachangestellte"
+    },
+    {
+      "code": "arzt",
+      "display": "Arzt",
+      "definition": "Aerztin oder Arzt"
+    },
+    {
+      "code": "wb-assistent",
+      "display": "WB-Assistent",
+      "definition": "Weiterbildungsassistent"
+    },
+    {
+      "code": "physiotherapeut",
+      "display": "Physiotherapeut",
+      "definition": "Physiotherapeutin oder Physiotherapeut"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 6
+}

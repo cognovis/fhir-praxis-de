@@ -1,0 +1,14 @@
+### CodeSystem: scheinart - Valid code: gkv
+# @name valid_gkv
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=gkv
+Authorization: Basic basic:secret
+
+### CodeSystem: scheinart - Valid code: pkv
+# @name valid_pkv
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=pkv
+Authorization: Basic basic:secret
+
+### CodeSystem: scheinart - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

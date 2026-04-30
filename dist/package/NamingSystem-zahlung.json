@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "zahlung",
+  "name": "ZahlungsId",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-03",
+  "publisher": "cognovis GmbH",
+  "description": "Zahlungs-ID aus dem PVS",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/zahlung",
+      "preferred": true
+    }
+  ]
+}

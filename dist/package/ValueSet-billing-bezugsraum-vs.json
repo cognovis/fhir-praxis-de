@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "BillingBezugsraumVS",
+  "id": "billing-bezugsraum-vs",
+  "title": "Abrechnungsbezugsraum",
+  "description": "Zeitliche Bezugsräume für EBM-Ausschlussregelungen",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/billing-bezugsraum-vs",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/billing-bezugsraum"
+      }
+    ]
+  }
+}

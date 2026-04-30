@@ -1,0 +1,65 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "fpde-patient",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/fpde-patient",
+  "name": "FPDEPatient",
+  "title": "FPDE Patient",
+  "status": "active",
+  "description": "Patient-Profil der deutschen Praxisverwaltung. Unterstützt Geburtsname (use=maiden), Ortsteil/Stadtteil und Stammdaten.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Patient",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Patient",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Patient.name.family.extension",
+        "path": "Patient.name.family.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Patient.name.family.extension:eigenname",
+        "path": "Patient.name.family.extension",
+        "sliceName": "eigenname",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/humanname-own-name|5.2.0"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Patient.address.extension:stadtteil",
+        "path": "Patient.address.extension",
+        "sliceName": "stadtteil",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://hl7.org/fhir/StructureDefinition/iso21090-ADXP-precinct|5.2.0"
+            ]
+          }
+        ],
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,44 @@
+### Profile: pas-task-de - Valid example
+# @name valid
+# Expected: OperationOutcome with "all ok" (no errors)
+# Fills: status (MS), intent (MS, pattern=order), code (MS, extensible binding to pas-task-code-vs),
+#   for (MS, Patient), requester (MS, Practitioner|Organization), owner (MS, Organization)
+POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Task",
+  "status": "requested",
+  "intent": "order",
+  "code": {
+    "coding": [{
+      "system": "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code",
+      "code": "submit",
+      "display": "Antrag einreichen"
+    }]
+  },
+  "for": {"reference": "Patient/pat-s1c-meyer"},
+  "requester": {"reference": "Practitioner/prac-berger"},
+  "owner": {"reference": "Organization/example-mvz"}
+}
+
+### Profile: pas-task-de - Invalid example (wrong intent pattern)
+# @name invalid
+# Expected: OperationOutcome with errors for:
+#   - intent = "filler-order" (pattern violation, must be "order")
+POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Task",
+  "status": "requested",
+  "intent": "filler-order",
+  "code": {
+    "coding": [{
+      "system": "http://example.org/unknown",
+      "code": "unknown-code"
+    }]
+  }
+}

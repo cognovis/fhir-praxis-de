@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-bud-freie-lz-ziffer",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-bud-freie-lz-ziffer",
+  "name": "KvBudFreieLzZifferExt",
+  "title": "KV-Budget Freie LZ Ziffer",
+  "status": "active",
+  "description": "EBM-Gebuehrenordnungsposition (GOP) der extrabudgetaeren Leistung",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Budget Freie LZ Ziffer",
+        "definition": "EBM-Gebuehrenordnungsposition (GOP) der extrabudgetaeren Leistung"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-bud-freie-lz-ziffer"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,62 @@
+### Profile: pas-claim-response-de - Valid example
+# @name valid
+# Expected: OperationOutcome with "all ok" (no errors)
+# Fills: status (MS), type (MS, pattern=professional), use (pattern=preauthorization),
+#   patient (MS), insurer (MS), outcome (MS),
+#   item (MS) with adjudication (MS)
+POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "ClaimResponse",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "professional"
+    }]
+  },
+  "use": "preauthorization",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "insurer": {"reference": "Organization/example-mvz"},
+  "outcome": "complete",
+  "item": [{
+    "itemSequence": 1,
+    "adjudication": [{
+      "category": {
+        "coding": [{
+          "system": "http://terminology.hl7.org/CodeSystem/adjudication",
+          "code": "benefit"
+        }]
+      },
+      "amount": {"value": 16.89, "currency": "EUR"}
+    }]
+  }]
+}
+
+### Profile: pas-claim-response-de - Invalid example (wrong type + use, missing outcome)
+# @name invalid
+# Expected: OperationOutcome with errors for:
+#   - type.coding.code = "institutional" (pattern violation, must be "professional")
+#   - use = "claim" (pattern violation, must be "preauthorization")
+#   - outcome missing (required by base ClaimResponse)
+POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "ClaimResponse",
+  "status": "active",
+  "type": {
+    "coding": [{
+      "system": "http://terminology.hl7.org/CodeSystem/claim-type",
+      "code": "institutional"
+    }]
+  },
+  "use": "claim",
+  "patient": {"reference": "Patient/pat-s1c-meyer"},
+  "created": "2026-04-01",
+  "insurer": {"reference": "Organization/example-mvz"}
+}

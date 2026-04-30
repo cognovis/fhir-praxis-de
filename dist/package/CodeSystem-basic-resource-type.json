@@ -1,0 +1,65 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "BasicResourceTypeCS",
+  "id": "basic-resource-type",
+  "title": "Basic Resource Type",
+  "description": "Typen fuer Basic-Ressourcen in der deutschen ambulanten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/basic-resource-type",
+  "concept": [
+    {
+      "code": "rlv-budget",
+      "display": "RLV-Budget",
+      "definition": "Regelleistungsvolumen-Konfiguration"
+    },
+    {
+      "code": "rlv-fallwert-detail",
+      "display": "RLV-Fallwert-Detail",
+      "definition": "Detaillierte RLV-Fallwert-Informationen"
+    },
+    {
+      "code": "kv-punktwert",
+      "display": "KV-Punktwert",
+      "definition": "KV-Punktwert in EUR je EBM-Gebührenordnungsposition"
+    },
+    {
+      "code": "kv-fachgruppe",
+      "display": "KV-Fachgruppe",
+      "definition": "KV-Fachgruppen-Budgetinformation"
+    },
+    {
+      "code": "kv-benchmark",
+      "display": "KV-Benchmark",
+      "definition": "KV-Benchmarkdaten fuer Fachgruppen"
+    },
+    {
+      "code": "genehmigung",
+      "display": "Genehmigung",
+      "definition": "Aerztliche Genehmigung durch die KV"
+    },
+    {
+      "code": "wb-zuordnung",
+      "display": "WB-Zuordnung",
+      "definition": "Weiterbildungszuordnung eines Assistenzarztes"
+    },
+    {
+      "code": "zeitbudget",
+      "display": "Zeitbudget",
+      "definition": "Zeitbudget-Konfiguration fuer einen Arzt"
+    },
+    {
+      "code": "kv-budget-freie-lz",
+      "display": "KV-Budget Freie Leistung",
+      "definition": "Extrabudgetaere EBM-Leistung ausserhalb RLV/QZV"
+    },
+    {
+      "code": "hvg-mandant-beteiligung",
+      "display": "HVG-Mandant-Beteiligung",
+      "definition": "Beteiligung eines Mandanten an einem HVG-Selektivvertrag"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 10
+}

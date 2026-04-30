@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "AnamneseBogentypVS",
+  "id": "anamnese-bogentyp",
+  "title": "Anamnese-Bogentyp",
+  "description": "Zulaessige Werte fuer den Typ eines ambulanten Anamnesebogens.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/anamnese-bogentyp",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/anamnese-bogentyp"
+      }
+    ]
+  }
+}

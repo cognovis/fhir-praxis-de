@@ -1,0 +1,61 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "encounter-praxis-hzv",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/encounter-praxis-hzv",
+  "name": "EncounterPraxisHZV",
+  "title": "Encounter Praxis HZV",
+  "status": "active",
+  "description": "Abrechnungsschein fuer die hausarztzentrierte Versorgung (HZV, §73b SGB V). Spezialisiert EncounterPraxis: fixiert Scheinart auf KBV-Code #50 (HZV) und erlaubt die Angabe des HZV-Rechnungsschemas per Extension.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "https://fhir.cognovis.de/praxis/StructureDefinition/encounter-praxis",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter.extension",
+        "path": "Encounter.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Encounter.extension:hzv-rechnungsschema",
+        "path": "Encounter.extension",
+        "sliceName": "hzv-rechnungsschema",
+        "short": "HZV-Rechnungsschema (Vertragskatalog)",
+        "definition": "Identifiziert das konkrete HZV-Rechnungsschema (Vertragskatalog) der Krankenkasse, nach dem dieser Schein abgerechnet wird.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/hzv-rechnungsschema"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:kbv-scheinart",
+        "path": "Encounter.type",
+        "sliceName": "kbv-scheinart"
+      },
+      {
+        "id": "Encounter.type:kbv-scheinart.coding.code",
+        "path": "Encounter.type.coding.code",
+        "patternCode": "50"
+      }
+    ]
+  }
+}

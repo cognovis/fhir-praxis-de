@@ -1,0 +1,110 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-condition",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-condition",
+  "name": "PraxisCondition",
+  "title": "Praxis Condition",
+  "status": "active",
+  "description": "Condition-Profil fuer die ambulante Praxis. Integriert ICD-10-GM Diagnosesicherheit (KVDT 6.06) und Dauerdiagnose.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Condition",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Condition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Condition.extension",
+        "path": "Condition.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Condition.extension:dauerdiagnose",
+        "path": "Condition.extension",
+        "sliceName": "dauerdiagnose",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/dauerdiagnose"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.clinicalStatus",
+        "path": "Condition.clinicalStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.verificationStatus",
+        "path": "Condition.verificationStatus",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code",
+        "path": "Condition.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code.coding",
+        "path": "Condition.code.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code.coding:icd10gm",
+        "path": "Condition.code.coding",
+        "sliceName": "icd10gm",
+        "min": 1,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code.coding:icd10gm.extension:diagnosesicherheit",
+        "path": "Condition.code.coding.extension",
+        "sliceName": "diagnosesicherheit",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Condition.code.coding:icd10gm.system",
+        "path": "Condition.code.coding.system",
+        "min": 1,
+        "patternUri": "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
+      }
+    ]
+  }
+}

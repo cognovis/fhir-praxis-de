@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "AppointmentReadinessVS",
+  "id": "appointment-readiness",
+  "title": "Appointment Readiness",
+  "description": "ValueSet of post-check-in readiness states for imaging appointments. Represents patient states AFTER Appointment.status=checked-in and before the modality call in German radiology workflow. The checked-in state itself is not included as it is covered by Appointment.status.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/appointment-readiness",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness"
+      }
+    ]
+  }
+}

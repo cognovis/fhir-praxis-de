@@ -1,0 +1,40 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "TaskTypeCS",
+  "id": "task-type",
+  "title": "Aufgabentyp",
+  "description": "Typen fuer Praxis-Aufgaben (Rueckruf, Dringend, etc.)",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/task-type",
+  "concept": [
+    {
+      "code": "callback",
+      "display": "Rueckruf",
+      "definition": "Patient bittet um Rueckruf"
+    },
+    {
+      "code": "urgent",
+      "display": "Dringend",
+      "definition": "Dringende Aufgabe"
+    },
+    {
+      "code": "lab",
+      "display": "Labor",
+      "definition": "Labor-Ergebnis bearbeiten"
+    },
+    {
+      "code": "recipe",
+      "display": "Rezept",
+      "definition": "Rezeptanforderung"
+    },
+    {
+      "code": "referral",
+      "display": "Ueberweisung",
+      "definition": "Ueberweisungsanforderung"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 5
+}

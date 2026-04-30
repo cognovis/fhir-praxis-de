@@ -1,0 +1,60 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "PraxisPlanTopicCS",
+  "id": "praxis-plan-topic",
+  "title": "Praxis Plan Topic",
+  "description": "Discovery axis for PlanDefinition.topic within PraxisBillingPattern resources. Distinguishes plan variants — chains, jobs, complex templates, DMP/HZV/HKP/specialist templates — without requiring separate FHIR profiles. Implements ADR-001 Decision 3. Extensible without profile version bump.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-plan-topic",
+  "concept": [
+    {
+      "code": "chain",
+      "display": "Ziffernkette",
+      "definition": "Automatische Mitnahmekette — A impliziert B (z.B. Wegepauschale bei Hausbesuch)"
+    },
+    {
+      "code": "job",
+      "display": "Job",
+      "definition": "Behandlungsbaustein bestehend aus Dokumentation, Leistungsziffern und Diagnosen-Sektionen"
+    },
+    {
+      "code": "komplex",
+      "display": "Komplex",
+      "definition": "Leistungskomplex — mehrere zusammengehoerige Ziffern ohne feste Reihenfolge"
+    },
+    {
+      "code": "dmp",
+      "display": "DMP-Template",
+      "definition": "Disease-Management-Programm-Vorlage (§137f SGB V)"
+    },
+    {
+      "code": "hzv",
+      "display": "HZV-Template",
+      "definition": "Hausarztzentrierte Versorgung Planvorlage (§73b SGB V)"
+    },
+    {
+      "code": "hkp",
+      "display": "HKP-Template",
+      "definition": "Heil- und Kostenplan-Vorlage (§87 Abs. 1a SGB V)"
+    },
+    {
+      "code": "par",
+      "display": "PAR-Template",
+      "definition": "Parodontitis-Behandlungs-Sequenz (S3-Leitlinie/BEMA)"
+    },
+    {
+      "code": "kfo",
+      "display": "KFO-Template",
+      "definition": "Kieferorthopaedie-Behandlungsplan-Vorlage"
+    },
+    {
+      "code": "ze",
+      "display": "ZE-Template",
+      "definition": "Zahnersatz-Behandlungsplan-Vorlage (§56 SGB V)"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 9
+}

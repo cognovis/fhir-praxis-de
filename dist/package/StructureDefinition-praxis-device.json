@@ -1,0 +1,99 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-device",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device",
+  "name": "PraxisDevice",
+  "title": "Praxis Device",
+  "status": "active",
+  "description": "Profil fuer medizinische Geraete und Laboranalyzatoren in der deutschen ambulanten Praxis. Basiert auf GDT 3.5 Geraetedaten (FK 8402 Geraetekennung).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Device",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Device",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Device.identifier",
+        "path": "Device.identifier",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Device.identifier:gdtId",
+        "path": "Device.identifier",
+        "sliceName": "gdtId",
+        "short": "GDT Geraetekennung (Feldkennung 8402)",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.identifier:gdtId.system",
+        "path": "Device.identifier.system",
+        "min": 1,
+        "patternUri": "https://fhir.cognovis.de/praxis/NamingSystem/gdt-device-id"
+      },
+      {
+        "id": "Device.identifier:gdtId.value",
+        "path": "Device.identifier.value",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.status",
+        "path": "Device.status",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Device.manufacturer",
+        "path": "Device.manufacturer",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.deviceName",
+        "path": "Device.deviceName",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.deviceName.name",
+        "path": "Device.deviceName.name",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.deviceName.type",
+        "path": "Device.deviceName.type",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.modelNumber",
+        "path": "Device.modelNumber",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.type",
+        "path": "Device.type",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.version",
+        "path": "Device.version",
+        "mustSupport": true
+      },
+      {
+        "id": "Device.version.value",
+        "path": "Device.version.value",
+        "mustSupport": true
+      }
+    ]
+  }
+}

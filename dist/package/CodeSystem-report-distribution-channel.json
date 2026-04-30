@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "ReportDistributionChannelCS",
+  "id": "report-distribution-channel",
+  "title": "Report Distribution Channel (DE-specific)",
+  "description": "DE-specific distribution channels for radiology and diagnostic reports that have no equivalent in international standards. Standard channels (email, fax, print) are represented by HL7 v3-ParticipationMode codes in the ReportDistributionChannelVS hybrid ValueSet.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/report-distribution-channel",
+  "concept": [
+    {
+      "code": "kim",
+      "display": "KIM",
+      "definition": "Report delivered via KIM (Kommunikation im Medizinwesen) — national DE secure medical messaging standard"
+    },
+    {
+      "code": "patientportal",
+      "display": "Patient Portal",
+      "definition": "Report delivered to patient via DE-specific secure healthcare portal (Patientenportal or ePA — Elektronische Patientenakte). Distinct from generic online written communication (v3:ONLINEWRIT) due to DE-specific authentication requirements (GesundheitsID / ELGA) and legal framework (§335 SGB V)."
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

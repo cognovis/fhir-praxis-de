@@ -1,0 +1,49 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "fragment",
+  "name": "LdtMaterialbezeichnungCS",
+  "id": "ldt-materialbezeichnung",
+  "title": "LDT Materialbezeichnung (FK 8428)",
+  "description": "Probenmaterial-Bezeichnungen gemaess LDT3-Schluessel (Feldkennung 8428). PVS-agnostische Auswahl haeufiger Materialien.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung",
+  "concept": [
+    {
+      "code": "EDTA-Blut",
+      "display": "EDTA-Blut",
+      "definition": "Venaeses Blut in EDTA-Roehrchen (Haematologie, klinische Chemie)"
+    },
+    {
+      "code": "Serum",
+      "display": "Serum",
+      "definition": "Blutserum (klinische Chemie, Serologie)"
+    },
+    {
+      "code": "Urin-MSU",
+      "display": "Urin-MSU",
+      "definition": "Mittelstrahlurin (Urinalyse, Urinkultur)"
+    },
+    {
+      "code": "Abstrich",
+      "display": "Abstrich",
+      "definition": "Abstrich (Mikrobiologie)"
+    },
+    {
+      "code": "Liquor",
+      "display": "Liquor",
+      "definition": "Liquor cerebrospinalis"
+    },
+    {
+      "code": "Stuhl",
+      "display": "Stuhl",
+      "definition": "Stuhlprobe (Mikrobiologie, Parasitologie)"
+    },
+    {
+      "code": "Urin",
+      "display": "Urin",
+      "definition": "Urin (ungeklaert, Streifentest)"
+    }
+  ],
+  "caseSensitive": true,
+  "experimental": false
+}

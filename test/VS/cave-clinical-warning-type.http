@@ -1,0 +1,19 @@
+### ValueSet: CAVE Clinical Warning Type - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/cave-clinical-warning-type/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: CAVE Clinical Warning Type - $validate-code valid (K)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/cave-clinical-warning-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type&code=K
+Authorization: Basic basic:secret
+
+### ValueSet: CAVE Clinical Warning Type - $validate-code valid (A)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/cave-clinical-warning-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type&code=A
+Authorization: Basic basic:secret
+
+### ValueSet: CAVE Clinical Warning Type - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/cave-clinical-warning-type/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

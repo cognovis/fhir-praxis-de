@@ -1,0 +1,204 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-billingpattern",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern",
+  "name": "PraxisBillingPattern",
+  "title": "Praxis BillingPattern",
+  "status": "active",
+  "description": "Profil fuer Abrechnungsmuster (Ziffernketten) in der deutschen ambulanten Praxis. Repraesentiert abrechnungsnahe Ziffernketten als PlanDefinition-Ressource mit Stoppfeldern und ICD-Fokus.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "PlanDefinition",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/PlanDefinition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "PlanDefinition.extension",
+        "path": "PlanDefinition.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "PlanDefinition.extension:stopfield",
+        "path": "PlanDefinition.extension",
+        "sliceName": "stopfield",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/billingpattern-stopfield"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PlanDefinition.identifier",
+        "path": "PlanDefinition.identifier",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "PlanDefinition.identifier:billingPatternId",
+        "path": "PlanDefinition.identifier",
+        "sliceName": "billingPatternId",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "PlanDefinition.identifier:billingPatternId.system",
+        "path": "PlanDefinition.identifier.system",
+        "min": 1,
+        "patternUri": "https://fhir.cognovis.de/praxis/sid/billing-pattern-id"
+      },
+      {
+        "id": "PlanDefinition.identifier:billingPatternId.value",
+        "path": "PlanDefinition.identifier.value",
+        "min": 1
+      },
+      {
+        "id": "PlanDefinition.title",
+        "path": "PlanDefinition.title",
+        "min": 1
+      },
+      {
+        "id": "PlanDefinition.type",
+        "path": "PlanDefinition.type",
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "code": "order-set",
+              "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type"
+            }
+          ]
+        }
+      },
+      {
+        "id": "PlanDefinition.status",
+        "path": "PlanDefinition.status",
+        "patternCode": "active"
+      },
+      {
+        "id": "PlanDefinition.useContext",
+        "path": "PlanDefinition.useContext",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "code"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "PlanDefinition.useContext:practitioner",
+        "path": "PlanDefinition.useContext",
+        "sliceName": "practitioner",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "PlanDefinition.useContext:practitioner.code",
+        "path": "PlanDefinition.useContext.code",
+        "patternCoding": {
+          "code": "user",
+          "system": "http://terminology.hl7.org/CodeSystem/usage-context-type"
+        }
+      },
+      {
+        "id": "PlanDefinition.useContext:practitioner.value[x]",
+        "path": "PlanDefinition.useContext.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "PlanDefinition.useContext:icdFocus",
+        "path": "PlanDefinition.useContext",
+        "sliceName": "icdFocus",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "PlanDefinition.useContext:icdFocus.code",
+        "path": "PlanDefinition.useContext.code",
+        "patternCoding": {
+          "code": "focus",
+          "system": "http://terminology.hl7.org/CodeSystem/usage-context-type"
+        }
+      },
+      {
+        "id": "PlanDefinition.useContext:icdFocus.value[x]",
+        "path": "PlanDefinition.useContext.value[x]",
+        "type": [
+          {
+            "code": "CodeableConcept"
+          }
+        ]
+      },
+      {
+        "id": "PlanDefinition.action.definition[x]",
+        "path": "PlanDefinition.action.definition[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "PlanDefinition.action.definition[x]:definitionCanonical",
+        "path": "PlanDefinition.action.definition[x]",
+        "sliceName": "definitionCanonical",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "canonical",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/ActivityDefinition"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "PlanDefinition.action.definition[x]:definitionUri",
+        "path": "PlanDefinition.action.definition[x]",
+        "sliceName": "definitionUri",
+        "min": 0,
+        "max": "0",
+        "type": [
+          {
+            "code": "uri"
+          }
+        ]
+      }
+    ]
+  }
+}

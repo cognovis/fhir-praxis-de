@@ -1,0 +1,14 @@
+### CodeSystem: lkz - Valid code: aktiv
+# @name valid_aktiv
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/lkz&code=aktiv
+Authorization: Basic basic:secret
+
+### CodeSystem: lkz - Valid code: geloescht
+# @name valid_geloescht
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/lkz&code=geloescht
+Authorization: Basic basic:secret
+
+### CodeSystem: lkz - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/lkz&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

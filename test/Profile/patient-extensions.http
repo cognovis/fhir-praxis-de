@@ -1,0 +1,62 @@
+### Patient with patient-seit extension (Bestandspatient)
+# @name patient-with-patient-seit
+# Expected: OperationOutcome with "all ok" (no errors)
+POST http://localhost:8080/fhir/Patient/$validate
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "extension": [{
+    "url": "https://fhir.cognovis.de/praxis/StructureDefinition/patient-seit",
+    "valueDate": "2015-03-15"
+  }],
+  "name": [{
+    "use": "official",
+    "family": "Mustermann",
+    "given": ["Max"]
+  }],
+  "birthDate": "1975-06-20"
+}
+
+###
+
+### Patient with patient-seit extension (Neupatient)
+# @name patient-with-patient-seit-neu
+# Expected: OperationOutcome with "all ok" (no errors)
+POST http://localhost:8080/fhir/Patient/$validate
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "extension": [{
+    "url": "https://fhir.cognovis.de/praxis/StructureDefinition/patient-seit",
+    "valueDate": "2024-01-08"
+  }],
+  "name": [{
+    "use": "official",
+    "family": "Schmidt",
+    "given": ["Anna"]
+  }],
+  "birthDate": "1990-11-03"
+}
+
+###
+
+### Patient without patient-seit extension (must remain valid)
+# @name patient-without-patient-seit
+# Expected: OperationOutcome with "all ok" (no errors)
+POST http://localhost:8080/fhir/Patient/$validate
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Patient",
+  "name": [{
+    "use": "official",
+    "family": "Weber",
+    "given": ["Klaus"]
+  }],
+  "birthDate": "1960-04-12"
+}

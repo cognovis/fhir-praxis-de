@@ -1,0 +1,55 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "DokumentKategorieCS",
+  "id": "dokument-kategorie",
+  "title": "Dokument Kategorie",
+  "description": "Kategorien fuer verlinkte Dokumente in der ambulanten Versorgung (z.B. Arztbriefe, Befunde, Labor)",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/dokument-kategorie",
+  "concept": [
+    {
+      "code": "arztbrief",
+      "display": "Arztbrief",
+      "definition": "Arztbrief oder ärztlicher Entlassungsbericht"
+    },
+    {
+      "code": "befund",
+      "display": "Befund",
+      "definition": "Befundbericht einer diagnostischen Untersuchung"
+    },
+    {
+      "code": "labor",
+      "display": "Labor",
+      "definition": "Laborbefund"
+    },
+    {
+      "code": "bild",
+      "display": "Bild",
+      "definition": "Bildgebende Diagnostik (z.B. Röntgen, CT, MRT)"
+    },
+    {
+      "code": "einwilligung",
+      "display": "Einwilligung",
+      "definition": "Patienteneinwilligungserklärung"
+    },
+    {
+      "code": "verordnung",
+      "display": "Verordnung",
+      "definition": "Ärztliche Verordnung"
+    },
+    {
+      "code": "ueberweisung",
+      "display": "Überweisung",
+      "definition": "Überweisungsschein"
+    },
+    {
+      "code": "sonstiges",
+      "display": "Sonstiges",
+      "definition": "Sonstige Dokumente"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 8
+}

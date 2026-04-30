@@ -1,0 +1,96 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-punktwert",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-punktwert",
+  "name": "KvPunktwert",
+  "title": "KV Punktwert",
+  "status": "active",
+  "description": "Profil fuer KV-Punktwerte je EBM-Gebührenordnungsposition.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Basic",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Basic",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Basic.extension",
+        "path": "Basic.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Basic.extension:punktwertGoNummer",
+        "path": "Basic.extension",
+        "sliceName": "punktwertGoNummer",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/punktwert-go-nummer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:punktwertKategorieNummer",
+        "path": "Basic.extension",
+        "sliceName": "punktwertKategorieNummer",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/punktwert-kategorie-nummer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:punktwertWert",
+        "path": "Basic.extension",
+        "sliceName": "punktwertWert",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/punktwert-wert"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.code",
+        "path": "Basic.code",
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "code": "kv-punktwert",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/basic-resource-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.subject",
+        "path": "Basic.subject",
+        "mustSupport": true
+      }
+    ]
+  }
+}

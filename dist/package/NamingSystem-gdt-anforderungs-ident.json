@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "gdt-anforderungs-ident",
+  "name": "GdtAnforderungsIdent",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-05",
+  "publisher": "cognovis GmbH",
+  "description": "GDT 3.5 Anforderungsidentifikation (FK 8413) — verknuepft GDT-Anforderung (Satzart 6302) mit GDT-Ergebnis (Satzart 6310)",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/gdt-anforderungs-ident",
+      "preferred": true
+    }
+  ]
+}

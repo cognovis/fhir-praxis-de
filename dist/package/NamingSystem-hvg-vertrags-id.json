@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "hvg-vertrags-id",
+  "name": "HvgVertragsId",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-03",
+  "publisher": "cognovis GmbH",
+  "description": "Eindeutige ID eines konkreten HVG-Vertrags (Instanz-Identifier)",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/hvg-vertrags-id",
+      "preferred": true
+    }
+  ]
+}

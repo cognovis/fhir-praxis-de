@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "MedikationKategorieCS",
+  "id": "medikation-kategorie",
+  "title": "Medikationskategorie",
+  "description": "Kategorie der Medikation hinsichtlich der Einnahmedauer",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/medikation-kategorie",
+  "concept": [
+    {
+      "code": "dauermedikation",
+      "display": "Dauermedikation",
+      "definition": "Medikament wird dauerhaft eingenommen"
+    },
+    {
+      "code": "bedarfsmedikation",
+      "display": "Bedarfsmedikation",
+      "definition": "Medikament wird nur bei Bedarf eingenommen"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

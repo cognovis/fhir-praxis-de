@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "bg-aktenzeichen",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/bg-aktenzeichen",
+  "name": "BgAktenzeichenExt",
+  "title": "BG-Aktenzeichen",
+  "status": "active",
+  "description": "Aktenzeichen der Berufsgenossenschaft für den Unfallversicherungsfall",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Claim",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "BG-Aktenzeichen",
+        "definition": "Aktenzeichen der Berufsgenossenschaft für den Unfallversicherungsfall"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/bg-aktenzeichen"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

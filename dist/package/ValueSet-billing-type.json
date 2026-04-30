@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BillingTypeVS",
+  "id": "billing-type",
+  "title": "Abrechnungsart",
+  "description": "Alle zulässigen Abrechnungsarten in der ambulanten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/billing-type",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/billing-type"
+      }
+    ]
+  }
+}

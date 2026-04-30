@@ -1,0 +1,264 @@
+# Code Systems
+
+This IG defines custom CodeSystems for concepts specific to German ambulatory practice management that are not covered by existing KBV or HL7 Germany terminologies.
+
+## Custom CodeSystems
+
+### BillingPatternStopfieldTypeCS — Stoppfeld-Typ
+
+Codes für Stoppfeld-Typen in abrechnungsnahen Ziffernketten. Wird von PVS-Adaptern für BillingPattern-Ressourcen emittiert.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `text` | Text | Freitexteingabe |
+| `icd` | ICD | ICD-10-GM Diagnoseziffer |
+| `euro` | Euro | Geldbetrag in Euro |
+| `generic` | Generic | Generisches Stoppfeld für andere Datentypen |
+
+### BillingTypeCS — Abrechnungsart
+
+Codes für Abrechnungsarten und Abrechnungskataloge in der ambulanten Versorgung. Dient als Diskriminator für ChargeItemDefinition-Kataloge. Regionale Selektivverträge nutzen den generischen Typ (z.B. `hzv`) — die KV-Region wird über `Contract.identifier` bzw. `ChargeItemDefinition.jurisdiction` abgebildet.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `ebm` | EBM | Einheitlicher Bewertungsmaßstab (GKV) |
+| `goae` | GOÄ | Gebührenordnung für Ärzte (PKV) |
+| `bema` | BEMA | Bewertungsmaßstab für zahnärztliche Leistungen (GKV) |
+| `goz` | GOZ | Gebührenordnung für Zahnärzte (PKV) |
+| `bgt2001` | BGT2001 | Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV) |
+| `hzv` | HZV | Hausarztzentrierte Versorgung (§73b SGB V) |
+| `facharztvertrag` | Facharztvertrag | Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V) |
+| `igel` | IGeL | Individuelle Gesundheitsleistung |
+| `bg` | BG | Berufsgenossenschaft (sonstige BG-Abrechnung) |
+
+### PvsOrganizationTypeCS — PVS Organization Type
+
+Zusatzkodierung fuer `Organization.type`, wenn eine Organization als Privataerztliche Verrechnungsstelle oder externer Billing Service auftritt. Diese Coding ist **zusaetzlich** zu einer generischen Organization-Typisierung zu verwenden, nicht als Ersatz.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `pvs` | PVS | Privataerztliche Verrechnungsstelle / externer Billing Service |
+
+### CorrectionRuleCS — KVB Richtigstellungsgründe
+
+Codes für KV-Richtigstellungen im Honorarbescheid.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `UV` | UV | Überschreitung Volumen |
+| `HO` | HO | Honoraroptimierung |
+| `GHO` | GHO | Gruppenhonorar-Optimierung |
+| `PL` | PL | Plausibilitätsprüfung |
+| `WP` | WP | Wirtschaftlichkeitsprüfung |
+| `ST` | ST | Storno |
+| `KO` | KO | Korrektur |
+
+### BehandlerRolleCS — Behandler-Rolle
+
+Rollen der Mitglieder in einem Behandler-Team (CareTeam) in der deutschen ambulanten Versorgung. Wird für die Rollenkodierung im CareTeamDE-Profil verwendet (Slicing von CareTeam.participant).
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `zahnarzt` | Zahnarzt | Zahnärztin oder Zahnarzt |
+| `arzt` | Arzt | Ärztin oder Arzt |
+| `zfa` | ZFA | Zahnmedizinische Fachangestellte |
+| `mfa` | MFA | Medizinische Fachangestellte |
+| `wb-assistent` | WB-Assistent | Weiterbildungsassistent |
+| `physiotherapeut` | Physiotherapeut | Physiotherapeutin oder Physiotherapeut |
+
+### ScheinartCS — Scheintypen
+
+Abrechnungsschein-Typen in der ambulanten Versorgung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `gkv` | GKV | Gesetzliche Krankenversicherung |
+| `pkv` | PKV | Private Krankenversicherung |
+| `bg` | BG | Berufsgenossenschaft |
+| `ue` | Überweisung | Überweisungsschein |
+| `not` | Notfall | Notfallschein |
+| `igel` | IGeL | Individuelle Gesundheitsleistung |
+
+### TaskTypeCS — Praxis-Aufgabentypen
+
+Typen für Praxis-Aufgaben in der Aufgabenverwaltung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `callback` | Rückruf | Patient bittet um Rückruf |
+| `urgent` | Dringend | Dringende Aufgabe |
+| `lab` | Labor | Labor-Ergebnis bearbeiten |
+| `recipe` | Rezept | Rezeptanforderung |
+| `referral` | Überweisung | Überweisungsanforderung |
+
+### GenehmigungenLeistungsbereichCS — KV-regulierte Leistungsbereiche
+
+Leistungsbereiche, die einer KV-Genehmigung bedürfen.
+
+| Code | Display |
+|------|---------|
+| `chirotherapie` | Chirotherapie |
+| `psychosomatik` | Psychosomatik |
+| `psychotherapie` | Psychotherapie |
+| `akupunktur` | Akupunktur |
+| `schmerztherapie` | Schmerztherapie |
+| `sonographie` | Sonographie |
+| `sono-abdomen` | Sono Abdomen |
+| `langzeit-ekg` | Langzeit-EKG |
+| `langzeit-blutdruck` | Langzeit-Blutdruck |
+| `radiologie` | Radiologie |
+| `allergologie` | Allergologie |
+| `dmp` | DMP |
+| `hks` | HKS (Herzschrittmacher-Kontrolle) |
+
+### GenehmigungenTypCS — Genehmigungstyp
+
+Typ der KV-Genehmigung: an den Arzt oder an die Betriebsstätte gebunden.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `kopfbezogen` | Kopfbezogen | An den einzelnen Arzt gebunden |
+| `betriebsstaette` | Betriebsstätte | An die Betriebsstätte gebunden |
+
+### WbRolleCS — WB/SA-Rollen
+
+Rollen für Weiterbildungs- und Sicherstellungsassistenten.
+
+| Code | Display |
+|------|---------|
+| `wb-assistent` | WB-Assistent (Weiterbildungsassistent) |
+| `sicherstellungsassistent` | Sicherstellungsassistent |
+
+### AiProvenanceCS — KI-Herkunftskennzeichnung
+
+Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `ai-generated` | KI-generiert | Inhalt wurde durch ein KI-System erzeugt |
+| `ai-assisted` | KI-unterstützt | Inhalt wurde mit KI-Unterstützung erstellt |
+| `human-reviewed` | Menschlich geprüft | KI-Inhalt wurde durch einen Menschen geprüft |
+| `human-approved` | Menschlich freigegeben | KI-Inhalt wurde durch einen Menschen freigegeben |
+
+### ZuzahlungsstatusCS — Zuzahlungsstatus
+
+GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden per ETL aus den offiziellen eGK-VSD-Spezifikationen befüllt (`^content = #not-present`).
+
+### HvgVertragsartCS — HVG-Vertragsart
+
+Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, Besondere Versorgung). Inhalte werden per ETL befüllt (`^content = #not-present`).
+
+### KvFachgruppeCS — KV-Fachgruppe
+
+KV-Fachgruppencodes für Honorarverteilung und Qualitätssicherung.
+
+| Code | Display |
+|------|---------|
+| `allgemeinmedizin` | Allgemeinmedizin |
+| `innere-medizin` | Innere Medizin |
+| `paediatrie` | Pädiatrie |
+| `gynaekologie` | Gynäkologie |
+| `chirurgie` | Chirurgie |
+| `orthopaedie` | Orthopädie |
+| `urologie` | Urologie |
+| `augenheilkunde` | Augenheilkunde |
+| `hno` | HNO |
+| `neurologie` | Neurologie |
+| `psychiatrie` | Psychiatrie |
+| `radiologie` | Radiologie |
+| `dermatologie` | Dermatologie |
+| `anaesthesiologie` | Anästhesiologie |
+
+### DokumentKategorieCS — Dokumentkategorie
+
+Dokumentkategorien für verlinkte Dokumente (arztbrief, befund, labor, etc.).
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `arztbrief` | Arztbrief | Ärztlicher Brief |
+| `befund` | Befund | Medizinischer Befund |
+| `labor` | Labor | Laborbefund |
+| `bild` | Bild | Bildgebende Diagnostik (z.B. Röntgen, CT, MRT) |
+| `einwilligung` | Einwilligung | Einwilligungsdokument |
+| `verordnung` | Verordnung | Ärztliche Verordnung |
+| `ueberweisung` | Überweisung | Überweisungsdokument |
+| `sonstiges` | Sonstiges | Sonstiges Dokument |
+
+### LkzCS — Löschkennzeichen
+
+Lifecycle-Status-Codes für Soft-Delete und Archivierung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `aktiv` | Aktiv | Eintrag ist aktiv |
+| `geloescht` | Gelöscht | Eintrag wurde gelöscht (Soft-Delete) |
+| `gesperrt` | Gesperrt | Eintrag ist gesperrt |
+| `archiviert` | Archiviert | Eintrag ist archiviert |
+
+### AppointmentModeCS — Terminmodus
+
+Terminmodus für ambulante Konsultationen (R4-Erweiterung für FHIR R5 virtualService).
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `in-person` | Praxisbesuch | Patient erscheint persönlich in der Praxis |
+| `video` | Videosprechstunde | Termin findet per Videokonferenz statt |
+| `phone` | Telefontermin | Termin findet telefonisch statt |
+| `home-visit` | Hausbesuch | Arzt besucht den Patienten zu Hause |
+
+### AnamneseBogentypCS — Anamnesebogen-Typ
+
+Codes für die Klassifizierung von Anamneseboegen (Fragebögen zur Erfassung der Patientenanamnese) in der ambulanten Praxisverwaltung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `erstanamnese` | Erstanamnese | Vollständige Erstanamnese bei Neuaufnahme des Patienten |
+| `schmerzanamnese` | Schmerzanamnese | Gezielte Anamnese zu Schmerzsymptomatik |
+| `praevention` | Praeventionsanamnese | Anamnese im Rahmen von Vorsorgeuntersuchungen |
+| `follow-up` | Verlaufsanamnese | Wiederholte Anamnese im Behandlungsverlauf |
+| `fachspezifisch` | Fachspezifisch | Fachspezifischer Anamnesebogen |
+
+### RezeptTypCS — Rezepttyp
+
+Typ des Rezepts in der ambulanten Versorgung.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `gkv` | GKV-Rezept | Rezept für gesetzlich versicherte Patienten (Muster 16) |
+| `privat` | Privatrezept | Rezept für privat versicherte Patienten |
+| `btm` | BTM-Rezept | Betäubungsmittelrezept nach BtMVV |
+| `t-rezept` | T-Rezept | Thalidomid-Rezept (THALIX/Lenalidomid) |
+
+### MedikationKategorieCS — Medikationskategorie
+
+Kategorie der Medikation hinsichtlich der Einnahmedauer.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `dauermedikation` | Dauermedikation | Medikament wird dauerhaft eingenommen |
+| `bedarfsmedikation` | Bedarfsmedikation | Medikament wird nur bei Bedarf eingenommen |
+
+### LdtMaterialbezeichnungCS — LDT Materialbezeichnung (FK 8428)
+
+Probenmaterial-Bezeichnungen gemäss LDT3-Schlüssel (Feldkennung 8428). Wird für die optionale Codierung von Specimentypen im PraxisSpecimen-Profil verwendet. Erfasst die haeufigsten Probenmaterialien, die in der ambulanten Praxis anfallen. Quelle: KBV LDT3-Spezifikation.
+
+| Code | Display | Beschreibung |
+|------|---------|--------------|
+| `EDTA-Blut` | EDTA-Blut | Venaeses Blut in EDTA-Roehrchen (Haematologie, klinische Chemie) |
+| `Serum` | Serum | Blutserum (klinische Chemie, Serologie) |
+| `Urin-MSU` | Urin-MSU | Mittelstrahlurin (Urinalyse, Urinkultur) |
+| `Abstrich` | Abstrich | Abstrich (Mikrobiologie) |
+| `Liquor` | Liquor | Liquor cerebrospinalis |
+| `Stuhl` | Stuhl | Stuhlprobe (Mikrobiologie, Parasitologie) |
+
+**Note:** This CodeSystem is marked as `#fragment` — only the most common material types are included. If other LDT material designations are needed, they should be added via FHIR tooling or extension mapping per site.
+
+## External CodeSystems
+
+This IG also references the following external CodeSystems from the KBV Schlüsseltabellen (`kbv.all.st-combined`):
+
+| CodeSystem | Package | Usage |
+|------------|---------|-------|
+| **KBV_CS_SFHIR_KBV_SCHEINART** | kbv.all.st-combined | Offizielle Scheinart-Codes der KBV (ergänzend zu ScheinartCS) |
+| **KBV_CS_SFHIR_EBM_RLV** | kbv.all.st-combined | EBM-Ziffern mit RLV-Relevanz |
+| **KBV_CS_SFHIR_BAR2_FACHGRUPPENZUORDNUNG** | kbv.all.st-combined | Fachgruppen-Codes für KV-Benchmark und RLV |

@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "AppointmentModeCS",
+  "id": "appointment-mode",
+  "title": "Appointment Mode",
+  "description": "Codes für die Durchführungsart eines Termins (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch).",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/appointment-mode",
+  "concept": [
+    {
+      "code": "in-person",
+      "display": "Praxisbesuch",
+      "definition": "Patient erscheint persönlich in der Praxis"
+    },
+    {
+      "code": "video",
+      "display": "Videosprechstunde",
+      "definition": "Termin findet per Videokonferenz statt"
+    },
+    {
+      "code": "phone",
+      "display": "Telefontermin",
+      "definition": "Termin findet telefonisch statt"
+    },
+    {
+      "code": "home-visit",
+      "display": "Hausbesuch",
+      "definition": "Arzt besucht den Patienten zu Hause"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

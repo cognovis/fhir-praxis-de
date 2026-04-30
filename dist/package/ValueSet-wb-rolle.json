@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "WbRolleVS",
+  "id": "wb-rolle",
+  "title": "WB/SA-Rolle",
+  "description": "Rollen fuer Weiterbildungs- und Sicherstellungsassistenten",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/wb-rolle",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle"
+      }
+    ]
+  }
+}

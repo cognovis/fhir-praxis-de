@@ -1,0 +1,154 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "bank-account",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/bank-account",
+  "name": "BankAccountExt",
+  "title": "Bankverbindung",
+  "status": "active",
+  "description": "Bankverbindung einer Organisation (IBAN, BIC, Bankname, Kontoinhaber). Kann mehrfach angegeben werden.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Organization",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Bankverbindung",
+        "definition": "Bankverbindung einer Organisation (IBAN, BIC, Bankname, Kontoinhaber). Kann mehrfach angegeben werden."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "min": 1
+      },
+      {
+        "id": "Extension.extension:iban",
+        "path": "Extension.extension",
+        "sliceName": "iban",
+        "short": "IBAN der Bankverbindung",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:iban.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:iban.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "iban"
+      },
+      {
+        "id": "Extension.extension:iban.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:bic",
+        "path": "Extension.extension",
+        "sliceName": "bic",
+        "short": "BIC/SWIFT-Code der Bank",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:bic.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:bic.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "bic"
+      },
+      {
+        "id": "Extension.extension:bic.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:bankname",
+        "path": "Extension.extension",
+        "sliceName": "bankname",
+        "short": "Name der Bank",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:bankname.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:bankname.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "bankname"
+      },
+      {
+        "id": "Extension.extension:bankname.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:kontoinhaber",
+        "path": "Extension.extension",
+        "sliceName": "kontoinhaber",
+        "short": "Name des Kontoinhabers",
+        "min": 0,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:kontoinhaber.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:kontoinhaber.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "kontoinhaber"
+      },
+      {
+        "id": "Extension.extension:kontoinhaber.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/bank-account"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "max": "0"
+      }
+    ]
+  }
+}

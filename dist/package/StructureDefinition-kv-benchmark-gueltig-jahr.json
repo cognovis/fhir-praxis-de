@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-benchmark-gueltig-jahr",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-gueltig-jahr",
+  "name": "KvBenchmarkGueltigJahrExt",
+  "title": "KV-Benchmark Gueltigkeitsjahr",
+  "status": "active",
+  "description": "Jahr der Gueltigkeit der Benchmark-Daten",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark Gueltigkeitsjahr",
+        "definition": "Jahr der Gueltigkeit der Benchmark-Daten"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-gueltig-jahr"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "integer"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,114 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "fpde-coverage-privat",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat",
+  "name": "FPDECoveragePrivat",
+  "title": "FPDE Coverage Privat",
+  "status": "active",
+  "description": "Privat oder selbst zu zahlendes Versicherungsverhaeltnis. Die Coverage ist der Routing-Anker fuer optionale Fremdabrechnung via PVS/Billing Service.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Coverage",
+  "baseDefinition": "http://fhir.de/StructureDefinition/coverage-de-basis",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coverage",
+        "path": "Coverage",
+        "constraint": [
+          {
+            "key": "fpde-coverage-privat-type",
+            "severity": "error",
+            "human": "Coverage.type muss eine VersicherungsartDeBasis-Kodierung mit PKV oder SEL enthalten.",
+            "expression": "type.coding.where(system = 'http://fhir.de/CodeSystem/versicherungsart-de-basis').where(code = 'PKV' or code = 'SEL').exists()",
+            "source": "https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat"
+          }
+        ]
+      },
+      {
+        "id": "Coverage.extension:billingAssignment",
+        "path": "Coverage.extension",
+        "sliceName": "billingAssignment",
+        "short": "Coverage-spezifische Forderungsabtretung an eine PVS",
+        "definition": "Referenz auf die Organization (PVS/Billing Service), an die Forderungen aus genau diesem Versicherungsverhaeltnis abgetreten werden.",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/billing-assignment"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type",
+        "path": "Coverage.type",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type.coding",
+        "path": "Coverage.type.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Coverage.type.coding:VersicherungsArtDeBasis",
+        "path": "Coverage.type.coding",
+        "sliceName": "VersicherungsArtDeBasis",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type.coding:VersicherungsArtDeBasis.system",
+        "path": "Coverage.type.coding.system",
+        "patternUri": "http://fhir.de/CodeSystem/versicherungsart-de-basis",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type.coding:VersicherungsArtDeBasis.code",
+        "path": "Coverage.type.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.type.coding:VersicherungsArtDeBasis.display",
+        "path": "Coverage.type.coding.display",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.subscriber",
+        "path": "Coverage.subscriber",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.beneficiary",
+        "path": "Coverage.beneficiary",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.payor",
+        "path": "Coverage.payor",
+        "mustSupport": true
+      },
+      {
+        "id": "Coverage.payor.display",
+        "path": "Coverage.payor.display",
+        "mustSupport": true
+      }
+    ]
+  }
+}

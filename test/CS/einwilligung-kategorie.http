@@ -1,0 +1,14 @@
+### CodeSystem: einwilligung-kategorie - Valid code: dsgvo
+# @name valid_dsgvo
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dsgvo
+Authorization: Basic basic:secret
+
+### CodeSystem: einwilligung-kategorie - Valid code: dmp
+# @name valid_dmp
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dmp
+Authorization: Basic basic:secret
+
+### CodeSystem: einwilligung-kategorie - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

@@ -1,0 +1,14 @@
+### CodeSystem: genehmigung-typ - Valid code: kopfbezogen
+# @name valid_kopfbezogen
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ&code=kopfbezogen
+Authorization: Basic basic:secret
+
+### CodeSystem: genehmigung-typ - Valid code: betriebsstaette
+# @name valid_betriebsstaette
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ&code=betriebsstaette
+Authorization: Basic basic:secret
+
+### CodeSystem: genehmigung-typ - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

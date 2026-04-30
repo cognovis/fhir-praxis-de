@@ -1,0 +1,14 @@
+### CodeSystem: cave-typ - Valid code: allergie
+# @name valid_allergie
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=allergie
+Authorization: Basic basic:secret
+
+### CodeSystem: cave-typ - Valid code: unvertraeglichkeit
+# @name valid_unvertraeglichkeit
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=unvertraeglichkeit
+Authorization: Basic basic:secret
+
+### CodeSystem: cave-typ - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-typ&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

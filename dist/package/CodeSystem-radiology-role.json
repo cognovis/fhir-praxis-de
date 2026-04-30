@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "RadiologyRoleCS",
+  "id": "radiology-role",
+  "title": "Radiology Role",
+  "description": "Radiology workflow roles in German ambulatory radiology. Covers technical (MTR) and physician roles needed for imaging workflow tracking (acquisition, reading, supervision, sign-off).",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/radiology-role",
+  "concept": [
+    {
+      "code": "MTR",
+      "display": "MTR",
+      "definition": "Medizinisch-Technische Radiologieassistentin / Medizinisch-Technischer Radiologieassistent — performs image acquisition"
+    },
+    {
+      "code": "Radiologist",
+      "display": "Radiologist",
+      "definition": "Radiologin / Radiologe — general radiologist performing or supervising examinations"
+    },
+    {
+      "code": "ReadingRadiologist",
+      "display": "Reading Radiologist",
+      "definition": "Befundende Radiologin / Befundender Radiologe — responsible for interpreting images and dictating/signing reports"
+    },
+    {
+      "code": "SupervisingRadiologist",
+      "display": "Supervising Radiologist",
+      "definition": "Supervisierende Radiologin / Supervisierender Radiologe — provides oversight and final approval, e.g. for residents"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

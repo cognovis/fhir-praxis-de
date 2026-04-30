@@ -1,0 +1,199 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "encounter-praxis",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/encounter-praxis",
+  "name": "EncounterPraxis",
+  "title": "Encounter Praxis",
+  "status": "active",
+  "description": "Abrechnungsschein in der ambulanten Praxisverwaltung. Bildet den Schein (GKV/PKV/BG/IGeL) als FHIR Encounter ab. Encounter.type tragt die Scheinart in zwei Slices: KBV SFHIR-Schluesseltabelle und PVS-interne Kodierung.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Encounter",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Encounter",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Encounter.identifier",
+        "path": "Encounter.identifier",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:scheinNummer",
+        "path": "Encounter.identifier",
+        "sliceName": "scheinNummer",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:scheinNummer.system",
+        "path": "Encounter.identifier.system",
+        "min": 1,
+        "patternUri": "https://fhir.cognovis.de/praxis/sid/scheinNummer",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.identifier:scheinNummer.value",
+        "path": "Encounter.identifier.value",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.status",
+        "path": "Encounter.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.class",
+        "path": "Encounter.class",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "http://terminology.hl7.org/ValueSet/v3-ActEncounterCode"
+        }
+      },
+      {
+        "id": "Encounter.type",
+        "path": "Encounter.type",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "coding.system"
+            }
+          ],
+          "rules": "open"
+        },
+        "short": "Scheinart (KBV SFHIR und/oder PVS-intern)",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:kbv-scheinart",
+        "path": "Encounter.type",
+        "sliceName": "kbv-scheinart",
+        "short": "Scheinart gemaess KBV SFHIR Schluessel KBV_VS_SFHIR_KBV_SCHEINART",
+        "definition": "Amtliche KBV-Scheinart-Kodierung aus der KVDT-Schluessel­tabelle S_KBV_SCHEINART.",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:kbv-scheinart.coding",
+        "path": "Encounter.type.coding",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_KBV_SCHEINART"
+        }
+      },
+      {
+        "id": "Encounter.type:kbv-scheinart.coding.system",
+        "path": "Encounter.type.coding.system",
+        "min": 1,
+        "patternUri": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_KBV_SCHEINART",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:kbv-scheinart.coding.code",
+        "path": "Encounter.type.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:praxis-scheinart",
+        "path": "Encounter.type",
+        "sliceName": "praxis-scheinart",
+        "short": "PVS-interne Scheinart (ScheinartCS)",
+        "definition": "PVS-eigene Scheinart-Kodierung (gkv, pkv, bg, ue, not, igel).",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:praxis-scheinart.coding",
+        "path": "Encounter.type.coding",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/scheinart"
+        }
+      },
+      {
+        "id": "Encounter.type:praxis-scheinart.coding.system",
+        "path": "Encounter.type.coding.system",
+        "min": 1,
+        "patternUri": "https://fhir.cognovis.de/praxis/CodeSystem/scheinart",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.type:praxis-scheinart.coding.code",
+        "path": "Encounter.type.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.serviceType",
+        "path": "Encounter.serviceType",
+        "short": "Behandlungsart / Leistungsbereich",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.subject",
+        "path": "Encounter.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.participant",
+        "path": "Encounter.participant",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.participant.individual",
+        "path": "Encounter.participant.individual",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Practitioner",
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period",
+        "path": "Encounter.period",
+        "mustSupport": true
+      },
+      {
+        "id": "Encounter.period.start",
+        "path": "Encounter.period.start",
+        "mustSupport": true
+      }
+    ]
+  }
+}

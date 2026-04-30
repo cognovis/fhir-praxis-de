@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "RezeptTypCS",
+  "id": "rezept-typ",
+  "title": "Rezepttyp",
+  "description": "Typ des Rezepts in der ambulanten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/rezept-typ",
+  "concept": [
+    {
+      "code": "gkv",
+      "display": "GKV-Rezept",
+      "definition": "Rezept fuer gesetzlich versicherte Patienten (Muster 16)"
+    },
+    {
+      "code": "privat",
+      "display": "Privatrezept",
+      "definition": "Rezept fuer privat versicherte Patienten"
+    },
+    {
+      "code": "btm",
+      "display": "BTM-Rezept",
+      "definition": "Betaeubungsmittelrezept nach BtMVV"
+    },
+    {
+      "code": "t-rezept",
+      "display": "T-Rezept",
+      "definition": "Thalidomid-Rezept (THALIX/Lenalidomid)"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

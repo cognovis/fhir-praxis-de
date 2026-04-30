@@ -1,0 +1,68 @@
+id: de.cognovis.fhir.praxis
+canonical: https://fhir.cognovis.de/praxis
+name: GermanPracticeManagementProfiles
+title: German Practice Management FHIR Profiles (R4)
+description: >-
+  FHIR R4 profiles for German ambulatory practice management (Praxisverwaltung) —
+  billing (EBM/GOA), budget management (RLV/QZV), remittance (Honorarbescheid),
+  queue management, AI provenance (EU AI Act), and administrative workflows.
+  Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
+  international interoperability mappings.
+status: active
+version: 0.41.1
+fhirVersion: 4.0.1
+copyrightYear: 2026+
+releaseLabel: STU1
+license: CC-BY-4.0
+publisher:
+  name: cognovis GmbH
+  url: https://www.cognovis.de
+  email: info@cognovis.de
+jurisdiction: urn:iso:std:iso:3166#DE "Germany"
+
+dependencies:
+  de.basisprofil.r4:
+    version: 1.6.0-ballot2
+    uri: http://fhir.de/ImplementationGuide/basisprofil-de-r4
+  hl7.terminology.r4: 7.1.0
+  fhir.dicom: 2022.4.20221006
+  # kbv.mio.laborbefund removed: v1.0.0-kommentierung.2 has snapshot bugs
+  # (Unknown path in Patient.gender.extension). Our profiles don't inherit
+  # from KBV MIO — re-add when KBV fixes their package.
+
+parameters:
+  auto-oid-root: 2.16.840.1.113883.3.7985
+
+pages:
+  index.md:
+    title: Home
+  profiles.md:
+    title: Profiles
+  extensions.md:
+    title: Extensions
+  codesystems.md:
+    title: Code Systems
+  valuesets.md:
+    title: Value Sets
+  namingsystems.md:
+    title: Naming Systems
+  plan-library-boundary.md:
+    title: Plan-Library vs. Rule-Execution Boundary
+  international-interoperability.md:
+    title: International Interoperability
+  architecture.md:
+    title: Architecture Decisions
+
+menu:
+  Home: index.html
+  Profiles: profiles.html
+  Extensions: extensions.html
+  Terminology:
+    Code Systems: codesystems.html
+    Value Sets: valuesets.html
+    Naming Systems: namingsystems.html
+  Architecture:
+    Plan-Library Boundary: plan-library-boundary.html
+    All Decisions: architecture.html
+  International Interoperability: international-interoperability.html
+  Artifacts: artifacts.html

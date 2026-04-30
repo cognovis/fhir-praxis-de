@@ -1,0 +1,24 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "WbRolleCS",
+  "id": "wb-rolle",
+  "title": "WB/SA-Rolle",
+  "description": "Rollen fuer Weiterbildungs- und Sicherstellungsassistenten",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/wb-rolle",
+  "concept": [
+    {
+      "code": "wb-assistent",
+      "display": "WB-Assistent",
+      "definition": "Weiterbildungsassistent"
+    },
+    {
+      "code": "sicherstellungsassistent",
+      "display": "Sicherstellungsassistent"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

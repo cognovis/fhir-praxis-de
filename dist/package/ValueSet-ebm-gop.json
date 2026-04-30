@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "EbmGopVS",
+  "id": "ebm-gop",
+  "title": "EBM Gebührenordnungsposition",
+  "description": "EBM-Gebührenordnungspositionen (GOP) aus dem KBV-Schlüsseltabellenwerk. Quelle: kbv.all.st-combined (KBV_CS_SFHIR_EBM). Binding: example — alle GOP-Codes aus dem EBM-Katalog sind zulässig.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/ebm-gop",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM"
+      }
+    ]
+  }
+}

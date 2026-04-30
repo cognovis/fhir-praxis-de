@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "privat-reviewed-status",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/privat-reviewed-status",
+  "name": "PrivatReviewedStatusExt",
+  "title": "Privat-Prüfstatus",
+  "status": "active",
+  "description": "Kennzeichen, ob die Privatrechnung ärztlich geprüft wurde",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Encounter",
+      "type": "element"
+    },
+    {
+      "expression": "Claim",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Privat-Prüfstatus",
+        "definition": "Kennzeichen, ob die Privatrechnung ärztlich geprüft wurde"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/privat-reviewed-status"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+}

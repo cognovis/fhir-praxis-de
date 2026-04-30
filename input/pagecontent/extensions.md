@@ -1,0 +1,381 @@
+# Extensions
+
+This IG defines extensions grouped by clinical and administrative domain. All extensions use the canonical base URL `https://fhir.cognovis.de/praxis/StructureDefinition/`.
+
+## Patient / Allgemein
+
+Patient-level administrative metadata extensions.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PatientSeitExt` | date | Datum seit wann der Patient in der Praxis in Behandlung ist |
+
+## Encounter / Warteraum
+
+Queue management extensions for patient flow in the practice.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `ArrivalTimeExt` | dateTime | Zeitpunkt der Ankunft des Patienten im Warteraum |
+| `EncounterCalledExt` | dateTime | Zeitpunkt des Aufrufs in das Behandlungszimmer |
+| `EncounterCreatedAtExt` | dateTime | Erstellungszeitpunkt des Scheins im PVS |
+| `ScheintypExt` | Coding | Scheinart (GKV, PKV, BG, IGeL, etc.) |
+| `LinkedDocumentExt` | Reference | Referenz auf ein verlinktes Dokument (Verlinktes Dokument) |
+
+## Billing / Ziffernketten
+
+Extensions for billing pattern (Ziffernketten) stopfield configuration.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BillingPatternStopfield` | complex | Stoppfeld-Konfiguration in einer Ziffernkette (label, type, required) |
+
+## Billing / Abrechnung GKV
+
+Extensions for EBM billing, charge items, and catalog metadata.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BillingSystemExt` | uri | Abrechnungssystem (EBM, GOÄ, etc.) |
+| `BillingCodeExt` | string | Abrechnungsziffer |
+| `BillingCategoryExt` | Coding | Leistungskategorie |
+| `BillingPointsExt` | decimal | Punktzahl der Leistung |
+| `BillingEuroValueExt` | Money | Euro-Betrag der Leistung |
+| `BillingRequirementsExt` | string | Abrechnungsvoraussetzungen (Legende) |
+| `BillingExclusionsExt` | Coding (repeated) | Ausgeschlossene GOP (je ein Coding pro GOP) |
+| `BillingExclusionsContextExt` | complex (repeated) | Ausschlüsse mit Bezugsraum (bezugsraum + excludedGop) |
+| `SupplementToExt` | string | Zuschlagsziffer zu Hauptleistung |
+| `AgeMinExt` | integer | Mindestalter für die Leistung |
+| `AgeMaxExt` | integer | Höchstalter für die Leistung |
+| `GenderExt` | code | Geschlechtsbeschränkung |
+| `MaxPerCaseExt` | integer | Max. Häufigkeit je Behandlungsfall |
+| `MaxPerQuarterExt` | integer | Max. Häufigkeit je Quartal |
+| `CatalogIsActiveExt` | boolean | Katalog-Eintrag aktiv/inaktiv |
+| `CatalogVersionLabelExt` | string | Katalog-Versionskennzeichen |
+| `BillingPruefzeitExt` | integer | Prüfzeit in Minuten (KBV) |
+| `BillingFachgruppenExt` | Coding (repeated) | Zugelassene Fachgruppen (je ein Coding pro Fachgruppe) |
+| `BillingGenehmigungspflichtExt` | boolean | Genehmigungspflichtige Leistung |
+| `BillingLeistungsinhaltExt` | string | Leistungsinhalt/Leistungsbeschreibung |
+| `AbrechnungsquartalExt` | string | Abrechnungsquartal (z.B. "2026Q1") |
+| `ScheinPositionExt` | Reference | Referenz auf die Scheinposition |
+| `StatistikleistungExt` | boolean | Kennzeichnung als Statistikleistung |
+
+> **Catalog Design Note:** `ChargeItemDefinition` is the canonical home for SDEBM billing catalog entries (EBM, GOÄ, BGT). `CodeSystem.property` is an optional future lookup path for terminology-only use cases but does NOT replace `ChargeItemDefinition` for operational billing catalogs.
+
+## Private Billing / GOÄ
+
+Extensions specific to GOÄ (private fee schedule) billing.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `GoaeFaktorExt` | decimal | GOÄ-Steigerungsfaktor (1,0 - 3,5) |
+| `GoaePunkteExt` | integer | GOÄ-Punktzahl |
+| `MultiplierMinExt` | decimal | Minimaler Steigerungsfaktor (1,0) |
+| `MultiplierDefaultExt` | decimal | Schwellenwert (z.B. 2,3) |
+| `MultiplierMaxExt` | decimal | Höchstsatz (z.B. 3,5) |
+| `RabStatusExt` | code | Status der rechnerischen Abrechnung |
+| `RabRefExt` | Reference | Referenz auf den RAB-Vorgang |
+| `RechFormArtExt` | code | Rechnungsformart |
+| `ManualOverrideExt` | boolean | Manuell überschriebener Wert |
+| `BgAktenzeichenExt` | string | BG-Aktenzeichen |
+| `BgUnfalltagExt` | date | BG-Unfalltag |
+
+## Private Billing Routing / Fremdabrechnung
+
+Coverage-level routing extensions for private billing and factoring.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BillingAssignmentExt` | Reference(Organization) | Coverage-spezifische Forderungsabtretung an eine PVS / einen Billing Service |
+
+## GOÄ Detail / Sachkosten
+
+Extensions for detailed GOÄ billing: ultrasound organs, time-of-day surcharges, material costs, and analog billing.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `GoaeOrganExt` | string | Ultraschall-Organ (GOÄ Kapitel C V) |
+| `GoaeUhrzeitExt` | time | Behandlungsuhrzeit (für Unzeitzuschläge GOÄ E/F) |
+| `GoaeSachkostenBezeichnungExt` | string | Sachkosten-Bezeichnung (GOÄ §10) |
+| `GoaeMaterialkostenExt` | Money | Materialkosten-Betrag (GOÄ §10) |
+| `SachkostenPriceExt` | Money | Sachkostenpauschale für GOÄ 0xxx-Ziffern |
+| `AnalogReferenceExt` | string | Analogziffer-Referenz (GOÄ §6 Abs. 2) |
+
+## Private Billing Workflow
+
+Extensions tracking review and release status of private invoices.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PrivatFreigabeStatusExt` | string | Freigabestatus (Entwurf, Freigegeben, Versendet) |
+| `PrivatReviewedStatusExt` | boolean | Ärztlich geprüft |
+| `PrivatReviewedAtExt` | dateTime | Zeitpunkt der ärztlichen Prüfung |
+| `ReviewedStatusExt` | string | Allgemeiner Prüfstatus einer Abrechnungsposition |
+| `ReviewedAtExt` | dateTime | Zeitpunkt der Prüfung |
+
+## EBM auf ChargeItem-Ebene
+
+EBM detail extensions on individual ChargeItems. The concrete billed values may differ from catalog values due to surcharges or deductions.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BillingRlvRelevanzExt` | boolean | RLV-Relevanz der abgerechneten Leistung |
+
+## RLV / Budget
+
+Extensions for physician capitation budget management (Regelleistungsvolumen).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `RlvKvRegionExt` | string | KV-Region (z.B. KVB, KVNO) |
+| `RlvFachgruppeExt` | Coding | Fachgruppe gemäß KBV-Fachgruppenverzeichnis |
+| `RlvFallwertExt` | Money | RLV-Fallwert in Euro |
+| `RlvQzvFallwertExt` | Money | QZV-Fallwert in Euro |
+| `RlvZugewiesenExt` | Money | Zugewiesenes RLV-Budget |
+| `RlvQzvZugewiesenExt` | Money | Zugewiesenes QZV-Budget |
+| `RlvEntbudgetiertExt` | boolean | Entbudgetierung (z.B. Hausärzte) |
+| `RlvKategorieExt` | code | RLV-Kategorie |
+
+## Honorarbescheid / Remittance
+
+Extensions for KV quarterly payment statements.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `HonorarbescheidQuartalExt` | string | Abrechnungsquartal des Honorarbescheids |
+| `HonorarbescheidPatientNameExt` | string | Patientenname (aus Honorarbescheid) |
+| `HonorarbescheidPatientBirthDateExt` | date | Geburtsdatum (aus Honorarbescheid) |
+| `HonorarbescheidCorrectionSignExt` | code | Richtigstellungskennzeichen |
+
+## KV Benchmark
+
+Extensions for KV benchmark/comparison data (Fachgruppen-Durchschnittswerte).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `KvBenchmarkKvRegionExt` | string | KV-Region |
+| `KvBenchmarkFachgruppeExt` | string | Fachgruppenbezeichnung |
+| `KvBenchmarkFachgruppeCodeExt` | Coding | Fachgruppen-Code (KBV BAR2) |
+| `KvBenchmarkGueltigJahrExt` | integer | Gültigkeitsjahr |
+| `KvBenchmarkRlvFallwertAk1Ext` | Money | RLV-Fallwert AK1 (Durchschnitt) |
+| `KvBenchmarkRlvFallwertAk2Ext` | Money | RLV-Fallwert AK2 |
+| `KvBenchmarkRlvFallwertAk3Ext` | Money | RLV-Fallwert AK3 |
+| `KvBenchmarkDurchschnittFallzahlExt` | integer | Durchschnittliche Fallzahl der Fachgruppe |
+| `KvBenchmarkAuszahlungsquoteExt` | decimal | Auszahlungsquote in Prozent |
+| `KvBenchmarkHonorarJeFallExt` | Money | Durchschnittliches Honorar je Fall |
+| `KvBenchmarkQzvBereicheExt` | string | QZV-Bereiche der Fachgruppe |
+
+## Zeitbudget
+
+Extensions for KBV time budget management (Prüfzeit).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `ZeitbudgetMaxMinutenExt` | integer | Maximale Prüfzeit in Minuten pro Quartal |
+| `ZeitbudgetAbrechnungskreiseExt` | string | Zugehörige Abrechnungskreise |
+
+## HVG / Selektivverträge
+
+Extensions for selective contracts (§73b/§73c SGB V). Base contract data maps to the FHIR Contract resource; only genuinely additional fields are modeled as extensions.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `HvgFacharztvertragExt` | boolean | Facharztvertrag-Kennzeichen (§73c SGB V) |
+| `HvgKennungExt` | string | ~~Eindeutige Vertragskennung beim Kostenträger~~ **RETIRED** — use `Contract.identifier` with system `NamingSystem/hvg-kennung` instead |
+
+## BGT2001 / BG-Tarif
+
+Extensions for occupational accident tariff positions (supplements dguv.basis dependency).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BgtPunkteExt` | decimal | BGT-Punktzahl |
+| `BgtKatalogGruppeExt` | string | Obergruppe im BGT2001-Katalog |
+| `BgtKatalogUntergruppeExt` | string | Untergruppe im BGT2001-Katalog |
+
+## Price History
+
+Complex extension for historical pricing on ChargeItemDefinition catalog entries.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `PriceHistoryExt` | complex | Container mit Gültigkeitszeitraum und historischen Werten |
+| `PriceHistoryExt.validFrom` | date | Gültig ab |
+| `PriceHistoryExt.validTo` | date | Gültig bis |
+| `PriceHistoryExt.points` | decimal | Historischer Punktwert |
+| `PriceHistoryExt.euroValue` | Money | Historischer Euro-Betrag |
+
+## Condition / Diagnose
+
+Extensions for German-specific diagnosis metadata.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `DauerdiagnoseExt` | boolean | Kennzeichnung als Dauerdiagnose |
+
+## AI Provenance
+
+Extensions for EU AI Act Art. 50 compliance — tracking AI-generated content.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `AiGeneratedExt` | Coding | Art der KI-Beteiligung (generiert, unterstützt) |
+| `AiProviderExt` | string | KI-Anbieter/Hersteller |
+| `AiModelExt` | string | KI-Modellversion |
+| `AiTimestampExt` | dateTime | Zeitpunkt der KI-Generierung |
+| `AiPurposeExt` | string | Zweck des KI-Einsatzes |
+| `HumanReviewedExt` | boolean | Durch einen Menschen geprüft |
+| `HumanReviewerExt` | Reference | Prüfende Person |
+| `HumanReviewTimestampExt` | dateTime | Zeitpunkt der menschlichen Prüfung |
+
+## Genehmigung / KV Approvals
+
+Complex extension for KV-regulated service approvals (Leistungsbereichs-Genehmigungen).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `GenehmigungenExt` | complex | Container für Genehmigungsinformationen |
+| `GenehmigungenExt.leistungsbereich` | Coding | Genehmigter Leistungsbereich (z.B. Chirotherapie, Sonographie) |
+| `GenehmigungenExt.typ` | Coding | Genehmigungstyp: kopfbezogen oder betriebsstättenbezogen |
+| `GenehmigungenExt.gueltigAb` | date | Gültig ab |
+| `GenehmigungenExt.gueltigBis` | date | Gültig bis |
+| `GenehmigungenTypExt` | Coding | Standalone-Genehmigungstyp (kopfbezogen/betriebsstätte) |
+
+## Cross-Abrechnungskreis / MVZ
+
+Extensions for multi-physician practices (MVZ) where billing crosses between physicians.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `CrossAkIsPrimaryExt` | boolean | Primärer Abrechnungskreis |
+| `CrossAkBilledUnderExt` | Reference | Abgerechnet unter anderem Abrechnungskreis |
+
+## WB / Sicherstellungsassistent
+
+Extensions for training physicians and locum doctors.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `WbRolleExt` | Coding | Rolle: WB-Assistent oder Sicherstellungsassistent |
+| `WbSupervisorRoleExt` | Reference(PractitionerRole) | PractitionerRole des betreuenden Arztes (Supervisor) |
+
+## Accounts Receivable / Offene Posten
+
+Extensions for managing open invoices and dunning.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `RechnungsbetragExt` | Money | Rechnungsbetrag |
+| `OpSollExt` | Money | Soll-Betrag (offener Posten) |
+| `OpHabenExt` | Money | Haben-Betrag (Zahlungseingänge) |
+| `MahnstufeExt` | integer | Aktuelle Mahnstufe (0-3) |
+| `MahnsperreExt` | boolean | Mahnsperre gesetzt |
+| `FaelligkeitsdatumExt` | date | Fälligkeitsdatum der Rechnung |
+| `LetzteMahnungExt` | date | Datum der letzten Mahnung |
+| `MahngebuehrExt` | Money | Mahngebühr |
+| `OpRefExt` | Reference | Referenz auf den offenen Posten |
+
+## Payment / Zahlung
+
+Extensions for payment tracking.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `ZahlungsartExt` | code | Zahlungsart (bar, Überweisung, EC, etc.) |
+| `PaymentPatientRefExt` | Reference | Referenz auf den zahlenden Patienten |
+
+## Referral / Überweisung
+
+Extensions for referral management and optimization.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `UeUnfallExt` | boolean | Überweisungskennzeichen: Unfall |
+| `ReferralSugTypeExt` | code | Überweisungstyp (Auftragsleistung, Konsiliarauftrag, etc.) |
+| `ReferralCrossArztgruppeExt` | Coding | Fachgruppenübergreifende Überweisung |
+| `ReferralOptimizationStatusExt` | code | Optimierungsstatus (z.B. Budget-Impact) |
+| `ReferralOptimizationDeltaExt` | Money | Budget-Delta der Überweisungsoptimierung |
+
+## Organization / Betriebsstätte
+
+Extensions for practice-level administrative data on Organization resources.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `BankAccountExt` | Complex | Bankverbindung der Praxis (wiederholbar — mehrere Konten möglich) |
+| `BankAccountExt.iban` | string (1..1) | IBAN (Pflichtfeld) |
+| `BankAccountExt.bic` | string (0..1) | BIC / SWIFT-Code |
+| `BankAccountExt.bankname` | string (0..1) | Name des Kreditinstituts |
+| `BankAccountExt.kontoinhaber` | string (0..1) | Kontoinhaber |
+
+## Hospital Admission / Krankenhauseinweisung
+
+Extensions for hospital admission forms (Einweisungsschein).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `KheBelegarztExt` | boolean | Belegärztliche Behandlung |
+| `KheNotfallExt` | boolean | Notfalleinweisung |
+| `KheUnfallExt` | boolean | Unfallbedingte Einweisung |
+| `KheBvgExt` | boolean | BVG-Einweisung (Bundesversorgungsgesetz) |
+
+## Consent / Einwilligung
+
+Extensions for patient consent management in the practice.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `EinwilligungKuerzelExt` | string | Kürzel/Code der Einwilligung |
+| `EinwilligungZielgruppeExt` | code | Zielgruppe (Patient, Betreuer, etc.) |
+| `EinwilligungWiderrufMoeglichExt` | boolean | Widerruf möglich |
+| `EinwilligungGueltigkeitsdauerExt` | Duration | Gültigkeitsdauer der Einwilligung |
+| `EinwilligungAuswahlExt` | code | Auswahl des Patienten (Ja/Nein) |
+| `EinwilligungScheinNummerExt` | string | Zugehörige Scheinnummer |
+
+## AU / Arbeitsunfähigkeit
+
+Extensions for certificates of incapacity for work (AU-Bescheinigung).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `AuTypExt` | code | AU-Typ (Erstbescheinigung, Folgebescheinigung) |
+| `AuArbeitsunfallExt` | boolean | Arbeitsunfall (BG-relevant) |
+
+## Questionnaire / Anamneseboegen
+
+Extensions for history-taking questionnaire templates.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `QuestionnaireKategorieExt` | string | Fachliche Kategorie des Anamnesebogens (z.B. Allgemeinmedizin, Orthopädie) |
+| `QuestItemClinicalAlertExt` | boolean | Marks a questionnaire item as clinically critical (allergy, anticoagulant, endocarditis risk) |
+
+## Appointment / Termin
+
+Extensions for appointment scheduling and mode of consultation.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `AppointmentModeExt` | code | Terminmodus (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch) |
+
+## Condition / Diagnose
+
+Extensions for German-specific diagnosis metadata and ICD-10-GM diagnosesicherheit (KVDT 6.06).
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `DauerdiagnoseExt` | boolean | Kennzeichnung einer Dauerdiagnose (chronische Diagnose). Diagnosen mit diesem Flag werden automatisch in Folgequartale übernommen. |
+| `DiagnoseSeiteExt` | CodeableConcept | Seitenangabe der Diagnose (links/rechts/beidseitig). Ergänzt die KBV bodySite-Kodierung. Bindet an `body-site-laterality` (FHIR core, extensible). |
+
+**Note:** ICD-10-GM Diagnosesicherheit (A/G/V/Z) ist Pflichtfeld bei KV-Abrechnung und wird via upstream Extension `http://fhir.de/StructureDefinition/icd-10-gm-diagnosesicherheit` auf Coding-Ebene gespeichert. Diese Extension bindet automatisch an KBV_VS_SFHIR_ICD_DIAGNOSESICHERHEIT und muss vom PVS bei jeder Diagnose gesetzt werden.
+
+## Medication / Verordnung
+
+Extensions for prescription and medication management.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `IsErezeptExt` | boolean | Kennzeichen, ob das Rezept als E-Rezept (elektronisches Rezept) ausgestellt wurde |
+| `IsDauermedikationExt` | boolean | Kennzeichen, ob das Medikament zur Dauermedikation des Patienten gehört |
+| `AvpExt` | Money | Apothekenverkaufspreis (AVP) des verordneten Medikaments |
+| `FestbetragExt` | Money | GKV-Festbetrag für das verordnete Medikament |

@@ -1,0 +1,30 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "PraxisCarePlanTypeCS",
+  "id": "praxis-care-plan-type",
+  "title": "Praxis CarePlan Type",
+  "description": "Plan type codes for PraxisCarePlanDE category[planType] slice. Discriminates HZV (hausarzt), DMP (disease management), and generic care plan types.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-care-plan-type",
+  "concept": [
+    {
+      "code": "hzv",
+      "display": "HZV",
+      "definition": "Hausarztzentrierte Versorgungsplan (§73b SGB V)"
+    },
+    {
+      "code": "dmp",
+      "display": "DMP",
+      "definition": "Disease-Management-Programm-Plan (§137f SGB V)"
+    },
+    {
+      "code": "generic",
+      "display": "Generisch",
+      "definition": "Generischer Behandlungsplan (kein spezifischer Programmtyp)"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 3
+}

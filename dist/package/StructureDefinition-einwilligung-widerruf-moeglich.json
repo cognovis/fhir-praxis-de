@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "einwilligung-widerruf-moeglich",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/einwilligung-widerruf-moeglich",
+  "name": "EinwilligungWiderrufMoeglichExt",
+  "title": "Einwilligung Widerruf moeglich",
+  "status": "active",
+  "description": "Gibt an, ob die Einwilligung widerrufen werden kann.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Consent",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Einwilligung Widerruf moeglich",
+        "definition": "Gibt an, ob die Einwilligung widerrufen werden kann."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/einwilligung-widerruf-moeglich"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,128 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-care-plan",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-care-plan",
+  "name": "PraxisCarePlanDE",
+  "title": "Praxis CarePlan DE",
+  "status": "active",
+  "experimental": false,
+  "publisher": "cognovis GmbH",
+  "description": "General practice care plan profile for German ambulatory Praxisverwaltung. Covers HZV (§73b SGB V), DMP (§137f SGB V), and generic care plan types. Differentiates plan type via category[planType] slice with PraxisCarePlanTypeVS. Subject is always Patient (1..1). Parallel to DentalCarePlanDE (fhir-dental-de) for general (humanmedizinische) practice use. Implements ADR-001 (Plan-Library vs. Rule-Execution).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "CarePlan",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/CarePlan",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "CarePlan.identifier",
+        "path": "CarePlan.identifier",
+        "short": "Interne Plan-ID",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.status",
+        "path": "CarePlan.status",
+        "short": "Planstatus: draft | active | on-hold | revoked | completed",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.intent",
+        "path": "CarePlan.intent",
+        "short": "Planabsicht: immer 'plan'",
+        "patternCode": "plan"
+      },
+      {
+        "id": "CarePlan.category",
+        "path": "CarePlan.category",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 2
+      },
+      {
+        "id": "CarePlan.category:praxis",
+        "path": "CarePlan.category",
+        "sliceName": "praxis",
+        "short": "Praxis-Kategorie (immer 'praxis')",
+        "min": 1,
+        "max": "1",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "praxis",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-care-plan-category",
+              "display": "Praxis"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.category:planType",
+        "path": "CarePlan.category",
+        "sliceName": "planType",
+        "short": "Plantyp: hzv | dmp | generic",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/praxis-care-plan-type"
+        }
+      },
+      {
+        "id": "CarePlan.title",
+        "path": "CarePlan.title",
+        "short": "Planbeschreibung",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.subject",
+        "path": "CarePlan.subject",
+        "short": "Patient",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.period",
+        "path": "CarePlan.period",
+        "short": "Behandlungszeitraum",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.created",
+        "path": "CarePlan.created",
+        "short": "Erstelldatum",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.addresses",
+        "path": "CarePlan.addresses",
+        "short": "Zugehoerige Diagnose (Condition), relevant fuer DMP-Plaene",
+        "mustSupport": true
+      },
+      {
+        "id": "CarePlan.supportingInfo",
+        "path": "CarePlan.supportingInfo",
+        "short": "Unterstuetzende Informationen",
+        "mustSupport": true
+      }
+    ]
+  }
+}

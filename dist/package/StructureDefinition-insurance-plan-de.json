@@ -1,0 +1,175 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "insurance-plan-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de",
+  "name": "InsurancePlanDE",
+  "title": "InsurancePlan DE",
+  "status": "active",
+  "description": "Profil fuer kassenspezifische und tarifspezifische Leistungsregeln (GKV/PKV) in der deutschen ambulanten Versorgung.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "InsurancePlan",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/InsurancePlan",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "InsurancePlan.identifier",
+        "path": "InsurancePlan.identifier",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.status",
+        "path": "InsurancePlan.status",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.type",
+        "path": "InsurancePlan.type",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.name",
+        "path": "InsurancePlan.name",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.coverageArea",
+        "path": "InsurancePlan.coverageArea",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.coverage",
+        "path": "InsurancePlan.coverage",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.coverage.benefit",
+        "path": "InsurancePlan.coverage.benefit",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.coverage.benefit.type",
+        "path": "InsurancePlan.coverage.benefit.type",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan",
+        "path": "InsurancePlan.plan",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "type"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "InsurancePlan.plan.specificCost",
+        "path": "InsurancePlan.plan.specificCost",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan.specificCost.category",
+        "path": "InsurancePlan.plan.specificCost.category",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan.specificCost.benefit",
+        "path": "InsurancePlan.plan.specificCost.benefit",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan.specificCost.benefit.type",
+        "path": "InsurancePlan.plan.specificCost.benefit.type",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:gkv",
+        "path": "InsurancePlan.plan",
+        "sliceName": "gkv",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "InsurancePlan.plan:gkv.type",
+        "path": "InsurancePlan.plan.type",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "gkv",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:gkv.specificCost",
+        "path": "InsurancePlan.plan.specificCost",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:gkv.specificCost.category",
+        "path": "InsurancePlan.plan.specificCost.category",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:gkv.specificCost.benefit",
+        "path": "InsurancePlan.plan.specificCost.benefit",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:gkv.specificCost.benefit.type",
+        "path": "InsurancePlan.plan.specificCost.benefit.type",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:pkv",
+        "path": "InsurancePlan.plan",
+        "sliceName": "pkv",
+        "min": 0,
+        "max": "*"
+      },
+      {
+        "id": "InsurancePlan.plan:pkv.type",
+        "path": "InsurancePlan.plan.type",
+        "min": 1,
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "pkv",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:pkv.specificCost",
+        "path": "InsurancePlan.plan.specificCost",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:pkv.specificCost.category",
+        "path": "InsurancePlan.plan.specificCost.category",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:pkv.specificCost.benefit",
+        "path": "InsurancePlan.plan.specificCost.benefit",
+        "mustSupport": true
+      },
+      {
+        "id": "InsurancePlan.plan:pkv.specificCost.benefit.type",
+        "path": "InsurancePlan.plan.specificCost.benefit.type",
+        "mustSupport": true
+      }
+    ]
+  }
+}

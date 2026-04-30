@@ -1,0 +1,128 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "billingpattern-stopfield",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/billingpattern-stopfield",
+  "name": "BillingPatternStopfield",
+  "title": "BillingPattern Stopfield",
+  "status": "active",
+  "description": "A stopfield (Stoppfeld) in a billing pattern chain (Ziffernkette). Stopfields prompt the user for additional input at point-of-care when executing the pattern.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "PlanDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "BillingPattern Stopfield",
+        "definition": "A stopfield (Stoppfeld) in a billing pattern chain (Ziffernkette). Stopfields prompt the user for additional input at point-of-care when executing the pattern."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "min": 3
+      },
+      {
+        "id": "Extension.extension:label",
+        "path": "Extension.extension",
+        "sliceName": "label",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:label.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:label.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "label"
+      },
+      {
+        "id": "Extension.extension:label.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:type",
+        "path": "Extension.extension",
+        "sliceName": "type",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:type.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:type.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "type"
+      },
+      {
+        "id": "Extension.extension:type.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/billing-pattern-stopfield-type"
+        }
+      },
+      {
+        "id": "Extension.extension:required",
+        "path": "Extension.extension",
+        "sliceName": "required",
+        "min": 1,
+        "max": "1"
+      },
+      {
+        "id": "Extension.extension:required.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:required.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "required"
+      },
+      {
+        "id": "Extension.extension:required.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/billingpattern-stopfield"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "max": "0"
+      }
+    ]
+  }
+}

@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "PASTaskInputTypeCS",
+  "id": "pas-task-input-type",
+  "title": "PAS Task Input Type",
+  "description": "Codes zur Unterscheidung der Eingabe- und Ausgabetypen in PAS-Workflow-Tasks.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-input-type",
+  "concept": [
+    {
+      "code": "claim-reference",
+      "display": "Claim Reference",
+      "definition": "Referenz auf den zugehoerigen Genehmigungsantrag (Claim)"
+    },
+    {
+      "code": "response-reference",
+      "display": "ClaimResponse Reference",
+      "definition": "Referenz auf den Genehmigungsbescheid (ClaimResponse)"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

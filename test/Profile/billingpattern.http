@@ -1,0 +1,139 @@
+### BillingPattern PlanDefinition validieren (Positiv-Test)
+# @name validate-billingpattern-positive
+# Expected: OperationOutcome with "all ok" (no errors)
+# Validates a PlanDefinition conforming to the PraxisBillingPattern profile
+# Covers: status=active, type=order-set, identifier[billingPatternId], useContext[practitioner], useContext[icdFocus], two stopfield extensions, one action with definitionCanonical
+POST http://localhost:8080/fhir/PlanDefinition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "PlanDefinition",
+  "id": "example-billingpattern-hausbesuch",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern"]
+  },
+  "extension": [
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/billingpattern-stopfield",
+      "extension": [
+        {
+          "url": "label",
+          "valueString": "Befundbeschreibung"
+        },
+        {
+          "url": "type",
+          "valueCode": "text"
+        },
+        {
+          "url": "required",
+          "valueBoolean": false
+        }
+      ]
+    },
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/billingpattern-stopfield",
+      "extension": [
+        {
+          "url": "label",
+          "valueString": "Hauptdiagnose"
+        },
+        {
+          "url": "type",
+          "valueCode": "icd"
+        },
+        {
+          "url": "required",
+          "valueBoolean": true
+        }
+      ]
+    }
+  ],
+  "identifier": [
+    {
+      "system": "https://fhir.cognovis.de/praxis/sid/billing-pattern-id",
+      "value": "HB-AM-001"
+    }
+  ],
+  "status": "active",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+        "code": "order-set"
+      }
+    ]
+  },
+  "title": "Hausbesuch — Allgemeinmedizin (EBM)",
+  "description": "Standardisierte Ziffernkette fuer den allgemeinmedizinischen Hausbesuch gemaess EBM.",
+  "useContext": [
+    {
+      "code": {
+        "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+        "code": "user"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe",
+            "code": "allgemeinmedizin",
+            "display": "Allgemeinmedizin"
+          }
+        ]
+      }
+    },
+    {
+      "code": {
+        "system": "http://terminology.hl7.org/CodeSystem/usage-context-type",
+        "code": "focus"
+      },
+      "valueCodeableConcept": {
+        "coding": [
+          {
+            "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+            "code": "I10",
+            "display": "Essentielle (primaere) Hypertonie"
+          }
+        ]
+      }
+    }
+  ],
+  "action": [
+    {
+      "title": "Hausbesuch (EBM 01410)",
+      "definitionCanonical": "https://fhir.cognovis.de/praxis/ActivityDefinition/ebm-01410"
+    },
+    {
+      "title": "Wegepauschale (EBM 01416)",
+      "definitionCanonical": "https://fhir.cognovis.de/praxis/ActivityDefinition/ebm-01416"
+    }
+  ]
+}
+
+###
+
+### BillingPattern PlanDefinition validieren (Negativ-Test: status=draft, type=protocol)
+# @name validate-billingpattern-negative
+# Expected: OperationOutcome with errors (status must be active, type must be order-set)
+# Verifies that profile constraints fire on invalid resources
+POST http://localhost:8080/fhir/PlanDefinition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "PlanDefinition",
+  "id": "example-billingpattern-invalid",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern"]
+  },
+  "status": "draft",
+  "type": {
+    "coding": [
+      {
+        "system": "http://terminology.hl7.org/CodeSystem/plan-definition-type",
+        "code": "protocol"
+      }
+    ]
+  },
+  "title": "Ungueltige Ziffernkette"
+}

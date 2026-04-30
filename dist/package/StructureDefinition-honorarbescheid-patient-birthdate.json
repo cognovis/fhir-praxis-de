@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "honorarbescheid-patient-birthdate",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-birthdate",
+  "name": "HonorarbescheidPatientBirthDateExt",
+  "title": "Honorarbescheid Geburtsdatum",
+  "status": "active",
+  "description": "Geburtsdatum des Patienten als Fallback",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ClaimResponse",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Honorarbescheid Geburtsdatum",
+        "definition": "Geburtsdatum des Patienten als Fallback"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/honorarbescheid-patient-birthdate"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "date"
+          }
+        ]
+      }
+    ]
+  }
+}

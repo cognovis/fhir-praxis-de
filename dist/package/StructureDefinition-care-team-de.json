@@ -1,0 +1,104 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "care-team-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de",
+  "name": "CareTeamDE",
+  "title": "CareTeam DE",
+  "status": "active",
+  "description": "Profil fuer Behandler-Teams in der deutschen ambulanten Versorgung (z.B. interdisziplinaere Versorgungsteams).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "CareTeam",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/CareTeam",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "CareTeam.status",
+        "path": "CareTeam.status",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.category",
+        "path": "CareTeam.category",
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.name",
+        "path": "CareTeam.name",
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.subject",
+        "path": "CareTeam.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.period",
+        "path": "CareTeam.period",
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.participant",
+        "path": "CareTeam.participant",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "role"
+            }
+          ],
+          "rules": "open"
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.participant:behandler",
+        "path": "CareTeam.participant",
+        "sliceName": "behandler",
+        "min": 0,
+        "max": "*",
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.participant:behandler.role",
+        "path": "CareTeam.participant.role",
+        "mustSupport": true,
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/behandler-rolle"
+        }
+      },
+      {
+        "id": "CareTeam.participant:behandler.member",
+        "path": "CareTeam.participant.member",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Practitioner",
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+              "http://hl7.org/fhir/StructureDefinition/Organization"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "CareTeam.participant:behandler.period",
+        "path": "CareTeam.participant.period",
+        "mustSupport": true
+      }
+    ]
+  }
+}

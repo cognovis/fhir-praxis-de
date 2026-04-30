@@ -1,0 +1,141 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rlv-fallwert-detail",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fallwert-detail",
+  "name": "RlvFallwertDetail",
+  "title": "RLV Fallwert Detail",
+  "status": "active",
+  "description": "Profil fuer detaillierte RLV-Fallwert-Informationen mit Zuschlaegen und Fallzahlen.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Basic",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Basic",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Basic.extension",
+        "path": "Basic.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Basic.extension:rlvFallwertzuschlag",
+        "path": "Basic.extension",
+        "sliceName": "rlvFallwertzuschlag",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fallwertzuschlag"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvFallzahl",
+        "path": "Basic.extension",
+        "sliceName": "rlvFallzahl",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fallzahl"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvZuschlagsgruppe",
+        "path": "Basic.extension",
+        "sliceName": "rlvZuschlagsgruppe",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-zuschlagsgruppe"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvVerrechnung",
+        "path": "Basic.extension",
+        "sliceName": "rlvVerrechnung",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-verrechnung"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvParentId",
+        "path": "Basic.extension",
+        "sliceName": "rlvParentId",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-parent-id"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvLzZiffer",
+        "path": "Basic.extension",
+        "sliceName": "rlvLzZiffer",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-lz-ziffer"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.code",
+        "path": "Basic.code",
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "code": "rlv-fallwert-detail",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/basic-resource-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.subject",
+        "path": "Basic.subject",
+        "mustSupport": true
+      }
+    ]
+  }
+}

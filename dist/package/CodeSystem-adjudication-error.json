@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "GenehmigungsFehlerCS",
+  "id": "adjudication-error",
+  "title": "Genehmigungsfehler",
+  "description": "Fehlercodes fuer abgelehnte Genehmigungsantraege im deutschen Praxiskontext",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/adjudication-error",
+  "concept": [
+    {
+      "code": "nicht-genehmigungspflichtig",
+      "display": "Nicht genehmigungspflichtig",
+      "definition": "Die beantragte Leistung bedarf keiner Vorabgenehmigung durch die Krankenkasse"
+    },
+    {
+      "code": "unbekannt",
+      "display": "Unbekannt",
+      "definition": "Fehlerursache unbekannt oder nicht naeher spezifiziert"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

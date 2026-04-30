@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "BGT2001VS",
+  "id": "bgt2001",
+  "title": "BGT2001 Tarifpositionen",
+  "description": "Alle Tarifpositionen (Ziffern) aus dem BGT2001-Gebührentarif der DGUV für die Abrechnung berufsgenossenschaftlicher Heilbehandlungen.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/bgt2001",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/bgt2001"
+      }
+    ]
+  }
+}

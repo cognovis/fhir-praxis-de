@@ -1,0 +1,16 @@
+{
+  "package-id": "de.cognovis.fhir.praxis",
+  "canonical": "https://fhir.cognovis.de/praxis",
+  "title": "German Practice Management FHIR Profiles (R4)",
+  "introduction": "FHIR R4 Implementation Guide for German ambulatory practice management (Praxisverwaltung). Covers billing (EBM/GOÄ), budget management (RLV/QZV), remittance, queue management, AI provenance (EU AI Act), and administrative workflows.",
+  "list": [
+    {
+      "version": "current",
+      "path": "https://fhir.cognovis.de/praxis",
+      "status": "ci-build",
+      "sequence": "ci-build",
+      "fhirversion": "4.0.1",
+      "current": true
+    }
+  ]
+}

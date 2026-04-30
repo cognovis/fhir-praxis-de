@@ -1,0 +1,19 @@
+### ValueSet: Genehmigung Typ - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/genehmigung-typ/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: Genehmigung Typ - $validate-code valid (kopfbezogen)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/genehmigung-typ/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ&code=kopfbezogen
+Authorization: Basic basic:secret
+
+### ValueSet: Genehmigung Typ - $validate-code valid (betriebsstaette)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/genehmigung-typ/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ&code=betriebsstaette
+Authorization: Basic basic:secret
+
+### ValueSet: Genehmigung Typ - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/genehmigung-typ/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

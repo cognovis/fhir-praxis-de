@@ -1,0 +1,9 @@
+### ValueSet: HVG Vertragsart - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/hvg-vertragsart/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: HVG Vertragsart - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/hvg-vertragsart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

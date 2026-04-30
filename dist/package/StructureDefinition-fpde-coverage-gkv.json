@@ -1,0 +1,23 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "fpde-coverage-gkv",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv",
+  "name": "FPDECoverageGKV",
+  "title": "FPDE Coverage GKV",
+  "status": "active",
+  "description": "GKV-Versicherung. Basiert auf coverage-de-gkv aus de.basisprofil.r4 (inkl. WOP und KrankenversichertenID).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Coverage",
+  "baseDefinition": "http://fhir.de/StructureDefinition/coverage-de-gkv",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Coverage",
+        "path": "Coverage"
+      }
+    ]
+  }
+}

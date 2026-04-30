@@ -1,0 +1,85 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "KvFachgruppeCS",
+  "id": "kv-fachgruppe",
+  "title": "KV Fachgruppe",
+  "description": "Fachgruppen-Codes der Kassenärztlichen Vereinigungen für die Honorarverteilung",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe",
+  "concept": [
+    {
+      "code": "allgemeinmedizin",
+      "display": "Allgemeinmedizin",
+      "definition": "Fachärzte für Allgemeinmedizin"
+    },
+    {
+      "code": "innere-medizin",
+      "display": "Innere Medizin",
+      "definition": "Fachärzte für Innere Medizin"
+    },
+    {
+      "code": "paediatrie",
+      "display": "Pädiatrie",
+      "definition": "Fachärzte für Kinder- und Jugendmedizin"
+    },
+    {
+      "code": "gynaekologie",
+      "display": "Gynäkologie",
+      "definition": "Fachärzte für Frauenheilkunde und Geburtshilfe"
+    },
+    {
+      "code": "chirurgie",
+      "display": "Chirurgie",
+      "definition": "Fachärzte für Chirurgie"
+    },
+    {
+      "code": "orthopaedie",
+      "display": "Orthopädie",
+      "definition": "Fachärzte für Orthopädie"
+    },
+    {
+      "code": "neurologie",
+      "display": "Neurologie",
+      "definition": "Fachärzte für Neurologie"
+    },
+    {
+      "code": "psychiatrie",
+      "display": "Psychiatrie",
+      "definition": "Fachärzte für Psychiatrie und Psychotherapie"
+    },
+    {
+      "code": "augenheilkunde",
+      "display": "Augenheilkunde",
+      "definition": "Fachärzte für Augenheilkunde"
+    },
+    {
+      "code": "hno",
+      "display": "HNO",
+      "definition": "Fachärzte für Hals-Nasen-Ohrenheilkunde"
+    },
+    {
+      "code": "dermatologie",
+      "display": "Dermatologie",
+      "definition": "Fachärzte für Haut- und Geschlechtskrankheiten"
+    },
+    {
+      "code": "urologie",
+      "display": "Urologie",
+      "definition": "Fachärzte für Urologie"
+    },
+    {
+      "code": "radiologie",
+      "display": "Radiologie",
+      "definition": "Fachärzte für Radiologie"
+    },
+    {
+      "code": "anaesthesiologie",
+      "display": "Anästhesiologie",
+      "definition": "Fachärzte für Anästhesiologie"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 14
+}

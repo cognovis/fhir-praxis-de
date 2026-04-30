@@ -1,0 +1,19 @@
+### ValueSet: Genehmigung Leistungsbereich - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/genehmigung-leistungsbereich/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: Genehmigung Leistungsbereich - $validate-code valid (chirotherapie)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/genehmigung-leistungsbereich/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=chirotherapie
+Authorization: Basic basic:secret
+
+### ValueSet: Genehmigung Leistungsbereich - $validate-code valid (psychosomatik)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/genehmigung-leistungsbereich/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=psychosomatik
+Authorization: Basic basic:secret
+
+### ValueSet: Genehmigung Leistungsbereich - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/genehmigung-leistungsbereich/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-leistungsbereich&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

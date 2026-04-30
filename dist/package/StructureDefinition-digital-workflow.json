@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "digital-workflow",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/digital-workflow",
+  "name": "DigitalWorkflowExt",
+  "title": "Digitaler Workflow",
+  "status": "active",
+  "description": "Art des Herstellungsworkflows: digital (z.B. Intraoralscan, CAD/CAM), konventionell (z.B. Alginatabformung, Gipsmodell) oder hybrid.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ServiceRequest",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Digitaler Workflow",
+        "definition": "Art des Herstellungsworkflows: digital (z.B. Intraoralscan, CAD/CAM), konventionell (z.B. Alginatabformung, Gipsmodell) oder hybrid."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/digital-workflow"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/digital-workflow"
+        }
+      }
+    ]
+  }
+}

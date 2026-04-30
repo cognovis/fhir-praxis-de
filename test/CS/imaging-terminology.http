@@ -1,0 +1,81 @@
+### ContrastAgentTypeCS — valid iodinated
+# @name contrast_iodinated
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/contrast-agent-type&code=iodinated-low-osmolar
+Authorization: Basic basic:secret
+
+### ContrastAgentTypeCS — valid gadolinium
+# @name contrast_gadolinium
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/contrast-agent-type&code=gadolinium-extracellular
+Authorization: Basic basic:secret
+
+### ContrastAgentTypeCS — invalid
+# @name contrast_invalid
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/contrast-agent-type&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret
+
+### ContrastAgentTypeCS — $lookup iodinated-low-osmolar (verify properties including pzn-code)
+# @name contrast_lookup_iodinated
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/contrast-agent-type&code=iodinated-low-osmolar
+Authorization: Basic basic:secret
+
+### ReportDistributionChannelCS — valid kim
+# @name dist_kim
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/report-distribution-channel&code=kim
+Authorization: Basic basic:secret
+
+### ReportDistributionChannelCS — valid patientportal
+# @name dist_patientportal
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/report-distribution-channel&code=patientportal
+Authorization: Basic basic:secret
+
+### ReportDistributionChannelCS — $lookup kim (verify display)
+# @name dist_lookup_kim
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/report-distribution-channel&code=kim
+Authorization: Basic basic:secret
+
+### RadiologyRoleCS — valid MTR
+# @name role_mtr
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/radiology-role&code=MTR
+Authorization: Basic basic:secret
+
+### RadiologyRoleCS — valid ReadingRadiologist
+# @name role_reading_rad
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/radiology-role&code=ReadingRadiologist
+Authorization: Basic basic:secret
+
+### AppointmentReadinessCS — valid checked-in
+# @name readiness_checked_in
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness&code=checked-in
+Authorization: Basic basic:secret
+
+### AppointmentReadinessCS — valid preparation-complete
+# @name readiness_prep_complete
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness&code=preparation-complete
+Authorization: Basic basic:secret
+
+### ReportSubstatusCS — valid signed
+# @name substatus_signed
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/report-substatus&code=signed
+Authorization: Basic basic:secret
+
+### ReportSubstatusCS — valid dictation-pending
+# @name substatus_dictation_pending
+GET http://localhost:8080/fhir/CodeSystem/$validate-code?url=https://fhir.cognovis.de/praxis/CodeSystem/report-substatus&code=dictation-pending
+Authorization: Basic basic:secret
+
+### AppointmentReadinessCS — $lookup all codes (AK7: $expand-equivalent via VS)
+# Note: CodeSystem.$expand is non-standard; use ValueSet/$expand for AppointmentReadinessVS
+# $lookup verifies individual code properties
+# @name readiness_lookup_waiting
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness&code=waiting-for-modality
+Authorization: Basic basic:secret
+
+### RadiologyRoleCS — $lookup all codes (AK7)
+# @name role_lookup_mtr
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/radiology-role&code=MTR
+Authorization: Basic basic:secret
+
+### ReportSubstatusCS — $lookup signed
+# @name substatus_lookup_signed
+GET http://localhost:8080/fhir/CodeSystem/$lookup?system=https://fhir.cognovis.de/praxis/CodeSystem/report-substatus&code=signed
+Authorization: Basic basic:secret

@@ -1,0 +1,14 @@
+### CodeSystem: diagnose-seite - Valid code: L
+# @name valid_L
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite&code=L
+Authorization: Basic basic:secret
+
+### CodeSystem: diagnose-seite - Valid code: R
+# @name valid_R
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite&code=R
+Authorization: Basic basic:secret
+
+### CodeSystem: diagnose-seite - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

@@ -1,0 +1,35 @@
+{
+  "resourceType": "Bundle",
+  "type": "transaction",
+  "entry": [
+    {
+      "resource": {
+        "resourceType": "Client",
+        "id": "basic",
+        "secret": "secret",
+        "grant_types": ["basic"]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "Client/basic"
+      }
+    },
+    {
+      "resource": {
+        "resourceType": "AccessPolicy",
+        "id": "basic-policy",
+        "engine": "allow",
+        "link": [
+          {
+            "resourceType": "Client",
+            "id": "basic"
+          }
+        ]
+      },
+      "request": {
+        "method": "PUT",
+        "url": "AccessPolicy/basic-policy"
+      }
+    }
+  ]
+}
