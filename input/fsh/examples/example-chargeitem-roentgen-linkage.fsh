@@ -6,7 +6,7 @@
 
 Alias: $sct = http://snomed.info/sct
 Alias: $icd10gm = http://fhir.de/CodeSystem/bfarm/icd-10-gm
-Alias: $goae = https://fhir.de/CodeSystem/bak/goae
+Alias: $goae = http://fhir.de/CodeSystem/goae
 Alias: $radiology-role-cs = https://fhir.cognovis.de/praxis/CodeSystem/radiology-role
 
 // --- Hilfsinstanz: Patient fuer Roentgen-Linkage-Beispiel ---
@@ -126,7 +126,7 @@ Usage: #example
 * context = Reference(example-encounter-ct-schaedel)
 
 // code: GOAe Ae5370 — CT Schaedel (strahlenrelevanter Abrechnungscode)
-* code.coding[0].system = "https://fhir.de/CodeSystem/bak/goae"
+* code.coding[0].system = "http://fhir.de/CodeSystem/goae"
 * code.coding[0].code = #5370
 * code.coding[0].display = "CT Schaedel"
 

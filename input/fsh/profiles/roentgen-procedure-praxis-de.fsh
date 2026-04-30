@@ -36,16 +36,19 @@ Description: "Roentgen-Prozedur-Profil fuer die deutsche ambulante Praxis. Erbt 
 * code ^short = "Bildgebungsverfahren-Code (ImagingProcedureVS, extensible)"
 * code ^definition = "Code des Bildgebungsverfahrens. Extensible Binding auf ImagingProcedureVS aus de.cognovis.terminology.imaging."
 
-// subject: Patient (1..1) — IPS parent allows only Patient-uv-ips; keep inherited constraint
+// subject: Patient (1..1) — override IPS narrowing to allow any Patient (not just Patient-uv-ips)
+// Cannot use "only Reference(Patient)" in FSH because SUSHI does not allow widening a parent type constraint.
+// Use caret syntax to set targetProfile directly in the generated JSON.
 * subject 1..1 MS
+* subject ^type[0].targetProfile[0] = "http://hl7.org/fhir/StructureDefinition/Patient"
 * subject ^short = "Patient (Pflichtfeld)"
 
 // performed[x]: Aufnahmedatum (Pflichtfeld gemaess SS85 StrlSchV)
-// IPS uses performed[x] — constrain to performedDateTime only
+// IPS uses performed[x] — constrain to dateTime only; cardinality on choice element before type narrowing
+* performed[x] 1..1 MS
 * performed[x] only dateTime
-* performedDateTime 1..1 MS
-* performedDateTime ^short = "Aufnahmedatum (Pflicht gemaess SS85 StrlSchV)"
-* performedDateTime ^definition = "Datum und Uhrzeit der Roentgenaufnahme. Pflichtfeld fuer die Aufzeichnung gemaess SS85 StrlSchV."
+* performed[x] ^short = "Aufnahmedatum (Pflicht gemaess SS85 StrlSchV)"
+* performed[x] ^definition = "Datum und Uhrzeit der Roentgenaufnahme. Pflichtfeld fuer die Aufzeichnung gemaess SS85 StrlSchV."
 
 // performer: Anwender-Slicing (MTR und Strahlenschutzverantwortlicher)
 * performer MS

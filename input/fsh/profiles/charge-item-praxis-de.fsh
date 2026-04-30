@@ -26,9 +26,9 @@ Description: "ChargeItem-Profil fuer die deutsche ambulante Praxis. Stellt siche
 * code ^short = "Abrechnungscode (EBM, GOAe, etc.)"
 * code ^definition = "Abrechnungsziffer des ChargeItems. Wenn der Code in RadiationRelevantBillingCodeVS enthalten ist, ist service (Referenz auf RoentgenProcedurePraxisDe) Pflicht (Invariante radiation-service-required)."
 
-// subject: Patient-Referenz
+// subject: Patient-Referenz (tightened to Patient only for practice scope)
 * subject MS
-* subject only Reference(Patient or Group)
+* subject only Reference(Patient)
 * subject ^short = "Patient (Pflichtfeld)"
 
 // service: Referenz auf durchgefuehrte Prozedur (Strahlenschutz-Compliance)
