@@ -29,7 +29,7 @@ Description: "Kontrastmittel-Gabe bei bildgebenden Untersuchungen. Dokumentiert 
 
 // agent-atc: ATC-Klassifikation des Kontrastmittels
 * extension[agent-atc].value[x] only CodeableConcept
-* extension[agent-atc] from https://fhir.cognovis.de/imaging/ValueSet/contrast-agent-atc (preferred)
+* extension[agent-atc].valueCodeableConcept from https://fhir.cognovis.de/imaging/ValueSet/contrast-agent-atc (preferred)
 * extension[agent-atc] ^short = "Kontrastmittel ATC-Klassifikation"
 * extension[agent-atc] ^definition = "ATC-Klassifikation des verabreichten Kontrastmittels (z.B. V08CA fuer gadoliniumhaltige MRT-Kontrastmittel)."
 
@@ -47,7 +47,7 @@ Description: "Kontrastmittel-Gabe bei bildgebenden Untersuchungen. Dokumentiert 
 
 // route: Applikationsweg
 * extension[route].value[x] only CodeableConcept
-* extension[route] from http://hl7.org/fhir/ValueSet/route-codes (preferred)
+* extension[route].valueCodeableConcept from http://hl7.org/fhir/ValueSet/route-codes (preferred)
 * extension[route] ^short = "Applikationsweg"
 * extension[route] ^definition = "Art der Verabreichung des Kontrastmittels (z.B. intravenoese Gabe)."
 

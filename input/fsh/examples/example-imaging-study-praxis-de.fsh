@@ -35,6 +35,9 @@ Usage: #example
 * connectionType.code = #dicom-wado-rs
 * connectionType.display = "DICOM WADO-RS"
 * name = "PACS WADO-RS Endpunkt"
+* payloadType[0].coding[0].system = "http://terminology.hl7.org/CodeSystem/endpoint-payload-type"
+* payloadType[0].coding[0].code = #any
+* payloadType[0].coding[0].display = "Any"
 * address = "https://pacs.example.org/wado/rs"
 
 // ============================================================
