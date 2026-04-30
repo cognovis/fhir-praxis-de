@@ -59,6 +59,8 @@ Title: "GKV-Versicherung Weber (MRT-Knie Szenario)"
 Description: "GKV-Versicherung fuer Thomas Weber, AOK Bayern, fuer das MRT-Knie-Szenario."
 Usage: #example
 * status = #active
+* identifier[0].system = "http://fhir.de/sid/gkv/kvid-10"
+* identifier[0].value = "A123456789"
 * subscriber = Reference(example-patient)
 * beneficiary = Reference(example-patient)
 * payor[0].display = "AOK Bayern"
@@ -71,8 +73,8 @@ Description: "Bildgebungsauftrag MRT linkes Knie fuer Thomas Weber. Indikation: 
 Usage: #example
 * status = #active
 * intent = #order
-* identifier[0].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
-* identifier[0].value = "SR-MRT-KNIE-2026-001"
+* identifier[accession].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
+* identifier[accession].value = "SR-MRT-KNIE-2026-001"
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #36803-5
 * code.coding[0].display = "MRI of knee"
