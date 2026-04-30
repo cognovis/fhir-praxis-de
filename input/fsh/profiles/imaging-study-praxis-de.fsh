@@ -37,9 +37,13 @@ Description: "Bildgebungs-Studie-Profil fuer die deutsche ambulante Praxis. Erbt
 * referrer ^definition = "Ueberweisender Arzt oder Ueberweiserin. Pflichtfeld fuer das KV-Abrechnungs-Tracking (Ueberweiser-Statistik und Qualitaetssicherung)."
 
 // endpoint: WADO-RS-faehiger DICOM-Endpunkt
+// endpoint: WADO-RS connection-type is RECOMMENDED (not enforced).
+// The example uses dicom-wado-rs. Profile intentionally omits connectionType constraint
+// to allow future endpoint types (QIDO-RS, STOW-RS) without re-profiling.
+// See bead notes: fpde-cpw.2 DECIDE on endpoint constraint.
 * endpoint MS
 * endpoint ^short = "WADO-RS Endpunkt fuer DICOM-Studie"
-* endpoint ^definition = "Verbindungsendpunkt fuer den Abruf der DICOM-Bilddaten via WADO-RS."
+* endpoint ^definition = "Verbindungsendpunkt fuer den Abruf der DICOM-Bilddaten. Connection type SHOULD be `dicom-wado-rs` (WADO-RS) for PACS retrieval. Constraint not enforced at profile level to allow future DICOMweb endpoint variants (QIDO-RS, STOW-RS)."
 
 // series: Bildserien-Constraints
 * series MS

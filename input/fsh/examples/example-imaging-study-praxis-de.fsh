@@ -43,7 +43,7 @@ Usage: #example
 // Modalitaet: MR — DICOM CID 29
 // Koerperregion: Knie (SNOMED 72696002)
 // Lateralitaet: Links (SNOMED 7771000)
-// KM: Gadolinium (ATC V08CA02 = Gadopentetate dimeglumine), 15 ml iv
+// KM: Gadolinium (ATC V08CA01 = Gadopentetic acid / Gadopentetate dimeglumine = Magnevist), 15 ml iv
 // Technik: TR=800ms, TE=15ms, Schichtdicke=3mm
 // Referrer: Dr. Klaus Schmidt (Pflicht fuer KV-Abrechnung)
 Instance: example-imaging-study-mrt-knie-km
@@ -69,8 +69,8 @@ Usage: #example
 // KM-Gabe Extension: Gadolinium intravenoese, 15 ml
 * extension[kmAdministration].extension[administered].valueBoolean = true
 * extension[kmAdministration].extension[agent-atc].valueCodeableConcept.coding[0].system = "http://www.whocc.no/atc"
-* extension[kmAdministration].extension[agent-atc].valueCodeableConcept.coding[0].code = #V08CA02
-* extension[kmAdministration].extension[agent-atc].valueCodeableConcept.coding[0].display = "Gadopentetate dimeglumine"
+* extension[kmAdministration].extension[agent-atc].valueCodeableConcept.coding[0].code = #V08CA01
+* extension[kmAdministration].extension[agent-atc].valueCodeableConcept.coding[0].display = "Gadopentetic acid"
 * extension[kmAdministration].extension[agent-name].valueString = "Magnevist 0,5 mmol/ml"
 * extension[kmAdministration].extension[dose-ml].valueQuantity.value = 15
 * extension[kmAdministration].extension[dose-ml].valueQuantity.unit = "mL"
