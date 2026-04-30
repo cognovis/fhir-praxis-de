@@ -1,0 +1,140 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "report-distribution",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/report-distribution",
+  "name": "ReportDistributionExt",
+  "title": "Report Distribution Event",
+  "status": "active",
+  "description": "Tracking eines Befund-Verteilungs-Events. Enthaelt Kanal (KIM, E-Mail, Fax, etc.), Empfaenger-Referenz und Zeitstempel der Uebermittlung. Wird als Array 0..* verwendet, um mehrere Verteilungen nachzuverfolgen.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "DiagnosticReport",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Report Distribution Event",
+        "definition": "Tracking eines Befund-Verteilungs-Events. Enthaelt Kanal (KIM, E-Mail, Fax, etc.), Empfaenger-Referenz und Zeitstempel der Uebermittlung. Wird als Array 0..* verwendet, um mehrere Verteilungen nachzuverfolgen."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "min": 2
+      },
+      {
+        "id": "Extension.extension:channel",
+        "path": "Extension.extension",
+        "sliceName": "channel",
+        "short": "Verteilungskanal (KIM, E-Mail, Fax, Patientenportal)",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Extension.extension:channel.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:channel.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "channel"
+      },
+      {
+        "id": "Extension.extension:channel.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "Coding"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/report-distribution-channel"
+        }
+      },
+      {
+        "id": "Extension.extension:recipient",
+        "path": "Extension.extension",
+        "sliceName": "recipient",
+        "short": "Empfaenger des Befunds (Arzt, Organisation, Patient)",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Extension.extension:recipient.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:recipient.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "recipient"
+      },
+      {
+        "id": "Extension.extension:recipient.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Practitioner",
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole",
+              "http://hl7.org/fhir/StructureDefinition/Organization",
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Extension.extension:timestamp",
+        "path": "Extension.extension",
+        "sliceName": "timestamp",
+        "short": "Zeitstempel der Uebermittlung",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Extension.extension:timestamp.extension",
+        "path": "Extension.extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.extension:timestamp.url",
+        "path": "Extension.extension.url",
+        "fixedUri": "timestamp"
+      },
+      {
+        "id": "Extension.extension:timestamp.value[x]",
+        "path": "Extension.extension.value[x]",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ]
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/report-distribution"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "max": "0"
+      }
+    ]
+  }
+}

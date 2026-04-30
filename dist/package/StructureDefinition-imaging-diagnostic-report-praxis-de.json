@@ -1,0 +1,167 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "imaging-diagnostic-report-praxis-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/imaging-diagnostic-report-praxis-de",
+  "name": "ImagingDiagnosticReportPraxisDe",
+  "title": "Imaging DiagnosticReport (Praxis DE)",
+  "status": "active",
+  "description": "Radiologiebefund-Profil fuer die deutsche ambulante Praxis. Erbt von IHE IMR DiagnosticReport (IHE.IMR.DiagnosticReport). Erweitert um KDL-Category-Slicing, LOINC-Code-Binding, Distribution-Tracking und Sub-Status-Extension.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "DiagnosticReport",
+  "baseDefinition": "https://profiles.ihe.net/RAD/IMR/StructureDefinition/imr-diagnosticreport",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "DiagnosticReport.extension:reportSubstatus",
+        "path": "DiagnosticReport.extension",
+        "sliceName": "reportSubstatus",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/report-substatus"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.extension:reportDistribution",
+        "path": "DiagnosticReport.extension",
+        "sliceName": "reportDistribution",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/report-distribution"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.status",
+        "path": "DiagnosticReport.status",
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.category",
+        "path": "DiagnosticReport.category",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "pattern",
+              "path": "$this"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "DiagnosticReport.category:roentgen",
+        "path": "DiagnosticReport.category",
+        "sliceName": "roentgen",
+        "min": 0,
+        "max": "1",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "DG020110",
+              "system": "http://dvmd.de/fhir/CodeSystem/kdl",
+              "display": "Roentgenbefund"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.category:ct",
+        "path": "DiagnosticReport.category",
+        "sliceName": "ct",
+        "min": 0,
+        "max": "1",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "DG020103",
+              "system": "http://dvmd.de/fhir/CodeSystem/kdl",
+              "display": "CT-Befund"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.category:mrt",
+        "path": "DiagnosticReport.category",
+        "sliceName": "mrt",
+        "min": 0,
+        "max": "1",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "DG020107",
+              "system": "http://dvmd.de/fhir/CodeSystem/kdl",
+              "display": "MRT-Befund"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.category:sono",
+        "path": "DiagnosticReport.category",
+        "sliceName": "sono",
+        "min": 0,
+        "max": "1",
+        "patternCodeableConcept": {
+          "coding": [
+            {
+              "code": "DG020111",
+              "system": "http://dvmd.de/fhir/CodeSystem/kdl",
+              "display": "Sonographiebefund"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.code",
+        "path": "DiagnosticReport.code",
+        "binding": {
+          "strength": "preferred",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/radiology-report-code"
+        }
+      },
+      {
+        "id": "DiagnosticReport.performer:practitionerRole",
+        "path": "DiagnosticReport.performer",
+        "sliceName": "practitionerRole",
+        "short": "Radiologin/Radiologe (PractitionerRole.code: ReadingRadiologist | SupervisingRadiologist aus RadiologyRoleCS)",
+        "min": 0,
+        "max": "*",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/PractitionerRole"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "DiagnosticReport.resultsInterpreter",
+        "path": "DiagnosticReport.resultsInterpreter",
+        "mustSupport": true
+      }
+    ]
+  }
+}
