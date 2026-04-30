@@ -1,6 +1,6 @@
 # Imaging Billing Architecture
 
-This page describes the 3-layer architecture for imaging billing in the German practice management FHIR IG. It covers the role of external FHIR ConceptMaps, the ChargeItemDefinition catalog, the MIRA rule engine, and the R4 Subscription pattern used for workflow event triggers.
+This page describes the 3-layer architecture for imaging billing in the German practice management FHIR IG. It covers the role of external FHIR ConceptMaps, the ChargeItemDefinition catalog, the rule engine integration point, and the R4 Subscription pattern used for workflow event triggers.
 
 ## Overview: 3-Layer Model
 
@@ -10,7 +10,7 @@ The imaging billing pipeline is structured in three distinct layers. Each layer 
 |-------|---------------|----------|---------------|
 | **Terminology** | `ConceptMap` (external package) | `de.cognovis.terminology.imaging` | Modality-to-billing-code suggestion tables |
 | **Catalog** | `ChargeItemDefinition` | This IG | Billing item definitions with pricing and applicability |
-| **Business Logic** | MIRA Rule Engine | External service | Validation, budget limits, audit, final billing decision |
+| **Business Logic** | Rule Engine (external service) | External service | Validation, budget limits, audit, final billing decision |
 
 ### Layer 1 — Terminology (FHIR ConceptMaps, External Package)
 
@@ -24,9 +24,9 @@ The suggestion-table ConceptMaps are defined in the external package `de.cognovi
 | ImagingStudyToEbmGop | `https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop` | Modality → EBM GOP suggestion (future: body-part extension planned upstream) |
 | GoaeContrastAgentBilling | `https://fhir.cognovis.de/imaging/ConceptMap/goae-contrast-agent-billing` | Contrast Agent → GOA billing code |
 
-PVS adapters and MIRA use `ConceptMap/$translate` to look up initial billing code candidates. These suggestions feed into the ChargeItemDefinition catalog lookup and the MIRA rule engine for final validation.
+PVS adapters and the rule engine use `ConceptMap/$translate` to look up initial billing code candidates. These suggestions feed into the ChargeItemDefinition catalog lookup and the rule engine for final validation.
 
-**Important**: A `$translate` match is a recommendation, not a billing decision. The MIRA rule engine always makes the final billing decision after applying budget constraints (RLV/QZV), patient context, and Kassenspezifische rules.
+**Important**: A `$translate` match is a recommendation, not a billing decision. The rule engine always makes the final billing decision after applying budget constraints (RLV/QZV), patient context, and Kassenspezifische rules.
 
 ### Layer 2 — Catalog (ChargeItemDefinition)
 
@@ -34,9 +34,9 @@ PVS adapters and MIRA use `ConceptMap/$translate` to look up initial billing cod
 
 The catalog is the authoritative source for billing item properties. ConceptMap suggestions point into the catalog; the catalog does not point back to ConceptMaps.
 
-### Layer 3 — Business Logic (MIRA Rule Engine)
+### Layer 3 — Business Logic (Rule Engine, External Service)
 
-MIRA is an external rule engine. It:
+The rule engine is an external service. It:
 
 - Receives FHIR Subscription notifications (see below)
 - Queries `ConceptMap/$translate` for billing code suggestions
@@ -45,7 +45,7 @@ MIRA is an external rule engine. It:
 - Applies Kassenspezifische constraints
 - Emits validated `ChargeItem` resources to the PVS
 
-MIRA rule definitions live outside this IG. See [Plan-Library vs. Rule-Execution Boundary](plan-library-boundary.html) for the general boundary rationale.
+Rule engine definitions live outside this IG. See [Plan-Library vs. Rule-Execution Boundary](plan-library-boundary.html) for the general boundary rationale.
 
 ## R4 Subscription Pattern
 
@@ -60,7 +60,7 @@ R5 `SubscriptionTopic` migration is a future task. For now, the R4 `Subscription
 - `channel.type = #rest-hook` — webhook delivery to the consuming service
 - `channel.payload = application/fhir+json` — full FHIR resource delivered on trigger
 
-MIRA instantiates these templates at runtime, replacing the placeholder `channel.endpoint` with the real service URL.
+The consuming rule engine instantiates these templates at runtime, replacing the placeholder `channel.endpoint` with the real service URL.
 
 ### Subscription Event Triggers
 
@@ -76,7 +76,7 @@ Three Subscription templates are defined as examples in this IG:
 
 The `report-substatus` extension on `DiagnosticReport` carries substatus values such as `signed`, `draft`, and `amended`. R4 Subscription criteria cannot filter by extension values — only by standard search parameters.
 
-The `example-subscription-study-signed` template uses `DiagnosticReport?status=final` as the trigger. This is correct per the IG: `report-substatus#signed` is only valid when `DiagnosticReport.status=final`. The MIRA subscription handler post-filters by the `report-substatus` extension value (`signed`) after receiving the notification, since R4 criteria cannot filter by extension values. Only reports with `status=final AND report-substatus=signed` are processed as signed study events.
+The `example-subscription-study-signed` template uses `DiagnosticReport?status=final` as the trigger. This is correct per the IG: `report-substatus#signed` is only valid when `DiagnosticReport.status=final`. The consuming subscription handler post-filters by the `report-substatus` extension value (`signed`) after receiving the notification, since R4 criteria cannot filter by extension values. Only reports with `status=final AND report-substatus=signed` are processed as signed study events.
 
 This is a known limitation of the R4 pattern. R5 `SubscriptionTopic` will allow extension-based filter criteria.
 
