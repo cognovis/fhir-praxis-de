@@ -1,0 +1,35 @@
+### CodeSystem: dokument-kategorie - Valid code: arztbrief
+# @name valid_arztbrief
+# Expected: Bundle mit einem Concept-Eintrag
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/dokument-kategorie&code=arztbrief
+Authorization: Basic basic:secret
+
+?? status == 200
+?? body.total > 0
+
+### CodeSystem: dokument-kategorie - Valid code: befund
+# @name valid_befund
+# Expected: Bundle mit einem Concept-Eintrag
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/dokument-kategorie&code=befund
+Authorization: Basic basic:secret
+
+?? status == 200
+?? body.total > 0
+
+### CodeSystem: dokument-kategorie - Valid code: labor
+# @name valid_labor
+# Expected: Bundle mit einem Concept-Eintrag
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/dokument-kategorie&code=labor
+Authorization: Basic basic:secret
+
+?? status == 200
+?? body.total > 0
+
+### CodeSystem: dokument-kategorie - Invalid code
+# @name invalid
+# Expected: Bundle mit 0 Einträgen (kein Treffer)
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/dokument-kategorie&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret
+
+?? status == 200
+?? body.total == 0

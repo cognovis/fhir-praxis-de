@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "KvdtScheinuntergruppeVS",
+  "id": "kvdt-scheinuntergruppe",
+  "title": "KVDT Scheinuntergruppe",
+  "description": "Alle Codes aus KvdtScheinuntergruppeCS (S_KBV_SCHEINART V1.02)",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/kvdt-scheinuntergruppe",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe"
+      }
+    ]
+  }
+}

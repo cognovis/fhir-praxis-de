@@ -1,0 +1,14 @@
+### CodeSystem: billing-type - Valid code: ebm
+# @name valid_ebm
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=ebm
+Authorization: Basic basic:secret
+
+### CodeSystem: billing-type - Valid code: goae
+# @name valid_goae
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=goae
+Authorization: Basic basic:secret
+
+### CodeSystem: billing-type - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/billing-type&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

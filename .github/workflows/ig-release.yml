@@ -1,0 +1,232 @@
+name: IG Release — Publish & Deploy
+
+on:
+  push:
+    tags: ['v*']
+
+permissions:
+  contents: write
+
+concurrency:
+  group: "ig-release"
+  cancel-in-progress: false
+
+jobs:
+  build-and-release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '20'
+
+      - name: Setup Java
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '17'
+
+      - name: Read version
+        id: version
+        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
+
+      - name: Verify tag matches VERSION file
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: |
+          TAG_VERSION="${TAG_NAME#v}"
+          FILE_VERSION=$(tr -d '[:space:]' < VERSION)
+          if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
+            echo "ERROR: Tag ${TAG_VERSION} does not match VERSION file ${FILE_VERSION}"
+            exit 1
+          fi
+          echo "Version match confirmed: ${FILE_VERSION}"
+
+      - name: Install SUSHI
+        run: npm install -g fsh-sushi
+
+      - name: Run SUSHI
+        run: sushi .
+
+      - name: Install Jekyll
+        run: sudo gem install jekyll
+
+      - name: Download IG Publisher
+        run: |
+          mkdir -p input-cache
+          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
+            -o input-cache/publisher.jar
+
+      - name: Pre-load previous FHIR package from private registry
+        run: |
+          CURRENT=$(tr -d '[:space:]' < VERSION)
+          REGISTRY_DATA=$(curl -sf "https://npm.cognovis.de/de.cognovis.fhir.praxis" || echo '{}')
+          PREV_VERSION=$(echo "$REGISTRY_DATA" | python3 -c "
+          import json, sys
+          data = json.load(sys.stdin)
+          current = tuple(int(x) for x in '${CURRENT}'.split('.'))
+          versions = list(data.get('versions', {}).keys())
+          older = [v for v in versions if tuple(int(x) for x in v.split('.')) < current]
+          older.sort(key=lambda v: tuple(int(x) for x in v.split('.')))
+          print(older[-1] if older else '')
+          ")
+          if [ -z "$PREV_VERSION" ]; then
+            echo "No previous version found on npm.cognovis.de — skipping pre-load"
+            exit 0
+          fi
+          echo "Pre-loading de.cognovis.fhir.praxis#${PREV_VERSION} into FHIR cache..."
+          CACHE_DIR="${HOME}/.fhir/packages/de.cognovis.fhir.praxis#${PREV_VERSION}"
+          mkdir -p "$CACHE_DIR"
+          curl -sL "https://npm.cognovis.de/de.cognovis.fhir.praxis/-/de.cognovis.fhir.praxis-${PREV_VERSION}.tgz" \
+            | tar -xz -C "$CACHE_DIR"
+          echo "Installed $(ls "$CACHE_DIR/package/" | wc -l) files to $CACHE_DIR"
+
+      - name: Run IG Publisher
+        run: |
+          set +eo pipefail
+          java -jar input-cache/publisher.jar -ig . -no-sushi 2>&1 | tee /tmp/ig-publisher.log
+          IG_EXIT=${PIPESTATUS[0]}
+          set -eo pipefail
+          if [ $IG_EXIT -ne 0 ]; then
+            if grep -q "Publishing Content Failed" /tmp/ig-publisher.log && [ -f output/full-ig.zip ]; then
+              echo "::warning::PublicationChecker failed (known NPE) — build output is complete, continuing"
+            else
+              echo "IG Publisher failed with unexpected error:"
+              tail -30 /tmp/ig-publisher.log
+              exit $IG_EXIT
+            fi
+          fi
+
+      - name: Build FHIR package
+        run: bash scripts/build-package.sh --skip-sushi
+
+      - name: Create GitHub Release
+        uses: softprops/action-gh-release@v2
+        with:
+          tag_name: ${{ github.ref_name }}
+          name: ${{ github.ref_name }}
+          files: |
+            dist/*.tgz
+            output/full-ig.zip
+          generate_release_notes: true
+          make_latest: true
+
+      - name: Publish to FHIR Package Registry
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+        run: |
+          # FHIR packages have non-npm dependencies that confuse npm publish.
+          # Use npm pack + publish with --ignore-scripts to skip dependency resolution.
+          PKG=$(ls dist/*.tgz | head -1)
+          echo "Publishing ${PKG} to npm.cognovis.de..."
+
+          # Create minimal .npmrc with auth
+          echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}" >> ~/.npmrc
+          echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
+          echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc
+
+          # Use absolute path — npm can misinterpret relative paths as package specs
+          ABSPKG="$(pwd)/${PKG}"
+          npm publish "${ABSPKG}" --registry https://npm.cognovis.de --ignore-scripts 2>&1 | tee /tmp/npm-publish.log
+          EXIT=${PIPESTATUS[0]}
+          if [ "$EXIT" -ne 0 ]; then
+            if grep -q "EPUBLISHCONFLICT\|already_published\|409\|cannot publish over" /tmp/npm-publish.log; then
+              echo "::warning::Package version already exists in registry — skipping"
+            else
+              cat /tmp/npm-publish.log
+              exit "$EXIT"
+            fi
+          fi
+
+      # Pages deployment handled by ig-ci.yml on main push — not needed here
+
+  update-package-list:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read version
+        id: version
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: echo "version=$(echo "$TAG_NAME" | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+
+      - name: Update package-list.json on fhir.cognovis.de
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          IG_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          # Setup SSH
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 116.202.111.75 >> ~/.ssh/known_hosts 2>/dev/null
+
+          TODAY=$(date -u +%Y-%m-%d)
+
+          # Update package-list.json on the server via python3 (jq not installed)
+          ssh -i ~/.ssh/deploy_key fhir@116.202.111.75 python3 -s - "$IG_VERSION" "$TODAY" << 'REMOTE_SCRIPT'
+          import json, sys, shutil
+
+          version, today = sys.argv[1], sys.argv[2]
+          pkg_list = "/var/www/fhir/praxis/package-list.json"
+
+          # Backup
+          shutil.copy2(pkg_list, pkg_list + ".bak")
+
+          with open(pkg_list) as f:
+              data = json.load(f)
+
+          # Mark all existing version entries as not current
+          for entry in data["list"]:
+              if "current" in entry:
+                  entry["current"] = False
+
+          # Insert new version after the ci-build entry (index 0)
+          new_entry = {
+              "version": version,
+              "date": today,
+              "desc": f"Release {version}",
+              "path": "https://fhir.cognovis.de/praxis",
+              "status": "trial-use",
+              "sequence": "STU1",
+              "fhirversion": "4.0.1",
+              "current": True,
+              "package": f"de.cognovis.fhir.praxis#{version}"
+          }
+          data["list"].insert(1, new_entry)
+
+          with open(pkg_list, "w") as f:
+              json.dump(data, f, indent=2)
+
+          print(f"Updated package-list.json: version {version}, date {today}")
+          REMOTE_SCRIPT
+
+  dispatch:
+    needs: build-and-release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Read version
+        id: version
+        env:
+          TAG_NAME: ${{ github.ref_name }}
+        run: echo "version=$(echo "$TAG_NAME" | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+
+      - name: Send repository_dispatch to downstream consumer
+        env:
+          DOWNSTREAM_DISPATCH_TOKEN: ${{ secrets.DOWNSTREAM_DISPATCH_TOKEN }}
+          DOWNSTREAM_REPOSITORY: ${{ vars.DOWNSTREAM_REPOSITORY }}
+          IG_VERSION: ${{ steps.version.outputs.version }}
+        run: |
+          if [ -z "${DOWNSTREAM_REPOSITORY}" ] || [ -z "${DOWNSTREAM_DISPATCH_TOKEN}" ]; then
+            echo "::warning::Downstream dispatch not configured — skipping"
+            exit 0
+          fi
+
+          curl -sf -X POST \
+            -H "Authorization: token ${DOWNSTREAM_DISPATCH_TOKEN}" \
+            -H "Accept: application/vnd.github.v3+json" \
+            "https://api.github.com/repos/${DOWNSTREAM_REPOSITORY}/dispatches" \
+            -d "{\"event_type\": \"ig-published\", \"client_payload\": {\"version\": \"${IG_VERSION}\", \"package_id\": \"de.cognovis.fhir.praxis\"}}"
+          echo "repository_dispatch sent to downstream consumer"

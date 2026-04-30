@@ -1,0 +1,155 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "ContrastAgentTypeCS",
+  "id": "contrast-agent-type",
+  "title": "Contrast Agent Type",
+  "description": "Local DE CodeSystem for radiological contrast agents approved in Germany. Includes external coding properties for ATC classification, DICOM CID 12 mapping, GOÄ billing codes, and PZN (Pharmazentralnummer) for ATC/PZN external reference (AK2).",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/contrast-agent-type",
+  "concept": [
+    {
+      "code": "iodinated-low-osmolar",
+      "display": "Low-osmolar Iodinated Contrast",
+      "definition": "Niederosmolares iodhaltiges Kontrastmittel (LOCM) fuer CT/Roentgen",
+      "property": [
+        {
+          "code": "atc-code",
+          "valueString": "V08AA"
+        },
+        {
+          "code": "dicom-cid12-code",
+          "valueString": "127508"
+        },
+        {
+          "code": "goae-code",
+          "valueString": "345"
+        }
+      ]
+    },
+    {
+      "code": "iodinated-iso-osmolar",
+      "display": "Iso-osmolar Iodinated Contrast",
+      "definition": "Isoosmolares iodhaltiges Kontrastmittel fuer CT",
+      "property": [
+        {
+          "code": "atc-code",
+          "valueString": "V08AB"
+        },
+        {
+          "code": "dicom-cid12-code",
+          "valueString": "127508"
+        },
+        {
+          "code": "goae-code",
+          "valueString": "345"
+        }
+      ]
+    },
+    {
+      "code": "gadolinium-extracellular",
+      "display": "Extracellular Gadolinium Contrast",
+      "definition": "Extrazellulaeres Gadolinium-Kontrastmittel fuer MRT",
+      "property": [
+        {
+          "code": "atc-code",
+          "valueString": "V08CA"
+        },
+        {
+          "code": "dicom-cid12-code",
+          "valueString": "127504"
+        },
+        {
+          "code": "goae-code",
+          "valueString": "5730"
+        }
+      ]
+    },
+    {
+      "code": "gadolinium-hepatobiliary",
+      "display": "Hepatobiliary Gadolinium Contrast",
+      "definition": "Hepatobiliaeres Gadolinium-Kontrastmittel fuer Leber-MRT",
+      "property": [
+        {
+          "code": "atc-code",
+          "valueString": "V08CA"
+        },
+        {
+          "code": "dicom-cid12-code",
+          "valueString": "127504"
+        },
+        {
+          "code": "goae-code",
+          "valueString": "5730"
+        }
+      ]
+    },
+    {
+      "code": "ultrasound-microbubble",
+      "display": "Microbubble Ultrasound Contrast",
+      "definition": "Mikroblaeschen-Kontrastmittel fuer Kontrastmittelsonographie (CEUS)",
+      "property": [
+        {
+          "code": "atc-code",
+          "valueString": "V08DA"
+        },
+        {
+          "code": "dicom-cid12-code",
+          "valueString": "127502"
+        },
+        {
+          "code": "goae-code",
+          "valueString": "420"
+        }
+      ]
+    },
+    {
+      "code": "barium-sulfate",
+      "display": "Barium Sulfate",
+      "definition": "Bariumsulfat fuer gastrointestinale Roentgenuntersuchungen",
+      "property": [
+        {
+          "code": "atc-code",
+          "valueString": "V08BA"
+        },
+        {
+          "code": "dicom-cid12-code",
+          "valueString": "127510"
+        },
+        {
+          "code": "goae-code",
+          "valueString": "344"
+        }
+      ]
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "property": [
+    {
+      "code": "atc-code",
+      "uri": "http://www.whocc.no/atc",
+      "description": "WHO ATC classification code for the contrast agent",
+      "type": "string"
+    },
+    {
+      "code": "dicom-cid12-code",
+      "uri": "http://dicom.nema.org/resources/ontology/DCM",
+      "description": "DICOM CID 12 Contrast/Bolus Agent code",
+      "type": "string"
+    },
+    {
+      "code": "goae-code",
+      "uri": "https://fhir.de/CodeSystem/bak/goae",
+      "description": "GOÄ billing code for contrast agent administration",
+      "type": "string"
+    },
+    {
+      "code": "pzn-code",
+      "uri": "http://fhir.de/CodeSystem/ifa/pzn",
+      "description": "Pharmazentralnummer (PZN) per IFA — product-specific identifier for contrast agent preparations approved in Germany",
+      "type": "string"
+    }
+  ],
+  "count": 6
+}

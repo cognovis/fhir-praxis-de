@@ -1,0 +1,19 @@
+### ValueSet: PAS Task Code - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/pas-task-code-vs/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: PAS Task Code - $validate-code valid (submit)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/pas-task-code-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=submit
+Authorization: Basic basic:secret
+
+### ValueSet: PAS Task Code - $validate-code valid (inquire)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/pas-task-code-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=inquire
+Authorization: Basic basic:secret
+
+### ValueSet: PAS Task Code - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/pas-task-code-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

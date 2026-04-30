@@ -1,0 +1,51 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "ProbenmaterialSnomedVS",
+  "id": "probenmaterial-snomed",
+  "title": "Probenmaterial SNOMED-CT",
+  "description": "Gaengige Probenmaterialien fuer die ambulante Praxis (SNOMED-CT)",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/probenmaterial-snomed",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "122555007",
+            "display": "Venous blood specimen"
+          },
+          {
+            "code": "122575003",
+            "display": "Urine specimen"
+          },
+          {
+            "code": "258529004",
+            "display": "Throat swab"
+          },
+          {
+            "code": "119361006",
+            "display": "Plasma specimen"
+          },
+          {
+            "code": "119297000",
+            "display": "Blood specimen"
+          },
+          {
+            "code": "119342007",
+            "display": "Saliva specimen"
+          },
+          {
+            "code": "445447003",
+            "display": "Specimen obtained from skin"
+          },
+          {
+            "code": "258580003",
+            "display": "Whole blood specimen"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "PraxisPlanTopicVS",
+  "id": "praxis-plan-topic",
+  "title": "Praxis Plan Topic",
+  "description": "All codes from the praxis-plan-topic CodeSystem. Bind to PlanDefinition.topic (extensible) to classify plan templates within PraxisBillingPattern.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/praxis-plan-topic",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-plan-topic"
+      }
+    ]
+  }
+}

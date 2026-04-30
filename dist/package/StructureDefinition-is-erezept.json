@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "is-erezept",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/is-erezept",
+  "name": "IsErezeptExt",
+  "title": "E-Rezept",
+  "status": "active",
+  "description": "Kennzeichen, ob das Rezept als E-Rezept (elektronisches Rezept) ausgestellt wurde",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "MedicationRequest",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "E-Rezept",
+        "definition": "Kennzeichen, ob das Rezept als E-Rezept (elektronisches Rezept) ausgestellt wurde"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/is-erezept"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+}

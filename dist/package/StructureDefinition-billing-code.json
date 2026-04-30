@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "billing-code",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/billing-code",
+  "name": "BillingCodeExt",
+  "title": "Abrechnungsziffer",
+  "status": "active",
+  "description": "Abrechnungsziffer im jeweiligen Gebührenkatalog",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItemDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Abrechnungsziffer",
+        "definition": "Abrechnungsziffer im jeweiligen Gebührenkatalog"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/billing-code"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rlv-fallwert",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fallwert",
+  "name": "RlvFallwertExt",
+  "title": "RLV-Fallwert",
+  "status": "active",
+  "description": "Fallwert in EUR fuer das Regelleistungsvolumen",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Contract",
+      "type": "element"
+    },
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "RLV-Fallwert",
+        "definition": "Fallwert in EUR fuer das Regelleistungsvolumen"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fallwert"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      }
+    ]
+  }
+}

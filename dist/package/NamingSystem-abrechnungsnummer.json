@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "abrechnungsnummer",
+  "name": "Abrechnungsnummer",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-03",
+  "publisher": "cognovis GmbH",
+  "description": "KV-Abrechnungsnummer des Arztes (vollstaendiges Format)",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/abrechnungsnummer",
+      "preferred": true
+    }
+  ]
+}

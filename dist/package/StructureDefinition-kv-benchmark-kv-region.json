@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-benchmark-kv-region",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-kv-region",
+  "name": "KvBenchmarkKvRegionExt",
+  "title": "KV-Benchmark KV-Region",
+  "status": "active",
+  "description": "KV-Regionskennzeichen fuer Benchmark-Daten",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark KV-Region",
+        "definition": "KV-Regionskennzeichen fuer Benchmark-Daten"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-kv-region"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

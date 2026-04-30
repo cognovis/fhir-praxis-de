@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "GenehmigungenTypVS",
+  "id": "genehmigung-typ",
+  "title": "Genehmigungstyp",
+  "description": "Typ der KV-Genehmigung: kopfbezogen vs. betriebsstaette",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/genehmigung-typ",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/genehmigung-typ"
+      }
+    ]
+  }
+}

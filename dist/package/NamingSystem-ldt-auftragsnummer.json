@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "ldt-auftragsnummer",
+  "name": "LdtAuftragsnummer",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-05",
+  "publisher": "cognovis GmbH",
+  "description": "Laborauftragsnummer gemaess LDT-Standard fuer ServiceRequest.identifier",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/ldt-auftragsnummer",
+      "preferred": true
+    }
+  ]
+}

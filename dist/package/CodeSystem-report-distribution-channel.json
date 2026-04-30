@@ -1,0 +1,40 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "ReportDistributionChannelCS",
+  "id": "report-distribution-channel",
+  "title": "Report Distribution Channel",
+  "description": "Distribution channels for radiology and diagnostic reports in the German healthcare system. Includes the national KIM (Kommunikation im Medizinwesen) secure messaging standard.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/report-distribution-channel",
+  "concept": [
+    {
+      "code": "email",
+      "display": "Email",
+      "definition": "Report delivered via standard email"
+    },
+    {
+      "code": "fax",
+      "display": "Fax",
+      "definition": "Report delivered via fax (still widely used in German ambulatory care)"
+    },
+    {
+      "code": "kim",
+      "display": "KIM",
+      "definition": "Report delivered via KIM (Kommunikation im Medizinwesen) — national DE secure medical messaging"
+    },
+    {
+      "code": "patientportal",
+      "display": "Patient Portal",
+      "definition": "Report delivered to patient via secure online portal (e.g. Patientenportal / ePA)"
+    },
+    {
+      "code": "print",
+      "display": "Print",
+      "definition": "Report printed and handed over or mailed as paper document"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 5
+}

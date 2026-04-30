@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "hzv-abmeldedatum",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/hzv-abmeldedatum",
+  "name": "HzvAbmeldedatumExt",
+  "title": "HZV Abmeldedatum",
+  "status": "active",
+  "description": "Datum der Abmeldung des Patienten aus der hausaerztlichen Versorgung (§73b SGB V)",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Flag",
+      "type": "element"
+    },
+    {
+      "expression": "EpisodeOfCare",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "HZV Abmeldedatum",
+        "definition": "Datum der Abmeldung des Patienten aus der hausaerztlichen Versorgung (§73b SGB V)"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/hzv-abmeldedatum"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "date"
+          }
+        ]
+      }
+    ]
+  }
+}

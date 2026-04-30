@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "punktwert-go-nummer",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/punktwert-go-nummer",
+  "name": "PunktwertGoNummerExt",
+  "title": "Punktwert GOP-Nummer",
+  "status": "active",
+  "description": "EBM-Gebührenordnungsposition fuer den Punktwert",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Punktwert GOP-Nummer",
+        "definition": "EBM-Gebührenordnungsposition fuer den Punktwert"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/punktwert-go-nummer"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

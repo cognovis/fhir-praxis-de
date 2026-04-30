@@ -1,0 +1,19 @@
+### ValueSet: HZV Participation - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/hzv-participation/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: HZV Participation - $validate-code valid (eingeschrieben)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/hzv-participation/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=eingeschrieben
+Authorization: Basic basic:secret
+
+### ValueSet: HZV Participation - $validate-code valid (abgemeldet)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/hzv-participation/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=abgemeldet
+Authorization: Basic basic:secret
+
+### ValueSet: HZV Participation - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/hzv-participation/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

@@ -1,0 +1,14 @@
+### CodeSystem: kvb-richtigstellung - Valid code: UV
+# @name valid_UV
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung&code=UV
+Authorization: Basic basic:secret
+
+### CodeSystem: kvb-richtigstellung - Valid code: HO
+# @name valid_HO
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung&code=HO
+Authorization: Basic basic:secret
+
+### CodeSystem: kvb-richtigstellung - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

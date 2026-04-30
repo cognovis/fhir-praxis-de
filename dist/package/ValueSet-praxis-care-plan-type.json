@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "PraxisCarePlanTypeVS",
+  "id": "praxis-care-plan-type",
+  "title": "Praxis CarePlan Type",
+  "description": "Plan type codes for use as PraxisCarePlanDE.category[planType]. Covers HZV, DMP, and generic care plan types.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/praxis-care-plan-type",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-care-plan-type"
+      }
+    ]
+  }
+}

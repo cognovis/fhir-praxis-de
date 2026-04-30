@@ -1,0 +1,20 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "PvsOrganizationTypeCS",
+  "id": "pvs-organization-type",
+  "title": "PVS Organization Type",
+  "description": "Zusatzkodierung fuer Organization.type, wenn eine Organization als Privataerztliche Verrechnungsstelle oder externer Billing Service auftritt.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/pvs-organization-type",
+  "concept": [
+    {
+      "code": "pvs",
+      "display": "PVS",
+      "definition": "Privataerztliche Verrechnungsstelle / externer Billing Service. Wird als zusaetzliche Coding auf Organization.type verwendet, nicht als Ersatz eines generischen Typs."
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 1
+}

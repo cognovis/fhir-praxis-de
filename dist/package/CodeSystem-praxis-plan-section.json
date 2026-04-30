@@ -1,0 +1,30 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "PraxisPlanSectionCS",
+  "id": "praxis-plan-section",
+  "title": "Praxis Plan Section",
+  "description": "Action-group markers for PlanDefinition.action.code within PraxisBillingPattern resources. Identifies the structural role of an action group (documentation, billing codes, diagnoses). Implements ADR-001 Decision 4. Extensible without profile version bump.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-plan-section",
+  "concept": [
+    {
+      "code": "behandlungsdoku",
+      "display": "Behandlungsdokumentation",
+      "definition": "Aktionsgruppe fuer Behandlungsdokumentation (Freitext, strukturierte Befunde, Anamnese-Items)"
+    },
+    {
+      "code": "ziffern",
+      "display": "Leistungsziffern",
+      "definition": "Aktionsgruppe fuer Abrechnungsziffern (EBM, GOÄ, BEMA, HZV, GOZ)"
+    },
+    {
+      "code": "diagnosen",
+      "display": "Diagnosen",
+      "definition": "Aktionsgruppe fuer Diagnosen (ICD-10-GM Codes, SNOMED CT)"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 3
+}

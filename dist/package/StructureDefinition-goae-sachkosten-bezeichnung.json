@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "goae-sachkosten-bezeichnung",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/goae-sachkosten-bezeichnung",
+  "name": "GoaeSachkostenBezeichnungExt",
+  "title": "Sachkosten-Bezeichnung",
+  "status": "active",
+  "description": "Bezeichnung der abgerechneten Sachkosten (z.B. Material, Medikamente) gemäß GOÄ §10",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ChargeItem",
+      "type": "element"
+    },
+    {
+      "expression": "Claim",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Sachkosten-Bezeichnung",
+        "definition": "Bezeichnung der abgerechneten Sachkosten (z.B. Material, Medikamente) gemäß GOÄ §10"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/goae-sachkosten-bezeichnung"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

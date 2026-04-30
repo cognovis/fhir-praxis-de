@@ -1,0 +1,167 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-specimen",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-specimen",
+  "name": "PraxisSpecimen",
+  "title": "Praxis Specimen",
+  "status": "active",
+  "description": "Specimen-Profil fuer die ambulante Praxis. Angelehnt an KBV_PR_MIO_LAB_Specimen (kbv.mio.laborbefund). SNOMED-CT ist Pflichtcoding (type.coding[snomed]); zusaetzlicher LDT-Code (FK 8428) optional. Labore vergeben Proben-Identifier mit eigener System-URL (z.B. http://example.org/lab/specimen-id).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Specimen",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Specimen",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Specimen.identifier",
+        "path": "Specimen.identifier",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type",
+        "path": "Specimen.type",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding",
+        "path": "Specimen.type.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        },
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:snomed",
+        "path": "Specimen.type.coding",
+        "sliceName": "snomed",
+        "min": 1,
+        "max": "1",
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/probenmaterial-snomed"
+        }
+      },
+      {
+        "id": "Specimen.type.coding:snomed.system",
+        "path": "Specimen.type.coding.system",
+        "min": 1,
+        "patternUri": "http://snomed.info/sct",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:snomed.code",
+        "path": "Specimen.type.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:snomed.display",
+        "path": "Specimen.type.coding.display",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:ldt",
+        "path": "Specimen.type.coding",
+        "sliceName": "ldt",
+        "min": 0,
+        "max": "1",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:ldt.system",
+        "path": "Specimen.type.coding.system",
+        "min": 1,
+        "patternUri": "https://fhir.cognovis.de/praxis/CodeSystem/ldt-materialbezeichnung",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:ldt.code",
+        "path": "Specimen.type.coding.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.type.coding:ldt.display",
+        "path": "Specimen.type.coding.display",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.subject",
+        "path": "Specimen.subject",
+        "min": 1,
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.collection",
+        "path": "Specimen.collection",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.collection.collected[x]",
+        "path": "Specimen.collection.collected[x]",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "type",
+              "path": "$this"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Specimen.collection.collected[x]:collectedDateTime",
+        "path": "Specimen.collection.collected[x]",
+        "sliceName": "collectedDateTime",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "dateTime"
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.collection.method",
+        "path": "Specimen.collection.method",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.collection.bodySite",
+        "path": "Specimen.collection.bodySite",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.container",
+        "path": "Specimen.container",
+        "mustSupport": true
+      },
+      {
+        "id": "Specimen.container.type",
+        "path": "Specimen.container.type",
+        "mustSupport": true
+      }
+    ]
+  }
+}

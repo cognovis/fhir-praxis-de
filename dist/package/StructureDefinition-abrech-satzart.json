@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "abrech-satzart",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/abrech-satzart",
+  "name": "AbrechSatzartExt",
+  "title": "Abrechnung Satzart",
+  "status": "active",
+  "description": "KV-Abrechnung Satzart fuer Claim-Positionen.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Claim.item",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Abrechnung Satzart",
+        "definition": "KV-Abrechnung Satzart fuer Claim-Positionen."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/abrech-satzart"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

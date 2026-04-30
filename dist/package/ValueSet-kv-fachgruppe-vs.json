@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "KvFachgruppeVS",
+  "id": "kv-fachgruppe-vs",
+  "title": "KV Fachgruppe",
+  "description": "Fachgruppen-Codes der Kassenärztlichen Vereinigungen fuer die Honorarverteilung",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/kv-fachgruppe-vs",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe"
+      }
+    ]
+  }
+}

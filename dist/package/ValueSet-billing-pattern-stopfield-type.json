@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "BillingPatternStopfieldTypeVS",
+  "id": "billing-pattern-stopfield-type",
+  "title": "BillingPattern Stopfield Type",
+  "description": "All valid stopfield types for billing pattern chains",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/billing-pattern-stopfield-type",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/billing-pattern-stopfield-type"
+      }
+    ]
+  }
+}

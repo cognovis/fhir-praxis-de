@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "DigitalWorkflowVS",
+  "id": "digital-workflow",
+  "title": "Digitaler Workflow",
+  "description": "Art des Herstellungsworkflows fuer individuell gefertigte Medizinprodukte.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/digital-workflow",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/digital-workflow"
+      }
+    ]
+  }
+}

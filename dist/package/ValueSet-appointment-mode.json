@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "AppointmentModeVS",
+  "id": "appointment-mode",
+  "title": "Appointment Mode",
+  "description": "Zulässige Werte für die Durchführungsart eines Termins.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/appointment-mode",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/appointment-mode"
+      }
+    ]
+  }
+}

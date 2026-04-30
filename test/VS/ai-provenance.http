@@ -1,0 +1,19 @@
+### ValueSet: AI Provenance - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/ai-provenance/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: AI Provenance - $validate-code valid (ai-generated)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/ai-provenance/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance&code=ai-generated
+Authorization: Basic basic:secret
+
+### ValueSet: AI Provenance - $validate-code valid (ai-assisted)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/ai-provenance/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance&code=ai-assisted
+Authorization: Basic basic:secret
+
+### ValueSet: AI Provenance - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/ai-provenance/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

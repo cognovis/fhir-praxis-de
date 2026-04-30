@@ -1,0 +1,19 @@
+### ValueSet: Diagnose Seite - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/diagnose-seite/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: Diagnose Seite - $validate-code valid (L)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/diagnose-seite/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite&code=L
+Authorization: Basic basic:secret
+
+### ValueSet: Diagnose Seite - $validate-code valid (R)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/diagnose-seite/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite&code=R
+Authorization: Basic basic:secret
+
+### ValueSet: Diagnose Seite - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/diagnose-seite/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/diagnose-seite&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

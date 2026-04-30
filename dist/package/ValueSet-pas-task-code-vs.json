@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "PASTaskCodeVS",
+  "id": "pas-task-code-vs",
+  "title": "PAS Task Code",
+  "description": "Codes fuer Genehmigungsworkflow-Tasks",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/pas-task-code-vs",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code"
+      }
+    ]
+  }
+}

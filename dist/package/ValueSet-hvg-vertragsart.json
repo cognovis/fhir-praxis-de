@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "HvgVertragsartVS",
+  "id": "hvg-vertragsart",
+  "title": "HVG-Vertragsart",
+  "description": "Zulässige HVG-Vertragsarten",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/hvg-vertragsart",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart"
+      }
+    ]
+  }
+}

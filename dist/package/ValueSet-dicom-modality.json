@@ -1,0 +1,19 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "DicomModalityVS",
+  "id": "dicom-modality",
+  "title": "DICOM Modality",
+  "description": "Acquisition modality codes from DICOM CID 29 (Acquisition Modality). Required binding for ImagingStudy.modality in DE imaging profiles. References the fhir.dicom package CID 29 ValueSet — codes are not copied locally.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/dicom-modality",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "valueSet": [
+          "http://dicom.nema.org/medical/dicom/current/output/chtml/part16/sect_CID_29.html"
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,37 @@
+### AppointmentReadinessVS — $expand (local CS, expect 3 codes)
+# @name readiness_expand
+GET http://localhost:8080/fhir/ValueSet/$expand?url=https://fhir.cognovis.de/praxis/ValueSet/appointment-readiness
+Authorization: Basic basic:secret
+
+### AppointmentReadinessVS — $validate-code valid
+# @name readiness_validate_valid
+GET http://localhost:8080/fhir/ValueSet/$validate-code?url=https://fhir.cognovis.de/praxis/ValueSet/appointment-readiness&code=waiting-for-modality&system=https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness
+Authorization: Basic basic:secret
+
+### AppointmentReadinessVS — $validate-code invalid
+# @name readiness_validate_invalid
+GET http://localhost:8080/fhir/ValueSet/$validate-code?url=https://fhir.cognovis.de/praxis/ValueSet/appointment-readiness&code=INVALID_CODE_XYZ&system=https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness
+Authorization: Basic basic:secret
+
+### DicomModalityVS — $expand (AK7: requires fhir.dicom package installed)
+# Expected: may return empty expansion or error if external DICOM CS not installed locally
+# @name dicom_modality_expand
+GET http://localhost:8080/fhir/ValueSet/$expand?url=https://fhir.cognovis.de/praxis/ValueSet/dicom-modality
+Authorization: Basic basic:secret
+
+### DicomModalityVS — resource exists (verify VS was uploaded)
+# @name dicom_modality_resource
+GET http://localhost:8080/fhir/ValueSet?url=https://fhir.cognovis.de/praxis/ValueSet/dicom-modality
+Authorization: Basic basic:secret
+
+### RadiationRelevantBillingCodeVS — $expand (AK7: requires EBM/GOÄ/BEMA/GOZ systems installed)
+# Expected: may return empty expansion or error if external billing CSes not installed locally
+# When external CSes are present, expansion returns codes from all four billing systems.
+# @name radiation_billing_expand
+GET http://localhost:8080/fhir/ValueSet/$expand?url=https://fhir.cognovis.de/praxis/ValueSet/radiation-relevant-billing-code
+Authorization: Basic basic:secret
+
+### RadiationRelevantBillingCodeVS — resource exists (verify VS was uploaded)
+# @name radiation_billing_resource
+GET http://localhost:8080/fhir/ValueSet?url=https://fhir.cognovis.de/praxis/ValueSet/radiation-relevant-billing-code
+Authorization: Basic basic:secret

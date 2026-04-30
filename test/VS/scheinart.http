@@ -1,0 +1,19 @@
+### ValueSet: Scheinart - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/scheinart/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: Scheinart - $validate-code valid (gkv)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/scheinart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=gkv
+Authorization: Basic basic:secret
+
+### ValueSet: Scheinart - $validate-code valid (pkv)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/scheinart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=pkv
+Authorization: Basic basic:secret
+
+### ValueSet: Scheinart - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/scheinart/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/scheinart&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

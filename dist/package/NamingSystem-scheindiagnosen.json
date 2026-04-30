@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "scheindiagnosen",
+  "name": "Scheindiagnosen",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-05",
+  "publisher": "cognovis GmbH",
+  "description": "Identifier-System fuer Scheindiagnosen (Condition.identifier)",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/scheindiagnosen",
+      "preferred": true
+    }
+  ]
+}

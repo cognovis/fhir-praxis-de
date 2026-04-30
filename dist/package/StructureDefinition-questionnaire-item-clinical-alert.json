@@ -1,0 +1,55 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "questionnaire-item-clinical-alert",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/questionnaire-item-clinical-alert",
+  "name": "QuestItemClinicalAlertExt",
+  "title": "Questionnaire Item Clinical Alert",
+  "status": "active",
+  "description": "Marks a questionnaire item as clinically critical (e.g., allergy, anticoagulant, endocarditis risk). When true, the item requires heightened clinical attention — not merely a UI highlight. Vendor-neutral replacement for PVS-specific alert flags.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Questionnaire.item",
+      "type": "element"
+    },
+    {
+      "expression": "QuestionnaireResponse.item",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Questionnaire Item Clinical Alert",
+        "definition": "Marks a questionnaire item as clinically critical (e.g., allergy, anticoagulant, endocarditis risk). When true, the item requires heightened clinical attention — not merely a UI highlight. Vendor-neutral replacement for PVS-specific alert flags."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/questionnaire-item-clinical-alert"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "min": 1,
+        "type": [
+          {
+            "code": "boolean"
+          }
+        ]
+      }
+    ]
+  }
+}

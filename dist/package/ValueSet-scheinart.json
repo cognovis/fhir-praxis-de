@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "draft",
+  "name": "ScheinartVS",
+  "id": "scheinart",
+  "title": "Scheinart",
+  "description": "Abrechnungsschein-Typen in der ambulanten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/scheinart",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
+      }
+    ]
+  }
+}

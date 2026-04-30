@@ -1,0 +1,36 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "PraxisBillingCodeVS",
+  "id": "praxis-billing-code",
+  "title": "Praxis Billing Code",
+  "description": "Billing codes from recognized German ambulatory billing systems for use as PraxisBillingActivity.code. Covers EBM (GKV), GOÄ (PKV), HZV (§73b SGB V), BEMA (GKV-Dental), and GOZ (PKV-Dental). Extensible — additional systems (e.g. DGUV/BG) may be used.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/praxis-billing-code",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM"
+      },
+      {
+        "system": "https://fhir.de/CodeSystem/bak/goae"
+      },
+      {
+        "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA"
+      },
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/billing-type",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "descendent-of",
+            "value": "hzv"
+          }
+        ]
+      },
+      {
+        "system": "https://fhir.de/CodeSystem/bzaek/goz"
+      }
+    ]
+  }
+}

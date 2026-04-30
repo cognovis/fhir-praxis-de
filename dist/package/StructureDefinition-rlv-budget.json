@@ -1,0 +1,175 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rlv-budget",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-budget",
+  "name": "RlvBudget",
+  "title": "RLV Budget",
+  "status": "active",
+  "description": "Profil fuer die Konfiguration des Regelleistungsvolumens (RLV) in der deutschen ambulanten Versorgung.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Basic",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Basic",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Basic.extension",
+        "path": "Basic.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Basic.extension:rlvKvRegion",
+        "path": "Basic.extension",
+        "sliceName": "rlvKvRegion",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-kv-region"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.extension:rlvFachgruppe",
+        "path": "Basic.extension",
+        "sliceName": "rlvFachgruppe",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fachgruppe"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.extension:rlvFallwert",
+        "path": "Basic.extension",
+        "sliceName": "rlvFallwert",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-fallwert"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.extension:rlvQzvFallwert",
+        "path": "Basic.extension",
+        "sliceName": "rlvQzvFallwert",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-qzv-fallwert"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvZugewiesen",
+        "path": "Basic.extension",
+        "sliceName": "rlvZugewiesen",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-zugewiesen"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvQzvZugewiesen",
+        "path": "Basic.extension",
+        "sliceName": "rlvQzvZugewiesen",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-qzv-zugewiesen"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvEntbudgetiert",
+        "path": "Basic.extension",
+        "sliceName": "rlvEntbudgetiert",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-entbudgetiert"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvKategorie",
+        "path": "Basic.extension",
+        "sliceName": "rlvKategorie",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-kategorie"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.code",
+        "path": "Basic.code",
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "code": "rlv-budget",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/basic-resource-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.subject",
+        "path": "Basic.subject",
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "pvs-id",
+  "name": "PvsId",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-03",
+  "publisher": "cognovis GmbH",
+  "description": "Generischer PVS-interner Identifier fuer Rueckweg-Sync zwischen FHIR-Adapter und dem PVS",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id",
+      "preferred": true
+    }
+  ]
+}

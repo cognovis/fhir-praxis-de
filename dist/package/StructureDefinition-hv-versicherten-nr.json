@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "hv-versicherten-nr",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/hv-versicherten-nr",
+  "name": "HvVersichertenNrExt",
+  "title": "HV Versichertennummer",
+  "status": "active",
+  "description": "eGK Versichertennummer aus dem Hauptversicherungsverhaeltnis.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Coverage",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "HV Versichertennummer",
+        "definition": "eGK Versichertennummer aus dem Hauptversicherungsverhaeltnis."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/hv-versicherten-nr"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

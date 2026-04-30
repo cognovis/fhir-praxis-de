@@ -1,0 +1,20 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "PraxisCarePlanCategoryCS",
+  "id": "praxis-care-plan-category",
+  "title": "Praxis CarePlan Category",
+  "description": "Category marker CodeSystem for PraxisCarePlanDE. Single code 'praxis' identifies this CarePlan as a general practice (humanmedizinisch) plan, in contrast to dental care plans (DentalCarePlanDE) from fhir-dental-de.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-care-plan-category",
+  "concept": [
+    {
+      "code": "praxis",
+      "display": "Praxis",
+      "definition": "Allgemeinmedizinischer / humanmedizinischer Behandlungsplan (Praxisverwaltung)"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 1
+}

@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "BillingBezugsraumCS",
+  "id": "billing-bezugsraum",
+  "title": "Abrechnungsbezugsraum",
+  "description": "Zeitlicher Bezugsraum für Ausschlussregelungen im EBM (Behandlungsfall, Arztfall, Sitzung, Tag)",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/billing-bezugsraum",
+  "concept": [
+    {
+      "code": "BF",
+      "display": "Behandlungsfall",
+      "definition": "Ausschluss gilt innerhalb desselben Behandlungsfalls (Quartal)"
+    },
+    {
+      "code": "AF",
+      "display": "Arztfall",
+      "definition": "Ausschluss gilt innerhalb desselben Arztfalls"
+    },
+    {
+      "code": "SF",
+      "display": "Sitzung",
+      "definition": "Ausschluss gilt für dieselbe Sitzung (Arztkontakt)"
+    },
+    {
+      "code": "TG",
+      "display": "Tag",
+      "definition": "Ausschluss gilt für denselben Behandlungstag"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

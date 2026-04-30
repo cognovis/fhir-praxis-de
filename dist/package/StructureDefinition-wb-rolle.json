@@ -1,0 +1,54 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "wb-rolle",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/wb-rolle",
+  "name": "WbRolleExt",
+  "title": "WB/SA-Rolle",
+  "status": "active",
+  "description": "Rolle des Assistenten: WB-Assistent oder Sicherstellungsassistent",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "PractitionerRole",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "WB/SA-Rolle",
+        "definition": "Rolle des Assistenten: WB-Assistent oder Sicherstellungsassistent"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/wb-rolle"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "code"
+          }
+        ],
+        "binding": {
+          "strength": "required",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/wb-rolle"
+        }
+      }
+    ]
+  }
+}

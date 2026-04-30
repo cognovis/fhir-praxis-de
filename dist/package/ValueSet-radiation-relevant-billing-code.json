@@ -1,0 +1,26 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "RadiationRelevantBillingCodeVS",
+  "id": "radiation-relevant-billing-code",
+  "title": "Radiation Relevant Billing Code",
+  "description": "Billing codes that trigger radiation dose documentation requirements under the German Strahlenschutzgesetz (StrlSchG). Intended scope: EBM Chapter 34 (codes starting with 34 — radiologische Leistungen), GOÄ §§5000-5855 (Strahlendiagnostik/therapie), BEMA Chapter 4 (dental radiology, OPG, DVT), and GOZ §§5000-5099 (private dental radiology). Full system includes are used because the referenced code systems do not declare FHIR filter support. Used by radiation dose tracking workflows (cpw.6).",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/radiation-relevant-billing-code",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM"
+      },
+      {
+        "system": "https://fhir.de/CodeSystem/bak/goae"
+      },
+      {
+        "system": "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA"
+      },
+      {
+        "system": "https://fhir.de/CodeSystem/bzaek/goz"
+      }
+    ]
+  }
+}

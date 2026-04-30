@@ -1,0 +1,14 @@
+### CodeSystem: cave-clinical-warning-type - Valid code: K
+# @name valid_K
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type&code=K
+Authorization: Basic basic:secret
+
+### CodeSystem: cave-clinical-warning-type - Valid code: A
+# @name valid_A
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type&code=A
+Authorization: Basic basic:secret
+
+### CodeSystem: cave-clinical-warning-type - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/cave-clinical-warning-type&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

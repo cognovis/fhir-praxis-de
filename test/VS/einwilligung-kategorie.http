@@ -1,0 +1,19 @@
+### ValueSet: Einwilligung Kategorie - $expand
+# @name expand
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$expand
+Authorization: Basic basic:secret
+
+### ValueSet: Einwilligung Kategorie - $validate-code valid (dsgvo)
+# @name validate_valid_1
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dsgvo
+Authorization: Basic basic:secret
+
+### ValueSet: Einwilligung Kategorie - $validate-code valid (dmp)
+# @name validate_valid_2
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=dmp
+Authorization: Basic basic:secret
+
+### ValueSet: Einwilligung Kategorie - $validate-code invalid
+# @name validate_invalid
+GET http://localhost:8080/ValueSet/einwilligung-kategorie/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/einwilligung-kategorie&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

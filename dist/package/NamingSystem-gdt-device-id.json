@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "gdt-device-id",
+  "name": "GdtDeviceId",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-05",
+  "publisher": "cognovis GmbH",
+  "description": "GDT 3.5 Geraetekennung (FK 8402) — identifiziert das medizinische Geraet im GDT-Datenstrom",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/gdt-device-id",
+      "preferred": true
+    }
+  ]
+}

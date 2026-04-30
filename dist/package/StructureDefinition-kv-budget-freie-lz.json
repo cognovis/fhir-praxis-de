@@ -1,0 +1,113 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-budget-freie-lz",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-budget-freie-lz",
+  "name": "KvBudgetFreieLz",
+  "title": "KV Budget Freie Leistung",
+  "status": "active",
+  "description": "Profil fuer extrabudgetaere EBM-Leistungen ausserhalb des Regelleistungsvolumens (RLV/QZV).",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Basic",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Basic",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Basic.extension",
+        "path": "Basic.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "Basic.extension:kvBudFreieLzZiffer",
+        "path": "Basic.extension",
+        "sliceName": "kvBudFreieLzZiffer",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/kv-bud-freie-lz-ziffer"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.extension:kvBudFreieLzBezeichnung",
+        "path": "Basic.extension",
+        "sliceName": "kvBudFreieLzBezeichnung",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/kv-bud-freie-lz-bezeichnung"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:kvBudFreieLzQuartal",
+        "path": "Basic.extension",
+        "sliceName": "kvBudFreieLzQuartal",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/kv-bud-freie-lz-quartal"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.extension:rlvKvRegion",
+        "path": "Basic.extension",
+        "sliceName": "rlvKvRegion",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-kv-region"
+            ]
+          }
+        ]
+      },
+      {
+        "id": "Basic.code",
+        "path": "Basic.code",
+        "fixedCodeableConcept": {
+          "coding": [
+            {
+              "code": "kv-budget-freie-lz",
+              "system": "https://fhir.cognovis.de/praxis/CodeSystem/basic-resource-type"
+            }
+          ]
+        },
+        "mustSupport": true
+      },
+      {
+        "id": "Basic.subject",
+        "path": "Basic.subject",
+        "mustSupport": true
+      }
+    ]
+  }
+}

@@ -1,0 +1,14 @@
+### CodeSystem: pas-task-code - Valid code: submit
+# @name valid_submit
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=submit
+Authorization: Basic basic:secret
+
+### CodeSystem: pas-task-code - Valid code: inquire
+# @name valid_inquire
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=inquire
+Authorization: Basic basic:secret
+
+### CodeSystem: pas-task-code - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/pas-task-code&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "kvdt-fallnummer",
+  "name": "KvdtFallnummer",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-05",
+  "publisher": "cognovis GmbH",
+  "description": "KVDT 6.06 Behandlungsfall-Identifier — PVS-agnostische Fallnummer aus KVDT-Schein",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/kvdt-fallnummer",
+      "preferred": true
+    }
+  ]
+}

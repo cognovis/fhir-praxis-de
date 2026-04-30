@@ -1,0 +1,50 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "CorrectionRuleCS",
+  "id": "kvb-richtigstellung",
+  "title": "KVB Richtigstellungsgrund",
+  "description": "Codes für KV-Richtigstellungen im Honorarbescheid",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/kvb-richtigstellung",
+  "concept": [
+    {
+      "code": "UV",
+      "display": "UV",
+      "definition": "Überschreitung Volumen"
+    },
+    {
+      "code": "HO",
+      "display": "HO",
+      "definition": "Honoraroptimierung"
+    },
+    {
+      "code": "GHO",
+      "display": "GHO",
+      "definition": "Gruppenhonorar-Optimierung"
+    },
+    {
+      "code": "PL",
+      "display": "PL",
+      "definition": "Plausibilitätsprüfung"
+    },
+    {
+      "code": "WP",
+      "display": "WP",
+      "definition": "Wirtschaftlichkeitsprüfung"
+    },
+    {
+      "code": "ST",
+      "display": "ST",
+      "definition": "Storno"
+    },
+    {
+      "code": "KO",
+      "display": "KO",
+      "definition": "Korrektur"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 7
+}

@@ -1,0 +1,14 @@
+### CodeSystem: ai-provenance - Valid code: ai-generated
+# @name valid_ai-generated
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance&code=ai-generated
+Authorization: Basic basic:secret
+
+### CodeSystem: ai-provenance - Valid code: ai-assisted
+# @name valid_ai-assisted
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance&code=ai-assisted
+Authorization: Basic basic:secret
+
+### CodeSystem: ai-provenance - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/ai-provenance&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

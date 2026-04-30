@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "pvs-patient-nummer",
+  "name": "PvsPatientNummer",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-03",
+  "publisher": "cognovis GmbH",
+  "description": "PVS-interne Patientennummer",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/pvs-patient-nummer",
+      "preferred": true
+    }
+  ]
+}

@@ -1,0 +1,4 @@
+### CodeSystem: zuzahlungsstatus - Invalid code (content: not-present, no codes defined)
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

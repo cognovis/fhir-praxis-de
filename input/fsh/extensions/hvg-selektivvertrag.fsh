@@ -1,0 +1,83 @@
+// HVG/Selektivvertrag Extensions
+// Grundstruktur über FHIR Contract Resource, hier nur Zusatzfelder
+
+Extension: HvgFacharztvertragExt
+Id: hvg-facharztvertrag
+Title: "Facharztvertrag"
+Description: "Kennzeichen, ob es sich um einen Facharztvertrag handelt (§73c SGB V)"
+Context: Contract
+* value[x] only boolean
+
+Extension: HvgKennungExt
+Id: hvg-kennung
+Title: "HVG-Kennung"
+Description: "RETIRED: HVG-Kennung wird als Contract.identifier (system: NamingSystem hvg-kennung) modelliert, nicht mehr als Extension. Adapter setzen das automatisch."
+Context: Contract
+* ^status = #retired
+* value[x] only string
+
+Extension: HvgBezeichnungExt
+Id: hvg-bezeichnung
+Title: "HVG-Bezeichnung"
+Description: "Vollstaendige Bezeichnung des Selektivvertrags"
+Context: Contract
+* value[x] only string
+
+Extension: HvgKurzbezeichnungExt
+Id: hvg-kurzbezeichnung
+Title: "HVG-Kurzbezeichnung"
+Description: "Kurzbezeichnung des Selektivvertrags fuer Anzeige im PVS"
+Context: Contract
+* value[x] only string
+
+Extension: HvgDatumExt
+Id: hvg-datum
+Title: "HVG-Datum"
+Description: "Vertragsdatum des Selektivvertrags"
+Context: Contract
+* value[x] only date
+
+Extension: HvgVertragNummerExt
+Id: hvg-vertrag-nummer
+Title: "HVG-Vertragsnummer"
+Description: "Vertragsnummer des Selektivvertrags beim Kostentraeger"
+Context: Contract
+* value[x] only string
+
+Extension: HvgMandantStatusExt
+Id: hvg-mandant-status
+Title: "HVG Mandant Status"
+Description: "Status des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only code
+
+Extension: HvgMandantDatumFreischaltungExt
+Id: hvg-mandant-datum-freischaltung
+Title: "HVG Mandant Datum Freischaltung"
+Description: "Freischaltungsdatum des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only date
+
+Extension: HvgMandantDatumBeginnExt
+Id: hvg-mandant-datum-beginn
+Title: "HVG Mandant Datum Beginn"
+Description: "Beginndatum des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only date
+
+Extension: HvgMandantDatumEndeExt
+Id: hvg-mandant-datum-ende
+Title: "HVG Mandant Datum Ende"
+Description: "Enddatum des Mandanten im HVG-Selektivvertrag"
+Context: Basic
+* value[x] only date
+
+// Context: EpisodeOfCare — Antragsdatum ist eine patienten-spezifische Eigenschaft der Einschreibung,
+// nicht des Vertrags selbst. Der Vertrag (Contract) ist PVS-übergreifend gültig;
+// der Antragszeitpunkt variiert je Patient und Einschreibefall (EpisodeOfCare).
+Extension: HvgDatumBeantragtExt
+Id: hvg-datum-beantragt
+Title: "HVG Datum Beantragt"
+Description: "Antragsdatum für die Einschreibung in den HVG-Selektivvertrag (§73b/§73c SGB V)"
+Context: EpisodeOfCare
+* value[x] only date

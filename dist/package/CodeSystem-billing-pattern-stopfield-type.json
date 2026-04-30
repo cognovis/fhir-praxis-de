@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "BillingPatternStopfieldTypeCS",
+  "id": "billing-pattern-stopfield-type",
+  "title": "BillingPattern Stopfield Type",
+  "description": "Codes for the types of stopfields (Stoppfelder) in a billing pattern (Ziffernkette). Emitted by PVS adapters for billing pattern chains.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/billing-pattern-stopfield-type",
+  "concept": [
+    {
+      "code": "text",
+      "display": "Text",
+      "definition": "Free-text input stopfield for descriptive entries"
+    },
+    {
+      "code": "icd",
+      "display": "ICD",
+      "definition": "ICD-10-GM diagnosis code stopfield"
+    },
+    {
+      "code": "euro",
+      "display": "Euro",
+      "definition": "Monetary amount stopfield (Euro)"
+    },
+    {
+      "code": "generic",
+      "display": "Generic",
+      "definition": "Generic stopfield for other data types"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

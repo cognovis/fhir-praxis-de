@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "BehandlerRolleVS",
+  "id": "behandler-rolle",
+  "title": "Behandler-Rolle",
+  "description": "Rollen der Mitglieder in einem Behandler-Team in der deutschen ambulanten Versorgung.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/behandler-rolle",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/behandler-rolle"
+      }
+    ]
+  }
+}

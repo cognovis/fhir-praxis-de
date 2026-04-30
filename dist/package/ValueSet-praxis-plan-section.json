@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "PraxisPlanSectionVS",
+  "id": "praxis-plan-section",
+  "title": "Praxis Plan Section",
+  "description": "All codes from the praxis-plan-section CodeSystem. Bind to PlanDefinition.action.code (extensible) to mark structural sections within PraxisBillingPattern actions.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/praxis-plan-section",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/praxis-plan-section"
+      }
+    ]
+  }
+}

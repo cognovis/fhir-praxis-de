@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "LkzCS",
+  "id": "lkz",
+  "title": "Löschkennzeichen",
+  "description": "Löschkennzeichen für Datensätze in der ambulanten Versorgung",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/lkz",
+  "concept": [
+    {
+      "code": "aktiv",
+      "display": "Aktiv",
+      "definition": "Datensatz ist aktiv und gültig"
+    },
+    {
+      "code": "geloescht",
+      "display": "Gelöscht",
+      "definition": "Datensatz ist als gelöscht markiert"
+    },
+    {
+      "code": "gesperrt",
+      "display": "Gesperrt",
+      "definition": "Datensatz ist gesperrt und nicht verwendbar"
+    },
+    {
+      "code": "archiviert",
+      "display": "Archiviert",
+      "definition": "Datensatz ist archiviert"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}

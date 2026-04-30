@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "rlv-parent-id",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-parent-id",
+  "name": "RlvParentIdExt",
+  "title": "RLV Parent-ID",
+  "status": "active",
+  "description": "Referenz auf die uebergeordnete RLV-Ressource",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "RLV Parent-ID",
+        "definition": "Referenz auf die uebergeordnete RLV-Ressource"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/rlv-parent-id"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "string"
+          }
+        ]
+      }
+    ]
+  }
+}

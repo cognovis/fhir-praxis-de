@@ -1,0 +1,25 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "InsurancePlanTypeCS",
+  "id": "insurance-plan-type",
+  "title": "Versicherungsplan-Typ",
+  "description": "Unterscheidung zwischen gesetzlicher (GKV) und privater (PKV) Krankenversicherung fuer InsurancePlan-Profile.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/insurance-plan-type",
+  "concept": [
+    {
+      "code": "gkv",
+      "display": "GKV",
+      "definition": "Gesetzliche Krankenversicherung — Satzungsleistungen und kassenindividuelle Leistungen"
+    },
+    {
+      "code": "pkv",
+      "display": "PKV",
+      "definition": "Private Krankenversicherung — GOÄ-Faktoren und Erstattungsregeln"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 2
+}

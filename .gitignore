@@ -1,0 +1,46 @@
+node_modules/
+output/
+fsh-generated/
+temp/
+template/
+*.tgz
+.DS_Store
+input-cache/
+txCache/
+
+# Beads / Dolt files (added by bd init)
+.dolt/
+*.db
+.beads-credential-key
+
+# Claude session logs
+logs/
+
+# Claude Code project config (keep commands/ tracked)
+.claude/*
+!.claude/commands/
+
+# Beads context files
+.beads/PRIME.md
+.beads/dolt.disabled/
+.beads/embeddeddolt/
+config.yaml
+
+# Local Dolt-sync artifact — beads sync via Dolt remote, not git
+.beads/issues.jsonl
+
+# Dolt backup artifacts (corruption recovery, local snapshots)
+.beads/backup.corrupt-*/
+.beads/dolt-backup.json
+.beads/dolt-backup-state.json
+
+# IG Publisher artifacts in root
+Requirements-fromNarrative.json
+
+# session-close transient artifacts (per-worktree IPC files)
+.session-close.lock
+.worktree-handoff.json
+.wave-orchestrator.lock
+
+# playwright-cli local cache
+.playwright-cli/

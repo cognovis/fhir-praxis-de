@@ -1,0 +1,53 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-billing-activity-definition",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billing-activity-definition",
+  "name": "PraxisBillingActivityDefinitionExt",
+  "title": "Praxis Billing Activity ChargeItemDefinition Reference",
+  "status": "active",
+  "description": "Canonical reference from a PraxisBillingActivity (ActivityDefinition) to the corresponding ChargeItemDefinition. Used by the plan-library catalog to resolve billing codes to prices and points. Implements ADR-001 Decision 3: plan-library resources carry only structural catalog references, not rule-bearing computability.",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "ActivityDefinition",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "Praxis Billing Activity ChargeItemDefinition Reference",
+        "definition": "Canonical reference from a PraxisBillingActivity (ActivityDefinition) to the corresponding ChargeItemDefinition. Used by the plan-library catalog to resolve billing codes to prices and points. Implements ADR-001 Decision 3: plan-library resources carry only structural catalog references, not rule-bearing computability."
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billing-activity-definition"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "canonical",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/ChargeItemDefinition"
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

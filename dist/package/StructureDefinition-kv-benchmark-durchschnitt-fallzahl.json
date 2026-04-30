@@ -1,0 +1,50 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "kv-benchmark-durchschnitt-fallzahl",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-durchschnitt-fallzahl",
+  "name": "KvBenchmarkDurchschnittFallzahlExt",
+  "title": "KV-Benchmark Durchschnittliche Fallzahl",
+  "status": "active",
+  "description": "Durchschnittliche Fallzahl pro Arzt pro Quartal",
+  "fhirVersion": "4.0.1",
+  "kind": "complex-type",
+  "abstract": false,
+  "context": [
+    {
+      "expression": "Basic",
+      "type": "element"
+    }
+  ],
+  "type": "Extension",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Extension",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Extension",
+        "path": "Extension",
+        "short": "KV-Benchmark Durchschnittliche Fallzahl",
+        "definition": "Durchschnittliche Fallzahl pro Arzt pro Quartal"
+      },
+      {
+        "id": "Extension.extension",
+        "path": "Extension.extension",
+        "max": "0"
+      },
+      {
+        "id": "Extension.url",
+        "path": "Extension.url",
+        "fixedUri": "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-durchschnitt-fallzahl"
+      },
+      {
+        "id": "Extension.value[x]",
+        "path": "Extension.value[x]",
+        "type": [
+          {
+            "code": "decimal"
+          }
+        ]
+      }
+    ]
+  }
+}

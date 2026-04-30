@@ -1,0 +1,88 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "praxis-billing-activity",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billing-activity",
+  "name": "PraxisBillingActivity",
+  "title": "Praxis Billing Activity",
+  "status": "active",
+  "experimental": false,
+  "publisher": "cognovis GmbH",
+  "description": "ActivityDefinition profile for individual billing code activities in the German practice management plan library. Serves as the anchor resource referenced by PlanDefinition.action.definitionCanonical within PraxisBillingPattern. The chargeItemDefinition extension (1..1) links to the corresponding ChargeItemDefinition for price and point resolution. Code binding covers EBM, GOÄ, HZV, BEMA, and GOZ billing systems. Implements ADR-001 (Plan-Library vs. Rule-Execution boundary) and plan-chargeitem linkage.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "ActivityDefinition",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/ActivityDefinition",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "ActivityDefinition.extension",
+        "path": "ActivityDefinition.extension",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "url"
+            }
+          ],
+          "ordered": false,
+          "rules": "open"
+        },
+        "min": 1
+      },
+      {
+        "id": "ActivityDefinition.extension:chargeItemDefinition",
+        "path": "ActivityDefinition.extension",
+        "sliceName": "chargeItemDefinition",
+        "short": "Referenz zur ChargeItemDefinition fuer Preis-/Punktwert-Aufloesung",
+        "min": 1,
+        "max": "1",
+        "type": [
+          {
+            "code": "Extension",
+            "profile": [
+              "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billing-activity-definition"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "ActivityDefinition.title",
+        "path": "ActivityDefinition.title",
+        "short": "Anzeigename der Leistungsziffer",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "ActivityDefinition.status",
+        "path": "ActivityDefinition.status",
+        "patternCode": "active",
+        "mustSupport": true
+      },
+      {
+        "id": "ActivityDefinition.description",
+        "path": "ActivityDefinition.description",
+        "short": "Beschreibung der Leistung (optional, fuer Katalog-Anzeige)",
+        "mustSupport": true
+      },
+      {
+        "id": "ActivityDefinition.code",
+        "path": "ActivityDefinition.code",
+        "short": "Abrechnungsziffer (EBM, GOÄ, HZV, BEMA oder GOZ)",
+        "min": 1,
+        "mustSupport": true,
+        "binding": {
+          "strength": "extensible",
+          "valueSet": "https://fhir.cognovis.de/praxis/ValueSet/praxis-billing-code"
+        }
+      },
+      {
+        "id": "ActivityDefinition.intent",
+        "path": "ActivityDefinition.intent",
+        "patternCode": "proposal"
+      }
+    ]
+  }
+}

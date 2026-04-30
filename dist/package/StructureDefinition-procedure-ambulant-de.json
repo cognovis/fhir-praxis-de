@@ -1,0 +1,83 @@
+{
+  "resourceType": "StructureDefinition",
+  "id": "procedure-ambulant-de",
+  "url": "https://fhir.cognovis.de/praxis/StructureDefinition/procedure-ambulant-de",
+  "name": "ProcedureAmbulantDE",
+  "title": "Procedure Ambulant DE",
+  "status": "active",
+  "description": "Ambulanter Eingriff in der deutschen Praxisverwaltung. Eingriffskodierung per OPS (Operationen- und Prozedurenschlüssel). Verwendet das CodingOPS-Profil aus de.basisprofil.r4, das die Seitenlokalisation als Extension auf der OPS-Coding einschließt.",
+  "fhirVersion": "4.0.1",
+  "kind": "resource",
+  "abstract": false,
+  "type": "Procedure",
+  "baseDefinition": "http://hl7.org/fhir/StructureDefinition/Procedure",
+  "derivation": "constraint",
+  "differential": {
+    "element": [
+      {
+        "id": "Procedure.status",
+        "path": "Procedure.status",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.code",
+        "path": "Procedure.code",
+        "min": 1,
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.code.coding",
+        "path": "Procedure.code.coding",
+        "slicing": {
+          "discriminator": [
+            {
+              "type": "value",
+              "path": "system"
+            }
+          ],
+          "rules": "open"
+        }
+      },
+      {
+        "id": "Procedure.code.coding:ops",
+        "path": "Procedure.code.coding",
+        "sliceName": "ops",
+        "min": 0,
+        "max": "1",
+        "type": [
+          {
+            "code": "Coding",
+            "profile": [
+              "http://fhir.de/StructureDefinition/CodingOPS"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.subject",
+        "path": "Procedure.subject",
+        "type": [
+          {
+            "code": "Reference",
+            "targetProfile": [
+              "http://hl7.org/fhir/StructureDefinition/Patient"
+            ]
+          }
+        ],
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.performed[x]",
+        "path": "Procedure.performed[x]",
+        "mustSupport": true
+      },
+      {
+        "id": "Procedure.bodySite",
+        "path": "Procedure.bodySite",
+        "short": "Detaillierte Körperstelle (ergänzend zur Seitenlokalisation in code.coding[ops])",
+        "mustSupport": true
+      }
+    ]
+  }
+}

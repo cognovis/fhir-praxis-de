@@ -1,0 +1,14 @@
+### CodeSystem: task-type - Valid code: callback
+# @name valid_callback
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=callback
+Authorization: Basic basic:secret
+
+### CodeSystem: task-type - Valid code: urgent
+# @name valid_urgent
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=urgent
+Authorization: Basic basic:secret
+
+### CodeSystem: task-type - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/task-type&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret

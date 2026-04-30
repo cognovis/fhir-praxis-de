@@ -1,0 +1,30 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "DigitalWorkflowCS",
+  "id": "digital-workflow",
+  "title": "Digitaler Workflow",
+  "description": "Art des Herstellungsworkflows fuer individuell gefertigte Medizinprodukte.",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/digital-workflow",
+  "concept": [
+    {
+      "code": "digital",
+      "display": "Digital",
+      "definition": "Volldigitaler Workflow (z.B. Intraoralscan, CAD/CAM-Fertigung)"
+    },
+    {
+      "code": "conventional",
+      "display": "Konventionell",
+      "definition": "Konventioneller Workflow (z.B. Alginatabformung, Gipsmodell, Handarbeit)"
+    },
+    {
+      "code": "hybrid",
+      "display": "Hybrid",
+      "definition": "Kombination aus digitalem und konventionellem Workflow"
+    }
+  ],
+  "caseSensitive": true,
+  "experimental": false,
+  "count": 3
+}

@@ -1,0 +1,17 @@
+{
+  "resourceType": "NamingSystem",
+  "id": "abrechnungsnummer-kurz",
+  "name": "AbrechnungsnummerKurz",
+  "status": "draft",
+  "kind": "identifier",
+  "date": "2026-04-03",
+  "publisher": "cognovis GmbH",
+  "description": "KV-Abrechnungsnummer im Kurzformat, falls ein Quellsystem nur eine gekuerzte Darstellung fuehrt",
+  "uniqueId": [
+    {
+      "type": "uri",
+      "value": "https://fhir.cognovis.de/praxis/NamingSystem/abrechnungsnummer-kurz",
+      "preferred": true
+    }
+  ]
+}

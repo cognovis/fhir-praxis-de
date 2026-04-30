@@ -1,0 +1,35 @@
+{
+  "resourceType": "CodeSystem",
+  "status": "active",
+  "content": "complete",
+  "name": "HzvParticipationCS",
+  "id": "hzv-participation",
+  "title": "HZV-Teilnahmestatus",
+  "description": "Teilnahmestatus des Patienten an der hausarztzentrierten Versorgung (§73b SGB V)",
+  "url": "https://fhir.cognovis.de/praxis/CodeSystem/hzv-participation",
+  "concept": [
+    {
+      "code": "eingeschrieben",
+      "display": "Eingeschrieben",
+      "definition": "Patient ist aktuell in HZV eingeschrieben"
+    },
+    {
+      "code": "abgemeldet",
+      "display": "Abgemeldet",
+      "definition": "Patient hat sich aus HZV abgemeldet"
+    },
+    {
+      "code": "gesperrt",
+      "display": "Gesperrt",
+      "definition": "Teilnahme wegen Sperrfrist nicht moeglich"
+    },
+    {
+      "code": "auslaufend",
+      "display": "Auslaufend",
+      "definition": "Teilnahme laeuft zum Ende des Quartals aus"
+    }
+  ],
+  "experimental": false,
+  "caseSensitive": true,
+  "count": 4
+}
