@@ -24,7 +24,7 @@ Id: contrast-agent-type
 Title: "Contrast Agent Type (Deprecated)"
 Description: "DEPRECATED. Superseded by https://fhir.cognovis.de/imaging/ValueSet/contrast-agent-atc (ATC classification) and https://fhir.cognovis.de/imaging/ValueSet/contrast-agent-dicom (DICOM CID 12) from de.cognovis.terminology.imaging. cpw.2 (imaging order) and cpw.4 (imaging study) SHOULD bind to the external ValueSets directly. Local DE CodeSystem for radiological contrast agents approved in Germany — includes ATC, DICOM CID 12, GOÄ billing codes, and PZN properties."
 * ^url = "https://fhir.cognovis.de/praxis/CodeSystem/contrast-agent-type"
-* ^status = #deprecated
+* ^status = #retired
 * ^experimental = false
 * ^caseSensitive = true
 * ^content = #complete
