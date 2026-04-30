@@ -29,6 +29,7 @@ dependencies:
   de.cognovis.terminology.imaging: 2026.0.0
   ihe.rad.imr: 1.1.0
   dvmd.kdl.r4: 2025.0.1
+  hl7.fhir.uv.ips: 1.1.0
   # kbv.mio.laborbefund removed: v1.0.0-kommentierung.2 has snapshot bugs
   # (Unknown path in Patient.gender.extension). Our profiles don't inherit
   # from KBV MIO — re-add when KBV fixes their package.
