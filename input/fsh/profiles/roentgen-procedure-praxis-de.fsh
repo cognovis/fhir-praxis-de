@@ -36,12 +36,9 @@ Description: "Roentgen-Prozedur-Profil fuer die deutsche ambulante Praxis. Erbt 
 * code ^short = "Bildgebungsverfahren-Code (ImagingProcedureVS, extensible)"
 * code ^definition = "Code des Bildgebungsverfahrens. Extensible Binding auf ImagingProcedureVS aus de.cognovis.terminology.imaging."
 
-// subject: Patient (1..1) — override IPS narrowing to allow any Patient (not just Patient-uv-ips)
-// Cannot use "only Reference(Patient)" in FSH because SUSHI does not allow widening a parent type constraint.
-// Use caret syntax to set targetProfile directly in the generated JSON.
+// subject: Patient (1..1) — IPS parent requires Patient-uv-ips; examples must claim conformance via meta.profile
 * subject 1..1 MS
-* subject ^type[0].targetProfile[0] = "http://hl7.org/fhir/StructureDefinition/Patient"
-* subject ^short = "Patient (Pflichtfeld)"
+* subject ^short = "Patient (Pflichtfeld, Patient-uv-ips gemaess IPS-Elternprofil)"
 
 // performed[x]: Aufnahmedatum (Pflichtfeld gemaess SS85 StrlSchV)
 // IPS uses performed[x] — constrain to dateTime only; cardinality on choice element before type narrowing
@@ -87,12 +84,12 @@ Description: "Roentgen-Prozedur-Profil fuer die deutsche ambulante Praxis. Erbt 
 * reasonCode contains
     rechtfertigende-indikation 1..* MS
 
-// reasonCode[rechtfertigende-indikation]: ICD-10-GM Slice (required binding)
+// reasonCode[rechtfertigende-indikation]: ICD-10-GM Slice (extensible binding — VS is curated quarterly, real-world codes may not yet be listed)
 * reasonCode[rechtfertigende-indikation] MS
-* reasonCode[rechtfertigende-indikation] from $ri-vs (required)
+* reasonCode[rechtfertigende-indikation] from $ri-vs (extensible)
 * reasonCode[rechtfertigende-indikation].coding 1..* MS
 * reasonCode[rechtfertigende-indikation].coding.system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
-* reasonCode[rechtfertigende-indikation] ^short = "Rechtfertigende Indikation (ICD-10-GM, required)"
-* reasonCode[rechtfertigende-indikation] ^definition = "Rechtfertigende Indikation fuer die Strahlenanwendung gemaess SS83 StrlSchG. Required Binding auf RechtfertigendeIndikationVS (ICD-10-GM). Attestierungsmetadaten als Extension."
+* reasonCode[rechtfertigende-indikation] ^short = "Rechtfertigende Indikation (ICD-10-GM, extensible)"
+* reasonCode[rechtfertigende-indikation] ^definition = "Rechtfertigende Indikation fuer die Strahlenanwendung gemaess SS83 StrlSchG. Extensible Binding auf RechtfertigendeIndikationVS (ICD-10-GM). Attestierungsmetadaten als Extension."
 * reasonCode[rechtfertigende-indikation].extension contains
     $ri-attest-ext named attest 0..1

@@ -9,12 +9,13 @@ Alias: $icd10gm = http://fhir.de/CodeSystem/bfarm/icd-10-gm
 Alias: $goae = http://fhir.de/CodeSystem/goae
 Alias: $radiology-role-cs = https://fhir.cognovis.de/praxis/CodeSystem/radiology-role
 
-// --- Hilfsinstanz: Patient fuer Roentgen-Linkage-Beispiel ---
+// --- Hilfsinstanz: Patient fuer Roentgen-Linkage-Beispiel (IPS-konform via meta.profile) ---
 Instance: example-patient-roentgen-linkage
 InstanceOf: Patient
 Title: "Maria Becker — Patientin CT Schaedel"
-Description: "Patientin fuer das ChargeItem-Roentgen-Linkage-Beispiel (CT Schaedel GOAe Ae5370)."
+Description: "Patientin fuer das ChargeItem-Roentgen-Linkage-Beispiel (CT Schaedel GOAe Ae5370). meta.profile Patient-uv-ips gemaess Anforderung des IPS-Elternprofils Procedure-uv-ips."
 Usage: #example
+* meta.profile = "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
 * active = true
 * name[0].use = #official
 * name[0].family = "Becker"

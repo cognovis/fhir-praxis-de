@@ -24,6 +24,20 @@ Usage: #example
 * name[0].given[0] = "Anna"
 * name[0].prefix[0] = "Dr."
 
+// --- Hilfsinstanz: Patient fuer DVT (IPS-konform via meta.profile) ---
+Instance: example-patient-dvt
+InstanceOf: Patient
+Title: "Max Hartmann — Patient DVT Oberkiefer"
+Description: "Patient fuer das DVT-Oberkiefer-Beispiel. Erhaelt meta.profile Patient-uv-ips gemaess Anforderung des IPS-Elternprofils Procedure-uv-ips."
+Usage: #example
+* meta.profile = "http://hl7.org/fhir/uv/ips/StructureDefinition/Patient-uv-ips"
+* active = true
+* name[0].use = #official
+* name[0].family = "Hartmann"
+* name[0].given[0] = "Max"
+* gender = #male
+* birthDate = "1978-09-12"
+
 // --- Hilfsinstanz: MTR (Anwender DVT) ---
 Instance: example-practitioner-mtr-dvt
 InstanceOf: Practitioner
@@ -61,8 +75,8 @@ Usage: #example
 * code.coding[0].code = #1255414003
 * code.coding[0].display = "Cone beam computed tomography of maxilla"
 
-// subject: Patient
-* subject = Reference(example-patient)
+// subject: Patient (IPS-konform via meta.profile)
+* subject = Reference(example-patient-dvt)
 
 // performedDateTime: Aufnahmedatum (Pflicht gemaess SS85 StrlSchV)
 * performedDateTime = "2026-04-30T10:30:00+02:00"
