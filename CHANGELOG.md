@@ -12,6 +12,9 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-cpw.4**: Add ImagingServiceRequestPraxisDe profile with IHE IMR inheritance, ICD-10-GM reasonCode slicing, insurance reference, and prior study support
+- **fpde-cpw.4**: Add ImagingAppointmentPraxisDe profile with modality, preparation, and readiness extensions
+- **fpde-cpw.4**: Add ImagingDevicePraxisDe profile with DICOM AE-Title identifier and maintenance status tracking
 - **fpde-cpw.2**: Add hl7.fhir.uv.ips 1.1.0 dependency
 - **fpde-cpw.2**: Add image-km-administration extension
 - **fpde-cpw.2**: Add technique-parameter extension
