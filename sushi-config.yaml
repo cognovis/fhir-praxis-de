@@ -56,6 +56,8 @@ pages:
     title: International Interoperability
   architecture.md:
     title: Architecture Decisions
+  strahlenschutz-compliance.md:
+    title: Strahlenschutz-Compliance
 
 menu:
   Home: index.html
