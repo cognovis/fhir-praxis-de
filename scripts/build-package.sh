@@ -33,7 +33,15 @@ fi
 if [ "$SKIP_SUSHI" = false ]; then
   echo "Running SUSHI..."
   cd "$ROOT"
-  npx sushi . 2>&1 | tail -5
+  SUSHI_OUTPUT=$(npx sushi . 2>&1)
+  SUSHI_EXIT=${PIPESTATUS[0]:-$?}
+  # Always show last 20 lines; on error show full output for diagnosis
+  if [[ "$SUSHI_EXIT" -ne 0 ]]; then
+    echo "$SUSHI_OUTPUT"
+    exit "$SUSHI_EXIT"
+  else
+    echo "$SUSHI_OUTPUT" | tail -20
+  fi
 else
   echo "Skipping SUSHI (--skip-sushi)"
   cd "$ROOT"
