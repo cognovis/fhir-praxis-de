@@ -10,11 +10,17 @@ All notable changes to this project will be documented in this file.
 - **ci**: Use tee to stream SUSHI output and capture exit code correctly
 - **ci**: Pre-load de.cognovis.terminology.imaging from npm.cognovis.de
 - **ci**: Vendor de.cognovis.terminology.imaging for CI FHIR cache
+- **fpde-cpw.5**: Address review findings iteration 1
 - **fpde-cpw.6**: Address review findings iteration 1
 - **fpde-cpw.6**: Address codex adversarial findings
 
+### Documentation
+
+- **fpde-cpw.5**: Update changelog with imaging subscriptions, translate tests, architecture page
+
 ### Features
 
+- **fpde-cpw.5**: Add subscription templates, $translate tests, imaging billing architecture page
 - **fpde-cpw.6**: Green — RoentgenProcedurePraxisDe, radiation-dose ext, ChargeItemPraxisDe invariant, IG page
 
 ### Miscellaneous
@@ -24,6 +30,7 @@ All notable changes to this project will be documented in this file.
 ### Test
 
 - **fpde-cpw.6**: Red — stub FSH profiles and extensions
+
 
 ## [0.41.4] - 2026-04-30
 

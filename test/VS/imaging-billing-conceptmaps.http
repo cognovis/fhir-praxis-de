@@ -1,0 +1,53 @@
+# Imaging Billing ConceptMap — $translate smoke tests
+#
+# Requires: de.cognovis.terminology.imaging@2026.0.0 installed in Aidbox
+# Install via: POST /fhir/$fhir-package-install { "packageId": "de.cognovis.terminology.imaging", "version": "2026.0.0" }
+#
+# ConceptMaps are defined in the external package de.cognovis.terminology.imaging@2026.0.0.
+# They are suggestion-tables only — NOT the billing engine. See imaging-billing-architecture.md.
+#
+# External ConceptMap canonical URLs:
+#   https://fhir.cognovis.de/imaging/ConceptMap/modality-to-goae-suggestion
+#   https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop
+#   https://fhir.cognovis.de/imaging/ConceptMap/goae-contrast-agent-billing
+
+### ModalityToGoaeSuggestion — resource exists (verify package was installed)
+# @name goae_suggestion_resource
+GET http://localhost:8080/fhir/ConceptMap?url=https://fhir.cognovis.de/imaging/ConceptMap/modality-to-goae-suggestion
+Authorization: Basic basic:secret
+
+### ImagingStudyToEbmGop — resource exists (verify package was installed)
+# @name ebm_gop_resource
+GET http://localhost:8080/fhir/ConceptMap?url=https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop
+Authorization: Basic basic:secret
+
+### GoaeContrastAgentBilling — resource exists (verify package was installed)
+# @name contrast_billing_resource
+GET http://localhost:8080/fhir/ConceptMap?url=https://fhir.cognovis.de/imaging/ConceptMap/goae-contrast-agent-billing
+Authorization: Basic basic:secret
+
+### ModalityToGoaeSuggestion — $translate CT Thorax -> GOA suggestion
+# Expected: returns match with GOA suggestion code(s) for CT modality
+# Source system: DICOM CID 29 Modality (http://dicom.nema.org/resources/ontology/DCM)
+# @name goae_translate_ct
+GET http://localhost:8080/fhir/ConceptMap/$translate?url=https://fhir.cognovis.de/imaging/ConceptMap/modality-to-goae-suggestion&code=CT&system=http://dicom.nema.org/resources/ontology/DCM
+Authorization: Basic basic:secret
+
+### ModalityToGoaeSuggestion — $translate MR -> GOA suggestion
+# Expected: returns match with GOA suggestion code(s) for MR (Magnetic Resonance) modality
+# @name goae_translate_mr
+GET http://localhost:8080/fhir/ConceptMap/$translate?url=https://fhir.cognovis.de/imaging/ConceptMap/modality-to-goae-suggestion&code=MR&system=http://dicom.nema.org/resources/ontology/DCM
+Authorization: Basic basic:secret
+
+### ImagingStudyToEbmGop — $translate MR -> EBM GOP suggestion
+# Expected: returns match with EBM GOP code(s) for MR modality
+# Source system: DICOM CID 29 Modality (http://dicom.nema.org/resources/ontology/DCM)
+# @name ebm_translate_mr
+GET http://localhost:8080/fhir/ConceptMap/$translate?url=https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop&code=MR&system=http://dicom.nema.org/resources/ontology/DCM
+Authorization: Basic basic:secret
+
+### ImagingStudyToEbmGop — $translate CT -> EBM GOP suggestion
+# Expected: returns match with EBM GOP code(s) for CT modality
+# @name ebm_translate_ct
+GET http://localhost:8080/fhir/ConceptMap/$translate?url=https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop&code=CT&system=http://dicom.nema.org/resources/ontology/DCM
+Authorization: Basic basic:secret
