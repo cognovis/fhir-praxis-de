@@ -1,0 +1,17 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "ReportSubstatusVS",
+  "id": "report-substatus",
+  "title": "Report Substatus",
+  "description": "ValueSet fuer den Sub-Status des Radiologiebefunds (Diktat, Lesung, Freigabe). Enthaelt alle Codes aus ReportSubstatusCS.",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/report-substatus",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/report-substatus"
+      }
+    ]
+  }
+}

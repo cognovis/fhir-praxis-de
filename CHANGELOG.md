@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.41.3] - 2026-04-30
+
 ### Bug Fixes
 
 - **fpde-cpw.1b**: Address review findings iteration 1
@@ -17,6 +19,12 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - **fpde-cpw.1b**: Update changelog for imaging terminology migration
+
+## [0.41.2] - 2026-04-30
+
+### Features
+
+- Migrate cpw.1 terminology to external imaging package (IHE IMR base)
 
 ## [0.41.1] - 2026-04-30
 

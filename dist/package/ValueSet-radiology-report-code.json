@@ -1,0 +1,59 @@
+{
+  "resourceType": "ValueSet",
+  "status": "active",
+  "name": "RadiologyReportCodeVS",
+  "id": "radiology-report-code",
+  "title": "Radiology Report Code",
+  "description": "LOINC-Codes fuer Radiologiebefunde. Umfasst allgemeine Bildgebungs-Studiencodes sowie modalitaetsspezifische Codes (CT, MRT, Roentgen, Sonographie).",
+  "url": "https://fhir.cognovis.de/praxis/ValueSet/radiology-report-code",
+  "experimental": false,
+  "compose": {
+    "include": [
+      {
+        "system": "http://loinc.org",
+        "concept": [
+          {
+            "code": "18748-4",
+            "display": "Diagnostic imaging study"
+          },
+          {
+            "code": "68604-8",
+            "display": "Radiology diagnostic study note"
+          },
+          {
+            "code": "24627-2",
+            "display": "CT study note"
+          },
+          {
+            "code": "36643-5",
+            "display": "CT of thorax"
+          },
+          {
+            "code": "24558-9",
+            "display": "CT Abdomen and Pelvis"
+          },
+          {
+            "code": "36554-4",
+            "display": "MRI study note"
+          },
+          {
+            "code": "36803-5",
+            "display": "MRI of knee"
+          },
+          {
+            "code": "24648-8",
+            "display": "DXA study note"
+          },
+          {
+            "code": "24893-0",
+            "display": "XR Chest 2 views"
+          },
+          {
+            "code": "24591-0",
+            "display": "US study note"
+          }
+        ]
+      }
+    ]
+  }
+}
