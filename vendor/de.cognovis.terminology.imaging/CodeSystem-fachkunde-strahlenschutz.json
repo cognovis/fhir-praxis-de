@@ -1,0 +1,34 @@
+{
+  "resourceType": "CodeSystem",
+  "id": "fachkunde-strahlenschutz",
+  "url": "https://fhir.cognovis.de/imaging/CodeSystem/fachkunde-strahlenschutz",
+  "version": "2026.0.0",
+  "name": "FachkundeStrahlenschutzCS",
+  "title": "Fachkunde Strahlenschutz",
+  "status": "active",
+  "content": "complete",
+  "description": "Local CodeSystem for radiation protection qualification categories (Fachkunde Strahlenschutz) as required by §47 StrlSchV. No standard FHIR CodeSystem exists for this domain.",
+  "count": 5,
+  "concept": [
+    {
+      "code": "radiologie",
+      "display": "Fachkunde Radiologie"
+    },
+    {
+      "code": "nuklearmedizin",
+      "display": "Fachkunde Nuklearmedizin"
+    },
+    {
+      "code": "strahlentherapie",
+      "display": "Fachkunde Strahlentherapie"
+    },
+    {
+      "code": "zahnmedizin-rvt",
+      "display": "Fachkunde Zahnmedizin (RöV)"
+    },
+    {
+      "code": "dvt",
+      "display": "Fachkunde Digitale Volumentomographie"
+    }
+  ]
+}

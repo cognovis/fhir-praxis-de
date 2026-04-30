@@ -1,0 +1,43 @@
+{
+  "resourceType": "ValueSet",
+  "id": "contrast-agent-dicom",
+  "url": "https://fhir.cognovis.de/imaging/ValueSet/contrast-agent-dicom",
+  "version": "2026.0.0",
+  "name": "ContrastAgentDicomVS",
+  "title": "Contrast Agents (SNOMED CT, aligned with DICOM CID 12)",
+  "status": "active",
+  "description": "Curated list of SNOMED CT codes for contrast agent categories, aligned with DICOM PS3.16 CID 12 (Contrast/Bolus Agent). Modern DICOM CID 12 uses SNOMED CT codes rather than DCM numeric codes. Used for structured documentation of contrast agents administered during imaging procedures.",
+  "compose": {
+    "include": [
+      {
+        "system": "http://snomed.info/sct",
+        "concept": [
+          {
+            "code": "385468004",
+            "display": "Iodinated contrast agent"
+          },
+          {
+            "code": "419164005",
+            "display": "Iodinated contrast media"
+          },
+          {
+            "code": "412515006",
+            "display": "Gadolinium-based contrast agent"
+          },
+          {
+            "code": "407270000",
+            "display": "Barium contrast agent"
+          },
+          {
+            "code": "418090003",
+            "display": "Non-ionic iodinated contrast media"
+          },
+          {
+            "code": "418613008",
+            "display": "Ionic iodinated contrast media"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -124,23 +124,27 @@ jobs:
 
       - name: Pre-load private FHIR packages
         run: |
-          # Pre-load private packages from npm.cognovis.de into the FHIR package cache
-          # so SUSHI doesn't try to download them from the public registry and fail.
-          pre_load() {
+          # Pre-load private packages from vendored files in the repo into the FHIR
+          # package cache so SUSHI finds them without attempting a registry download.
+          # Packages in vendor/ are committed directly — no auth required.
+          pre_load_vendor() {
             local pkg="$1" version="$2"
+            local vendor_dir="vendor/${pkg}"
             local cache_dir="${HOME}/.fhir/packages/${pkg}#${version}"
             if [ -d "$cache_dir" ]; then
               echo "$pkg#$version already cached — skipping"
               return
             fi
-            local url="https://npm.cognovis.de/${pkg}/-/${pkg}-${version}.tgz"
-            echo "Pre-loading $pkg#$version from npm.cognovis.de..."
-            mkdir -p "$cache_dir"
-            curl -sL "$url" | tar -xz -C "$cache_dir" && \
-              echo "  Installed $(ls "$cache_dir/package/" 2>/dev/null | wc -l) files" || \
-              echo "  WARNING: failed to pre-load $pkg#$version (non-blocking)"
+            if [ ! -d "$vendor_dir" ]; then
+              echo "WARNING: vendor/$pkg not found — $pkg#$version will be downloaded from registry"
+              return
+            fi
+            echo "Installing $pkg#$version from vendor/ into FHIR cache..."
+            mkdir -p "$cache_dir/package"
+            cp -r "$vendor_dir/"* "$cache_dir/package/"
+            echo "  Installed $(ls "$cache_dir/package/" | wc -l) files"
           }
-          pre_load "de.cognovis.terminology.imaging" "2026.0.0"
+          pre_load_vendor "de.cognovis.terminology.imaging" "2026.0.0"
 
       - name: Build FHIR package
         run: bash scripts/build-package.sh

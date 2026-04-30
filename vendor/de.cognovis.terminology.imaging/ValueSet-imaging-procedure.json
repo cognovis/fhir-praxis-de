@@ -1,0 +1,54 @@
+{
+  "resourceType": "ValueSet",
+  "id": "imaging-procedure",
+  "url": "https://fhir.cognovis.de/imaging/ValueSet/imaging-procedure",
+  "version": "2026.0.0",
+  "name": "ImagingProcedureVS",
+  "title": "Imaging Procedure Codes (OPS Kapitel 3)",
+  "status": "active",
+  "description": "OPS chapter 3 (Bildgebende Diagnostik) subsystem codes for imaging procedures. Uses is-a hierarchy filters to enumerate radiology, CT, MRT, and sonography codes.",
+  "compose": {
+    "include": [
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "3-10"
+          }
+        ]
+      },
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "3-20"
+          }
+        ]
+      },
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "3-30"
+          }
+        ]
+      },
+      {
+        "system": "http://fhir.de/CodeSystem/bfarm/ops",
+        "filter": [
+          {
+            "property": "concept",
+            "op": "is-a",
+            "value": "3-70"
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,39 @@
+{
+  "resourceType": "ValueSet",
+  "id": "fachkunde-strahlenschutz",
+  "url": "https://fhir.cognovis.de/imaging/ValueSet/fachkunde-strahlenschutz",
+  "version": "2026.0.0",
+  "name": "FachkundeStrahlenschutzVS",
+  "title": "Fachkunde Strahlenschutz ValueSet",
+  "status": "active",
+  "description": "All radiation protection qualification categories from the local FachkundeStrahlenschutzCS CodeSystem.",
+  "compose": {
+    "include": [
+      {
+        "system": "https://fhir.cognovis.de/imaging/CodeSystem/fachkunde-strahlenschutz",
+        "concept": [
+          {
+            "code": "radiologie",
+            "display": "Fachkunde Radiologie"
+          },
+          {
+            "code": "nuklearmedizin",
+            "display": "Fachkunde Nuklearmedizin"
+          },
+          {
+            "code": "strahlentherapie",
+            "display": "Fachkunde Strahlentherapie"
+          },
+          {
+            "code": "zahnmedizin-rvt",
+            "display": "Fachkunde Zahnmedizin (RöV)"
+          },
+          {
+            "code": "dvt",
+            "display": "Fachkunde Digitale Volumentomographie"
+          }
+        ]
+      }
+    ]
+  }
+}

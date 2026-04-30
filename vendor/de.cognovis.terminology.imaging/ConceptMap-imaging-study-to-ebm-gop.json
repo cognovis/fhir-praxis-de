@@ -1,0 +1,128 @@
+{
+  "resourceType": "ConceptMap",
+  "id": "imaging-study-to-ebm-gop",
+  "url": "https://fhir.cognovis.de/imaging/ConceptMap/imaging-study-to-ebm-gop",
+  "version": "2026.0.0",
+  "name": "ImagingStudyToEbmGop",
+  "title": "Imaging Study Modality (DICOM CID 29) → EBM GOP Suggestion",
+  "status": "active",
+  "description": "This is a billing suggestion table only. It does not execute billing rules and must not be used as an authoritative billing decision. Actual EBM GOPs must be verified by qualified billing personnel based on the specific procedure performed and applicable KBV Abrechnungsbestimmungen. Source provenance: DICOM PS3.16 CID 29 (Acquisition Modality). EBM source: target codes curated against ebm-catalog.json (chapter 34); displays sourced from the catalog at build time. Review when EBM catalog updates (typically quarterly). Nuclear medicine (NM) and ultrasound (US) are not in EBM chapter 34 and map to disjoint.",
+  "sourceUri": "http://dicom.nema.org/resources/ontology/DCM",
+  "targetUri": "http://fhir.de/CodeSystem/ebm",
+  "group": [
+    {
+      "source": "http://dicom.nema.org/resources/ontology/DCM",
+      "target": "http://fhir.de/CodeSystem/ebm",
+      "element": [
+        {
+          "code": "CT",
+          "display": "Computed Tomography",
+          "target": [
+            {
+              "code": "34310",
+              "display": "CT-Untersuchung des Neurocraniums",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "MR",
+          "display": "Magnetic Resonance Imaging",
+          "target": [
+            {
+              "code": "34410",
+              "display": "MRT-Untersuchung des Neurocraniums",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "DX",
+          "display": "Digital Radiography",
+          "target": [
+            {
+              "code": "34210",
+              "display": "Übersichtsaufnahmen des Schädels",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "CR",
+          "display": "Computed Radiography",
+          "target": [
+            {
+              "code": "34210",
+              "display": "Übersichtsaufnahmen des Schädels",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "MG",
+          "display": "Mammography",
+          "target": [
+            {
+              "code": "34270",
+              "display": "Mammographie",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "XA",
+          "display": "X-Ray Angiography",
+          "target": [
+            {
+              "code": "34283",
+              "display": "Serienangiographie",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "RF",
+          "display": "Radio Fluoroscopy",
+          "target": [
+            {
+              "code": "34280",
+              "display": "Durchleuchtung(en)",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "PT",
+          "display": "Positron Emission Tomography",
+          "target": [
+            {
+              "code": "34700",
+              "display": "18F-Fluordesoxyglukose-PET des Körperstammes",
+              "equivalence": "relatedto"
+            }
+          ]
+        },
+        {
+          "code": "NM",
+          "display": "Nuclear Medicine",
+          "target": [
+            {
+              "equivalence": "disjoint",
+              "comment": "NM (nuclear medicine scintigraphy) is in EBM chapter 17, not chapter 34"
+            }
+          ]
+        },
+        {
+          "code": "US",
+          "display": "Ultrasound",
+          "target": [
+            {
+              "equivalence": "disjoint",
+              "comment": "US (ultrasound) is in EBM chapter 33, not chapter 34"
+            }
+          ]
+        }
+      ]
+    }
+  ]
+}
