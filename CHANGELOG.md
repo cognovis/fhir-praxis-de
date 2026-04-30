@@ -2,10 +2,11 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.41.4] - 2026-04-30
 
 ### Bug Fixes
 
+- **fpde-cpw.4**: Address codex adversarial findings - use #profile discriminator for participant slicing
 - **fpde-cpw.2**: Fix binding paths and endpoint payloadType for SUSHI compilation
 - **fpde-cpw.2**: Address review findings iteration 1
 - **fpde-cpw.2**: Address codex adversarial findings
@@ -20,6 +21,10 @@ All notable changes to this project will be documented in this file.
 - **fpde-cpw.2**: Add technique-parameter extension
 - **fpde-cpw.2**: Add ImagingStudyPraxisDe profile on IPS ImagingStudy-uv-ips
 - **fpde-cpw.2**: Add ImagingStudy examples (MRT Knie KM, CT Abdomen)
+
+### Test
+
+- **fpde-cpw.4**: Red -- imaging workflow profiles not yet defined
 
 ## [0.41.3] - 2026-04-30
 
