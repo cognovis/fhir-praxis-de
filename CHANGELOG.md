@@ -13,6 +13,9 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-cpw.5**: Add imaging workflow Subscription templates for DiagnosticReport finalization, signing, and Appointment arrival events
+- **fpde-cpw.5**: Add $translate smoke tests for billing suggestion ConceptMaps (ModalityToGoaeSuggestion, ImagingStudyToEbmGop) from de.cognovis.terminology.imaging
+- **fpde-cpw.5**: Document 3-layer billing architecture: Terminology ConceptMaps (suggestions) → Catalog ChargeItemDefinitions → MIRA Rule-Engine business logic
 - **fpde-cpw.4**: Add ImagingServiceRequestPraxisDe profile with IHE IMR inheritance, ICD-10-GM reasonCode slicing, insurance reference, and prior study support
 - **fpde-cpw.4**: Add ImagingAppointmentPraxisDe profile with modality, preparation, and readiness extensions
 - **fpde-cpw.4**: Add ImagingDevicePraxisDe profile with DICOM AE-Title identifier and maintenance status tracking
