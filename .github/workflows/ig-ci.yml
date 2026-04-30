@@ -122,6 +122,26 @@ jobs:
           echo "init-bundle POST failed after 5 attempts"
           exit 1
 
+      - name: Pre-load private FHIR packages
+        run: |
+          # Pre-load private packages from npm.cognovis.de into the FHIR package cache
+          # so SUSHI doesn't try to download them from the public registry and fail.
+          pre_load() {
+            local pkg="$1" version="$2"
+            local cache_dir="${HOME}/.fhir/packages/${pkg}#${version}"
+            if [ -d "$cache_dir" ]; then
+              echo "$pkg#$version already cached — skipping"
+              return
+            fi
+            local url="https://npm.cognovis.de/${pkg}/-/${pkg}-${version}.tgz"
+            echo "Pre-loading $pkg#$version from npm.cognovis.de..."
+            mkdir -p "$cache_dir"
+            curl -sL "$url" | tar -xz -C "$cache_dir" && \
+              echo "  Installed $(ls "$cache_dir/package/" 2>/dev/null | wc -l) files" || \
+              echo "  WARNING: failed to pre-load $pkg#$version (non-blocking)"
+          }
+          pre_load "de.cognovis.terminology.imaging" "2026.0.0"
+
       - name: Build FHIR package
         run: bash scripts/build-package.sh
 
