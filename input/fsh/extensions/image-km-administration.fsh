@@ -16,9 +16,9 @@ Description: "Kontrastmittel-Gabe bei bildgebenden Untersuchungen. Dokumentiert 
 
 * extension contains
     administered 1..1 MS and
-    agent-atc 0..1 and
+    agent-atc 0..1 MS and
     agent-name 0..1 MS and
-    dose-ml 0..1 and
+    dose-ml 0..1 MS and
     route 0..1 and
     goae-reference 0..1
 

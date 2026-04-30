@@ -7,9 +7,6 @@
 Alias: $dcm = http://dicom.nema.org/resources/ontology/DCM
 Alias: $sct = http://snomed.info/sct
 Alias: $atc = http://www.whocc.no/atc
-Alias: $laterality = http://snomed.info/sct
-Alias: $ucum = http://unitsofmeasure.org
-Alias: $connection-type = http://terminology.hl7.org/CodeSystem/endpoint-connection-type
 
 // --- Hilfsinstanz: Ueberweisender Arzt ---
 // Wird in beiden ImagingStudy-Beispielen als referrer verwendet.
@@ -82,6 +79,7 @@ Usage: #example
 * extension[kmAdministration].extension[route].valueCodeableConcept.coding[0].system = "http://snomed.info/sct"
 * extension[kmAdministration].extension[route].valueCodeableConcept.coding[0].code = #47625008
 * extension[kmAdministration].extension[route].valueCodeableConcept.coding[0].display = "Intravenous route"
+* extension[kmAdministration].extension[goae-reference].valueReference = Reference(example-charge-item-def-goae-km)
 
 // Serie 0: MRT Knie Links — sagittale PD-Sequenz
 * series[0].uid = "2.16.840.1.113883.19.5.99.1.1"
@@ -106,6 +104,18 @@ Usage: #example
 * series[0].instance[0].uid = "2.16.840.1.113883.19.5.99.1.1.1"
 * series[0].instance[0].sopClass.system = "urn:ietf:rfc:3986"
 * series[0].instance[0].sopClass.code = #urn:oid:1.2.840.10008.5.1.4.1.1.4
+
+// --- Hilfsinstanz: GOAe ChargeItemDefinition fuer Gadolinium KM-Gabe ---
+Instance: example-charge-item-def-goae-km
+InstanceOf: ChargeItemDefinition
+Title: "GOAe 5730 — Gadolinium KM-Gabe"
+Description: "GOAe Ziffer 5730 fuer die Gabe von gadoliniumhaltigen Kontrastmitteln bei MRT-Untersuchungen."
+Usage: #example
+* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/goae-5730"
+* status = #active
+* code.coding[0].system = "https://fhir.de/CodeSystem/bak/goae"
+* code.coding[0].code = #5730
+* code.coding[0].display = "Gadolinium-haltige Kontrastmittelgabe MRT"
 
 // ============================================================
 // Beispiel 2: CT Abdomen ohne KM
