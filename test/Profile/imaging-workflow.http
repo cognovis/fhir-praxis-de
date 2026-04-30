@@ -1,0 +1,268 @@
+### ImagingDevicePraxisDe — validate MRT device (expect: no errors)
+# @name validate-imaging-device
+# Covers: identifier[aeTitle] slice, type DicomModalityVS, DeviceMaintenanceStatusExt
+POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Device",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de"]
+  },
+  "status": "active",
+  "identifier": [
+    {
+      "system": "https://fhir.cognovis.de/praxis/NamingSystem/dicom-ae-title",
+      "value": "MRT_KNIE_001"
+    }
+  ],
+  "extension": [
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/device-maintenance-status",
+      "valueCoding": {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/device-maintenance-status",
+        "code": "in-service",
+        "display": "In Service"
+      }
+    }
+  ],
+  "deviceName": [
+    {
+      "name": "MAGNETOM Vida 3T",
+      "type": "manufacturer-name"
+    }
+  ],
+  "manufacturer": "Siemens Healthineers",
+  "modelNumber": "MAGNETOM Vida",
+  "type": {
+    "coding": [
+      {
+        "system": "http://dicom.nema.org/resources/ontology/DCM",
+        "code": "MR",
+        "display": "Magnetic Resonance"
+      }
+    ]
+  }
+}
+
+?? status == 200
+
+
+### ImagingServiceRequestPraxisDe — validate MRT Knie order (expect: no errors)
+# @name validate-imaging-service-request
+# Covers: reasonCode[icd10gm] slice, insurance Reference, supportingInfo, code LOINC, priority
+POST http://localhost:8080/fhir/ServiceRequest/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-service-request-praxis-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "ServiceRequest",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/imaging-service-request-praxis-de"]
+  },
+  "status": "active",
+  "intent": "order",
+  "identifier": [
+    {
+      "system": "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id",
+      "value": "SR-MRT-KNIE-2026-001"
+    }
+  ],
+  "code": {
+    "coding": [
+      {
+        "system": "http://loinc.org",
+        "code": "36803-5",
+        "display": "MRI of knee"
+      }
+    ]
+  },
+  "subject": {
+    "reference": "Patient/example-patient"
+  },
+  "requester": {
+    "reference": "Practitioner/example-practitioner"
+  },
+  "reasonCode": [
+    {
+      "coding": [
+        {
+          "system": "http://fhir.de/CodeSystem/bfarm/icd-10-gm",
+          "code": "M23.2",
+          "display": "Meniskusschaden durch altes Trauma"
+        }
+      ]
+    }
+  ],
+  "insurance": [
+    {
+      "reference": "Coverage/example-coverage-gkv-knie"
+    }
+  ],
+  "supportingInfo": [
+    {
+      "reference": "ImagingStudy/example-prior-imaging-study-knie"
+    }
+  ],
+  "priority": "routine"
+}
+
+?? status == 200
+
+
+### ImagingAppointmentPraxisDe — validate MRT Knie appointment (expect: no errors)
+# @name validate-imaging-appointment
+# Covers: AppointmentModalityExt, AppointmentPreparationExt, AppointmentReadinessExt, participant slicing
+POST http://localhost:8080/fhir/Appointment/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-appointment-praxis-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Appointment",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/imaging-appointment-praxis-de"]
+  },
+  "status": "booked",
+  "extension": [
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-modality",
+      "extension": [
+        {
+          "url": "modality",
+          "valueCoding": {
+            "system": "http://dicom.nema.org/resources/ontology/DCM",
+            "code": "MR",
+            "display": "Magnetic Resonance"
+          }
+        },
+        {
+          "url": "device",
+          "valueReference": {
+            "reference": "Device/example-imaging-device-mrt-knie"
+          }
+        }
+      ]
+    },
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-preparation",
+      "extension": [
+        {
+          "url": "prepDuration",
+          "valueDuration": {
+            "value": 15,
+            "unit": "min",
+            "system": "http://unitsofmeasure.org",
+            "code": "min"
+          }
+        },
+        {
+          "url": "recoveryDuration",
+          "valueDuration": {
+            "value": 5,
+            "unit": "min",
+            "system": "http://unitsofmeasure.org",
+            "code": "min"
+          }
+        },
+        {
+          "url": "patientInstruction",
+          "valueString": "Bitte keine metallischen Gegenstaende mitbringen."
+        }
+      ]
+    },
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/appointment-readiness",
+      "valueCoding": {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/appointment-readiness",
+        "code": "preparation-complete",
+        "display": "Preparation Complete"
+      }
+    }
+  ],
+  "serviceType": [
+    {
+      "coding": [
+        {
+          "system": "http://loinc.org",
+          "code": "36803-5",
+          "display": "MRI of knee"
+        }
+      ]
+    }
+  ],
+  "start": "2026-05-10T10:00:00+02:00",
+  "end": "2026-05-10T10:45:00+02:00",
+  "basedOn": [
+    {
+      "reference": "ServiceRequest/example-imaging-service-request-mrt-knie"
+    }
+  ],
+  "participant": [
+    {
+      "actor": {
+        "reference": "Device/example-imaging-device-mrt-knie"
+      },
+      "status": "accepted"
+    },
+    {
+      "actor": {
+        "reference": "Practitioner/example-practitioner-mtr-knie"
+      },
+      "status": "accepted"
+    }
+  ]
+}
+
+?? status == 200
+
+
+### ImagingDevicePraxisDe — validate out-of-service device (expect: no errors)
+# @name validate-imaging-device-oos
+# Covers: DeviceMaintenanceStatusExt with out-of-service code
+POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de
+Authorization: Basic basic:secret
+Content-Type: application/fhir+json
+
+{
+  "resourceType": "Device",
+  "meta": {
+    "profile": ["https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de"]
+  },
+  "status": "inactive",
+  "identifier": [
+    {
+      "system": "https://fhir.cognovis.de/praxis/NamingSystem/dicom-ae-title",
+      "value": "CT_THORAX_002"
+    }
+  ],
+  "extension": [
+    {
+      "url": "https://fhir.cognovis.de/praxis/StructureDefinition/device-maintenance-status",
+      "valueCoding": {
+        "system": "https://fhir.cognovis.de/praxis/CodeSystem/device-maintenance-status",
+        "code": "out-of-service",
+        "display": "Out of Service"
+      }
+    }
+  ],
+  "deviceName": [
+    {
+      "name": "SOMATOM Definition AS+",
+      "type": "manufacturer-name"
+    }
+  ],
+  "manufacturer": "Siemens Healthineers",
+  "modelNumber": "SOMATOM Definition AS+",
+  "type": {
+    "coding": [
+      {
+        "system": "http://dicom.nema.org/resources/ontology/DCM",
+        "code": "CT",
+        "display": "Computed Tomography"
+      }
+    ]
+  }
+}
+
+?? status == 200
