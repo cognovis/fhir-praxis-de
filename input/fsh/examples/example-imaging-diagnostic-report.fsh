@@ -145,10 +145,10 @@ Usage: #example
 // KDL-Kategorie: CT-Befund
 * category[ct] = $kdl#DG020103 "CT-Befund"
 
-// LOINC-Code: CT study note
+// LOINC-Code: CT of thorax
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #24627-2
-* code.coding[0].display = "CT study note"
+* code.coding[0].code = #36643-5
+* code.coding[0].display = "CT of thorax"
 
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-30T09:00:00+02:00"
@@ -164,10 +164,10 @@ Usage: #example
 * imagingStudy[0] = Reference(example-imaging-study-ct-thorax)
 
 // PresentedForm HTML: Pflicht durch IMR
-// Base64 von: <html><body><p>MRT Knie - Vorlaeufiger Befund (Diktat)</p></body></html>
-// Size: 72 Bytes, SHA-1: Hly20WoLlLFcBOdy/dz0FJjLVlo=
-* presentedForm[html].data = "PGh0bWw+PGJvZHk+PHA+TVJUIEtuaWUgLSBWb3JsYWV1ZmlnZXIgQmVmdW5kIChEaWt0YXQpPC9wPjwvYm9keT48L2h0bWw+"
+// Content: <html><body><p>CT Thorax - Vorlaeufiger Befund (Diktat)</p></body></html>
+// Size: 73 Bytes, SHA-1: iSovfd6LbrolQQUaBxxQltS1ZMg=
+* presentedForm[html].data = "PGh0bWw+PGJvZHk+PHA+Q1QgVGhvcmF4IC0gVm9ybGFldWZpZ2VyIEJlZnVuZCAoRGlrdGF0KTwvcD48L2JvZHk+PC9odG1sPg=="
 * presentedForm[html].contentType = #text/html
-* presentedForm[html].size = 72
-* presentedForm[html].hash = "Hly20WoLlLFcBOdy/dz0FJjLVlo="
+* presentedForm[html].size = 73
+* presentedForm[html].hash = "iSovfd6LbrolQQUaBxxQltS1ZMg="
 * presentedForm[html].title = "CT Thorax - Vorlaeufiger Befund"

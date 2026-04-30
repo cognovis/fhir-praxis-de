@@ -28,12 +28,14 @@ Description: "Radiologiebefund-Profil fuer die deutsche ambulante Praxis. Erbt v
 
 // Status: FHIR-native Status-Maschine — registered -> partial -> preliminary -> final -> amended
 * status MS
+* status ^comment = "FHIR-native Status-Maschine fuer Radiologiebefunde: registered (Befund angelegt, kein Inhalt) -> partial (Teilbefund, Inhalt unvollstaendig) -> preliminary (vorlaeufig; Diktat/Lesung, noch nicht final freigegeben) -> final (freigegeben, gesetzlich bindend) -> amended (nachtraeglich geaendert, neue Version). Der Sub-Status (Extension reportSubstatus) verfeinert 'preliminary': dictation-pending, dictated, read-pending. Der Code #signed ist nur gueltig bei status=final."
 
 // Category: KDL-Slicing fuer deutsche Radiologie-Kategorien
 // IMR schraenkt category nicht ein — KDL-Slices werden zusaetzlich definiert.
 * category ^slicing.discriminator.type = #pattern
 * category ^slicing.discriminator.path = "$this"
 * category ^slicing.rules = #open
+* category from KdlRadiologyCategoryVS (extensible)
 * category contains
     roentgen 0..1 MS and
     ct 0..1 MS and
@@ -54,6 +56,8 @@ Description: "Radiologiebefund-Profil fuer die deutsche ambulante Praxis. Erbt v
 * performer contains practitionerRole 0..* MS
 * performer[practitionerRole] only Reference(PractitionerRole)
 * performer[practitionerRole] ^short = "Radiologin/Radiologe (PractitionerRole.code: ReadingRadiologist | SupervisingRadiologist aus RadiologyRoleCS)"
+// NOTE: Binding PractitionerRole.code to RadiologyRoleVS requires a profiled PractitionerRole resource.
+// RadiologyRoleVS (https://fhir.cognovis.de/praxis/ValueSet/radiology-role) is defined for this purpose.
 
 // ResultsInterpreter: Befundende Radiologin/Radiologe (primaere Unterzeichnerin)
 * resultsInterpreter MS
