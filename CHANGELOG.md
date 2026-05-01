@@ -2,12 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.44.0] - 2026-05-01
 
 ### Bug Fixes
 
+- **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
+- **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
 - **fpde-9fq**: Remove HvgVertragsartCS stub, use dmp-kennzeichen-de in example
 - **fpde-9fq**: Use correct numeric DMP Kennzeichen code 01 for DM2
+
+### Miscellaneous
+
+- Bump version to 0.44.0
 
 ## [0.43.1] - 2026-05-01
 
@@ -33,7 +39,7 @@ All notable changes to this project will be documented in this file.
 - **fpde-cpw.6**: Address review findings iteration 1
 - **fpde-cpw.6**: Address codex adversarial findings
 - **fpde-cpw.5**: Address review findings iteration 1
-- **fpde-cpw.5**: Replace vendor-specific term MIRA with vendor-neutral 'rule engine' in public IG surfaces
+- **fpde-cpw.5**: Replace vendor-specific term with vendor-neutral 'rule engine' in public IG surfaces
 
 ### Documentation
 

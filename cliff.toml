@@ -20,6 +20,12 @@ footer = ""
 conventional_commits = true
 filter_unconventional = true
 split_commits = false
+commit_preprocessors = [
+  # Neutralise product-name references that leak into commit messages
+  # so CHANGELOG.md stays vendor-neutral (checked by scripts/check-ig-vendor-leaks.sh).
+  { pattern = "(?i)\\bterm MIRA\\b", replace = "term" },
+  { pattern = "(?i)\\bMIRA\\b", replace = "the rule engine" },
+]
 commit_parsers = [
   { message = "^feat", group = "Features" },
   { message = "^fix", group = "Bug Fixes" },

@@ -1,9 +1,0 @@
-### ValueSet: Zuzahlungsstatus - $expand
-# @name expand
-GET http://localhost:8080/ValueSet/zuzahlungsstatus/$expand
-Authorization: Basic basic:secret
-
-### ValueSet: Zuzahlungsstatus - $validate-code invalid
-# @name validate_invalid
-GET http://localhost:8080/ValueSet/zuzahlungsstatus/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus&code=INVALID_CODE_XYZ
-Authorization: Basic basic:secret
