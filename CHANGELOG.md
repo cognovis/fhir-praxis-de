@@ -2,12 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.44.0] - 2026-05-01
 
 ### Bug Fixes
 
 - **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
 - **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
+
+### Miscellaneous
+
+- Bump version to 0.44.0
 
 ## [0.43.1] - 2026-05-01
 
