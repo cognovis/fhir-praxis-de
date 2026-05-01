@@ -149,7 +149,7 @@ Description: "Patient Weber eingeschrieben im DMP Diabetes mellitus Typ 2 seit 2
 Usage: #example
 * status = #active
 * type[0].coding[0].system = "http://fhir.de/CodeSystem/dmp-kennzeichen-de"
-* type[0].coding[0].code = #DM2
+* type[0].coding[0].code = #01
 * type[0].coding[0].display = "Diabetes mellitus Typ 2"
 * patient = Reference(example-patient)
 * managingOrganization = Reference(example-organization)
