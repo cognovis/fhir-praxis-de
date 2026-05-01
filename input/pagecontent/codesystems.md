@@ -140,10 +140,6 @@ Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
 | `human-reviewed` | Menschlich geprüft | KI-Inhalt wurde durch einen Menschen geprüft |
 | `human-approved` | Menschlich freigegeben | KI-Inhalt wurde durch einen Menschen freigegeben |
 
-### ZuzahlungsstatusCS — Zuzahlungsstatus
-
-GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden per ETL aus den offiziellen eGK-VSD-Spezifikationen befüllt (`^content = #not-present`).
-
 ### HvgVertragsartCS — HVG-Vertragsart
 
 Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, Besondere Versorgung). Inhalte werden per ETL befüllt (`^content = #not-present`).
