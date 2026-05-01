@@ -19,8 +19,6 @@ The canonical URL http://fhir.de/ImplementationGuide/basisprofil-de-r4 doesn't p
 
 # Own CodeSystems with #not-present / #example content — codes provided via ETL, not in IG
 # Server-side expansion errors (tx.fhir.org cannot resolve our unpublished CodeSystems)
-A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart' could not be found, so the code cannot be validated
-Error from https://tx.fhir.org/r4: Error: A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart' could not be found, so the value set cannot be expanded
 Error from https://tx.fhir.org/r4: Error: A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/zuzahlungsstatus' could not be found, so the value set cannot be expanded
 Error from https://tx.fhir.org/r4: Error: A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/bgt2001' could not be found, so the value set cannot be expanded
 The value set references CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/bgt2001' which has status 'example'
