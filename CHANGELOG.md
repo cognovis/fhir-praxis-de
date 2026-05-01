@@ -4,8 +4,24 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.43.1] - 2026-05-01
+
 ### Bug Fixes
 
+- **ci(release)**: Pre-load `de.cognovis.terminology.imaging` in `ig-release.yml` before SUSHI (was only in `ig-ci.yml`); release pipeline failed silently for v0.42.0 + v0.43.0, blocking npm.cognovis.de publish — workflows now symmetric
+
+## [0.43.0] - 2026-04-30
+
+### Features
+
+- **fpde-cpw.5**: Add subscription templates, $translate tests, imaging billing architecture page
+- **fpde-cpw.6**: RoentgenProcedurePraxisDe, radiation-dose extension, ChargeItemPraxisDe invariant, IG page (StrlSchG §83/§85)
+
+### Bug Fixes
+
+- **fpde-cpw.5**: Address review findings iteration 1
+- **fpde-cpw.6**: Address review findings iteration 1
+- **fpde-cpw.6**: Address codex adversarial findings
 - **ci**: Show full SUSHI output on error instead of tail -5
 - **ci**: Use tee to stream SUSHI output and capture exit code correctly
 - **ci**: Pre-load de.cognovis.terminology.imaging from npm.cognovis.de
