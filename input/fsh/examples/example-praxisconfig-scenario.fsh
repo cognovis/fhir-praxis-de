@@ -148,9 +148,9 @@ Title: "HZV-Einschreibung Weber — DMP DM2"
 Description: "Patient Weber eingeschrieben im DMP Diabetes mellitus Typ 2 seit 2019, Antrag vom 15.06.2019."
 Usage: #example
 * status = #active
-* type[0].coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertragsart"
-* type[0].coding[0].code = #DMP
-* type[0].coding[0].display = "Disease Management Programm"
+* type[0].coding[0].system = "http://fhir.de/CodeSystem/dmp-kennzeichen-de"
+* type[0].coding[0].code = #DM2
+* type[0].coding[0].display = "Diabetes mellitus Typ 2"
 * patient = Reference(example-patient)
 * managingOrganization = Reference(example-organization)
 * period.start = "2019-07-01"

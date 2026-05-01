@@ -144,10 +144,6 @@ Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
 
 GKV-Zuzahlungsstatus gemäß eGK-Versichertenstammdaten (VSD). Inhalte werden per ETL aus den offiziellen eGK-VSD-Spezifikationen befüllt (`^content = #not-present`).
 
-### HvgVertragsartCS — HVG-Vertragsart
-
-Arten von Selektivverträgen nach §73b/§73c SGB V (Hausarztverträge, Facharztverträge, Besondere Versorgung). Inhalte werden per ETL befüllt (`^content = #not-present`).
-
 ### KvFachgruppeCS — KV-Fachgruppe
 
 KV-Fachgruppencodes für Honorarverteilung und Qualitätssicherung.
