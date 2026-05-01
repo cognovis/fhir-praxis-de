@@ -4,31 +4,36 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
+- **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
+
 ## [0.43.1] - 2026-05-01
 
 ### Bug Fixes
 
-- **ci(release)**: Pre-load `de.cognovis.terminology.imaging` in `ig-release.yml` before SUSHI (was only in `ig-ci.yml`); release pipeline failed silently for v0.42.0 + v0.43.0, blocking npm.cognovis.de publish — workflows now symmetric
+- **ci**: Pre-load terminology.imaging in release workflow before SUSHI
 
 ## [0.43.0] - 2026-04-30
 
-### Features
+### Miscellaneous
 
-- **fpde-cpw.5**: Add subscription templates, $translate tests, imaging billing architecture page
-- **fpde-cpw.6**: RoentgenProcedurePraxisDe, radiation-dose extension, ChargeItemPraxisDe invariant, IG page (StrlSchG §83/§85)
+- Merge origin/main — resolve CHANGELOG and sushi-config conflicts (fpde-cpw.5 + fpde-cpw.6)
+- Bump version to 0.43.0
+
+## [0.42.0] - 2026-04-30
 
 ### Bug Fixes
 
-- **fpde-cpw.5**: Address review findings iteration 1
-- **fpde-cpw.6**: Address review findings iteration 1
-- **fpde-cpw.6**: Address codex adversarial findings
 - **ci**: Show full SUSHI output on error instead of tail -5
 - **ci**: Use tee to stream SUSHI output and capture exit code correctly
 - **ci**: Pre-load de.cognovis.terminology.imaging from npm.cognovis.de
 - **ci**: Vendor de.cognovis.terminology.imaging for CI FHIR cache
-- **fpde-cpw.5**: Address review findings iteration 1
 - **fpde-cpw.6**: Address review findings iteration 1
 - **fpde-cpw.6**: Address codex adversarial findings
+- **fpde-cpw.5**: Address review findings iteration 1
+- **fpde-cpw.5**: Replace vendor-specific term MIRA with vendor-neutral 'rule engine' in public IG surfaces
 
 ### Documentation
 
@@ -36,17 +41,23 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **fpde-cpw.5**: Add subscription templates, $translate tests, imaging billing architecture page
 - **fpde-cpw.6**: Green — RoentgenProcedurePraxisDe, radiation-dose ext, ChargeItemPraxisDe invariant, IG page
+- **fpde-cpw.6**: Add Strahlenschutz-Compliance & Röntgenbuch profiles (StrlSchG §83/§85)
+- **fpde-cpw.5**: Add subscription templates, $translate tests, imaging billing architecture page
 
 ### Miscellaneous
 
 - Update dist/package with imaging profiles from fpde-cpw.2 and fpde-cpw.4
+- **fpde-cpw.5**: Update CHANGELOG for imaging subscriptions and ConceptMap tests
+- Bump version to 0.42.0
+
+### Merge
+
+- Worktree-bead-fpde-cpw.5
 
 ### Test
 
 - **fpde-cpw.6**: Red — stub FSH profiles and extensions
-
 
 ## [0.41.4] - 2026-04-30
 
