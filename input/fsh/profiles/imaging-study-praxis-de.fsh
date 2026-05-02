@@ -25,6 +25,8 @@ Description: "Bildgebungs-Studie-Profil fuer die deutsche ambulante Praxis. Erbt
 * identifier ^slicing.discriminator.path = "type.coding.code"
 * identifier ^slicing.rules = #open
 * identifier contains accessionNumber 0..1 MS
+* identifier[accessionNumber].value 1..1 MS
+* identifier[accessionNumber].type.coding.system 1..1 MS
 * identifier[accessionNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
 * identifier[accessionNumber].type.coding.code = #ACSN
 * identifier[accessionNumber] ^short = "AccessionNumber (DICOM 0008,0050)"
