@@ -63,9 +63,7 @@ jobs:
             exit 1
           fi
           {
-            echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}"
-            echo "//npm.cognovis.de/:username=cognovis"
-            echo "//npm.cognovis.de/:email=info@cognovis.de"
+            echo "//npm.cognovis.de/:_auth=$(echo -n "cognovis:${VERDACCIO_TOKEN}" | base64)"
             echo "//npm.cognovis.de/:always-auth=true"
           } >> ~/.npmrc
 
@@ -164,9 +162,8 @@ jobs:
           echo "Publishing ${PKG} to npm.cognovis.de..."
 
           # Create minimal .npmrc with auth
-          echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}" >> ~/.npmrc
-          echo "//npm.cognovis.de/:username=cognovis" >> ~/.npmrc
-          echo "//npm.cognovis.de/:email=info@cognovis.de" >> ~/.npmrc
+          echo "//npm.cognovis.de/:_auth=$(echo -n "cognovis:${VERDACCIO_TOKEN}" | base64)" >> ~/.npmrc
+          echo "//npm.cognovis.de/:always-auth=true" >> ~/.npmrc
 
           # Use absolute path — npm can misinterpret relative paths as package specs
           ABSPKG="$(pwd)/${PKG}"
