@@ -55,6 +55,11 @@ Description: "Bildgebungsauftrag-Profil fuer die deutsche ambulante Praxis. Erbt
 // Requester: anforderender Arzt
 * requester MS
 
+// Identifier: AccessionNumber (DICOM 0008,0050) — IMR parent already defines slice cardinality 1..1
+// Pin system to pvs-id NamingSystem for cross-resource consistency with ImagingStudyPraxisDe.identifier[accessionNumber].
+* identifier[accession].system 1..1 MS
+* identifier[accession].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
+
 // Identifier: RequestedProcedureID (DICOM 0040,1001) fuer MWL-Scheduling
 // type.coding pattern required by IMR parent slicer (discriminator: pattern on identifier.type.coding)
 * identifier contains requestedProcedureId 0..1 MS
