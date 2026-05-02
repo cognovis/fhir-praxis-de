@@ -2,16 +2,30 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.45.1] - 2026-05-02
+
+### Bug Fixes
+
+- **imaging**: Pin AccessionNumber identifier.system to pvs-id NamingSystem (1..1 MS) on both ImagingServiceRequestPraxisDe.identifier[accession] and ImagingStudyPraxisDe.identifier[accessionNumber] for cross-resource consistency
+- **examples**: Add missing identifier[accessionNumber].system to MRT-Knie and CT-Abdomen ImagingStudy examples
+
+## [0.45.0] - 2026-05-02
+
+### Features
+
+- **fpde-nzb**: Add DicomwebEndpointPraxisDe profile with connectionType required binding (WADO-RS, QIDO-RS, STOW-RS), HTTPS invariant, and AE-title identifier slice
+- **fpde-nzb**: Constrain ImagingStudyPraxisDe.endpoint to Reference(DicomwebEndpointPraxisDe)
+- **fpde-nzb**: Add DicomwebConnectionTypeVS ValueSet
+- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
 
 ### Bug Fixes
 
 - **fpde-5h0**: Add type.coding discriminator to requestedProcedureId identifier slice
 - **fpde-5h0**: Use v2-0203#FILL type coding instead of non-existent local CodeSystem
 
-### Features
+### CI
 
-- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
+- **infra**: Fetch terminology.imaging from Verdaccio (npm.cognovis.de) with VERDACCIO_TOKEN auth, replacing vendor/ pre-load step
 
 ## [0.44.1] - 2026-05-02
 
