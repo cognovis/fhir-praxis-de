@@ -54,3 +54,10 @@ Description: "Bildgebungsauftrag-Profil fuer die deutsche ambulante Praxis. Erbt
 
 // Requester: anforderender Arzt
 * requester MS
+
+// Identifier: RequestedProcedureID (DICOM 0040,1001) fuer MWL-Scheduling
+* identifier contains requestedProcedureId 0..1 MS
+* identifier[requestedProcedureId].system = "https://fhir.cognovis.de/praxis/NamingSystem/dicom-requested-procedure-id"
+* identifier[requestedProcedureId].system MS
+* identifier[requestedProcedureId].value 1..1 MS
+* identifier[requestedProcedureId] ^short = "DICOM RequestedProcedureID (0040,1001) — Identifier des geplanten Untersuchungsschritts"
