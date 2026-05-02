@@ -13,6 +13,7 @@ Alias: $laterality-vs = http://hl7.org/fhir/ValueSet/bodysite-laterality
 Alias: $endpoint-connection-type-vs = http://hl7.org/fhir/ValueSet/endpoint-connection-type
 Alias: $km-ext = https://fhir.cognovis.de/praxis/StructureDefinition/image-km-administration
 Alias: $technique-ext = https://fhir.cognovis.de/praxis/StructureDefinition/technique-parameter
+Alias: $dicomweb-endpoint = https://fhir.cognovis.de/praxis/StructureDefinition/dicomweb-endpoint-praxis-de
 
 Profile: ImagingStudyPraxisDe
 Parent: $ips-imagingstudy
@@ -48,14 +49,12 @@ Description: "Bildgebungs-Studie-Profil fuer die deutsche ambulante Praxis. Erbt
 * referrer ^short = "Ueberweisender Arzt (Pflichtfeld fuer KV-Abrechnung)"
 * referrer ^definition = "Ueberweisender Arzt oder Ueberweiserin. Pflichtfeld fuer das KV-Abrechnungs-Tracking (Ueberweiser-Statistik und Qualitaetssicherung)."
 
-// endpoint: WADO-RS-faehiger DICOM-Endpunkt
-// endpoint: WADO-RS connection-type is RECOMMENDED (not enforced).
-// The example uses dicom-wado-rs. Profile intentionally omits connectionType constraint
-// to allow future endpoint types (QIDO-RS, STOW-RS) without re-profiling.
-// See bead notes: fpde-cpw.2 DECIDE on endpoint constraint.
+// endpoint: DICOMweb-Endpunkt (WADO-RS, QIDO-RS oder STOW-RS)
+// Referenz auf DicomwebEndpointPraxisDe — erzwingt DICOMweb-Verbindungstyp und HTTPS-Adresse.
+* endpoint only Reference(DicomwebEndpointPraxisDe)
 * endpoint MS
-* endpoint ^short = "WADO-RS Endpunkt fuer DICOM-Studie"
-* endpoint ^definition = "Verbindungsendpunkt fuer den Abruf der DICOM-Bilddaten. Connection type SHOULD be `dicom-wado-rs` (WADO-RS) for PACS retrieval. Constraint not enforced at profile level to allow future DICOMweb endpoint variants (QIDO-RS, STOW-RS)."
+* endpoint ^short = "DICOMweb Endpunkt fuer DICOM-Studie"
+* endpoint ^definition = "Verbindungsendpunkt fuer den Zugriff auf die DICOM-Bilddaten. Muss eine Referenz auf DicomwebEndpointPraxisDe sein (connectionType: WADO-RS, QIDO-RS oder STOW-RS, Adresse HTTPS)."
 
 // series: Bildserien-Constraints
 * series MS

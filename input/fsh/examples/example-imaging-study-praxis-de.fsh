@@ -23,15 +23,17 @@ Usage: #example
 
 // --- Hilfsinstanz: WADO-RS Endpunkt ---
 Instance: example-endpoint-wado-rs
-InstanceOf: Endpoint
+InstanceOf: DicomwebEndpointPraxisDe
 Title: "WADO-RS Endpunkt Radiologie"
-Description: "DICOM WADO-RS Verbindungsendpunkt fuer den Abruf von Bildmaterial aus dem PACS."
+Description: "DICOM WADO-RS Verbindungsendpunkt fuer den Abruf von Bildmaterial aus dem PACS. Instanz von DicomwebEndpointPraxisDe mit AE-Title Identifier."
 Usage: #example
 * status = #active
 * connectionType.system = "http://terminology.hl7.org/CodeSystem/endpoint-connection-type"
 * connectionType.code = #dicom-wado-rs
 * connectionType.display = "DICOM WADO-RS"
 * name = "PACS WADO-RS Endpunkt"
+* identifier[aeTitle].system = "https://fhir.cognovis.de/praxis/NamingSystem/dicom-ae-title"
+* identifier[aeTitle].value = "PACS_WADO_RS"
 * payloadType[0].coding[0].system = "http://terminology.hl7.org/CodeSystem/endpoint-payload-type"
 * payloadType[0].coding[0].code = #any
 * payloadType[0].coding[0].display = "Any"
