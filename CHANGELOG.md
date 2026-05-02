@@ -2,7 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.45.1] - 2026-05-02
+
+### Bug Fixes
+
+- **imaging**: Pin AccessionNumber identifier.system to pvs-id NamingSystem (1..1 MS) on both ImagingServiceRequestPraxisDe.identifier[accession] and ImagingStudyPraxisDe.identifier[accessionNumber] for cross-resource consistency
+- **examples**: Add missing identifier[accessionNumber].system to MRT-Knie and CT-Abdomen ImagingStudy examples
+
+## [0.45.0] - 2026-05-02
+
+### Features
+
+- **fpde-nzb**: Add DicomwebEndpointPraxisDe profile with connectionType required binding (WADO-RS, QIDO-RS, STOW-RS), HTTPS invariant, and AE-title identifier slice
+- **fpde-nzb**: Constrain ImagingStudyPraxisDe.endpoint to Reference(DicomwebEndpointPraxisDe)
+- **fpde-nzb**: Add DicomwebConnectionTypeVS ValueSet
+- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
 
 ### Bug Fixes
 
@@ -14,25 +28,9 @@ All notable changes to this project will be documented in this file.
 - **fpde-7yo.1**: Update external repo tracking with advisory fix status
 - **fpde-7yo.1**: Add changelog entry for de-identification IG bootstrap
 
-### Features
+### CI
 
-- **fpde-nzb**: Add DicomwebEndpointPraxisDe profile with connectionType constraint
-
-### Merge
-
-- Worktree-bead-fpde-nzb
-
-## [0.45.0] - 2026-05-02
-
-### Miscellaneous
-
-- Bump version to 0.45.0
-
-### Merge
-
-- Worktree-bead-fpde-8c1
-- Resolve CHANGELOG conflict with origin/main (fpde-5h0 + 0.44.1)
-- Worktree-bead-fpde-5h0
+- **infra**: Fetch terminology.imaging from Verdaccio (npm.cognovis.de) with VERDACCIO_TOKEN auth, replacing vendor/ pre-load step
 
 ## [0.44.1] - 2026-05-02
 
