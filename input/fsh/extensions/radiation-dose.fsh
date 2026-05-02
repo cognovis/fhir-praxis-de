@@ -1,13 +1,15 @@
-// radiation-dose Extension — Strahlendosis-Parameter fuer RoentgenProcedurePraxisDe
-// Dokumentiert Dosis-Flaechenprodukt (DAP), effektive Dosis und Roentgenroehren-Parameter.
-// DICOM DCM semantic alignment (kein Dependency auf CI-build IG).
+// radiation-dose Extension — Radiation dose parameters for RoentgenProcedurePraxisDe.
+// Captures Dose Area Product (DAP), effective dose, and X-ray tube parameters.
+// Satisfies §14 StrlSchV (Strahlenschutzverordnung 2018, BGBl. I S. 2034) documentation
+// requirements when combined with the Procedure context (patient, date, body region).
+// DICOM DCM semantic alignment (no dependency on CI-build IG).
 //
-// ASCII-safe: keine Umlaute in Kommentaren (ae, ue, oe, ss statt Umlauten).
+// ASCII-safe: no umlauts in comments (ae, ue, oe, ss instead of umlauts).
 
 Extension: RadiationDoseExt
 Id: radiation-dose
 Title: "Radiation Dose"
-Description: "Strahlendosis-Parameter fuer Roentgen-Prozeduren. Erfasst Dosis-Flaechenprodukt (DAP in microGy*m2), effektive Dosis (microSv), Roehrenspannung (kVp in kV), Roehrenstrom (mA) und Belichtungszeit (s). DICOM DCM semantic alignment."
+Description: "Radiation dose parameters for X-ray procedures. Captures Dose Area Product (DAP in microGy*m2), effective dose (microSv), tube voltage (kVp in kV), tube current (mA), and exposure time (s). Combined with the Procedure resource (patient, date, body region, examination type), satisfies the documentation requirements of §14 StrlSchV (Strahlenschutzverordnung 2018). DICOM DCM semantic alignment."
 * ^url = "https://fhir.cognovis.de/praxis/StructureDefinition/radiation-dose"
 * ^status = #active
 * ^experimental = false
