@@ -44,7 +44,7 @@ yet exist.
 
 **Trigger now (from Round 1):**
 
-Dental agents go live in 1–2 weeks. The Charly-PVS data path covers patient,
+Dental agents go live in 1–2 weeks. The PVS data path covers patient,
 practitioner, treatment, and claim resources — including BEMA/HZV positions
 that fhir-praxis-de's current PII list does not cover. Without the IG, dental
 will introduce a fourth hand-maintained PII list.
@@ -630,7 +630,7 @@ Declarative observable-behavior statements. Each is verifiable in isolation.
 
 **NB-3**: The IG MUST NOT extend its free-text scrub patterns to include bare `Capitalised Capitalised` bigrams. Reason: false-positive cost — clinical terms like `Diabetes Mellitus`, `Akute Otitis`, `Bilaterale Pneumonie`, `Morbus Crohn`, `Ductus Arteriosus Botalli` would be incorrectly scrubbed. Negative test corpus (FR-040) enforces this rule by blocking PRs that introduce such matches.
 
-**NB-4**: The IG MUST NOT declare a Faker generator catalogue. Faker-replacement is a consumer-sdk-side mechanism (`@consumer-sdk/pvs-charly/src/lib/anonymize.ts`) — the IG declares which fields are PII; the choice of Faker generator vs `cryptoHash` vs `redact` is consumer-side. Reason: Faker's surface (50+ generators) is too rich and use-case-specific to express declaratively in FHIR.
+**NB-4**: The IG MUST NOT declare a Faker generator catalogue. Faker-replacement is a consumer-sdk-side mechanism (`@consumer-sdk/pvs-adapter/src/lib/anonymize.ts`) — the IG declares which fields are PII; the choice of Faker generator vs `cryptoHash` vs `redact` is consumer-side. Reason: Faker's surface (50+ generators) is too rich and use-case-specific to express declaratively in FHIR.
 
 **NB-5**: The IG MUST NOT define request-mapping storage mechanics. The mapping (for mode `llm-anonymized`) lives in the consumer's runtime memory only. Reason: per ADR-027 §6 — mapping persistence is a property of the LLM-Gateway implementation, not of the IG.
 
