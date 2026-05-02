@@ -55,6 +55,11 @@ Usage: #example
 * subject = Reference(example-patient)
 * started = "2026-04-30T10:00:00+02:00"
 
+// AccessionNumber (DICOM 0008,0050)
+* identifier[accessionNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[accessionNumber].type.coding.code = #ACSN
+* identifier[accessionNumber].value = "A2026-04300001"
+
 // Modalitaet: MRT (DICOM CID 29)
 * modality[0].system = "http://dicom.nema.org/resources/ontology/DCM"
 * modality[0].code = #MR
@@ -134,6 +139,11 @@ Usage: #example
 * status = #available
 * subject = Reference(example-patient)
 * started = "2026-04-30T09:00:00+02:00"
+
+// AccessionNumber (DICOM 0008,0050)
+* identifier[accessionNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
+* identifier[accessionNumber].type.coding.code = #ACSN
+* identifier[accessionNumber].value = "A2026-04300002"
 
 // Modalitaet: CT (DICOM CID 29)
 * modality[0].system = "http://dicom.nema.org/resources/ontology/DCM"
