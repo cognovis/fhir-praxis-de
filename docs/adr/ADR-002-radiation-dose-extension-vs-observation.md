@@ -17,7 +17,7 @@ The `radiation-dose` extension (`https://fhir.cognovis.de/praxis/StructureDefini
 | `tubeCurrent` | mA | Tube current (Roehrenstrom) |
 | `exposureTime` | s | Exposure time (Belichtungszeit) |
 
-The DICOMweb coverage gap analysis (polaris-6ey.3, gap G-3) raised the question of whether this extension is sufficient for German regulatory compliance, or whether a separate `RadiationDoseObservation` FHIR profile — analogous to DICOM TID 10007 or DICOM CID 10050 "Radiation Dose" patterns — is required.
+A DICOMweb coverage gap analysis raised the question of whether this extension is sufficient for German regulatory compliance, or whether a separate `RadiationDoseObservation` FHIR profile — analogous to DICOM TID 10007 or DICOM CID 10050 "Radiation Dose" patterns — is required.
 
 ### Legal context: §85 StrlSchG / §127 StrlSchV
 
@@ -92,7 +92,7 @@ This complexity adds no regulatory value and increases system overhead for the s
 
 ### 6. The DICOMweb coverage gap (G-3) is an interoperability note, not a compliance gap
 
-Gap G-3 from the polaris-6ey.3 analysis flags that the FHIR IG does not use DICOM CID 10050 DCM codes (e.g. DCM#113722, DCM#113839) for dose semantics. This is an interoperability enhancement to consider for future DICOMweb integration, not a current legal compliance gap. DICOM semantic alignment can be added incrementally as DICOM concept mappings in the extension definition without requiring a new Observation profile.
+The gap analysis flags that the FHIR IG does not use DICOM CID 10050 DCM codes (e.g. DCM#113722, DCM#113839) for dose semantics. This is an interoperability enhancement to consider for future DICOMweb integration, not a current legal compliance gap. DICOM semantic alignment can be added incrementally as DICOM concept mappings in the extension definition without requiring a new Observation profile.
 
 ## Consequences
 
@@ -130,7 +130,7 @@ A standalone `RadiationDoseObservation` FHIR profile was considered and rejected
 - DICOM PS3.16 CID 10050 (Radiation Dose) — DICOM concept codes for dose quantities
 - DICOM PS3.16 TID 10007 (Radiation Dose) — DICOM Template for Dose Structured Reports
 - Extension definition: `input/fsh/extensions/radiation-dose.fsh`
-- DICOMweb coverage gap analysis: polaris-6ey.3, gap G-3
+- DICOMweb coverage gap analysis (internal architecture review)
 
 ## Revisit Triggers
 
