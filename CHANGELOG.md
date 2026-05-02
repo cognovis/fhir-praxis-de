@@ -13,6 +13,10 @@ All notable changes to this project will be documented in this file.
 
 - **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
 
+### Task
+
+- **fpde-7yo.1**: Bootstrap `cognovis/fhir-deidentification-de` repo — De-Identification IG (`io.cognovis.de-identification.de@0.1.0`) with HS vendor packages, CodeSystem data-provenance (FR-070), and CI workflows; published to npm.cognovis.de
+
 ## [0.44.1] - 2026-05-02
 
 ### Bug Fixes
