@@ -2,18 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-8c1**: Require value 1..1 and system 1..1 on accessionNumber slice
+
+### Task
+
+- **fpde-8c1**: Add identifier:accessionNumber ACSN slice to ImagingStudyPraxisDe
+
 ## [0.44.0] - 2026-05-01
 
 ### Bug Fixes
 
-- **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
-- **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
 - **fpde-9fq**: Remove HvgVertragsartCS stub, use dmp-kennzeichen-de in example
 - **fpde-9fq**: Use correct numeric DMP Kennzeichen code 01 for DM2
+- **fpde-9fq**: Update CHANGELOG for HvgVertragsartCS stub removal
+- **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
+- **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
 
 ### Miscellaneous
 
+- **fpde-bra**: Update changelog for ZuzahlungsstatusCS removal
 - Bump version to 0.44.0
+- Merge worktree-bead-fpde-bra — remove ZuzahlungsstatusCS stub
+
+### Merge
+
+- Worktree-bead-fpde-9fq
 
 ## [0.43.1] - 2026-05-01
 
