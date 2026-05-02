@@ -27,11 +27,13 @@ Description: "Bildgebungs-Studie-Profil fuer die deutsche ambulante Praxis. Erbt
 * identifier ^slicing.rules = #open
 * identifier contains accessionNumber 0..1 MS
 * identifier[accessionNumber].value 1..1 MS
+* identifier[accessionNumber].system 1..1 MS
+* identifier[accessionNumber].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
 * identifier[accessionNumber].type.coding.system 1..1 MS
 * identifier[accessionNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
 * identifier[accessionNumber].type.coding.code = #ACSN
 * identifier[accessionNumber] ^short = "AccessionNumber (DICOM 0008,0050)"
-* identifier[accessionNumber] ^definition = "Zugriffsnummer der Studie (DICOM AccessionNumber, Tag 0008,0050). Entspricht dem identifier[accession] auf dem zugrundeliegenden ImagingServiceRequest."
+* identifier[accessionNumber] ^definition = "Zugriffsnummer der Studie (DICOM AccessionNumber, Tag 0008,0050). Entspricht dem identifier[accession] auf dem zugrundeliegenden ImagingServiceRequest. system pinned to pvs-id NamingSystem (PVS issues AccessionNumber on order entry, RIS reuses it for studies)."
 
 // Extensions auf ImagingStudy-Ebene
 * extension contains
