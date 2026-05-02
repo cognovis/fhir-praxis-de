@@ -4,14 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.44.1] - 2026-05-02
+
 ### Bug Fixes
 
 - **fpde-8c1**: Require value 1..1 and system 1..1 on accessionNumber slice
 - **fpde-z4n**: Correct legal citation from §14 StrlSchV to §85 StrlSchG / §127 StrlSchV
+- **fpde-z4n**: Replace vendor-specific references in ADR-002 with neutral wording
 
 ### Documentation
 
-- **fpde-z4n**: Add ADR-002 confirming radiation-dose extension satisfies §14 StrlSchV
+- **fpde-z4n**: Add ADR-002 confirming radiation-dose extension satisfies §85 StrlSchG / §127 StrlSchV
 
 ### Task
 
