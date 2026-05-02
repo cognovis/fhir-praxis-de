@@ -7,6 +7,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - **fpde-8c1**: Require value 1..1 and system 1..1 on accessionNumber slice
+- **fpde-z4n**: Correct legal citation from §14 StrlSchV to §85 StrlSchG / §127 StrlSchV
+
+### Documentation
+
+- **fpde-z4n**: Add ADR-002 confirming radiation-dose extension satisfies §14 StrlSchV
 
 ### Task
 
