@@ -19,9 +19,9 @@ The `radiation-dose` extension (`https://fhir.cognovis.de/praxis/StructureDefini
 
 The DICOMweb coverage gap analysis (polaris-6ey.3, gap G-3) raised the question of whether this extension is sufficient for German regulatory compliance, or whether a separate `RadiationDoseObservation` FHIR profile — analogous to DICOM TID 10007 or DICOM CID 10050 "Radiation Dose" patterns — is required.
 
-### Legal context: §14 StrlSchV
+### Legal context: §85 StrlSchG / §127 StrlSchV
 
-§14 of the Strahlenschutzverordnung 2018 (StrlSchV, BGBl. I S. 2034) requires that the person responsible for radiation protection keeps written records ("Aufzeichnungen") for each individual examination. The required record elements under §14(1) StrlSchV are:
+§85 of the Strahlenschutzgesetz (StrlSchG) establishes the examination recordkeeping duty: the person responsible for radiation protection must keep written records ("Aufzeichnungen") for each individual examination. §127 of the Strahlenschutzverordnung 2018 (StrlSchV, BGBl. I S. 2034) governs record retention and availability, specifying how long records must be kept and that they must be accessible for inspection by radiation protection authorities (Strahlenschutzbehoerde). The required record elements are:
 
 1. Date and time of the examination
 2. Patient identification (name, date of birth)
@@ -40,7 +40,7 @@ The primary deployment context for this IG in the MCN Schwabach pilot is ambulat
 - Dental X-ray (2D panoramic, bitewing, periapical)
 - Conventional X-ray (skeleton, thorax)
 - CT (referral-based, less frequent)
-- MRI (referral-based, no ionizing radiation — §14 StrlSchV does not apply)
+- MRI (referral-based, no ionizing radiation — §85 StrlSchG / §127 StrlSchV do not apply)
 
 For simple 2D X-ray in dental/ambulatory practice, dose measurement produces at most two or three numeric values (DAP, kVp, mA, exposure time). This is fundamentally different from CT multi-series dose reporting, where DICOM Dose SR (Structured Report) objects and DICOM TID 10007 / CID 10050 semantics are the appropriate primary records at the DICOM level.
 
@@ -48,15 +48,15 @@ For simple 2D X-ray in dental/ambulatory practice, dose measurement produces at 
 
 **Option A — Extension on Procedure is sufficient. No separate `RadiationDoseObservation` profile will be created for this IG.**
 
-The `radiation-dose` extension on `Procedure`, combined with the contextual data already present on `Procedure`, satisfies §14 StrlSchV (Strahlenschutzverordnung 2018) requirements for ambulatory practice management.
+The `radiation-dose` extension on `Procedure`, combined with the contextual data already present on `Procedure`, satisfies §85 StrlSchG (examination recordkeeping duty) and §127 StrlSchV (record retention) requirements for ambulatory practice management.
 
 ## Reasoning
 
-### 1. All §14 StrlSchV required fields are covered
+### 1. All §85 StrlSchG / §127 StrlSchV required fields are covered
 
-§14(1) StrlSchV requires the following data elements. The table below shows how each is covered:
+§85 StrlSchG and §127 StrlSchV require the following data elements. The table below shows how each is covered:
 
-| §14 StrlSchV requirement | Where covered |
+| §85 StrlSchG / §127 StrlSchV requirement | Where covered |
 |---|---|
 | Date and time | `Procedure.performedDateTime` or `Procedure.performedPeriod` |
 | Patient identification | `Procedure.subject` → Patient (name, birthDate) |
@@ -72,7 +72,7 @@ All required fields are covered by the combination of the standard `Procedure` r
 
 German national IGs (KBV, gematik, Medizinformatik Initiative / MII) do not mandate standalone `Observation` resources for radiation dose in an ambulatory FHIR IG. The MII Kerndatensatz Bildgebung uses extensions on imaging-related resources (e.g. `ImagingStudy`) for dose parameters, not standalone Observations. Introducing a `RadiationDoseObservation` profile in this IG would diverge from established German practice without legal or interoperability justification.
 
-### 3. §14 StrlSchV does not mandate FHIR Observations
+### 3. §85 StrlSchG / §127 StrlSchV do not mandate FHIR Observations
 
 The regulation is technology-agnostic. It requires the data to be recorded and accessible, not that it be expressed as a specific FHIR resource type. A FHIR `Extension` carrying the same dose values is legally equivalent to a FHIR `Observation` — both are records of the required data elements.
 
@@ -99,7 +99,7 @@ Gap G-3 from the polaris-6ey.3 analysis flags that the FHIR IG does not use DICO
 ### For `fhir-praxis-de` (this IG)
 
 - No new profile is added. `RadiationDoseObservation` will not be created.
-- The `radiation-dose` extension description SHOULD be updated to reference §14 StrlSchV explicitly, so that consumers understand the regulatory context.
+- The `radiation-dose` extension description SHOULD be updated to reference §85 StrlSchG / §127 StrlSchV explicitly, so that consumers understand the regulatory context.
 - DICOM CID 10050 / TID 10007 alignment (adding DCM concept mappings) may be added to the extension in a future iteration as an interoperability enhancement, tracked as a separate bead.
 
 ### For downstream Aidbox instances
@@ -109,7 +109,7 @@ Gap G-3 from the polaris-6ey.3 analysis flags that the FHIR IG does not use DICO
 
 ### For MCN Schwabach CT/MRI/X-ray workflow
 
-- The current extension is sufficient for §14 StrlSchV compliance in ambulatory practice.
+- The current extension is sufficient for §85 StrlSchG / §127 StrlSchV compliance in ambulatory practice.
 - This decision does NOT block the DentalNow/medworkx pilot.
 - If MCN Schwabach requires DICOM SR ingestion and full FHIR dose reporting at the CT level, a separate architecture decision (potentially outside this IG) would be needed. That is a future bead, not a current blocker.
 
@@ -117,7 +117,7 @@ Gap G-3 from the polaris-6ey.3 analysis flags that the FHIR IG does not use DICO
 
 A standalone `RadiationDoseObservation` FHIR profile was considered and rejected for the following reasons:
 
-1. **No legal mandate**: §14 StrlSchV does not require FHIR Observation resources. Legal compliance is achieved by recording the data, not by the resource type used.
+1. **No legal mandate**: §85 StrlSchG / §127 StrlSchV do not require FHIR Observation resources. Legal compliance is achieved by recording the data, not by the resource type used.
 2. **No German national precedent**: No national German IG mandates `Observation`-based dose reporting in an ambulatory FHIR context.
 3. **Unnecessary complexity for the primary use case**: Ambulatory 2D X-ray dose parameters are a small scalar set. Modeling each as an Observation creates 5x resource overhead per examination with no compliance benefit.
 4. **DICOM SR is the authoritative record for CT**: For CT, the DICOM modality produces the authoritative dose record. A FHIR Observation would be a less-authoritative copy.
@@ -125,7 +125,8 @@ A standalone `RadiationDoseObservation` FHIR profile was considered and rejected
 
 ## References
 
-- §14 Strahlenschutzverordnung 2018 (StrlSchV, BGBl. I S. 2034) — Aufzeichnungspflichten bei Strahlenexposition
+- §85 Strahlenschutzgesetz (StrlSchG) — Aufzeichnungspflicht bei Strahlenexposition (examination recordkeeping duty): https://www.gesetze-im-internet.de/strlschg/__85.html
+- §127 Strahlenschutzverordnung 2018 (StrlSchV, BGBl. I S. 2034) — Aufbewahrung und Weitergabe von Aufzeichnungen (record retention and availability): https://www.gesetze-im-internet.de/strlschv_2018/__127.html
 - DICOM PS3.16 CID 10050 (Radiation Dose) — DICOM concept codes for dose quantities
 - DICOM PS3.16 TID 10007 (Radiation Dose) — DICOM Template for Dose Structured Reports
 - Extension definition: `input/fsh/extensions/radiation-dose.fsh`
