@@ -47,31 +47,46 @@ jobs:
       - name: Install SUSHI
         run: npm install -g fsh-sushi
 
-      - name: Pre-load private FHIR packages
+      - name: Pre-load private FHIR packages from npm.cognovis.de
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
         run: |
-          # Pre-load private packages from vendored files in the repo into the FHIR
-          # package cache so SUSHI finds them without attempting a registry download.
-          # Packages in vendor/ are committed directly — no auth required.
-          # MUST run before SUSHI to avoid "Failed to download" errors for private deps.
-          # Mirrors the same step in ig-ci.yml — keep in sync.
-          pre_load_vendor() {
+          # Praxis depends on de.cognovis.terminology.imaging, which is published
+          # only to the private Verdaccio at npm.cognovis.de (auth required;
+          # public FHIR mirrors return 404). Authenticate and fetch the tarball
+          # with npm pack, then extract into the FHIR package cache so SUSHI
+          # resolves it locally. MUST run before SUSHI to avoid "Failed to
+          # download" errors for private deps. Mirrors the same step in
+          # ig-ci.yml — keep in sync.
+          if [ -z "${VERDACCIO_TOKEN:-}" ]; then
+            echo "::error::VERDACCIO_TOKEN secret is not configured — cannot fetch private FHIR packages"
+            exit 1
+          fi
+          {
+            echo "//npm.cognovis.de/:_password=${VERDACCIO_TOKEN}"
+            echo "//npm.cognovis.de/:username=cognovis"
+            echo "//npm.cognovis.de/:email=info@cognovis.de"
+            echo "//npm.cognovis.de/:always-auth=true"
+          } >> ~/.npmrc
+
+          fetch_to_fhir_cache() {
             local pkg="$1" version="$2"
-            local vendor_dir="vendor/${pkg}"
             local cache_dir="${HOME}/.fhir/packages/${pkg}#${version}"
-            if [ -d "$cache_dir" ]; then
+            if [ -d "$cache_dir/package" ] && [ -f "$cache_dir/package/package.json" ]; then
               echo "$pkg#$version already cached — skipping"
               return
             fi
-            if [ ! -d "$vendor_dir" ]; then
-              echo "WARNING: vendor/$pkg not found — $pkg#$version will be downloaded from registry"
-              return
-            fi
-            echo "Installing $pkg#$version from vendor/ into FHIR cache..."
-            mkdir -p "$cache_dir/package"
-            cp -r "$vendor_dir/"* "$cache_dir/package/"
-            echo "  Installed $(ls "$cache_dir/package/" | wc -l) files"
+            echo "Fetching $pkg@$version from npm.cognovis.de..."
+            local pack_dir
+            pack_dir=$(mktemp -d)
+            ( cd "$pack_dir" && npm pack "${pkg}@${version}" --registry https://npm.cognovis.de >/dev/null )
+            local tgz
+            tgz=$(ls "$pack_dir"/*.tgz | head -1)
+            mkdir -p "$cache_dir"
+            tar xzf "$tgz" -C "$cache_dir"
+            echo "  Installed $(ls "$cache_dir/package/" | wc -l) files into $cache_dir"
           }
-          pre_load_vendor "de.cognovis.terminology.imaging" "2026.0.0"
+          fetch_to_fhir_cache "de.cognovis.terminology.imaging" "2026.0.0"
 
       - name: Run SUSHI
         run: sushi .
