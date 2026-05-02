@@ -2,18 +2,36 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-5h0**: Add type.coding discriminator to requestedProcedureId identifier slice
+- **fpde-5h0**: Use v2-0203#FILL type coding instead of non-existent local CodeSystem
+
+### Features
+
+- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
+
 ## [0.44.0] - 2026-05-01
 
 ### Bug Fixes
 
-- **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
-- **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
 - **fpde-9fq**: Remove HvgVertragsartCS stub, use dmp-kennzeichen-de in example
 - **fpde-9fq**: Use correct numeric DMP Kennzeichen code 01 for DM2
+- **fpde-9fq**: Update CHANGELOG for HvgVertragsartCS stub removal
+- **fpde-bra**: Remove unused ZuzahlungsstatusCS and ZuzahlungsstatusVS
+- **fpde-bra**: Remove stale dist/package artifacts, test fixtures, and oids.ini entries
 
 ### Miscellaneous
 
+- **fpde-bra**: Update changelog for ZuzahlungsstatusCS removal
 - Bump version to 0.44.0
+- Merge worktree-bead-fpde-bra — remove ZuzahlungsstatusCS stub
+
+### Merge
+
+- Worktree-bead-fpde-9fq
 
 ## [0.43.1] - 2026-05-01
 
