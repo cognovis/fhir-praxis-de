@@ -58,6 +58,7 @@ Usage: #example
 * started = "2026-04-30T10:00:00+02:00"
 
 // AccessionNumber (DICOM 0008,0050)
+* identifier[accessionNumber].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
 * identifier[accessionNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
 * identifier[accessionNumber].type.coding.code = #ACSN
 * identifier[accessionNumber].value = "A2026-04300001"
@@ -143,6 +144,7 @@ Usage: #example
 * started = "2026-04-30T09:00:00+02:00"
 
 // AccessionNumber (DICOM 0008,0050)
+* identifier[accessionNumber].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
 * identifier[accessionNumber].type.coding.system = "http://terminology.hl7.org/CodeSystem/v2-0203"
 * identifier[accessionNumber].type.coding.code = #ACSN
 * identifier[accessionNumber].value = "A2026-04300002"
