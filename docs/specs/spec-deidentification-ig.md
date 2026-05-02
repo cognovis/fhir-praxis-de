@@ -5,7 +5,7 @@
 **Date**: 2026-05-02
 **Version**: 1.0
 **Bead**: `fpde-7yo` (Epic, this repo)
-**Companion ADR**: `polaris/docs/adr/ADR-027-privacy-and-compliance.md`
+**Companion ADR**: `consumer-sdk/docs/adr/ADR-027-privacy-and-compliance.md`
 **Target repo**: `cognovis/fhir-deidentification-de` (new, separate from this repo)
 
 ---
@@ -18,11 +18,11 @@ trust-zone modes apply per field*. Extends Health Samurai's
 `io.health-samurai.de-identification.r4` with DE-specific identifier systems
 (LANR, BSNR, KVNR, KIM-Telecom) and DE-specific resource profiles (ChargeItem
 EBM/GOÄ, Account, Coverage, CarePlan). Ships a machine-consumable manifest
-artefact that polaris codegen turns into `pii-fields.ts`, eliminating today's
+artefact that consumer-sdk codegen turns into `pii-fields.ts`, eliminating today's
 hand-maintained duplicated PII lists. Implements the technical counterpart to
 ADR-027 §7 (provenance chain) and provides the field catalogue for the four
 trust-zone modes (`agent-readonly`, `analytics`, `hipaa-safe-harbor`,
-`llm-anonymized`). Primary consumer: polaris SDK + LLM-Gateway. Secondary:
+`llm-anonymized`). Primary consumer: consumer-sdk SDK + LLM-Gateway. Secondary:
 optional Aidbox-side de-identification.
 
 ---
@@ -31,7 +31,7 @@ optional Aidbox-side de-identification.
 
 **Today's pain (from Round 1):**
 
-Polaris maintains hand-curated `pii-fields.ts` at multiple sites:
+ConsumerSDK maintains hand-curated `pii-fields.ts` at multiple sites:
 
 1. `packages/fhir-de/src/client/pii-fields.ts` — consumed by `AnonymizingTransport`
 2. `packages/adapter-common/src/anonymization/pii-fields.ts` — consumed by mcp-server filter path and PVS extract
@@ -59,8 +59,8 @@ fhir-dental-de, third-party DE-vendor consumers).
 
 **Scope boundary**: This IG declares *what* and *which method* per field
 per mode. It does not declare *how* the method is implemented. The
-implementation lives in polaris (codegen + AnonymizingTransport +
-LLM-Gateway tokenization). See the polaris workstream `adr-027-privacy`
+implementation lives in consumer-sdk (codegen + AnonymizingTransport +
+LLM-Gateway tokenization). See the consumer-sdk workstream `adr-027-privacy`
 label (11 beads) for the implementation side.
 
 ---
@@ -76,14 +76,14 @@ label (11 beads) for the implementation side.
 2. Adds FSH entries declaring fields + methods + modes
 3. CI runs: SUSHI compile + IG Publisher build + negative-test-corpus regression
 4. PR merges, tag `vN.M.K` cut, GitHub Actions publishes to `npm.cognovis.de`
-5. Polaris-1bx codegen runs (in polaris-CI or via `bun update`), `pii-fields.ts` regenerates
-6. Polaris builds; new fields are now redacted / scrubbed / generalized per mode
-**Postcondition**: New resource type covered without polaris-side hand-edits
-**Exceptions**: CI rejection if (a) negative-test-corpus matches scrub patterns, (b) version-pin in polaris stale, (c) coverage regression vs prior version
+5. ConsumerSDK-1bx codegen runs (in consumer-sdk-CI or via `bun update`), `pii-fields.ts` regenerates
+6. ConsumerSDK builds; new fields are now redacted / scrubbed / generalized per mode
+**Postcondition**: New resource type covered without consumer-sdk-side hand-edits
+**Exceptions**: CI rejection if (a) negative-test-corpus matches scrub patterns, (b) version-pin in consumer-sdk stale, (c) coverage regression vs prior version
 
-### UC-2: Polaris consumes IG at build time
-**Actor**: polaris build pipeline (CI or local `bun run codegen`)
-**Precondition**: New IG version published; polaris pinned to that version in `package.json`
+### UC-2: ConsumerSDK consumes IG at build time
+**Actor**: consumer-sdk build pipeline (CI or local `bun run codegen`)
+**Precondition**: New IG version published; consumer-sdk pinned to that version in `package.json`
 **Trigger**: `bun run codegen` invocation
 **Main Flow**:
 1. Codegen reads `node_modules/io.cognovis.de-identification.de/package.tgz`
@@ -92,7 +92,7 @@ label (11 beads) for the implementation side.
 4. Emits `packages/fhir-de/src/client/generated/pii-fields.ts` and `free-text-patterns.ts`
 5. Emits `packages/llm-gateway/src/generated/quasi-id-generalizers.ts`
 6. CI lint gate confirms no manual edits to generated files
-**Postcondition**: Polaris consumers (`AnonymizingTransport`, LLM-Gateway tokenization layer, PVS Faker pipeline) read from regenerated files
+**Postcondition**: ConsumerSDK consumers (`AnonymizingTransport`, LLM-Gateway tokenization layer, PVS Faker pipeline) read from regenerated files
 **Exceptions**: Codegen aborts on manifest schema mismatch (e.g. unknown method code, missing required field) — fail-closed
 
 ### UC-3: Aidbox server-side de-identification (future, optional)
@@ -107,7 +107,7 @@ label (11 beads) for the implementation side.
 **Exceptions**: Algorithm mismatch between Aidbox version and IG version → rejected per ADR-027 §7 boot-time check
 
 ### UC-4: External LLM-Gateway tokenization request
-**Actor**: polaris LLM-Gateway processing an `ExternalAnonymizedPrompt` per ADR-027 §6
+**Actor**: consumer-sdk LLM-Gateway processing an `ExternalAnonymizedPrompt` per ADR-027 §6
 **Precondition**: Mode `llm-anonymized` selected; request enters gateway
 **Trigger**: SDK call `llm.complete(prompt, { pii: 'llm-anonymized', … })`
 **Main Flow**:
@@ -146,7 +146,7 @@ label (11 beads) for the implementation side.
 | `appliesIn` | code[] | Yes | Subset of `[agent-readonly, analytics, hipaa-safe-harbor, llm-anonymized]`; non-empty |
 | `params` | object | No | Method-specific (e.g. age-bucket boundaries for `generalize:ageGroup`, prefix-length for `generalize:plzPrefix`) |
 | `rationale` | string | No | Human-readable justification for compliance-trace purposes |
-| `legacyCompat` | boolean | No | True if this entry exists to preserve coverage of legacy hardcoded polaris PII lists (Round 8 Q4) |
+| `legacyCompat` | boolean | No | True if this entry exists to preserve coverage of legacy hardcoded consumer-sdk PII lists (Round 8 Q4) |
 
 **Storage**: As a `Library` FHIR resource (canonical) with content extracted to JSON sidecar at build (per Round 3 Q3 hybrid: (i) primary, (iv) derived).
 
@@ -219,7 +219,7 @@ Removed in `analytics` mode (same as `agent-readonly`):
 
 - **Persistent**: All IG resources (Profiles, Library-pii-fields, TestScript-negative-corpus) live in `input/fsh/` and compile to `fsh-generated/` and `output/`
 - **Build-time generated**: `output/manifest/pii-fields.json` (the JSON sidecar derived from the Library)
-- **Ephemeral / non-IG**: Per-request mapping (LLM-Gateway, ADR-027 §6) — lives in `@polaris/llm-gateway` runtime memory, NEVER in the IG
+- **Ephemeral / non-IG**: Per-request mapping (LLM-Gateway, ADR-027 §6) — lives in `@consumer-sdk/llm-gateway` runtime memory, NEVER in the IG
 
 ---
 
@@ -293,9 +293,9 @@ Removed in `analytics` mode (same as `agent-readonly`):
 - **Priority**: Must
 - **Acceptance**: Build script produces sidecar; format matches schema published in IG narrative.
 
-**FR-031**: The IG build MUST produce a TypeScript-importable snapshot for polaris codegen consumption (file path TBD with polaris-1bx — see AW-1).
+**FR-031**: The IG build MUST produce a TypeScript-importable snapshot for consumer-sdk codegen consumption (file path TBD with consumer-sdk-1bx — see AW-1).
 - **Priority**: Should
-- **Acceptance**: polaris-1bx codegen successfully consumes the artefact; integration test in polaris CI.
+- **Acceptance**: consumer-sdk-1bx codegen successfully consumes the artefact; integration test in consumer-sdk CI.
 
 ### Quality gates
 
@@ -307,7 +307,7 @@ Removed in `analytics` mode (same as `agent-readonly`):
 - **Priority**: Must
 - **Acceptance**: CI fails build if any example file lacks the marker.
 
-**FR-042**: CI MUST verify reverse-coverage against the legacy polaris hardcoded list (per Round 8 Q4).
+**FR-042**: CI MUST verify reverse-coverage against the legacy consumer-sdk hardcoded list (per Round 8 Q4).
 - **Priority**: Must
 - **Acceptance**: CI loads the legacy list (committed as a snapshot in this IG repo for reference) and asserts every legacy entry has a corresponding manifest entry tagged `legacyCompat: true`.
 
@@ -349,15 +349,15 @@ Removed in `analytics` mode (same as `agent-readonly`):
 - **Priority**: Must
 - **Acceptance**: `cognovis.github.io/fhir-deidentification-de/` reachable; QA report passes.
 
-### Preserved Behavior (Brownfield → polaris migration)
+### Preserved Behavior (Brownfield → consumer-sdk migration)
 
-**FR-P-001**: The IG MUST cover every field currently in polaris's hand-maintained `PII_FIELDS = { Patient: ['name', 'identifier', 'address', 'telecom', 'photo'], Practitioner: ['name', 'telecom', 'address', 'photo'], RelatedPerson: ['name', 'telecom', 'address'] }` for mode `agent-readonly`. (See FR-042 reverse-coverage gate.)
+**FR-P-001**: The IG MUST cover every field currently in consumer-sdk's hand-maintained `PII_FIELDS = { Patient: ['name', 'identifier', 'address', 'telecom', 'photo'], Practitioner: ['name', 'telecom', 'address', 'photo'], RelatedPerson: ['name', 'telecom', 'address'] }` for mode `agent-readonly`. (See FR-042 reverse-coverage gate.)
 
-**FR-P-002**: The IG MUST cover every field currently in polaris's hand-maintained `FREE_TEXT_FIELDS = { DocumentReference: ['description'], AllergyIntolerance: ['note[].text'] }` for mode `agent-readonly`.
+**FR-P-002**: The IG MUST cover every field currently in consumer-sdk's hand-maintained `FREE_TEXT_FIELDS = { DocumentReference: ['description'], AllergyIntolerance: ['note[].text'] }` for mode `agent-readonly`.
 
-**FR-P-003**: The IG free-text scrub patterns MUST preserve the polaris intentional false-positive trade-off: titled-names only (`Dr.`, `Hr.`, `Fr.` + name), NOT bare `Capitalised Capitalised` bigrams. Negative test corpus enforces this.
+**FR-P-003**: The IG free-text scrub patterns MUST preserve the consumer-sdk intentional false-positive trade-off: titled-names only (`Dr.`, `Hr.`, `Fr.` + name), NOT bare `Capitalised Capitalised` bigrams. Negative test corpus enforces this.
 
-**FR-P-004**: The IG-declared algorithm for `cryptoHash` MUST produce bit-identical anon-IDs to the current polaris `hashId(salt, id)` function for the same `(salt, id)` input.
+**FR-P-004**: The IG-declared algorithm for `cryptoHash` MUST produce bit-identical anon-IDs to the current consumer-sdk `hashId(salt, id)` function for the same `(salt, id)` input.
 
 ---
 
@@ -390,7 +390,7 @@ Removed in `analytics` mode (same as `agent-readonly`):
 
 ### Maintainability
 
-**NFR-030**: The IG MUST document the upgrade-loop SLA (Round 2 Q4 = (c)): Issue → IG-PR → Release → Polaris-Codegen-Run, target end-to-end latency ≤ 1 working day for security-relevant fixes.
+**NFR-030**: The IG MUST document the upgrade-loop SLA (Round 2 Q4 = (c)): Issue → IG-PR → Release → ConsumerSDK-Codegen-Run, target end-to-end latency ≤ 1 working day for security-relevant fixes.
 
 **NFR-031**: The IG MUST add-only when bumping HS-IG dependency version (no silent removal of fields). Coverage regression CI gate asserts this.
 
@@ -408,7 +408,7 @@ This IG does not expose an HTTP API. It exposes three machine-readable artefacts
 
 **Distribution**: `https://npm.cognovis.de/io.cognovis.de-identification.de/-/io.cognovis.de-identification.de-<version>.tgz`
 **Auth**: per `npm.cognovis.de` access policy
-**Consumers**: polaris codegen, Aidbox `$fhir-package-install`
+**Consumers**: consumer-sdk codegen, Aidbox `$fhir-package-install`
 
 ### Artefact 2: JSON Manifest Sidecar
 
@@ -487,7 +487,7 @@ This IG does not expose an HTTP API. It exposes three machine-readable artefacts
 ## Section 9: Edge Cases & Boundary Conditions
 
 ### EC-1: Consumer reads manifest field for ResourceType not declared
-**Scenario**: Polaris consumer encounters a resource type the IG does not list (e.g. zukünftiger FHIR R5 type, or DE-Custom-Resource added after IG was last bumped).
+**Scenario**: ConsumerSDK consumer encounters a resource type the IG does not list (e.g. zukünftiger FHIR R5 type, or DE-Custom-Resource added after IG was last bumped).
 **Expected Behavior**: ADR-027 §6 + Round 5 Q1 = (a) `agent-readonly` fail-closed default. The IG narrative MUST recommend this; the IG itself cannot enforce it.
 **Risk if Unhandled**: New resource type leaks PII through to consumers.
 
@@ -503,7 +503,7 @@ This IG does not expose an HTTP API. It exposes three machine-readable artefacts
 
 ### EC-4: `Bundle.entry.fullUrl` rewriting order
 **Scenario**: Bundle entry has `resource.id = "p-123"` and `fullUrl = "https://server/fhir/Patient/p-123"`. After hashing, both must agree on the new ID.
-**Expected Behavior**: Per polaris current implementation: rewrite `fullUrl` based on the *original* `resource.id` BEFORE hashing the resource.id — order-sensitive.
+**Expected Behavior**: Per consumer-sdk current implementation: rewrite `fullUrl` based on the *original* `resource.id` BEFORE hashing the resource.id — order-sensitive.
 **Risk if Unhandled**: `fullUrl` and `resource.id` diverge after hashing → broken Bundle.
 
 ### EC-5: HS-IG bumps and adds a new field to existing resource
@@ -523,7 +523,7 @@ This IG does not expose an HTTP API. It exposes three machine-readable artefacts
 
 ### EC-8: Cross-resource consistency for `Bundle.entry` of mixed resource types
 **Scenario**: Bundle contains Patient/123 + Encounter/456 (with subject=Patient/123). After `cryptoHash`, Patient.id becomes `anon-X`, Encounter.subject must also become `Patient/anon-X`.
-**Expected Behavior**: Recursive reference rewriting per polaris current behavior (see ADR-027 §5).
+**Expected Behavior**: Recursive reference rewriting per consumer-sdk current behavior (see ADR-027 §5).
 **Risk if Unhandled**: Broken referential integrity in pseudonymized output.
 
 ### EC-9: IG used standalone without fhir-praxis-de
@@ -544,27 +544,27 @@ This IG does not expose an HTTP API. It exposes three machine-readable artefacts
 
 ### Downstream consumers (identified)
 
-- `@polaris/fhir-de` codegen (polaris-1bx) — primary
-- `@polaris/llm-gateway` tokenization layer (polaris-9qg6 et al.) — primary
-- `@polaris/adapter-common` PVS Faker pipeline (polaris-oah) — secondary (field list only; Faker generators stay outside IG)
+- `@consumer-sdk/fhir-de` codegen (consumer-sdk-1bx) — primary
+- `@consumer-sdk/llm-gateway` tokenization layer (consumer-sdk-9qg6 et al.) — primary
+- `@consumer-sdk/adapter-common` PVS Faker pipeline (consumer-sdk-oah) — secondary (field list only; Faker generators stay outside IG)
 - Aidbox server-side `$de-identify` (future, optional)
 
 ### Migration
 
-- polaris currently runs hand-maintained `pii-fields.ts`; codegen migration in polaris-1bx replaces it. Reverse-coverage CI gate (FR-042) prevents regression.
+- consumer-sdk currently runs hand-maintained `pii-fields.ts`; codegen migration in consumer-sdk-1bx replaces it. Reverse-coverage CI gate (FR-042) prevents regression.
 - Aidbox-side de-identification not in current production setup; future work, not blocked by this IG.
 
 ### Backward compatibility
 
 - Add-only on minor bumps (NFR-031)
-- Major bump triggers polaris semver-major (downstream)
+- Major bump triggers consumer-sdk semver-major (downstream)
 - Deprecation: when an HS field is removed in a future HS bump, our IG keeps the entry with `legacyCompat: true` for one major cycle, then drops on next major
 
 ### Rollout strategy — single-track toward 1.0.0
 
 No staged feature rollouts. v0.1.0 ships the full v1.0.0-content scope; subsequent
 0.x.x releases are bug fixes and missing-field additions discovered during
-polaris consumption.
+consumer-sdk consumption.
 
 **v0.1.0 content** (full scope, status: draft):
 - HS-17 coverage + DE-Identifier-Overrides + Bundle/Provenance + ChargeItem/Account/Coverage/CarePlan profiles
@@ -577,11 +577,11 @@ polaris consumption.
 - HIPAA Safe Harbor DE-mapping table (`input/pagecontent/hipaa-safe-harbor-de-mapping.md`)
 - HS-IG vendored at `vendor/io.health-samurai.de-identification.r4/`
 
-**v0.x.x patches**: bug fixes, missing-field additions, scrub-pattern refinements that surface during polaris-1bx and polaris-9qg6 consumption. Each adds a coverage row, never removes (NFR-031).
+**v0.x.x patches**: bug fixes, missing-field additions, scrub-pattern refinements that surface during consumer-sdk-1bx and consumer-sdk-9qg6 consumption. Each adds a coverage row, never removes (NFR-031).
 
 **v1.0.0 trigger** (status flips from `draft` to `active`):
-- polaris-1bx codegen has consumed the IG cleanly for ≥ 30 days
-- polaris-9qg6 LLM-Gateway tokenization has consumed the IG cleanly for ≥ 30 days  
+- consumer-sdk-1bx codegen has consumed the IG cleanly for ≥ 30 days
+- consumer-sdk-9qg6 LLM-Gateway tokenization has consumed the IG cleanly for ≥ 30 days  
 - No outstanding coverage-regression CI failures in the IG repo
 - No `legacyCompat: true` entries waiting on consumer-side migration
 
@@ -600,7 +600,7 @@ Declarative observable-behavior statements. Each is verifiable in isolation.
 
 **BC-2**: When a consumer requests mode `llm-anonymized` and a manifest entry's `appliesIn[]` includes `llm-anonymized`, the consumer applies the entry's method per IG narrative.
 
-**BC-3**: When two consumers (e.g. polaris and Aidbox) process the same input resource with the same salt and the same IG version, they produce bit-identical `cryptoHash` output.
+**BC-3**: When two consumers (e.g. consumer-sdk and Aidbox) process the same input resource with the same salt and the same IG version, they produce bit-identical `cryptoHash` output.
 
 **BC-4**: When the negative-test-corpus contains a term that matches a free-text scrub pattern, the IG build MUST fail.
 
@@ -608,7 +608,7 @@ Declarative observable-behavior statements. Each is verifiable in isolation.
 
 **BC-6**: When an IG example file lacks the synthetic-data marker, CI MUST fail.
 
-**BC-7**: When the IG's coverage of legacy polaris hardcoded fields drops vs the prior version, CI MUST fail.
+**BC-7**: When the IG's coverage of legacy consumer-sdk hardcoded fields drops vs the prior version, CI MUST fail.
 
 **BC-8**: When a tag is pushed in the form `v<X>.<Y>.<Z>`, the IG MUST publish to `npm.cognovis.de` and to GitHub Pages within the workflow's success path.
 
@@ -630,15 +630,15 @@ Declarative observable-behavior statements. Each is verifiable in isolation.
 
 **NB-3**: The IG MUST NOT extend its free-text scrub patterns to include bare `Capitalised Capitalised` bigrams. Reason: false-positive cost — clinical terms like `Diabetes Mellitus`, `Akute Otitis`, `Bilaterale Pneumonie`, `Morbus Crohn`, `Ductus Arteriosus Botalli` would be incorrectly scrubbed. Negative test corpus (FR-040) enforces this rule by blocking PRs that introduce such matches.
 
-**NB-4**: The IG MUST NOT declare a Faker generator catalogue. Faker-replacement is a polaris-side mechanism (`@polaris/pvs-charly/src/lib/anonymize.ts`) — the IG declares which fields are PII; the choice of Faker generator vs `cryptoHash` vs `redact` is consumer-side. Reason: Faker's surface (50+ generators) is too rich and use-case-specific to express declaratively in FHIR.
+**NB-4**: The IG MUST NOT declare a Faker generator catalogue. Faker-replacement is a consumer-sdk-side mechanism (`@consumer-sdk/pvs-charly/src/lib/anonymize.ts`) — the IG declares which fields are PII; the choice of Faker generator vs `cryptoHash` vs `redact` is consumer-side. Reason: Faker's surface (50+ generators) is too rich and use-case-specific to express declaratively in FHIR.
 
 **NB-5**: The IG MUST NOT define request-mapping storage mechanics. The mapping (for mode `llm-anonymized`) lives in the consumer's runtime memory only. Reason: per ADR-027 §6 — mapping persistence is a property of the LLM-Gateway implementation, not of the IG.
 
-**NB-6**: The IG MUST NOT specify a salt-rotation policy. Salt lifecycle is operational and lives in the polaris-5bdl runbook. The IG only states the salt requirements (≥256 bit entropy, fail-closed). Reason: per Round 4 Q1 + ADR-027 §5.
+**NB-6**: The IG MUST NOT specify a salt-rotation policy. Salt lifecycle is operational and lives in the consumer-sdk-5bdl runbook. The IG only states the salt requirements (≥256 bit entropy, fail-closed). Reason: per Round 4 Q1 + ADR-027 §5.
 
 **NB-7**: The IG MUST NOT silently drop coverage when bumping the HS-IG dependency. Add-only invariant per NFR-031 + BC-12. Reason: silent removals are stealth privacy regressions.
 
-**NB-8**: The IG MUST NOT contain real PII in `input/examples/`. Examples MUST be synthetic, generated via deterministic Faker seeds (consistent with `polaris/packages/install-pvs/` and `install-dental-pvs/` patterns), and each example file MUST carry a `meta.tag` referencing the data-provenance CodeSystem (FR-070):
+**NB-8**: The IG MUST NOT contain real PII in `input/examples/`. Examples MUST be synthetic, generated via deterministic Faker seeds (consistent with `consumer-sdk/packages/install-pvs/` and `install-dental-pvs/` patterns), and each example file MUST carry a `meta.tag` referencing the data-provenance CodeSystem (FR-070):
 
 ```json
 "meta": {
@@ -658,9 +658,9 @@ Reason: per Round 8 Q3 (revised). "Mustermann" is also forbidden — too obvious
 ### `npm.cognovis.de` (private package registry)
 
 - **Data Flow In**: `package.tgz` upload via GitHub Actions on tag push
-- **Data Flow Out**: `package.tgz` download by polaris codegen, by Aidbox `$fhir-package-install`
-- **Failure Mode**: registry unreachable at consume-time → polaris CI build fails (vendored fallback is the runbook escape per fhir-praxis-de's `vendor/` pattern, FR-051)
-- **Timeout Strategy**: polaris codegen: 60s download timeout; vendored fallback if registry returns 5xx
+- **Data Flow Out**: `package.tgz` download by consumer-sdk codegen, by Aidbox `$fhir-package-install`
+- **Failure Mode**: registry unreachable at consume-time → consumer-sdk CI build fails (vendored fallback is the runbook escape per fhir-praxis-de's `vendor/` pattern, FR-051)
+- **Timeout Strategy**: consumer-sdk codegen: 60s download timeout; vendored fallback if registry returns 5xx
 
 ### Health Samurai upstream (`io.health-samurai.de-identification.r4`)
 
@@ -669,12 +669,12 @@ Reason: per Round 8 Q3 (revised). "Mustermann" is also forbidden — too obvious
 - **Failure Mode**: HS package unavailable → vendored copy in our `vendor/` dir (mirrors fhir-praxis-de pattern); CI step `pre_load_vendor` ensures cache populated
 - **Timeout Strategy**: same as fhir-praxis-de release workflow (60s with vendor fallback)
 
-### Polaris codegen (`@polaris/fhir-de`)
+### ConsumerSDK codegen (`@consumer-sdk/fhir-de`)
 
 - **Data Flow In**: this IG's manifest sidecar
-- **Data Flow Out**: regenerated `pii-fields.ts`, `free-text-patterns.ts`, `quasi-id-generalizers.ts` in polaris repo
-- **Failure Mode**: schema mismatch → polaris build fails (consumer-side); IG repository's CI is unaffected (consumer responsibility)
-- **Timeout Strategy**: codegen runs synchronously in polaris CI
+- **Data Flow Out**: regenerated `pii-fields.ts`, `free-text-patterns.ts`, `quasi-id-generalizers.ts` in consumer-sdk repo
+- **Failure Mode**: schema mismatch → consumer-sdk build fails (consumer-side); IG repository's CI is unaffected (consumer responsibility)
+- **Timeout Strategy**: codegen runs synchronously in consumer-sdk CI
 
 ### Aidbox (`$fhir-package-install`)
 
@@ -697,10 +697,10 @@ Reason: per Round 8 Q3 (revised). "Mustermann" is also forbidden — too obvious
 All AW items resolved 2026-05-02. Resolutions are now part of the spec
 contract; entries are retained here as decision-log entries for traceability.
 
-**AW-1 (RESOLVED)**: Polaris-codegen artefact format = **both**, with explicit roles.
+**AW-1 (RESOLVED)**: ConsumerSDK-codegen artefact format = **both**, with explicit roles.
 - Canonical source: `Library` FHIR resource (FHIR-native, validatable, Aidbox-loadable)
-- Build-time-derived: JSON sidecar at `output/manifest/pii-fields.json` (simple format optimized for polaris codegen — no FHIR machinery required in polaris build step)
-- The build script extracts the JSON from the Library's `content[0].data`. Polaris-1bx reads the JSON sidecar; Aidbox `$fhir-package-install` consumes the Library. See FR-030 + FR-031 for acceptance.
+- Build-time-derived: JSON sidecar at `output/manifest/pii-fields.json` (simple format optimized for consumer-sdk codegen — no FHIR machinery required in consumer-sdk build step)
+- The build script extracts the JSON from the Library's `content[0].data`. ConsumerSDK-1bx reads the JSON sidecar; Aidbox `$fhir-package-install` consumes the Library. See FR-030 + FR-031 for acceptance.
 
 **AW-2 (RESOLVED)**: HS-IG version pin handled via vendoring.
 - HS package `io.health-samurai.de-identification.r4` is not yet on `npm.cognovis.de` and not HEAD-accessible on `simplifier.net` from our environment.
@@ -754,7 +754,7 @@ contract; entries are retained here as decision-log entries for traceability.
 **AW-9 (RESOLVED)**: Synthetic-marker uses a new shared CodeSystem at the cognovis canonical base.
 - **CodeSystem URI**: `https://fhir.cognovis.de/CodeSystem/data-provenance`
 - **Codes**:
-  - `synthetic-faker-generated` — programmatically generated via `@faker-js/faker` with deterministic seed (matches polaris install-pvs/install-dental-pvs convention)
+  - `synthetic-faker-generated` — programmatically generated via `@faker-js/faker` with deterministic seed (matches consumer-sdk install-pvs/install-dental-pvs convention)
   - `synthetic-template` — hand-crafted template (e.g. minimal example for narrative documentation)
   - `synthetic-imported` — derived from a third-party synthetic dataset with attribution
   - `production` — real data; MUST NEVER appear in any IG examples directory
@@ -769,13 +769,13 @@ contract; entries are retained here as decision-log entries for traceability.
 
 - **OQ-2**: Does the published IG need to be registered on `simplifier.net`? — Round 2 said "deklarativ, nice if compatible". — **Owner**: Malte. — **Risk Level**: Low. — **Suggested resolution**: defer to post-v1.0.0; not blocking for internal consumption.
 
-- **OQ-3 (RESOLVED 2026-05-02)**: Cross-repo bead-coordination handled via documentation in fpde-7yo notes; wave-orchestrator dispatches IG repo first, polaris workstream (`bd list --label=adr-027-privacy`) consumes the published artefact.
+- **OQ-3 (RESOLVED 2026-05-02)**: Cross-repo bead-coordination handled via documentation in fpde-7yo notes; wave-orchestrator dispatches IG repo first, consumer-sdk workstream (`bd list --label=adr-027-privacy`) consumes the published artefact.
 
-- **OQ-4 (RESOLVED 2026-05-02)**: `status: draft` for v0.1.0 through v0.x.x; flips to `status: active` at v1.0.0 once the polaris consumption gate (≥30 days clean consumption by polaris-1bx + polaris-9qg6) is satisfied. See updated Section 10.
+- **OQ-4 (RESOLVED 2026-05-02)**: `status: draft` for v0.1.0 through v0.x.x; flips to `status: active` at v1.0.0 once the consumer-sdk consumption gate (≥30 days clean consumption by consumer-sdk-1bx + consumer-sdk-9qg6) is satisfied. See updated Section 10.
 
 - **OQ-R-1** (Risk): HS-IG could change semantics on a minor bump (e.g. method name change) breaking our compose-on-top model. — **Mitigation**: Strict pin (FR-Round-6-Q1) + bump-review-PR process.
 
-- **OQ-R-2** (Risk): Polaris-1bx might find that the IG's manifest schema doesn't match what their codegen wants to consume. — **Mitigation**: AW-1 resolved before IG v0.1.0; cross-team review during sub-bead 1 (Format-Entscheidung).
+- **OQ-R-2** (Risk): ConsumerSDK-1bx might find that the IG's manifest schema doesn't match what their codegen wants to consume. — **Mitigation**: AW-1 resolved before IG v0.1.0; cross-team review during sub-bead 1 (Format-Entscheidung).
 
 - **OQ-R-3** (Risk): Re-ID-preflight thresholds (AW-5) being deployment config could lead to inconsistent privacy posture across customer deployments. — **Mitigation**: ADR-027 §6 documents this as deployment responsibility; IG can publish recommendations as informative.
 
