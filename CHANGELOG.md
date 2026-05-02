@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-5h0**: Add type.coding discriminator to requestedProcedureId identifier slice
+- **fpde-5h0**: Use v2-0203#FILL type coding instead of non-existent local CodeSystem
+
+### Features
+
+- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
+
 ## [0.44.1] - 2026-05-02
 
 ### Bug Fixes
