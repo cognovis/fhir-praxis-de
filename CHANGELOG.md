@@ -6,28 +6,63 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-- **fpde-5h0**: Add type.coding discriminator to requestedProcedureId identifier slice
-- **fpde-5h0**: Use v2-0203#FILL type coding instead of non-existent local CodeSystem
+- **ci**: Fetch terminology.imaging from Verdaccio with VERDACCIO_TOKEN
+
+### Documentation
+
+- **fpde-7yo.1**: Track fhir-deidentification-de external repo bootstrap
+- **fpde-7yo.1**: Update external repo tracking with advisory fix status
+- **fpde-7yo.1**: Add changelog entry for de-identification IG bootstrap
 
 ### Features
 
-- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
+- **fpde-nzb**: Add DicomwebEndpointPraxisDe profile with connectionType constraint
 
-### Task
+### Merge
 
-- **fpde-7yo.1**: Bootstrap `cognovis/fhir-deidentification-de` repo — De-Identification IG (`io.cognovis.de-identification.de@0.1.0`) with HS vendor packages, CodeSystem data-provenance (FR-070), and CI workflows; published to npm.cognovis.de
+- Worktree-bead-fpde-nzb
+
+## [0.45.0] - 2026-05-02
+
+### Miscellaneous
+
+- Bump version to 0.45.0
+
+### Merge
+
+- Worktree-bead-fpde-8c1
+- Resolve CHANGELOG conflict with origin/main (fpde-5h0 + 0.44.1)
+- Worktree-bead-fpde-5h0
 
 ## [0.44.1] - 2026-05-02
 
 ### Bug Fixes
 
+- **fpde-5h0**: Add type.coding discriminator to requestedProcedureId identifier slice
+- **fpde-5h0**: Use v2-0203#FILL type coding instead of non-existent local CodeSystem
 - **fpde-8c1**: Require value 1..1 and system 1..1 on accessionNumber slice
+- **fpde-8c1**: Update changelog for accessionNumber slice on ImagingStudyPraxisDe
 - **fpde-z4n**: Correct legal citation from §14 StrlSchV to §85 StrlSchG / §127 StrlSchV
 - **fpde-z4n**: Replace vendor-specific references in ADR-002 with neutral wording
 
 ### Documentation
 
-- **fpde-z4n**: Add ADR-002 confirming radiation-dose extension satisfies §85 StrlSchG / §127 StrlSchV
+- **fpde-z4n**: Add ADR-002 confirming radiation-dose extension satisfies §14 StrlSchV
+
+### Features
+
+- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
+
+### Miscellaneous
+
+- **fpde-5h0**: Update changelog for requestedProcedureId identifier slice
+- **fpde-z4n**: Update changelog for radiation-dose extension legal review
+- Bump version to 0.44.1
+
+### Merge
+
+- Worktree-bead-fpde-z4n
+- Resolve CHANGELOG conflict from origin/main (fpde-z4n + fpde-8c1)
 
 ### Task
 
