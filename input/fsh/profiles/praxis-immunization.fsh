@@ -1,18 +1,21 @@
 // PraxisImmunization — Impfdokumentation in der ambulanten Praxis
-// B2: Thin profile ohne KBV-MIO-Impfpass-Abhaengigkeit
-// (B1 via packages.kbv.de nicht erreichbar — siehe Bead fpde-daz)
+// Bindet KBV-MIO-Impfpass Impfstoff-Vokabular (kbv.mio.impfpass 1.1.0).
+// Parent bleibt base Immunization (nicht KBV_PR_MIO_Vaccination_Record_Prime),
+// da dessen obligatorische Extensions (Entry_Type, Attester) mit PVS-Daten
+// inkompatibel waeren — fpde-daz B1-Entscheidung.
 
 Profile: PraxisImmunization
 Parent: Immunization
 Id: praxis-immunization
 Title: "Praxis Immunization"
-Description: "Immunization-Profil fuer die ambulante Praxis (B2: thin profile ohne KBV-MIO-Impfpass-Abhaengigkeit). Dokumentiert Schutzimpfungen mit Impfstoff, Patient, Verabreichungsdatum und verabreichendem Arzt (LANR)."
+Description: "Immunization-Profil fuer die ambulante Praxis. Bindet KBV-MIO-Impfpass Impfstoff-Vokabular (KBV_VS_MIO_Vaccination_Vaccine_List) als extensible Binding. Parent ist base Immunization (nicht KBV_PR_MIO_Vaccination_Record_Prime, da dessen obligatorische Extensions inkompatibel mit PVS-Kratkenblatt-Daten sind)."
 
 // Status: Pflicht
 * status 1..1 MS
 
-// Impfstoff: Pflicht und Must-Support
+// Impfstoff: Pflicht — KBV-MIO-Impfpass Vokabular (extensible)
 * vaccineCode 1..1 MS
+* vaccineCode from https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_Vaccine_List (extensible)
 
 // Patient: Pflicht
 * patient 1..1 MS

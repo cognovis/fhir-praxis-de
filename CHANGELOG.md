@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.48.0] - 2026-05-04
+
+### Features
+
+- **fpde-daz**: Add KBV-MIO-Impfpass vocabulary binding to PraxisImmunization (extensible binding on vaccineCode to KBV_VS_MIO_Vaccination_Vaccine_List from kbv.mio.impfpass 1.1.0)
+
+### Bug Fixes
+
+- **ci**: Fix VERDACCIO_TOKEN GitHub secret (was set to wrong value, causing E401 on npm.cognovis.de)
+
 ## [unreleased]
 
 ### Bug Fixes
