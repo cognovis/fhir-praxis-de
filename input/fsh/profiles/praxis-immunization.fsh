@@ -1,5 +1,8 @@
 // PraxisImmunization — Impfdokumentation in der ambulanten Praxis
-// Bindet KBV-MIO-Impfpass Impfstoff-Vokabular (kbv.mio.impfpass 1.1.0).
+// Bindet KBV-MIO-Impfpass Impfstoff-Vokabular via cognovis-Vocab-Repackage
+// kbv.mio.impfpass.vocab@1.1.0-cognovis.1 (Subset von kbv.mio.impfpass 1.1.0
+// ohne dimdi-Referenzen → keine transitive Abhängigkeit auf de.basisprofil.r4@0.9.12).
+// Die ValueSet-URLs sind unverändert von KBV: https://fhir.kbv.de/ValueSet/KBV_VS_MIO_Vaccination_Vaccine_List et al.
 // Parent bleibt base Immunization (nicht KBV_PR_MIO_Vaccination_Record_Prime),
 // da dessen obligatorische Extensions (Entry_Type, Attester) mit PVS-Daten
 // inkompatibel waeren — fpde-daz B1-Entscheidung.
