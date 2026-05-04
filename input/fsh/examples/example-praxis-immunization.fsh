@@ -9,8 +9,8 @@ Usage: #example
 
 * status = #completed
 * vaccineCode.coding[0].system = "http://snomed.info/sct"
-* vaccineCode.coding[0].code = #1181000221105
-* vaccineCode.coding[0].display = "Influenza-Impfstoff"
+* vaccineCode.coding[0].code = #46233009
+* vaccineCode.coding[0].display = "Influenza virus vaccine"
 * vaccineCode.text = "Influvac Tetra — Influenza-Impfstoff quadrivalent"
 * patient = Reference(example-patient)
 * occurrenceDateTime = "2025-10-15"

@@ -30,10 +30,10 @@ Description: "Composition-Profil fuer die ambulante Praxis. Bildet den Dokumentk
 
 // Encounter-Verknuepfung: Optional (Schein-Referenz)
 * encounter MS
-* encounter only Reference(Encounter)
+* encounter only Reference(EncounterPraxis or Encounter)
 
 // Abschnitte: mindestens ein section mit Freitext
-* section MS
+* section 1..* MS
 * section.title MS
 * section.text MS
 * section.entry MS

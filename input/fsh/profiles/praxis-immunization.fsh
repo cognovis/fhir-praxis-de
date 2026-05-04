@@ -26,8 +26,10 @@ Description: "Immunization-Profil fuer die ambulante Praxis (B2: thin profile oh
 * performer.actor MS
 
 // LANR-Identifier fuer verabreichenden Arzt (via Display-Referenz oder identifier.system)
-// Slicing auf performer.actor.identifier ist in FHIR R4 nicht moeglich (max=1 auf Reference.identifier).
-// LANR wird daher per Konvention als identifier.system = KBV_NS_Base_ANR in der Referenz gesetzt.
+// Note: A fixed-system constraint on performer.actor.identifier.system cannot be enforced at the
+// profile level in FHIR R4 because Reference.identifier is a flat element (cardinality max=1)
+// and slicing on it is not supported. LANR convention is documented here but cannot be
+// structurally enforced — implementations MUST set identifier.system = KBV_NS_Base_ANR by convention.
 * performer.actor.identifier MS
 * performer.actor.identifier.system MS
 * performer.actor.identifier.value MS
