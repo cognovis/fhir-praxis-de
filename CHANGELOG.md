@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.47.0] - 2026-05-04
+
+### Features
+
+- **fpde-daz**: Add PraxisComposition profile for Anamnese/Befund/Konsultation entries
+- **fpde-daz**: Add PraxisCommunication profile with communication category CodeSystem
+- **fpde-daz**: Add PraxisFlag profile with flag-kategorie CodeSystem for patient-level alerts
+- **fpde-daz**: Add PraxisMedicationAdministration profile for in-practice medications
+- **fpde-daz**: Add PraxisAnamneseQuestionnaireResponse profile bound to AnamneseQuestionnaire
+- **fpde-daz**: Add PraxisImmunization profile (B2: thin profile, no KBV-MIO-Impfpass dependency)
+
+### Documentation
+
+- **fpde-daz**: Polaris follow-up bead required — update KrablLink mappers to set meta.profile for all 6 new resource types
+
 ## [0.45.1] - 2026-05-02
 
 ### Bug Fixes
