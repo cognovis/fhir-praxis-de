@@ -6,7 +6,7 @@ Beads prefix: `fdid-` (separate beads database in target repo)
 
 De-Identification IG bootstrapped in bead `fpde-7yo.1` (closed).
 Spec: `docs/specs/spec-deidentification-ig.md` (this repo)
-ADR: `ADR-027-privacy-and-compliance.md` (polaris repo)
+ADR: `ADR-027-privacy-and-compliance.md` (adapter repo)
 
 ## Status
 
@@ -50,5 +50,5 @@ Wave-orchestrator filter for that repo: `bd list` (all top-level, no Epic).
 ## Cross-repo references
 
 - Spec source of truth: this repo (`docs/specs/spec-deidentification-ig.md`)
-- Privacy ADR (the technical counterpart to AVV §9 + §203): polaris repo (`docs/adr/ADR-027-privacy-and-compliance.md`)
-- Polaris consumer workstream (11 beads): polaris repo, label `adr-027-privacy`
+- Privacy ADR (the technical counterpart to AVV §9 + §203): adapter repo (`docs/adr/ADR-027-privacy-and-compliance.md`)
+- Adapter consumer workstream (11 beads): adapter repo, label `adr-027-privacy`
