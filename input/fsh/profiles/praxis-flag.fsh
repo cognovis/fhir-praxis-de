@@ -20,3 +20,6 @@ Description: "Flag-Profil fuer die ambulante Praxis. Bildet patientenbezogene Fl
 // Patient: Pflicht
 * subject 1..1 MS
 * subject only Reference(Patient)
+
+// Gueltigkeitszeitraum: Must-Support fuer Flag-Gueltigkeit
+* period MS

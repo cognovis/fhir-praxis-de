@@ -7,7 +7,7 @@ Title: "Erstanamnese Weber — Ausgefuellt"
 Description: "Ausgefuellter Erstanamnese-Bogen von Patient Thomas Weber (2026-01-15)."
 Usage: #example
 
-* questionnaire = "https://fhir.cognovis.de/praxis/Questionnaire/erstanamnese-standard"
+* questionnaire = "https://fhir.cognovis.de/praxis/Questionnaire/example-anamnese-erstanamnese"
 * status = #completed
 * subject = Reference(example-patient)
 * authored = "2026-01-15T09:00:00+01:00"

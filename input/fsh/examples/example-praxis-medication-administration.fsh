@@ -14,6 +14,9 @@ Usage: #example
 * medicationCodeableConcept.text = "Vitamin B12 1000 mcg — Injektion i.m."
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-01-15T09:30:00+01:00"
+* dosage.route.coding[0].system = "http://snomed.info/sct"
+* dosage.route.coding[0].code = #78421000
+* dosage.route.coding[0].display = "Intramuscular route"
 * dosage.dose.value = 1000
 * dosage.dose.unit = "mcg"
 * dosage.dose.system = "http://unitsofmeasure.org"

@@ -11,5 +11,8 @@ Usage: #example
 * category[0].coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/flag-kategorie"
 * category[0].coding[0].code = #cave
 * category[0].coding[0].display = "CAVE"
+* code.coding[0].system = "http://snomed.info/sct"
+* code.coding[0].code = #419511003
+* code.coding[0].display = "Propensity to adverse reactions to drug"
 * code.text = "Penicillin-Allergie: Anaphylaktische Reaktion bekannt. Keine Beta-Laktam-Antibiotika!"
 * subject = Reference(example-patient)

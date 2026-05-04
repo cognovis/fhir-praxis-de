@@ -22,6 +22,7 @@ Description: "MedicationAdministration-Profil fuer die ambulante Praxis. Bildet 
 * effective[x] only dateTime
 * effectiveDateTime 1..1 MS
 
-// Dosierung: Menge als Quantity
+// Dosierung: Menge und Applikationsweg
 * dosage MS
 * dosage.dose MS
+* dosage.route MS
