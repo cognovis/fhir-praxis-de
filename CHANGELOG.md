@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.49.0] - 2026-05-04
+
+### Bug Fixes
+
+- **fpde-daz**: Replace `kbv.mio.impfpass: 1.1.0` dependency with `kbv.mio.impfpass.vocab: 1.1.0-cognovis.1` (vocabulary-only repackage on npm.cognovis.de). The upstream impfpass 1.1.0 transitively depends on `de.basisprofil.r4: 0.9.12`, which conflicts with the pinned `1.6.0-ballot2` (the `dimdi/*` → `bfarm/*` namespace rename means these versions cannot be loaded together). The repackage drops the dimdi-tainted ValueSets/ConceptMaps (8 of 43 resources) and carries `hl7.fhir.r4.core` as its only dependency. PraxisImmunization keeps its extensible binding to `KBV_VS_MIO_Vaccination_Vaccine_List` (canonical URL unchanged) without the transitive resolver conflict. Downstream `@atomic-ehr/codegen` consumers now succeed against `de.basisprofil.r4@1.6.0-ballot2` only. SUSHI 0 errors / 0 warnings.
+
 ## [0.48.0] - 2026-05-04
 
 ### Features
