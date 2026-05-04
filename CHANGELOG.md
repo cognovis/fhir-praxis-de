@@ -2,40 +2,27 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.47.0] - 2026-05-04
+## [unreleased]
 
-### Features
+### Bug Fixes
 
-- **fpde-daz**: Add PraxisComposition profile for Anamnese/Befund/Konsultation entries
-- **fpde-daz**: Add PraxisCommunication profile with communication category CodeSystem
-- **fpde-daz**: Add PraxisFlag profile with flag-kategorie CodeSystem for patient-level alerts
-- **fpde-daz**: Add PraxisMedicationAdministration profile for in-practice medications
-- **fpde-daz**: Add PraxisAnamneseQuestionnaireResponse profile bound to AnamneseQuestionnaire
-- **fpde-daz**: Add PraxisImmunization profile (B2: thin profile, no KBV-MIO-Impfpass dependency)
+- Replace vendor-specific terms in public IG surfaces
+- Remove remaining PVS product name from IG spec surfaces
+- **ci**: Use _auth base64 token for Verdaccio instead of _password+username
+- **fpde-daz**: Address review findings iteration 1
 
 ### Documentation
 
-- **fpde-daz**: Polaris follow-up bead required — update KrablLink mappers to set meta.profile for all 6 new resource types
-
-## [0.45.1] - 2026-05-02
-
-### Bug Fixes
-
-- **imaging**: Pin AccessionNumber identifier.system to pvs-id NamingSystem (1..1 MS) on both ImagingServiceRequestPraxisDe.identifier[accession] and ImagingStudyPraxisDe.identifier[accessionNumber] for cross-resource consistency
-- **examples**: Add missing identifier[accessionNumber].system to MRT-Knie and CT-Abdomen ImagingStudy examples
-
-## [0.45.0] - 2026-05-02
+- **fpde-7yo**: Close epic + migrate Wave-2/3 sub-beads to fhir-deidentification-de
 
 ### Features
 
-- **fpde-nzb**: Add DicomwebEndpointPraxisDe profile with connectionType required binding (WADO-RS, QIDO-RS, STOW-RS), HTTPS invariant, and AE-title identifier slice
-- **fpde-nzb**: Constrain ImagingStudyPraxisDe.endpoint to Reference(DicomwebEndpointPraxisDe)
-- **fpde-nzb**: Add DicomwebConnectionTypeVS ValueSet
-- **fpde-5h0**: Add requestedProcedureId identifier slice to ImagingServiceRequestPraxisDe
+- **fpde-daz**: Add PraxisComposition and PraxisCommunication profiles
+- **fpde-daz**: Add PraxisFlag and PraxisMedicationAdministration profiles
+- **fpde-daz**: Add PraxisAnamneseQuestionnaireResponse and PraxisImmunization profiles
+- **fpde-daz**: Bump version to 0.47.0 and update CHANGELOG
 
-### Bug Fixes
-
-- **ci**: Fetch terminology.imaging from Verdaccio with VERDACCIO_TOKEN
+## [0.46.0] - 2026-05-02
 
 ### Documentation
 
@@ -43,9 +30,58 @@ All notable changes to this project will be documented in this file.
 - **fpde-7yo.1**: Update external repo tracking with advisory fix status
 - **fpde-7yo.1**: Add changelog entry for de-identification IG bootstrap
 
-### CI
+### Features
 
-- **infra**: Fetch terminology.imaging from Verdaccio (npm.cognovis.de) with VERDACCIO_TOKEN auth, replacing vendor/ pre-load step
+- **fpde-7yo.1**: Bootstrap cognovis/fhir-deidentification-de repo
+
+### Miscellaneous
+
+- Bump version to 0.46.0
+
+### Merge
+
+- Resolve CHANGELOG conflict with origin/main (fpde-7yo.1)
+
+## [0.45.2] - 2026-05-02
+
+### Documentation
+
+- **fpde-7yo**: Add de-identification IG spec — 4 modes, all AW resolved, single-track v1.0.0
+
+### Miscellaneous
+
+- Bump version to 0.45.2
+
+## [0.45.1] - 2026-05-02
+
+### Bug Fixes
+
+- **ci**: Fetch terminology.imaging from Verdaccio with VERDACCIO_TOKEN
+- **imaging**: Pin AccessionNumber identifier.system to pvs-id NamingSystem
+
+### Features
+
+- **fpde-nzb**: Add DicomwebEndpointPraxisDe profile with connectionType constraint
+
+### Miscellaneous
+
+- Bump version to 0.45.1 + reconcile CHANGELOG
+
+### Merge
+
+- Worktree-bead-fpde-nzb
+
+## [0.45.0] - 2026-05-02
+
+### Miscellaneous
+
+- Bump version to 0.45.0
+
+### Merge
+
+- Worktree-bead-fpde-8c1
+- Resolve CHANGELOG conflict with origin/main (fpde-5h0 + 0.44.1)
+- Worktree-bead-fpde-5h0
 
 ## [0.44.1] - 2026-05-02
 
