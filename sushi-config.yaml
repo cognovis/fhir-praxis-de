@@ -9,7 +9,7 @@ description: >-
   Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
   international interoperability mappings.
 status: active
-version: 0.47.0
+version: 0.48.0
 fhirVersion: 4.0.1
 copyrightYear: 2026+
 releaseLabel: STU1
@@ -30,6 +30,7 @@ dependencies:
   ihe.rad.imr: 1.1.0
   dvmd.kdl.r4: 2025.0.1
   hl7.fhir.uv.ips: 1.1.0
+  kbv.mio.impfpass: 1.1.0
   # kbv.mio.laborbefund removed: v1.0.0-kommentierung.2 has snapshot bugs
   # (Unknown path in Patient.gender.extension). Our profiles don't inherit
   # from KBV MIO — re-add when KBV fixes their package.
