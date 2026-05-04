@@ -85,6 +85,8 @@ jobs:
             echo "  Installed $(ls "$cache_dir/package/" | wc -l) files into $cache_dir"
           }
           fetch_to_fhir_cache "de.cognovis.terminology.imaging" "2026.0.0"
+          # KBV-MIO-Impfpass vocabulary repackage (cognovis-private; npm.cognovis.de only)
+          fetch_to_fhir_cache "kbv.mio.impfpass.vocab" "1.1.0-cognovis.1"
 
       - name: Run SUSHI
         run: sushi .
