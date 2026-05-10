@@ -36,12 +36,17 @@ print(f'{with_snap}/{len(sds)} SDs have snapshots')
 
 ## What This Action Does
 
-1. Scans `~/.fhir/packages/kbv.basis#*` for installed versions.
-2. **Idempotency check**: if all SDs already have snapshots, exits immediately.
-3. Downloads `validator_cli.jar` (HL7 FHIR Validator CLI) if not cached.
-4. Runs a **single JVM invocation** to generate snapshots for all 47 SDs
+1. **Auto-download**: Reads the `kbv.basis` version from `sushi-config.yaml` and
+   downloads the package from the public FHIR registry
+   (`https://packages2.fhir.org/packages/kbv.basis/{version}`) if it is not
+   already in the local FHIR package cache. This is always required on a fresh
+   CI runner because SUSHI has not yet run to populate the cache.
+2. Scans `~/.fhir/packages/kbv.basis#*` for installed versions.
+3. **Idempotency check**: if all SDs already have snapshots, exits immediately.
+4. Downloads `validator_cli.jar` (HL7 FHIR Validator CLI) if not cached.
+5. Runs a **single JVM invocation** to generate snapshots for all 47 SDs
    simultaneously (avoids per-SD JVM startup overhead — ~11s vs ~430s).
-5. Merges generated snapshots back into the original package JSON files.
+6. Merges generated snapshots back into the original package JSON files.
 
 ## Tool Selection: HL7 FHIR Validator CLI
 

@@ -122,7 +122,44 @@ runs:
                     errors += 1
             return merged, errors
 
+        def ensure_kbv_basis_in_cache():
+            """Download kbv.basis from FHIR registry if not already in the local cache."""
+            import re
+            config_path = 'sushi-config.yaml'
+            if not os.path.exists(config_path):
+                print('sushi-config.yaml not found — cannot auto-download kbv.basis')
+                return
+            with open(config_path) as f:
+                config_content = f.read()
+            # Match: `kbv.basis: X.Y.Z` (after removing comment lines)
+            match = re.search(r'^\s*kbv\.basis:\s*([0-9]+\.[0-9]+\.[0-9]+)', config_content, re.MULTILINE)
+            if not match:
+                print('kbv.basis not found in sushi-config.yaml dependencies — skipping auto-download')
+                return
+            version = match.group(1)
+            cache_dir = os.path.join(FHIR_PACKAGES_DIR, f'kbv.basis#{version}')
+            pkg_dir = os.path.join(cache_dir, 'package')
+            if os.path.isdir(pkg_dir) and os.path.exists(os.path.join(pkg_dir, 'package.json')):
+                print(f'kbv.basis#{version} already in FHIR cache')
+                return
+            print(f'kbv.basis#{version} not in FHIR cache — downloading from packages2.fhir.org...')
+            import tarfile, tempfile
+            os.makedirs(cache_dir, exist_ok=True)
+            url = f'https://packages2.fhir.org/packages/kbv.basis/{version}'
+            dl_start = time.time()
+            with tempfile.NamedTemporaryFile(suffix='.tgz', delete=False) as tmp:
+                tmp_path = tmp.name
+                urllib.request.urlretrieve(url, tmp_path)
+            with tarfile.open(tmp_path, 'r:gz') as tar:
+                tar.extractall(cache_dir)
+            os.unlink(tmp_path)
+            elapsed = time.time() - dl_start
+            print(f'Downloaded kbv.basis#{version} in {elapsed:.1f}s')
+
         # Main
+        print('Ensuring kbv.basis is present in FHIR cache...')
+        ensure_kbv_basis_in_cache()
+
         print('Checking for kbv.basis packages in FHIR cache...')
         kbv_versions = find_kbv_basis_versions()
 
