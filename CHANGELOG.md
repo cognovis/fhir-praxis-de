@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Features
+
+- **ci**: Add `generate-kbv-basis-snapshots` GitHub Actions composite action that injects FHIR snapshots into `kbv.basis` StructureDefinitions before SUSHI runs. Workaround for KBV publishing oversight (kbv.basis ships without snapshots unlike kbv.ita.for). Uses HL7 FHIR Validator CLI v6.9.7 in batch mode (~8-11s for 47 SDs). Idempotent: skips if snapshots already present. Auto-downloads kbv.basis from the public FHIR registry on fresh CI runners. Enables SUSHI inheritance from `KBV_PR_Base_*` profiles (e.g. `Parent: KBV_PR_Base_Condition_Diagnosis`). Integrated in both `ig-ci.yml` and `ig-release.yml`. Reusable pattern documented for fhir-dental-de.
+
 ## [0.49.0] - 2026-05-04
 
 ### Bug Fixes
