@@ -1,0 +1,175 @@
+name: 'Generate KBV Basis Snapshots'
+description: >-
+  Injects FHIR snapshots into kbv.basis StructureDefinitions in the local
+  FHIR package cache. KBV publishes kbv.basis without snapshots (see README).
+  SUSHI and IG Publisher require snapshots when inheriting from KBV profiles.
+  This action is idempotent: if all snapshots are already present, it exits
+  immediately without invoking the validator.
+
+# No inputs required: auto-detects all kbv.basis versions in ~/.fhir/packages/
+# No outputs: side-effect only (modifies files in the FHIR package cache)
+
+runs:
+  using: composite
+  steps:
+    - name: Generate KBV Basis snapshots
+      shell: bash
+      run: |
+        python3 << 'PYEOF'
+        import json
+        import glob
+        import subprocess
+        import sys
+        import os
+        import time
+        import urllib.request
+        import shutil
+
+        VALIDATOR_JAR = '/tmp/validator_cli.jar'
+        VALIDATOR_URL = 'https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar'
+        FHIR_PACKAGES_DIR = os.path.expanduser('~/.fhir/packages')
+
+        def find_kbv_basis_versions():
+            """Find all kbv.basis#X.Y.Z directories in the FHIR package cache."""
+            pattern = os.path.join(FHIR_PACKAGES_DIR, 'kbv.basis#*')
+            dirs = glob.glob(pattern)
+            versions = []
+            for d in sorted(dirs):
+                pkg_dir = os.path.join(d, 'package')
+                if os.path.isdir(pkg_dir):
+                    versions.append((os.path.basename(d), pkg_dir))
+            return versions
+
+        def count_snapshots(pkg_dir):
+            """Count SDs and how many already have snapshots."""
+            all_json = glob.glob(os.path.join(pkg_dir, 'StructureDefinition-*.json'))
+            sds = sorted(f for f in all_json if not f.endswith('.snapshot.json'))
+            with_snapshot = 0
+            for f in sds:
+                try:
+                    data = json.load(open(f))
+                    if data.get('snapshot', {}).get('element'):
+                        with_snapshot += 1
+                except (json.JSONDecodeError, OSError):
+                    pass
+            return sds, with_snapshot
+
+        def ensure_validator_jar():
+            """Download validator_cli.jar if not already cached at VALIDATOR_JAR."""
+            if os.path.exists(VALIDATOR_JAR) and os.path.getsize(VALIDATOR_JAR) > 10_000_000:
+                print(f'  validator_cli.jar already cached at {VALIDATOR_JAR}')
+                return
+            print(f'  Downloading HL7 FHIR Validator CLI from GitHub...')
+            dl_start = time.time()
+            urllib.request.urlretrieve(VALIDATOR_URL, VALIDATOR_JAR)
+            dl_elapsed = time.time() - dl_start
+            size_mb = os.path.getsize(VALIDATOR_JAR) / 1024 / 1024
+            print(f'  Downloaded {size_mb:.0f}MB in {dl_elapsed:.1f}s')
+
+        def generate_snapshots_for_version(version_dir, pkg_dir, sds):
+            """Run validator snapshot command for all SDs in one JVM invocation."""
+            print(f'  Running HL7 FHIR Validator CLI snapshot generation...')
+            # Use -ig kbv.basis#X.Y.Z so the validator resolves internal
+            # cross-references (e.g. KBV_PR_Base_PractitionerRole_ASV -> PractitionerRole)
+            kbv_version = version_dir.split('#', 1)[1]
+            cmd = [
+                'java', '-jar', VALIDATOR_JAR, 'snapshot',
+                '-version', '4.0.1',
+                '-ig', f'de.basisprofil.r4',  # resolve upstream base profiles
+                '-ig', f'kbv.basis#{kbv_version}',  # resolve internal cross-refs
+            ] + sds + ['-outputSuffix', 'snapshot.json']
+
+            snap_start = time.time()
+            result = subprocess.run(
+                cmd,
+                capture_output=True,
+                text=True,
+                timeout=300
+            )
+            elapsed = time.time() - snap_start
+
+            if result.returncode != 0:
+                print(f'  ERROR: Validator exited with code {result.returncode}')
+                print(result.stderr[-2000:])
+                sys.exit(1)
+
+            print(f'  Validator completed in {elapsed:.1f}s')
+            return elapsed
+
+        def merge_snapshots_back(sds):
+            """Merge generated .snapshot.json files back into the originals."""
+            merged = 0
+            errors = 0
+            for sd_file in sds:
+                snap_file = sd_file + '.snapshot.json'
+                if not os.path.exists(snap_file):
+                    print(f'  WARNING: No snapshot generated for {os.path.basename(sd_file)}')
+                    errors += 1
+                    continue
+                try:
+                    snap_data = json.load(open(snap_file))
+                    orig_data = json.load(open(sd_file))
+                    orig_data['snapshot'] = snap_data.get('snapshot', {})
+                    with open(sd_file, 'w') as f:
+                        json.dump(orig_data, f, indent=2)
+                    # Truncate temp file instead of deleting (avoids OS permission issues)
+                    open(snap_file, 'w').close()
+                    merged += 1
+                except (json.JSONDecodeError, OSError) as e:
+                    print(f'  ERROR merging {os.path.basename(sd_file)}: {e}')
+                    errors += 1
+            return merged, errors
+
+        # Main
+        print('Checking for kbv.basis packages in FHIR cache...')
+        kbv_versions = find_kbv_basis_versions()
+
+        if not kbv_versions:
+            print('No kbv.basis packages found in FHIR cache — nothing to do')
+            sys.exit(0)
+
+        any_work_done = False
+        total_start = time.time()
+
+        for version_dir, pkg_dir in kbv_versions:
+            print(f'\nProcessing {version_dir}...')
+            sds, with_snapshot = count_snapshots(pkg_dir)
+            total = len(sds)
+
+            if total == 0:
+                print(f'  No StructureDefinitions found — skipping')
+                continue
+
+            if with_snapshot == total:
+                print(f'  All {total} snapshots already present — skipping (idempotent)')
+                continue
+
+            missing = total - with_snapshot
+            print(f'  {missing}/{total} SDs missing snapshots — generating...')
+            any_work_done = True
+
+            ensure_validator_jar()
+
+            elapsed = generate_snapshots_for_version(version_dir, pkg_dir, sds)
+
+            merged, errors = merge_snapshots_back(sds)
+
+            if errors > 0:
+                print(f'  ERROR: {errors} SDs failed to merge — aborting')
+                sys.exit(1)
+
+            # Verify
+            _, with_snapshot_after = count_snapshots(pkg_dir)
+            if with_snapshot_after != total:
+                print(f'  ERROR: Expected {total} snapshots, got {with_snapshot_after}')
+                sys.exit(1)
+
+            print(f'  Generated and merged {merged} snapshots for {version_dir}')
+            print(f'  Timing: {elapsed:.1f}s for {total} SDs ({elapsed/total:.2f}s/SD)')
+
+        total_elapsed = time.time() - total_start
+        if any_work_done:
+            print(f'\nSnapshot generation complete in {total_elapsed:.1f}s total')
+        else:
+            print('\nAll kbv.basis snapshots already present — no generation needed')
+        PYEOF
