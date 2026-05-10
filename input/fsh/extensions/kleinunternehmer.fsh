@@ -1,11 +1,10 @@
 // Kleinunternehmerregelung § 19 UStG — Extension on Organization
-// Bead: fpde-47a (implemented as stub in fpde-shp.6 for 3-layer-chain)
-// Full implementation (subextension gueltigAb, ChargeItem logic) follows in fpde-47a.
+// Bead: fpde-shp.6. ChargeItem-Logik und Invoice-Constraint folgen in fpde-47a.
 
 Extension: KleinunternehmerregelungExt
 Id: kleinunternehmerregelung
 Title: "Kleinunternehmerregelung § 19 UStG"
-Description: "Kennzeichnung ob die Praxis unter die Kleinunternehmerregelung nach § 19 UStG faellt. Seit 2025: Schwellen 25.000 EUR Vorjahresumsatz / 100.000 EUR laufendes Jahr. Bei aktiver Regelung: Keine USt-Ausweis, Pflicht-Hinweis auf Rechnungen. Bead fpde-47a implementiert den vollen Scope (Subextension gueltigAb, ChargeItem-Logik)."
+Description: "Kennzeichnung ob die Praxis unter die Kleinunternehmerregelung nach § 19 UStG faellt. Seit 2025: Schwellen 25.000 EUR Vorjahresumsatz / 100.000 EUR laufendes Jahr. Bei aktiver Regelung: Keine USt-Ausweis, Pflicht-Hinweis auf Rechnungen ('gemaess § 19 UStG wird keine Umsatzsteuer berechnet'). ChargeItem-Logik und Invoice-Constraint folgen in fpde-47a."
 Context: Organization
 * extension contains
     aktiv 1..1 and

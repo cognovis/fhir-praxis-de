@@ -6,28 +6,38 @@ This page documents the 3-layer profile inheritance chain used in `de.cognovis.f
 
 German FHIR IGs for ambulatory practice management follow a three-tier inheritance hierarchy:
 
-```
-Layer 1 — KBV Base (kbv.basis 1.8.0)
-    KBV_PR_Base_Condition_Diagnosis
-    KBV_PR_Base_Patient
-    KBV_PR_Base_Practitioner
-    KBV_PR_Base_Organization
-         |
-         | (extends with praxis-specific constraints)
-         v
-Layer 2 — praxis-de Middle Layer (de.cognovis.fhir.praxis — THIS IG)
-    PraxisConditionDE       (praxis-condition-de)
-    PraxisPatientDE         (praxis-patient-de)
-    PraxisPractitionerDE    (praxis-practitioner-de)
-    PraxisOrganizationDE    (praxis-organization-de)
-         |
-         | (extends with specialty-specific constraints)
-         v
-Layer 3 — Specialty IGs (e.g. de.cognovis.fhir.dental)
-    DentalConditionDE
-    DentalPatientDE
-    DentalPractitionerDE
-    DentalOrganizationDE
+```mermaid
+graph TD
+    subgraph L1["Layer 1 — KBV Base (kbv.basis 1.8.0)"]
+        KBV_C["KBV_PR_Base_Condition_Diagnosis"]
+        KBV_P["KBV_PR_Base_Patient"]
+        KBV_PR["KBV_PR_Base_Practitioner"]
+        KBV_O["KBV_PR_Base_Organization"]
+    end
+
+    subgraph L2["Layer 2 — praxis-de Middle Layer (de.cognovis.fhir.praxis — THIS IG)"]
+        PC["PraxisConditionDE"]
+        PP["PraxisPatientDE"]
+        PPR["PraxisPractitionerDE"]
+        PO["PraxisOrganizationDE"]
+    end
+
+    subgraph L3["Layer 3 — Specialty IGs (e.g. de.cognovis.fhir.dental)"]
+        DC["DentalConditionDE"]
+        DP["DentalPatientDE"]
+        DPR["DentalPractitionerDE"]
+        DO["DentalOrganizationDE"]
+    end
+
+    KBV_C --> PC
+    KBV_P --> PP
+    KBV_PR --> PPR
+    KBV_O --> PO
+
+    PC --> DC
+    PP --> DP
+    PPR --> DPR
+    PO --> DO
 ```
 
 This design means:
@@ -70,6 +80,10 @@ The marker enables fast filtering (e.g. "show me all AI-assisted diagnoses") wit
 ## KBV Snapshot Generation
 
 KBV publishes `kbv.basis` without snapshots (a known KBV publishing oversight). The CI pipeline runs the `generate-kbv-basis-snapshots` composite action (`.github/actions/generate-kbv-basis-snapshots/`) before SUSHI to inject snapshots, enabling inheritance from KBV base profiles. See bead fpde-shp.5.
+
+## CI Test Profiles
+
+The directory `input/fsh/tests/` contains CI-only test profiles (IDs prefixed with `test-`); these are included in the published package tarball as tripwires to verify profile inheritance compiles correctly end-to-end. Downstream consumers of `de.cognovis.fhir.praxis` should filter out any profile IDs matching `test-*` — they are not intended for clinical use.
 
 ## Cross-Reference: fhir-dental-de (fdde-pax)
 
