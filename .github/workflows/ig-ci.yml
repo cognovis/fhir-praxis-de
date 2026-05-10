@@ -162,6 +162,9 @@ jobs:
           # KBV-MIO-Impfpass vocabulary repackage (cognovis-private; npm.cognovis.de only)
           fetch_to_fhir_cache "kbv.mio.impfpass.vocab" "1.1.0-cognovis.1"
 
+      - name: Generate KBV Basis snapshots
+        uses: ./.github/actions/generate-kbv-basis-snapshots
+
       - name: Build FHIR package
         run: bash scripts/build-package.sh
 
