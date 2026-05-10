@@ -43,6 +43,10 @@ dependencies:
   # kbv.mio.laborbefund removed: v1.0.0-kommentierung.2 has snapshot bugs
   # (Unknown path in Patient.gender.extension). Our profiles don't inherit
   # from KBV MIO — re-add when KBV fixes their package.
+  # kbv.basis ships WITHOUT snapshots (KBV publishing oversight — see
+  # .github/actions/generate-kbv-basis-snapshots/README.md). The
+  # generate-kbv-basis-snapshots CI action injects them before SUSHI runs.
+  kbv.basis: 1.8.0
 
 parameters:
   auto-oid-root: 2.16.840.1.113883.3.7985

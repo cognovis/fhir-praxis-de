@@ -2,23 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-shp.5**: Address review findings (version pinning, file handles, dead import)
+- **fpde-shp.5**: Ensure kbv.basis downloaded before snapshot generation (CI fresh runner fix)
+
+### Documentation
+
+- **fpde-shp.5**: Add changelog entry for kbv.basis snapshot composite action
+
+### Features
+
+- **fpde-shp.5**: Green — generate-kbv-basis-snapshots composite action + workflow integration
+
+### Test
+
+- **fpde-shp.5**: Red — TestKBVCondition FSH fails without kbv.basis snapshots
+
 ## [0.49.0] - 2026-05-04
 
 ### Bug Fixes
 
-- **fpde-daz**: Replace `kbv.mio.impfpass: 1.1.0` dependency with `kbv.mio.impfpass.vocab: 1.1.0-cognovis.1` (vocabulary-only repackage on npm.cognovis.de). The upstream impfpass 1.1.0 transitively depends on `de.basisprofil.r4: 0.9.12`, which conflicts with the pinned `1.6.0-ballot2` (the `dimdi/*` → `bfarm/*` namespace rename means these versions cannot be loaded together). The repackage drops the dimdi-tainted ValueSets/ConceptMaps (8 of 43 resources) and carries `hl7.fhir.r4.core` as its only dependency. PraxisImmunization keeps its extensible binding to `KBV_VS_MIO_Vaccination_Vaccine_List` (canonical URL unchanged) without the transitive resolver conflict. Downstream `@atomic-ehr/codegen` consumers now succeed against `de.basisprofil.r4@1.6.0-ballot2` only. SUSHI 0 errors / 0 warnings.
+- **fpde-daz**: Replace kbv.mio.impfpass with cognovis vocab repackage to drop de.basisprofil.r4@0.9.12 transitive dep
+- **fpde-daz**: Pre-load kbv.mio.impfpass.vocab from npm.cognovis.de in CI
 
 ## [0.48.0] - 2026-05-04
 
 ### Features
 
-- **fpde-daz**: Add KBV-MIO-Impfpass vocabulary binding to PraxisImmunization (extensible binding on vaccineCode to KBV_VS_MIO_Vaccination_Vaccine_List from kbv.mio.impfpass 1.1.0)
+- **fpde-daz**: Bind KBV-MIO-Impfpass vocabulary to PraxisImmunization + bump to 0.48.0
 
-### Bug Fixes
-
-- **ci**: Fix VERDACCIO_TOKEN GitHub secret (was set to wrong value, causing E401 on npm.cognovis.de)
-
-## [unreleased]
+## [0.47.0] - 2026-05-04
 
 ### Bug Fixes
 
@@ -26,6 +42,7 @@ All notable changes to this project will be documented in this file.
 - Remove remaining PVS product name from IG spec surfaces
 - **ci**: Use _auth base64 token for Verdaccio instead of _password+username
 - **fpde-daz**: Address review findings iteration 1
+- Replace vendor-specific terms in external-repos doc
 
 ### Documentation
 
@@ -38,6 +55,14 @@ All notable changes to this project will be documented in this file.
 - **fpde-daz**: Add PraxisFlag and PraxisMedicationAdministration profiles
 - **fpde-daz**: Add PraxisAnamneseQuestionnaireResponse and PraxisImmunization profiles
 - **fpde-daz**: Bump version to 0.47.0 and update CHANGELOG
+
+### Miscellaneous
+
+- **fpde-daz**: Update changelog for session close
+
+### Merge
+
+- Worktree-bead-fpde-daz
 
 ## [0.46.0] - 2026-05-02
 
