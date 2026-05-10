@@ -13,7 +13,9 @@ Description: "Wrapper-Profil fuer Diagnosen in der deutschen Praxisverwaltung. E
 * asserter only Reference(KBV_PR_Base_Practitioner)
 * asserter MS
 * asserter ^short = "Diagnosesteller (Arzt/Zahnarzt-Vorbehalt -- nur qualifizierte Practitioner)"
-* asserter ^definition = "Pflichtfeld bei aerztlicher Diagnose. Nur qualifizierte Practitioner gemaess KBV_PR_Base_Practitioner duerfen als Diagnosesteller fungieren (Arzt-/Zahnarzt-Vorbehalt: ZHG § 1 Abs. 5, BAeO). MFA/ZFA duerfen Befunde messen (recorder), aber nicht als asserter referenziert werden."
+* asserter ^definition = "Wenn angegeben, MUSS ein qualifizierter Practitioner gemaess KBV_PR_Base_Practitioner referenziert werden (Arzt-/Zahnarzt-Vorbehalt: ZHG § 1 Abs. 5, BAeO). MFA/ZFA duerfen Befunde messen (recorder), aber NICHT als asserter referenziert werden."
 
 // AI Provenance Marker: applicable for AI-assisted diagnosis documentation
 * extension contains AiProvenanceApplicableExt named aiProvenanceApplicable 0..1 MS
+* extension[aiProvenanceApplicable] ^short = "KI-Provenance anwendbar (EU AI Act)"
+* extension[aiProvenanceApplicable] ^definition = "Wenn gesetzt: KI-Provenance via Provenance-Ressource mit AiGeneratedExt, AiProviderExt etc. ist fuer diesen Eintrag dokumentiert."

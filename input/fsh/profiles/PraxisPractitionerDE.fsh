@@ -16,3 +16,5 @@ Description: "Wrapper-Profil fuer Behandler in der deutschen Praxisverwaltung. E
 
 // AI Provenance Marker
 * extension contains AiProvenanceApplicableExt named aiProvenanceApplicable 0..1 MS
+* extension[aiProvenanceApplicable] ^short = "KI-Provenance anwendbar (EU AI Act)"
+* extension[aiProvenanceApplicable] ^definition = "Wenn gesetzt: KI-Provenance via Provenance-Ressource mit AiGeneratedExt, AiProviderExt etc. ist fuer diesen Eintrag dokumentiert."
