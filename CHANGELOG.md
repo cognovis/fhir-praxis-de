@@ -33,6 +33,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-shp.5**: Add KBV.basis snapshot pre-generator as CI composite action — generates missing Snapshot elements for all 47 kbv.basis StructureDefinitions using HL7 FHIR Validator CLI before SUSHI compilation. Enables KBV inheritance-based profiles (e.g., TestKBVConditionDE extending KBV_PR_Base_Condition_Diagnosis). Idempotent and cached (~8-11s batch processing time). Resolves kbv.basis publishing gap (kbv.ita.for ships with snapshots, kbv.basis does not).
 - **fpde-daz**: Add PraxisComposition and PraxisCommunication profiles
 - **fpde-daz**: Add PraxisFlag and PraxisMedicationAdministration profiles
 - **fpde-daz**: Add PraxisAnamneseQuestionnaireResponse and PraxisImmunization profiles
