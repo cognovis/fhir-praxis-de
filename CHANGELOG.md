@@ -6,6 +6,24 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **fpde-shp.6**: Address review findings iteration 1
+
+### Documentation
+
+- **fpde-shp.6**: Add changelog entry for kbv wrapper profiles
+
+### Features
+
+- **fpde-shp.6**: Green — 4 KBV wrapper profiles + kleinunternehmer ext + inheritance doc
+
+### Test
+
+- **fpde-shp.6**: Red — test profiles extending PraxisDE wrappers (not yet created)
+
+## [0.50.0] - 2026-05-10
+
+### Bug Fixes
+
 - **fpde-shp.5**: Address review findings (version pinning, file handles, dead import)
 - **fpde-shp.5**: Ensure kbv.basis downloaded before snapshot generation (CI fresh runner fix)
 
@@ -52,7 +70,6 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **fpde-shp.5**: Add KBV.basis snapshot pre-generator as CI composite action — generates missing Snapshot elements for all 47 kbv.basis StructureDefinitions using HL7 FHIR Validator CLI before SUSHI compilation. Enables KBV inheritance-based profiles (e.g., TestKBVConditionDE extending KBV_PR_Base_Condition_Diagnosis). Idempotent and cached (~8-11s batch processing time). Resolves kbv.basis publishing gap (kbv.ita.for ships with snapshots, kbv.basis does not).
 - **fpde-daz**: Add PraxisComposition and PraxisCommunication profiles
 - **fpde-daz**: Add PraxisFlag and PraxisMedicationAdministration profiles
 - **fpde-daz**: Add PraxisAnamneseQuestionnaireResponse and PraxisImmunization profiles

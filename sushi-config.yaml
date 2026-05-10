@@ -9,7 +9,7 @@ description: >-
   Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
   international interoperability mappings.
 status: active
-version: 0.50.0
+version: 0.51.0
 fhirVersion: 4.0.1
 copyrightYear: 2026+
 releaseLabel: STU1
@@ -74,6 +74,8 @@ pages:
     title: Strahlenschutz-Compliance
   imaging-billing-architecture.md:
     title: Imaging Billing Architecture
+  inheritance-architecture.md:
+    title: Vererbungsarchitektur
 
 menu:
   Home: index.html
@@ -88,5 +90,6 @@ menu:
     All Decisions: architecture.html
     Strahlenschutz Compliance: strahlenschutz-compliance.html
     Imaging Billing: imaging-billing-architecture.html
+    Vererbungsarchitektur: inheritance-architecture.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html
