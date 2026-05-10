@@ -25,8 +25,8 @@ You can verify this:
 
 ```bash
 python3 -c "
-import json, glob
-sds = glob.glob(expanduser('~/.fhir/packages/kbv.ita.for#*/package/StructureDefinition-*.json'))
+import os, json, glob
+sds = glob.glob(os.path.expanduser('~/.fhir/packages/kbv.ita.for#*/package/StructureDefinition-*.json'))
 with_snap = sum(1 for f in sds if json.load(open(f)).get('snapshot', {}).get('element'))
 print(f'{with_snap}/{len(sds)} SDs have snapshots')
 "

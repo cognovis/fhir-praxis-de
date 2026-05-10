@@ -23,10 +23,9 @@ runs:
         import os
         import time
         import urllib.request
-        import shutil
-
         VALIDATOR_JAR = '/tmp/validator_cli.jar'
-        VALIDATOR_URL = 'https://github.com/hapifhir/org.hl7.fhir.core/releases/latest/download/validator_cli.jar'
+        # To bump: update version in VALIDATOR_URL and test locally
+        VALIDATOR_URL = 'https://github.com/hapifhir/org.hl7.fhir.core/releases/download/6.9.7/validator_cli.jar'
         FHIR_PACKAGES_DIR = os.path.expanduser('~/.fhir/packages')
 
         def find_kbv_basis_versions():
@@ -47,7 +46,8 @@ runs:
             with_snapshot = 0
             for f in sds:
                 try:
-                    data = json.load(open(f))
+                    with open(f) as fh:
+                        data = json.load(fh)
                     if data.get('snapshot', {}).get('element'):
                         with_snapshot += 1
                 except (json.JSONDecodeError, OSError):
@@ -75,7 +75,7 @@ runs:
             cmd = [
                 'java', '-jar', VALIDATOR_JAR, 'snapshot',
                 '-version', '4.0.1',
-                '-ig', f'de.basisprofil.r4',  # resolve upstream base profiles
+                '-ig', 'de.basisprofil.r4#1.6.0-ballot2',  # resolve upstream base profiles
                 '-ig', f'kbv.basis#{kbv_version}',  # resolve internal cross-refs
             ] + sds + ['-outputSuffix', 'snapshot.json']
 
@@ -107,8 +107,10 @@ runs:
                     errors += 1
                     continue
                 try:
-                    snap_data = json.load(open(snap_file))
-                    orig_data = json.load(open(sd_file))
+                    with open(snap_file) as fh:
+                        snap_data = json.load(fh)
+                    with open(sd_file) as fh:
+                        orig_data = json.load(fh)
                     orig_data['snapshot'] = snap_data.get('snapshot', {})
                     with open(sd_file, 'w') as f:
                         json.dump(orig_data, f, indent=2)
