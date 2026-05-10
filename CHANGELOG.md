@@ -12,10 +12,12 @@ All notable changes to this project will be documented in this file.
 ### Documentation
 
 - **fpde-shp.5**: Add changelog entry for kbv.basis snapshot composite action
+- **fpde-shp.6**: Add inheritance architecture documentation with 3-layer profile chain design (KBV Base → praxis-de wrapper → specialty IGs)
 
 ### Features
 
 - **fpde-shp.5**: Green — generate-kbv-basis-snapshots composite action + workflow integration
+- **fpde-shp.6**: **3-Layer Wrapper Profiles** — PraxisConditionDE, PraxisPatientDE, PraxisPractitionerDE, PraxisOrganizationDE extending KBV_PR_Base_* profiles with cross-specialty constraints (asserter targetProfile, Kleinunternehmerregelung extension, Telematik-ID MS, AI provenance marker). Enables specialty IGs (e.g. fhir-dental-de) to extend praxis-de middle layer instead of KBV base directly
 
 ### Test
 
