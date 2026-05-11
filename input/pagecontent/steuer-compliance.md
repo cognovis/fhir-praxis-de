@@ -47,7 +47,7 @@ fhir-terminology-de                fhir-praxis-de              fhir-dental-de
              provides codes                 defines context               uses profile
 ```
 
-**fhir-terminology-de** acts as the authoritative catalog supplier for the `TaxCategoryDE` ValueSet. The codes (S, AA, E, AE, Z) are sourced from the UNECE Recommendation N20 standard (`urn:un:unece:uncefact:codelist:standard:5305`). See [fhir-terminology-de](https://cognovis.github.io/fhir-terminology-de/) for the full catalog.
+**fhir-terminology-de** acts as the authoritative catalog supplier for the `TaxCategoryDE` ValueSet. The codes (S, AA, E, AE, Z) are sourced from the UNECE Recommendation N20 standard (`urn:un:unece:uncefact:codelist:standard:5305`). See fhir-terminology-de for the full catalog.
 
 **fhir-praxis-de** defines the extension pattern (this IG) — where the extensions can be applied (`Context`) and how they are bound (`TaxCategoryDE`, `UStBefreiungsgrundVS`).
 
