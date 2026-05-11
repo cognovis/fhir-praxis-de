@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **fpde-shp.8**: Address review findings iteration 1
 - **fpde-shp.9**: Address review findings — typo, unused aliases, broken URL
 
 ### Documentation
@@ -14,6 +15,8 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-shp.8**: Add **Condition evidence.detail linking pattern** to Observation, ImagingStudy, and DiagnosticReport with comprehensive constraint documentation
+- **fpde-shp.8**: Add **HbA1cObservationDE** and **SmokingStatusDE** laboratory observation profiles
 - **fpde-shp.9**: Extend tax extension context to include ChargeItemDefinition.propertyGroup.priceComponent
 - **fpde-shp.9**: Migrate TaxCategoryDE ValueSet from local CS to UNECE-5305 URN
 - **fpde-shp.9**: Add ChargeItemDefinition demo examples with UNECE-5305 tax category
