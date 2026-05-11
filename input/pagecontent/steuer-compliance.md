@@ -16,13 +16,85 @@ German ambulatory practices frequently provide **both** VAT-exempt and VAT-liabl
 | Reimbursements, technical services | Taxable or zero-rated | Lab pass-through (varies) |
 | KU-regulated practice | Exempt (§ 19 UStG) | All services, blanket exemption |
 
-**FHIR Implementation:** Each `Invoice` carries the invoice-level tax category and exemption reason via extensions on the root resource:
-- `ext-tax-category` — EN 16931 category code (S / AA / E / AE / Z), see `TaxCategoryDE` ValueSet. **Context: `Invoice` (root only)**.
-- `ext-tax-exemption-reason` — legal basis for exemption, see `UStBefreiungsgrundVS`. **Context: `Invoice` (root only)**.
+**FHIR Implementation:** Each `Invoice` carries the invoice-level tax category and exemption reason via extensions:
+- `ext-tax-category` — UNECE-5305 / EN 16931 category code (S / AA / E / AE / Z), see `TaxCategoryDE` ValueSet. **Context: `Invoice`, `ChargeItemDefinition.propertyGroup.priceComponent`**.
+- `ext-tax-exemption-reason` — legal basis for exemption, see `UStBefreiungsgrundVS`. **Context: `Invoice`, `ChargeItemDefinition.propertyGroup.priceComponent`**.
 
-Both extensions are declared with `Context: Invoice` and therefore apply **at the Invoice root level**, NOT on individual `Invoice.lineItem.priceComponent` elements. SUSHI v3 does not accept `Invoice.lineItem.priceComponent` as a Context-Token, which is why sub-element path context declarations are not used in this IG.
+Both extensions apply at the **Invoice root level** for final billing classification, and optionally on `ChargeItemDefinition.propertyGroup.priceComponent` as a non-binding default suggestion in the service catalog (see ChargeItemDefinition-Pattern section below).
 
 For **per-line-item tax category** in mixed invoices, use the standard FHIR field `Invoice.lineItem.priceComponent.code` directly (bound to the `TaxCategoryDE` ValueSet) — no extension is needed. This produces legally compliant ZUGFeRD / XRechnung output where each line item carries its own EN 16931 category code.
+
+---
+
+## ChargeItemDefinition-Pattern
+
+### Schichtenmodell: Katalog → Profil → Spezialisierung
+
+The tax extension pattern spans three layers of the German FHIR terminology and profile ecosystem:
+
+```
+fhir-terminology-de                fhir-praxis-de              fhir-dental-de
+(Katalog-Lieferant)               (Pattern-Layer)             (Spezialisierung)
+        |                               |                             |
+        |  TaxCategoryDE ValueSet       |  ext-tax-category           |  ZahnPraxisInvoiceDE
+        |  (UNECE-5305 codes:           |  ext-tax-exemption-reason   |  ZahnChargeItemDef
+        |   S, AA, E, AE, Z)           |  Context:                   |  -- inherits pattern
+        |                              |   Invoice,                  |
+        |                              |   ChargeItemDefinition      |
+        |                              |   .propertyGroup            |
+        |                              |   .priceComponent           |
+        +------------------------------> -----------------------------> 
+             provides codes                 defines context               uses profile
+```
+
+**fhir-terminology-de** acts as the authoritative catalog supplier for the `TaxCategoryDE` ValueSet. The codes (S, AA, E, AE, Z) are sourced from the UNECE Recommendation N20 standard (`urn:un:unece:uncefact:codelist:standard:5305`). See [fhir-terminology-de](https://cognovis.github.io/fhir-terminology-de/) for the full catalog.
+
+**fhir-praxis-de** defines the extension pattern (this IG) — where the extensions can be applied (`Context`) and how they are bound (`TaxCategoryDE`, `UStBefreiungsgrundVS`).
+
+**fhir-dental-de** and other specialty IGs inherit the pattern and apply it to their specific service definitions.
+
+### ChargeItemDefinition as Catalog with Tax Pre-Population
+
+A `ChargeItemDefinition` can carry a **non-binding tax category suggestion** on its `propertyGroup.priceComponent`. This serves as a pre-population hint for the PVS (practice management software) when generating an `Invoice`:
+
+```
+ChargeItemDefinition (catalog entry)
+  └── propertyGroup[0]
+        └── priceComponent[0]
+              ├── type = #base
+              ├── amount = 13.50 EUR
+              └── extension[ext-tax-category]
+                    └── valueCodeableConcept = UNECE-5305#E  ← pre-population hint (optional, 0..1)
+              └── extension[ext-tax-exemption-reason]
+                    └── valueCodeableConcept = UStBefreiungsgrundCS#para4-nr14a  ← hint (if E)
+
+Invoice (actual billing document)
+  └── extension[ext-tax-category]  ← FINAL classification (set by PVS/Steuerberater)
+        └── valueCodeableConcept = UNECE-5305#E
+  └── extension[ext-tax-exemption-reason]
+        └── valueCodeableConcept = UStBefreiungsgrundCS#para4-nr14a
+```
+
+### Design Decisions and Disclaimers
+
+**Default is optional (0..1):** The `ext-tax-category` extension on `ChargeItemDefinition.propertyGroup.priceComponent` is entirely optional. Not every catalog entry carries a tax suggestion — in particular:
+
+- **Context-dependent codes (e.g. BEMA/GOZ codes):** A BEMA code may be exempt (§4 Nr. 14a UStG) when billed by a licensed dentist, but taxable when the same service is performed by a non-licensed entity. The ChargeItemDefinition does **not** carry a default in these ambiguous cases.
+- **Mixed-use services:** Services that can be both therapeutic (exempt) and cosmetic (taxable) carry no default.
+
+**Final classification is the PVS/Steuerberater responsibility:** The tax category on `ChargeItemDefinition.propertyGroup.priceComponent` is an **informational pre-population hint**, not a legal declaration. The PVS must apply context-specific rules (type of practice entity, patient relationship, service purpose) and the final `Invoice` must reflect the actual legal classification as validated by the practice's tax advisor.
+
+**Cross-reference:** The `TaxCategoryDE` ValueSet codes are defined in UNECE Recommendation N20 and mapped to EN 16931 / ZUGFeRD / XRechnung standards. The German FHIR terminology ecosystem provides these codes via `fhir-terminology-de`.
+
+### Example Instances
+
+This IG provides three `ChargeItemDefinition` demo instances showing the tax extension pattern:
+
+| Instance | Service Type | Tax Category | Reason |
+|---|---|---|---|
+| `example-cid-bema-heilbehandlung` | BEMA 01 — GKV dental treatment | E (exempt) | §4 Nr. 14a UStG |
+| `example-cid-igel-bleaching` | IGeL bleaching — cosmetic | S (19%) | Taxable cosmetic service |
+| `example-cid-eigenlabor-material` | Own-lab dental material | AA (7%) | §12 Abs. 2 Nr. 2 UStG |
 
 ---
 
@@ -82,9 +154,9 @@ The `BillingTypeCS` codes (`igel`, `bg`, `hzv`) can serve as a starting point fo
 
 ## ZUGFeRD / XRechnung Mapping
 
-The `TaxCategoryCS` codes in this IG correspond directly to the EN 16931 / ZUGFeRD / XRechnung `BT-151` (Seller tax category code):
+The `TaxCategoryDE` ValueSet uses UNECE-5305 codes (`urn:un:unece:uncefact:codelist:standard:5305`) which correspond directly to the EN 16931 / ZUGFeRD / XRechnung `BT-151` (Seller tax category code). The local `TaxCategoryCS` was removed in v0.54.0 — the UNECE URN is now the authoritative system:
 
-| TaxCategoryCS Code | EN 16931 BT-151 | TaxPercent (typical) | ZUGFeRD Profile | Description |
+| UNECE-5305 Code | EN 16931 BT-151 | TaxPercent (typical) | ZUGFeRD Profile | Description |
 |---|---|---|---|---|
 | `S` | S | 19.00 | MINIMUM / EN16931 / EXTENDED | Standard rate (Regelsteuersatz) |
 | `AA` | AA | 7.00 | EN16931 / EXTENDED | Reduced rate (ermäßigter Satz) |
@@ -92,8 +164,11 @@ The `TaxCategoryCS` codes in this IG correspond directly to the EN 16931 / ZUGFe
 | `AE` | AE | 0.00 | EN16931 / EXTENDED | Reverse Charge (§ 13b UStG) |
 | `Z` | Z | 0.00 | EN16931 / EXTENDED | Zero-rated (Nullsatz) |
 
+**FHIR system URI:** `urn:un:unece:uncefact:codelist:standard:5305`  
 **ZUGFeRD XML path:** `ram:ApplicableTradeTax/ram:CategoryCode`  
 **XRechnung XML path:** `cac:TaxCategory/cbc:ID`
+
+**Migration note:** Systems that previously used the local `TaxCategoryCS` (`https://fhir.cognovis.de/praxis/CodeSystem/tax-category-de`) must migrate to the UNECE URN. The code values (S, AA, E, AE, Z) remain unchanged.
 
 For ZUGFeRD MINIMUM profile (used in B2G, XRechnung): only codes `S` and `E` are valid — include `AE` and `Z` only in EN16931 or EXTENDED profiles.
 
