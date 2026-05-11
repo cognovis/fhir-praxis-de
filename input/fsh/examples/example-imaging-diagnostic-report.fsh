@@ -147,10 +147,11 @@ Usage: #example
 // KDL-Kategorie: CT-Befund
 * category[ct] = $kdl#DG020103 "CT-Befund"
 
-// LOINC-Code: CT of thorax
+// LOINC-Code: CT Chest (24627-2, verified via tx.fhir.org 2026-05-11)
+// Note: 36643-5 is "XR Chest 2 Views" (plain radiograph), not CT.
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #36643-5
-* code.coding[0].display = "CT of thorax"
+* code.coding[0].code = #24627-2
+* code.coding[0].display = "CT Chest"
 
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-30T09:00:00+02:00"

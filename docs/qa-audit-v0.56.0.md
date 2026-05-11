@@ -237,18 +237,23 @@ at the declared canonical URL. This is an external dependency issue outside our 
 
 ### Counting Methodology
 
-The 59-error baseline came from the bead description (fpde-95o), which listed the v0.56.0 QA report
-error count. This count was NOT taken from a fresh local IG Publisher run (per project convention in
-CLAUDE.md: IG Publisher runs in CI, not locally). The bead description table accounted for:
+**Important limitation:** The 59-error baseline came from the bead description (fpde-95o), which
+listed the v0.56.0 QA report error count. This count was NOT taken from a fresh local IG Publisher
+run (per project convention in CLAUDE.md: IG Publisher runs in CI, not locally).
+
+**Individually mapped errors (45 of 59):**
 
 - 36 directly fixed errors (categories 1–3 above: fullUrl, LOINC displays, code validity)
 - 9 documented/suppressed errors (categories 4–6: slicing discriminator, IG URL pattern, LL2255-7)
-- Subtotal: 45 individually catalogued errors
 
-The remaining **14 errors** (59 − 45 = 14) were listed as "2+ unklassifiziert" in the bead
-description. Based on patterns seen in the v0.55.0 audit (see `docs/qa-audit-v0.55.0.md`), these
-unclassified errors most likely fall into the following categories already suppressed via
-`input/ignoreWarnings.txt`:
+These 45 errors were individually identified and catalogued from the bead description table.
+
+**Estimated errors (14 of 59 — NOT individually mapped):**
+
+The remaining 14 errors (59 − 45 = 14) were listed as "2+ unklassifiziert" in the bead description
+and could NOT be individually identified without a fresh CI run. Based on patterns from the v0.55.0
+audit (see `docs/qa-audit-v0.55.0.md`), these unclassified errors are estimated to fall into the
+following suppressed categories:
 
 | Likely Category | Estimated Count | Status |
 |----------------|----------------|--------|
@@ -256,10 +261,12 @@ unclassified errors most likely fall into the following categories already suppr
 | German NamingSystem URL not resolvable (IK, KVID, ANR) | ~4 | Suppressed in ignoreWarnings.txt |
 | de.basisprofil.r4 canonical resolution errors | ~2 | Suppressed in ignoreWarnings.txt |
 | No de-DE display name for international codes | ~4 | Suppressed in ignoreWarnings.txt |
-| **Total estimated unclassified** | **~14** | All suppressed |
+| **Total estimated unclassified** | **~14** | All suppressed (estimated) |
 
-These suppression patterns were established in the v0.55.0 cleanup cycle and continue to apply.
-None of these represent new defects introduced in v0.56.0.
+These estimates are based on suppression patterns established in the v0.55.0 cleanup cycle. The
+exact count and categorization of the remaining 14 errors will be confirmed by the next CI run
+at https://cognovis.github.io/fhir-praxis-de/qa.html. None are expected to represent new defects
+introduced in v0.56.0.
 
 ### AK9 — Local IG Publisher Run
 

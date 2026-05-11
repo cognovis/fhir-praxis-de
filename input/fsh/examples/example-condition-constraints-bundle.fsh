@@ -5,7 +5,7 @@
 //   - asserter-Constraint: KBV_PR_Base_Practitioner mit LANR
 //   - evidence.detail-Linking: Observation, ImagingStudy, DiagnosticReport
 //   - HbA1cObservationDE (LOINC 4548-4)
-//   - SmokingStatusDE (LOINC 88031-0)
+//   - SmokingStatusDE (LOINC 72166-2)
 //   - PAR-Grading-Beispiel mit allen drei evidence.detail-Typen
 //   - Karies-Beispiel mit Bissfluegel-ImagingStudy + DiagnosticReport
 //
@@ -69,7 +69,7 @@ Usage: #example
 * interpretation.coding[0].display = "High"
 
 // --- Smoking Status Observation (PAR-Grading) ---
-// SmokingStatusDE: LOINC 88031-0, Ex-Raucher (LA15920-4)
+// SmokingStatusDE: LOINC 72166-2, Ex-Raucher (LA15920-4)
 Instance: par-grading-smoking-obs
 InstanceOf: SmokingStatusDE
 Title: "Raucherstatus Observation — PAR-Grading Weber"
@@ -78,8 +78,8 @@ Usage: #example
 * status = #final
 * category[social-history] = http://terminology.hl7.org/CodeSystem/observation-category#social-history
 * code.coding[loinc].system = "http://loinc.org"
-* code.coding[loinc].code = #88031-0
-* code.coding[loinc].display = "Smokeless tobacco status"
+* code.coding[loinc].code = #72166-2
+* code.coding[loinc].display = "Tobacco smoking status"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-01T09:05:00+02:00"
 * valueCodeableConcept.coding[0].system = "http://loinc.org"
