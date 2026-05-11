@@ -59,7 +59,7 @@ Usage: #example
 Instance: example-imaging-mrt-knie
 InstanceOf: ImagingDiagnosticReportPraxisDe
 Title: "Imaging DiagnosticReport: MRT Knie (final)"
-Description: "MRT-Kniebefund, Status final. KDL MRT-Befund, LOINC 36803-5. KIM-Distribution an ueberweisenden Hausarzt. Sub-Status: signed. HTML + PDF presentedForm."
+Description: "MRT-Kniebefund, Status final. KDL MRT-Befund, LOINC 24802-1. KIM-Distribution an ueberweisenden Hausarzt. Sub-Status: signed. HTML + PDF presentedForm."
 Usage: #example
 * status = #final
 
@@ -78,10 +78,10 @@ Usage: #example
 // KDL-Kategorie: MRT-Befund
 * category[mrt] = $kdl#DG020107 "MRT-Befund"
 
-// LOINC-Code: MRT des Knies
+// LOINC-Code: MRT des Knies (LOINC 24802-1 MR Knee)
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #36803-5
-* code.coding[0].display = "MRI of knee"
+* code.coding[0].code = #24802-1
+* code.coding[0].display = "MR Knee"
 
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-30T10:00:00+02:00"
@@ -147,10 +147,11 @@ Usage: #example
 // KDL-Kategorie: CT-Befund
 * category[ct] = $kdl#DG020103 "CT-Befund"
 
-// LOINC-Code: CT of thorax
+// LOINC-Code: CT Chest (24627-2, verified via tx.fhir.org 2026-05-11)
+// Note: 36643-5 is "XR Chest 2 Views" (plain radiograph), not CT.
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #36643-5
-* code.coding[0].display = "CT of thorax"
+* code.coding[0].code = #24627-2
+* code.coding[0].display = "CT Chest"
 
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-04-30T09:00:00+02:00"

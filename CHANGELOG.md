@@ -2,17 +2,48 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-95o**: FullUrl absolute URIs in bundle examples — 12 relative + 10 urn:uuid
+- **fpde-95o**: LOINC display corrections — 88031-0 Smokeless tobacco status, 24558-9 US Abdomen, 36803-5→24802-1 MR Knee, 24558-9→18748-4 for dental reports
+- **fpde-95o**: Invalid code references — v3-ActCode BILLED removed, versicherungsart SKT→BEI, IG URL pattern suppression added
+- **fpde-95o**: Address review findings iteration 1
+- **fpde-95o**: Address codex adversarial findings — CT of thorax code, US study display, SmokingStatus LOINC code
+
+### Miscellaneous
+
+- **fpde-95o**: Version bump 0.56.0→0.57.0, QA audit doc, changelog
+- **fpde-95o**: Update changelog with codex regression fixes
 
 ## [0.56.0] - 2026-05-11
 
 ### Bug Fixes
 
-- **QA Cleanup**: Resolved 26 internal QA errors — fixed HumanName prefix extensions, DVMD display codes, ParticipationMode codes, imaging LOINC codes, and FHIRPath invariants across profiles and examples
+- **fpde-bxv**: Add iso21090-EN-qualifier extension to all Dr. prefixes
+- **fpde-bxv**: Fix DVMD KDL DG020110 display — Röntgenbefund
+- **fpde-bxv**: Fix ParticipationMode MAILWRIT/TYPEWRIT displays
+- **fpde-bxv**: Fix Fachkunde DVT display and remove invalid LOINC 36218-5
+- **fpde-bxv**: Add external error suppressions to ignoreWarnings.txt
+- **fpde-bxv**: Fix ku-hinweis-required invariant FHIRPath expression
+- **fpde-bxv**: Address review findings iteration 1
+- **fpde-bxv**: Address codex adversarial findings — CHANGELOG count consistency
 
 ### Documentation
 
-- **QA Audit**: Created comprehensive audit report documenting v0.55.0 baseline (79 total errors: 26 internal, 53 external) with remediation strategy and external error suppressions
+- **changelog**: Move shp.8 entries to v0.55.0 + note epic close
+- **fpde-bxv**: Add QA audit doc for v0.55.0 errors
+
+### Miscellaneous
+
+- Commit generated files before bead merge (worktree-bead-fpde-bxv)
+- **fpde-bxv**: Version bump 0.55.0 → 0.56.0 + changelog entry
+- **fpde-bxv**: Session-close — finalize changelog for v0.56.0
+
+### Merge
+
+- Worktree-bead-fpde-bxv
 
 ## [0.55.0] - 2026-05-11
 

@@ -31,6 +31,11 @@ A definition for CodeSystem 'urn:un:unece:uncefact:codelist:standard:5305' could
 # de.basisprofil.r4 dependency canonical not resolvable (known issue with fhir.de registry)
 Canonical URL 'http://fhir.de/ImplementationGuide/basisprofil-de-r4' kann nicht aufgelöst werden
 The canonical URL http://fhir.de/ImplementationGuide/basisprofil-de-r4 doesn't point to an actual ImplementationGuide resource
+# de.basisprofil.r4 dependency — canonical uri in sushi-config points to IG resource URL that doesn't resolve directly.
+# The fhir.de registry serves the canonical http://fhir.de/ImplementationGuide/basisprofil-de-r4 but the IG Publisher
+# validator expects the URL to point directly to an ImplementationGuide resource endpoint. This is an external
+# dependency issue outside our control; the package is valid and installs correctly via package registries.
+IG URL should refer directly to ImplementationGuide resource
 
 # Own CodeSystems with #not-present / #example content — codes provided via ETL, not in IG
 # Server-side expansion errors (tx.fhir.org cannot resolve our unpublished CodeSystems)

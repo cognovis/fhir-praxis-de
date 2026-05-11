@@ -110,12 +110,13 @@ Description: "Spezialisiertes Profil fuer Haemoglobin A1c (HbA1c) Messungen nach
 * valueQuantity ^definition = "Messergebnis als UCUM-Prozentwert (%). Normalbereich: 4.0–6.0 %; diabetisch relevant ab > 6.5 %."
 
 // =============================================================================
-// SmokingStatusDE — Tabakkonsum-Status (LOINC 88031-0)
+// SmokingStatusDE — Tabakkonsum-Status (LOINC 72166-2)
 // Bead: fpde-shp.8
 // =============================================================================
 //
 // Spezialisiertes Profil fuer den dokumentierten Raucherstatus eines Patienten.
-// LOINC 88031-0: Tobacco use
+// LOINC 72166-2: Tobacco smoking status (verified via tx.fhir.org 2026-05-11)
+// Note: 88031-0 "Smokeless tobacco status" ist semantisch falsch fuer Zigarettenrauchen.
 // Antwortliste: LOINC LL2255-7 (preferred binding)
 //
 // Kategorie: social-history (FHIR canonical, US Core, IPS — Raucherstatus ist
@@ -130,7 +131,7 @@ Profile: SmokingStatusDE
 Parent: Observation
 Id: smoking-status-de
 Title: "Smoking Status DE"
-Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 88031-0. Kategorie: social-history (FHIR canonical fuer Raucherstatus — kein Laborbefund). Wert als CodeableConcept aus LOINC-Antwortliste LL2255-7 (preferred). Relevant fuer PAR-Grading und allgemeine Risikoeinschaetzung."
+Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 72166-2 (Tobacco smoking status). Kategorie: social-history (FHIR canonical fuer Raucherstatus — kein Laborbefund). Wert als CodeableConcept aus LOINC-Antwortliste LL2255-7 (preferred). Relevant fuer PAR-Grading und allgemeine Risikoeinschaetzung. Note: 88031-0 (Smokeless tobacco status) ist fuer Kautabak/Schnupftabak — fuer Zigarettenrauchen gilt 72166-2."
 
 // Status: Pflichtfeld
 * status MS
@@ -151,10 +152,10 @@ Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 8803
 * code.coding ^slicing.rules = #open
 * code.coding contains loinc 1..1 MS
 * code.coding[loinc].system = "http://loinc.org"
-* code.coding[loinc].code = #88031-0
-* code.coding[loinc].display = "Tobacco use"
-* code.coding[loinc] ^short = "LOINC 88031-0 — Tobacco use (Raucherstatus)"
-* code.coding[loinc] ^definition = "Fester LOINC-Code fuer Tabakkonsum-Status. Antworten aus LOINC-Antwortliste LL2255-7."
+* code.coding[loinc].code = #72166-2
+* code.coding[loinc].display = "Tobacco smoking status"
+* code.coding[loinc] ^short = "LOINC 72166-2 — Tobacco smoking status (Raucherstatus)"
+* code.coding[loinc] ^definition = "Fester LOINC-Code fuer Tabakkonsum-Status (Zigarettenrauchen). Verified via tx.fhir.org 2026-05-11. Antworten aus LOINC-Antwortliste LL2255-7."
 
 // Wert: nur CodeableConcept
 * value[x] only CodeableConcept

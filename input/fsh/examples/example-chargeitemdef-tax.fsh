@@ -29,8 +29,6 @@ Usage: #example
 * code.coding[0].display = "Klinische Untersuchung"
 // propertyGroup: Preis mit Steuer-Vorbelegung (Kategorie E — Heilbehandlung)
 * propertyGroup[0].priceComponent[0].type = #base
-* propertyGroup[0].priceComponent[0].code.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ActCode"
-* propertyGroup[0].priceComponent[0].code.coding[0].code = #BILLED
 * propertyGroup[0].priceComponent[0].code.text = "Basispreis BEMA 01"
 * propertyGroup[0].priceComponent[0].amount.value = 13.50
 * propertyGroup[0].priceComponent[0].amount.currency = #EUR
@@ -59,8 +57,6 @@ Usage: #example
 * code.coding[0].display = "Bleaching (Zahnaufhellung)"
 // propertyGroup: Basispreis 19% USt
 * propertyGroup[0].priceComponent[0].type = #base
-* propertyGroup[0].priceComponent[0].code.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ActCode"
-* propertyGroup[0].priceComponent[0].code.coding[0].code = #BILLED
 * propertyGroup[0].priceComponent[0].code.text = "Basispreis netto"
 * propertyGroup[0].priceComponent[0].amount.value = 126.05
 * propertyGroup[0].priceComponent[0].amount.currency = #EUR
@@ -94,8 +90,6 @@ Usage: #example
 * code.text = "Kunststoffverblendung Eigenlabor"
 // propertyGroup: Materialpreis 7% ermaessigter Steuersatz
 * propertyGroup[0].priceComponent[0].type = #base
-* propertyGroup[0].priceComponent[0].code.coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-ActCode"
-* propertyGroup[0].priceComponent[0].code.coding[0].code = #BILLED
 * propertyGroup[0].priceComponent[0].code.text = "Materialpreis netto"
 * propertyGroup[0].priceComponent[0].amount.value = 93.46
 * propertyGroup[0].priceComponent[0].amount.currency = #EUR
