@@ -78,6 +78,8 @@ pages:
     title: Imaging Billing Architecture
   inheritance-architecture.md:
     title: Vererbungsarchitektur
+  multi-coverage.md:
+    title: Multi-Coverage Linking Pattern
 
 menu:
   Home: index.html
@@ -94,5 +96,6 @@ menu:
     Steuer-Compliance: steuer-compliance.html
     Imaging Billing: imaging-billing-architecture.html
     Vererbungsarchitektur: inheritance-architecture.html
+    Multi-Coverage: multi-coverage.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html
