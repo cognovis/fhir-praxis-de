@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Features
+
+- **Tax compliance patterns** extended to ChargeItemDefinition and Invoice profiles with priceComponent support
+- **TaxCategoryDE ValueSet** migrated to UNECE-5305 standard (urn:un:unece:uncefact:codelist:standard:5305) with S/AA/E/AE/Z codes
+- **ChargeItemDefinition examples** added for BEMA treatment, IGeL procedures, and lab materials demonstrating tax classification patterns
+- **steuer-compliance documentation** expanded with CID pattern diagram and UNECE migration guidance
+
 ## [0.52.0] - 2026-05-11
 
 ### Bug Fixes
