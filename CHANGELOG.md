@@ -2,7 +2,21 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-shp.8**: Address review findings iteration 1
+
+### Features
+
+- **fpde-shp.8**: Implement Condition constraints bundle (AC 1-10)
+
+### Miscellaneous
+
+- **fpde-shp.8**: Update changelog for v0.55.0
+
+## [0.54.0] - 2026-05-11
 
 ### Bug Fixes
 
@@ -20,7 +34,13 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
+- Commit generated files before bead merge (worktree-bead-fpde-shp.9)
 - **fpde-shp.9**: Bump version to 0.54.0
+- **fpde-shp.9**: Update changelog for v0.54.0 release
+
+### Merge
+
+- Worktree-bead-fpde-shp.9
 
 ## [0.52.0] - 2026-05-11
 
