@@ -2,7 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.52.0] - 2026-05-11
+
+### Bug Fixes
+
+- **fpde-shp.2**: Address review findings iteration 1
+- **fpde-shp.2**: Address codex adversarial findings
+
+### Documentation
+
+- **fpde-shp.2**: Add changelog entry for multi-coverage linking pattern
+
+### Features
+
+- **fpde-shp.2**: Add multi-coverage linking pattern documentation and examples
+
+## [0.51.0] - 2026-05-10
 
 ### Bug Fixes
 
