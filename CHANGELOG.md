@@ -10,9 +10,7 @@ All notable changes to this project will be documented in this file.
 
 - **QA Cleanup 2 (fpde-95o)**: Addressed 45 of 59 QA errors from v0.56.0 baseline — 36 fixed directly in code, 9 documented/suppressed (7 slicing discriminator IG Publisher quirks + 2 IG URL pattern errors added to ignoreWarnings.txt); remaining ~14 errors are covered by existing suppressions from v0.55.0:
   - **fullUrl fixes**: All 22 Bundle.entry.fullUrl values changed to absolute URIs — 12 relative URLs (`Patient/...`) and 10 invalid `urn:uuid:<name>` patterns fixed in `example-multi-coverage.fsh` and `example-condition-constraints-bundle.fsh`
-  - **LOINC 88031-0**: Corrected display from "Tobacco use" to "Smokeless tobacco status" (verified via tx.fhir.org) in `lab-observation.fsh` and `example-condition-constraints-bundle.fsh`
-  - **LOINC 36803-5**: Replaced with correct code 24802-1 "MR Knee" in all examples and valuesets (36803-5 is actually "MRA Pulmonary vessels")
-  - **LOINC 24558-9**: Corrected usage — dental diagnostic reports now use 18748-4 "Diagnostic imaging study"; valueset updated with correct "US Abdomen" display
+  - **LOINC codes corrected**: 88031-0 display corrected from "Tobacco use" to "Smokeless tobacco status" (verified via tx.fhir.org); 36643-5 (CT thorax) replaced with 24627-2; 24591-0 (US study) replaced with 24630-6; 36803-5 replaced with 24802-1 "MR Knee"; 24558-9 corrected to 18748-4 "Diagnostic imaging study" for dental diagnostic reports
   - **v3-ActCode #BILLED**: Removed invalid system/code from 3 ChargeItemDefinition priceComponent examples; text-only pattern used instead
   - **VersicherungsartDeBasis #SKT**: Replaced with valid code `#BEI` (Beihilfe) in ExampleCoverageBeihilfe
   - **IG URL pattern**: Added suppression for "IG URL should refer directly to ImplementationGuide resource" in `ignoreWarnings.txt`
