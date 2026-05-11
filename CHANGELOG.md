@@ -2,7 +2,22 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.52.0] - 2026-05-11
+
+### Bug Fixes
+
+- **fpde-shp.2**: Address review findings iteration 1
+- **fpde-shp.2**: Address codex adversarial findings
+
+### Documentation
+
+- **fpde-shp.2**: Add changelog entry for multi-coverage linking pattern
+
+### Features
+
+- **fpde-shp.2**: Add multi-coverage linking pattern documentation and examples
+
+## [0.51.0] - 2026-05-10
 
 ### Bug Fixes
 
@@ -14,8 +29,16 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **fpde-shp.2**: **Multi-Coverage Linking Pattern** — Account.coverage.priority for ordering primary/secondary/tertiary payers (GKV + Zusatzversicherung, GKV + PKV, Beihilfe + PKV) with pagecontent documentation and 3 example bundles; Coverage.subrogation used as coordinated-benefit marker for Beihilfe scenarios
 - **fpde-shp.6**: Green — 4 KBV wrapper profiles + kleinunternehmer ext + inheritance doc
+
+### Miscellaneous
+
+- Commit generated files before bead merge (worktree-bead-fpde-shp.6)
+- **fpde-shp.6**: Update changelog for v0.51.0 release
+
+### Merge
+
+- Worktree-bead-fpde-shp.6
 
 ### Test
 
@@ -31,12 +54,20 @@ All notable changes to this project will be documented in this file.
 ### Documentation
 
 - **fpde-shp.5**: Add changelog entry for kbv.basis snapshot composite action
-- **fpde-shp.6**: Add inheritance architecture documentation with 3-layer profile chain design (KBV Base → praxis-de wrapper → specialty IGs)
 
 ### Features
 
 - **fpde-shp.5**: Green — generate-kbv-basis-snapshots composite action + workflow integration
-- **fpde-shp.6**: **3-Layer Wrapper Profiles** — PraxisConditionDE, PraxisPatientDE, PraxisPractitionerDE, PraxisOrganizationDE extending KBV_PR_Base_* profiles with cross-specialty constraints (asserter targetProfile, Kleinunternehmerregelung extension, Telematik-ID MS, AI provenance marker). Enables specialty IGs (e.g. fhir-dental-de) to extend praxis-de middle layer instead of KBV base directly
+- **fpde-shp.5**: Add generate-kbv-basis-snapshots CI composite action
+
+### Miscellaneous
+
+- Commit generated files before bead merge (worktree-bead-fpde-shp.5)
+- Bump version to 0.50.0
+
+### Merge
+
+- Worktree-bead-fpde-shp.5
 
 ### Test
 
