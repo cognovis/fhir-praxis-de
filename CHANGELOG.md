@@ -14,6 +14,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-shp.2**: **Multi-Coverage Linking Pattern** — Account.coverage.priority for ordering primary/secondary/tertiary payers (GKV + Zusatzversicherung, GKV + PKV, Beihilfe + PKV) with pagecontent documentation and 3 example bundles; Coverage.subrogation used as coordinated-benefit marker for Beihilfe scenarios
 - **fpde-shp.6**: Green — 4 KBV wrapper profiles + kleinunternehmer ext + inheritance doc
 
 ### Test
