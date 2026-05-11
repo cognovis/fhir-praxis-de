@@ -12,6 +12,21 @@ A definition for CodeSystem 'http://fhir.de/CodeSystem/bfarm/icd-10-gm' could no
 URL-Wert 'http://fhir.de/NamingSystem/arge-ik/iknr' löst nicht auf
 URL-Wert 'http://fhir.de/NamingSystem/gkv/kvid-10' löst nicht auf
 URL-Wert 'https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR' löst nicht auf
+URL-Wert 'https://fhir.de/sid/gkv/kvid-10' löst nicht auf
+
+# SNOMED CT code 1255414003 — Cone beam computed tomography of maxilla
+# Not yet indexed by tx.fhir.org in the international SNOMED release
+Unknown code '1255414003' in the CodeSystem 'http://snomed.info/sct'
+
+# tx.fhir.org cannot process LOINC LL2255-7 panel filter — external limitation
+Error from https://tx.fhir.org/r4: Error: The filter "LIST = LL2255-7" is not understood or supported
+
+# German dental code systems — valid but not registered on international tx.fhir.org
+A definition for CodeSystem 'https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA' could not be found
+Das CodeSystem https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA ist unbekannt
+A definition for CodeSystem 'https://fhir.de/CodeSystem/bzaek/goz' could not be found
+A definition for CodeSystem 'https://fhir.de/CodeSystem/bak/goae' could not be found
+A definition for CodeSystem 'urn:un:unece:uncefact:codelist:standard:5305' could not be found
 
 # de.basisprofil.r4 dependency canonical not resolvable (known issue with fhir.de registry)
 Canonical URL 'http://fhir.de/ImplementationGuide/basisprofil-de-r4' kann nicht aufgelöst werden
