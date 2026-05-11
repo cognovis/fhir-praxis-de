@@ -20,7 +20,6 @@ Description: "LOINC-Codes fuer Bildgebungsanforderungen in der deutschen ambulan
 * $loinc#24727-0 "MRI of pelvis"
 * $loinc#24629-8 "CT of chest"
 * $loinc#24648-8 "CT of abdomen"
-* $loinc#36218-5 "MRI of spine"
 * $loinc#24565-4 "MRI of shoulder"
 * $loinc#24698-3 "MRI of abdomen"
 * $loinc#24605-8 "CT of head"

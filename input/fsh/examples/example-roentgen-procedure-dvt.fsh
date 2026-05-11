@@ -90,7 +90,7 @@ Usage: #example
 * performer[anwender].actor = Reference(example-practitioner-mtr-dvt)
 * performer[anwender].extension[fachkunde].valueCoding.system = "https://fhir.cognovis.de/imaging/CodeSystem/fachkunde-strahlenschutz"
 * performer[anwender].extension[fachkunde].valueCoding.code = #dvt
-* performer[anwender].extension[fachkunde].valueCoding.display = "Fachkunde DVT"
+* performer[anwender].extension[fachkunde].valueCoding.display = "Fachkunde Digitale Volumentomographie"
 
 // performer[strahlenschutzverantwortlicher]: Radiologin
 * performer[strahlenschutzverantwortlicher].function.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/radiology-role"
