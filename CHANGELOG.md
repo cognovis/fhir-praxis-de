@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - **fpde-shp.6**: Address review findings iteration 1
+- **fpde-shp.7**: Address review findings iteration 1
 
 ### Documentation
 
@@ -15,6 +16,7 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-shp.6**: Green — 4 KBV wrapper profiles + kleinunternehmer ext + inheritance doc
+- **fpde-shp.7**: Tax compliance — TaxCategoryDE (EN 16931), UStBefreiungsgrundCS, ext-tax-category, ext-tax-exemption-reason, PraxisInvoiceDE with ku-hinweis invariant, steuer-compliance pagecontent (0.52.0)
 
 ### Test
 

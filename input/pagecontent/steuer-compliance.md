@@ -61,7 +61,7 @@ implies note.text.exists()
 
 KU invoices use:
 - `ext-tax-category` = `E` (exempt)
-- `ext-tax-exemption-reason` = `kleinunternehmer-§19`
+- `ext-tax-exemption-reason` = `kleinunternehmer-para19`
 
 ---
 
