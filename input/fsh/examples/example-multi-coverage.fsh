@@ -62,13 +62,13 @@ Title: "Multi-Coverage Bundle: ZE GKV + ZZV"
 Description: "Beispiel-Bundle fuer Zahnersatz-Szenario mit GKV als primaeren und ZZV als sekundaeren Kostentraeger. Account.coverage.priority steuert die Abrechnungsreihenfolge."
 Usage: #example
 * type = #collection
-* entry[+].fullUrl = "urn:uuid:example-patient"
+* entry[+].fullUrl = "Patient/example-patient"
 * entry[=].resource = example-patient
-* entry[+].fullUrl = "urn:uuid:ExampleCoverageGkvZe"
+* entry[+].fullUrl = "Coverage/ExampleCoverageGkvZe"
 * entry[=].resource = ExampleCoverageGkvZe
-* entry[+].fullUrl = "urn:uuid:ExampleCoverageZzvZe"
+* entry[+].fullUrl = "Coverage/ExampleCoverageZzvZe"
 * entry[=].resource = ExampleCoverageZzvZe
-* entry[+].fullUrl = "urn:uuid:ExampleAccountZe"
+* entry[+].fullUrl = "Account/ExampleAccountZe"
 * entry[=].resource = ExampleAccountZe
 
 // ============================================================
@@ -136,13 +136,13 @@ Title: "Multi-Coverage Bundle: KFO GKV + PKV-Zusatz"
 Description: "Beispiel-Bundle fuer KFO-Szenario mit GKV als primaeren und PKV-Zusatzversicherung als sekundaeren Kostentraeger."
 Usage: #example
 * type = #collection
-* entry[+].fullUrl = "urn:uuid:ExamplePatientKfo"
+* entry[+].fullUrl = "Patient/ExamplePatientKfo"
 * entry[=].resource = ExamplePatientKfo
-* entry[+].fullUrl = "urn:uuid:ExampleCoverageGkvKfo"
+* entry[+].fullUrl = "Coverage/ExampleCoverageGkvKfo"
 * entry[=].resource = ExampleCoverageGkvKfo
-* entry[+].fullUrl = "urn:uuid:ExampleCoveragePkvZusatzKfo"
+* entry[+].fullUrl = "Coverage/ExampleCoveragePkvZusatzKfo"
 * entry[=].resource = ExampleCoveragePkvZusatzKfo
-* entry[+].fullUrl = "urn:uuid:ExampleAccountKfo"
+* entry[+].fullUrl = "Account/ExampleAccountKfo"
 * entry[=].resource = ExampleAccountKfo
 
 // ============================================================
@@ -209,11 +209,11 @@ Title: "Multi-Coverage Bundle: PKV + Beihilfe"
 Description: "Beispiel-Bundle fuer Beamten-Szenario mit PKV als primaeren und Beihilfe als sekundaeren Kostentraeger (subrogation=true auf der Beihilfe-Coverage)."
 Usage: #example
 * type = #collection
-* entry[+].fullUrl = "urn:uuid:ExamplePatientBeamter"
+* entry[+].fullUrl = "Patient/ExamplePatientBeamter"
 * entry[=].resource = ExamplePatientBeamter
-* entry[+].fullUrl = "urn:uuid:ExampleCoveragePkvBeamter"
+* entry[+].fullUrl = "Coverage/ExampleCoveragePkvBeamter"
 * entry[=].resource = ExampleCoveragePkvBeamter
-* entry[+].fullUrl = "urn:uuid:ExampleCoverageBeihilfe"
+* entry[+].fullUrl = "Coverage/ExampleCoverageBeihilfe"
 * entry[=].resource = ExampleCoverageBeihilfe
-* entry[+].fullUrl = "urn:uuid:ExampleAccountBeihilfe"
+* entry[+].fullUrl = "Account/ExampleAccountBeihilfe"
 * entry[=].resource = ExampleAccountBeihilfe
