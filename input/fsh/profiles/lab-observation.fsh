@@ -118,27 +118,55 @@ Description: "Spezialisiertes Profil fuer Haemoglobin A1c (HbA1c) Messungen nach
 // LOINC 88031-0: Tobacco use
 // Antwortliste: LOINC LL2255-7 (preferred binding)
 //
+// Kategorie: social-history (FHIR canonical, US Core, IPS — Raucherstatus ist
+// eine Sozialanamnese-Beobachtung, kein Laborbefund).
+//
 // Beispiel-Codes aus LL2255-7:
 //   LA18976-3 — Never smoker (Nie geraucht)
 //   LA15920-4 — Former smoker (Ex-Raucher)
 //   LA18977-1 — Current every day smoker (Taegl. Raucher)
 // =============================================================================
 Profile: SmokingStatusDE
-Parent: PraxisLabObservation
+Parent: Observation
 Id: smoking-status-de
 Title: "Smoking Status DE"
-Description: "Spezialisiertes Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 88031-0. Wert als CodeableConcept aus LOINC-Antwortliste LL2255-7 (preferred). Relevant fuer PAR-Grading und allgemeine Risikoeinschaetzung. Erbt Code-Slicing und Must Support von PraxisLabObservation."
+Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 88031-0. Kategorie: social-history (FHIR canonical fuer Raucherstatus — kein Laborbefund). Wert als CodeableConcept aus LOINC-Antwortliste LL2255-7 (preferred). Relevant fuer PAR-Grading und allgemeine Risikoeinschaetzung."
 
-// Erzwinge LOINC-Code 88031-0
-* code.coding[loinc] 1..1
-* code.coding[loinc].code = #88031-0
+// Status: Pflichtfeld
+* status MS
+
+// Kategorie: social-history (FHIR canonical fuer Raucherstatus)
+* category 1..* MS
+* category ^slicing.discriminator.type = #pattern
+* category ^slicing.discriminator.path = "$this"
+* category ^slicing.rules = #open
+* category contains social-history 1..1 MS
+* category[social-history] = http://terminology.hl7.org/CodeSystem/observation-category#social-history
+
+// Code: LOINC 88031-0 fest
+* code MS
+* code.coding MS
+* code.coding ^slicing.discriminator.type = #value
+* code.coding ^slicing.discriminator.path = "system"
+* code.coding ^slicing.rules = #open
+* code.coding contains loinc 1..1 MS
 * code.coding[loinc].system = "http://loinc.org"
+* code.coding[loinc].code = #88031-0
 * code.coding[loinc].display = "Tobacco use"
 * code.coding[loinc] ^short = "LOINC 88031-0 — Tobacco use (Raucherstatus)"
 * code.coding[loinc] ^definition = "Fester LOINC-Code fuer Tabakkonsum-Status. Antworten aus LOINC-Antwortliste LL2255-7."
 
 // Wert: nur CodeableConcept
 * value[x] only CodeableConcept
+* value[x] MS
 * valueCodeableConcept from http://loinc.org/vs/LL2255-7 (preferred)
 * valueCodeableConcept ^short = "Raucherstatus (LOINC LL2255-7)"
 * valueCodeableConcept ^definition = "Kodierter Raucherstatus. Preferred Binding auf LOINC-Antwortliste LL2255-7 (z.B. LA18976-3 = Never smoker, LA15920-4 = Former smoker, LA18977-1 = Current every day smoker)."
+
+// Patient: Pflicht
+* subject 1..1 MS
+* subject only Reference(Patient)
+
+// Beobachtungszeitpunkt
+* effective[x] only dateTime
+* effective[x] MS

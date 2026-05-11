@@ -14,6 +14,13 @@
 // identifier and therefore does NOT conform to KBV_PR_Base_Practitioner.
 // Expected: validator error on asserter reference when validated against
 // PraxisConditionDE with targetProfile enforcement.
+//
+// HOW TO TEST: POST to Aidbox $validate:
+//   POST http://localhost:8080/fhir/Bundle/$validate
+//   Body: Bundle with type=transaction containing test-zfa-practitioner-no-lanr + test-condition-asserter-zfa
+//   Expected: OperationOutcome with issue[0].severity = "error" referencing asserter profileConstraint
+//   The KBV_PR_Base_Practitioner profile requires identifier[LANR] — a Practitioner without LANR
+//   does NOT conform, so the asserter targetProfile constraint in PraxisConditionDE fails.
 
 // Supporting ZFA Practitioner — no LANR, plain base Practitioner
 // This does NOT conform to KBV_PR_Base_Practitioner (no LANR / no qualifying identifier)
@@ -46,3 +53,16 @@ Usage: #inline
 * subject = Reference(example-patient)
 // asserter points to a non-KBV_PR_Base_Practitioner (ZFA, no LANR) — CONSTRAINT VIOLATION
 * asserter = Reference(test-zfa-practitioner-no-lanr) "Maria Braun (ZFA)"
+
+// Self-contained test Bundle aggregating ZFA Practitioner + violating Condition
+// Usage: #inline — NOT #example, so it is excluded from the IG Publisher QA report
+// (we want the validator to flag this as an error, not pollute the QA report with it)
+Instance: test-bundle-asserter-zfa
+InstanceOf: Bundle
+Title: "TEST BUNDLE (NEGATIVE): ZFA als Asserter — erwartet Validator-Fehler"
+Usage: #inline
+* type = #collection
+* entry[0].fullUrl = "urn:uuid:test-zfa-practitioner-no-lanr"
+* entry[0].resource = test-zfa-practitioner-no-lanr
+* entry[1].fullUrl = "urn:uuid:test-condition-asserter-zfa"
+* entry[1].resource = test-condition-asserter-zfa

@@ -1,6 +1,6 @@
 // PraxisConditionDE — KBV Inheritance Middle Layer for Diagnoses
 // 3-Layer-Chain: KBV_PR_Base_Condition_Diagnosis -> PraxisConditionDE -> DentalConditionDE etc.
-// Bead: fpde-shp.6 (asserter-Constraint), fpde-shp.8 (evidence.detail + documentation)
+// Bead: fpde-shp.3 (origin) / fpde-shp.6 (asserter targetProfile) / fpde-shp.8 (evidence.detail + documentation)
 
 Profile: PraxisConditionDE
 Parent: KBV_PR_Base_Condition_Diagnosis
