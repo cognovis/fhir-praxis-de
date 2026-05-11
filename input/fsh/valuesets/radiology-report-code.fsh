@@ -30,5 +30,6 @@ Description: "LOINC-Codes fuer Radiologiebefunde. Umfasst allgemeine Bildgebungs
 * http://loinc.org#24648-8 "XR Chest PA upright"
 * http://loinc.org#24647-0 "XR Chest PA and Lateral upright"
 
-// Sonographie-Codes (verified against tx.fhir.org 2026-05-11)
-* http://loinc.org#24591-0 "US study note"
+// Sonographie-Codes Thorax (verified against tx.fhir.org 2026-05-11)
+// Note: 24591-0 was incorrect (NM Brain code). 24630-6 = "US Chest" per tx.fhir.org.
+* http://loinc.org#24630-6 "US Chest"
