@@ -1,10 +1,10 @@
 // Kleinunternehmerregelung § 19 UStG — Extension on Organization
-// Bead: fpde-shp.6. ChargeItem-Logik und Invoice-Constraint folgen in fpde-47a.
+// Bead: fpde-shp.6/fpde-shp.7.
 
 Extension: KleinunternehmerregelungExt
 Id: kleinunternehmerregelung
 Title: "Kleinunternehmerregelung § 19 UStG"
-Description: "Kennzeichnung ob die Praxis unter die Kleinunternehmerregelung nach § 19 UStG faellt. Seit 2025: Schwellen 25.000 EUR Vorjahresumsatz / 100.000 EUR laufendes Jahr. Bei aktiver Regelung: Keine USt-Ausweis, Pflicht-Hinweis auf Rechnungen ('gemaess § 19 UStG wird keine Umsatzsteuer berechnet'). ChargeItem-Logik und Invoice-Constraint folgen in fpde-47a."
+Description: "Kennzeichnung ob die Praxis unter die Kleinunternehmerregelung nach § 19 UStG faellt. Seit 2025: Schwellen 25.000 EUR Vorjahresumsatz / 100.000 EUR laufendes Jahr. Bei aktiver Regelung: Keine USt-Ausweis, Pflicht-Hinweis auf Rechnungen ('gemaess § 19 UStG wird keine Umsatzsteuer berechnet'). Der Invoice-Constraint (ku-hinweis-required) ist im PraxisInvoiceDE-Profil implementiert."
 Context: Organization
 * extension contains
     aktiv 1..1 and
