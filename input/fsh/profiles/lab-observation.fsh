@@ -115,7 +115,7 @@ Description: "Spezialisiertes Profil fuer Haemoglobin A1c (HbA1c) Messungen nach
 // =============================================================================
 //
 // Spezialisiertes Profil fuer den dokumentierten Raucherstatus eines Patienten.
-// LOINC 88031-0: Tobacco use
+// LOINC 88031-0: Smokeless tobacco status
 // Antwortliste: LOINC LL2255-7 (preferred binding)
 //
 // Kategorie: social-history (FHIR canonical, US Core, IPS — Raucherstatus ist
@@ -130,7 +130,7 @@ Profile: SmokingStatusDE
 Parent: Observation
 Id: smoking-status-de
 Title: "Smoking Status DE"
-Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 88031-0. Kategorie: social-history (FHIR canonical fuer Raucherstatus — kein Laborbefund). Wert als CodeableConcept aus LOINC-Antwortliste LL2255-7 (preferred). Relevant fuer PAR-Grading und allgemeine Risikoeinschaetzung."
+Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 88031-0 (Smokeless tobacco status). Kategorie: social-history (FHIR canonical fuer Raucherstatus — kein Laborbefund). Wert als CodeableConcept aus LOINC-Antwortliste LL2255-7 (preferred). Relevant fuer PAR-Grading und allgemeine Risikoeinschaetzung."
 
 // Status: Pflichtfeld
 * status MS
@@ -152,8 +152,8 @@ Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 8803
 * code.coding contains loinc 1..1 MS
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #88031-0
-* code.coding[loinc].display = "Tobacco use"
-* code.coding[loinc] ^short = "LOINC 88031-0 — Tobacco use (Raucherstatus)"
+* code.coding[loinc].display = "Smokeless tobacco status"
+* code.coding[loinc] ^short = "LOINC 88031-0 — Smokeless tobacco status (Raucherstatus)"
 * code.coding[loinc] ^definition = "Fester LOINC-Code fuer Tabakkonsum-Status. Antworten aus LOINC-Antwortliste LL2255-7."
 
 // Wert: nur CodeableConcept

@@ -15,18 +15,18 @@ Description: "LOINC-Codes fuer Radiologiebefunde. Umfasst allgemeine Bildgebungs
 * http://loinc.org#18748-4 "Diagnostic imaging study"
 * http://loinc.org#68604-8 "Radiology diagnostic study note"
 
-// CT-Codes
-* http://loinc.org#24627-2 "CT study note"
-* http://loinc.org#36643-5 "CT of thorax"
-* http://loinc.org#24558-9 "CT Abdomen and Pelvis"
+// CT-Codes (verified against tx.fhir.org 2026-05-11)
+* http://loinc.org#24627-2 "CT Chest"
+* http://loinc.org#24725-4 "CT Head"
+* http://loinc.org#24558-9 "US Abdomen"
 
-// MRT-Codes
-* http://loinc.org#36554-4 "MRI study note"
-* http://loinc.org#36803-5 "MRI of knee"
+// MRT-Codes (verified against tx.fhir.org 2026-05-11)
+* http://loinc.org#24802-1 "MR Knee"
+* http://loinc.org#24590-2 "MR Brain"
 
-// Roentgen-Codes
-* http://loinc.org#24648-8 "DXA study note"
-* http://loinc.org#24893-0 "XR Chest 2 views"
+// Roentgen-Codes (verified against tx.fhir.org 2026-05-11)
+* http://loinc.org#24648-8 "XR Chest PA upright"
+* http://loinc.org#24647-0 "XR Chest PA and Lateral upright"
 
 // Sonographie-Codes
 * http://loinc.org#24591-0 "US study note"
