@@ -17,7 +17,7 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - **fpde-bxv**: Version bump 0.55.0 → 0.56.0
-- **fpde-bxv**: QA audit documentation for v0.55.0 errors (79 total: 32 internal fixed, 47 external suppressed)
+- **fpde-bxv**: QA audit documentation for v0.55.0 errors (79 total: 26 internal fixed, 53 external suppressed)
 
 ## [0.55.0] - 2026-05-11
 
