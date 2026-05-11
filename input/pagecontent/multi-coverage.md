@@ -17,16 +17,28 @@ Für das Multi-Coverage-Linking stehen stattdessen folgende Standardmechanismen 
 | Feld | Verfügbarkeit | Verwendungszweck |
 |------|---------------|-----------------|
 | `Coverage.order` | **Nicht verfügbar** (max=0 in de.basisprofil.r4) | — |
-| `Coverage.subrogation` | Verfügbar (`max=1` in de.basisprofil.r4) | Regressrecht (Beihilfe) |
+| `Coverage.subrogation` | Verfügbar (FHIR R4 Basis 0..1, in de.basisprofil.r4 nicht eingeschränkt) | Koordinierte Leistungserbringung (Beihilfe) |
 | `Account.coverage.priority` | Verfügbar (FHIR R4 Account) | Abrechnungsreihenfolge im Account |
 
-## Coverage.subrogation — Regressrecht
+## Coverage.subrogation — Koordinierte Leistungserbringung
 
-Das Feld `Coverage.subrogation` (Typ: `boolean`, Kardinalität: 0..1) gibt an, ob ein Kostenträger Regressrechte gegen einen anderen Zahler geltend machen kann.
+Das Feld `Coverage.subrogation` (FHIR R4 Typ: `boolean`, Kardinalität: 0..1) signalisiert,
+dass der Kostenträger Informationen für die Kostenrückforderung von einem anderen Zahler bereitstellt.
 
-Im deutschen Kontext ist dies insbesondere relevant für **Beihilfe**-Verhältnisse: Die Beihilfestelle erstattet einen festen Prozentsatz der Kosten und hat das Recht, bei der PKV Regress zu nehmen.
+**Semantik in FHIR R4:** "Subrogation" bezeichnet das Recht eines Versicherers, Kosten von einem Dritten
+zurückzufordern — z. B. bei Unfällen (Berufsgenossenschaft vs. privater Haftpflicht).
 
-**Empfehlung:** `subrogation = true` setzen, wenn die Coverage Regressansprüche hat (z. B. Beihilfe gegenüber der PKV des Beamten).
+**Beihilfe-PKV-Szenario:** Beihilfe und PKV sind **parallele Zahler**, nicht ein Rückforderungsverhältnis.
+Beihilfe erstattet typischerweise 50% der Kosten, die PKV die verbleibenden 50% — unabhängig voneinander.
+Ein direktes Regressrecht der Beihilfe gegenüber der PKV besteht nicht.
+
+In diesem IG wird `subrogation=true` auf der Beihilfe-Coverage als **pragmatisches Marker-Flag** gesetzt,
+um das koordinierte Leistungsverhältnis (coordinated benefit) zwischen staatlicher Beihilfe und
+privater Krankenversicherung zu signalisieren. Dies weicht vom strengen FHIR-R4-Subrogations-Semantic ab
+und ist eine projektspezifische Konvention.
+
+**Empfehlung:** `subrogation = true` auf der Beihilfe-Coverage setzen, um das koordinierte Leistungsverhältnis
+zu markieren, mit Verständnis des semantischen Unterschieds zur FHIR-R4-Definition.
 
 ## Account.coverage.priority — Abrechnungsreihenfolge
 
@@ -96,7 +108,7 @@ Patientin Mueller ist GKV-versichert. Eine PKV-Zusatzversicherung übernimmt den
 
 ### Bundle 3: Beamter — PKV + Beihilfe
 
-Beamter Schneider ist privat krankenversichert. Die Beihilfestelle des Landes erstattet den beihilfefähigen Anteil und hat Subrogationsrechte gegenüber der PKV.
+Beamter Schneider ist privat krankenversichert. Die Beihilfestelle des Landes erstattet den beihilfefähigen Anteil (paralleler Zahler; `subrogation=true` als Marker für das koordinierte Leistungsverhältnis).
 
 - `ExampleCoveragePkvBeamter`: PKV Allianz (primary)
 - `ExampleCoverageBeihilfe`: Beihilfe SKT, `subrogation=true` (secondary)

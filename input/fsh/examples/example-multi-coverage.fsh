@@ -3,7 +3,7 @@
 //
 // NOTE: Coverage.order is constrained to max=0 in de.basisprofil.r4 (coverage-de-gkv and coverage-de-basis).
 // Therefore Account.coverage.priority is the correct FHIR mechanism for ordering multiple coverages.
-// Coverage.subrogation (max=1) remains available and is used for Beihilfe scenarios.
+// Coverage.subrogation (0..1, FHIR R4 base, not restricted by de.basisprofil.r4) remains available and is used for Beihilfe scenarios.
 //
 // Bundle 1: ZE (Zahnersatz) — GKV (primary, priority=1) + ZZV/PKV (secondary, priority=2)
 // Bundle 2: KFO (Kieferorthopadie) — GKV (primary, priority=1) + PKV-Zusatz (secondary, priority=2)
@@ -76,7 +76,7 @@ Usage: #example
 // ============================================================
 
 Instance: ExamplePatientKfo
-InstanceOf: Patient
+InstanceOf: FPDEPatient
 Title: "Anna Mueller — GKV-Patientin mit PKV-Zusatz"
 Description: "GKV-Patientin mit privater Zusatzversicherung fuer den KFO-Eigenanteil."
 Usage: #example
@@ -150,7 +150,7 @@ Usage: #example
 // ============================================================
 
 Instance: ExamplePatientBeamter
-InstanceOf: Patient
+InstanceOf: FPDEPatient
 Title: "Klaus Schneider — Beamter (PKV + Beihilfe)"
 Description: "Verbeamteter Lehrer mit privater Krankenversicherung und Beihilfeanspruch."
 Usage: #example
@@ -180,7 +180,7 @@ Usage: #example
 Instance: ExampleCoverageBeihilfe
 InstanceOf: http://fhir.de/StructureDefinition/coverage-de-basis
 Title: "Beihilfe-Coverage (secondary, subrogation)"
-Description: "Beihilfeanspruch des Beamten. Sekundaerer Kostentraeger (Account.coverage.priority=2) mit Subrogationsrecht (subrogation=true). Typ=SKT (Sonstige Kostentraeger), da kein dedizierter Beihilfe-Code im CodeSystem versicherungsart-de-basis existiert."
+Description: "Beihilfeanspruch des Beamten. Sekundaerer Kostentraeger (Account.coverage.priority=2). subrogation=true als pragmatisches Marker-Flag fuer das koordinierte Leistungsverhaeltnis (Beihilfe und PKV sind parallele Zahler). Typ=SKT (Sonstige Kostentraeger), da kein dedizierter Beihilfe-Code im CodeSystem versicherungsart-de-basis existiert."
 Usage: #example
 * status = #active
 * subrogation = true
