@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.56.0] - 2026-05-11
+
+### Bug Fixes
+
+- **fpde-bxv**: Add iso21090-EN-qualifier (#AC) extension to all Dr. prefix examples — fixes HumanName.prefix.extension validation errors on KBV_PR_Base_Practitioner-based instances
+- **fpde-bxv**: Fix DVMD KDL DG020110 display "Roentgenbefund" → "Röntgenbefund" in imaging-diagnostic-report profile
+- **fpde-bxv**: Fix HL7 v3-ParticipationMode displays: MAILWRIT → "mail", TYPEWRIT → "typewritten" (canonical CodeSystem display strings)
+- **fpde-bxv**: Fix Fachkunde DVT display → "Fachkunde Digitale Volumentomographie" (canonical CodeSystem display)
+- **fpde-bxv**: Remove invalid LOINC code 36218-5 from ImagingRequestCodeVS (code does not exist in LOINC)
+- **fpde-bxv**: Fix ku-hinweis-required FHIRPath invariant — use .where($this = true).exists() to avoid empty-collection false positives
+- **fpde-bxv**: Add external error suppressions to ignoreWarnings.txt (SNOMED 1255414003, LOINC LL2255-7 filter, German dental CodeSystems)
+
+### Miscellaneous
+
+- **fpde-bxv**: Version bump 0.55.0 → 0.56.0
+- **fpde-bxv**: QA audit documentation for v0.55.0 errors (79 total: 32 internal fixed, 47 external suppressed)
+
 ## [0.55.0] - 2026-05-11
 
 ### Features
