@@ -7,7 +7,7 @@
 //
 // Bundle 1: ZE (Zahnersatz) — GKV (primary, priority=1) + ZZV/PKV (secondary, priority=2)
 // Bundle 2: KFO (Kieferorthopadie) — GKV (primary, priority=1) + PKV-Zusatz (secondary, priority=2)
-// Bundle 3: Beamter — PKV (primary, priority=1) + Beihilfe/SKT (secondary, priority=2, subrogation=true)
+// Bundle 3: Beamter — PKV (primary, priority=1) + Beihilfe/BEI (secondary, priority=2, subrogation=true)
 
 // ============================================================
 // Bundle 1: Zahnersatz (ZE) — GKV + ZZV
@@ -62,13 +62,13 @@ Title: "Multi-Coverage Bundle: ZE GKV + ZZV"
 Description: "Beispiel-Bundle fuer Zahnersatz-Szenario mit GKV als primaeren und ZZV als sekundaeren Kostentraeger. Account.coverage.priority steuert die Abrechnungsreihenfolge."
 Usage: #example
 * type = #collection
-* entry[+].fullUrl = "Patient/example-patient"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Patient/example-patient"
 * entry[=].resource = example-patient
-* entry[+].fullUrl = "Coverage/ExampleCoverageGkvZe"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Coverage/ExampleCoverageGkvZe"
 * entry[=].resource = ExampleCoverageGkvZe
-* entry[+].fullUrl = "Coverage/ExampleCoverageZzvZe"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Coverage/ExampleCoverageZzvZe"
 * entry[=].resource = ExampleCoverageZzvZe
-* entry[+].fullUrl = "Account/ExampleAccountZe"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Account/ExampleAccountZe"
 * entry[=].resource = ExampleAccountZe
 
 // ============================================================
@@ -136,13 +136,13 @@ Title: "Multi-Coverage Bundle: KFO GKV + PKV-Zusatz"
 Description: "Beispiel-Bundle fuer KFO-Szenario mit GKV als primaeren und PKV-Zusatzversicherung als sekundaeren Kostentraeger."
 Usage: #example
 * type = #collection
-* entry[+].fullUrl = "Patient/ExamplePatientKfo"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Patient/ExamplePatientKfo"
 * entry[=].resource = ExamplePatientKfo
-* entry[+].fullUrl = "Coverage/ExampleCoverageGkvKfo"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Coverage/ExampleCoverageGkvKfo"
 * entry[=].resource = ExampleCoverageGkvKfo
-* entry[+].fullUrl = "Coverage/ExampleCoveragePkvZusatzKfo"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Coverage/ExampleCoveragePkvZusatzKfo"
 * entry[=].resource = ExampleCoveragePkvZusatzKfo
-* entry[+].fullUrl = "Account/ExampleAccountKfo"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Account/ExampleAccountKfo"
 * entry[=].resource = ExampleAccountKfo
 
 // ============================================================
@@ -175,18 +175,17 @@ Usage: #example
 
 // NOTE: ExampleCoverageBeihilfe uses coverage-de-basis directly (NOT FPDECoveragePrivat)
 // because the fpde-coverage-privat-type invariant only allows PKV or SEL.
-// Beihilfe must use type=SKT (Sonstige Kostentraeger) as there is no dedicated Beihilfe code
-// in the versicherungsart-de-basis CodeSystem.
+// Beihilfe uses type=BEI (Beihilfe) — a valid code in versicherungsart-de-basis CodeSystem.
 Instance: ExampleCoverageBeihilfe
 InstanceOf: http://fhir.de/StructureDefinition/coverage-de-basis
 Title: "Beihilfe-Coverage (secondary, subrogation)"
-Description: "Beihilfeanspruch des Beamten. Sekundaerer Kostentraeger (Account.coverage.priority=2). subrogation=true als pragmatisches Marker-Flag fuer das koordinierte Leistungsverhaeltnis (Beihilfe und PKV sind parallele Zahler). Typ=SKT (Sonstige Kostentraeger), da kein dedizierter Beihilfe-Code im CodeSystem versicherungsart-de-basis existiert."
+Description: "Beihilfeanspruch des Beamten. Sekundaerer Kostentraeger (Account.coverage.priority=2). subrogation=true als pragmatisches Marker-Flag fuer das koordinierte Leistungsverhaeltnis (Beihilfe und PKV sind parallele Zahler). Typ=BEI (Beihilfe) gemaess versicherungsart-de-basis CodeSystem."
 Usage: #example
 * status = #active
 * subrogation = true
 * type.coding[0].system = "http://fhir.de/CodeSystem/versicherungsart-de-basis"
-* type.coding[0].code = #SKT
-* type.coding[0].display = "Sonstige Kostentraeger (Beihilfe)"
+* type.coding[0].code = #BEI
+* type.coding[0].display = "Beihilfe"
 * beneficiary = Reference(ExamplePatientBeamter)
 * payor[0].display = "Beihilfestelle Land Baden-Wuerttemberg"
 
@@ -209,11 +208,11 @@ Title: "Multi-Coverage Bundle: PKV + Beihilfe"
 Description: "Beispiel-Bundle fuer Beamten-Szenario mit PKV als primaeren und Beihilfe als sekundaeren Kostentraeger (subrogation=true auf der Beihilfe-Coverage)."
 Usage: #example
 * type = #collection
-* entry[+].fullUrl = "Patient/ExamplePatientBeamter"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Patient/ExamplePatientBeamter"
 * entry[=].resource = ExamplePatientBeamter
-* entry[+].fullUrl = "Coverage/ExampleCoveragePkvBeamter"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Coverage/ExampleCoveragePkvBeamter"
 * entry[=].resource = ExampleCoveragePkvBeamter
-* entry[+].fullUrl = "Coverage/ExampleCoverageBeihilfe"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Coverage/ExampleCoverageBeihilfe"
 * entry[=].resource = ExampleCoverageBeihilfe
-* entry[+].fullUrl = "Account/ExampleAccountBeihilfe"
+* entry[+].fullUrl = "https://fhir.cognovis.de/praxis/Account/ExampleAccountBeihilfe"
 * entry[=].resource = ExampleAccountBeihilfe

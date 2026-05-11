@@ -5,7 +5,7 @@
 //   - asserter-Constraint: KBV_PR_Base_Practitioner mit LANR
 //   - evidence.detail-Linking: Observation, ImagingStudy, DiagnosticReport
 //   - HbA1cObservationDE (LOINC 4548-4)
-//   - SmokingStatusDE (LOINC 88031-0)
+//   - SmokingStatusDE (LOINC 72166-2)
 //   - PAR-Grading-Beispiel mit allen drei evidence.detail-Typen
 //   - Karies-Beispiel mit Bissfluegel-ImagingStudy + DiagnosticReport
 //
@@ -69,7 +69,7 @@ Usage: #example
 * interpretation.coding[0].display = "High"
 
 // --- Smoking Status Observation (PAR-Grading) ---
-// SmokingStatusDE: LOINC 88031-0, Ex-Raucher (LA15920-4)
+// SmokingStatusDE: LOINC 72166-2, Ex-Raucher (LA15920-4)
 Instance: par-grading-smoking-obs
 InstanceOf: SmokingStatusDE
 Title: "Raucherstatus Observation — PAR-Grading Weber"
@@ -78,8 +78,8 @@ Usage: #example
 * status = #final
 * category[social-history] = http://terminology.hl7.org/CodeSystem/observation-category#social-history
 * code.coding[loinc].system = "http://loinc.org"
-* code.coding[loinc].code = #88031-0
-* code.coding[loinc].display = "Tobacco use"
+* code.coding[loinc].code = #72166-2
+* code.coding[loinc].display = "Tobacco smoking status"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-01T09:05:00+02:00"
 * valueCodeableConcept.coding[0].system = "http://loinc.org"
@@ -122,8 +122,8 @@ Description: "Strukturierter Befundbericht fuer PAR-Grading. Schlussfolgerung: P
 Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #24558-9
-* code.coding[0].display = "Dental diagnostic study"
+* code.coding[0].code = #18748-4
+* code.coding[0].display = "Diagnostic imaging study"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-01T14:00:00+02:00"
 * issued = "2026-05-01T13:00:00Z"
@@ -204,8 +204,8 @@ Description: "Befundbericht fuer Karies approximal an Zahn 36 auf Basis der Biss
 Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #24558-9
-* code.coding[0].display = "Dental diagnostic study"
+* code.coding[0].code = #18748-4
+* code.coding[0].display = "Diagnostic imaging study"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-05T11:00:00+02:00"
 * issued = "2026-05-05T10:00:00Z"
@@ -242,17 +242,17 @@ Title: "PAR-Grading Bundle — alle Constraint-Typen"
 Description: "Beispiel-Bundle fuer PAR-Grading Diagnose mit asserter=Arzt, evidence.detail=[HbA1c-Obs, SmokingStatus-Obs, ImagingStudy, DiagnosticReport]. Demonstriert alle drei fpde-shp.8 Constraints."
 Usage: #example
 * type = #collection
-* entry[0].fullUrl = "urn:uuid:par-grading-practitioner-arzt"
+* entry[0].fullUrl = "https://fhir.cognovis.de/praxis/Practitioner/par-grading-practitioner-arzt"
 * entry[0].resource = par-grading-practitioner-arzt
-* entry[1].fullUrl = "urn:uuid:par-grading-hba1c-obs"
+* entry[1].fullUrl = "https://fhir.cognovis.de/praxis/Observation/par-grading-hba1c-obs"
 * entry[1].resource = par-grading-hba1c-obs
-* entry[2].fullUrl = "urn:uuid:par-grading-smoking-obs"
+* entry[2].fullUrl = "https://fhir.cognovis.de/praxis/Observation/par-grading-smoking-obs"
 * entry[2].resource = par-grading-smoking-obs
-* entry[3].fullUrl = "urn:uuid:par-grading-roentgen"
+* entry[3].fullUrl = "https://fhir.cognovis.de/praxis/ImagingStudy/par-grading-roentgen"
 * entry[3].resource = par-grading-roentgen
-* entry[4].fullUrl = "urn:uuid:par-grading-befund"
+* entry[4].fullUrl = "https://fhir.cognovis.de/praxis/DiagnosticReport/par-grading-befund"
 * entry[4].resource = par-grading-befund
-* entry[5].fullUrl = "urn:uuid:par-grading-condition"
+* entry[5].fullUrl = "https://fhir.cognovis.de/praxis/Condition/par-grading-condition"
 * entry[5].resource = par-grading-condition
 
 // =============================================================================
@@ -264,11 +264,11 @@ Title: "Karies Bundle — ImagingStudy + DiagnosticReport"
 Description: "Beispiel-Bundle fuer Karies-Diagnose K02.1 mit asserter=Arzt, evidence.detail=[Bissfluegel-ImagingStudy, DiagnosticReport]. Demonstriert ImagingStudy + DiagnosticReport als evidence.detail-Typen."
 Usage: #example
 * type = #collection
-* entry[0].fullUrl = "urn:uuid:par-grading-practitioner-arzt"
+* entry[0].fullUrl = "https://fhir.cognovis.de/praxis/Practitioner/par-grading-practitioner-arzt"
 * entry[0].resource = par-grading-practitioner-arzt
-* entry[1].fullUrl = "urn:uuid:karies-bissfluegel-study"
+* entry[1].fullUrl = "https://fhir.cognovis.de/praxis/ImagingStudy/karies-bissfluegel-study"
 * entry[1].resource = karies-bissfluegel-study
-* entry[2].fullUrl = "urn:uuid:karies-befund"
+* entry[2].fullUrl = "https://fhir.cognovis.de/praxis/DiagnosticReport/karies-befund"
 * entry[2].resource = karies-befund
-* entry[3].fullUrl = "urn:uuid:karies-condition"
+* entry[3].fullUrl = "https://fhir.cognovis.de/praxis/Condition/karies-condition"
 * entry[3].resource = karies-condition

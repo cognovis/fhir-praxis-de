@@ -76,8 +76,8 @@ Usage: #example
 * identifier[accession].system = "https://fhir.cognovis.de/praxis/NamingSystem/pvs-id"
 * identifier[accession].value = "SR-MRT-KNIE-2026-001"
 * code.coding[0].system = "http://loinc.org"
-* code.coding[0].code = #36803-5
-* code.coding[0].display = "MRI of knee"
+* code.coding[0].code = #24802-1
+* code.coding[0].display = "MR Knee"
 * subject = Reference(example-patient)
 * requester = Reference(example-practitioner)
 * reasonCode[icd10gm][0].coding[0].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
@@ -95,8 +95,8 @@ Description: "Bildgebungstermin MRT linkes Knie fuer Thomas Weber. Modalitaet MR
 Usage: #example
 * status = #booked
 * serviceType[0].coding[0].system = "http://loinc.org"
-* serviceType[0].coding[0].code = #36803-5
-* serviceType[0].coding[0].display = "MRI of knee"
+* serviceType[0].coding[0].code = #24802-1
+* serviceType[0].coding[0].display = "MR Knee"
 * start = "2026-05-10T10:00:00+02:00"
 * end = "2026-05-10T10:45:00+02:00"
 * basedOn[0] = Reference(example-imaging-service-request-mrt-knie)
