@@ -23,6 +23,8 @@ Usage: #example
 * name[0].family = "Schoell"
 * name[0].given[0] = "Markus"
 * name[0].prefix[0] = "Dr."
+* name[0].prefix[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier"
+* name[0].prefix[0].extension[0].valueCode = #AC
 
 Instance: example-practitioner-wb
 InstanceOf: Practitioner
@@ -34,6 +36,8 @@ Usage: #example
 * name[0].family = "Mueller"
 * name[0].given[0] = "Jonas"
 * name[0].prefix[0] = "Dr."
+* name[0].prefix[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier"
+* name[0].prefix[0].extension[0].valueCode = #AC
 
 Instance: example-organization
 InstanceOf: Organization

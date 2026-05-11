@@ -28,6 +28,8 @@ Usage: #example
 * name[0].family = "Mueller"
 * name[0].given[0] = "Stefan"
 * name[0].prefix[0] = "Dr."
+* name[0].prefix[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier"
+* name[0].prefix[0].extension[0].valueCode = #AC
 * identifier[0].system = "https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR"
 // LANR: Struktureller Platzhalter — kein KBV-Pruefziffer-Test in FHIR R4 Validator.
 * identifier[0].value = "123456789"
