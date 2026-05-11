@@ -96,7 +96,7 @@ Usage: #example
 * status = #issued
 * subject = Reference(Patient/example-patient)
 * date = "2026-05-11"
-* issuer = Reference(Organization/example-praxis)
+* issuer = Reference(Organization/example-zahnarzt-praxis)
 * totalGross.value = 80.00
 * totalGross.currency = #EUR
 // Pflichthinweis nach §19 UStG in note (erzwungen durch ku-hinweis-required Invariante)

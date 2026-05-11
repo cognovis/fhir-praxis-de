@@ -16,11 +16,13 @@ German ambulatory practices frequently provide **both** VAT-exempt and VAT-liabl
 | Reimbursements, technical services | Taxable or zero-rated | Lab pass-through (varies) |
 | KU-regulated practice | Exempt (§ 19 UStG) | All services, blanket exemption |
 
-**FHIR Implementation:** Each `Invoice` (or `Invoice.lineItem.priceComponent`) carries:
-- `ext-tax-category` — EN 16931 category code (S / AA / E / AE / Z), see `TaxCategoryDE` ValueSet
-- `ext-tax-exemption-reason` — legal basis for exemption, see `UStBefreiungsgrundVS`
+**FHIR Implementation:** Each `Invoice` carries the invoice-level tax category and exemption reason via extensions on the root resource:
+- `ext-tax-category` — EN 16931 category code (S / AA / E / AE / Z), see `TaxCategoryDE` ValueSet. **Context: `Invoice` (root only)**.
+- `ext-tax-exemption-reason` — legal basis for exemption, see `UStBefreiungsgrundVS`. **Context: `Invoice` (root only)**.
 
-The separation must be maintained **per line item** in mixed invoices to produce legally compliant ZUGFeRD / XRechnung output.
+Both extensions are declared with `Context: Invoice` and therefore apply **at the Invoice root level**, NOT on individual `Invoice.lineItem.priceComponent` elements. SUSHI v3 does not accept `Invoice.lineItem.priceComponent` as a Context-Token, which is why sub-element path context declarations are not used in this IG.
+
+For **per-line-item tax category** in mixed invoices, use the standard FHIR field `Invoice.lineItem.priceComponent.code` directly (bound to the `TaxCategoryDE` ValueSet) — no extension is needed. This produces legally compliant ZUGFeRD / XRechnung output where each line item carries its own EN 16931 category code.
 
 ---
 
