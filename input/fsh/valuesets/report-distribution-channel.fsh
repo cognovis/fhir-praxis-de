@@ -14,8 +14,8 @@ Description: "ValueSet for report distribution channels. Standard channels from 
 // Standard HL7 v3 channels
 * http://terminology.hl7.org/CodeSystem/v3-ParticipationMode#EMAILWRIT "Email"
 * http://terminology.hl7.org/CodeSystem/v3-ParticipationMode#FAXWRIT "Telefax"
-* http://terminology.hl7.org/CodeSystem/v3-ParticipationMode#MAILWRIT "Mail / Post"
-* http://terminology.hl7.org/CodeSystem/v3-ParticipationMode#TYPEWRIT "Print / Hand-over"
+* http://terminology.hl7.org/CodeSystem/v3-ParticipationMode#MAILWRIT "mail"
+* http://terminology.hl7.org/CodeSystem/v3-ParticipationMode#TYPEWRIT "typewritten"
 
 // DE-specific channels (not covered by international standards)
 * include codes from system ReportDistributionChannelCS
