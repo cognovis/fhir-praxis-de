@@ -18,6 +18,8 @@ Description: "LOINC-Codes fuer Radiologiebefunde. Umfasst allgemeine Bildgebungs
 // CT-Codes (verified against tx.fhir.org 2026-05-11)
 * http://loinc.org#24627-2 "CT Chest"
 * http://loinc.org#24725-4 "CT Head"
+
+// Sonographie/Ultraschall-Codes (verified against tx.fhir.org 2026-05-11)
 * http://loinc.org#24558-9 "US Abdomen"
 
 // MRT-Codes (verified against tx.fhir.org 2026-05-11)
@@ -28,5 +30,5 @@ Description: "LOINC-Codes fuer Radiologiebefunde. Umfasst allgemeine Bildgebungs
 * http://loinc.org#24648-8 "XR Chest PA upright"
 * http://loinc.org#24647-0 "XR Chest PA and Lateral upright"
 
-// Sonographie-Codes
+// Sonographie-Codes (verified against tx.fhir.org 2026-05-11)
 * http://loinc.org#24591-0 "US study note"

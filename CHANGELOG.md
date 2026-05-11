@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-- **QA Cleanup 2 (fpde-95o)**: Resolved 36 additional QA errors from v0.56.0 baseline:
+- **QA Cleanup 2 (fpde-95o)**: Addressed 45 of 59 QA errors from v0.56.0 baseline — 36 fixed directly in code, 9 documented/suppressed (7 slicing discriminator IG Publisher quirks + 2 IG URL pattern errors added to ignoreWarnings.txt); remaining ~14 errors are covered by existing suppressions from v0.55.0:
   - **fullUrl fixes**: All 22 Bundle.entry.fullUrl values changed to absolute URIs — 12 relative URLs (`Patient/...`) and 10 invalid `urn:uuid:<name>` patterns fixed in `example-multi-coverage.fsh` and `example-condition-constraints-bundle.fsh`
   - **LOINC 88031-0**: Corrected display from "Tobacco use" to "Smokeless tobacco status" (verified via tx.fhir.org) in `lab-observation.fsh` and `example-condition-constraints-bundle.fsh`
   - **LOINC 36803-5**: Replaced with correct code 24802-1 "MR Knee" in all examples and valuesets (36803-5 is actually "MRA Pulmonary vessels")
