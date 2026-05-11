@@ -13,7 +13,7 @@ Title: "Beispiel Invoice — Zahnarzt §4 Nr. 14a UStG (steuerbefreit)"
 Description: "Zahnarztrechnung fuer eine Heilbehandlungsleistung, steuerbefreit nach §4 Nr. 14a UStG. Steuerkategorie E (befreit), Befreiungsgrund para4-nr14a."
 Usage: #example
 
-* extension[taxCategory].valueCodeableConcept = TaxCategoryCS#E "Steuerfrei"
+* extension[taxCategory].valueCodeableConcept = urn:un:unece:uncefact:codelist:standard:5305#E "Steuerfrei"
 * extension[taxExemptionReason].valueCodeableConcept = UStBefreiungsgrundCS#para4-nr14a "§ 4 Nr. 14a UStG"
 * status = #issued
 * subject = Reference(Patient/example-patient)
@@ -35,7 +35,7 @@ Title: "Beispiel Invoice — IGeL 19% Umsatzsteuer (Kategorie S)"
 Description: "IGeL-Rechnung (z.B. Reisemedizinische Beratung ohne GKV-Indikation) mit normalem Umsatzsteuersatz 19% (Steuerkategorie S). Nicht steuerbefreit da keine Heilbehandlung im umsatzsteuerlichen Sinne."
 Usage: #example
 
-* extension[taxCategory].valueCodeableConcept = TaxCategoryCS#S "Normaler Steuersatz"
+* extension[taxCategory].valueCodeableConcept = urn:un:unece:uncefact:codelist:standard:5305#S "Normaler Steuersatz"
 * status = #issued
 * subject = Reference(Patient/example-patient)
 * date = "2026-05-11"
@@ -63,7 +63,7 @@ Title: "Beispiel Invoice — 7% ermaessigter Steuersatz (Kategorie AA)"
 Description: "Rechnung fuer eine zahntechnische Laborleistung mit ermaessigtem Umsatzsteuersatz 7% (Steuerkategorie AA). ZUGFeRD/XRechnung: CategoryCode AA, TaxPercent 7.00."
 Usage: #example
 
-* extension[taxCategory].valueCodeableConcept = TaxCategoryCS#AA "Ermaessigter Steuersatz"
+* extension[taxCategory].valueCodeableConcept = urn:un:unece:uncefact:codelist:standard:5305#AA "Ermaessigter Steuersatz"
 * status = #issued
 * subject = Reference(Patient/example-patient)
 * date = "2026-05-11"
@@ -91,7 +91,7 @@ Description: "Rechnung einer Praxis unter der Kleinunternehmerregelung nach §19
 Usage: #example
 
 * extension[kuHinweisPflicht].valueBoolean = true
-* extension[taxCategory].valueCodeableConcept = TaxCategoryCS#E "Steuerfrei"
+* extension[taxCategory].valueCodeableConcept = urn:un:unece:uncefact:codelist:standard:5305#E "Steuerfrei"
 * extension[taxExemptionReason].valueCodeableConcept = UStBefreiungsgrundCS#kleinunternehmer-para19 "Kleinunternehmerregelung § 19 UStG"
 * status = #issued
 * subject = Reference(Patient/example-patient)
