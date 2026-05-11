@@ -57,6 +57,8 @@ Usage: #example
 * name[0].family = "Kurz"
 * name[0].given[0] = "Peter"
 * name[0].prefix[0] = "Prof. Dr."
+* name[0].prefix[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier"
+* name[0].prefix[0].extension[0].valueCode = #AC
 
 // ============================================================
 // RoentgenProcedurePraxisDe: CT Schaedel

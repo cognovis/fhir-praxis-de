@@ -23,6 +23,8 @@ Usage: #example
 * name[0].family = "Schmidt"
 * name[0].given[0] = "Maria"
 * name[0].prefix[0] = "Dr."
+* name[0].prefix[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier"
+* name[0].prefix[0].extension[0].valueCode = #AC
 
 Instance: PASClaimInsurerExample
 InstanceOf: Organization

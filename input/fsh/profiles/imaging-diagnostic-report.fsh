@@ -42,7 +42,7 @@ Description: "Radiologiebefund-Profil fuer die deutsche ambulante Praxis. Erbt v
     mrt 0..1 MS and
     sono 0..1 MS
 
-* category[roentgen] = $kdl#DG020110 "Roentgenbefund"
+* category[roentgen] = $kdl#DG020110 "Röntgenbefund"
 * category[ct] = $kdl#DG020103 "CT-Befund"
 * category[mrt] = $kdl#DG020107 "MRT-Befund"
 * category[sono] = $kdl#DG020111 "Sonographiebefund"

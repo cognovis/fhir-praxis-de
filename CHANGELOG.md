@@ -16,18 +16,22 @@ All notable changes to this project will be documented in this file.
 
 ## [0.55.0] - 2026-05-11
 
-### Features
-
-- **fpde-shp.8**: Implement Condition constraints bundle (AC 1-10) — consolidates fpde-shp.3 (asserter targetProfile-Constraint), fpde-shp.4 (HbA1cObservationDE + SmokingStatusDE Risk-Modifier profiles), and fpde-6xf (evidence.detail erweitert auf Reference(Observation | ImagingStudy | DiagnosticReport))
-
 ### Bug Fixes
 
 - **fpde-shp.8**: Address review findings iteration 1
 
+### Features
+
+- **fpde-shp.8**: Implement Condition constraints bundle (AC 1-10)
+
 ### Miscellaneous
 
 - **fpde-shp.8**: Update changelog for v0.55.0
-- **Epic close**: fpde-shp (Praxis-DE Foundation v1.0) — alle 13 Sub-Beads closed across v0.49.0–v0.55.0
+- **fpde-shp.8**: Session-close — regenerate changelog for v0.55.0
+
+### Merge
+
+- Worktree-bead-fpde-shp.8
 
 ## [0.54.0] - 2026-05-11
 
