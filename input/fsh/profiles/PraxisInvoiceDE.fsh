@@ -5,7 +5,7 @@
 
 Invariant: ku-hinweis-required
 Description: "Bei Rechnungen mit Kleinunternehmerregelung (ku-hinweis-pflicht = true) muss Invoice.note.text vorhanden sein. Der konkrete Inhalt des Pflichthinweises ('gemaess § 19 UStG wird keine Umsatzsteuer berechnet') liegt in der Verantwortung des implementierenden Systems."
-Expression: "extension.where(url='https://fhir.cognovis.de/praxis/StructureDefinition/ext-ku-hinweis-pflicht').value.ofType(boolean).first() = true implies note.text.exists()"
+Expression: "(extension.where(url='https://fhir.cognovis.de/praxis/StructureDefinition/ext-ku-hinweis-pflicht').value.ofType(boolean).where($this = true).exists()) implies note.text.exists()"
 Severity: #error
 
 Profile: PraxisInvoiceDE

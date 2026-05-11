@@ -23,6 +23,8 @@ Usage: #example
 * name[0].family = "Hofmann"
 * name[0].given[0] = "Anna"
 * name[0].prefix[0] = "Dr."
+* name[0].prefix[0].extension[0].url = "http://hl7.org/fhir/StructureDefinition/iso21090-EN-qualifier"
+* name[0].prefix[0].extension[0].valueCode = #AC
 
 // --- Hilfsinstanz: Patient fuer DVT (IPS-konform via meta.profile) ---
 Instance: example-patient-dvt
@@ -88,7 +90,7 @@ Usage: #example
 * performer[anwender].actor = Reference(example-practitioner-mtr-dvt)
 * performer[anwender].extension[fachkunde].valueCoding.system = "https://fhir.cognovis.de/imaging/CodeSystem/fachkunde-strahlenschutz"
 * performer[anwender].extension[fachkunde].valueCoding.code = #dvt
-* performer[anwender].extension[fachkunde].valueCoding.display = "Fachkunde DVT"
+* performer[anwender].extension[fachkunde].valueCoding.display = "Fachkunde Digitale Volumentomographie"
 
 // performer[strahlenschutzverantwortlicher]: Radiologin
 * performer[strahlenschutzverantwortlicher].function.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/radiology-role"
