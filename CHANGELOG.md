@@ -2,12 +2,35 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-shp.9**: Address review findings — typo, unused aliases, broken URL
+
+### Documentation
+
+- **fpde-shp.9**: Extend steuer-compliance.md with CID pattern diagram and UNECE migration notes
+
+### Features
+
+- **fpde-shp.9**: Extend tax extension context to include ChargeItemDefinition.propertyGroup.priceComponent
+- **fpde-shp.9**: Migrate TaxCategoryDE ValueSet from local CS to UNECE-5305 URN
+- **fpde-shp.9**: Add ChargeItemDefinition demo examples with UNECE-5305 tax category
+
+### Miscellaneous
+
+- **fpde-shp.9**: Bump version to 0.54.0
+
 ## [0.52.0] - 2026-05-11
 
 ### Bug Fixes
 
 - **fpde-shp.2**: Address review findings iteration 1
 - **fpde-shp.2**: Address codex adversarial findings
+- **fpde-shp.7**: Address review findings iteration 1
+- **fpde-shp.7**: Address codex adversarial findings
+- **fpde-shp.7**: Add steuer-compliance to navigation menu
 
 ### Documentation
 
@@ -16,20 +39,19 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-shp.2**: Add multi-coverage linking pattern documentation and examples
-
-## [0.51.0] - 2026-05-10
-
-### Bug Fixes
-
-- **fpde-shp.7**: Address review findings iteration 1
-- **fpde-shp.7**: Address codex adversarial findings
-- **fpde-shp.7**: Add steuer-compliance to navigation menu
-
-### Features
-
+- **fpde-shp.2**: Add multi-coverage linking pattern for GKV + Zusatz/PKV/Beihilfe
 - **fpde-shp.7**: Add UStBefreiungsgrundCS, TaxCategoryDE, ext-tax-category, ext-tax-exemption-reason, ext-ku-hinweis-pflicht
 - **fpde-shp.7**: Green — PraxisInvoiceDE profile + invoice tax examples
 - **fpde-shp.7**: Green — steuer-compliance pagecontent + version 0.52.0
+
+### Miscellaneous
+
+- **fpde-shp.7**: Update changelog for v0.52.0 release
+
+### Merge
+
+- Worktree-bead-fpde-shp.7
+- Worktree-bead-fpde-shp.2
 
 ## [0.51.0] - 2026-05-10
 
