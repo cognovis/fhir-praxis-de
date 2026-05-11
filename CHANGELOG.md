@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+## [0.56.0] - 2026-05-11
+
+### Bug Fixes
+
+- **QA Cleanup**: Resolved 26 internal QA errors — fixed HumanName prefix extensions, DVMD display codes, ParticipationMode codes, imaging LOINC codes, and FHIRPath invariants across profiles and examples
+
+### Documentation
+
+- **QA Audit**: Created comprehensive audit report documenting v0.55.0 baseline (79 total errors: 26 internal, 53 external) with remediation strategy and external error suppressions
+
 ## [0.55.0] - 2026-05-11
 
 ### Features
