@@ -2,37 +2,46 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.56.0] - 2026-05-11
+## [unreleased]
 
 ### Bug Fixes
 
-- **fpde-bxv**: Add iso21090-EN-qualifier (#AC) extension to all Dr. prefix examples — fixes HumanName.prefix.extension validation errors on KBV_PR_Base_Practitioner-based instances
-- **fpde-bxv**: Fix DVMD KDL DG020110 display "Roentgenbefund" → "Röntgenbefund" in imaging-diagnostic-report profile
-- **fpde-bxv**: Fix HL7 v3-ParticipationMode displays: MAILWRIT → "mail", TYPEWRIT → "typewritten" (canonical CodeSystem display strings)
-- **fpde-bxv**: Fix Fachkunde DVT display → "Fachkunde Digitale Volumentomographie" (canonical CodeSystem display)
-- **fpde-bxv**: Remove invalid LOINC code 36218-5 from ImagingRequestCodeVS (code does not exist in LOINC)
-- **fpde-bxv**: Fix ku-hinweis-required FHIRPath invariant — use .where($this = true).exists() to avoid empty-collection false positives
-- **fpde-bxv**: Add external error suppressions to ignoreWarnings.txt (SNOMED 1255414003, LOINC LL2255-7 filter, German dental CodeSystems)
+- **fpde-bxv**: Add iso21090-EN-qualifier extension to all Dr. prefixes
+- **fpde-bxv**: Fix DVMD KDL DG020110 display — Röntgenbefund
+- **fpde-bxv**: Fix ParticipationMode MAILWRIT/TYPEWRIT displays
+- **fpde-bxv**: Fix Fachkunde DVT display and remove invalid LOINC 36218-5
+- **fpde-bxv**: Add external error suppressions to ignoreWarnings.txt
+- **fpde-bxv**: Fix ku-hinweis-required invariant FHIRPath expression
+- **fpde-bxv**: Address review findings iteration 1
+- **fpde-bxv**: Address codex adversarial findings — CHANGELOG count consistency
+
+### Documentation
+
+- **changelog**: Move shp.8 entries to v0.55.0 + note epic close
+- **fpde-bxv**: Add QA audit doc for v0.55.0 errors
 
 ### Miscellaneous
 
-- **fpde-bxv**: Version bump 0.55.0 → 0.56.0
-- **fpde-bxv**: QA audit documentation for v0.55.0 errors (79 total: 26 internal fixed, 53 external suppressed)
+- **fpde-bxv**: Version bump 0.55.0 → 0.56.0 + changelog entry
 
 ## [0.55.0] - 2026-05-11
-
-### Features
-
-- **fpde-shp.8**: Implement Condition constraints bundle (AC 1-10) — consolidates fpde-shp.3 (asserter targetProfile-Constraint), fpde-shp.4 (HbA1cObservationDE + SmokingStatusDE Risk-Modifier profiles), and fpde-6xf (evidence.detail erweitert auf Reference(Observation | ImagingStudy | DiagnosticReport))
 
 ### Bug Fixes
 
 - **fpde-shp.8**: Address review findings iteration 1
 
+### Features
+
+- **fpde-shp.8**: Implement Condition constraints bundle (AC 1-10)
+
 ### Miscellaneous
 
 - **fpde-shp.8**: Update changelog for v0.55.0
-- **Epic close**: fpde-shp (Praxis-DE Foundation v1.0) — alle 13 Sub-Beads closed across v0.49.0–v0.55.0
+- **fpde-shp.8**: Session-close — regenerate changelog for v0.55.0
+
+### Merge
+
+- Worktree-bead-fpde-shp.8
 
 ## [0.54.0] - 2026-05-11
 
