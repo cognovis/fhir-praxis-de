@@ -7,7 +7,7 @@
 //   - HbA1cObservationDE (LOINC 4548-4)
 //   - SmokingStatusDE (LOINC 88031-0)
 //   - PAR-Grading-Beispiel mit allen drei evidence.detail-Typen
-//   - Karies-Beispiel mit Bisstlugel-ImagingStudy + DiagnosticReport
+//   - Karies-Beispiel mit Bissfluegel-ImagingStudy + DiagnosticReport
 //
 // Alle Instanzen verwenden ASCII-sichere Bezeichner (keine Umlaute).
 
@@ -29,6 +29,7 @@ Usage: #example
 * name[0].given[0] = "Stefan"
 * name[0].prefix[0] = "Dr."
 * identifier[0].system = "https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR"
+// LANR: Struktureller Platzhalter — kein KBV-Pruefziffer-Test in FHIR R4 Validator.
 * identifier[0].value = "123456789"
 
 // =============================================================================
@@ -73,7 +74,7 @@ Title: "Raucherstatus Observation — PAR-Grading Weber"
 Description: "Raucherstatus: Ex-Raucher (LA15920-4 Former smoker). Historischer Risikofaktor fuer PAR-Grading."
 Usage: #example
 * status = #final
-* category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
+* category[social-history] = http://terminology.hl7.org/CodeSystem/observation-category#social-history
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #88031-0
 * code.coding[loinc].display = "Tobacco use"
@@ -161,18 +162,18 @@ Usage: #example
 // KARIES BEISPIEL
 // =============================================================================
 // Demonstriert Karies-Diagnose mit:
-//   - evidence.detail[0]: ImagingStudy (Bisstlugel-Aufnahme DX)
+//   - evidence.detail[0]: ImagingStudy (Bissfluegel-Aufnahme DX)
 //   - evidence.detail[1]: DiagnosticReport (Karies-Befund)
 //
 // Diagnosesicherheit: G (gesichert)
 // ICD-10-GM: K02.1 — Karies mit Dentinbeteiligung
 
-// --- Karies Bisstflugel ImagingStudy ---
-// Basis-ImagingStudy (nicht Spezial-Profil) fuer Bisstflugel-Aufnahme
-Instance: karies-bissflugel-study
+// --- Karies Bissfluegel ImagingStudy ---
+// Basis-ImagingStudy (nicht Spezial-Profil) fuer Bissfluegel-Aufnahme
+Instance: karies-bissfluegel-study
 InstanceOf: ImagingStudy
-Title: "ImagingStudy: Bisstflugel-Aufnahme Karies Zahn 36 (DX)"
-Description: "Bisstflugel-Roentgenaufnahme (Bitewing) fuer Karies-Befund an Zahn 36. Modalitaet: DX (Digital Radiography)."
+Title: "ImagingStudy: Bissfluegel-Aufnahme Karies Zahn 36 (DX)"
+Description: "Bissfluegel-Roentgenaufnahme (Bitewing) fuer Karies-Befund an Zahn 36. Modalitaet: DX (Digital Radiography)."
 Usage: #example
 * status = #available
 * subject = Reference(example-patient)
@@ -180,13 +181,13 @@ Usage: #example
 * modality[0].system = "http://dicom.nema.org/resources/ontology/DCM"
 * modality[0].code = #DX
 * modality[0].display = "Digital Radiography"
-// Serie: Bisstflugel (Bitewing)
+// Serie: Bissfluegel (Bitewing)
 * series[0].uid = "2.16.840.1.113883.19.5.99.4.1"
 * series[0].number = 1
 * series[0].modality.system = "http://dicom.nema.org/resources/ontology/DCM"
 * series[0].modality.code = #DX
 * series[0].modality.display = "Digital Radiography"
-* series[0].description = "Bisstflugel Zahn 36 Karies approximal"
+* series[0].description = "Bissfluegel Zahn 36 Karies approximal"
 // Pflichtfeld: mindestens eine Instanz pro Serie
 * series[0].instance[0].uid = "2.16.840.1.113883.19.5.99.4.1.1"
 * series[0].instance[0].sopClass.system = "urn:ietf:rfc:3986"
@@ -197,7 +198,7 @@ Usage: #example
 Instance: karies-befund
 InstanceOf: DiagnosticReport
 Title: "DiagnosticReport: Karies approximal Zahn 36"
-Description: "Befundbericht fuer Karies approximal an Zahn 36 auf Basis der Bisstflugel-Aufnahme."
+Description: "Befundbericht fuer Karies approximal an Zahn 36 auf Basis der Bissfluegel-Aufnahme."
 Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
@@ -209,11 +210,11 @@ Usage: #example
 * conclusion = "Karies approximal Zahn 36, radiologisch gesichert. Dentinbeteiligung K02.1."
 
 // --- Karies Condition (K02.1) ---
-// Karies mit evidence.detail auf Bisstflugel + DiagnosticReport
+// Karies mit evidence.detail auf Bissfluegel + DiagnosticReport
 Instance: karies-condition
 InstanceOf: PraxisConditionDE
 Title: "Condition: Karies K02.1 approximal Zahn 36"
-Description: "Karies-Diagnose K02.1 mit evidence.detail-Verlinkung auf Bisstflugel-ImagingStudy und Karies-DiagnosticReport. Demonstriert ImagingStudy + DiagnosticReport als evidence.detail-Typen."
+Description: "Karies-Diagnose K02.1 mit evidence.detail-Verlinkung auf Bissfluegel-ImagingStudy und Karies-DiagnosticReport. Demonstriert ImagingStudy + DiagnosticReport als evidence.detail-Typen."
 Usage: #example
 * clinicalStatus = http://terminology.hl7.org/CodeSystem/condition-clinical#active
 * verificationStatus = http://terminology.hl7.org/CodeSystem/condition-ver-status#confirmed
@@ -227,5 +228,45 @@ Usage: #example
 // asserter: Arzt mit LANR (KBV_PR_Base_Practitioner-konform)
 * asserter = Reference(par-grading-practitioner-arzt) "Dr. Stefan Mueller"
 // evidence.detail-Linking: ImagingStudy + DiagnosticReport
-* evidence[0].detail[0] = Reference(karies-bissflugel-study) "Bisstflugel-Aufnahme Zahn 36"
+* evidence[0].detail[0] = Reference(karies-bissfluegel-study) "Bissfluegel-Aufnahme Zahn 36"
 * evidence[0].detail[1] = Reference(karies-befund) "Karies-Befundbericht"
+
+// =============================================================================
+// BUNDLE: PAR-Grading — alle Constraint-Typen
+// =============================================================================
+Instance: par-grading-bundle
+InstanceOf: Bundle
+Title: "PAR-Grading Bundle — alle Constraint-Typen"
+Description: "Beispiel-Bundle fuer PAR-Grading Diagnose mit asserter=Arzt, evidence.detail=[HbA1c-Obs, SmokingStatus-Obs, ImagingStudy, DiagnosticReport]. Demonstriert alle drei fpde-shp.8 Constraints."
+Usage: #example
+* type = #collection
+* entry[0].fullUrl = "urn:uuid:par-grading-practitioner-arzt"
+* entry[0].resource = par-grading-practitioner-arzt
+* entry[1].fullUrl = "urn:uuid:par-grading-hba1c-obs"
+* entry[1].resource = par-grading-hba1c-obs
+* entry[2].fullUrl = "urn:uuid:par-grading-smoking-obs"
+* entry[2].resource = par-grading-smoking-obs
+* entry[3].fullUrl = "urn:uuid:par-grading-roentgen"
+* entry[3].resource = par-grading-roentgen
+* entry[4].fullUrl = "urn:uuid:par-grading-befund"
+* entry[4].resource = par-grading-befund
+* entry[5].fullUrl = "urn:uuid:par-grading-condition"
+* entry[5].resource = par-grading-condition
+
+// =============================================================================
+// BUNDLE: Karies — ImagingStudy + DiagnosticReport
+// =============================================================================
+Instance: karies-bundle
+InstanceOf: Bundle
+Title: "Karies Bundle — ImagingStudy + DiagnosticReport"
+Description: "Beispiel-Bundle fuer Karies-Diagnose K02.1 mit asserter=Arzt, evidence.detail=[Bissfluegel-ImagingStudy, DiagnosticReport]. Demonstriert ImagingStudy + DiagnosticReport als evidence.detail-Typen."
+Usage: #example
+* type = #collection
+* entry[0].fullUrl = "urn:uuid:par-grading-practitioner-arzt"
+* entry[0].resource = par-grading-practitioner-arzt
+* entry[1].fullUrl = "urn:uuid:karies-bissfluegel-study"
+* entry[1].resource = karies-bissfluegel-study
+* entry[2].fullUrl = "urn:uuid:karies-befund"
+* entry[2].resource = karies-befund
+* entry[3].fullUrl = "urn:uuid:karies-condition"
+* entry[3].resource = karies-condition
