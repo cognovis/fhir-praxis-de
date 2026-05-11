@@ -4,6 +4,23 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.57.0] - 2026-05-11
+
+### Bug Fixes
+
+- **QA Cleanup 2 (fpde-95o)**: Resolved 36 additional QA errors from v0.56.0 baseline:
+  - **fullUrl fixes**: All 22 Bundle.entry.fullUrl values changed to absolute URIs — 12 relative URLs (`Patient/...`) and 10 invalid `urn:uuid:<name>` patterns fixed in `example-multi-coverage.fsh` and `example-condition-constraints-bundle.fsh`
+  - **LOINC 88031-0**: Corrected display from "Tobacco use" to "Smokeless tobacco status" (verified via tx.fhir.org) in `lab-observation.fsh` and `example-condition-constraints-bundle.fsh`
+  - **LOINC 36803-5**: Replaced with correct code 24802-1 "MR Knee" in all examples and valuesets (36803-5 is actually "MRA Pulmonary vessels")
+  - **LOINC 24558-9**: Corrected usage — dental diagnostic reports now use 18748-4 "Diagnostic imaging study"; valueset updated with correct "US Abdomen" display
+  - **v3-ActCode #BILLED**: Removed invalid system/code from 3 ChargeItemDefinition priceComponent examples; text-only pattern used instead
+  - **VersicherungsartDeBasis #SKT**: Replaced with valid code `#BEI` (Beihilfe) in ExampleCoverageBeihilfe
+  - **IG URL pattern**: Added suppression for "IG URL should refer directly to ImplementationGuide resource" in `ignoreWarnings.txt`
+
+### Documentation
+
+- **QA Audit**: Created `docs/qa-audit-v0.56.0.md` with full error catalog (59 errors), file mapping, LOINC verification table, and remediation for each category
+
 ## [0.56.0] - 2026-05-11
 
 ### Bug Fixes
