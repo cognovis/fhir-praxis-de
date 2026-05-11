@@ -11,7 +11,7 @@ Alias: $GOZ = https://fhir.de/CodeSystem/bzaek/goz
 // ============================================================
 // Beispiel 1: BEMA-Heilbehandlung — steuerbefreit §4 Nr.14a UStG
 // Steuerkategorie E (befreit), Befreiungsgrund para4-nr14a
-// Zahnaeztliche GKV-Behandlung nach BEMA Ziffer 01 (Untersuchung)
+// Zahnaerztliche GKV-Behandlung nach BEMA Ziffer 01 (Untersuchung)
 // ============================================================
 
 Instance: example-cid-bema-heilbehandlung
@@ -24,7 +24,7 @@ Usage: #example
 * status = #active
 * title = "BEMA 01 — Klinische Untersuchung"
 * description = "Klinische Untersuchung (GKV-Abrechnung BEMA Ziffer 01). Heilbehandlungsleistung eines Zahnarztes, steuerbefreit nach §4 Nr. 14a UStG."
-* code.coding[0].system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA"
+* code.coding[0].system = $BEMA
 * code.coding[0].code = #01
 * code.coding[0].display = "Klinische Untersuchung"
 // propertyGroup: Preis mit Steuer-Vorbelegung (Kategorie E — Heilbehandlung)
@@ -54,7 +54,7 @@ Usage: #example
 * status = #active
 * title = "IGeL Bleaching — Zahnaufhellung"
 * description = "Professionelle Zahnaufhellung (Bleaching) als IGeL-Leistung. Keine Heilbehandlung im umsatzsteuerlichen Sinne (§4 Nr. 14a UStG nicht anwendbar) — regulaere 19% USt."
-* code.coding[0].system = "https://fhir.de/CodeSystem/bzaek/goz"
+* code.coding[0].system = $GOZ
 * code.coding[0].code = #1000
 * code.coding[0].display = "Bleaching (Zahnaufhellung)"
 // propertyGroup: Basispreis 19% USt
