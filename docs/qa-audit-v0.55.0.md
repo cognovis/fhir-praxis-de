@@ -3,8 +3,8 @@
 **Audit date:** 2026-05-11
 **QA report source:** https://cognovis.github.io/fhir-praxis-de/qa.html (v0.55.0 published)
 **Total errors:** 79
-**Fixed in v0.56.0:** 32 internal errors
-**Suppressed as external:** 47 external errors (added to ignoreWarnings.txt)
+**Fixed in v0.56.0:** 26 internal errors
+**Suppressed as external:** 53 external errors (added to ignoreWarnings.txt)
 
 ## Error Summary by Category
 
@@ -37,7 +37,7 @@
   - **Fix:** Changed to "mail" in `input/fsh/valuesets/report-distribution-channel.fsh`.
 - **2× ParticipationMode TYPEWRIT**: Wrong display in `ReportDistributionChannelVS`.
   - **Fix:** Changed to "typewritten" in same file.
-- **1× misc**: HbA1c/SmokingStatus binding errors from parent profile.
+- **1× external**: `Error from https://tx.fhir.org/r4: Error: The filter "LIST = LL2255-7" is not understood or supported` — SmokingStatus Observation binding on LOINC LL2255-7 panel filter not supported by tx.fhir.org. Suppressed in `input/ignoreWarnings.txt`.
 
 ### Bundle-karies-bundle (10 errors)
 
@@ -158,14 +158,47 @@
 The following patterns are added to `input/ignoreWarnings.txt` and should be excluded from any CI error gate:
 
 ```text
+# External German CodeSystems not resolvable by tx.fhir.org
+A definition for CodeSystem 'https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM' could not be found, so the code cannot be validated
+Das CodeSystem https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM ist unbekannt
+A definition for CodeSystem 'http://fhir.de/CodeSystem/goae' could not be found, so the code cannot be validated
+A definition for CodeSystem 'http://fhir.de/CodeSystem/bfarm/ops' could not be found, so the code cannot be validated
+A definition for CodeSystem 'http://fhir.de/CodeSystem/bfarm/icd-10-gm' could not be found, so the code cannot be validated
+
+# External German NamingSystems not resolvable
+URL-Wert 'http://fhir.de/NamingSystem/arge-ik/iknr' löst nicht auf
+URL-Wert 'http://fhir.de/NamingSystem/gkv/kvid-10' löst nicht auf
+URL-Wert 'https://fhir.kbv.de/NamingSystem/KBV_NS_Base_ANR' löst nicht auf
+URL-Wert 'https://fhir.de/sid/gkv/kvid-10' löst nicht auf
+
+# SNOMED CT code 1255414003 — Cone beam computed tomography of maxilla (not yet indexed)
 Unknown code '1255414003' in the CodeSystem 'http://snomed.info/sct'
+
+# tx.fhir.org cannot process LOINC LL2255-7 panel filter
 Error from https://tx.fhir.org/r4: Error: The filter "LIST = LL2255-7" is not understood or supported
+
+# German dental code systems — valid but not registered on international tx.fhir.org
 A definition for CodeSystem 'https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA' could not be found
 Das CodeSystem https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BEMA ist unbekannt
 A definition for CodeSystem 'https://fhir.de/CodeSystem/bzaek/goz' could not be found
 A definition for CodeSystem 'https://fhir.de/CodeSystem/bak/goae' could not be found
 A definition for CodeSystem 'urn:un:unece:uncefact:codelist:standard:5305' could not be found
-URL-Wert 'https://fhir.de/sid/gkv/kvid-10' löst nicht auf
+
+# de.basisprofil.r4 dependency canonical not resolvable (known issue with fhir.de registry)
+Canonical URL 'http://fhir.de/ImplementationGuide/basisprofil-de-r4' kann nicht aufgelöst werden
+The canonical URL http://fhir.de/ImplementationGuide/basisprofil-de-r4 doesn't point to an actual ImplementationGuide resource
+
+# Own CodeSystems with #not-present / #example content — codes provided via ETL, not in IG
+Error from https://tx.fhir.org/r4: Error: A definition for CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/bgt2001' could not be found, so the value set cannot be expanded
+The value set references CodeSystem 'https://fhir.cognovis.de/praxis/CodeSystem/bgt2001' which has status 'example'
+
+# No German (de-DE) display names registered on tx.fhir.org for international codes
+There are no valid display names found for the code urn:iso:std:iso:3166#DE for language(s) 'de-DE'. The display is 'Germany' which is the default language display
+There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/v3-ActCode#AMB for language(s) 'de-DE'. The display is 'ambulatory' which is the default language display
+There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/v3-ActCode#PBILLACCT for language(s) 'de-DE'. The display is 'patient billing account' which is the default language display
+There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/adjudication#eligible for language(s) 'de-DE'. The display is 'Eligible Amount' which is the default language display
+There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/adjudication#submitted for language(s) 'de-DE'. The display is 'Submitted Amount' which is the default language display
+There are no valid display names found for the code http://terminology.hl7.org/CodeSystem/payment-type#payment for language(s) 'de-DE'. The display is 'Payment' which is the default language display
 ```
 
 Additionally, kvid-2 warnings (GKV/PKV type codes retired) originate from `de.basisprofil.r4` dependency and cannot be fixed in this IG.
