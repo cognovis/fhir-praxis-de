@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.59.0] - 2026-05-12
+
+### Bug Fixes
+
+- **QA Final Cleanup (manual, follow-up)**: Anamnese-Questionnaire-Struktur korrigiert — "beschwerden" + "vorerkrankungen" als Top-Level items mit exact-matching text zur QuestionnaireResponse. Fixes "Structural Error: item with linkid vorerkrankungen is in the wrong place" + Text-Mismatch-Constraint.
+
 ## [0.58.0] - 2026-05-12
 
 ### Bug Fixes
