@@ -11,6 +11,9 @@ from pathlib import Path
 
 import pytest
 
+# Make qa_gate importable for unit-level tests
+sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
+
 # ---------------------------------------------------------------------------
 # Helpers to build synthetic qa.html content
 # ---------------------------------------------------------------------------
@@ -311,3 +314,136 @@ def test_v059_baseline_no_internal_errors():
         f"stdout: {result.stdout}\nstderr: {result.stderr}"
     )
     assert "internal_errors=0" in result.stdout or "0 internal error" in result.stdout.lower()
+
+
+# ---------------------------------------------------------------------------
+# Test 11: HTML entities in error messages are unescaped before allowlist matching
+# ---------------------------------------------------------------------------
+
+
+def make_qa_html_raw(error_rows_html: str, n_errors: int) -> str:
+    """Build qa.html with a pre-formatted error row block (allows raw HTML entities)."""
+    return f"""<!DOCTYPE HTML>
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<!-- broken links = 0, errors = {n_errors}, warn = 0, info = 0-->
+<head><title>Test IG : Validation Results</title></head>
+<body>
+<p>Generated Tue May 12 2026 for test.ig#0.1.0</p>
+<tr><td>Summary:</td><td> errors = {n_errors}, warn = 0, info = 0, broken links = 0.</td></tr>
+<a name="sorted"> </a>
+<p><b>Errors sorted by type</b></p>
+<table class="grid">
+{error_rows_html}
+</table>
+</body>
+</html>"""
+
+
+def test_html_entities_unescaped_before_allowlist_matching():
+    """Error messages with HTML-escaped characters are unescaped before allowlist matching.
+
+    IG Publisher may emit messages like:
+        Error from https://tx.fhir.org/r4: Error: The filter &quot;LIST = LL2255-7&quot; is not understood
+    which must match the allowlist pattern containing literal double-quotes.
+    Without html.unescape(), the pattern match fails and the error is counted as internal.
+    """
+    escaped_row = (
+        '   <tr style="background-color: #ffe6e6">\n'
+        '     <td><a href="test.html">test/resource.json</a></td>'
+        '<td><b>Error from https://tx.fhir.org/r4: Error: The filter &quot;LIST = LL2255-7&quot; is not understood</b></td>'
+        '<td><a href="ctx.html">Context</a></td>\n'
+        '   </tr>\n'
+    )
+    html = make_qa_html_raw(escaped_row, n_errors=1)
+    result = run_qa_gate(html, VALID_ALLOWLIST)
+    assert result.returncode == 0, (
+        "HTML-entity-escaped error message should match allowlist after unescape, "
+        f"got exit {result.returncode}\n"
+        f"stdout: {result.stdout}\nstderr: {result.stderr}"
+    )
+    assert "internal_errors=0" in result.stdout or "0 internal error" in result.stdout.lower()
+
+
+def test_html_amp_entity_in_error_message():
+    """&amp; entities in error messages are unescaped correctly."""
+    allowlist_with_amp = """
+version: "1"
+patterns:
+  - pattern: "Error: A & B condition not met"
+    reason: "Test entity unescape"
+    source: "test"
+"""
+    escaped_row = (
+        '   <tr style="background-color: #ffe6e6">\n'
+        '     <td>f.json</td>'
+        '<td><b>Error: A &amp; B condition not met</b></td>'
+        '<td>ctx</td>\n'
+        '   </tr>\n'
+    )
+    html = make_qa_html_raw(escaped_row, n_errors=1)
+    result = run_qa_gate(html, allowlist_with_amp)
+    assert result.returncode == 0, (
+        "&amp; should be unescaped to & before allowlist matching, "
+        f"got exit {result.returncode}\n"
+        f"stdout: {result.stdout}\nstderr: {result.stderr}"
+    )
+
+
+# ---------------------------------------------------------------------------
+# Test 12: YAML parser rejects unclosed brackets (fail-closed, not fail-open)
+# ---------------------------------------------------------------------------
+
+
+def test_malformed_yaml_unclosed_bracket_rejected():
+    """Allowlist with unclosed bracket in pattern value causes exit 1.
+
+    Ensures the YAML parser raises ValueError for '[unclosed bracket' values,
+    which load_allowlist converts to sys.exit(1). The gate must never silently
+    pass due to a partial parse of a corrupt config.
+    """
+    malformed_yaml = (
+        'version: "1"\npatterns:\n'
+        '  - pattern: [unclosed bracket\n'
+        '    reason: "test"\n'
+        '    source: "test"'
+    )
+    html = make_qa_html(error_messages=["Some error"])
+    result = run_qa_gate(html, malformed_yaml)
+    assert result.returncode != 0, (
+        "Unclosed bracket in pattern value must cause exit 1, "
+        f"got exit {result.returncode}\n"
+        f"stdout: {result.stdout}\nstderr: {result.stderr}"
+    )
+
+
+def test_malformed_yaml_partial_parse_not_fail_open():
+    """Corrupt YAML that would yield a partial pattern list must not allow errors through.
+
+    Directly verifies that _parse_yaml_simple raises ValueError for an unclosed
+    bracket in a pattern value, preventing any partial pattern from being used.
+    """
+    from qa_gate import _parse_yaml_simple  # type: ignore
+
+    corrupt_text = (
+        'version: "1"\npatterns:\n'
+        '  - pattern: [unclosed\n'
+        '    reason: "r"\n'
+        '    source: "s"'
+    )
+    try:
+        _parse_yaml_simple(corrupt_text)
+        assert False, "_parse_yaml_simple should raise ValueError for '[unclosed' pattern value"
+    except ValueError:
+        pass  # Expected
+
+
+def test_malformed_yaml_flow_sequence_on_patterns_key_rejected():
+    """Inline flow sequence on 'patterns:' key (other than []) causes exit 1."""
+    malformed_yaml = 'version: "1"\npatterns: [- pattern: "x", reason: "y"]'
+    html = make_qa_html(error_messages=["Some error"])
+    result = run_qa_gate(html, malformed_yaml)
+    assert result.returncode != 0, (
+        "Inline non-empty flow sequence on patterns key must cause exit 1, "
+        f"got exit {result.returncode}\n"
+        f"stdout: {result.stdout}\nstderr: {result.stderr}"
+    )
