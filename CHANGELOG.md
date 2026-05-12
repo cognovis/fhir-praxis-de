@@ -2,6 +2,12 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Features
+
+- **QA Release Gate**: CI-Workflow prüft qa.html auf interne Fehler und blockt Tag/npm-publish wenn internal_errors > 0. Externe Fehler (tx.fhir.org, externe FHIR-Profile) können in .github/qa-allowlist.yml konfiguriert werden. Pattern dokumentiert für dental-de und terminology-de.
+
 ## [0.59.0] - 2026-05-12
 
 ### Bug Fixes
