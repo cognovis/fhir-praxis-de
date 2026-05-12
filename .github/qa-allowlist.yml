@@ -1,0 +1,46 @@
+# QA Error Allowlist — external errors excluded from the CI release gate
+#
+# Format:
+#   patterns:
+#     - pattern: "substring that must appear in the error message"
+#       reason:  "why this error is external and cannot be fixed here"
+#       source:  "which upstream system/package causes this"
+#
+# Rules:
+#   - Matching is substring-based: the 'pattern' string must appear anywhere
+#     in the error message text.
+#   - An empty patterns list means NO errors are allowed through (fail-closed).
+#   - Every entry MUST have a documented 'reason' and 'source'.
+#   - Do NOT add internal errors here — fix them in the FSH sources instead.
+#
+# To add a new entry:
+#   1. Confirm the error originates from an external system (tx server,
+#      external IG canonical, third-party terminology).
+#   2. Add a new list item with pattern, reason, and source.
+#   3. Open a tracking issue for the upstream fix and reference it in reason.
+#   4. See docs/release-process.md for full guidance.
+#
+# Baseline: v0.59.0 (5 external errors confirmed, 0 internal errors)
+# ---------------------------------------------------------------------------
+
+version: "1"
+patterns:
+  - pattern: "Error from https://tx.fhir.org/r4: Error: The filter \"LIST = LL2255-7\" is not understood"
+    reason: "tx.fhir.org server-side LOINC filter limitation — the LIST filter type for LOINC panels is not supported by the public tx server; the ValueSet is correct per LOINC spec. Appears 2x in QA (once per usage site)."
+    source: "tx.fhir.org"
+
+  - pattern: "IG URL should refer directly to the ImplementationGuide resource"
+    reason: "de.basisprofil.r4 canonical resolution issue — the external IG's canonical URL does not resolve to a direct ImplementationGuide resource endpoint. This is an upstream packaging issue in de.basisprofil.r4. Appears 2x in QA."
+    source: "de.basisprofil.r4"
+
+  - pattern: "Unknown code '1255414003' in the CodeSystem 'http://snomed.info/sct'"
+    reason: "SNOMED CT concept 1255414003 (Dental calculus) is not yet indexed in the international SNOMED CT release available to tx.fhir.org. The code is valid in the SNOMED CT German Extension. Appears 1x in QA."
+    source: "snomed-ct"
+
+  - pattern: "The link 'http://fhir.de/StructureDefinition/coverage-de-gkv"
+    reason: "Broken external link to de.basisprofil.r4 canonical — coverage-de-gkv is defined in the German base profiles package but the canonical URL does not resolve in the IG Publisher's link checker. Appears 1x in multi-coverage.html."
+    source: "de.basisprofil.r4"
+
+  - pattern: "The link 'http://fhir.de/StructureDefinition/coverage-de-basis"
+    reason: "Broken external link to de.basisprofil.r4 canonical — coverage-de-basis is defined in the German base profiles package but the canonical URL does not resolve in the IG Publisher's link checker. Appears 1x in multi-coverage.html."
+    source: "de.basisprofil.r4"
