@@ -29,7 +29,7 @@ patterns:
     reason: "tx.fhir.org server-side LOINC filter limitation — the LIST filter type for LOINC panels is not supported by the public tx server; the ValueSet is correct per LOINC spec. Appears 2x in QA (once per usage site)."
     source: "tx.fhir.org"
 
-  - pattern: "IG URL should refer directly to the ImplementationGuide resource"
+  - pattern: "The URL should refer directly to the ImplementationGuide resource"
     reason: "de.basisprofil.r4 canonical resolution issue — the external IG's canonical URL does not resolve to a direct ImplementationGuide resource endpoint. This is an upstream packaging issue in de.basisprofil.r4. Appears 2x in QA. Pattern specificity note: this message is only emitted by IG Publisher for de.basisprofil.r4's canonical URL (http://fhir.de/ImplementationGuide/basisprofil-de-r4) in the current project; if the same message appeared for our own IG canonical it would be a genuine internal error requiring immediate investigation."
     source: "de.basisprofil.r4"
 

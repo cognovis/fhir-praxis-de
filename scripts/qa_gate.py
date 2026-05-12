@@ -62,7 +62,7 @@ def parse_qa_html(qa_path: Path) -> tuple[int, int, list[str]]:
         <!-- broken links = N, errors = N, warn = N, info = N-->
 
     Individual error messages are extracted from table rows with
-    background-color: #ffe6e6 (IG Publisher v2.2.x error-severity color).
+    background-color: #ffcccc (IG Publisher v2.2.x error-severity color).
     Each such row has 3 cells: filename, <b>message</b>, context.
 
     Raises SystemExit(1) on missing/empty/malformed file.
@@ -94,18 +94,28 @@ def parse_qa_html(qa_path: Path) -> tuple[int, int, list[str]]:
     errors_count = int(comment_match.group(2))
 
     # Parse individual error messages from error-colored rows.
-    # IG Publisher v2.2.x uses background-color: #ffe6e6 for error-severity rows
+    # IG Publisher v2.2.x uses background-color: #ffcccc for error-severity rows
     # in the "Errors sorted by type" detail section.
-    # Row format: <tr style="background-color: #ffe6e6">
-    #   <td>filename</td><td><b>message</b></td><td>context</td>
+    # Row format: <tr style="background-color: #ffcccc">
+    #   <td>location</td><td><b>error</b></td><td><b>message</b></td><td>context</td>
     # </tr>
+    # Note: #ffcccc is also used for summary counter cells (just "<b>2</b>" etc.)
+    # — we filter by requiring "<b>error</b>" as severity marker, then take the
+    # NEXT <b>...</b> as the message.
     error_messages: list[str] = []
     error_row_pattern = re.compile(
-        r'<tr[^>]*background-color:\s*#ffe6e6[^>]*>.*?<td[^>]*><b>(.*?)</b></td>',
+        r'<tr[^>]*background-color:\s*#ffcccc[^>]*>(.*?)</tr>',
         re.DOTALL | re.IGNORECASE,
     )
-    for match in error_row_pattern.finditer(content):
-        msg = html_module.unescape(re.sub(r'<[^>]+>', '', match.group(1)).strip())
+    message_pattern = re.compile(r'<b>error</b>\s*</td>\s*<td[^>]*><b>(.*?)</b>', re.DOTALL | re.IGNORECASE)
+    for row_match in error_row_pattern.finditer(content):
+        row_content = row_match.group(1)
+        if '<b>error</b>' not in row_content.lower():
+            continue
+        msg_match = message_pattern.search(row_content)
+        if not msg_match:
+            continue
+        msg = html_module.unescape(re.sub(r'<[^>]+>', '', msg_match.group(1)).strip())
         if msg:
             error_messages.append(msg)
 
@@ -357,7 +367,7 @@ def main() -> None:
     all_errors = list(error_messages)
     detail_total = len(all_errors)
     if detail_total < total_from_comment:
-        # Broken links or other errors not captured as #ffe6e6 rows —
+        # Broken links or other errors not captured as #ffcccc rows —
         # pad with a generic message so count stays accurate.
         for _ in range(total_from_comment - detail_total):
             all_errors.append("(broken link or unparsed error — see qa.html)")

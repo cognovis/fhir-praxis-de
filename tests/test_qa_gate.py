@@ -22,7 +22,7 @@ sys.path.insert(0, str(Path(__file__).parent.parent / "scripts"))
 def make_qa_html(error_messages: list[str], info_messages: list[str] | None = None) -> str:
     """Create synthetic qa.html matching real IG Publisher v2.2.4 format.
 
-    Error rows use background-color: #ffe6e6 (parsed by gate).
+    Error rows use background-color: #ffcccc (parsed by gate).
     Info rows use background-color: #fffff2 (ignored by gate — not errors).
     The HTML comment provides authoritative counts used for the fast path.
     """
@@ -30,12 +30,14 @@ def make_qa_html(error_messages: list[str], info_messages: list[str] | None = No
     n_errors = len(error_messages)
     n_info = len(info_messages)
 
-    # Build error rows (background: #ffe6e6)
+    # Build error rows (background: #ffcccc) — IG Publisher v2.2.x format:
+    # <td>location</td><td><b>error</b></td><td><b>message</b></td><td>context</td>
     error_rows = ""
     for msg in error_messages:
         error_rows += (
-            f'   <tr style="background-color: #ffe6e6">\n'
+            f'   <tr style="background-color: #ffcccc">\n'
             f'     <td><a href="test.html">test/resource.json</a></td>'
+            f'<td><b>error</b></td>'
             f'<td><b>{msg}</b></td>'
             f'<td><a href="ctx.html">Context</a></td>\n'
             f'   </tr>\n'
@@ -348,8 +350,9 @@ def test_html_entities_unescaped_before_allowlist_matching():
     Without html.unescape(), the pattern match fails and the error is counted as internal.
     """
     escaped_row = (
-        '   <tr style="background-color: #ffe6e6">\n'
+        '   <tr style="background-color: #ffcccc">\n'
         '     <td><a href="test.html">test/resource.json</a></td>'
+        '<td><b>error</b></td>'
         '<td><b>Error from https://tx.fhir.org/r4: Error: The filter &quot;LIST = LL2255-7&quot; is not understood</b></td>'
         '<td><a href="ctx.html">Context</a></td>\n'
         '   </tr>\n'
@@ -374,8 +377,9 @@ patterns:
     source: "test"
 """
     escaped_row = (
-        '   <tr style="background-color: #ffe6e6">\n'
+        '   <tr style="background-color: #ffcccc">\n'
         '     <td>f.json</td>'
+        '<td><b>error</b></td>'
         '<td><b>Error: A &amp; B condition not met</b></td>'
         '<td>ctx</td>\n'
         '   </tr>\n'

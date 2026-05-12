@@ -2,7 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
-## [Unreleased]
+## [0.61.0] - 2026-05-12
+
+### Bug Fixes
+
+- **qa-gate (post-release)**: Fix IG-Publisher row color #ffe6e6 → #ffcccc (actual color in v2.2.x output)
+- **qa-gate (post-release)**: Parser handles full row format `<td>location</td><td><b>error</b></td><td><b>message</b></td>` — skips counter cells that only have severity-marker `<b>N</b>`
+- **qa-gate (post-release)**: Allowlist pattern "IG URL should refer directly" → "The URL should refer directly" (actual message wording)
+- **qa-gate (post-release)**: Test helper updated to match new row format with severity column
+
+## [0.60.0] - 2026-05-12
 
 ### Bug Fixes
 
