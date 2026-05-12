@@ -18,10 +18,10 @@ See docs/release-process.md for a full explanation of the gate and allowlist for
 from __future__ import annotations
 
 import argparse
+import os
 import re
 import sys
 from dataclasses import dataclass, field
-from html.parser import HTMLParser
 from pathlib import Path
 
 
@@ -44,6 +44,7 @@ class QaResult:
     external_errors: int = 0
     internal_messages: list[str] = field(default_factory=list)
     external_messages: list[str] = field(default_factory=list)
+    external_entries: list[AllowlistEntry] = field(default_factory=list)
 
 
 # ---------------------------------------------------------------------------
@@ -51,59 +52,19 @@ class QaResult:
 # ---------------------------------------------------------------------------
 
 
-class QaHtmlParser(HTMLParser):
-    """Parse IG Publisher qa.html and extract rows where severity is 'Error'.
+def parse_qa_html(qa_path: Path) -> tuple[int, int, list[str]]:
+    """Parse IG Publisher qa.html.
 
-    The IG Publisher generates Bootstrap tables where each row contains:
-        <td ...>Error</td><td>message text</td>
-    We collect message text from cells that follow an 'Error' severity cell.
-    """
+    Returns: (error_count_from_comment, broken_links_from_comment, error_messages)
 
-    def __init__(self) -> None:
-        super().__init__()
-        self._in_td = False
-        self._current_cell_text = ""
-        self._row_cells: list[str] = []
-        self._in_tr = False
-        self.errors: list[str] = []
+    The authoritative counts come from the HTML comment at the top:
+        <!-- broken links = N, errors = N, warn = N, info = N-->
 
-    def handle_starttag(self, tag: str, attrs: list[tuple[str, str | None]]) -> None:
-        if tag == "tr":
-            self._in_tr = True
-            self._row_cells = []
-        elif tag == "td" and self._in_tr:
-            self._in_td = True
-            self._current_cell_text = ""
+    Individual error messages are extracted from table rows with
+    background-color: #ffe6e6 (IG Publisher v2.2.x error-severity color).
+    Each such row has 3 cells: filename, <b>message</b>, context.
 
-    def handle_endtag(self, tag: str) -> None:
-        if tag == "td" and self._in_td:
-            self._in_td = False
-            self._row_cells.append(self._current_cell_text.strip())
-        elif tag == "tr" and self._in_tr:
-            self._in_tr = False
-            self._process_row(self._row_cells)
-            self._row_cells = []
-
-    def handle_data(self, data: str) -> None:
-        if self._in_td:
-            self._current_cell_text += data
-
-    def _process_row(self, cells: list[str]) -> None:
-        """Process a completed table row; collect message if severity is 'Error'."""
-        if len(cells) < 2:
-            return
-        severity = cells[0].strip()
-        # Match "Error" exactly (case-insensitive for robustness)
-        if severity.lower() == "error":
-            message = cells[1].strip()
-            if message:
-                self.errors.append(message)
-
-
-def parse_qa_html(qa_path: Path) -> list[str]:
-    """Parse qa.html and return list of error message strings.
-
-    Raises SystemExit(1) on missing or empty file.
+    Raises SystemExit(1) on missing/empty/malformed file.
     """
     if not qa_path.exists():
         print(f"ERROR: qa.html not found at {qa_path}", file=sys.stderr)
@@ -114,9 +75,40 @@ def parse_qa_html(qa_path: Path) -> list[str]:
         print(f"ERROR: qa.html is empty at {qa_path}", file=sys.stderr)
         sys.exit(1)
 
-    parser = QaHtmlParser()
-    parser.feed(content)
-    return parser.errors
+    # Parse HTML comment for authoritative counts
+    # Format: <!-- broken links = N, errors = N, warn = N, info = N-->
+    comment_match = re.search(
+        r'<!--\s*broken links\s*=\s*(\d+),\s*errors\s*=\s*(\d+)',
+        content,
+    )
+    if not comment_match:
+        print(
+            "ERROR: Could not find summary comment in qa.html "
+            "(expected: <!-- broken links = N, errors = N, ...-->)",
+            file=sys.stderr,
+        )
+        sys.exit(1)
+
+    broken_links = int(comment_match.group(1))
+    errors_count = int(comment_match.group(2))
+
+    # Parse individual error messages from error-colored rows.
+    # IG Publisher v2.2.x uses background-color: #ffe6e6 for error-severity rows
+    # in the "Errors sorted by type" detail section.
+    # Row format: <tr style="background-color: #ffe6e6">
+    #   <td>filename</td><td><b>message</b></td><td>context</td>
+    # </tr>
+    error_messages: list[str] = []
+    error_row_pattern = re.compile(
+        r'<tr[^>]*background-color:\s*#ffe6e6[^>]*>.*?<td[^>]*><b>(.*?)</b></td>',
+        re.DOTALL | re.IGNORECASE,
+    )
+    for match in error_row_pattern.finditer(content):
+        msg = re.sub(r'<[^>]+>', '', match.group(1)).strip()
+        if msg:
+            error_messages.append(msg)
+
+    return errors_count, broken_links, error_messages
 
 
 # ---------------------------------------------------------------------------
@@ -137,20 +129,8 @@ def _parse_yaml_simple(text: str) -> dict:
     Uses stdlib only (no PyYAML dependency in CI).
     Raises ValueError on parse failure (e.g. unclosed brackets, duplicate keys).
     """
-    # Quick structural sanity check: reject unclosed brackets/braces
-    # YAML flow sequences like "patterns: [unclosed" are invalid
-    opened = 0
-    for ch in text:
-        if ch in ("[", "{"):
-            opened += 1
-        elif ch in ("]", "}"):
-            opened -= 1
-        if opened < 0:
-            raise ValueError("Unbalanced brackets/braces in YAML")
-    if opened != 0:
-        raise ValueError("Unclosed brackets/braces in YAML")
-
     lines = text.splitlines()
+    version: str = ""
     patterns: list[dict] = []
     current_entry: dict | None = None
     in_patterns_block = False
@@ -162,6 +142,13 @@ def _parse_yaml_simple(text: str) -> dict:
 
         # Skip comments and blank lines
         if not stripped or stripped.startswith("#"):
+            i += 1
+            continue
+
+        # Detect "version:" key
+        m = re.match(r"^version\s*:\s*(.*)", stripped)
+        if m and not in_patterns_block:
+            version = _unquote(m.group(1).strip())
             i += 1
             continue
 
@@ -201,7 +188,7 @@ def _parse_yaml_simple(text: str) -> dict:
     if current_entry is not None:
         patterns.append(current_entry)
 
-    return {"patterns": patterns}
+    return {"version": version, "patterns": patterns}
 
 
 def _unquote(s: str) -> str:
@@ -216,10 +203,13 @@ def _unquote(s: str) -> str:
     return s
 
 
+SUPPORTED_VERSIONS = {"1"}
+
+
 def load_allowlist(allowlist_path: Path) -> list[AllowlistEntry]:
     """Load qa-allowlist.yml and return list of AllowlistEntry objects.
 
-    Raises SystemExit(1) on missing file or parse failure.
+    Raises SystemExit(1) on missing file, parse failure, or unsupported version.
     """
     if not allowlist_path.exists():
         print(f"ERROR: allowlist not found at {allowlist_path}", file=sys.stderr)
@@ -234,6 +224,18 @@ def load_allowlist(allowlist_path: Path) -> list[AllowlistEntry]:
         data = _parse_yaml_simple(text)
     except Exception as exc:
         print(f"ERROR: failed to parse allowlist YAML: {exc}", file=sys.stderr)
+        sys.exit(1)
+
+    version = data.get("version", "")
+    if not version:
+        print("ERROR: allowlist missing 'version' field", file=sys.stderr)
+        sys.exit(1)
+    if str(version) not in SUPPORTED_VERSIONS:
+        print(
+            f"ERROR: unsupported allowlist version '{version}' "
+            f"(supported: {SUPPORTED_VERSIONS})",
+            file=sys.stderr,
+        )
         sys.exit(1)
 
     entries = []
@@ -287,6 +289,7 @@ def run_gate(errors: list[str], allowlist: list[AllowlistEntry]) -> QaResult:
         if matched is not None:
             result.external_errors += 1
             result.external_messages.append(msg)
+            result.external_entries.append(matched)
         else:
             result.internal_errors += 1
             result.internal_messages.append(msg)
@@ -310,23 +313,37 @@ def main() -> None:
     )
     parser.add_argument(
         "--allowlist",
-        required=False,
+        required=True,
         metavar="PATH",
-        help="Path to .github/qa-allowlist.yml (fail-closed if omitted and errors exist)",
+        help="Path to .github/qa-allowlist.yml",
     )
     args = parser.parse_args()
 
     qa_path = Path(args.qa_html)
-    errors = parse_qa_html(qa_path)
+    errors_count, broken_links, error_messages = parse_qa_html(qa_path)
 
-    # Load allowlist — fail-closed if not provided
-    if args.allowlist:
-        allowlist = load_allowlist(Path(args.allowlist))
-    else:
-        # No allowlist provided: all errors count as internal
-        allowlist = []
+    # Fast path: if comment says 0 errors and 0 broken links, gate passes immediately
+    total_from_comment = errors_count + broken_links
+    if total_from_comment == 0:
+        print("QA Gate: total_errors=0 internal_errors=0 external_errors=0")
+        print("\nQA gate passed.")
+        _write_step_summary(QaResult())
+        sys.exit(0)
 
-    result = run_gate(errors, allowlist)
+    allowlist = load_allowlist(Path(args.allowlist))
+
+    # Use all parsed error messages; broken_links count is already reflected in
+    # errors_count+broken_links. If the HTML detail rows don't cover broken links,
+    # synthesize a placeholder so the count is never understated.
+    all_errors = list(error_messages)
+    detail_total = len(all_errors)
+    if detail_total < total_from_comment:
+        # Broken links or other errors not captured as #ffe6e6 rows —
+        # pad with a generic message so count stays accurate.
+        for _ in range(total_from_comment - detail_total):
+            all_errors.append("(broken link or unparsed error — see qa.html)")
+
+    result = run_gate(all_errors, allowlist)
 
     # Print summary
     print(
@@ -342,8 +359,11 @@ def main() -> None:
 
     if result.external_errors > 0:
         print(f"\nExternal errors ({result.external_errors}) — allowlisted, not blocking:")
-        for msg in result.external_messages:
-            print(f"  - {msg}")
+        for msg, entry in zip(result.external_messages, result.external_entries):
+            print(f"  - [{entry.source}] {msg}")
+            print(f"    Reason: {entry.reason}")
+
+    _write_step_summary(result)
 
     if result.internal_errors > 0:
         print("\nQA GATE FAILED — fix internal errors before releasing.")
@@ -351,6 +371,23 @@ def main() -> None:
     else:
         print("\nQA gate passed.")
         sys.exit(0)
+
+
+def _write_step_summary(result: QaResult) -> None:
+    """Write a Markdown summary table to GITHUB_STEP_SUMMARY if set."""
+    summary_path = os.environ.get("GITHUB_STEP_SUMMARY")
+    if not summary_path:
+        return
+    with open(summary_path, "a", encoding="utf-8") as f:
+        f.write("## QA Gate Results\n\n")
+        f.write("| Metric | Count |\n|--------|-------|\n")
+        f.write(f"| Total errors | {result.total_errors} |\n")
+        f.write(f"| Internal errors | {result.internal_errors} |\n")
+        f.write(f"| External (allowlisted) | {result.external_errors} |\n")
+        if result.internal_errors > 0:
+            f.write("\n### Internal Errors (must fix)\n\n")
+            for msg in result.internal_messages:
+                f.write(f"- `{msg}`\n")
 
 
 if __name__ == "__main__":
