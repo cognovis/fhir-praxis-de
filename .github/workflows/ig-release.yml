@@ -143,6 +143,16 @@ jobs:
             fi
           fi
 
+      - name: QA Gate — block release if internal errors > 0
+        # Runs AFTER IG Publisher, BEFORE packaging/release.
+        # Fails with exit 1 if any error in output/qa.html is not covered by
+        # .github/qa-allowlist.yml, blocking the GitHub Release and npm publish.
+        # See docs/release-process.md for allowlist management instructions.
+        run: |
+          python3 scripts/qa_gate.py \
+            --qa-html output/qa.html \
+            --allowlist .github/qa-allowlist.yml
+
       - name: Build FHIR package
         run: bash scripts/build-package.sh --skip-sushi
 
