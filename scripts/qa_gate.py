@@ -18,6 +18,7 @@ See docs/release-process.md for a full explanation of the gate and allowlist for
 from __future__ import annotations
 
 import argparse
+import html as html_module
 import os
 import re
 import sys
@@ -104,7 +105,7 @@ def parse_qa_html(qa_path: Path) -> tuple[int, int, list[str]]:
         re.DOTALL | re.IGNORECASE,
     )
     for match in error_row_pattern.finditer(content):
-        msg = re.sub(r'<[^>]+>', '', match.group(1)).strip()
+        msg = html_module.unescape(re.sub(r'<[^>]+>', '', match.group(1)).strip())
         if msg:
             error_messages.append(msg)
 
@@ -159,6 +160,13 @@ def _parse_yaml_simple(text: str) -> dict:
                 in_patterns_block = True
                 i += 1
                 continue
+            # Reject inline non-empty YAML flow sequences/mappings — not supported
+            remainder = re.sub(r"^patterns\s*:\s*", "", stripped)
+            if remainder and remainder != "|" and remainder != ">":
+                if remainder.startswith("[") or remainder.startswith("{"):
+                    raise ValueError(
+                        f"Unsupported inline sequence/mapping on 'patterns' key: {stripped!r}"
+                    )
             in_patterns_block = True
             i += 1
             continue
@@ -169,8 +177,13 @@ def _parse_yaml_simple(text: str) -> dict:
                 patterns.append(current_entry)
             # Extract value after "pattern:"
             m = re.match(r"^-\s+pattern\s*:\s*(.*)", stripped)
-            val = m.group(1).strip() if m else ""
-            val = _unquote(val)
+            raw_val = m.group(1).strip() if m else ""
+            # Reject unclosed bracket/brace (flow sequences) in scalar values
+            if raw_val.startswith("[") or raw_val.startswith("{"):
+                raise ValueError(
+                    f"Unsupported YAML flow sequence/mapping in pattern value: {raw_val!r}"
+                )
+            val = _unquote(raw_val)
             current_entry = {"pattern": val, "reason": "", "source": ""}
             i += 1
             continue
@@ -180,7 +193,13 @@ def _parse_yaml_simple(text: str) -> dict:
             for key in ("reason", "source"):
                 m = re.match(rf"^{key}\s*:\s*(.*)", stripped)
                 if m:
-                    current_entry[key] = _unquote(m.group(1).strip())
+                    raw_val = m.group(1).strip()
+                    # Reject unclosed bracket/brace in scalar values
+                    if raw_val.startswith("[") or raw_val.startswith("{"):
+                        raise ValueError(
+                            f"Unsupported YAML flow sequence/mapping in '{key}' value: {raw_val!r}"
+                        )
+                    current_entry[key] = _unquote(raw_val)
                     break
 
         i += 1
