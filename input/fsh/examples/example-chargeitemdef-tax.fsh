@@ -20,7 +20,7 @@ Title: "ChargeItemDefinition — BEMA 01 Untersuchung (steuerbefreit)"
 Description: "BEMA Ziffer 01 (Klinische Untersuchung). Steuerkategorie E (steuerbefreit) gemaess §4 Nr. 14a UStG — aerztliche Heilbehandlungsleistung. Tax-Extension auf propertyGroup.priceComponent als unverbindliche Vorbelegung fuer das PVS. Finale Klassifikation liegt beim PVS/Steuerberater."
 Usage: #example
 
-* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/bema-01-untersuchung"
+* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/example-cid-bema-heilbehandlung"
 * status = #active
 * title = "BEMA 01 — Klinische Untersuchung"
 * description = "Klinische Untersuchung (GKV-Abrechnung BEMA Ziffer 01). Heilbehandlungsleistung eines Zahnarztes, steuerbefreit nach §4 Nr. 14a UStG."
@@ -48,7 +48,7 @@ Title: "ChargeItemDefinition — IGeL Bleaching (19% USt, Kategorie S)"
 Description: "IGeL-Leistung Zahnaufhellung (Bleaching). Kosmetische Behandlung ohne Heilbehandlungszweck — steuerpflichtig mit Regelsteuersatz 19% (UNECE-5305 Kategorie S). Tax-Extension auf propertyGroup.priceComponent als unverbindliche Vorbelegung. Finale Klassifikation liegt beim PVS/Steuerberater."
 Usage: #example
 
-* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/igel-bleaching-zahnaufhellung"
+* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/example-cid-igel-bleaching"
 * status = #active
 * title = "IGeL Bleaching — Zahnaufhellung"
 * description = "Professionelle Zahnaufhellung (Bleaching) als IGeL-Leistung. Keine Heilbehandlung im umsatzsteuerlichen Sinne (§4 Nr. 14a UStG nicht anwendbar) — regulaere 19% USt."
@@ -80,7 +80,7 @@ Title: "ChargeItemDefinition — Eigenlabor-Material (7% USt, Kategorie AA)"
 Description: "Dentaltechnisches Eigenlabormaterial (Zahnarztpraxis mit eigenem Labor). Lieferung zahntechnischer Erzeugnisse durch den Zahnarzt unterliegt dem ermaessigten Steuersatz 7% (§12 Abs. 2 Nr. 2 UStG, UNECE-5305 Kategorie AA). Tax-Extension auf propertyGroup.priceComponent als unverbindliche Vorbelegung. Finale Klassifikation liegt beim PVS/Steuerberater."
 Usage: #example
 
-* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/eigenlabor-material-kunststoffverblendung"
+* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/example-cid-eigenlabor-material"
 * status = #active
 * title = "Eigenlabor-Material — Kunststoffverblendung"
 * description = "Zahntechnisches Eigenlabormaterial: Kunststoffverblendung (Frontzahnversorgung). Hergestellt und geliefert durch das praxiseigene Dentallabor. Ermaessigter Umsatzsteuersatz 7% nach §12 Abs. 2 Nr. 2 UStG."

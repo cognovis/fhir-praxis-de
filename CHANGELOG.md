@@ -2,7 +2,17 @@
 
 All notable changes to this project will be documented in this file.
 
-## [unreleased]
+## [0.58.0] - 2026-05-12
+
+### Bug Fixes
+
+- **QA Final Cleanup (manual)**: Resource id/url mismatch fixed in 4 ChargeItemDefinition examples (example-cid-bema-heilbehandlung, example-cid-igel-bleaching, example-cid-eigenlabor-material, example-charge-item-def-goae-km) — url-Suffix angepasst an Instance-id
+- **QA Final Cleanup (manual)**: LOINC display corrections on de-DE locale — 4548-4 "Hämoglobin A1c/Hämoglobin.gesamt in Blut", 72166-2 "Raucherstatus", 18748-4 "Diagnostische Bildgebung - Untersuchung". Fixes in profile definitions (HbA1cObservationDE, SmokingStatusDE) AND examples
+- **QA Final Cleanup (manual)**: SNOMED 72696002 (Knee region structure) display reduced to "Knee" — default international display, no de-DE available
+- **QA Final Cleanup (manual)**: Coverage slicing discriminator changed from #pattern/$this to #value/system on FPDECoveragePrivat type.coding — fixes 7x "Slicing kann nicht ausgewertet werden" errors
+- **QA Final Cleanup (manual)**: Anamnese-Questionnaire-Template ergänzt um LinkIds "beschwerden" + "vorerkrankungen" — referenced in example-praxis-anamnese-questionnaire-response
+
+## [0.57.0] - 2026-05-12
 
 ### Bug Fixes
 

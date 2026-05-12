@@ -12,7 +12,7 @@ Description: "LOINC-Codes fuer Radiologiebefunde. Umfasst allgemeine Bildgebungs
 * ^experimental = false
 
 // Allgemeine Radiologie-Codes
-* http://loinc.org#18748-4 "Diagnostic imaging study"
+* http://loinc.org#18748-4 "Diagnostische Bildgebung - Untersuchung"
 * http://loinc.org#68604-8 "Radiology diagnostic study note"
 
 // CT-Codes (verified against tx.fhir.org 2026-05-11)

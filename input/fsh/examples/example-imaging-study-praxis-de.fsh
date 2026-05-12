@@ -100,7 +100,7 @@ Usage: #example
 * series[0].description = "SAG PD FS Knie Links"
 * series[0].bodySite.system = "http://snomed.info/sct"
 * series[0].bodySite.code = #72696002
-* series[0].bodySite.display = "Knee region structure"
+* series[0].bodySite.display = "Knee"
 * series[0].laterality.system = "http://snomed.info/sct"
 * series[0].laterality.code = #7771000
 * series[0].laterality.display = "Left"
@@ -121,7 +121,7 @@ InstanceOf: ChargeItemDefinition
 Title: "GOAe 5730 — Gadolinium KM-Gabe"
 Description: "GOAe Ziffer 5730 fuer die Gabe von gadoliniumhaltigen Kontrastmitteln bei MRT-Untersuchungen."
 Usage: #example
-* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/goae-5730"
+* url = "https://fhir.cognovis.de/praxis/ChargeItemDefinition/example-charge-item-def-goae-km"
 * status = #active
 * code.coding[0].system = "https://fhir.de/CodeSystem/bak/goae"
 * code.coding[0].code = #5730

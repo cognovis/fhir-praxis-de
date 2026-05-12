@@ -98,7 +98,7 @@ Description: "Spezialisiertes Profil fuer Haemoglobin A1c (HbA1c) Messungen nach
 * code.coding[loinc] 1..1
 * code.coding[loinc].code = #4548-4
 * code.coding[loinc].system = "http://loinc.org"
-* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * code.coding[loinc] ^short = "LOINC 4548-4 — HbA1c"
 * code.coding[loinc] ^definition = "Fester LOINC-Code fuer HbA1c. Zusaetzliche LDT-Testkennung (code.coding[ldt]) ist erlaubt."
 
@@ -153,8 +153,8 @@ Description: "Profil fuer den Tabakkonsum-Status (Raucherstatus) nach LOINC 7216
 * code.coding contains loinc 1..1 MS
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #72166-2
-* code.coding[loinc].display = "Tobacco smoking status"
-* code.coding[loinc] ^short = "LOINC 72166-2 — Tobacco smoking status (Raucherstatus)"
+* code.coding[loinc].display = "Raucherstatus"
+* code.coding[loinc] ^short = "LOINC 72166-2 — Raucherstatus (Tobacco smoking status)"
 * code.coding[loinc] ^definition = "Fester LOINC-Code fuer Tabakkonsum-Status (Zigarettenrauchen). Verified via tx.fhir.org 2026-05-11. Antworten aus LOINC-Antwortliste LL2255-7."
 
 // Wert: nur CodeableConcept

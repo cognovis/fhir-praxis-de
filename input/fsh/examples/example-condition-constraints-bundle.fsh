@@ -57,7 +57,7 @@ Usage: #example
 * category[laboratory] = http://terminology.hl7.org/CodeSystem/observation-category#laboratory
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #4548-4
-* code.coding[loinc].display = "Hemoglobin A1c/Hemoglobin.total in Blood"
+* code.coding[loinc].display = "Hämoglobin A1c/Hämoglobin.gesamt in Blut"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-01T09:00:00+02:00"
 * valueQuantity.value = 8.5
@@ -79,7 +79,7 @@ Usage: #example
 * category[social-history] = http://terminology.hl7.org/CodeSystem/observation-category#social-history
 * code.coding[loinc].system = "http://loinc.org"
 * code.coding[loinc].code = #72166-2
-* code.coding[loinc].display = "Tobacco smoking status"
+* code.coding[loinc].display = "Raucherstatus"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-01T09:05:00+02:00"
 * valueCodeableConcept.coding[0].system = "http://loinc.org"
@@ -123,7 +123,7 @@ Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #18748-4
-* code.coding[0].display = "Diagnostic imaging study"
+* code.coding[0].display = "Diagnostische Bildgebung - Untersuchung"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-01T14:00:00+02:00"
 * issued = "2026-05-01T13:00:00Z"
@@ -205,7 +205,7 @@ Usage: #example
 * status = #final
 * code.coding[0].system = "http://loinc.org"
 * code.coding[0].code = #18748-4
-* code.coding[0].display = "Diagnostic imaging study"
+* code.coding[0].display = "Diagnostische Bildgebung - Untersuchung"
 * subject = Reference(example-patient)
 * effectiveDateTime = "2026-05-05T11:00:00+02:00"
 * issued = "2026-05-05T10:00:00Z"
