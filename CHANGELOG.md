@@ -2,23 +2,39 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-838**: Address review findings iteration 1
+- **fpde-838**: Address codex adversarial findings
+
+### Features
+
+- **fpde-838**: Green — qa_gate.py parser + allowlist matcher (10/10 tests pass)
+- **fpde-838**: QA release gate — allowlist, workflow integration, docs
+
+### Test
+
+- **fpde-838**: Red — QA gate test suite (10 scenarios, all failing)
+
 ## [0.59.0] - 2026-05-12
 
 ### Bug Fixes
 
-- **QA Final Cleanup (manual, follow-up)**: Anamnese-Questionnaire-Struktur korrigiert — "beschwerden" + "vorerkrankungen" als Top-Level items mit exact-matching text zur QuestionnaireResponse. Fixes "Structural Error: item with linkid vorerkrankungen is in the wrong place" + Text-Mismatch-Constraint.
+- **qa**: Anamnese questionnaire structure — beschwerden/vorerkrankungen top-level
 
 ## [0.58.0] - 2026-05-12
 
 ### Bug Fixes
 
-- **QA Final Cleanup (manual)**: Resource id/url mismatch fixed in 4 ChargeItemDefinition examples (example-cid-bema-heilbehandlung, example-cid-igel-bleaching, example-cid-eigenlabor-material, example-charge-item-def-goae-km) — url-Suffix angepasst an Instance-id
-- **QA Final Cleanup (manual)**: LOINC display corrections on de-DE locale — 4548-4 "Hämoglobin A1c/Hämoglobin.gesamt in Blut", 72166-2 "Raucherstatus", 18748-4 "Diagnostische Bildgebung - Untersuchung". Fixes in profile definitions (HbA1cObservationDE, SmokingStatusDE) AND examples
-- **QA Final Cleanup (manual)**: SNOMED 72696002 (Knee region structure) display reduced to "Knee" — default international display, no de-DE available
-- **QA Final Cleanup (manual)**: Coverage slicing discriminator changed from #pattern/$this to #value/system on FPDECoveragePrivat type.coding — fixes 7x "Slicing kann nicht ausgewertet werden" errors
-- **QA Final Cleanup (manual)**: Anamnese-Questionnaire-Template ergänzt um LinkIds "beschwerden" + "vorerkrankungen" — referenced in example-praxis-anamnese-questionnaire-response
+- **qa**: Manual cleanup of remaining 18 internal QA errors → v0.58.0
 
-## [0.57.0] - 2026-05-12
+### Miscellaneous
+
+- Close beads fpde-95o and fpde-bxv — v0.57.0 shipped
+
+## [0.57.0] - 2026-05-11
 
 ### Bug Fixes
 
@@ -32,6 +48,11 @@ All notable changes to this project will be documented in this file.
 
 - **fpde-95o**: Version bump 0.56.0→0.57.0, QA audit doc, changelog
 - **fpde-95o**: Update changelog with codex regression fixes
+- **fpde-95o**: Session-close — finalize changelog for v0.57.0
+
+### Merge
+
+- Worktree-bead-fpde-95o
 
 ## [0.56.0] - 2026-05-11
 
