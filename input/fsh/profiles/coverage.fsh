@@ -30,8 +30,8 @@ Description: "Privat oder selbst zu zahlendes Versicherungsverhaeltnis. Die Cove
 * extension[billingAssignment] ^definition = "Referenz auf die Organization (PVS/Billing Service), an die Forderungen aus genau diesem Versicherungsverhaeltnis abgetreten werden."
 
 * type 1..1 MS
-* type.coding ^slicing.discriminator.type = #pattern
-* type.coding ^slicing.discriminator.path = "$this"
+* type.coding ^slicing.discriminator.type = #value
+* type.coding ^slicing.discriminator.path = "system"
 * type.coding ^slicing.rules = #open
 * type.coding contains VersicherungsArtDeBasis 1..1 MS
 * type.coding[VersicherungsArtDeBasis].system = "http://fhir.de/CodeSystem/versicherungsart-de-basis"

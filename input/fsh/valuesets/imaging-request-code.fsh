@@ -30,4 +30,4 @@ Description: "LOINC-Codes fuer Bildgebungsanforderungen in der deutschen ambulan
 * $loinc#24556-3 "MR Abdomen"
 * $loinc#24648-8 "XR Chest PA upright"
 * $loinc#24558-9 "US Abdomen"
-* $loinc#18748-4 "Diagnostic imaging study"
+* $loinc#18748-4 "Diagnostische Bildgebung - Untersuchung"
