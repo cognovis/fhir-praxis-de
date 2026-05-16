@@ -18,3 +18,12 @@ Description: "Wrapper-Profil fuer Behandler in der deutschen Praxisverwaltung. E
 * extension contains AiProvenanceApplicableExt named aiProvenanceApplicable 0..1 MS
 * extension[aiProvenanceApplicable] ^short = "KI-Provenance anwendbar (EU AI Act)"
 * extension[aiProvenanceApplicable] ^definition = "Wenn gesetzt: KI-Provenance via Provenance-Ressource mit AiGeneratedExt, AiProviderExt etc. ist fuer diesen Eintrag dokumentiert."
+
+// AK-5 dental prep: ZANR slice -- allows dental practitioners to carry ZANR identifier
+// KBV_PR_Base_Practitioner defines LANR and Telematik-ID slices. ZANR is an additional slice.
+// Uses IdentifierZanr from de.basisprofil.r4 (http://fhir.de/StructureDefinition/identifier-zanr)
+// System: http://fhir.de/sid/kzbv/zahnarztnummer (KZV Zahnarztnummer, fixed by IdentifierZanr)
+* identifier contains zanr 0..* MS
+* identifier[zanr] only IdentifierZanr
+* identifier[zanr] ^short = "Zahnarzt-Nummer (ZANR, KZV)"
+* identifier[zanr] ^definition = "Zahnarzt-Nummer (ZANR) gemaess KZV-Abrechnungsstandard. Dental-Tenant-Erweiterung. System: http://fhir.de/sid/kzbv/zahnarztnummer"

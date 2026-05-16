@@ -2,14 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
+## [unreleased]
+
+### Bug Fixes
+
+- **fpde-e0o**: Address review findings iteration 1
+- **fpde-e0o**: Address codex adversarial findings
+
+### Documentation
+
+- **fpde-e0o**: Add changelog entry for v0.62.0
+
+### Features
+
+- **fpde-e0o**: AK-1 extend genehmigung-leistungsbereich with 130+ codes and block hierarchy
+- **fpde-e0o**: AK-2 wb-befugnis extension and PractitionerRole profile
+- **fpde-e0o**: AK-3 ermaechtigung profile, extensions, codesystems
+- **fpde-e0o**: AK-4 sitz-vakanz extensions, sitz-status and arzt-status codesystems
+- **fpde-e0o**: AK-5 ZANR identifier slice on PraxisPractitionerDE
+
+### Miscellaneous
+
+- **fpde-e0o**: Bump version 0.61.0 → 0.62.0
+
 ## [0.61.0] - 2026-05-12
 
 ### Bug Fixes
 
-- **qa-gate (post-release)**: Fix IG-Publisher row color #ffe6e6 → #ffcccc (actual color in v2.2.x output)
-- **qa-gate (post-release)**: Parser handles full row format `<td>location</td><td><b>error</b></td><td><b>message</b></td>` — skips counter cells that only have severity-marker `<b>N</b>`
-- **qa-gate (post-release)**: Allowlist pattern "IG URL should refer directly" → "The URL should refer directly" (actual message wording)
-- **qa-gate (post-release)**: Test helper updated to match new row format with severity column
+- **qa-gate**: Parser color + row format + allowlist pattern wording
 
 ## [0.60.0] - 2026-05-12
 
@@ -20,12 +40,22 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **fpde-838**: CI release gate — block tag/release when QA errors exceed allowlist (scripts/qa_gate.py, .github/qa-allowlist.yml, docs/release-process.md)
-- **QA Release Gate**: CI-Workflow prüft qa.html auf interne Fehler und blockt Tag/npm-publish wenn internal_errors > 0. Externe Fehler (tx.fhir.org, externe FHIR-Profile) können in .github/qa-allowlist.yml konfiguriert werden. Pattern dokumentiert für dental-de und terminology-de.
+- **fpde-838**: Green — qa_gate.py parser + allowlist matcher (10/10 tests pass)
+- **fpde-838**: QA release gate — allowlist, workflow integration, docs
+- **fpde-838**: CI release gate — block tag/release when QA errors exceed allowlist
+
+### Miscellaneous
+
+- Commit generated files before bead merge (worktree-bead-fpde-838)
+- Bump version 0.59.0 → 0.60.0
+
+### Merge
+
+- Worktree-bead-fpde-838 — resolve CHANGELOG.md conflict
 
 ### Test
 
-- **fpde-838**: QA gate test suite — 15 pytest tests (TDD red→green)
+- **fpde-838**: Red — QA gate test suite (10 scenarios, all failing)
 
 ## [0.59.0] - 2026-05-12
 
