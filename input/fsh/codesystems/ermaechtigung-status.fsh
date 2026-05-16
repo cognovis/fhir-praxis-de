@@ -2,7 +2,7 @@
 // Status codes for aerztliche Ermaechtigung
 // Bead: fpde-e0o
 
-CodeSystem: ErmaechtingungStatusCS
+CodeSystem: ErmaechtigungStatusCS
 Id: ermaechtigung-status
 Title: "Ermaechtigung Status"
 Description: "Statuswerte fuer aerztliche Ermaechtigungen"
@@ -13,10 +13,10 @@ Description: "Statuswerte fuer aerztliche Ermaechtigungen"
 * #abgelaufen "Abgelaufen" "Ermaechtigung ist abgelaufen"
 * #entzogen "Entzogen" "Ermaechtigung wurde entzogen"
 
-ValueSet: ErmaechtingungStatusVS
+ValueSet: ErmaechtigungStatusVS
 Id: ermaechtigung-status-vs
 Title: "Ermaechtigung Status"
 Description: "Statuswerte fuer aerztliche Ermaechtigungen"
 * ^status = #active
 * ^experimental = false
-* include codes from system ErmaechtingungStatusCS
+* include codes from system ErmaechtigungStatusCS

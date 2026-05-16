@@ -4,7 +4,7 @@
 // Bead: fpde-e0o
 
 Profile: PraxisPractitionerRoleDE
-Parent: PractitionerRole
+Parent: KBV_PR_Base_PractitionerRole
 Id: praxis-practitioner-role-de
 Title: "Praxis PractitionerRole DE"
 Description: "PractitionerRole fuer Arzt-Standort-Zuordnung mit WB-Befugnis, Genehmigungen und Sitz-Zuordnung. Basisschicht fuer spezialisierte Arzt-Standort-Profile."
