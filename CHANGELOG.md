@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Refactoring
+
+- **fpde-1cn**: Shared ZulassungStatusConcepts RuleSet for aktiv/abgelaufen/entzogen
+
+## [0.62.0] - 2026-05-16
+
 ### Bug Fixes
 
 - **fpde-e0o**: Address review findings iteration 1
@@ -24,6 +30,11 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - **fpde-e0o**: Bump version 0.61.0 → 0.62.0
+- **fpde-e0o**: Session close — Practitioner-Berechtigungs-Strukturen v0.62.0
+
+### Merge
+
+- Worktree-bead-fpde-e0o
 
 ## [0.61.0] - 2026-05-12
 
