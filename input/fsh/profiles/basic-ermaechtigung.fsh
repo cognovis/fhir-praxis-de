@@ -2,7 +2,7 @@
 // Profile for aerztliche Ermaechtigung as Basic resource
 // Bead: fpde-e0o
 
-Profile: BasicErmaechtingungDE
+Profile: BasicErmaechtigungDE
 Parent: Basic
 Id: basic-ermaechtigung-de
 Title: "Basic Ermaechtigung DE"
@@ -18,6 +18,6 @@ Description: "Aerztliche Ermaechtigung gemaess § 116 SGB V modelliert als Basic
 * subject ^short = "Arzt mit Ermaechtigung"
 
 // Ermaechtigung data via extension
-* extension contains ErmaechtingungExt named ermaechtigung 1..1 MS
+* extension contains ErmaechtigungExt named ermaechtigung 1..1 MS
 * extension[ermaechtigung] ^short = "Ermaechtigung Daten"
 * extension[ermaechtigung] ^definition = "Aerztliche Ermaechtigung mit Art, Einrichtung, Leistungsbereich, Gueltigkeitszeitraum und Status."
