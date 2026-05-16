@@ -11,7 +11,7 @@ Usage: #definition
 * kind = #identifier
 * date = "2026-05-16"
 * publisher = "cognovis GmbH"
-* description = "Zahnarzt-Nummer (ZANR) fuer zahnaerztliche Abrechnungsidentifikatoren. Sub-NamingSystem fuer dental-Tenants."
+* description = "Zahnarzt-Nummer (ZANR) — KZV Abrechnungsidentifikator fuer Zahnaerzte. System: http://fhir.de/sid/kzbv/zahnarztnummer"
 * uniqueId[+].type = #uri
-* uniqueId[=].value = "https://fhir.cognovis.de/praxis/NamingSystem/zanr"
+* uniqueId[=].value = "http://fhir.de/sid/kzbv/zahnarztnummer"
 * uniqueId[=].preferred = true
