@@ -2,6 +2,16 @@
 
 All notable changes to this project will be documented in this file.
 
+## [0.62.0] - 2026-05-16
+
+### Added
+
+- **fpde-e0o (AK-1)**: Expand `genehmigung-leistungsbereich` CodeSystem from 13 to 185 codes with block hierarchy (`is-a`) — 5 blocks: `kopfbezogen` (68 codes), `sonographie` (36), `dmp` (31), `dmp-schulung` (30), `radiologie` (12). Offene Liste (extensible binding) fuer dentale Erweiterbarkeit. Source: MCN Cockpit Excel `Übersicht_Genehmigungen_Stand 20052025.xlsx`.
+- **fpde-e0o (AK-2)**: New `WbBefugnisExt` nested extension on `PractitionerRole` for Weiterbildungsbefugnis (fachgruppe, maxMonate, period, status). New `wb-befugnis-status` CodeSystem/ValueSet (aktiv/abgelaufen/entzogen). New `PraxisPractitionerRoleDE` middle-layer profile (Parent: `KBV_PR_Base_PractitionerRole`) as 3-Layer-Chain base for dental and other specialized role profiles.
+- **fpde-e0o (AK-3)**: New `ErmaechtigungExt` nested extension on `Basic` resource for aerztliche Ermaechtigung (§116 SGB V). New `BasicErmaechtigungDE` profile (code=`ermaechtigung`). New CodeSystems: `ermaechtigung-art` (krankenhausambulanz, mvz-uebergang, bedarfsplanung, sonderbedarfszulassung, notfallversorgung) + `ermaechtigung-status` (aktiv/abgelaufen/entzogen). Added `#ermaechtigung` to `basic-resource-type` CodeSystem.
+- **fpde-e0o (AK-4)**: New Sitz-Vakanz extensions on `PraxisOrganizationDE` (SitzUmfangExt, SitzStatusExt, VakanzSeitExt, VakanzFristExt) and Arzt-Sitz-Zuordnung extensions on `PraxisPractitionerRoleDE` (SitzAnteilExt, StundenProWocheExt, ArztSitzStatusExt). New CodeSystems: `sitz-status` (aktiv/vakant/ruhend/verkauft) + `arzt-status` (facharzt/wba/sicherstellung/vertreter).
+- **fpde-e0o (AK-5)**: ZANR identifier slice on `PraxisPractitionerDE` (dental prep). Uses standard `IdentifierZanr` profile from `de.basisprofil.r4` with system `http://fhir.de/sid/kzbv/zahnarztnummer`. New `NamingSystem-zanr-identifier` resource.
+
 ## [0.61.0] - 2026-05-12
 
 ### Bug Fixes
