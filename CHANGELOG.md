@@ -2,24 +2,34 @@
 
 All notable changes to this project will be documented in this file.
 
-## [0.62.0] - 2026-05-16
+## [unreleased]
 
-### Added
+### Bug Fixes
 
-- **fpde-e0o (AK-1)**: Expand `genehmigung-leistungsbereich` CodeSystem from 13 to 185 codes with block hierarchy (`is-a`) — 5 blocks: `kopfbezogen` (68 codes), `sonographie` (36), `dmp` (31), `dmp-schulung` (30), `radiologie` (12). Offene Liste (extensible binding) fuer dentale Erweiterbarkeit. Source: MCN Cockpit Excel `Übersicht_Genehmigungen_Stand 20052025.xlsx`.
-- **fpde-e0o (AK-2)**: New `WbBefugnisExt` nested extension on `PractitionerRole` for Weiterbildungsbefugnis (fachgruppe, maxMonate, period, status). New `wb-befugnis-status` CodeSystem/ValueSet (aktiv/abgelaufen/entzogen). New `PraxisPractitionerRoleDE` middle-layer profile (Parent: `KBV_PR_Base_PractitionerRole`) as 3-Layer-Chain base for dental and other specialized role profiles.
-- **fpde-e0o (AK-3)**: New `ErmaechtigungExt` nested extension on `Basic` resource for aerztliche Ermaechtigung (§116 SGB V). New `BasicErmaechtigungDE` profile (code=`ermaechtigung`). New CodeSystems: `ermaechtigung-art` (krankenhausambulanz, mvz-uebergang, bedarfsplanung, sonderbedarfszulassung, notfallversorgung) + `ermaechtigung-status` (aktiv/abgelaufen/entzogen). Added `#ermaechtigung` to `basic-resource-type` CodeSystem.
-- **fpde-e0o (AK-4)**: New Sitz-Vakanz extensions on `PraxisOrganizationDE` (SitzUmfangExt, SitzStatusExt, VakanzSeitExt, VakanzFristExt) and Arzt-Sitz-Zuordnung extensions on `PraxisPractitionerRoleDE` (SitzAnteilExt, StundenProWocheExt, ArztSitzStatusExt). New CodeSystems: `sitz-status` (aktiv/vakant/ruhend/verkauft) + `arzt-status` (facharzt/wba/sicherstellung/vertreter).
-- **fpde-e0o (AK-5)**: ZANR identifier slice on `PraxisPractitionerDE` (dental prep). Uses standard `IdentifierZanr` profile from `de.basisprofil.r4` with system `http://fhir.de/sid/kzbv/zahnarztnummer`. New `NamingSystem-zanr-identifier` resource.
+- **fpde-e0o**: Address review findings iteration 1
+- **fpde-e0o**: Address codex adversarial findings
+
+### Documentation
+
+- **fpde-e0o**: Add changelog entry for v0.62.0
+
+### Features
+
+- **fpde-e0o**: AK-1 extend genehmigung-leistungsbereich with 130+ codes and block hierarchy
+- **fpde-e0o**: AK-2 wb-befugnis extension and PractitionerRole profile
+- **fpde-e0o**: AK-3 ermaechtigung profile, extensions, codesystems
+- **fpde-e0o**: AK-4 sitz-vakanz extensions, sitz-status and arzt-status codesystems
+- **fpde-e0o**: AK-5 ZANR identifier slice on PraxisPractitionerDE
+
+### Miscellaneous
+
+- **fpde-e0o**: Bump version 0.61.0 → 0.62.0
 
 ## [0.61.0] - 2026-05-12
 
 ### Bug Fixes
 
-- **qa-gate (post-release)**: Fix IG-Publisher row color #ffe6e6 → #ffcccc (actual color in v2.2.x output)
-- **qa-gate (post-release)**: Parser handles full row format `<td>location</td><td><b>error</b></td><td><b>message</b></td>` — skips counter cells that only have severity-marker `<b>N</b>`
-- **qa-gate (post-release)**: Allowlist pattern "IG URL should refer directly" → "The URL should refer directly" (actual message wording)
-- **qa-gate (post-release)**: Test helper updated to match new row format with severity column
+- **qa-gate**: Parser color + row format + allowlist pattern wording
 
 ## [0.60.0] - 2026-05-12
 
@@ -30,12 +40,22 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **fpde-838**: CI release gate — block tag/release when QA errors exceed allowlist (scripts/qa_gate.py, .github/qa-allowlist.yml, docs/release-process.md)
-- **QA Release Gate**: CI-Workflow prüft qa.html auf interne Fehler und blockt Tag/npm-publish wenn internal_errors > 0. Externe Fehler (tx.fhir.org, externe FHIR-Profile) können in .github/qa-allowlist.yml konfiguriert werden. Pattern dokumentiert für dental-de und terminology-de.
+- **fpde-838**: Green — qa_gate.py parser + allowlist matcher (10/10 tests pass)
+- **fpde-838**: QA release gate — allowlist, workflow integration, docs
+- **fpde-838**: CI release gate — block tag/release when QA errors exceed allowlist
+
+### Miscellaneous
+
+- Commit generated files before bead merge (worktree-bead-fpde-838)
+- Bump version 0.59.0 → 0.60.0
+
+### Merge
+
+- Worktree-bead-fpde-838 — resolve CHANGELOG.md conflict
 
 ### Test
 
-- **fpde-838**: QA gate test suite — 15 pytest tests (TDD red→green)
+- **fpde-838**: Red — QA gate test suite (10 scenarios, all failing)
 
 ## [0.59.0] - 2026-05-12
 
