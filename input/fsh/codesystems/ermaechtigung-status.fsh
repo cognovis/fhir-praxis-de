@@ -1,6 +1,6 @@
 // ermaechtigung-status.fsh
 // Status codes for aerztliche Ermaechtigung
-// Bead: fpde-e0o
+// Bead: fpde-e0o, fpde-1cn
 
 CodeSystem: ErmaechtigungStatusCS
 Id: ermaechtigung-status
@@ -9,9 +9,7 @@ Description: "Statuswerte fuer aerztliche Ermaechtigungen"
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
-* #aktiv "Aktiv" "Ermaechtigung ist aktiv und gueltig"
-* #abgelaufen "Abgelaufen" "Ermaechtigung ist abgelaufen"
-* #entzogen "Entzogen" "Ermaechtigung wurde entzogen"
+* insert ZulassungStatusConcepts
 
 ValueSet: ErmaechtigungStatusVS
 Id: ermaechtigung-status-vs

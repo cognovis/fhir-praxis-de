@@ -1,6 +1,6 @@
 // wb-befugnis-status.fsh
 // Status codes for Weiterbildungsbefugnis
-// Bead: fpde-e0o
+// Bead: fpde-e0o, fpde-1cn
 
 CodeSystem: WbBefugnisStatusCS
 Id: wb-befugnis-status
@@ -9,9 +9,7 @@ Description: "Statuswerte fuer Weiterbildungsbefugnisse"
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
-* #aktiv "Aktiv" "Weiterbildungsbefugnis ist aktiv und gueltig"
-* #abgelaufen "Abgelaufen" "Weiterbildungsbefugnis ist abgelaufen"
-* #entzogen "Entzogen" "Weiterbildungsbefugnis wurde entzogen"
+* insert ZulassungStatusConcepts
 
 ValueSet: WbBefugnisStatusVS
 Id: wb-befugnis-status-vs
