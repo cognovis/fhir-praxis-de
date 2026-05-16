@@ -26,4 +26,4 @@ Description: "Wrapper-Profil fuer Behandler in der deutschen Praxisverwaltung. E
 * identifier contains zanr 0..* MS
 * identifier[zanr] only IdentifierZanr
 * identifier[zanr] ^short = "Zahnarzt-Nummer (ZANR, KZV)"
-* identifier[zanr] ^definition = "Zahnarzt-Nummer (ZANR) gemaess KZV-Abrechnungsstandard. Dental-Tenant-Erweiterung. System: http://fhir.de/sid/kzbv/zahnarztnummer"
+* identifier[zanr] ^definition = "Zahnarzt-Nummer (ZANR) gemaess KZV-Abrechnungsstandard. Dental-Tenant-Erweiterung. Systemfixierung erfolgt durch IdentifierZanr (de.basisprofil.r4)."
