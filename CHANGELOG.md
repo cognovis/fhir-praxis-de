@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **adapter-d1vy**: Add `PvsWritebackStatusCS` CodeSystem (`pvs-writeback-status`) — Adapter adapters tag FHIR resources with `pvs-writeback-error` when a writeback to the PVS fails. Self-healing: the tag is cleared on successful apply. Defines the canonical URL `https://fhir.cognovis.de/praxis/CodeSystem/pvs-writeback-status` previously inlined in the Adapter adapter.
+
 ### Refactoring
 
 - **fpde-1cn**: Shared ZulassungStatusConcepts RuleSet for aktiv/abgelaufen/entzogen
