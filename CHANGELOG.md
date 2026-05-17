@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.62.1] - 2026-05-17
+
 ### Features
 
 - Add `PvsWritebackStatusCS` CodeSystem (`pvs-writeback-status`) — FHIR-Ressourcen werden mit `pvs-writeback-error` getaggt, wenn ein Writeback in das anbindende PVS fehlschlaegt. Self-healing: der Tag wird bei erfolgreichem Apply (auch nach Retry) entfernt. Definiert die kanonische URL `https://fhir.cognovis.de/praxis/CodeSystem/pvs-writeback-status`.
