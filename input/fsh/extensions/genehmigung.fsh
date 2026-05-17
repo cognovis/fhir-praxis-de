@@ -18,12 +18,15 @@ Context: Basic
     leistungsbereich 1..1 and
     genehmigungsdatum 0..1 and
     ablaufdatum 0..1 and
-    kvAktenzeichen 0..1
+    kvAktenzeichen 0..1 and
+    status 0..1
 * extension[leistungsbereich].value[x] only code
 * extension[leistungsbereich].valueCode from GenehmigungenLeistungsbereichVS (extensible)
 * extension[genehmigungsdatum].value[x] only date
 * extension[ablaufdatum].value[x] only date
 * extension[kvAktenzeichen].value[x] only string
+* extension[status].value[x] only code
+* extension[status].valueCode from GenehmigungenStatusVS (required)
 
 Extension: GenehmigungenTypExt
 Id: genehmigung-typ
