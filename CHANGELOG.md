@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **adapter-d1vy**: Add `PvsWritebackStatusCS` CodeSystem (`pvs-writeback-status`) — Adapter adapters tag FHIR resources with `pvs-writeback-error` when a writeback to the PVS fails. Self-healing: the tag is cleared on successful apply. Defines the canonical URL `https://fhir.cognovis.de/praxis/CodeSystem/pvs-writeback-status` previously inlined in the Adapter adapter.
+- Add `PvsWritebackStatusCS` CodeSystem (`pvs-writeback-status`) — FHIR-Ressourcen werden mit `pvs-writeback-error` getaggt, wenn ein Writeback in das anbindende PVS fehlschlaegt. Self-healing: der Tag wird bei erfolgreichem Apply (auch nach Retry) entfernt. Definiert die kanonische URL `https://fhir.cognovis.de/praxis/CodeSystem/pvs-writeback-status`.
 
 ### Refactoring
 
