@@ -19,7 +19,8 @@ Context: Basic
     genehmigungsdatum 0..1 and
     ablaufdatum 0..1 and
     kvAktenzeichen 0..1 and
-    status 0..1
+    status 0..1 and
+    cockpitItemId 0..1
 * extension[leistungsbereich].value[x] only code
 * extension[leistungsbereich].valueCode from GenehmigungenLeistungsbereichVS (extensible)
 * extension[genehmigungsdatum].value[x] only date
@@ -27,6 +28,8 @@ Context: Basic
 * extension[kvAktenzeichen].value[x] only string
 * extension[status].value[x] only code
 * extension[status].valueCode from GenehmigungenStatusVS (required)
+* extension[cockpitItemId].value[x] only string
+* extension[cockpitItemId] ^short = "Stable source-system identifier (e.g. Cockpit item.id) for matching across syncs — required to distinguish historical entries of the same leistungsbereich (revoke→re-grant)"
 
 Extension: GenehmigungenTypExt
 Id: genehmigung-typ
