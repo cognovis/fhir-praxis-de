@@ -1,13 +1,20 @@
 // PraxisGKVClaimDE — Final GKV (statutory health insurance) billing claim
 // AW-SST crosswalk: maps to KBV_PR_AW_Abrechnung_vertragsaerztlich
-// use=claim; references PraxisPreliminaryBillingClaimDE via Claim.related.
-// Item lines stay in the preliminary claim.
+// use=claim; references PraxisPreliminaryBillingClaimDE via Claim.related (1..*).
+// Item lines stay in the preliminary claim (item 0..0 here).
+
+Invariant: praxis-gkv-claim-preliminary-required
+Description: "A GKV final claim must reference at least one preliminary billing claim via Claim.related.claim."
+Expression: "related.where(claim.exists()).count() >= 1"
+Severity: #error
 
 Profile: PraxisGKVClaimDE
 Parent: Claim
 Id: praxis-gkv-claim-de
 Title: "Praxis GKV Claim DE"
-Description: "Finaler vertragsaerztlicher Abrechnungsanspruch (GKV) fuer die deutsche ambulante Praxis. Referenziert den vorlaeufigerabrechnung (PraxisPreliminaryBillingClaimDE) per Claim.related. Abrechnungspositionen verbleiben in der vorlaeufigerabrechnung. Entspricht KBV_PR_AW_Abrechnung_vertragsaerztlich semantisch."
+Description: "Finaler vertragsaerztlicher Abrechnungsanspruch (GKV) fuer die deutsche ambulante Praxis. Referenziert den vorlaeufigerabrechnung (PraxisPreliminaryBillingClaimDE) per Claim.related (Pflicht: 1..*). Keine Abrechnungspositionen (item 0..0) — diese verbleiben in der vorlaeufigerabrechnung. Entspricht KBV_PR_AW_Abrechnung_vertragsaerztlich semantisch."
+
+* obeys praxis-gkv-claim-preliminary-required
 
 * status 1..1 MS
 * status ^short = "Status of the claim"
@@ -15,6 +22,11 @@ Description: "Finaler vertragsaerztlicher Abrechnungsanspruch (GKV) fuer die deu
 * use = #claim
 * use MS
 * use ^short = "claim — this is the final submitted GKV billing claim"
+
+// Machine-readable subType: identifies this as a GKV final claim
+* subType 1..1 MS
+* subType = PraxisBillingClaimSubTypeCS#gkv
+* subType ^short = "Billing claim subtype: gkv (GKV final)"
 
 * type MS
 * type ^short = "Claim type"
@@ -43,10 +55,14 @@ Description: "Finaler vertragsaerztlicher Abrechnungsanspruch (GKV) fuer die deu
 * insurance.focal MS
 * insurance.coverage MS
 
-// Reference to preliminary claim — item lines stay there
-* related MS
-* related ^short = "Reference to the preliminary billing claim (PraxisPreliminaryBillingClaimDE)"
-* related.claim MS
-* related.claim ^short = "Reference to PraxisPreliminaryBillingClaimDE"
+// Preliminary claim reference: REQUIRED (1..*) — enforces AW billing split
+* related 1..* MS
+* related ^short = "Reference to the preliminary billing claim (PraxisPreliminaryBillingClaimDE) — required"
+* related.claim 1..1 MS
+* related.claim ^short = "Reference to PraxisPreliminaryBillingClaimDE — mandatory"
 * related.relationship MS
-* related.relationship ^short = "predetermination"
+* related.relationship ^short = "Relationship code — use 'associated' to indicate the preliminary claim"
+
+// No item lines in final claims — all service lines stay in the preliminary claim
+* item 0..0
+* item ^short = "Not allowed: item lines belong in the preliminary billing claim"

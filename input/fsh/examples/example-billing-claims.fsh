@@ -1,5 +1,6 @@
 // AW-SST Billing Claim Examples
 // Demonstrates the preliminary->final claim relationship for all 5 claim profiles.
+// Each final claim instance includes subType and a mandatory Claim.related reference.
 
 // Shared inline references for billing claim examples
 Instance: BillingClaimPatientExample
@@ -34,14 +35,33 @@ Usage: #example
 * identifier[0].value = "101575519"
 * name = "Techniker Krankenkasse"
 
+Instance: BillingClaimPrivateInsurerExample
+InstanceOf: Organization
+Title: "Example Private Insurer (Billing Claims)"
+Description: "Example private insurer for private billing claim examples"
+Usage: #example
+* identifier[0].system = "http://fhir.de/NamingSystem/arge-ik/iknr"
+* identifier[0].value = "168140346"
+* name = "DKV Deutsche Krankenversicherung"
+
+Instance: BillingClaimBGInsurerExample
+InstanceOf: Organization
+Title: "Example BG Insurer (Billing Claims)"
+Description: "Example Berufsgenossenschaft insurer for BG billing claim examples"
+Usage: #example
+* identifier[0].system = "http://fhir.de/NamingSystem/arge-ik/iknr"
+* identifier[0].value = "120491885"
+* name = "BG Holz und Metall"
+
 // --- Preliminary Billing Claim (item carrier) ---
 Instance: PraxisPreliminaryBillingClaimExample
 InstanceOf: PraxisPreliminaryBillingClaimDE
 Title: "Preliminary Billing Claim Example"
-Description: "Vorlaeufigerabrechnung mit den tatsaechlichen Abrechnungspositionen (EBM). Wird von finalen Claims per Claim.related referenziert."
+Description: "Vorlaeufigerabrechnung mit den tatsaechlichen Abrechnungspositionen (EBM). Wird von finalen Claims per Claim.related referenziert. Pflicht: mindestens eine item-Zeile (1..*). subType=vorlaeufig."
 Usage: #example
 * status = #active
 * use = #predetermination
+* subType = PraxisBillingClaimSubTypeCS#vorlaeufig
 * type = http://terminology.hl7.org/CodeSystem/claim-type#professional
 * patient = Reference(BillingClaimPatientExample)
 * created = "2024-04-01T08:00:00+02:00"
@@ -71,10 +91,11 @@ Usage: #example
 Instance: PraxisGKVClaimExample
 InstanceOf: PraxisGKVClaimDE
 Title: "GKV Claim Example"
-Description: "Finaler GKV-Abrechnungsanspruch. Referenziert die vorlaeufigerabrechnung per Claim.related."
+Description: "Finaler GKV-Abrechnungsanspruch. Referenziert die vorlaeufigerabrechnung per Claim.related (Pflicht). Keine item-Zeilen (item 0..0). subType=gkv."
 Usage: #example
 * status = #active
 * use = #claim
+* subType = PraxisBillingClaimSubTypeCS#gkv
 * type = http://terminology.hl7.org/CodeSystem/claim-type#professional
 * patient = Reference(BillingClaimPatientExample)
 * created = "2024-04-30T10:00:00+02:00"
@@ -92,43 +113,45 @@ Usage: #example
 Instance: PraxisPrivateClaimExample
 InstanceOf: PraxisPrivateClaimDE
 Title: "Private Claim Example"
-Description: "Finaler Privatabrechnungsanspruch. Referenziert die vorlaeufigerabrechnung per Claim.related."
+Description: "Finaler Privatabrechnungsanspruch. Referenziert die vorlaeufigerabrechnung per Claim.related (Pflicht). Keine item-Zeilen (item 0..0). subType=privat."
 Usage: #example
 * status = #active
 * use = #claim
+* subType = PraxisBillingClaimSubTypeCS#privat
 * type = http://terminology.hl7.org/CodeSystem/claim-type#professional
 * patient = Reference(BillingClaimPatientExample)
 * created = "2024-04-15T11:00:00+02:00"
 * provider = Reference(BillingClaimPractitionerExample)
 * priority.coding[0].system = "http://terminology.hl7.org/CodeSystem/processpriority"
 * priority.coding[0].code = #normal
-* insurer.display = "Patient (Selbstzahler)"
+* insurer = Reference(BillingClaimPrivateInsurerExample)
 * insurance[0].sequence = 1
 * insurance[0].focal = true
-* insurance[0].coverage.display = "Privatversicherung / Selbstzahler"
+* insurance[0].coverage.display = "DKV Privatversicherung"
 * related[0].claim = Reference(PraxisPreliminaryBillingClaimExample)
 * related[0].relationship = http://terminology.hl7.org/CodeSystem/ex-relatedclaimrelationship#associated
 
 // --- Final BG Claim ---
+// Note: BG accident context is carried via referenced Condition/Procedure resources,
+// not via Claim.accident (which is not part of the AW final claim semantics for BG).
 Instance: PraxisBGClaimExample
 InstanceOf: PraxisBGClaimDE
 Title: "BG Claim Example"
-Description: "Finaler BG-Abrechnungsanspruch (Unfallversicherung). Referenziert die vorlaeufigerabrechnung per Claim.related."
+Description: "Finaler BG-Abrechnungsanspruch (Unfallversicherung). Referenziert die vorlaeufigerabrechnung per Claim.related (Pflicht). Keine item-Zeilen (item 0..0). subType=bg. Unfallkontext wird per referenzierter Condition/Procedure getragen."
 Usage: #example
 * status = #active
 * use = #claim
+* subType = PraxisBillingClaimSubTypeCS#bg
 * type = http://terminology.hl7.org/CodeSystem/claim-type#professional
 * patient = Reference(BillingClaimPatientExample)
 * created = "2024-04-20T09:30:00+02:00"
 * provider = Reference(BillingClaimPractitionerExample)
 * priority.coding[0].system = "http://terminology.hl7.org/CodeSystem/processpriority"
 * priority.coding[0].code = #normal
-* insurer.display = "DGUV / Berufsgenossenschaft Holz und Metall"
+* insurer = Reference(BillingClaimBGInsurerExample)
 * insurance[0].sequence = 1
 * insurance[0].focal = true
-* insurance[0].coverage.display = "BG Unfallversicherung"
-* accident.date = "2024-04-10"
-* accident.type = http://terminology.hl7.org/CodeSystem/v3-ActIncidentCode#MVA
+* insurance[0].coverage.display = "BG Holz und Metall Unfallversicherung"
 * related[0].claim = Reference(PraxisPreliminaryBillingClaimExample)
 * related[0].relationship = http://terminology.hl7.org/CodeSystem/ex-relatedclaimrelationship#associated
 
@@ -136,10 +159,11 @@ Usage: #example
 Instance: PraxisSelectiveContractClaimExample
 InstanceOf: PraxisSelectiveContractClaimDE
 Title: "Selective Contract Claim Example"
-Description: "Finaler Selektivvertrags-Abrechnungsanspruch (HZV). Referenziert die vorlaeufigerabrechnung per Claim.related."
+Description: "Finaler Selektivvertrags-Abrechnungsanspruch (HZV). Referenziert die vorlaeufigerabrechnung per Claim.related (Pflicht). Keine item-Zeilen (item 0..0). subType=hzv-selektiv."
 Usage: #example
 * status = #active
 * use = #claim
+* subType = PraxisBillingClaimSubTypeCS#hzv-selektiv
 * type = http://terminology.hl7.org/CodeSystem/claim-type#professional
 * patient = Reference(BillingClaimPatientExample)
 * created = "2024-04-30T12:00:00+02:00"
