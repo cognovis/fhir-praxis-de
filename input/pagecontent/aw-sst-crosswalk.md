@@ -69,11 +69,11 @@ of PVS data areas.
 | Stationary treatment | Local administrative workflow where present | `KBV_PR_AW_Stationaere_Behandlung` | Adapter/export crosswalk | No immediate local parent/profile change. |
 | Diagnosis | `PraxisConditionDE`, older `PraxisCondition`, `DauerdiagnoseExt` | `KBV_PR_AW_Diagnose` | Crosswalk, no parent | Keep `asserter` and `evidence.detail`. Map AW flags such as duration and billing relevance on export/import. |
 | Accident | Local BG/accident context and `Procedure`/`Condition` links | `KBV_PR_AW_Unfall`, `KBV_PR_AW_Unfall_Ort` | Crosswalk | Use AW as export target; do not collapse accident handling into diagnosis profile inheritance. |
-| Anamnesis freetext | `PraxisComposition`, questionnaires, possible note observations | `KBV_PR_AW_Observation_Anamnese` | Gap | Add lightweight local `Observation.valueString` profile for card-file anamnesis lines if implementation needs freetext extraction/NLP. |
-| Finding freetext | `PraxisComposition`, reports, possible note observations | `KBV_PR_AW_Observation_Befund` | Gap | Add lightweight local `Observation.valueString` finding profile; keep structured reports separate. |
+| Anamnesis freetext | `PraxisAnamneseFreeTextObservationDE` | `KBV_PR_AW_Observation_Anamnese` | Implemented | `PraxisAnamneseFreeTextObservationDE` — lightweight `Observation.valueString` (category=survey, LOINC 10164-2) for card-file anamnesis lines. Structured questionnaire responses remain in `PraxisAnamneseQuestionnaireResponse`. |
+| Finding freetext | `PraxisBefundFreeTextObservationDE` | `KBV_PR_AW_Observation_Befund` | Implemented | `PraxisBefundFreeTextObservationDE` — lightweight `Observation.valueString` (category=exam, LOINC 11506-3) for unstructured finding notes. Structured reports (lab, imaging) remain in separate profiles. |
 | Vital signs and simple observations | `PraxisLabObservation`, `HbA1cObservationDE`, `SmokingStatusDE`, other Observation profiles as needed | `KBV_PR_AW_Observation_Blutdruck`, `_Puls`, `_Koerpertemperatur`, `_Bauchumfang`, `_Hueftumfang`, `_Raucherstatus`, `_Schwangerschaft` | Crosswalk | Preserve standard categories such as `social-history` for smoking; add AW coding as mapping/export detail where useful. |
 | Lab observations | `PraxisLabObservation`, `PraxisLabDiagnosticReport`, `PraxisSpecimen` | AW has selected Observation/DiagnosticReport profiles and ring trial/certificate support | Crosswalk | Keep lab profiles; map only overlapping findings and certificates to AW export. |
-| Allergy | Currently broad `PraxisFlag` / CAVE concept | `KBV_PR_AW_Allergie` | Gap | Add real `PraxisAllergyIntoleranceDE` for allergies. Keep `PraxisFlag` for broader CAVE, notes, risks, and workflow warnings. |
+| Allergy | `PraxisAllergyIntoleranceDE`, `PraxisFlag` for CAVE/workflow flags | `KBV_PR_AW_Allergie` | Implemented | `PraxisAllergyIntoleranceDE` — real `AllergyIntolerance` profile with clinicalStatus, verificationStatus, type, category, criticality, code (SNOMED), and reaction. `PraxisFlag` kept for broader CAVE, notes, risks, and workflow warnings. |
 | Immunization | `PraxisImmunization` with KBV MIO vaccine vocabulary, no MIO parent | `KBV_PR_AW_Impfung` | Crosswalk | Keep local profile; AW is export target. Do not inherit from AW or MIO profile. |
 | Procedures | `ProcedureAmbulantDE`, `RoentgenProcedurePraxisDe`, specialty profiles | `KBV_PR_AW_Untersuchung`, `_Therapie`, `_Ambulante_Operation`, `_Genetische_Untersuchung`, `_Kur` | Crosswalk | Local procedure profiles stay richer for OPS, imaging, and radiation protection. Export to AW procedure family as needed. |
 | Imaging | IHE IMR ServiceRequest, ImagingStudy, DiagnosticReport, Appointment, Device, radiation-dose extensions | No equivalent AW imaging workflow model | Local better | Keep local model. AW may receive generic Procedure/DocumentReference exports only. |
@@ -84,7 +84,7 @@ of PVS data areas.
 | Krankenbefoerderung | Local ServiceRequest workflow where present | `KBV_PR_AW_Krankenbefoerderung`, `_42019`, `_Befoerderungsmittel` | Crosswalk | Export mapping only unless local workflow requires a dedicated profile. |
 | Sprechstundenbedarf | No central local profile yet | `KBV_PR_AW_Anforderung_Sprechstundenbedarf`, bundle profile | Crosswalk | Use AW as reference if demand/order support is added. |
 | Prior authorization | `PASClaimDE`, `PASClaimResponseDE`, `PASTaskDE` | AW CoverageEligibilityRequest/Response for Kur, Heilmittel, Psychotherapie | Parallel patterns | Keep PAS for prior authorization. Map to AW eligibility resources only when the use case requires AW archive export. |
-| Billing claim | `PASClaimDE` currently exists but is preauthorization only; examples include raw `Claim`; `ChargeItemPraxisDe`; `PraxisInvoiceDE` | `KBV_PR_AW_Abrechnung_Vorlaeufig`, `_vertragsaerztlich`, `_privat`, `_BG`, `_HzV_BesondereVersorgung_Selektiv` | Gap, high priority | Add local submitted-billing Claim profiles aligned with AW split. This is the most important implementation gap. |
+| Billing claim | `PraxisPreliminaryBillingClaimDE`, `PraxisGKVClaimDE`, `PraxisPrivateClaimDE`, `PraxisBGClaimDE`, `PraxisSelectiveContractClaimDE`; `PASClaimDE` remains prior-auth only; `ChargeItemPraxisDe`; `PraxisInvoiceDE` | `KBV_PR_AW_Abrechnung_Vorlaeufig`, `_vertragsaerztlich`, `_privat`, `_BG`, `_HzV_BesondereVersorgung_Selektiv` | Implemented | Five local billing Claim profiles added. Preliminary claim carries item lines (use=predetermination). Final claims (GKV/private/BG/selective, use=claim) reference the preliminary claim via `Claim.related`. |
 | Billing service lines | `ChargeItemPraxisDe`, billing extensions, `ChargeItemDefinition` catalog | AW preliminary Claim item lines and item categories | Crosswalk | Keep ChargeItem as operational source. Export service lines into preliminary AW-style Claim items. |
 | Fiscal invoice | `PraxisInvoiceDE` with tax categories, exemption reason, small-business notice | AW private/BG/final Claim with invoice-like metadata | Intentional divergence | Keep Invoice separate. Link or map to private/BG Claim where needed; do not treat AW Claim as tax invoice. |
 | Billing patterns | `PraxisBillingPattern`, `PraxisBillingActivity`, `ChargeItemDefinition` | `KBV_PR_AW_Behandlungsbaustein_Definition`, `_Leistungsziffern`, `_Diagnose`, `_Verordnung`, `_Textvorlage`, `_OMIMCode`, `_Sonstige` | Crosswalk, no parent | Keep plan-library/rule-execution boundary from ADR-001. Export or import AW Behandlungsbaustein semantics through mapping. |
@@ -99,32 +99,39 @@ of PVS data areas.
 ## Billing Claim Target Model
 
 The AW Claim split is the strongest finding of the crosswalk. Local billing Claim
-profiles should be added rather than reusing `PASClaimDE`.
+profiles have been added rather than reusing `PASClaimDE`.
 
-| Local target profile | AW target | Key behavior |
+| Local profile | File | AW target | Status | Key behavior |
+|---|---|---|---|---|
+| `PraxisPreliminaryBillingClaimDE` | `praxis-preliminary-billing-claim.fsh` | `KBV_PR_AW_Abrechnung_Vorlaeufig` | Implemented | Carries the actual billable item lines. `Claim.use = predetermination`. |
+| `PraxisGKVClaimDE` | `praxis-gkv-claim.fsh` | `KBV_PR_AW_Abrechnung_vertragsaerztlich` | Implemented | Final GKV claim. `use=claim`. References preliminary claim via `Claim.related`; item lines stay in preliminary claim. |
+| `PraxisPrivateClaimDE` | `praxis-private-claim.fsh` | `KBV_PR_AW_Abrechnung_privat` | Implemented | Final private claim. `use=claim`. References preliminary claim. Private payer/routing semantics distinct from `PraxisInvoiceDE`. |
+| `PraxisBGClaimDE` | `praxis-bg-claim.fsh` | `KBV_PR_AW_Abrechnung_BG` | Implemented | Final BG claim. `use=claim`. References preliminary claim. Carries BG accident context. |
+| `PraxisSelectiveContractClaimDE` | `praxis-selective-contract-claim.fsh` | `KBV_PR_AW_Abrechnung_HzV_BesondereVersorgung_Selektiv` | Implemented | Final HZV/selective-contract claim. `use=claim`. References preliminary claim and contract context. |
+
+`PASClaimDE` remains a prior-authorization/preauthorization profile (`use=preauthorization`).
+It must not become the submitted billing Claim profile.
+
+## Implementation Status
+
+Bead `fpde-7eg` has been completed. All gap profiles from the crosswalk have been implemented:
+
+| Gap profile | File | Status |
 |---|---|---|
-| `PraxisPreliminaryBillingClaimDE` | `KBV_PR_AW_Abrechnung_Vorlaeufig` | Carries the actual billable item lines. AW uses `Claim.use = predetermination`. |
-| `PraxisGKVClaimDE` | `KBV_PR_AW_Abrechnung_vertragsaerztlich` | Final GKV claim. References the preliminary claim; normal service items remain in the preliminary claim. |
-| `PraxisPrivateClaimDE` | `KBV_PR_AW_Abrechnung_privat` | Final private claim. References the preliminary claim; keeps private receiver/payment/routing semantics distinct from local `Invoice`. |
-| `PraxisBGClaimDE` | `KBV_PR_AW_Abrechnung_BG` | Final BG claim. References the preliminary claim and carries BG-specific billing context. |
-| `PraxisSelectiveContractClaimDE` | `KBV_PR_AW_Abrechnung_HzV_BesondereVersorgung_Selektiv` | Final selective-contract/HZV claim. References the preliminary claim and contract context. |
+| `PraxisPreliminaryBillingClaimDE` | `input/fsh/profiles/praxis-preliminary-billing-claim.fsh` | Done |
+| `PraxisGKVClaimDE` | `input/fsh/profiles/praxis-gkv-claim.fsh` | Done |
+| `PraxisPrivateClaimDE` | `input/fsh/profiles/praxis-private-claim.fsh` | Done |
+| `PraxisBGClaimDE` | `input/fsh/profiles/praxis-bg-claim.fsh` | Done |
+| `PraxisSelectiveContractClaimDE` | `input/fsh/profiles/praxis-selective-contract-claim.fsh` | Done |
+| `PraxisAnamneseFreeTextObservationDE` | `input/fsh/profiles/praxis-anamnese-freetext-observation.fsh` | Done |
+| `PraxisBefundFreeTextObservationDE` | `input/fsh/profiles/praxis-befund-freetext-observation.fsh` | Done |
+| `PraxisAllergyIntoleranceDE` | `input/fsh/profiles/praxis-allergy-intolerance.fsh` | Done |
 
-`PASClaimDE` remains a prior-authorization/preauthorization profile. It must not
-become the submitted billing Claim profile.
-
-## Implementation Follow-Up
-
-Implementation is tracked in bead `fpde-7eg`.
-
-That bead must stay limited to AW-SST consequences:
-
-1. Add AW-aligned local billing Claim profiles and examples.
-2. Keep `ChargeItem`, `Claim`, and `Invoice` as separate layers.
-3. Add only the local gap profiles needed for the crosswalk: freetext
-   anamnesis/finding observations, real AllergyIntolerance, and archive
-   DocumentReference/AuditEvent support if required by examples/export.
-4. Keep `kbv.ita.aws` out of package dependencies and avoid every
-   `Parent: KBV_PR_AW_*`.
+Invariants maintained:
+- `kbv.ita.aws` not in `sushi-config.yaml` dependencies
+- No `Parent: KBV_PR_AW_*` anywhere in `input/fsh/`
+- `PASClaimDE` unchanged (prior-auth only)
+- `ChargeItem`, `Claim`, and `Invoice` remain separate layers
 
 ## Non-Goals
 
