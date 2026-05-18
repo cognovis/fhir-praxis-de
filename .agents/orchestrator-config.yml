@@ -30,4 +30,9 @@ phases:
   phase_14_constraints:
     enabled: true
 
-# No worktree_bootstrap needed: uses shared persistent Aidbox at localhost:8080, no .env required
+# No .env needed: uses shared persistent Aidbox at localhost:8080.
+# Explicit empty section so hook does not fall back to legacy .env copy.
+worktree_bootstrap:
+  symlink_from_main: []
+  copy_from_main: []
+  warn_if_missing_in_main: []
