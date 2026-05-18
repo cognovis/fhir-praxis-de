@@ -72,6 +72,8 @@ pages:
     title: AW-SST Crosswalk
   proposal-provenance.md:
     title: Proposal Provenance
+  foundation-source-register.md:
+    title: Foundation Source Register
   architecture.md:
     title: Architecture Decisions
   strahlenschutz-compliance.md:
@@ -96,6 +98,7 @@ menu:
   Architecture:
     AW-SST Crosswalk: aw-sst-crosswalk.html
     Proposal Provenance: proposal-provenance.html
+    Foundation Source Register: foundation-source-register.html
     Plan-Library Boundary: plan-library-boundary.html
     All Decisions: architecture.html
     Strahlenschutz Compliance: strahlenschutz-compliance.html
