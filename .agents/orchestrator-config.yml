@@ -29,3 +29,5 @@ phases:
     enabled: false
   phase_14_constraints:
     enabled: true
+
+# No worktree_bootstrap needed: uses shared persistent Aidbox at localhost:8080, no .env required
