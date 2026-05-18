@@ -22,8 +22,10 @@ Description: "Vorlaeufigerabrechnung fuer die deutsche ambulante Praxis. Traegt 
 * subType = PraxisBillingClaimSubTypeCS#vorlaeufig
 * subType ^short = "Billing claim subtype: vorlaeufig (preliminary item carrier)"
 
-* type MS
-* type ^short = "Claim type (professional, institutional, etc.)"
+// type fixed to professional — matches AW billing claim semantics
+* type 1..1 MS
+* type = http://terminology.hl7.org/CodeSystem/claim-type#professional
+* type ^short = "Claim type: professional"
 
 * patient 1..1 MS
 * patient only Reference(Patient)
