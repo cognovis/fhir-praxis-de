@@ -1,0 +1,31 @@
+# fhir-praxis-de orchestrator configuration
+# Schema: cognovis-core/standards/orchestrator/orchestrator-config.md
+# Owner: clc-8gy
+
+project:
+  namespace_pattern: "{prefix}-{bead_number}"
+
+dev_server:
+  mode: shared_external
+  startup:
+    owner: external   # Aidbox is externally managed -- do NOT start/stop
+    command: null
+    health_url: "http://localhost:8080/fhir/metadata"
+    startup_timeout_s: 5   # short; it's already running
+  serialization:
+    lock_resource: "aidbox:package-install"   # serialize IG package installs
+
+scenarios:
+  required_for_feature_beads: false   # FHIR IG projects don't use scenario gate
+  config_path: ".agents/scenario-config.yml"
+
+standards:
+  index: ".agents/standards/index.yml"
+
+phases:
+  phase_12_e2e:
+    enabled: false   # no browser e2e for FHIR IG projects
+  phase_13_uat:
+    enabled: false
+  phase_14_constraints:
+    enabled: true
