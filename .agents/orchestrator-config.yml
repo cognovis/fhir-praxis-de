@@ -12,7 +12,7 @@ dev_server:
     command: null
     health_url: "http://localhost:8080/fhir/metadata"
     startup_timeout_s: 5   # short; it's already running
-  serialization:
+  concurrency:
     lock_resource: "aidbox:package-install"   # serialize IG package installs
 
 scenarios:
