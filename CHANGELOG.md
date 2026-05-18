@@ -4,22 +4,55 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Documentation
+
+- Document AW-SST crosswalk decision
+- **fpde-7eg**: Update changelog for AW-SST billing claim profiles and gap profiles
+
 ### Features
 
-- **fpde-7eg**: Add AW-SST billing Claim profiles — `PraxisPreliminaryBillingClaimDE` (use=predetermination, carries billable service-line items), `PraxisGKVClaimDE`, `PraxisPrivateClaimDE`, `PraxisBGClaimDE`, `PraxisSelectiveContractClaimDE` (all use=claim, reference preliminary via `Claim.related`). Implements the AW crosswalk billing split without kbv.ita.aws dependency or KBV_PR_AW_* parent inheritance.
-- **fpde-7eg**: Add `PraxisAllergyIntoleranceDE` — dedicated AllergyIntolerance profile (clinicalStatus, verificationStatus, type, category, criticality, code, reaction). Separates real allergies from broad `PraxisFlag` CAVE/workflow flags.
-- **fpde-7eg**: Add `PraxisAnamneseFreeTextObservationDE` and `PraxisBefundFreeTextObservationDE` — lightweight freetext Observation profiles for card-file anamnesis lines (LOINC 10164-2, category=survey) and unstructured finding notes (LOINC 11506-3, category=exam) for NLP/extraction use cases.
-- **fpde-7eg**: Update AW-SST crosswalk page — four gap rows (Billing claim, Anamnesis freetext, Finding freetext, Allergy) marked Implemented with local profile names and file paths.
+- **fpde-7eg**: Add billing claim profiles, freetext obs, AllergyIntolerance, update crosswalk
+
+### Test
+
+- **fpde-7eg**: Red -- add AW-SST profile existence tests
+
+## [0.62.3] - 2026-05-17
+
+### Features
+
+- **genehmigung**: Add cockpit-item-id sub-extension (adapter-5yeg)
+
+## [0.62.2] - 2026-05-17
+
+### Features
+
+- **genehmigung**: Add status sub-extension (active|expired|revoked)
 
 ## [0.62.1] - 2026-05-17
 
+### Bug Fixes
+
+- **fpde-hcq**: Remove hardcoded system URI from ZANR definition prose
+- **adapter-d1vy**: Vendor-neutral wording in PvsWritebackStatusCS description
+
 ### Features
 
-- Add `PvsWritebackStatusCS` CodeSystem (`pvs-writeback-status`) — FHIR-Ressourcen werden mit `pvs-writeback-error` getaggt, wenn ein Writeback in das anbindende PVS fehlschlaegt. Self-healing: der Tag wird bei erfolgreichem Apply (auch nach Retry) entfernt. Definiert die kanonische URL `https://fhir.cognovis.de/praxis/CodeSystem/pvs-writeback-status`.
+- **adapter-d1vy**: Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
+
+### Miscellaneous
+
+- **fpde-1cn**: Session close — shared ZulassungStatusConcepts RuleSet v0.62.0
+- Bump version to 0.62.1
+- Bump version to 0.62.1 — publish PvsWritebackStatusCS
 
 ### Refactoring
 
 - **fpde-1cn**: Shared ZulassungStatusConcepts RuleSet for aktiv/abgelaufen/entzogen
+
+### Merge
+
+- Feat/adapter-d1vy-pvs-writeback-status — add PvsWritebackStatusCS
 
 ## [0.62.0] - 2026-05-16
 
