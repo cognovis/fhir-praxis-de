@@ -56,14 +56,22 @@ Contract mit hvg-kennung, ChargeItem mit HZV-Katalog-CodeSystem).
 
 ## Built On
 
-This IG builds on established German FHIR base profiles:
+This IG builds on the German and international FHIR packages declared in
+`sushi-config.yaml`, including:
 
-- [de.basisprofil.r4](https://simplifier.net/basisprofil-de-r4) (1.5.0) — German base profiles
-- [kbv.basis](https://simplifier.net/for) (1.8.0) — KBV Basisprofile
-- [kbv.ita.for](https://simplifier.net/for) (1.3.1) — Formularübergreifende Festlegungen
-- [kbv.ita.aws](https://simplifier.net/for) (1.2.0) — Archivierungs-/Wechselschnittstelle
-- [kbv.all.st-combined](https://simplifier.net/for) (1.32.0) — KBV Schlüsseltabellen
-- [DGUV.Basis](https://simplifier.net/dguv-basis) (1.4.0) — BG/Arbeitsunfall
+- [de.basisprofil.r4](https://simplifier.net/basisprofil-de-r4) (1.6.0-ballot2) - German base profiles
+- [kbv.basis](https://simplifier.net/packages/kbv.basis) (1.8.0) - KBV base profiles
+- [IHE RAD IMR](https://profiles.ihe.net/RAD/IMR/) - imaging request workflow
+- [HL7 IPS](https://hl7.org/fhir/uv/ips/) - international patient-summary baseline patterns
+
+## Referenced Standards and Crosswalk Targets
+
+The following standards are used as semantic references or mapping targets, but
+are not necessarily direct package dependencies:
+
+- [kbv.ita.aws](https://simplifier.net/packages/kbv.ita.aws) (1.2.0) - AW-SST/PVS archive-change crosswalk target, not a parent package. See [AW-SST Crosswalk](aw-sst-crosswalk.html).
+- KBV formular and key-table artifacts - referenced where local profile bindings or ConceptMaps need KBV terminology.
+- [DGUV.Basis](https://simplifier.net/dguv-basis) - BG/occupational-accident reference semantics where local BG billing context requires it.
 
 ## Publisher
 

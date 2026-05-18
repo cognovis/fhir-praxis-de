@@ -68,6 +68,8 @@ pages:
     title: Plan-Library vs. Rule-Execution Boundary
   international-interoperability.md:
     title: International Interoperability
+  aw-sst-crosswalk.md:
+    title: AW-SST Crosswalk
   architecture.md:
     title: Architecture Decisions
   strahlenschutz-compliance.md:
@@ -90,6 +92,7 @@ menu:
     Value Sets: valuesets.html
     Naming Systems: namingsystems.html
   Architecture:
+    AW-SST Crosswalk: aw-sst-crosswalk.html
     Plan-Library Boundary: plan-library-boundary.html
     All Decisions: architecture.html
     Strahlenschutz Compliance: strahlenschutz-compliance.html

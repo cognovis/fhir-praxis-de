@@ -2,6 +2,31 @@
 
 This page documents the architectural decisions (ADRs) that shape the design of this Implementation Guide.
 
+## ADR-003: AW-SST as Crosswalk Target, Not Profile Parent
+
+**Status:** Accepted | **Date:** 2026-05-18
+
+**Summary:** The IG treats KBV AW-SST/PVS-AWS as a semantic crosswalk target for
+archive and system-change export, not as a profile parent layer. Local profiles
+must not derive from `KBV_PR_AW_*`, and `kbv.ita.aws` remains outside direct
+package dependencies. The main implementation follow-up is an AW-aligned local
+Claim profile set while preserving the local `ChargeItem`/`Claim`/`Invoice`
+separation.
+
+**Full ADR:** [ADR-003-aw-sst-crosswalk.md](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-003-aw-sst-crosswalk.md)
+
+**Crosswalk:** [AW-SST Crosswalk](aw-sst-crosswalk.html)
+
+### Key Decisions
+
+| Decision | Rationale |
+|---|---|
+| No AW parent inheritance | AW-SST is archive/export-shaped and would remove needed live-workflow semantics |
+| No direct `kbv.ita.aws` dependency | The published package stack is older than this IG stack and is not needed for local validation |
+| AW as crosswalk target | AW-SST remains the official semantic reference for PVS archive/change export |
+| Claim implementation required | AW's preliminary/final Claim split is useful and should be reflected in local billing Claim profiles |
+| Scope kept narrow | Follow-up is tracked as one AW bead, not a broad profile-harmonization program |
+
 ## ADR-001: Plan-Library vs. Rule-Execution — Boundary, Profile-Strategy, CPG-Reuse
 
 **Status:** Accepted | **Date:** 2026-04-27
