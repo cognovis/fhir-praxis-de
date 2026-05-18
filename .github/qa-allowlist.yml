@@ -44,3 +44,7 @@ patterns:
   - pattern: "The link 'http://fhir.de/StructureDefinition/coverage-de-basis"
     reason: "Broken external link to de.basisprofil.r4 canonical — coverage-de-basis is defined in the German base profiles package but the canonical URL does not resolve in the IG Publisher's link checker. Appears 1x in multi-coverage.html."
     source: "de.basisprofil.r4"
+
+  - pattern: "http://terminology.hl7.org/CodeSystem/v3-ActIncidentCode"
+    reason: "HL7 v3 ActIncidentCode CodeSystem URL not resolvable by IG Publisher / tx server. The CodeSystem is valid per FHIR R4 spec and used in Claim.accident.type (BG claim example). Introduced in v0.63.0 (fpde-7eg). The code MVA (Motor Vehicle Accident) is defined in the HL7 v3 ActIncidentCode CodeSystem."
+    source: "hl7.terminology.r4"
