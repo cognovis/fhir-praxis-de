@@ -4,6 +4,13 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **fpde-7eg**: Add AW-SST billing Claim profiles — `PraxisPreliminaryBillingClaimDE` (use=predetermination, carries billable service-line items), `PraxisGKVClaimDE`, `PraxisPrivateClaimDE`, `PraxisBGClaimDE`, `PraxisSelectiveContractClaimDE` (all use=claim, reference preliminary via `Claim.related`). Implements the AW crosswalk billing split without kbv.ita.aws dependency or KBV_PR_AW_* parent inheritance.
+- **fpde-7eg**: Add `PraxisAllergyIntoleranceDE` — dedicated AllergyIntolerance profile (clinicalStatus, verificationStatus, type, category, criticality, code, reaction). Separates real allergies from broad `PraxisFlag` CAVE/workflow flags.
+- **fpde-7eg**: Add `PraxisAnamneseFreeTextObservationDE` and `PraxisBefundFreeTextObservationDE` — lightweight freetext Observation profiles for card-file anamnesis lines (LOINC 10164-2, category=survey) and unstructured finding notes (LOINC 11506-3, category=exam) for NLP/extraction use cases.
+- **fpde-7eg**: Update AW-SST crosswalk page — four gap rows (Billing claim, Anamnesis freetext, Finding freetext, Allergy) marked Implemented with local profile names and file paths.
+
 ## [0.62.1] - 2026-05-17
 
 ### Features
