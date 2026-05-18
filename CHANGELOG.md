@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.64.0] - 2026-05-18
+
+### Features
+
+- **fpde-ctx**: Add vendor-neutral proposal Provenance profile, contribution-role terminology, examples, and documentation.
+
+### Build
+
+- Add local IG build wrapper with Homebrew Ruby/Jekyll path setup and private FHIR package preloading.
+
+## [0.63.1] - 2026-05-18
+
 ### Documentation
 
 - Document AW-SST crosswalk decision
@@ -596,5 +608,3 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Vendor-clear public baseline v0.41.1
-
-

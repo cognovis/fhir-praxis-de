@@ -50,6 +50,7 @@ The IG therefore combines reusable extensions and terminology with a small numbe
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
 | **[FPDEPatient](StructureDefinition-fpde-patient.html)** | Patient demographics with maiden name and district support | humanname-own-name, iso21090-ADXP-precinct |
+| **[PraxisProposalProvenance](StructureDefinition-praxis-proposal-provenance.html)** | Proposal lifecycle provenance for software/LLM suggestions, clinician confirmations, links to existing records, and direct manual entries | ProposalContributionRoleVS |
 | **Provenance** | AI provenance tracking (EU AI Act) | AiGeneratedExt, AiModelExt, HumanReviewedExt |
 | **[FPDECoverageGKV](StructureDefinition-fpde-coverage-gkv.html)** | GKV insurance with Wohnortprinzip (WOP) | gkv/wop |
 | **[FPDECoveragePrivat](StructureDefinition-fpde-coverage-privat.html)** | PKV / self-pay coverage with optional PVS routing | billingAssignment |

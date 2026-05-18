@@ -38,6 +38,39 @@ sushi .
 ./_genonce.sh           # run full build
 ```
 
+### Local Developer Build
+
+Use the local wrapper when running the full IG Publisher build on a developer
+machine:
+
+```bash
+scripts/build-local-ig.sh
+```
+
+The wrapper does three local-only things before delegating to `_genonce.sh`:
+
+- Adds Homebrew Ruby and its gem binary directory to `PATH`, so Jekyll is found.
+- Finds private FHIR dependency versions in `sushi-config.yaml` and preloads
+  them from `npm.cognovis.de` into `~/.fhir/packages`.
+- Preloads the previous `de.cognovis.fhir.praxis` release for IG Publisher
+  previous-version comparison.
+
+Supported token sources for private packages:
+
+- Existing `~/.npmrc` auth for `npm.cognovis.de`
+- `VERDACCIO_TOKEN` (CI-compatible basic auth)
+- `BOX_FHIR_NPM_PACKAGE_REGISTRY_TOKEN`
+- `POLARIS_STACK_NPM_TOKEN`
+- `NPM_TOKEN`
+
+Recommended one-time local toolchain setup:
+
+```bash
+HOMEBREW_NO_AUTO_UPDATE=1 brew install ruby
+export PATH="$(brew --prefix ruby)/bin:$("$(brew --prefix ruby)/bin/ruby" -rrubygems -e 'print Gem.bindir'):$PATH"
+gem install jekyll
+```
+
 ## License
 
 CC-BY-4.0 — see [LICENSE](LICENSE)

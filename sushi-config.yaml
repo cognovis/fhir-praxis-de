@@ -9,7 +9,7 @@ description: >-
   Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
   international interoperability mappings.
 status: active
-version: 0.63.1
+version: 0.64.0
 fhirVersion: 4.0.1
 copyrightYear: 2026+
 releaseLabel: STU1
@@ -70,6 +70,8 @@ pages:
     title: International Interoperability
   aw-sst-crosswalk.md:
     title: AW-SST Crosswalk
+  proposal-provenance.md:
+    title: Proposal Provenance
   architecture.md:
     title: Architecture Decisions
   strahlenschutz-compliance.md:
@@ -93,6 +95,7 @@ menu:
     Naming Systems: namingsystems.html
   Architecture:
     AW-SST Crosswalk: aw-sst-crosswalk.html
+    Proposal Provenance: proposal-provenance.html
     Plan-Library Boundary: plan-library-boundary.html
     All Decisions: architecture.html
     Strahlenschutz Compliance: strahlenschutz-compliance.html

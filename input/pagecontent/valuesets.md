@@ -68,6 +68,14 @@ Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
 - **Binding:** Used by `AiGeneratedExt` on Provenance
 - **Usage:** Tracks the level of AI involvement in content generation (KI-generiert, KI-unterstützt, menschlich geprüft, menschlich freigegeben)
 
+### ProposalContributionRoleVS — Proposal Contribution Role
+
+Allowed contribution-role codes for proposal Provenance agents.
+
+- **Includes:** All codes from [ProposalContributionRoleCS](CodeSystem-proposal-contribution-role.html)
+- **Binding:** Used by `PraxisProposalProvenance.agent.role` (required)
+- **Usage:** Distinguishes software suggestions, LLM suggestions, clinician confirmations, existing-record links, and manual entries in proposal Provenance events
+
 ### AppointmentModeVS — Terminmodus
 
 Terminmodus für ambulante Konsultationen.

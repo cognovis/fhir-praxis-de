@@ -1,0 +1,14 @@
+### CodeSystem: proposal-contribution-role - Valid code: llm-suggested
+# @name valid_llm_suggested
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=llm-suggested
+Authorization: Basic basic:secret
+
+### CodeSystem: proposal-contribution-role - Valid code: clinician-confirmed
+# @name valid_clinician_confirmed
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=clinician-confirmed
+Authorization: Basic basic:secret
+
+### CodeSystem: proposal-contribution-role - Invalid code
+# @name invalid
+GET http://localhost:8080/Concept?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=INVALID_CODE_XYZ
+Authorization: Basic basic:secret
