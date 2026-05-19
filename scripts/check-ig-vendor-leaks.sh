@@ -52,6 +52,17 @@ while IFS= read -r -d '' path; do
   fi
 done < <(git ls-files -z -- "${PATHS[@]}")
 
+# Exclude internal architecture documents — ADRs and research notes may name downstream systems
+# for context; they are not published IG surfaces.
+FILTERED_PATHS=()
+for path in "${TRACKED_PATHS[@]}"; do
+  case "$path" in
+    docs/adr/*|docs/research/*) ;;
+    *) FILTERED_PATHS+=("$path") ;;
+  esac
+done
+TRACKED_PATHS=("${FILTERED_PATHS[@]}")
+
 if [ "${#TRACKED_PATHS[@]}" -eq 0 ]; then
   echo "Vendor leak guard skipped: no tracked public repository surfaces found."
   exit 0

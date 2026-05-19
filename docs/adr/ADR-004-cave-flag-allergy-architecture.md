@@ -71,10 +71,11 @@ create a dual-source dependency with unclear conflict resolution semantics.
 
 **Canonical read sources:**
 
-| Admin Status     | Canonical FHIR Resource    | x.pvs Source                    |
-|------------------|----------------------------|------------------------------------|
-| HZV enrollment   | `EpisodeOfCare`            | `HVGPatient`, `HVGVertrag`         |
-| DMP participation| `Coverage.dmpIndicator`    | `Schein.DMPKennzeichnung`          |
+| Admin Status          | Canonical FHIR Resource | x.pvs Source                  | Status          |
+|-----------------------|-------------------------|----------------------------------|-----------------|
+| HZV enrollment        | `EpisodeOfCare`         | `HVGPatient`, `HVGVertrag`       | Implemented     |
+| DMP program enrollment| `EpisodeOfCare`         | `HVGPatient` (DMP contract rows) | Implemented     |
+| DMP Schein-level code | TBD                     | `Schein.DMPKennzeichnung`        | Not yet mapped  |
 
 **Permitted use of HZV/DMP Flags:** The 3 active CAVE-icon mappings may be retained in
 `flag_bild_to_code.yaml` for worklist/UI purposes (e.g., "HZV endet" warning surface). When
@@ -82,10 +83,12 @@ retained, the resulting `Flag` resources MUST carry supplementary-provenance tag
 engine misuse.
 
 **Consequences:**
-- platform-v2 engine rule implementations MUST NOT query `Flag` for HZV or DMP status
+- platform-v2 engine rule implementations MUST NOT query `Flag` for HZV or DMP enrollment status
 - A guardrail (lint rule or engine-layer type constraint) should be added in adapter to prevent
   accidental Flag-based reads (follow-up bead)
-- No Flag migration or deletion required; existing Flags are valid audit trail data
+- No semantic migration required: existing HZV/DMP Flag resources remain valid as audit trail data.
+  The URL rename migration (Decision 4) is a separate concern — it updates `coding.system`, not the
+  Flag's enrollment semantics.
 
 ---
 

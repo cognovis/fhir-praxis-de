@@ -49,10 +49,10 @@ live in the separate `x-pvs-cave-marker` CodeSystem — they are NOT flag-katego
 
 | Adapter YAML `category` | flag-kategorie code | Notes                                                              |
 |-------------------------|---------------------|--------------------------------------------------------------------|
-| hzv                     | — (none)            | Admin enrollment marker; NOT a clinical flag (see Point 3)        |
-| dmp                     | — (none)            | Admin enrollment marker; NOT a clinical flag (see Point 3)        |
-| cave                    | `cave`              | Aligns semantically with the existing `cave` code                 |
-| sonstige                | `hinweis` or `info` | Catch-all; map contextually; no dedicated code needed             |
+| hzv                     | — (none)            | Admin enrollment marker; NOT a clinical flag (see Point 3). Present in current active YAML. |
+| dmp                     | — (none)            | Admin enrollment marker; NOT a clinical flag (see Point 3). Present in current active YAML. |
+| cave                    | `cave`              | Aligns semantically with the existing `cave` code. Not in current active YAML mappings; hypothetical future mapping. |
+| sonstige                | `hinweis` or `info` | Catch-all; map contextually. Not in current active YAML mappings; named in bead description as possible category. |
 
 ### Decision
 
@@ -134,7 +134,7 @@ The gap is **in the adapter mapper**, not the profile:
 2. `mapNfdmAllergyToAllergyIntolerance` needs to populate `criticality` from `Stufe`
 3. Optionally: SNOMED CT lookup for substance codes (if a lookup table is available)
 
-**Follow-up bead created:** [adapter-NFDM-allergy-mapper-enrichment] — see AK-3 below.
+**Follow-up bead created:** adapter-hse0 — see AK-3 below.
 
 ---
 
@@ -153,8 +153,8 @@ The YAML itself marks these with `annaReview` comments explicitly stating they a
 - DMP: "approved 2026-05-19 by Malte - noncanonical hint only; canonical DMP source is Schein.DMPKennzeichnung -> Coverage.dmpIndicator"
 
 The x.pvs data model has:
-- `HVGPatient` table → maps to `EpisodeOfCare` (HZV enrollment, canonical)
-- `Schein.DMPKennzeichnung` → maps to `Coverage.dmpIndicator` (DMP status, canonical)
+- `HVGPatient` table → maps to `EpisodeOfCare` (HZV and DMP enrollment, canonical; already implemented in adapter recommendation-mappers)
+- `Schein.DMPKennzeichnung` → per-Schein DMP billing code; mapping destination is TBD (not yet mapped in adapter). This is a separate, additive concern from enrollment.
 
 ### Decision
 
@@ -162,10 +162,11 @@ The x.pvs data model has:
 
 The authoritative FHIR resources for enrollment/program status are:
 
-| Admin Status      | Canonical FHIR Resource         | Source (x.pvs)              |
-|-------------------|---------------------------------|--------------------------------|
-| HZV enrollment    | `EpisodeOfCare`                 | `HVGPatient`, `HVGVertrag`     |
-| DMP participation | `Coverage.dmpIndicator`         | `Schein.DMPKennzeichnung`      |
+| Admin Status         | Canonical FHIR Resource    | Source (x.pvs)                  | Status               |
+|----------------------|----------------------------|------------------------------------|----------------------|
+| HZV enrollment       | `EpisodeOfCare`            | `HVGPatient`, `HVGVertrag`         | Implemented          |
+| DMP program enrollment| `EpisodeOfCare`           | `HVGPatient` (DMP contract rows)   | Implemented          |
+| DMP Schein-level code| TBD                        | `Schein.DMPKennzeichnung`          | Not yet mapped       |
 
 **platform-v2 Engine read source:** The rule engine MUST read HZV status from `EpisodeOfCare` and
 DMP status from `Coverage.dmpIndicator`. Flag resources from `flag_bild_to_code.yaml` MUST NOT
