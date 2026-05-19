@@ -4,25 +4,42 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **fpde-46j**: Review fixes — ADR-004 format, Point 2 table contradiction, YAML quote, AK-4 references
+- **fpde-46j**: Codex adversarial fixes — vendor leak, DMP canonical, stale refs
+
 ### Documentation
 
-- **fpde-46j**: Add CAVE/Flag/Allergy architecture clarification (ADR-004): flag-kategorie is complete; PraxisAllergyIntoleranceDE needs no profile changes; HZV/DMP enrollment is canonical in EpisodeOfCare; CodeSystem URL vendor-leak rename decision.
-
-### Build
-
-- **fpde-46j**: Exclude `docs/adr/` and `docs/research/` from vendor-leak guard (internal architecture docs may name downstream systems).
+- Add foundation source register
+- **fpde-46j**: CAVE/Flag/Allergy architecture clarification + ADR-004
+- **fpde-46j**: Update changelog for CAVE/Flag/Allergy architecture research
 
 ## [0.64.0] - 2026-05-18
 
+### Bug Fixes
+
+- **fpde-7eg**: Enforce AW billing claim constraints — related 1..*, item 0..0 final, item 1..* preliminary, subType discriminator, remove BG accident
+- **fpde-7eg**: Type final related.claim to PreliminaryClaimDE, related 1..1, type=professional fixed, structural regression tests
+- **clc-8gy**: Explicit empty worktree_bootstrap to prevent legacy .env fallback
+
 ### Features
 
-- **fpde-ctx**: Add vendor-neutral proposal Provenance profile, contribution-role terminology, examples, and documentation.
+- **clc-8gy**: Add orchestrator-config.yml for fhir-praxis-de
+- **clc-8gy**: Add orchestrator-config.yml (dev_server concurrency key rename)
+- **clc-8gy**: Note no worktree_bootstrap needed (shared Aidbox)
+- **fpde-ctx**: Add proposal provenance profile
 
-### Build
+### Miscellaneous
 
-- Add local IG build wrapper with Homebrew Ruby/Jekyll path setup and private FHIR package preloading.
+- **fpde-7eg**: Bump version to 0.63.1 — AW-SST crosswalk implementation
 
-## [0.63.1] - 2026-05-18
+## [0.63.0] - 2026-05-18
+
+### Bug Fixes
+
+- Remove vendor-specific bead IDs from historical CHANGELOG entries
+- **fpde-7eg**: Allowlist v3-ActIncidentCode resolution error in QA gate
 
 ### Documentation
 
@@ -32,6 +49,11 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-7eg**: Add billing claim profiles, freetext obs, AllergyIntolerance, update crosswalk
+- **fpde-7eg**: Add AW-SST billing claim profiles, freetext obs, AllergyIntolerance
+
+### Merge
+
+- Worktree-bead-fpde-7eg
 
 ### Test
 
@@ -41,7 +63,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **genehmigung**: Add cockpit-item-id sub-extension
+- **genehmigung**: Add cockpit-item-id sub-extension (adapter-5yeg)
 
 ## [0.62.2] - 2026-05-17
 
@@ -54,11 +76,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - **fpde-hcq**: Remove hardcoded system URI from ZANR definition prose
-- **pvs-adapter**: Vendor-neutral wording in PvsWritebackStatusCS description
+- **adapter-d1vy**: Vendor-neutral wording in PvsWritebackStatusCS description
 
 ### Features
 
-- **pvs-adapter**: Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
+- **adapter-d1vy**: Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
 
 ### Miscellaneous
 
@@ -72,7 +94,7 @@ All notable changes to this project will be documented in this file.
 
 ### Merge
 
-- Feat/pvs-adapter-pvs-writeback-status — add PvsWritebackStatusCS
+- Feat/adapter-d1vy-pvs-writeback-status — add PvsWritebackStatusCS
 
 ## [0.62.0] - 2026-05-16
 
@@ -616,3 +638,5 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Vendor-clear public baseline v0.41.1
+
+
