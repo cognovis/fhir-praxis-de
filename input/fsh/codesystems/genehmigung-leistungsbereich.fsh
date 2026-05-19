@@ -216,6 +216,8 @@ Description: "KV-regulierte Leistungsbereiche mit Genehmigungspflicht. Offene Li
 * #radiologie #digitale-volumentomographie "Digitale Volumentomographie (DVT)" "Digitale Volumentomographie (DVT) — KZBV/KBV-Genehmigung"
 * #radiologie #roentgen-thorax "Roentgen Thorax" "Roentgen-Thorax-Aufnahmen — fachgebietsspezifische Genehmigung"
 * #radiologie #roentgen-skelett "Roentgen Skelett" "Skelett-Roentgen — fachgebietsspezifische Genehmigung"
+* #radiologie #interventionelle-radiologie "Interventionelle Radiologie" "Interventionelle Radiologie nach KVB-Vereinbarung — durchleuchtungs- und bildwandlergestuetzte Interventionen (EBM 34500 PTC, 34501 Oesophagus-Stent, 34503 Wirbelsaeule). fhir-term-e24 follow-up."
+* #radiologie #mrt-mamma "MRT Mamma" "Magnetresonanztomographie der Mamma — eigenstaendige KVB-Genehmigung nach Mammographie-Vereinbarung und Kernspintomographie-Vereinbarung (EBM 34431). fhir-term-e24 follow-up."
 
 // Block: labor
 // Labor-Genehmigungen — KV-genehmigungspflichtige Laborgemeinschaften und Spezialdiagnostik
