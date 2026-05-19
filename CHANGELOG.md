@@ -4,9 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- Remove vendor-specific bead IDs from historical CHANGELOG entries
+- **fpde-46j**: Correct DMP canonical — Coverage.dmpIndicator tracked in adapter-0x2a.3
+
 ### Features
 
-- **fhir-term-e24 follow-up**: Expand `genehmigung-leistungsbereich` CodeSystem with two new top-level blocks — `labor` (14 codes: Labor allgemein, Praesenzlabor, Versandlabor, Pathologie, Zytologie gyn, Mikrobiologie, Molekulargenetik, Humangenetik, Mukoviszidose-Screening, Tumormarker, Hormone, Allergologie, Toxikologie, Immunhaematologie) and `ambulantes-operieren-block` (16 codes: AO §115b allgemein, Belegaerztlich §121, AO Kapitel 31.1/31.4/31.5/31.6 stages, 10 Fachgruppen-spezifische AO codes). Adds 6 detail codes to `radiologie` (Mammographie-Screening, Mammographie kurativ, Strahlentherapie, Angiographie, PET/CT, DVT, Roentgen Thorax, Roentgen Skelett). Total concepts: 185 → 225. Closes the coverage gaps identified in fhir-term-e24 review: 495 AO/Belegaerztlich, 444 Labor, 104 Radiologie EBM codes can now be precisely mapped instead of skip-listed.
+- **fhir-term-e24 follow-up**: Expand genehmigung-leistungsbereich CS with labor + AO blocks (0.65.1)
+
+### Task
+
+- **fpde-yw5**: Add SGB V legal basis comment to ZulassungStatusConcepts ruleset
+
+## [0.64.2] - 2026-05-19
 
 ### Bug Fixes
 
@@ -18,6 +29,15 @@ All notable changes to this project will be documented in this file.
 - Add foundation source register
 - **fpde-46j**: CAVE/Flag/Allergy architecture clarification + ADR-004
 - **fpde-46j**: Update changelog for CAVE/Flag/Allergy architecture research
+
+### Miscellaneous
+
+- **fpde-46j**: Bump version to 0.64.1, update changelog
+- Bump version to 0.64.2
+
+### Merge
+
+- Worktree-bead-fpde-46j
 
 ## [0.64.0] - 2026-05-18
 
@@ -67,7 +87,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **genehmigung**: Add cockpit-item-id sub-extension
+- **genehmigung**: Add cockpit-item-id sub-extension (adapter-5yeg)
 
 ## [0.62.2] - 2026-05-17
 
@@ -80,11 +100,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - **fpde-hcq**: Remove hardcoded system URI from ZANR definition prose
-- Vendor-neutral wording in PvsWritebackStatusCS description
+- **adapter-d1vy**: Vendor-neutral wording in PvsWritebackStatusCS description
 
 ### Features
 
-- Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
+- **adapter-d1vy**: Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
 
 ### Miscellaneous
 
@@ -98,7 +118,7 @@ All notable changes to this project will be documented in this file.
 
 ### Merge
 
-- Merge pvs-writeback-status — add PvsWritebackStatusCS
+- Feat/adapter-d1vy-pvs-writeback-status — add PvsWritebackStatusCS
 
 ## [0.62.0] - 2026-05-16
 
