@@ -3,6 +3,7 @@
 // Used by: wb-befugnis-status.fsh, ermaechtigung-status.fsh
 // Bead: fpde-1cn
 
+// Status values apply to §95, §116, and §119 SGB V-regulated authorization types.
 RuleSet: ZulassungStatusConcepts
 * #aktiv "Aktiv" "Eintrag ist aktiv und gueltig"
 * #abgelaufen "Abgelaufen" "Eintrag ist zeitlich abgelaufen"
