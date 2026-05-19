@@ -1,7 +1,7 @@
 CodeSystem: HvgVertragCS
 Id: hvg-vertrag
 Title: "HVG-Vertrag"
-Description: "Codes for selective care contract identifiers used in x.pvs (HVGVertrag.VertragsID slugs). Each code represents a specific contract variant. Slug derivation: VertragsID.toLowerCase().replace(/_/g, '-'). Source: adapter-7ihe, hvg_vertrag_to_episode_metadata.yaml (24 contracts with non-empty VertragsID; ~67 additional entries pending re-query before v2-cutover 2026-06-22)."
+Description: "Codes for selective care contract identifiers (HVGVertrag.VertragsID slugs). Each code represents a specific contract variant. Slug derivation: VertragsID.toLowerCase().replace(/_/g, '-'). 24 contracts with non-empty VertragsID; ~67 additional entries pending re-query."
 * ^url = "https://fhir.cognovis.de/praxis/CodeSystem/hvg-vertrag"
 * ^status = #active
 * ^experimental = false

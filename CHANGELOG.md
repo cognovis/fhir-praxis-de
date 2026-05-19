@@ -12,7 +12,7 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - Remove vendor-specific bead IDs from historical CHANGELOG entries
-- **fpde-46j**: Correct DMP canonical — Coverage.dmpIndicator tracked in adapter-0x2a.3
+- **fpde-46j**: Correct DMP canonical — Coverage.dmpIndicator tracked in downstream adapter
 
 ### Features
 
@@ -92,7 +92,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
-- **genehmigung**: Add cockpit-item-id sub-extension (adapter-5yeg)
+- **genehmigung**: Add cockpit-item-id sub-extension
 
 ## [0.62.2] - 2026-05-17
 
@@ -105,11 +105,11 @@ All notable changes to this project will be documented in this file.
 ### Bug Fixes
 
 - **fpde-hcq**: Remove hardcoded system URI from ZANR definition prose
-- **adapter-d1vy**: Vendor-neutral wording in PvsWritebackStatusCS description
+- Vendor-neutral wording in PvsWritebackStatusCS description
 
 ### Features
 
-- **adapter-d1vy**: Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
+- Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
 
 ### Miscellaneous
 
@@ -123,7 +123,7 @@ All notable changes to this project will be documented in this file.
 
 ### Merge
 
-- Feat/adapter-d1vy-pvs-writeback-status — add PvsWritebackStatusCS
+- Add PvsWritebackStatusCS
 
 ## [0.62.0] - 2026-05-16
 

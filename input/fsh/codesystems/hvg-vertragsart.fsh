@@ -1,7 +1,7 @@
 CodeSystem: HvgVertragsartCS
 Id: hvg-vertragsart
 Title: "HVG-Vertragsart"
-Description: "Classification codes for selective care contract types (HVGVertrag.Vertragsart), derived from x.pvs enumeration values."
+Description: "Classification codes for selective care contract types (HVGVertrag.Vertragsart)."
 * ^status = #active
 * ^experimental = false
 * ^caseSensitive = true
