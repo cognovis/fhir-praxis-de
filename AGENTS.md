@@ -58,27 +58,31 @@ bd close <id>         # Complete work
 
 ## Session Completion
 
-**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until `git push` succeeds.
+**When ending a work session**, you MUST complete ALL steps below. Work is NOT complete until **the PR is merged to main**.
 
 **MANDATORY WORKFLOW:**
 
 1. **File issues for remaining work** - Create issues for anything that needs follow-up
 2. **Run quality gates** (if code changed) - Tests, linters, builds
 3. **Update issue status** - Close finished work, update in-progress items
-4. **PUSH TO REMOTE** - This is MANDATORY:
+4. **OPEN PR + MERGE** — `main` is protected; **direct push is blocked**. Required status check: `vendor-leak-check / check`. `enforce_admins: true` — no admin bypass. Workflow:
    ```bash
-   git pull --rebase
-   bd dolt push
-   git push
-   git status  # MUST show "up to date with origin"
+   git pull --rebase origin main
+   bd dolt push                                       # beads sync stays direct (Dolt remote, not git)
+   git push -u origin <feature-branch>                # push to feature branch, NOT main
+   gh pr create --base main --head <feature-branch> \
+     --title "<conventional commit subject>" --body "..."
+   gh pr checks --watch                               # block until required checks complete
+   gh pr merge <pr-number> --merge --delete-branch    # only proceeds if all required checks green
    ```
 5. **Clean up** - Clear stashes, prune remote branches
-6. **Verify** - All changes committed AND pushed
+6. **Verify** - PR merged, branch deleted, beads pushed to Dolt
 7. **Hand off** - Provide context for next session
 
 **CRITICAL RULES:**
-- Work is NOT complete until `git push` succeeds
-- NEVER stop before pushing - that leaves work stranded locally
-- NEVER say "ready to push when you are" - YOU must push
-- If push fails, resolve and retry until it succeeds
+- Work is NOT complete until **the PR is merged to main**
+- NEVER attempt direct push to main — it will be rejected by branch protection
+- NEVER bypass the `vendor-leak-check` or any other required check — see CLAUDE.md "Branch Protection & Merge Workflow"
+- NEVER say "ready to push when you are" — YOU must create the PR and merge it
+- If checks fail, fix the underlying issue and push a new commit to the feature branch; do not request a bypass
 <!-- END BEADS INTEGRATION -->
