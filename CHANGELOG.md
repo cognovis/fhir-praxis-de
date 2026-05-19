@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **fhir-term-e24 follow-up**: Expand `genehmigung-leistungsbereich` CodeSystem with two new top-level blocks — `labor` (14 codes: Labor allgemein, Praesenzlabor, Versandlabor, Pathologie, Zytologie gyn, Mikrobiologie, Molekulargenetik, Humangenetik, Mukoviszidose-Screening, Tumormarker, Hormone, Allergologie, Toxikologie, Immunhaematologie) and `ambulantes-operieren-block` (16 codes: AO §115b allgemein, Belegaerztlich §121, AO Kapitel 31.1/31.4/31.5/31.6 stages, 10 Fachgruppen-spezifische AO codes). Adds 6 detail codes to `radiologie` (Mammographie-Screening, Mammographie kurativ, Strahlentherapie, Angiographie, PET/CT, DVT, Roentgen Thorax, Roentgen Skelett). Total concepts: 185 → 225. Closes the coverage gaps identified in fhir-term-e24 review: 495 AO/Belegaerztlich, 444 Labor, 104 Radiologie EBM codes can now be precisely mapped instead of skip-listed.
+
 ### Bug Fixes
 
 - **fpde-46j**: Review fixes — ADR-004 format, Point 2 table contradiction, YAML quote, AK-4 references

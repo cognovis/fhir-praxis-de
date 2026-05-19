@@ -208,4 +208,52 @@ Description: "KV-regulierte Leistungsbereiche mit Genehmigungspflicht. Offene Li
 * #radiologie #nuk-invitro "NUK In-Vitro Diagnostik" "Nuklearmedizin In-Vitro Diagnostik (NM 0005)"
 * #radiologie #nuk-szintigraphie-planar "NUK Szintigraphie Planar" "Nuklearmedizin Szintigraphie Planar (NM 001C)"
 * #radiologie #nuk-szintigraphie-spect "NUK Szintigraphie SPECT" "Nuklearmedizin Szintigraphie SPECT (NM 002B)"
+* #radiologie #mammographie-screening "Mammographie-Screening Programm" "Mammographie-Screening-Programm KFRG (Frueherkennung)"
+* #radiologie #mammographie-kurativ "Mammographie kurativ" "Kurative Mammographie und Tomosynthese"
+* #radiologie #strahlentherapie "Strahlentherapie" "Strahlentherapie EBM Kapitel 25 — Facharzt fuer Strahlentherapie"
+* #radiologie #angiographie "Angiographie" "Angiographische Untersuchungen — fachgebietsspezifisch"
+* #radiologie #pet-ct-onkologie "PET/CT Onkologie" "PET/CT-Untersuchungen onkologisch (PC 0001)"
+* #radiologie #digitale-volumentomographie "Digitale Volumentomographie (DVT)" "Digitale Volumentomographie (DVT) — KZBV/KBV-Genehmigung"
+* #radiologie #roentgen-thorax "Roentgen Thorax" "Roentgen-Thorax-Aufnahmen — fachgebietsspezifische Genehmigung"
+* #radiologie #roentgen-skelett "Roentgen Skelett" "Skelett-Roentgen — fachgebietsspezifische Genehmigung"
+
+// Block: labor
+// Labor-Genehmigungen — KV-genehmigungspflichtige Laborgemeinschaften und Spezialdiagnostik
+// EBM Kapitel 32 (Labor), 19 (Pathologie), 11 (Humangenetik)
+* #labor "Labor" "Labor-Genehmigungen — KV-genehmigungspflichtige Laborgemeinschaften und Spezialdiagnostik"
+* #labor #labor-allgemein "Labor Allgemein Kapitel 32" "Allgemeine Laboruntersuchungen Kapitel 32 — Laborgemeinschaftsmitgliedschaft erforderlich"
+* #labor #labor-praesenz "Labor Praesenz Kapitel 32.2" "Praesenzlabor (Patientennaehe) — Kapitel 32.2 — Praesenzlabor-Genehmigung"
+* #labor #labor-versandlabor "Labor Versandlabor Kapitel 32.3" "Versandlabor Kapitel 32.3 — siehe auch labor-o3 fuer OIII-Stufe"
+* #labor #labor-pathologie "Labor Pathologie Kapitel 19" "Histologische/zytologische Untersuchungen Kapitel 19 — Facharzt Pathologie"
+* #labor #labor-zytologie-gyn "Labor Zytologie gynaekologisch" "Gynaekologische Zytologie (Pap-Smear) — Facharzt Gynaekologie/Pathologie"
+* #labor #labor-mikrobiologie "Labor Mikrobiologie Kapitel 32.3.7" "Mikrobiologische Untersuchungen — Facharzt Mikrobiologie"
+* #labor #labor-molekulargenetik "Labor Molekulargenetik Kapitel 11" "Molekulargenetische Untersuchungen Kapitel 11 — Humangenetik-Facharzt"
+* #labor #labor-humangenetik "Labor Humangenetik Kapitel 11" "Humangenetische Beratung/Untersuchungen Kapitel 11"
+* #labor #labor-mukoviszidose "Labor Mukoviszidose-Screening" "Mukoviszidose-Neugeborenenscreening (KFRG)"
+* #labor #labor-tumormarker "Labor Tumormarker" "Tumor-Marker-Untersuchungen — fachgebietsspezifisch"
+* #labor #labor-hormone "Labor Hormone" "Endokrinologische Laboruntersuchungen — Facharzt Endokrinologie"
+* #labor #labor-allergologie "Labor Allergologie" "Allergie-Diagnostik (Spezifisches IgE etc.) — Facharzt Allergologie"
+* #labor #labor-toxikologie "Labor Toxikologie" "Toxikologische Untersuchungen / Drug-Monitoring"
+* #labor #labor-immunhamatologie "Labor Immunhaematologie Kapitel 32.2.2" "Immunhaematologie / Blutgruppen / AB0-Rhesus"
+
+// Block: ambulantes-operieren-block
+// Ambulantes Operieren Vertrag §115b SGB V und Belegaerztliche Behandlung §121 SGB V
+// EBM Kapitel 31 (Ambulantes Operieren), 36 (Belegaerztliche Leistungen)
+* #ambulantes-operieren-block "Ambulantes Operieren und Belegaerztlich" "Ambulantes Operieren §115b SGB V und Belegaerztliche Behandlung §121 SGB V"
+* #ambulantes-operieren-block #ao-allgemein "AO Allgemeingenehmigung §115b" "Ambulantes Operieren Allgemeingenehmigung gemaess §115b SGB V (AO GLOBAL — siehe auch ambulantes-operieren)"
+* #ambulantes-operieren-block #ao-belegarzt "Belegaerztliche Behandlung §121" "Belegaerztliche Behandlung gemaess §121 SGB V"
+* #ambulantes-operieren-block #ao-postoperativ "AO Postoperative Behandlung Kapitel 31.4" "Postoperative Ueberwachung Kapitel 31.4"
+* #ambulantes-operieren-block #ao-anaesthesie "AO Anaesthesie Kapitel 31.5" "Ambulante Anaesthesie Kapitel 31.5 — Facharzt Anaesthesie"
+* #ambulantes-operieren-block #ao-narkose "AO Narkose Kapitel 31.6" "Narkose im ambulanten Operieren Kapitel 31.6"
+* #ambulantes-operieren-block #ao-praeoperativ "AO Praeoperative Untersuchung Kapitel 31.1" "Praeoperative Diagnostik Kapitel 31.1"
+* #ambulantes-operieren-block #ao-fachgruppe-augen "AO Augenheilkunde" "Ambulantes Operieren Augenheilkunde — Facharzt Augenheilkunde"
+* #ambulantes-operieren-block #ao-fachgruppe-hno "AO HNO" "Ambulantes Operieren HNO-Heilkunde — Facharzt HNO"
+* #ambulantes-operieren-block #ao-fachgruppe-chirurgie "AO Chirurgie" "Ambulantes Operieren Allgemein-/Visceralchirurgie"
+* #ambulantes-operieren-block #ao-fachgruppe-orthopaedie "AO Orthopaedie/Unfallchirurgie" "Ambulantes Operieren Orthopaedie und Unfallchirurgie"
+* #ambulantes-operieren-block #ao-fachgruppe-urologie "AO Urologie" "Ambulantes Operieren Urologie — Facharzt Urologie"
+* #ambulantes-operieren-block #ao-fachgruppe-gynaekologie "AO Gynaekologie" "Ambulantes Operieren Gynaekologie/Geburtshilfe"
+* #ambulantes-operieren-block #ao-fachgruppe-dermatologie "AO Dermatologie" "Ambulantes Operieren Dermatologie — Facharzt Dermatologie"
+* #ambulantes-operieren-block #ao-fachgruppe-mkg "AO MKG" "Ambulantes Operieren Mund-, Kiefer-, Gesichtschirurgie"
+* #ambulantes-operieren-block #ao-fachgruppe-neurochirurgie "AO Neurochirurgie" "Ambulantes Operieren Neurochirurgie"
+* #ambulantes-operieren-block #ao-fachgruppe-kinderchirurgie "AO Kinderchirurgie" "Ambulantes Operieren Kinderchirurgie"
 
