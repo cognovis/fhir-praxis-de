@@ -154,7 +154,7 @@ The YAML itself marks these with `annaReview` comments explicitly stating they a
 
 The x.pvs data model has:
 - `HVGPatient` table → maps to `EpisodeOfCare` (HZV and DMP enrollment, canonical; already implemented in adapter recommendation-mappers)
-- `Schein.DMPKennzeichnung` → per-Schein DMP billing code; mapping destination is TBD (not yet mapped in adapter). This is a separate, additive concern from enrollment.
+- `Schein.DMPKennzeichnung` → per-Schein DMP billing code → `Coverage.dmpIndicator` (tracked in adapter-0x2a.3, in_progress). Separate, additive concern from enrollment.
 
 ### Decision
 
@@ -166,7 +166,7 @@ The authoritative FHIR resources for enrollment/program status are:
 |----------------------|----------------------------|------------------------------------|----------------------|
 | HZV enrollment       | `EpisodeOfCare`            | `HVGPatient`, `HVGVertrag`         | Implemented          |
 | DMP program enrollment| `EpisodeOfCare`           | `HVGPatient` (DMP contract rows)   | Implemented          |
-| DMP Schein-level code| TBD                        | `Schein.DMPKennzeichnung`          | Not yet mapped       |
+| DMP Schein-level code| `Coverage.dmpIndicator`    | `Schein.DMPKennzeichnung`          | In progress (adapter-0x2a.3) |
 
 **platform-v2 Engine read source:** The rule engine MUST read HZV status from `EpisodeOfCare` and
 DMP status from `Coverage.dmpIndicator`. Flag resources from `flag_bild_to_code.yaml` MUST NOT
