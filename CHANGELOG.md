@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Changed
+
+- **fhir-term-d4z.5**: Flip `de.cognovis.terminology.imaging` dependency pin from `2026.0.0` to `1.0.0` in `sushi-config.yaml` (ADR-006 Step 4). Update CI workflow pre-fetch scripts to fetch `imaging@1.0.0`.
+
+
 ### Bug Fixes
 
 - Remove vendor-specific bead IDs from historical CHANGELOG entries
