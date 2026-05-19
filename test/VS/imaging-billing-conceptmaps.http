@@ -1,9 +1,9 @@
 # Imaging Billing ConceptMap — $translate smoke tests
 #
-# Requires: de.cognovis.terminology.imaging@2026.0.0 installed in Aidbox
-# Install via: POST /fhir/$fhir-package-install { "packageId": "de.cognovis.terminology.imaging", "version": "2026.0.0" }
+# Requires: de.cognovis.terminology.imaging@1.0.0 installed in Aidbox
+# Install via: POST /fhir/$fhir-package-install { "packageId": "de.cognovis.terminology.imaging", "version": "1.0.0" }
 #
-# ConceptMaps are defined in the external package de.cognovis.terminology.imaging@2026.0.0.
+# ConceptMaps are defined in the external package de.cognovis.terminology.imaging@1.0.0.
 # They are suggestion-tables only — NOT the billing engine. See imaging-billing-architecture.md.
 #
 # External ConceptMap canonical URLs:
