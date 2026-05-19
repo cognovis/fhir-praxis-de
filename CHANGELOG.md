@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Documentation
+
+- **fpde-46j**: Add CAVE/Flag/Allergy architecture clarification (ADR-004): flag-kategorie is complete; PraxisAllergyIntoleranceDE needs no profile changes; HZV/DMP enrollment is canonical in EpisodeOfCare; CodeSystem URL vendor-leak rename decision.
+
+### Build
+
+- **fpde-46j**: Exclude `docs/adr/` and `docs/research/` from vendor-leak guard (internal architecture docs may name downstream systems).
+
 ## [0.64.0] - 2026-05-18
 
 ### Features
