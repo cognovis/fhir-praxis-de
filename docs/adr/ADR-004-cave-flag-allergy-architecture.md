@@ -1,9 +1,9 @@
 # ADR-004: CAVE / Flag / Allergy Architecture
 
-**Date:** 2026-05-19
 **Status:** Accepted
+**Date:** 2026-05-19
 **Deciders:** Malte Sussdorff
-**Context:** Bead fpde-46j — research document: [cave-flag-allergy-clarification-2026-05-19.md](../research/cave-flag-allergy-clarification-2026-05-19.md)
+**Affected systems:** `fhir-praxis-de` IG, `adapter` adapter (pvs-x-pvs), platform-v2 engine
 
 ---
 
@@ -138,3 +138,14 @@ markers (not clinical flags), absorption is not appropriate.
 | adapter-hse0 | adapter | NFDM allergy mapper enrichment (Stufe/Reaktionstyp structured mapping) |
 | adapter-kylm | adapter | platform-v2 engine guardrail: prohibit Flag reads for HZV/DMP status |
 | adapter-4qbg | adapter | Rename x-pvs-cave-marker → cave-marker (YAML + Aidbox + data migration) |
+
+---
+
+## References
+
+- Research document: `docs/research/cave-flag-allergy-clarification-2026-05-19.md`
+- `input/fsh/codesystems/flag-kategorie.fsh` — current 6-code flag taxonomy
+- `input/fsh/profiles/praxis-allergy-intolerance.fsh` — current AllergyIntolerance profile
+- `adapter/packages/pvs-x-pvs/config/v2-lookups/flag_bild_to_code.yaml` — CAVE-icon mappings
+- `adapter/packages/pvs-x-pvs/src/lib/mappers/linkdata-safety-mappers.ts` — NFDM/LinkData mappers
+- `adapter/packages/pvs-x-pvs/src/lib/pvs-db-types.ts` — `NfdmListItemBaseRow` type definition

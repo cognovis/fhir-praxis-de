@@ -119,7 +119,7 @@ No structured NFDM-specific extensions are currently emitted. `criticality` is n
 | Stufe (structured)| criticality                         | Gap in MAPPER (not in profile) |
 | Reaktionstyp (structured) | verificationStatus         | Gap in MAPPER (not in profile) |
 | Substance SNOMED  | code.coding (SNOMED CT)             | Gap in MAPPER (no SNOMED lookup) |
-| Route             | reaction.exposureRoute              | Gap in MAPPER + profile (field exists in base but not profiled) |
+| Route             | reaction.exposureRoute              | Gap in MAPPER only (field available in base AllergyIntolerance; explicit profiling not required) |
 
 ### Decision
 
@@ -149,8 +149,8 @@ The gap is **in the adapter mapper**, not the profile:
 
 The YAML itself marks these with `annaReview` comments explicitly stating they are
 **noncanonical**:
-- HZV: "noncanonical admin marker; HVGPatient/EpisodeOfCare remains canonical for enrollment"
-- DMP: "noncanonical hint only; canonical DMP source is Schein.DMPKennzeichnung -> Coverage.dmpIndicator"
+- HZV: "approved 2026-05-19 by Malte - noncanonical admin marker; HVGPatient/EpisodeOfCare remains canonical for enrollment"
+- DMP: "approved 2026-05-19 by Malte - noncanonical hint only; canonical DMP source is Schein.DMPKennzeichnung -> Coverage.dmpIndicator"
 
 The x.pvs data model has:
 - `HVGPatient` table → maps to `EpisodeOfCare` (HZV enrollment, canonical)
