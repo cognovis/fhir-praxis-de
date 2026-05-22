@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.67.0] - 2026-05-22
+
+### Changed
+
+- **fpde-ehh**: Remove local `KvFachgruppeCS`/`KvFachgruppeVS` terminology and bind Fachgruppe/WBO surfaces directly to KBV BAR2-WBO via `de.cognovis.terminology.kbv`.
+
 ## [0.66.1] - 2026-05-22
 
 ### Changed
@@ -670,4 +676,3 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Vendor-clear public baseline v0.41.1
-

@@ -9,7 +9,7 @@ description: >-
   Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
   international interoperability mappings.
 status: active
-version: 0.66.1
+version: 0.67.0
 fhirVersion: 4.0.1
 copyrightYear: 2026+
 releaseLabel: STU1
@@ -40,6 +40,8 @@ dependencies:
   # inheritance from KBV-MIO. Provenance + included resource list:
   # github.com/cognovis/kbv-mio-vocabulary (TODO: create repo).
   kbv.mio.impfpass.vocab: 1.1.0-cognovis.1
+  # KBV Schluesseltabellen mirror used for BAR2-WBO specialty bindings.
+  de.cognovis.terminology.kbv: 1.0.0
   # kbv.mio.laborbefund removed: v1.0.0-kommentierung.2 has snapshot bugs
   # (Unknown path in Patient.gender.extension). Our profiles don't inherit
   # from KBV MIO — re-add when KBV fixes their package.

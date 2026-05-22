@@ -15,9 +15,9 @@ Usage: #example
 
 // useContext: Practitioner-Slice (Fachgruppe Allgemeinmedizin)
 * useContext[practitioner].code = http://terminology.hl7.org/CodeSystem/usage-context-type#user
-* useContext[practitioner].valueCodeableConcept.coding[0].system = "https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe"
-* useContext[practitioner].valueCodeableConcept.coding[0].code = #allgemeinmedizin
-* useContext[practitioner].valueCodeableConcept.coding[0].display = "Allgemeinmedizin"
+* useContext[practitioner].valueCodeableConcept.coding[0].system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BAR2_WBO"
+* useContext[practitioner].valueCodeableConcept.coding[0].code = #010
+* useContext[practitioner].valueCodeableConcept.coding[0].display = "FÄ/FA Allgemeinmedizin"
 
 // useContext: ICD-Focus-Slice (Hausbesuch bei Hypertonie)
 * useContext[icdFocus].code = http://terminology.hl7.org/CodeSystem/usage-context-type#focus

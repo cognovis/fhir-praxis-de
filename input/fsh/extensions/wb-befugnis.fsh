@@ -14,7 +14,7 @@ Context: PractitionerRole
     period 0..1 and
     status 1..1
 * extension[fachgruppe].value[x] only Coding
-* extension[fachgruppe].valueCoding from KvFachgruppeVS (preferred)
+* extension[fachgruppe].valueCoding from https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_BAR2_WBO (preferred)
 * extension[fachgruppe] ^short = "Fachgruppe der Weiterbildungsbefugnis (KBV WBO)"
 * extension[maxMonate].value[x] only positiveInt
 * extension[maxMonate] ^short = "Maximale Weiterbildungsdauer in Monaten"

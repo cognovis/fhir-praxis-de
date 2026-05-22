@@ -102,4 +102,7 @@ SNOMED-CT codes for common laboratory specimen types encountered in ambulatory p
 
 ## External ValueSets
 
-The IG does not define custom ValueSets for external code systems. Extensions referencing KBV Schlüsseltabellen (e.g. `KBV_CS_SFHIR_BAR2_FACHGRUPPENZUORDNUNG` for `RlvFachgruppeExt`) bind directly to the external CodeSystem from `kbv.all.st-combined`.
+The IG does not define custom ValueSets for external code systems. Extensions
+referencing KBV Schlüsseltabellen bind directly to external KBV ValueSets, e.g.
+`KBV_VS_SFHIR_BAR2_WBO` for WBO/Fachgruppen coding and
+`KBV_CS_SFHIR_BAR2_FACHGRUPPENZUORDNUNG` for RLV grouping.

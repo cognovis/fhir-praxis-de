@@ -162,7 +162,7 @@ Title: "Fachgruppen"
 Description: "KBV-Fachgruppen, die diese Leistung abrechnen dürfen (wiederholbar — je ein Coding pro Fachgruppe)"
 Context: ChargeItemDefinition
 * value[x] only Coding
-* valueCoding from KvFachgruppeVS (extensible)
+* valueCoding from https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_BAR2_WBO (extensible)
 
 Extension: BillingGenehmigungspflichtExt
 Id: billing-genehmigungspflicht
