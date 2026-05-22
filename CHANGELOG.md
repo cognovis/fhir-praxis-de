@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.66.1] - 2026-05-22
+
 ### Changed
 
 - **fhir-term-d4z.5**: Flip `de.cognovis.terminology.imaging` dependency pin from `2026.0.0` to `1.0.0` in `sushi-config.yaml` (ADR-006 Step 4). Update CI workflow pre-fetch scripts to fetch `imaging@1.0.0`.
@@ -21,6 +23,7 @@ All notable changes to this project will be documented in this file.
 ### Task
 
 - **fpde-yw5**: Add SGB V legal basis comment to ZulassungStatusConcepts ruleset
+- **fpde-bh6**: Release corrected package metadata for the imaging dependency pin.
 
 ## [0.64.2] - 2026-05-19
 
@@ -667,5 +670,4 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Vendor-clear public baseline v0.41.1
-
 
