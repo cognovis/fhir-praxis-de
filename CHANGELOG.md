@@ -9,6 +9,7 @@ All notable changes to this project will be documented in this file.
 ### Changed
 
 - **fpde-ehh**: Remove local `KvFachgruppeCS`/`KvFachgruppeVS` terminology and bind Fachgruppe/WBO surfaces directly to KBV BAR2-WBO via `de.cognovis.terminology.kbv`.
+- **fpde-ehh**: Correct QA-blocking examples: use official WOP displays/codes and model HZV through local `ScheinartCS#hzv` instead of invalid KBV Scheinart `#50`.
 
 ## [0.66.1] - 2026-05-22
 

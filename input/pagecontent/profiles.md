@@ -388,7 +388,7 @@ The `FPDECoverageGKV` profile extends the base FHIR `Coverage` resource to suppo
 
 #### `gkv/wop` — Wohnortprinzip (WOP)
 
-The extension `http://fhir.de/StructureDefinition/gkv/wop` from `de.basisprofil.r4` is used to specify the regional KV responsible for the patient. The value is a Coding from the KBV CodeSystem `https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP`, which lists all German KV regions (e.g., 38 = Nordrhein, 17 = Westfalen-Lippe).
+The extension `http://fhir.de/StructureDefinition/gkv/wop` from `de.basisprofil.r4` is used to specify the regional KV responsible for the patient. The value is a Coding from the KBV CodeSystem `https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP`, which lists all German KV regions (e.g., 38 = Nordrhein, 20 = Westfalen-Lippe).
 
 **Example:**
 ```
@@ -403,7 +403,7 @@ extension[0].valueCoding.display = "Nordrhein"
 | Code | Display | Region |
 |------|---------|--------|
 | **38** | Nordrhein | Nordrhein (North Rhine) |
-| **17** | Westfalen-Lippe | Westfalen-Lippe (Westphalia-Lippe) |
+| **20** | Westfalen-Lippe | Westfalen-Lippe (Westphalia-Lippe) |
 | **33** | Baden-Württemberg | Baden-Württemberg |
 | **52** | Saarland | Saarland |
 | (and others) | | See KBV CodeSystem for complete list |
