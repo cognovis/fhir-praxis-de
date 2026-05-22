@@ -8,10 +8,10 @@ Context: Basic
 Extension: KvfgFachgruppeCodeExt
 Id: kvfg-fachgruppe-code
 Title: "KV-Fachgruppe Code"
-Description: "Fachgruppen-Code gebunden an das KV-Fachgruppen-CodeSystem"
+Description: "Fachgruppen-Code gebunden an KBV BAR2-WBO."
 Context: Basic
 * value[x] only Coding
-* valueCoding from KvFachgruppeVS (required)
+* valueCoding from https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_BAR2_WBO (required)
 
 Extension: KvfgGueltigAbExt
 Id: kvfg-gueltig-ab

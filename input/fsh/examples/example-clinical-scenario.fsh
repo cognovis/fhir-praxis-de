@@ -143,11 +143,11 @@ Usage: #example
 * extension[=].extension[=].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_EBM#01621
 // billing-fachgruppen: individual valueCoding per Fachgruppe
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-fachgruppen"
-* extension[=].valueCoding = https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe#allgemeinmedizin
+* extension[=].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BAR2_WBO#010
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-fachgruppen"
-* extension[=].valueCoding = https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe#innere-medizin
+* extension[=].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BAR2_WBO#080
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-fachgruppen"
-* extension[=].valueCoding = https://fhir.cognovis.de/praxis/CodeSystem/kv-fachgruppe#paediatrie
+* extension[=].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BAR2_WBO#090
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-genehmigungspflicht"
 * extension[=].valueBoolean = false
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/billing-pruefzeit"

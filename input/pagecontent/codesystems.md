@@ -153,26 +153,11 @@ Codes für KI-Herkunftskennzeichnung gemäß EU AI Act Art. 50.
 | `human-approved` | Menschlich freigegeben | KI-Inhalt wurde durch einen Menschen freigegeben |
 
 
-### KvFachgruppeCS — KV-Fachgruppe
+### KBV BAR2-WBO — Fachgruppen und Weiterbildungsordnung
 
-KV-Fachgruppencodes für Honorarverteilung und Qualitätssicherung.
-
-| Code | Display |
-|------|---------|
-| `allgemeinmedizin` | Allgemeinmedizin |
-| `innere-medizin` | Innere Medizin |
-| `paediatrie` | Pädiatrie |
-| `gynaekologie` | Gynäkologie |
-| `chirurgie` | Chirurgie |
-| `orthopaedie` | Orthopädie |
-| `urologie` | Urologie |
-| `augenheilkunde` | Augenheilkunde |
-| `hno` | HNO |
-| `neurologie` | Neurologie |
-| `psychiatrie` | Psychiatrie |
-| `radiologie` | Radiologie |
-| `dermatologie` | Dermatologie |
-| `anaesthesiologie` | Anästhesiologie |
+This IG does not define a local KV-Fachgruppe CodeSystem. Specialty and
+Weiterbildungsordnung coding uses the external KBV BAR2-WBO terminology
+directly.
 
 ### DokumentKategorieCS — Dokumentkategorie
 
@@ -266,4 +251,5 @@ This IG also references the following external CodeSystems from the KBV Schlüss
 |------------|---------|-------|
 | **KBV_CS_SFHIR_KBV_SCHEINART** | kbv.all.st-combined | Offizielle Scheinart-Codes der KBV (ergänzend zu ScheinartCS) |
 | **KBV_CS_SFHIR_EBM_RLV** | kbv.all.st-combined | EBM-Ziffern mit RLV-Relevanz |
+| **KBV_CS_SFHIR_BAR2_WBO** | de.cognovis.terminology.kbv | Facharzt-, Schwerpunkt- und WBO-Codes für Fachgruppen-Bindings |
 | **KBV_CS_SFHIR_BAR2_FACHGRUPPENZUORDNUNG** | kbv.all.st-combined | Fachgruppen-Codes für KV-Benchmark und RLV |
