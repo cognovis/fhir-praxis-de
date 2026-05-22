@@ -102,7 +102,7 @@ Usage: #example
 * payor[0].display = "AOK Bayern"
 * extension[wop].url = "http://fhir.de/StructureDefinition/gkv/wop"
 * extension[wop].valueCoding.system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP"
-* extension[wop].valueCoding.code = #72
+* extension[wop].valueCoding.code = #71
 * extension[wop].valueCoding.display = "Bayern"
 
 Instance: ExampleCoveragePkvZusatzKfo

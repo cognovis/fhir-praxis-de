@@ -23,7 +23,7 @@ Usage: #example
 Instance: example-coverage-gkv-wop-west
 InstanceOf: FPDECoverageGKV
 Title: "GKV-Coverage mit WOP Westfalen-Lippe"
-Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=17 Westfalen-Lippe)."
+Description: "GKV-Krankenversicherungsabdeckung mit Wohnortprinzip-Extension (WOP=20 Westfalen-Lippe)."
 Usage: #example
 * status = #active
 * identifier[KrankenversichertenID].system = "http://fhir.de/sid/gkv/kvid-10"
@@ -34,5 +34,5 @@ Usage: #example
 * payor[0].display = "Techniker Krankenkasse"
 * extension[wop].url = "http://fhir.de/StructureDefinition/gkv/wop"
 * extension[wop].valueCoding.system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ITA_WOP"
-* extension[wop].valueCoding.code = #17
+* extension[wop].valueCoding.code = #20
 * extension[wop].valueCoding.display = "Westfalen-Lippe"

@@ -1,15 +1,16 @@
 // EncounterPraxisHZV — HZV-Abrechnungsschein-Profil der deutschen Praxisverwaltung
 // Spezialisiert EncounterPraxis fuer die hausarztzentrierte Versorgung (§73b SGB V).
-// Fixiert KBV-Scheinart auf #50 (HZV-Hausarztschein).
+// Fixiert die lokale Praxis-Scheinart auf hzv. KBV_CS_SFHIR_KBV_SCHEINART hat
+// keinen offiziellen HZV-Code.
 
 Profile: EncounterPraxisHZV
 Parent: EncounterPraxis
 Id: encounter-praxis-hzv
 Title: "Encounter Praxis HZV"
-Description: "Abrechnungsschein fuer die hausarztzentrierte Versorgung (HZV, §73b SGB V). Spezialisiert EncounterPraxis: fixiert Scheinart auf KBV-Code #50 (HZV) und erlaubt die Angabe des HZV-Rechnungsschemas per Extension."
+Description: "Abrechnungsschein fuer die hausarztzentrierte Versorgung (HZV, §73b SGB V). Spezialisiert EncounterPraxis: fixiert die lokale Praxis-Scheinart auf hzv und erlaubt die Angabe des HZV-Rechnungsschemas per Extension."
 
-// Scheinart KBV: HZV = #50 (Hausarztschein HZV)
-* type[kbv-scheinart].coding.code = #50
+// HZV ist nicht Teil der offiziellen KBV_SFHIR_KBV_SCHEINART-Terminologie.
+* type[praxis-scheinart].coding.code = #hzv
 
 // HZV-Rechnungsschema-Extension (optional): identifiziert den Vertragskatalog der Krankenkasse
 * extension contains HzvRechnungsschemaExt named hzv-rechnungsschema 0..1 MS
