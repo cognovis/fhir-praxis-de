@@ -1,0 +1,30 @@
+installed:
+- name: english-only
+  type: standard
+  marketplace: unknown
+  source: https://github.com/cognovis/library/blob/main/standards/workflow/english-only.md
+  source_commit: fcc7f182d87f2d20c83f1c922df59abeca206a4f
+  cache_path: /Users/malte/.local/share/library/standards/unknown/english-only@fcc7f182d87f2d/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/standards/workflow/english-only.md
+  install_timestamp: '2026-05-23T08:52:19Z'
+  checksum_sha256: e84aa8052bb2ee3e9f4a1f1635d3f68c8f088c7e5e1a209e6c75e7715e4c5bcc
+  checksum_type: file
+  content_sha256: e84aa8052bb2ee3e9f4a1f1635d3f68c8f088c7e5e1a209e6c75e7715e4c5bcc
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks: []
+- name: fhir-sync-versions
+  type: skill
+  marketplace: unknown
+  source: https://github.com/cognovis/library-core/blob/main/skills/fhir-sync-versions/SKILL.md
+  source_commit: f41a7dcb47acbc91ba9bbdbef4b7e6045e6814ca
+  cache_path: /Users/malte/.local/share/library/skills/unknown/fhir-sync-versions@f41a7dcb47acbc/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/fhir-sync-versions/
+  install_timestamp: '2026-05-23T08:51:33Z'
+  checksum_sha256: 07c0c36224eb33f3cac682e2920ebc245a08d3f96c89a690ec5a9fdd9d972c4d
+  checksum_type: directory
+  content_sha256: 07c0c36224eb33f3cac682e2920ebc245a08d3f96c89a690ec5a9fdd9d972c4d
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/fhir-sync-versions -> /Users/malte/code/fhir-praxis-de/.agents/skills/fhir-sync-versions
