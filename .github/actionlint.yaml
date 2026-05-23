@@ -4,6 +4,7 @@ self-hosted-runner:
     - Linux
     - X64
     - docker
+    - fhir-publisher
     - atlas
     - atlas-2
     - elysium

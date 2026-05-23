@@ -3,7 +3,7 @@
 # Expected: OperationOutcome with "all ok" (no errors)
 # Fills: status (MS), intent (MS, pattern=order), code (MS, extensible binding to pas-task-code-vs),
 #   for (MS, Patient), requester (MS, Practitioner|Organization), owner (MS, Organization)
-POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
+POST {{baseUrl}}/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -27,7 +27,7 @@ Content-Type: application/fhir+json
 # @name invalid
 # Expected: OperationOutcome with errors for:
 #   - intent = "filler-order" (pattern violation, must be "order")
-POST http://localhost:8080/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
+POST {{baseUrl}}/fhir/Task/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-task-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

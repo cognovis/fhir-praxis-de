@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   build-and-release:
-    runs-on: [self-hosted, Linux, X64, docker, atlas]
+    runs-on: [self-hosted, Linux, X64, docker, fhir-publisher]
     steps:
       - uses: actions/checkout@v4
         with:
@@ -26,17 +26,6 @@ jobs:
           ref: 7589f980e00435e051e5a2bb417f129cde929786
           path: .fhir-publish/library-core
           token: ${{ secrets.RELEASE_PAT }}
-
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
-
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
 
       - name: Read version
         id: version
@@ -53,6 +42,20 @@ jobs:
             exit 1
           fi
           echo "Version match confirmed: ${FILE_VERSION}"
+
+      - name: Verify self-hosted FHIR publish toolchain
+        run: |
+          for command in java node npm npx python3 ruby gem curl; do
+            if ! command -v "$command" >/dev/null 2>&1; then
+              echo "::error::Missing required self-hosted runner command: ${command}"
+              exit 1
+            fi
+          done
+          java -version
+          node --version
+          npm --version
+          python3 --version
+          ruby --version
 
       - name: Ensure SUSHI
         run: |

@@ -2,7 +2,7 @@ name: IG CI — Validate & Build
 
 on:
   push:
-    branches: ['**']
+    branches: [main]
     tags-ignore: ['v*']
   pull_request:
     branches: [main]
@@ -13,12 +13,13 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "ig-ci-${{ github.ref }}"
+  group: "ig-ci-${{ github.workflow }}-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.event.pull_request.head.ref || github.ref_name }}"
   cancel-in-progress: true
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
+    runs-on: [self-hosted, Linux, X64, docker, fhir-publisher]
 
     services:
       postgres:
@@ -36,7 +37,7 @@ jobs:
       aidbox:
         image: healthsamurai/aidboxone:edge
         ports:
-          - 8080:8080
+          - 8080/tcp
         env:
           AIDBOX_PORT: 8080
           AIDBOX_FHIR_VERSION: 4.0.1
@@ -71,25 +72,36 @@ jobs:
           fi
           echo "Versions in sync: $VERSION"
 
-      - name: Setup Node.js
-        uses: actions/setup-node@v4
-        with:
-          node-version: '20'
+      - name: Configure Aidbox endpoint
+        run: |
+          echo "AIDBOX_BASE_URL=http://localhost:${{ job.services.aidbox.ports['8080'] }}" >> "$GITHUB_ENV"
 
-      - name: Setup Java
-        uses: actions/setup-java@v4
-        with:
-          distribution: 'temurin'
-          java-version: '17'
+      - name: Verify self-hosted FHIR CI toolchain
+        run: |
+          for command in java node npm npx python3 ruby gem curl jq; do
+            if ! command -v "$command" >/dev/null 2>&1; then
+              echo "::error::Missing required self-hosted runner command: ${command}"
+              exit 1
+            fi
+          done
+          java -version
+          node --version
+          npm --version
+          python3 --version
+          ruby --version
 
-      - name: Install SUSHI
-        run: npm install -g fsh-sushi
+      - name: Ensure SUSHI
+        run: |
+          if ! command -v sushi >/dev/null 2>&1; then
+            npm install -g fsh-sushi
+          fi
+          sushi --version
 
       - name: Wait for Aidbox
         run: |
           echo "Waiting for Aidbox to be ready..."
           for i in $(seq 1 24); do
-            if curl -sf http://localhost:8080/health > /dev/null 2>&1; then
+            if curl -sf "${AIDBOX_BASE_URL}/health" > /dev/null 2>&1; then
               echo "Aidbox is ready after $((i * 5))s"
               break
             fi
@@ -106,7 +118,7 @@ jobs:
           # Retry the POST a few times to handle this race condition.
           for attempt in 1 2 3 4 5; do
             HTTP_CODE=$(curl -s -o /tmp/aidbox-response.json -w "%{http_code}" \
-              -X POST http://localhost:8080/ \
+              -X POST "${AIDBOX_BASE_URL}/" \
               -u "basic:secret" \
               -H "Content-Type: application/json" \
               -d @init-bundle.json)
@@ -153,10 +165,10 @@ jobs:
             pack_dir=$(mktemp -d)
             ( cd "$pack_dir" && npm pack "${pkg}@${version}" --registry https://npm.cognovis.de >/dev/null )
             local tgz
-            tgz=$(ls "$pack_dir"/*.tgz | head -1)
+            tgz=$(find "$pack_dir" -maxdepth 1 -name '*.tgz' -print -quit)
             mkdir -p "$cache_dir"
             tar xzf "$tgz" -C "$cache_dir"
-            echo "  Installed $(ls "$cache_dir/package/" | wc -l) files into $cache_dir"
+            echo "  Installed $(find "$cache_dir/package" -mindepth 1 -maxdepth 1 | wc -l) files into $cache_dir"
           }
           fetch_to_fhir_cache "de.cognovis.terminology.imaging" "1.0.0"
           fetch_to_fhir_cache "de.cognovis.terminology.kbv" "1.0.0"
@@ -185,7 +197,7 @@ jobs:
           echo "{\"resourceType\":\"Bundle\",\"type\":\"transaction\",\"entry\":[$ENTRIES]}" > /tmp/sd-bundle.json
           echo "Uploading $COUNT StructureDefinitions as transaction bundle..."
           HTTP_CODE=$(curl -s -o /tmp/sd-response.json -w "%{http_code}" \
-            -X POST http://localhost:8080/ \
+            -X POST "${AIDBOX_BASE_URL}/" \
             -u "basic:secret" \
             -H "Content-Type: application/json" \
             -d @/tmp/sd-bundle.json)
@@ -197,14 +209,18 @@ jobs:
             exit 1
           fi
 
-      - name: Install httpyac CLI
-        run: npm install -g httpyac
+      - name: Ensure httpyac CLI
+        run: |
+          if ! command -v httpyac >/dev/null 2>&1; then
+            npm install -g httpyac
+          fi
+          httpyac --version
 
       - name: Run CodeSystem tests
         run: |
           # CS expansion tests call tx.health-samurai.io (external terminology server).
           # This service is rate-limited/unavailable in CI. Run informatively only.
-          httpyac run test/CS/ --all --output short \
+          httpyac run test/CS/ --all --output short --var baseUrl="${AIDBOX_BASE_URL}" \
             && echo "::notice::CS tests passed" \
             || echo "::warning::CS tests had failures (terminology server unavailable in CI — informational only)"
 
@@ -212,7 +228,7 @@ jobs:
         run: |
           # VS expansion tests call tx.health-samurai.io (external terminology server).
           # This service is rate-limited/unavailable in CI. Run informatively only.
-          httpyac run test/VS/ --all --output short \
+          httpyac run test/VS/ --all --output short --var baseUrl="${AIDBOX_BASE_URL}" \
             && echo "::notice::VS tests passed" \
             || echo "::warning::VS tests had failures (terminology server unavailable in CI — informational only)"
 
@@ -221,19 +237,29 @@ jobs:
           # Profile validation tests — some negative tests fail on Aidbox edge
           # due to changed validation behavior. Run informatively until tests
           # are updated for the new Aidbox version.
-          httpyac run test/Profile/ --all --output short \
+          httpyac run test/Profile/ --all --output short --var baseUrl="${AIDBOX_BASE_URL}" \
             && echo "::notice::Profile tests passed" \
             || echo "::warning::Profile tests had failures (10 negative tests need updating for Aidbox edge — see cognovis/fhir-praxis-de backlog)"
 
-      - name: Install Jekyll
+      - name: Ensure Jekyll
         run: |
-          sudo gem install jekyll
+          if ! command -v jekyll >/dev/null 2>&1; then
+            gem install --user-install jekyll
+            GEM_BIN="$(ruby -rrubygems -e 'print Gem.user_dir + "/bin"')"
+            echo "$GEM_BIN" >> "$GITHUB_PATH"
+            export PATH="$GEM_BIN:$PATH"
+          fi
+          jekyll --version
 
-      - name: Download IG Publisher
+      - name: Verify IG Publisher
         run: |
-          mkdir -p input-cache
-          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
-            -o input-cache/publisher.jar
+          PUBLISHER_JAR="/opt/fhir-ig-publisher/publisher-2.2.7.jar"
+          if [ ! -f "$PUBLISHER_JAR" ]; then
+            echo "::error::Missing pinned IG Publisher jar: ${PUBLISHER_JAR}"
+            exit 1
+          fi
+          echo "94dff8e4b8faecda0bebbf93d3a14fdddc52020a0a7e8f5225807727b0281661  ${PUBLISHER_JAR}" | sha256sum -c -
+          echo "PUBLISHER_JAR=${PUBLISHER_JAR}" >> "$GITHUB_ENV"
 
       - name: Pre-load previous FHIR package from private registry
         run: |
@@ -257,15 +283,15 @@ jobs:
           mkdir -p "$CACHE_DIR"
           curl -sL "https://npm.cognovis.de/de.cognovis.fhir.praxis/-/de.cognovis.fhir.praxis-${PREV_VERSION}.tgz" \
             | tar -xz -C "$CACHE_DIR"
-          echo "Installed $(ls "$CACHE_DIR/package/" | wc -l) files to $CACHE_DIR"
+          echo "Installed $(find "$CACHE_DIR/package" -mindepth 1 -maxdepth 1 | wc -l) files to $CACHE_DIR"
 
       - name: Run IG Publisher
         run: |
           set +eo pipefail
-          java -jar input-cache/publisher.jar -ig . -no-sushi 2>&1 | tee /tmp/ig-publisher.log
+          java -jar "$PUBLISHER_JAR" -ig . -no-sushi 2>&1 | tee /tmp/ig-publisher.log
           IG_EXIT=${PIPESTATUS[0]}
           set -eo pipefail
-          if [ $IG_EXIT -ne 0 ]; then
+          if [ "$IG_EXIT" -ne 0 ]; then
             # PublicationChecker NPE is a known IG Publisher bug when the remote
             # package-list.json is unreachable. The build output is already complete
             # at that point (zip built, HTML checked).
@@ -274,7 +300,7 @@ jobs:
             else
               echo "IG Publisher failed with unexpected error:"
               tail -30 /tmp/ig-publisher.log
-              exit $IG_EXIT
+              exit "$IG_EXIT"
             fi
           fi
 

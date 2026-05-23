@@ -1,19 +1,19 @@
 ### ValueSet: Proposal Contribution Role - $expand
 # @name expand
-GET http://localhost:8080/ValueSet/proposal-contribution-role-vs/$expand
+GET {{baseUrl}}/ValueSet/proposal-contribution-role-vs/$expand
 Authorization: Basic basic:secret
 
 ### ValueSet: Proposal Contribution Role - $validate-code valid (llm-suggested)
 # @name validate_valid_llm_suggested
-GET http://localhost:8080/ValueSet/proposal-contribution-role-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=llm-suggested
+GET {{baseUrl}}/ValueSet/proposal-contribution-role-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=llm-suggested
 Authorization: Basic basic:secret
 
 ### ValueSet: Proposal Contribution Role - $validate-code valid (manual-entry)
 # @name validate_valid_manual_entry
-GET http://localhost:8080/ValueSet/proposal-contribution-role-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=manual-entry
+GET {{baseUrl}}/ValueSet/proposal-contribution-role-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=manual-entry
 Authorization: Basic basic:secret
 
 ### ValueSet: Proposal Contribution Role - $validate-code invalid
 # @name validate_invalid
-GET http://localhost:8080/ValueSet/proposal-contribution-role-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=INVALID_CODE_XYZ
+GET {{baseUrl}}/ValueSet/proposal-contribution-role-vs/$validate-code?system=https://fhir.cognovis.de/praxis/CodeSystem/proposal-contribution-role&code=INVALID_CODE_XYZ
 Authorization: Basic basic:secret

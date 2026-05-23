@@ -2,7 +2,7 @@
 # @name claim-with-abrech-extensions
 # Expected: OperationOutcome with "all ok" (no errors)
 # Validates ad-hoc usage of abrech-satzart and abrech-feldkennung extensions on Claim.item
-POST http://localhost:8080/fhir/Claim/$validate
+POST {{baseUrl}}/fhir/Claim/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -49,7 +49,7 @@ Content-Type: application/fhir+json
 # @name coverage-with-hv-versicherten-nr
 # Expected: OperationOutcome with "all ok" (no errors)
 # Validates ad-hoc usage of hv-versicherten-nr extension on Coverage
-POST http://localhost:8080/fhir/Coverage/$validate
+POST {{baseUrl}}/fhir/Coverage/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

@@ -1,7 +1,7 @@
 ### ImagingDevicePraxisDe — validate MRT device (expect: no errors)
 # @name validate-imaging-device
 # Covers: identifier[aeTitle] slice, type DicomModalityVS, DeviceMaintenanceStatusExt
-POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de
+POST {{baseUrl}}/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -52,7 +52,7 @@ Content-Type: application/fhir+json
 ### ImagingServiceRequestPraxisDe — validate MRT Knie order (expect: no errors)
 # @name validate-imaging-service-request
 # Covers: reasonCode[icd10gm] slice, insurance Reference, supportingInfo, code LOINC, priority
-POST http://localhost:8080/fhir/ServiceRequest/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-service-request-praxis-de
+POST {{baseUrl}}/fhir/ServiceRequest/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-service-request-praxis-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -114,7 +114,7 @@ Content-Type: application/fhir+json
 ### ImagingAppointmentPraxisDe — validate MRT Knie appointment (expect: no errors)
 # @name validate-imaging-appointment
 # Covers: AppointmentModalityExt, AppointmentPreparationExt, AppointmentReadinessExt, participant slicing
-POST http://localhost:8080/fhir/Appointment/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-appointment-praxis-de
+POST {{baseUrl}}/fhir/Appointment/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-appointment-praxis-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -220,7 +220,7 @@ Content-Type: application/fhir+json
 ### ImagingDevicePraxisDe — validate out-of-service device (expect: no errors)
 # @name validate-imaging-device-oos
 # Covers: DeviceMaintenanceStatusExt with out-of-service code
-POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de
+POST {{baseUrl}}/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/imaging-device-praxis-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

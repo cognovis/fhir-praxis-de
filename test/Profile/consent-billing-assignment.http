@@ -1,7 +1,7 @@
 ### Consent mit HPAYMT und Coverage-spezifischer PVS-Freigabe
 # @name consent-billing-assignment
 # Expected: OperationOutcome with "all ok" (no errors)
-POST http://localhost:8080/fhir/Consent/$validate
+POST {{baseUrl}}/fhir/Consent/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
