@@ -8,6 +8,8 @@ template/
 .DS_Store
 input-cache/
 txCache/
+.fhir-publish/
+!.fhir-publish.yml
 __pycache__/
 *.py[cod]
 

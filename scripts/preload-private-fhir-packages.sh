@@ -148,6 +148,7 @@ make_npm_config
 
 private_fhir_packages=(
   "de.cognovis.terminology.imaging"
+  "de.cognovis.terminology.kbv"
   "kbv.mio.impfpass.vocab"
 )
 

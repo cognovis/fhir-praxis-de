@@ -1,0 +1,12 @@
+self-hosted-runner:
+  labels:
+    - self-hosted
+    - Linux
+    - X64
+    - docker
+    - atlas
+    - atlas-2
+    - elysium
+    - kaji-2
+
+config-variables: null

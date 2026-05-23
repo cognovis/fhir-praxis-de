@@ -13,9 +13,19 @@ concurrency:
 
 jobs:
   build-and-release:
-    runs-on: ubuntu-latest
+    runs-on: [self-hosted, Linux, X64, docker, atlas]
     steps:
       - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Checkout fhir-publish-ig helper
+        uses: actions/checkout@v4
+        with:
+          repository: cognovis/library-core
+          ref: 7589f980e00435e051e5a2bb417f129cde929786
+          path: .fhir-publish/library-core
+          token: ${{ secrets.RELEASE_PAT }}
 
       - name: Setup Node.js
         uses: actions/setup-node@v4
@@ -44,118 +54,59 @@ jobs:
           fi
           echo "Version match confirmed: ${FILE_VERSION}"
 
-      - name: Install SUSHI
-        run: npm install -g fsh-sushi
-
-      - name: Pre-load private FHIR packages from npm.cognovis.de
-        env:
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+      - name: Ensure SUSHI
         run: |
-          # Praxis depends on de.cognovis.terminology.imaging, which is published
-          # only to the private Verdaccio at npm.cognovis.de (auth required;
-          # public FHIR mirrors return 404). Authenticate and fetch the tarball
-          # with npm pack, then extract into the FHIR package cache so SUSHI
-          # resolves it locally. MUST run before SUSHI to avoid "Failed to
-          # download" errors for private deps. Mirrors the same step in
-          # ig-ci.yml — keep in sync.
-          if [ -z "${VERDACCIO_TOKEN:-}" ]; then
-            echo "::error::VERDACCIO_TOKEN secret is not configured — cannot fetch private FHIR packages"
-            exit 1
+          if ! command -v sushi >/dev/null 2>&1; then
+            npm install -g fsh-sushi
           fi
-          {
-            echo "//npm.cognovis.de/:_auth=$(echo -n "cognovis:${VERDACCIO_TOKEN}" | base64)"
-            echo "//npm.cognovis.de/:always-auth=true"
-          } >> ~/.npmrc
+          sushi --version
 
-          fetch_to_fhir_cache() {
-            local pkg="$1" version="$2"
-            local cache_dir="${HOME}/.fhir/packages/${pkg}#${version}"
-            if [ -d "$cache_dir/package" ] && [ -f "$cache_dir/package/package.json" ]; then
-              echo "$pkg#$version already cached — skipping"
-              return
-            fi
-            echo "Fetching $pkg@$version from npm.cognovis.de..."
-            local pack_dir
-            pack_dir=$(mktemp -d)
-            ( cd "$pack_dir" && npm pack "${pkg}@${version}" --registry https://npm.cognovis.de >/dev/null )
-            local tgz
-            tgz=$(ls "$pack_dir"/*.tgz | head -1)
-            mkdir -p "$cache_dir"
-            tar xzf "$tgz" -C "$cache_dir"
-            echo "  Installed $(ls "$cache_dir/package/" | wc -l) files into $cache_dir"
-          }
-          fetch_to_fhir_cache "de.cognovis.terminology.imaging" "1.0.0"
-          fetch_to_fhir_cache "de.cognovis.terminology.kbv" "1.0.0"
-          # KBV-MIO-Impfpass vocabulary repackage (cognovis-private; npm.cognovis.de only)
-          fetch_to_fhir_cache "kbv.mio.impfpass.vocab" "1.1.0-cognovis.1"
+      - name: Ensure Jekyll
+        run: |
+          if ! command -v jekyll >/dev/null 2>&1; then
+            gem install --user-install jekyll
+            GEM_BIN="$(ruby -rrubygems -e 'print Gem.user_dir + "/bin"')"
+            echo "$GEM_BIN" >> "$GITHUB_PATH"
+            export PATH="$GEM_BIN:$PATH"
+          fi
+          jekyll --version
+
+      - name: Ensure Python dependencies
+        run: |
+          if ! python3 -c 'import yaml' >/dev/null 2>&1; then
+            python3 -m pip install --user pyyaml
+          fi
 
       - name: Generate KBV Basis snapshots
         uses: ./.github/actions/generate-kbv-basis-snapshots
 
-      - name: Run SUSHI
-        run: sushi .
-
-      - name: Install Jekyll
-        run: sudo gem install jekyll
-
-      - name: Download IG Publisher
+      - name: fhir-publish doctor
         run: |
-          mkdir -p input-cache
-          curl -L https://github.com/HL7/fhir-ig-publisher/releases/latest/download/publisher.jar \
-            -o input-cache/publisher.jar
+          python3 .fhir-publish/library-core/skills/fhir-publish-ig/scripts/publish_ig.py \
+            doctor \
+            --repo "$GITHUB_WORKSPACE" \
+            --json
 
-      - name: Pre-load previous FHIR package from private registry
+      - name: fhir-publish preflight
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
         run: |
-          CURRENT=$(tr -d '[:space:]' < VERSION)
-          REGISTRY_DATA=$(curl -sf "https://npm.cognovis.de/de.cognovis.fhir.praxis" || echo '{}')
-          PREV_VERSION=$(echo "$REGISTRY_DATA" | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          current = tuple(int(x) for x in '${CURRENT}'.split('.'))
-          versions = list(data.get('versions', {}).keys())
-          older = [v for v in versions if tuple(int(x) for x in v.split('.')) < current]
-          older.sort(key=lambda v: tuple(int(x) for x in v.split('.')))
-          print(older[-1] if older else '')
-          ")
-          if [ -z "$PREV_VERSION" ]; then
-            echo "No previous version found on npm.cognovis.de — skipping pre-load"
-            exit 0
-          fi
-          echo "Pre-loading de.cognovis.fhir.praxis#${PREV_VERSION} into FHIR cache..."
-          CACHE_DIR="${HOME}/.fhir/packages/de.cognovis.fhir.praxis#${PREV_VERSION}"
-          mkdir -p "$CACHE_DIR"
-          curl -sL "https://npm.cognovis.de/de.cognovis.fhir.praxis/-/de.cognovis.fhir.praxis-${PREV_VERSION}.tgz" \
-            | tar -xz -C "$CACHE_DIR"
-          echo "Installed $(ls "$CACHE_DIR/package/" | wc -l) files to $CACHE_DIR"
+          python3 .fhir-publish/library-core/skills/fhir-publish-ig/scripts/publish_ig.py \
+            preflight \
+            --repo "$GITHUB_WORKSPACE" \
+            --handoff-file "$GITHUB_WORKSPACE/.fhir-publish/preflight.json" \
+            --json
 
-      - name: Run IG Publisher
-        run: |
-          set +eo pipefail
-          java -jar input-cache/publisher.jar -ig . -no-sushi 2>&1 | tee /tmp/ig-publisher.log
-          IG_EXIT=${PIPESTATUS[0]}
-          set -eo pipefail
-          if [ $IG_EXIT -ne 0 ]; then
-            if grep -q "Publishing Content Failed" /tmp/ig-publisher.log && [ -f output/full-ig.zip ]; then
-              echo "::warning::PublicationChecker failed (known NPE) — build output is complete, continuing"
-            else
-              echo "IG Publisher failed with unexpected error:"
-              tail -30 /tmp/ig-publisher.log
-              exit $IG_EXIT
-            fi
-          fi
-
-      - name: QA Gate — block release if internal errors > 0
-        # Runs AFTER IG Publisher, BEFORE packaging/release.
-        # Fails with exit 1 if any error in output/qa.html is not covered by
-        # .github/qa-allowlist.yml, blocking the GitHub Release and npm publish.
-        # See docs/release-process.md for allowlist management instructions.
-        run: |
-          python3 scripts/qa_gate.py \
-            --qa-html output/qa.html \
-            --allowlist .github/qa-allowlist.yml
-
-      - name: Build FHIR package
-        run: bash scripts/build-package.sh --skip-sushi
+      - name: Upload fhir-publish diagnostics
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: fhir-publish-release-diagnostics
+          path: |
+            .fhir-publish/preflight.json
+            .fhir-publish/logs/
+            output/qa.html
+            output/qa/
 
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v2
@@ -174,7 +125,11 @@ jobs:
         run: |
           # FHIR packages have non-npm dependencies that confuse npm publish.
           # Use npm pack + publish with --ignore-scripts to skip dependency resolution.
-          PKG=$(ls dist/*.tgz | head -1)
+          PKG="$(find dist -maxdepth 1 -name '*.tgz' -print -quit)"
+          if [ -z "$PKG" ]; then
+            echo "::error::No FHIR package found in dist/"
+            exit 1
+          fi
           echo "Publishing ${PKG} to npm.cognovis.de..."
 
           # Create minimal .npmrc with auth
@@ -204,7 +159,7 @@ jobs:
         id: version
         env:
           TAG_NAME: ${{ github.ref_name }}
-        run: echo "version=$(echo "$TAG_NAME" | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+        run: echo "version=${TAG_NAME#v}" >> "$GITHUB_OUTPUT"
 
       - name: Update package-list.json on fhir.cognovis.de
         env:
@@ -265,7 +220,7 @@ jobs:
         id: version
         env:
           TAG_NAME: ${{ github.ref_name }}
-        run: echo "version=$(echo "$TAG_NAME" | sed 's/^v//')" >> "$GITHUB_OUTPUT"
+        run: echo "version=${TAG_NAME#v}" >> "$GITHUB_OUTPUT"
 
       - name: Send repository_dispatch to downstream consumer
         env:
