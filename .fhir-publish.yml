@@ -1,0 +1,17 @@
+publisher:
+  url: https://github.com/HL7/fhir-ig-publisher/releases/download/2.2.7/publisher.jar
+  sha256: "94dff8e4b8faecda0bebbf93d3a14fdddc52020a0a7e8f5225807727b0281661"
+  jar_path: input-cache/publisher-2.2.7.jar
+
+artifacts:
+  log_dir: .fhir-publish/logs
+  handoff_file: .fhir-publish/preflight.json
+
+preflight:
+  prefetch_commands:
+    - name: preload-private-fhir-packages
+      command: ["bash", "scripts/preload-private-fhir-packages.sh"]
+
+phases:
+  build_package:
+    command: ["bash", "scripts/build-package.sh", "--skip-sushi"]
