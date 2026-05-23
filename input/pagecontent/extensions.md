@@ -358,6 +358,14 @@ Extensions for appointment scheduling and mode of consultation.
 |-----------|------|-------------|
 | `AppointmentModeExt` | code | Terminmodus (Praxisbesuch, Videosprechstunde, Telefontermin, Hausbesuch) |
 
+## Flag / Bemerkung
+
+Extensions for free-text remarks on flags.
+
+| Extension | Type | Description |
+|-----------|------|-------------|
+| `FlagBemerkungExt` | string | Freitext-Bemerkung zum Flag |
+
 ## Condition / Diagnose
 
 Extensions for German-specific diagnosis metadata and ICD-10-GM diagnosesicherheit (KVDT 6.06).
