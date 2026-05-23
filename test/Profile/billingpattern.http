@@ -3,7 +3,7 @@
 # Expected: OperationOutcome with "all ok" (no errors)
 # Validates a PlanDefinition conforming to the PraxisBillingPattern profile
 # Covers: status=active, type=order-set, identifier[billingPatternId], useContext[practitioner], useContext[icdFocus], two stopfield extensions, one action with definitionCanonical
-POST http://localhost:8080/fhir/PlanDefinition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern
+POST {{baseUrl}}/fhir/PlanDefinition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -116,7 +116,7 @@ Content-Type: application/fhir+json
 # @name validate-billingpattern-negative
 # Expected: OperationOutcome with errors (status must be active, type must be order-set)
 # Verifies that profile constraints fire on invalid resources
-POST http://localhost:8080/fhir/PlanDefinition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern
+POST {{baseUrl}}/fhir/PlanDefinition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-billingpattern
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

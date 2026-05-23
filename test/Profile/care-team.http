@@ -2,7 +2,7 @@
 # @name validate-care-team-full
 # Expected: OperationOutcome with "all ok" (no errors)
 # Covers: participant[behandler] slices, status, category, subject, period, managingOrganization
-POST http://localhost:8080/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
+POST {{baseUrl}}/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -88,7 +88,7 @@ Content-Type: application/fhir+json
 # @name validate-care-team-small
 # Expected: OperationOutcome with "all ok" (no errors)
 # Covers: minimal valid team with 2 behandler participants, no managingOrganization
-POST http://localhost:8080/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
+POST {{baseUrl}}/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -150,7 +150,7 @@ Content-Type: application/fhir+json
 ### Validate CareTeamDE — Invalid: fehlender status (muss scheitern)
 # @name validate-care-team-missing-status
 # Expected: OperationOutcome mit Fehler (status ist Pflichtfeld im FHIR R4 CareTeam)
-POST http://localhost:8080/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
+POST {{baseUrl}}/fhir/CareTeam/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/care-team-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

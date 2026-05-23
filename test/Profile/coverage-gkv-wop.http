@@ -3,7 +3,7 @@
 # Expected: OperationOutcome with "all ok" (no errors)
 # AK3: WOP Extension (http://fhir.de/StructureDefinition/gkv/wop) aus de.basisprofil.r4
 # Extension wird NICHT neu definiert — direkt aus Upstream-Paket verwendet
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -38,7 +38,7 @@ Content-Type: application/fhir+json
 ### PKV-Coverage mit billing-assignment an PVS
 # @name coverage-privat-billing-assignment
 # Expected: OperationOutcome with "all ok" (no errors)
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -74,7 +74,7 @@ Content-Type: application/fhir+json
 ### Selbstzahler-Coverage ohne billing-assignment
 # @name coverage-privat-self-pay
 # Expected: OperationOutcome with "all ok" (no errors)
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -101,7 +101,7 @@ Content-Type: application/fhir+json
 ### Negativ-Test: billing-assignment darf nicht auf Patient zeigen
 # @name coverage-privat-billing-assignment-invalid
 # Expected: OperationOutcome with errors (Reference target must be Organization)
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-privat
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -134,7 +134,7 @@ Content-Type: application/fhir+json
 # @name coverage-gkv-wop-westfalen
 # Expected: OperationOutcome with "all ok" (no errors)
 # AK3: WOP mit anderem Wert (20 = Westfalen-Lippe)
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -169,7 +169,7 @@ Content-Type: application/fhir+json
 # @name coverage-gkv-wop-invalid
 # Expected: OperationOutcome with errors (code "99" is not in KBV_VS_SFHIR_ITA_WOP)
 # Note: Only validates if Aidbox has KBV terminology loaded (may pass with warning if not)
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -205,7 +205,7 @@ Content-Type: application/fhir+json
 # @name coverage-gkv-ohne-wop
 # Expected: OperationOutcome with "all ok" (no errors)
 # AK3: WOP ist optional — Coverage ohne WOP muss valide bleiben
-POST http://localhost:8080/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
+POST {{baseUrl}}/fhir/Coverage/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/fpde-coverage-gkv
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

@@ -2,7 +2,7 @@
 # @name validate-device-cobas
 # Expected: OperationOutcome with "all ok" (no errors)
 # Covers: identifier[gdtId] slice, deviceName, manufacturer, modelNumber, version, type, status
-POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device
+POST {{baseUrl}}/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -47,7 +47,7 @@ Content-Type: application/fhir+json
 # @name validate-device-ekg
 # Expected: OperationOutcome with "all ok" (no errors)
 # Covers: minimal PraxisDevice with GDT identifier and deviceName only
-POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device
+POST {{baseUrl}}/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -79,7 +79,7 @@ Content-Type: application/fhir+json
 ### Validate PraxisDevice — Invalid: fehlender status (muss scheitern)
 # @name validate-device-missing-status
 # Expected: OperationOutcome mit Fehler (status ist Pflichtfeld im FHIR R4 Device)
-POST http://localhost:8080/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device
+POST {{baseUrl}}/fhir/Device/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-device
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

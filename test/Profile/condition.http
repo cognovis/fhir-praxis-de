@@ -1,5 +1,5 @@
 ### Validate Condition with Diagnosesicherheit G (gesichert)
-POST http://localhost:8080/fhir/Condition/$validate
+POST {{baseUrl}}/fhir/Condition/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -31,7 +31,7 @@ Content-Type: application/fhir+json
 ?? status == 200
 
 ### Validate Condition with Diagnosesicherheit A (ausgeschlossen)
-POST http://localhost:8080/fhir/Condition/$validate
+POST {{baseUrl}}/fhir/Condition/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -59,7 +59,7 @@ Content-Type: application/fhir+json
 ?? status == 200
 
 ### Validate Condition with Diagnosesicherheit V (Verdacht auf)
-POST http://localhost:8080/fhir/Condition/$validate
+POST {{baseUrl}}/fhir/Condition/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -88,7 +88,7 @@ Content-Type: application/fhir+json
 ?? status == 200
 
 ### Validate Condition with Diagnosesicherheit Z (Zustand nach)
-POST http://localhost:8080/fhir/Condition/$validate
+POST {{baseUrl}}/fhir/Condition/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -130,7 +130,7 @@ Content-Type: application/fhir+json
 # Expected: OperationOutcome mit Fehler
 # Profil erfordert code.coding[icd10gm] mit system=http://fhir.de/CodeSystem/bfarm/icd-10-gm (1..*).
 # SNOMED-Code erfüllt diesen Slice nicht → Validation-Fehler erwartet.
-POST http://localhost:8080/fhir/Condition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-condition
+POST {{baseUrl}}/fhir/Condition/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-condition
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

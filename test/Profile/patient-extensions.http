@@ -1,7 +1,7 @@
 ### Patient with patient-seit extension (Bestandspatient)
 # @name patient-with-patient-seit
 # Expected: OperationOutcome with "all ok" (no errors)
-POST http://localhost:8080/fhir/Patient/$validate
+POST {{baseUrl}}/fhir/Patient/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -24,7 +24,7 @@ Content-Type: application/fhir+json
 ### Patient with patient-seit extension (Neupatient)
 # @name patient-with-patient-seit-neu
 # Expected: OperationOutcome with "all ok" (no errors)
-POST http://localhost:8080/fhir/Patient/$validate
+POST {{baseUrl}}/fhir/Patient/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -47,7 +47,7 @@ Content-Type: application/fhir+json
 ### Patient without patient-seit extension (must remain valid)
 # @name patient-without-patient-seit
 # Expected: OperationOutcome with "all ok" (no errors)
-POST http://localhost:8080/fhir/Patient/$validate
+POST {{baseUrl}}/fhir/Patient/$validate
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

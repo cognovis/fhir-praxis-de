@@ -2,7 +2,7 @@
 # @name validate-insurance-plan-aok
 # Expected: OperationOutcome with "all ok" (no errors)
 # Covers: plan[gkv] slice, identifier, name, type, coverageArea, coverage, specificCost
-POST http://localhost:8080/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
+POST {{baseUrl}}/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -76,7 +76,7 @@ Content-Type: application/fhir+json
 # @name validate-insurance-plan-debeka
 # Expected: OperationOutcome with "all ok" (no errors)
 # Covers: plan[pkv] slice, GOÄ-Faktor value, Implantat-Erstattung
-POST http://localhost:8080/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
+POST {{baseUrl}}/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -171,7 +171,7 @@ Content-Type: application/fhir+json
 ### Validate InsurancePlanDE — Invalid: fehlender status (muss scheitern)
 # @name validate-insurance-plan-missing-status
 # Expected: OperationOutcome mit Fehler (status ist Pflichtfeld im FHIR R4 InsurancePlan)
-POST http://localhost:8080/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
+POST {{baseUrl}}/fhir/InsurancePlan/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/insurance-plan-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

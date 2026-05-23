@@ -1,6 +1,6 @@
 ### Profile: praxis-proposal-provenance - Valid LLM suggestion with source entity
 # @name valid_llm_suggestion
-POST http://localhost:8080/fhir/Provenance/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-proposal-provenance
+POST {{baseUrl}}/fhir/Provenance/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-proposal-provenance
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -37,7 +37,7 @@ Content-Type: application/fhir+json
 
 ### Profile: praxis-proposal-provenance - Invalid derived proposal without source entity
 # @name invalid_llm_suggestion_without_entity
-POST http://localhost:8080/fhir/Provenance/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-proposal-provenance
+POST {{baseUrl}}/fhir/Provenance/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-proposal-provenance
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -70,7 +70,7 @@ Content-Type: application/fhir+json
 
 ### Profile: praxis-proposal-provenance - Valid manual entry without source entity
 # @name valid_manual_entry_without_entity
-POST http://localhost:8080/fhir/Provenance/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-proposal-provenance
+POST {{baseUrl}}/fhir/Provenance/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/praxis-proposal-provenance
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

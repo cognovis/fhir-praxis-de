@@ -4,7 +4,7 @@
 # Fills: status (MS), type (MS, pattern=professional), use (pattern=preauthorization),
 #   patient (MS), insurer (MS), outcome (MS),
 #   item (MS) with adjudication (MS)
-POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
+POST {{baseUrl}}/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 
@@ -42,7 +42,7 @@ Content-Type: application/fhir+json
 #   - type.coding.code = "institutional" (pattern violation, must be "professional")
 #   - use = "claim" (pattern violation, must be "preauthorization")
 #   - outcome missing (required by base ClaimResponse)
-POST http://localhost:8080/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
+POST {{baseUrl}}/fhir/ClaimResponse/$validate?profile=https://fhir.cognovis.de/praxis/StructureDefinition/pas-claim-response-de
 Authorization: Basic basic:secret
 Content-Type: application/fhir+json
 

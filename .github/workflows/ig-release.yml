@@ -13,7 +13,7 @@ concurrency:
 
 jobs:
   build-and-release:
-    runs-on: [self-hosted, Linux, X64, docker]
+    runs-on: [self-hosted, Linux, X64, docker, fhir-publisher]
     steps:
       - uses: actions/checkout@v4
         with:
