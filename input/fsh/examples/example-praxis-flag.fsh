@@ -15,4 +15,5 @@ Usage: #example
 * code.coding[0].code = #419511003
 * code.coding[0].display = "Propensity to adverse reactions to drug"
 * code.text = "Penicillin-Allergie: Anaphylaktische Reaktion bekannt. Keine Beta-Laktam-Antibiotika!"
+* extension[flag-bemerkung].valueString = "Keine Milchprodukte"
 * subject = Reference(example-patient)
