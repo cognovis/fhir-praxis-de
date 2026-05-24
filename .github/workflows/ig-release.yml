@@ -150,6 +150,8 @@ jobs:
     needs: build-and-release
     runs-on: ubuntu-latest
     steps:
+      - uses: actions/checkout@v4
+
       - name: Read version
         id: version
         env:
@@ -160,8 +162,13 @@ jobs:
         env:
           DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
           IG_VERSION: ${{ steps.version.outputs.version }}
+          PACKAGE_ID: de.cognovis.fhir.praxis
+          PUBLIC_IG_PATH: https://fhir.cognovis.de/praxis
+          PUBLIC_PACKAGE_LIST_URL: https://fhir.cognovis.de/praxis/package-list.json
+          REMOTE_PACKAGE_LIST: /var/www/fhir/praxis/package-list.json
         run: |
-          # Setup SSH
+          set -euo pipefail
+
           mkdir -p ~/.ssh
           echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
@@ -169,43 +176,12 @@ jobs:
 
           TODAY=$(date -u +%Y-%m-%d)
 
-          # Update package-list.json on the server via python3 (jq not installed)
-          ssh -i ~/.ssh/deploy_key fhir@116.202.111.75 python3 -s - "$IG_VERSION" "$TODAY" << 'REMOTE_SCRIPT'
-          import json, sys, shutil
+          ssh -i ~/.ssh/deploy_key fhir@116.202.111.75 \
+            python3 -s - "$IG_VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$REMOTE_PACKAGE_LIST" \
+            < .github/scripts/update-package-list-remote.py
 
-          version, today = sys.argv[1], sys.argv[2]
-          pkg_list = "/var/www/fhir/praxis/package-list.json"
-
-          # Backup
-          shutil.copy2(pkg_list, pkg_list + ".bak")
-
-          with open(pkg_list) as f:
-              data = json.load(f)
-
-          # Mark all existing version entries as not current
-          for entry in data["list"]:
-              if "current" in entry:
-                  entry["current"] = False
-
-          # Insert new version after the ci-build entry (index 0)
-          new_entry = {
-              "version": version,
-              "date": today,
-              "desc": f"Release {version}",
-              "path": "https://fhir.cognovis.de/praxis",
-              "status": "trial-use",
-              "sequence": "STU1",
-              "fhirversion": "4.0.1",
-              "current": True,
-              "package": f"de.cognovis.fhir.praxis#{version}"
-          }
-          data["list"].insert(1, new_entry)
-
-          with open(pkg_list, "w") as f:
-              json.dump(data, f, indent=2)
-
-          print(f"Updated package-list.json: version {version}, date {today}")
-          REMOTE_SCRIPT
+          curl -fsSL "${PUBLIC_PACKAGE_LIST_URL}?run=${GITHUB_RUN_ID}" \
+            | python3 .github/scripts/verify-public-package-list.py "$IG_VERSION" "$PACKAGE_ID" "$PUBLIC_IG_PATH"
 
   dispatch:
     needs: build-and-release

@@ -1,0 +1,56 @@
+name: Package List Sync
+
+on:
+  workflow_dispatch:
+    inputs:
+      version:
+        description: Release version to mark current
+        required: true
+        type: string
+      date:
+        description: Release date in YYYY-MM-DD format; defaults to today
+        required: false
+        type: string
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "package-list-sync"
+  cancel-in-progress: false
+
+jobs:
+  sync:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Update package-list.json on fhir.cognovis.de
+        env:
+          DEPLOY_SSH_KEY: ${{ secrets.DEPLOY_SSH_KEY }}
+          IG_VERSION: ${{ inputs.version }}
+          RELEASE_DATE: ${{ inputs.date }}
+          PACKAGE_ID: de.cognovis.fhir.praxis
+          PUBLIC_IG_PATH: https://fhir.cognovis.de/praxis
+          PUBLIC_PACKAGE_LIST_URL: https://fhir.cognovis.de/praxis/package-list.json
+          REMOTE_PACKAGE_LIST: /var/www/fhir/praxis/package-list.json
+        run: |
+          set -euo pipefail
+
+          if [ -n "${RELEASE_DATE}" ]; then
+            TODAY="${RELEASE_DATE}"
+          else
+            TODAY=$(date -u +%Y-%m-%d)
+          fi
+
+          mkdir -p ~/.ssh
+          echo "$DEPLOY_SSH_KEY" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H 116.202.111.75 >> ~/.ssh/known_hosts 2>/dev/null
+
+          ssh -i ~/.ssh/deploy_key fhir@116.202.111.75 \
+            python3 -s - "$IG_VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$REMOTE_PACKAGE_LIST" \
+            < .github/scripts/update-package-list-remote.py
+
+          curl -fsSL "${PUBLIC_PACKAGE_LIST_URL}?run=${GITHUB_RUN_ID}" \
+            | python3 .github/scripts/verify-public-package-list.py "$IG_VERSION" "$PACKAGE_ID" "$PUBLIC_IG_PATH"
