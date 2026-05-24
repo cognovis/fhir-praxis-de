@@ -3,11 +3,13 @@ self-hosted-runner:
     - self-hosted
     - Linux
     - X64
+    - ARM64
     - docker
     - fhir-publisher
     - atlas
     - atlas-2
     - elysium
     - kaji-2
+    - netbird
 
 config-variables: null

@@ -15,5 +15,44 @@ jobs:
       - uses: actions/checkout@v4
         with:
           fetch-depth: 0
+      - name: Install actionlint
+        env:
+          ACTIONLINT_VERSION: 1.7.7
+        run: |
+          set -euo pipefail
+          curl -fsSL \
+            "https://github.com/rhysd/actionlint/releases/download/v${ACTIONLINT_VERSION}/actionlint_${ACTIONLINT_VERSION}_linux_amd64.tar.gz" \
+            -o /tmp/actionlint.tar.gz
+          tar -xzf /tmp/actionlint.tar.gz -C /tmp actionlint
+          sudo mv /tmp/actionlint /usr/local/bin/actionlint
+      - name: Run workflow guardrails
+        run: |
+          set -euo pipefail
+          actionlint -config-file .github/actionlint.yaml
+          python3 - <<'PY'
+          from pathlib import Path
+          import py_compile
+
+          paths = []
+          for root in (
+              Path(".github/scripts"),
+              Path("scripts"),
+              Path(".agents/skills/fhir-sync-versions/scripts"),
+          ):
+              if root.is_dir():
+                  paths.extend(sorted(root.glob("*.py")))
+
+          for path in paths:
+              py_compile.compile(str(path), doraise=True)
+          print(f"Compiled {len(paths)} Python script(s).")
+          PY
+      - name: Run release-publication unit tests
+        run: |
+          set -euo pipefail
+          python3 -m pip install --user pytest pyyaml
+          python3 -m pytest \
+            tests/test_package_list_remote.py \
+            tests/test_release_publication_verification.py \
+            .agents/skills/fhir-sync-versions/scripts/test_sync.py
       - name: Run vendor-leak guard
         run: bash scripts/check-ig-vendor-leaks.sh

@@ -17,6 +17,8 @@ import time
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any, Callable, Optional
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 import yaml
 
@@ -28,6 +30,10 @@ DEFAULT_PUBLISHER_URL = (
 DEFAULT_PROFILE_FILE = ".fhir-publish.yml"
 DEFAULT_LOG_DIR = ".fhir-publish/logs"
 DEFAULT_HANDOFF_FILE = ".fhir-publish/preflight.json"
+PUBLIC_IG_PATHS = {
+    "de.cognovis.fhir.praxis": "https://fhir.cognovis.de/praxis",
+    "de.cognovis.fhir.dental": "https://fhir.cognovis.de/dental",
+}
 REQUIRED_FILES = (
     "VERSION",
     "sushi-config.yaml",
@@ -1074,6 +1080,65 @@ def github_pr_status(repo: Path, pr: str | None) -> dict[str, Any]:
     return {"ok": not failing, "pr": data, "failing_checks": failing}
 
 
+def infer_public_ig_path(package_id: str, explicit_path: str | None = None) -> str | None:
+    if explicit_path:
+        return explicit_path.rstrip("/")
+    return PUBLIC_IG_PATHS.get(package_id)
+
+
+def public_package_list_status(package_id: str, version: str, public_ig_path: str | None) -> dict[str, Any]:
+    public_path = infer_public_ig_path(package_id, public_ig_path)
+    if public_path is None:
+        return {
+            "ok": False,
+            "complete": True,
+            "error": f"No public IG path configured for {package_id}; pass --public-ig-path.",
+        }
+
+    url = f"{public_path}/package-list.json?watch={int(time.time())}"
+    try:
+        request = Request(url)
+        with urlopen(request, timeout=10) as response:
+            data = json.loads(response.read().decode("utf-8"))
+    except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as error:
+        return {"ok": False, "complete": True, "error": f"Could not read {url}: {error}"}
+
+    entries = data.get("list", []) if isinstance(data, dict) else []
+    if not isinstance(entries, list):
+        return {"ok": False, "complete": True, "error": f"{url} has no list array"}
+
+    expected_package = f"{package_id}#{version}"
+    current_entries = [
+        entry
+        for entry in entries
+        if isinstance(entry, dict) and entry.get("current") is True
+    ]
+    for entry in current_entries:
+        entry_path = str(entry.get("path", "")).rstrip("/")
+        if (
+            entry.get("version") == version
+            and entry.get("package") == expected_package
+            and entry_path == public_path
+        ):
+            return {
+                "ok": True,
+                "complete": True,
+                "url": url,
+                "entry": entry,
+            }
+
+    current = ", ".join(
+        f"{entry.get('version')} ({entry.get('package')})"
+        for entry in current_entries
+    )
+    return {
+        "ok": False,
+        "complete": True,
+        "url": url,
+        "error": f"{url} does not mark {expected_package} as current. Current entries: {current}",
+    }
+
+
 def poll_status(
     check: Callable[[], dict[str, Any]],
     timeout_seconds: int,
@@ -1148,7 +1213,12 @@ def watch(args: argparse.Namespace) -> dict[str, Any]:
 
     tag = f"v{version}"
     commit_sha = args.commit_sha or (metadata.commit_sha if metadata else None)
-    targets = ["registry", "release", "github-run"] if args.target == "all" else [args.target]
+    if args.target == "all":
+        targets = ["registry", "release", "github-run"]
+    elif args.target == "postrelease":
+        targets = ["registry", "release", "public-package-list"]
+    else:
+        targets = [args.target]
     results: dict[str, Any] = {}
     if args.dry_run:
         for target in targets:
@@ -1186,13 +1256,24 @@ def watch(args: argparse.Namespace) -> dict[str, Any]:
                     args.timeout_seconds,
                     args.poll_interval,
                 )
+            elif target == "public-package-list":
+                results[target] = poll_status(
+                    lambda: public_package_list_status(
+                        package_id,
+                        version,
+                        args.public_ig_path,
+                    ),
+                    args.timeout_seconds,
+                    args.poll_interval,
+                    stop_on_complete=True,
+                )
             else:
                 errors.append(f"Unknown watch target: {target}")
     if "registry" in results and not args.dry_run and not results["registry"].get("found"):
         diagnostics = npm_registry_diagnostics(package_id, version, args.registry)
         results["registry"]["diagnostics"] = diagnostics
         errors.append(f"{package_id}@{version} not visible in registry: {diagnostics['reason']}")
-    for target in ("github-run", "release", "pr"):
+    for target in ("github-run", "release", "pr", "public-package-list"):
         if target in results and not args.dry_run and not results[target].get("ok"):
             errors.append(f"{target} watch failed: {results[target].get('error') or 'not ok'}")
     status = "ok" if args.dry_run or not errors else "error"
@@ -1343,6 +1424,7 @@ def add_common_arguments(parser: argparse.ArgumentParser) -> None:
     parser.add_argument("--version", help="expected package version")
     parser.add_argument("--package-id", help="expected FHIR package id")
     parser.add_argument("--registry", default=DEFAULT_REGISTRY, help="npm registry URL")
+    parser.add_argument("--public-ig-path", help="public IG base URL for package-list verification")
     parser.add_argument("--publisher-jar", type=Path, help="publisher.jar path")
     parser.add_argument("--json", action="store_true", help="emit JSON envelope")
 
@@ -1394,7 +1476,7 @@ def parse_args(argv: list[str] | None = None) -> argparse.Namespace:
     watch_parser.add_argument("--dry-run", action="store_true", help="plan only")
     watch_parser.add_argument(
         "--target",
-        choices=["registry", "github-run", "release", "pr", "all"],
+        choices=["registry", "github-run", "release", "pr", "public-package-list", "postrelease", "all"],
         default="registry",
         help="publication surface to watch",
     )

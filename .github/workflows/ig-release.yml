@@ -163,9 +163,10 @@ jobs:
           IG_VERSION: ${{ steps.version.outputs.version }}
           PACKAGE_ID: de.cognovis.fhir.praxis
           PUBLIC_IG_PATH: https://fhir.cognovis.de/praxis
-          PUBLIC_PACKAGE_LIST_URL: https://fhir.cognovis.de/praxis/package-list.json
           REMOTE_PACKAGE_LIST: /opt/fhir-proxy/html/praxis/package-list.json
           PACKAGE_LIST_EXACT_PATH_ONLY: "true"
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
 
@@ -174,8 +175,11 @@ jobs:
           python3 .github/scripts/update-package-list-remote.py \
             "$IG_VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$REMOTE_PACKAGE_LIST"
 
-          curl -fsSL "${PUBLIC_PACKAGE_LIST_URL}?run=${GITHUB_RUN_ID}" \
-            | python3 .github/scripts/verify-public-package-list.py "$IG_VERSION" "$PACKAGE_ID" "$PUBLIC_IG_PATH"
+          python3 .github/scripts/verify-fhir-release-publication.py \
+            --version "$IG_VERSION" \
+            --package-id "$PACKAGE_ID" \
+            --public-ig-path "$PUBLIC_IG_PATH" \
+            --repository "$GITHUB_REPOSITORY"
 
   dispatch:
     needs: build-and-release

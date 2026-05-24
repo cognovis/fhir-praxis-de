@@ -189,7 +189,7 @@ jobs:
           COUNT=0
           for f in fsh-generated/resources/StructureDefinition-*.json; do
             ID=$(jq -r '.id' "$f")
-            RESOURCE=$(cat "$f")
+            RESOURCE=$(<"$f")
             if [ -n "$ENTRIES" ]; then ENTRIES="$ENTRIES,"; fi
             ENTRIES="$ENTRIES{\"resource\":$RESOURCE,\"request\":{\"method\":\"PUT\",\"url\":\"StructureDefinition/$ID\"}}"
             COUNT=$((COUNT + 1))
@@ -205,7 +205,7 @@ jobs:
             echo "All $COUNT StructureDefinitions uploaded successfully (HTTP $HTTP_CODE)"
           else
             echo "StructureDefinition bundle upload failed (HTTP $HTTP_CODE):"
-            cat /tmp/sd-response.json 2>/dev/null | jq . 2>/dev/null || cat /tmp/sd-response.json 2>/dev/null || true
+            jq . /tmp/sd-response.json 2>/dev/null || cat /tmp/sd-response.json 2>/dev/null || true
             exit 1
           fi
 

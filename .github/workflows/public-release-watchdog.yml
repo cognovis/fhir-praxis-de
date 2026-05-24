@@ -1,0 +1,31 @@
+name: Public Release Watchdog
+
+on:
+  schedule:
+    - cron: "17 6 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: "public-release-watchdog"
+  cancel-in-progress: false
+
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Verify public release surfaces
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+          GITHUB_TOKEN: ${{ github.token }}
+        run: |
+          set -euo pipefail
+          python3 .github/scripts/verify-fhir-release-publication.py \
+            --package-id de.cognovis.fhir.praxis \
+            --public-ig-path https://fhir.cognovis.de/praxis \
+            --repository "$GITHUB_REPOSITORY" \
+            --check-public-root

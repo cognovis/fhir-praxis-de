@@ -185,6 +185,74 @@ def test_package_json_reads_and_updates_cross_repo_dependency_fields(tmp_path):
     )
 
 
+def test_public_package_list_audit_detects_stale_current_entry():
+    expected = {"de.cognovis.fhir.praxis": "0.68.0"}
+
+    def fetcher(url):
+        assert url.startswith("https://fhir.cognovis.de/praxis/package-list.json?")
+        return {
+            "list": [
+                {
+                    "version": "0.66.0",
+                    "package": "de.cognovis.fhir.praxis#0.66.0",
+                    "path": "https://fhir.cognovis.de/praxis",
+                    "current": True,
+                }
+            ]
+        }
+
+    drifts = sync.compute_public_package_list_drifts(expected, fetcher=fetcher)
+
+    assert [(drift.package, drift.action) for drift in drifts] == [
+        ("de.cognovis.fhir.praxis", "PUBLIC_PACKAGE_LIST_STALE")
+    ]
+    assert "0.66.0" in drifts[0].current
+    assert "0.68.0" in drifts[0].expected
+
+
+def test_public_package_list_audit_accepts_matching_current_entry():
+    expected = {"de.cognovis.fhir.praxis": "0.68.0"}
+
+    def fetcher(url):
+        return {
+            "list": [
+                {
+                    "version": "0.68.0",
+                    "package": "de.cognovis.fhir.praxis#0.68.0",
+                    "path": "https://fhir.cognovis.de/praxis/",
+                    "current": True,
+                }
+            ]
+        }
+
+    assert sync.compute_public_package_list_drifts(expected, fetcher=fetcher) == []
+
+
+def test_legacy_package_list_deploy_target_audit_detects_old_host_and_path(tmp_path):
+    repo = tmp_path / "fhir-praxis-de"
+    workflow = repo / ".github" / "workflows" / "ig-release.yml"
+    workflow.parent.mkdir(parents=True)
+    workflow.write_text(
+        """
+jobs:
+  update-package-list:
+    steps:
+      - run: ssh fhir@116.202.111.75 'python3 /var/www/fhir/praxis/package-list.json'
+""".lstrip(),
+        encoding="utf-8",
+    )
+
+    drifts = sync.compute_legacy_package_list_deploy_target_drifts(
+        {"de.cognovis.fhir.praxis": repo}
+    )
+
+    assert [(drift.package, drift.action) for drift in drifts] == [
+        ("de.cognovis.fhir.praxis", "LEGACY_PACKAGE_LIST_DEPLOY_TARGET")
+    ]
+    assert "116.202.111.75" in drifts[0].current
+    assert "/var/www/fhir/" in drifts[0].current
+
+
 def test_discover_consumers_adds_external_repos_and_excludes_generated_dirs(
     tmp_path, monkeypatch
 ):
