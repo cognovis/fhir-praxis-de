@@ -56,6 +56,8 @@ Run from the fhir-terminology-de repo root.
    - Fetches published `package.json` metadata with `npm pack` and reports `REGISTRY_METADATA_STALE` when published dependencies disagree with manifest/local expected versions
    - Scans workflow/action/script files in local fhir-* repos for duplicated version pins and reports `AUX_PIN_DRIFT`
    - Checks local tags for version mismatch, missing GitHub releases, and missing registry package versions where `git`, `gh`, and `npm` are available
+   - Checks public `https://fhir.cognovis.de/<ig>/package-list.json` files and reports `PUBLIC_PACKAGE_LIST_STALE` when the manifest version is not marked current
+   - Reports `LEGACY_PACKAGE_LIST_DEPLOY_TARGET` when workflows/scripts still point at the old `116.202.111.75` or `/var/www/fhir/` package-list deployment path
    - Prints dependency graph cycle status and a topological release order
 
 When a local SUSHI IG is not listed in `fhir-versions.lock.yaml`, its own top-level

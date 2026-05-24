@@ -17,6 +17,8 @@ from collections import defaultdict, deque
 from dataclasses import dataclass, replace
 from pathlib import Path
 from typing import Any, Callable, Literal
+from urllib.error import HTTPError, URLError
+from urllib.request import Request, urlopen
 
 import yaml
 
@@ -102,6 +104,20 @@ PACKAGE_ALIASES = {
         "de-identification",
     ),
 }
+PUBLIC_PACKAGE_LISTS = {
+    "de.cognovis.fhir.praxis": {
+        "url": "https://fhir.cognovis.de/praxis/package-list.json",
+        "path": "https://fhir.cognovis.de/praxis",
+    },
+    "de.cognovis.fhir.dental": {
+        "url": "https://fhir.cognovis.de/dental/package-list.json",
+        "path": "https://fhir.cognovis.de/dental",
+    },
+}
+LEGACY_PACKAGE_LIST_DEPLOY_TARGETS = (
+    "116.202.111.75",
+    "/var/www/fhir/",
+)
 VERSION_TOKEN_RE = re.compile(
     r"\bv?(?P<version>\d+\.\d+\.\d+(?:[-+][0-9A-Za-z.-]+)?)\b"
 )
@@ -115,6 +131,8 @@ DriftAction = Literal[
     "TAG_VERSION_MISMATCH",
     "TAG_WITHOUT_RELEASE",
     "TAG_WITHOUT_REGISTRY_PACKAGE",
+    "PUBLIC_PACKAGE_LIST_STALE",
+    "LEGACY_PACKAGE_LIST_DEPLOY_TARGET",
 ]
 RELEASE_AUDIT_ACTIONS = frozenset(
     {
@@ -123,6 +141,8 @@ RELEASE_AUDIT_ACTIONS = frozenset(
         "TAG_VERSION_MISMATCH",
         "TAG_WITHOUT_RELEASE",
         "TAG_WITHOUT_REGISTRY_PACKAGE",
+        "PUBLIC_PACKAGE_LIST_STALE",
+        "LEGACY_PACKAGE_LIST_DEPLOY_TARGET",
     }
 )
 NON_APPLYABLE_ACTIONS = RELEASE_AUDIT_ACTIONS | frozenset(
@@ -830,6 +850,133 @@ def compute_tag_release_drifts(
     return drifts
 
 
+def fetch_json_url(url: str, timeout: int = NPM_TIMEOUT_SECONDS) -> Any:
+    request = Request(url)
+    with urlopen(request, timeout=timeout) as response:
+        return json.loads(response.read().decode("utf-8"))
+
+
+def package_list_current_entry(
+    data: dict[str, Any],
+    package_name: str,
+    version: str,
+    public_path: str,
+) -> dict[str, Any] | None:
+    entries = data.get("list", [])
+    if not isinstance(entries, list):
+        return None
+
+    expected_package = f"{package_name}#{version}"
+    expected_path = public_path.rstrip("/")
+    for entry in entries:
+        if not isinstance(entry, dict) or entry.get("current") is not True:
+            continue
+        entry_path = str(entry.get("path", "")).rstrip("/")
+        if (
+            entry.get("version") == version
+            and entry.get("package") == expected_package
+            and entry_path == expected_path
+        ):
+            return entry
+    return None
+
+
+def package_list_current_summary(data: dict[str, Any]) -> str:
+    entries = data.get("list", [])
+    if not isinstance(entries, list):
+        return "no list array"
+    current_entries = [
+        entry
+        for entry in entries
+        if isinstance(entry, dict) and entry.get("current") is True
+    ]
+    if not current_entries:
+        return "no current entries"
+    return ", ".join(
+        f"{entry.get('version')} ({entry.get('package')})"
+        for entry in current_entries
+    )
+
+
+def compute_public_package_list_drifts(
+    expected_versions: dict[str, str],
+    fetcher: Callable[[str], Any] = fetch_json_url,
+) -> list[Drift]:
+    drifts: list[Drift] = []
+    for package_name, target in sorted(PUBLIC_PACKAGE_LISTS.items()):
+        expected = expected_versions.get(package_name)
+        if expected is None:
+            continue
+
+        url = str(target["url"])
+        public_path = str(target["path"])
+        try:
+            data = fetcher(f"{url}?release_audit={int(time.time())}")
+        except (HTTPError, URLError, TimeoutError, json.JSONDecodeError, OSError) as error:
+            drifts.append(
+                Drift(
+                    file=Path(url),
+                    package=package_name,
+                    current=f"unreachable: {error}",
+                    expected=f"{package_name}#{expected} current",
+                    action="PUBLIC_PACKAGE_LIST_STALE",
+                    registry=url,
+                )
+            )
+            continue
+
+        if not isinstance(data, dict) or package_list_current_entry(
+            data, package_name, expected, public_path
+        ) is None:
+            current = package_list_current_summary(data) if isinstance(data, dict) else "not a JSON object"
+            drifts.append(
+                Drift(
+                    file=Path(url),
+                    package=package_name,
+                    current=current,
+                    expected=f"{package_name}#{expected} current at {public_path}",
+                    action="PUBLIC_PACKAGE_LIST_STALE",
+                    registry=url,
+                )
+            )
+    return drifts
+
+
+def compute_legacy_package_list_deploy_target_drifts(
+    repo_roots: dict[str, Path] = LOCAL_IG_REPOS,
+) -> list[Drift]:
+    drifts: list[Drift] = []
+    for package_name, repo_root in sorted(repo_roots.items()):
+        if not repo_root.is_dir():
+            continue
+        candidates = [
+            *sorted((repo_root / ".github" / "workflows").glob("*.yml")),
+            *sorted((repo_root / ".github" / "workflows").glob("*.yaml")),
+            *sorted((repo_root / ".github" / "scripts").glob("*.py")),
+        ]
+        for path in candidates:
+            if not path.is_file():
+                continue
+            text = path.read_text(encoding="utf-8", errors="ignore")
+            found = [
+                target
+                for target in LEGACY_PACKAGE_LIST_DEPLOY_TARGETS
+                if target in text
+            ]
+            if not found:
+                continue
+            drifts.append(
+                Drift(
+                    file=path,
+                    package=package_name,
+                    current=", ".join(found),
+                    expected="/opt/fhir-proxy/html/<ig>/package-list.json via netbird runner",
+                    action="LEGACY_PACKAGE_LIST_DEPLOY_TARGET",
+                )
+            )
+    return drifts
+
+
 def enrich_release_local_drifts(
     drifts: list[Drift], registry: str
 ) -> list[Drift]:
@@ -857,6 +1004,8 @@ def compute_release_audit_drifts(
         *compute_registry_metadata_drifts(expected_versions, registry),
         *compute_aux_pin_drifts(expected_versions),
         *compute_tag_release_drifts(expected_versions, registry),
+        *compute_public_package_list_drifts(expected_versions),
+        *compute_legacy_package_list_deploy_target_drifts(),
     ]
     return sorted(
         drifts, key=lambda drift: (display_path(drift.file), drift.package, drift.action)
