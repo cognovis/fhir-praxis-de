@@ -110,6 +110,10 @@ def iter_package_lists(default_path, public_path):
         seen.add(default_candidate)
         yield default_candidate
 
+    exact_only = os.environ.get("PACKAGE_LIST_EXACT_PATH_ONLY", "").lower() in {"1", "true", "yes", "on"}
+    if exact_only:
+        return
+
     for candidate in iter_nginx_package_lists(public_path):
         if candidate in seen:
             continue
