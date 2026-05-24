@@ -165,6 +165,7 @@ jobs:
           PUBLIC_IG_PATH: https://fhir.cognovis.de/praxis
           PUBLIC_PACKAGE_LIST_URL: https://fhir.cognovis.de/praxis/package-list.json
           REMOTE_PACKAGE_LIST: /opt/fhir-proxy/html/praxis/package-list.json
+          PACKAGE_LIST_EXACT_PATH_ONLY: "true"
         run: |
           set -euo pipefail
 
