@@ -1,19 +1,93 @@
 #!/usr/bin/env python3
 import json
 import os
+import re
 import shutil
 import sys
 from pathlib import Path
+from urllib.parse import urlparse
 
 
-WEB_ROOT = Path("/var/www")
+SEARCH_ROOTS = (
+    Path("/var/www"),
+    Path("/srv"),
+    Path("/usr/share/nginx"),
+    Path("/usr/local/www"),
+    Path("/opt"),
+    Path("/home/fhir"),
+    Path("/data"),
+    Path("/mnt"),
+    Path("/var/lib/docker/volumes"),
+)
+NGINX_CONFIG_ROOT = Path("/etc/nginx")
+ROOT_OR_ALIAS_RE = re.compile(r"\b(root|alias)\s+([^;]+);")
+SKIP_DIRS = {
+    ".cache",
+    ".git",
+    "__pycache__",
+    "cache",
+    "log",
+    "logs",
+    "node_modules",
+    "tmp",
+    "vendor",
+}
 
 
 def warn_walk_error(error):
     print(f"WARNING: Could not scan {error.filename}: {error.strerror}", file=sys.stderr)
 
 
-def iter_package_lists(default_path):
+def iter_nginx_config_files():
+    if not NGINX_CONFIG_ROOT.is_dir():
+        return
+
+    for root, dirs, files in os.walk(NGINX_CONFIG_ROOT, onerror=warn_walk_error):
+        dirs[:] = [name for name in dirs if name not in SKIP_DIRS]
+        for name in files:
+            yield Path(root) / name
+
+
+def clean_directive_path(raw_path):
+    value = raw_path.strip().strip("\"'")
+    parts = value.split()
+    if not parts:
+        return None
+
+    value = parts[0].strip("\"'")
+    if "$" in value:
+        return None
+
+    return Path(value)
+
+
+def iter_nginx_package_lists(public_path):
+    public_url_path = urlparse(public_path).path.strip("/")
+    public_suffix = Path(public_url_path) if public_url_path else None
+
+    for config_file in iter_nginx_config_files():
+        try:
+            config = config_file.read_text(encoding="utf-8", errors="ignore")
+        except OSError as error:
+            print(f"WARNING: Could not read {config_file}: {error}", file=sys.stderr)
+            continue
+
+        for directive, raw_path in ROOT_OR_ALIAS_RE.findall(config):
+            base_path = clean_directive_path(raw_path)
+            if base_path is None:
+                continue
+
+            if directive == "alias":
+                yield base_path / "package-list.json"
+                if public_suffix is not None:
+                    yield base_path / public_suffix / "package-list.json"
+            else:
+                if public_suffix is not None:
+                    yield base_path / public_suffix / "package-list.json"
+                yield base_path / "package-list.json"
+
+
+def iter_package_lists(default_path, public_path):
     seen = set()
 
     default_candidate = Path(default_path)
@@ -21,20 +95,27 @@ def iter_package_lists(default_path):
         seen.add(default_candidate)
         yield default_candidate
 
-    if not WEB_ROOT.is_dir():
-        return
-
-    for root, dirs, files in os.walk(WEB_ROOT, onerror=warn_walk_error):
-        dirs[:] = [name for name in dirs if name not in {".git", "node_modules"}]
-        if "package-list.json" not in files:
-            continue
-
-        candidate = Path(root) / "package-list.json"
+    for candidate in iter_nginx_package_lists(public_path):
         if candidate in seen:
             continue
-
         seen.add(candidate)
         yield candidate
+
+    for search_root in SEARCH_ROOTS:
+        if not search_root.is_dir():
+            continue
+
+        for root, dirs, files in os.walk(search_root, onerror=warn_walk_error):
+            dirs[:] = [name for name in dirs if name not in SKIP_DIRS]
+            if "package-list.json" not in files:
+                continue
+
+            candidate = Path(root) / "package-list.json"
+            if candidate in seen:
+                continue
+
+            seen.add(candidate)
+            yield candidate
 
 
 def read_json(path):
@@ -124,10 +205,13 @@ def main():
 
     updated = []
     failures = []
+    scanned = 0
 
-    for path in iter_package_lists(default_path):
+    for path in iter_package_lists(default_path, public_path):
         if not path.is_file():
             continue
+
+        scanned += 1
 
         try:
             data = read_json(path)
@@ -157,6 +241,7 @@ def main():
     print("Updated package-list.json paths:")
     for path in updated:
         print(path)
+    print(f"Scanned {scanned} package-list.json candidates")
 
     if failures:
         print("ERROR: Some package-list.json files could not be processed:", file=sys.stderr)
