@@ -38,14 +38,29 @@ def warn_walk_error(error):
     print(f"WARNING: Could not scan {error.filename}: {error.strerror}", file=sys.stderr)
 
 
+def is_scannable_dir(path):
+    try:
+        return path.is_dir()
+    except OSError as error:
+        print(f"WARNING: Could not scan {path}: {error}", file=sys.stderr)
+        return False
+
+
 def iter_nginx_config_files():
-    if not NGINX_CONFIG_ROOT.is_dir():
+    if not is_scannable_dir(NGINX_CONFIG_ROOT):
         return
 
     for root, dirs, files in os.walk(NGINX_CONFIG_ROOT, onerror=warn_walk_error):
         dirs[:] = [name for name in dirs if name not in SKIP_DIRS]
         for name in files:
-            yield Path(root) / name
+            candidate = Path(root) / name
+            try:
+                if not candidate.is_file():
+                    continue
+            except OSError as error:
+                print(f"WARNING: Could not read {candidate}: {error}", file=sys.stderr)
+                continue
+            yield candidate
 
 
 def clean_directive_path(raw_path):
@@ -102,7 +117,7 @@ def iter_package_lists(default_path, public_path):
         yield candidate
 
     for search_root in SEARCH_ROOTS:
-        if not search_root.is_dir():
+        if not is_scannable_dir(search_root):
             continue
 
         for root, dirs, files in os.walk(search_root, onerror=warn_walk_error):
