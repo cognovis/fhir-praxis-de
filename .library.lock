@@ -3,10 +3,10 @@ installed:
   type: standard
   marketplace: unknown
   source: https://github.com/cognovis/library/blob/main/standards/workflow/english-only.md
-  source_commit: 131a123fdc19f3cadc07d40800e556250944c0cc
-  cache_path: /Users/malte/.local/share/library/standards/unknown/english-only@131a123fdc19f3/
-  install_target: .agents/standards/workflow/english-only.md
-  install_timestamp: '2026-05-23T09:07:18Z'
+  source_commit: 064f9a5e77550d50002710e170d5a6c2acddd537
+  cache_path: /Users/malte/.local/share/library/standards/unknown/english-only@064f9a5e77550d/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/standards/workflow/english-only.md
+  install_timestamp: '2026-05-25T06:58:44Z'
   checksum_sha256: e84aa8052bb2ee3e9f4a1f1635d3f68c8f088c7e5e1a209e6c75e7715e4c5bcc
   checksum_type: file
   content_sha256: e84aa8052bb2ee3e9f4a1f1635d3f68c8f088c7e5e1a209e6c75e7715e4c5bcc
@@ -28,3 +28,136 @@ installed:
   license: unknown
   bridge_symlinks:
   - .claude/skills/fhir-sync-versions -> .agents/skills/fhir-sync-versions
+- name: aidbox
+  type: skill
+  marketplace: cognovis-samurai
+  source: https://github.com/cognovis/samurai-skills/tree/master/plugins/aidbox/skills/aidbox
+  source_commit: 6767dabf6239429c66125941c7f5866d24edaeba
+  cache_path: /Users/malte/.local/share/library/skills/cognovis-samurai/aidbox@6767dabf623942/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/aidbox/
+  install_timestamp: '2026-05-25T06:58:45Z'
+  checksum_sha256: ec2285a1d5d64c909463624675c967d42609d9371104542906c43d8121168989
+  checksum_type: directory
+  content_sha256: ec2285a1d5d64c909463624675c967d42609d9371104542906c43d8121168989
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/aidbox -> /Users/malte/code/fhir-praxis-de/.agents/skills/aidbox
+- name: aidbox-ig-development
+  type: skill
+  marketplace: cognovis-samurai
+  source: https://github.com/cognovis/samurai-skills/tree/master/plugins/aidbox-ig-development/skills/aidbox-ig-development
+  source_commit: 6767dabf6239429c66125941c7f5866d24edaeba
+  cache_path: /Users/malte/.local/share/library/skills/cognovis-samurai/aidbox-ig-development@6767dabf623942/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/aidbox-ig-development/
+  install_timestamp: '2026-05-25T06:58:45Z'
+  checksum_sha256: 090fd2cfe921c293f1a58d3cdf2dd078263bd3f4fe5d308b3cbb7bc7a1499ed3
+  checksum_type: directory
+  content_sha256: 090fd2cfe921c293f1a58d3cdf2dd078263bd3f4fe5d308b3cbb7bc7a1499ed3
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/aidbox-ig-development -> /Users/malte/code/fhir-praxis-de/.agents/skills/aidbox-ig-development
+- name: aidbox-sql-on-fhir
+  type: skill
+  marketplace: cognovis-samurai
+  source: https://github.com/cognovis/samurai-skills/tree/master/plugins/aidbox-sql-on-fhir/skills/aidbox-sql-on-fhir
+  source_commit: 6767dabf6239429c66125941c7f5866d24edaeba
+  cache_path: /Users/malte/.local/share/library/skills/cognovis-samurai/aidbox-sql-on-fhir@6767dabf623942/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/aidbox-sql-on-fhir/
+  install_timestamp: '2026-05-25T06:58:47Z'
+  checksum_sha256: af94248c4a50197c4531977fb23dc46848faf129a227ecd61c370fadd6a022b4
+  checksum_type: directory
+  content_sha256: af94248c4a50197c4531977fb23dc46848faf129a227ecd61c370fadd6a022b4
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/aidbox-sql-on-fhir -> /Users/malte/code/fhir-praxis-de/.agents/skills/aidbox-sql-on-fhir
+- name: atomic-generate-types
+  type: skill
+  marketplace: cognovis-samurai
+  source: https://github.com/cognovis/samurai-skills/tree/master/plugins/atomic-generate-types/skills/atomic-generate-types
+  source_commit: 6767dabf6239429c66125941c7f5866d24edaeba
+  cache_path: /Users/malte/.local/share/library/skills/cognovis-samurai/atomic-generate-types@6767dabf623942/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/atomic-generate-types/
+  install_timestamp: '2026-05-25T06:58:48Z'
+  checksum_sha256: c212cb1708e2813a7b17daa37d7914354d1c90205413d734686547f7beedd2a1
+  checksum_type: directory
+  content_sha256: c212cb1708e2813a7b17daa37d7914354d1c90205413d734686547f7beedd2a1
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/atomic-generate-types -> /Users/malte/code/fhir-praxis-de/.agents/skills/atomic-generate-types
+- name: hs-search
+  type: skill
+  marketplace: cognovis-samurai
+  source: https://github.com/cognovis/samurai-skills/tree/master/plugins/hs-search/skills/hs-search
+  source_commit: 6767dabf6239429c66125941c7f5866d24edaeba
+  cache_path: /Users/malte/.local/share/library/skills/cognovis-samurai/hs-search@6767dabf623942/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/hs-search/
+  install_timestamp: '2026-05-25T06:58:49Z'
+  checksum_sha256: 26386bcafdf45add2b01c95bbe6e796aa61c212c9f72f0e277862cda72452650
+  checksum_type: directory
+  content_sha256: 26386bcafdf45add2b01c95bbe6e796aa61c212c9f72f0e277862cda72452650
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/hs-search -> /Users/malte/code/fhir-praxis-de/.agents/skills/hs-search
+- name: fhir-validation
+  type: skill
+  marketplace: cognovis-samurai
+  source: https://github.com/cognovis/samurai-skills/tree/master/plugins/samurai-skills/skills/fhir-validation
+  source_commit: 6767dabf6239429c66125941c7f5866d24edaeba
+  cache_path: /Users/malte/.local/share/library/skills/cognovis-samurai/fhir-validation@6767dabf623942/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/fhir-validation/
+  install_timestamp: '2026-05-25T06:58:50Z'
+  checksum_sha256: 9d927c24efa7a600ecf4201e22741cef12a6e53a5f66ce90b1981dcb4a786909
+  checksum_type: directory
+  content_sha256: 9d927c24efa7a600ecf4201e22741cef12a6e53a5f66ce90b1981dcb4a786909
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/fhir-validation -> /Users/malte/code/fhir-praxis-de/.agents/skills/fhir-validation
+- name: no-emoji
+  type: standard
+  marketplace: unknown
+  source: https://github.com/cognovis/library/blob/main/standards/workflow/no-emoji.md
+  source_commit: 064f9a5e77550d50002710e170d5a6c2acddd537
+  cache_path: /Users/malte/.local/share/library/standards/unknown/no-emoji@064f9a5e77550d/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/standards/workflow/no-emoji.md
+  install_timestamp: '2026-05-25T06:59:54Z'
+  checksum_sha256: 7429e491b1373470f8ffae35a39d54c6302dff6e69370c197fbb40c4fe53dd25
+  checksum_type: file
+  content_sha256: 7429e491b1373470f8ffae35a39d54c6302dff6e69370c197fbb40c4fe53dd25
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks: []
+- name: judge-layer
+  type: standard
+  marketplace: unknown
+  source: https://github.com/cognovis/library-core/blob/main/standards/judge-layer/judge-layer.md
+  source_commit: 39aa95113fc1c47d9ed87c3a54c04f14a61a9d30
+  cache_path: /Users/malte/.local/share/library/standards/unknown/judge-layer@39aa95113fc1c4/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/standards/judge-layer/judge-layer.md
+  install_timestamp: '2026-05-25T06:59:56Z'
+  checksum_sha256: 9ce436b26061d7f78e5a87cf5afafa6efbab4be72f75d58c7470e5db972b192a
+  checksum_type: file
+  content_sha256: 9ce436b26061d7f78e5a87cf5afafa6efbab4be72f75d58c7470e5db972b192a
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks: []
+- name: fhir-publish-ig
+  type: skill
+  marketplace: unknown
+  source: https://github.com/cognovis/library-core/blob/main/skills/fhir-publish-ig/SKILL.md
+  source_commit: 39aa95113fc1c47d9ed87c3a54c04f14a61a9d30
+  cache_path: /Users/malte/.local/share/library/skills/unknown/fhir-publish-ig@39aa95113fc1c4/
+  install_target: /Users/malte/code/fhir-praxis-de/.agents/skills/fhir-publish-ig/
+  install_timestamp: '2026-05-25T06:59:57Z'
+  checksum_sha256: f58e621a3cc07462abf2bfad5c6fe6c5ee6a07325487bf4cea52383454488304
+  checksum_type: directory
+  content_sha256: f58e621a3cc07462abf2bfad5c6fe6c5ee6a07325487bf4cea52383454488304
+  install_mode: vendor
+  license: unknown
+  bridge_symlinks:
+  - /Users/malte/code/fhir-praxis-de/.claude/skills/fhir-publish-ig -> /Users/malte/code/fhir-praxis-de/.agents/skills/fhir-publish-ig
