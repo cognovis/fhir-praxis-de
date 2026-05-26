@@ -62,3 +62,11 @@ Downstream resolution logic must:
 - Preserve `Seitenlokalisation` and
   `Mehrfachcodierungskennzeichen` on the source ICD coding and, when using
   `diagnosisCodeableConcept`, on the Claim diagnosis coding.
+
+## Related Decisions and Beads
+
+- ADR-005: `docs/adr/ADR-005-account-centered-billing-case-model.md`
+- AW-SST crosswalk: `input/pagecontent/aw-sst-crosswalk.md`
+- `fpde-cj3`: AccountPraxisSchein and EncounterPraxis contact re-scope
+- `fpde-mub`: this Claim.diagnosis contract and KBV-AWS diagnosis certainty mapping
+- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision

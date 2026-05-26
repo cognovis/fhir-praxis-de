@@ -1,0 +1,144 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-hms",
+  "commands": [
+    {
+      "id": "cmd:bd-prime",
+      "command": "bd prime",
+      "purpose": "Load bead workflow context.",
+      "exit_code": 0,
+      "observed_result": "Beads workflow context loaded."
+    },
+    {
+      "id": "cmd:bd-show",
+      "command": "bd show fpde-hms --json",
+      "purpose": "Read bead context, dependencies, and acceptance criteria through bd CLI.",
+      "exit_code": 0,
+      "observed_result": "Bead fpde-hms was in progress with AK-1 through AK-10 and notes for AW inspection, cj3, mub, and Wegegeld."
+    },
+    {
+      "id": "cmd:git-diff-check",
+      "command": "git diff --check HEAD~2..HEAD",
+      "purpose": "Check committed implementation diff for whitespace errors.",
+      "exit_code": 0,
+      "observed_result": "No whitespace errors reported."
+    },
+    {
+      "id": "cmd:no-aw-parent",
+      "command": "rg -n \"^Parent: KBV_PR_AW_\" input/fsh",
+      "purpose": "Confirm no FSH profile inherits from a KBV_PR_AW_* profile.",
+      "exit_code": 1,
+      "observed_result": "No matches found; this confirms no AW parent inheritance in input/fsh."
+    },
+    {
+      "id": "cmd:base-parent-confirmation",
+      "command": "rg -n \"^Profile: (AccountPraxisSchein|EncounterPraxis)$|^Parent: (Account|Encounter)$\" input/fsh/profiles/account-praxis-schein.fsh input/fsh/profiles/EncounterPraxis.fsh",
+      "purpose": "Confirm AccountPraxisSchein and EncounterPraxis parent only base Account and Encounter.",
+      "exit_code": 0,
+      "observed_result": "AccountPraxisSchein has Parent: Account; EncounterPraxis has Parent: Encounter."
+    },
+    {
+      "id": "cmd:explicit-extension-slices",
+      "command": "rg -n \"extension\\\\[(distance|zone)\\\\]|extension\\\\[\\\\+\\\\]|extension\\\\[=\\\\]\" input/fsh/extensions/wegegeld.fsh",
+      "purpose": "Verify Wegegeld sliced extension uses explicit distance/zone slices and not SUSHI soft-index syntax.",
+      "exit_code": 0,
+      "observed_result": "Lines 28-35 use extension[distance] and extension[zone]. No extension[+] or extension[=] soft-index usage was present."
+    },
+    {
+      "id": "cmd:git-log",
+      "command": "git log --oneline -2",
+      "purpose": "Record implementation commits.",
+      "exit_code": 0,
+      "observed_result": "0241d70 feat: add Wegegeld home visit extension; a0c4b9a docs: record account-centered billing model."
+    },
+    {
+      "id": "cmd:git-status",
+      "command": "git status --short --branch",
+      "purpose": "Check remaining worktree state before writing evidence artifacts.",
+      "exit_code": 0,
+      "observed_result": "Only .beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/ remained untracked before artifact creation."
+    },
+    {
+      "id": "cmd:initial-git-push",
+      "command": "git push -u origin worktree-bead-fpde-hms",
+      "purpose": "Attempt to push the implementation branch.",
+      "exit_code": 1,
+      "observed_result": "Pre-push vendor-leak guard blocked product-specific downstream names in public IG/evidence surfaces. References were changed to vendor-neutral external bead/ADR wording before retry."
+    },
+    {
+      "id": "cmd:vendor-leak-guard",
+      "command": "scripts/check-ig-vendor-leaks.sh",
+      "purpose": "Verify public IG/evidence surfaces use vendor-neutral wording after the push-blocking guard finding.",
+      "exit_code": 0,
+      "observed_result": "Vendor leak guard passed."
+    }
+  ],
+  "skipped_checks": [
+    {
+      "check": "SUSHI build",
+      "reason": "Explicit bead constraint: do not run SUSHI because it is expensive and CI-only."
+    },
+    {
+      "check": "FHIR package validation against kbv.ita.aws",
+      "reason": "ADR-003 keeps kbv.ita.aws out of sushi-config dependencies; this bead is documentation and local FSH profile work."
+    }
+  ],
+  "artifacts": [
+    {
+      "id": "artifact:adr-003",
+      "path": "docs/adr/ADR-003-aw-sst-crosswalk.md",
+      "description": "Revised EncounterPraxis/AW_Begegnung rationale and related links."
+    },
+    {
+      "id": "artifact:adr-005",
+      "path": "docs/adr/ADR-005-account-centered-billing-case-model.md",
+      "description": "New accepted ADR for Account-centered three-layer billing-case model."
+    },
+    {
+      "id": "artifact:crosswalk-page",
+      "path": "input/pagecontent/aw-sst-crosswalk.md",
+      "description": "Split Encounter/Account rows, Account AW decomposition, diagnosis confirmation, Wegegeld crosswalk, and related links."
+    },
+    {
+      "id": "artifact:claim-diagnosis-page",
+      "path": "input/pagecontent/claim-diagnosis-contract.md",
+      "description": "Related decision links for fpde-cj3, fpde-mub, and external bead 59tj/ADR-039."
+    },
+    {
+      "id": "artifact:wegegeld-extension",
+      "path": "input/fsh/extensions/wegegeld.fsh",
+      "description": "WegegeldHausbesuchExt plus local home-visit zone CodeSystem and ValueSet."
+    },
+    {
+      "id": "artifact:encounter-profile",
+      "path": "input/fsh/profiles/EncounterPraxis.fsh",
+      "description": "EncounterPraxis includes optional Wegegeld extension for class=HH contacts."
+    },
+    {
+      "id": "artifact:encounter-hzv-profile",
+      "path": "input/fsh/profiles/encounter-praxis-hzv.fsh",
+      "description": "HZV prose clarifies base R4 EpisodeOfCare enrollment convention and no HZV-only EpisodeOfCare profile."
+    },
+    {
+      "id": "artifact:implementation-manifest",
+      "path": ".beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/implementation_manifest.json",
+      "description": "Acceptance-criteria implementation manifest."
+    },
+    {
+      "id": "artifact:evidence-ledger",
+      "path": ".beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/evidence_ledger.json",
+      "description": "Command evidence and skipped-check ledger."
+    },
+    {
+      "id": "artifact:related-links",
+      "label": "Cross-links to fpde-cj3, fpde-mub, and external 59tj/ADR-039",
+      "description": "Cross-link presence verified in ADR-003, ADR-005, aw-sst-crosswalk.md, and claim-diagnosis-contract.md via grep.",
+      "files": [
+        "docs/adr/ADR-003-aw-sst-crosswalk.md",
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md",
+        "input/pagecontent/claim-diagnosis-contract.md"
+      ]
+    }
+  ]
+}

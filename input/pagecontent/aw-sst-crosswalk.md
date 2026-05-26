@@ -15,6 +15,8 @@ PVS synchronization contract.
 
 See ADR-003:
 [AW-SST as Crosswalk Target, Not Profile Parent](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-003-aw-sst-crosswalk.md).
+See ADR-005:
+[Account-Centered Billing Case Model](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-005-account-centered-billing-case-model.md).
 
 ## Sources Checked
 
@@ -64,10 +66,11 @@ of PVS data areas.
 | Organization and location | `PraxisOrganizationDE`, local identifiers and PVS organization types | `KBV_PR_AW_Betriebsstaette`, `KBV_PR_AW_Organisation`, `KBV_PR_AW_Betriebsstaette_Ort`, `KBV_PR_AW_Hausbesuch_Ort`, `KBV_PR_AW_Unfall_Ort` | Crosswalk | Keep local organization profile; add export mappings for BSNR/IK/location roles. |
 | Coverage | `FPDECoverageGKV`, `FPDECoveragePrivat`, multi-coverage Account pattern | `KBV_PR_AW_Krankenversicherungsverhaeltnis` | Crosswalk | Preserve local multi-coverage routing and private billing assignment; map to AW coverage when exporting. |
 | Selective contracts | `Contract`, HZV/HVG extensions, `InsurancePlanDE` where needed | `KBV_PR_AW_Selektivvertrag` | Crosswalk | Keep contract identifier and tariff model; export to AW selective-contract representation. |
-| Encounter / Schein | `EncounterPraxis` (clinical contact, class AMB/HH) + `AccountPraxisSchein` (billing-case anchor, R4 Account) | `KBV_PR_AW_Begegnung` | Partial crosswalk | Do not parent. AW Begegnung is a completed consultation. Local billing-case anchor is `AccountPraxisSchein`; `EncounterPraxis` is the clinical contact referencing the Account. |
-| Home visit | Appointment/Encounter context, local visit semantics where available | `KBV_PR_AW_Hausbesuch`, `KBV_PR_AW_Hausbesuch_Ort` | Crosswalk | If explicit home-visit Encounter profile is needed, align it to AW as export target without changing `EncounterPraxis`. |
+| EncounterPraxis contact | `EncounterPraxis` (clinical contact, class AMB/HH; billing-agnostic) | `KBV_PR_AW_Begegnung`; home-visit contacts also crosswalk to `KBV_PR_AW_Hausbesuch` where export requires the AW home-visit profile | Clean crosswalk, no parent | `EncounterPraxis` is now the clinical contact and crosswalks cleanly to AW Begegnung. Do not parent: live contacts must not inherit archive-completeness constraints, and `kbv.ita.aws@1.2.0` adds old base-package pressure. Keep Scheinart and coverage on Account. |
+| AccountPraxisSchein billing case | `AccountPraxisSchein` (R4 Account; Schein billing-case anchor) | No `KBV_PR_AW_Account` equivalent. Export decomposes into AW encounter context (`KBV_PR_AW_Begegnung` / `KBV_PR_AW_Hausbesuch`), `KBV_PR_AW_Krankenversicherungsverhaeltnis`, and `KBV_PR_AW_Abrechnung_*` Claim resources. | Local operational layer, no AW parent | Account carries ScheinNummer, Scheinart, servicePeriod, coverage, and open/closed case status. AW export materializes the relevant coverage and per-area Claims rather than exporting Account directly. |
+| Home visit Wegegeld | `EncounterPraxis` with class `HH` plus `WegegeldHausbesuchExt` distance and zone | `KBV_EX_AW_Hausbesuch_Entfernungsinformationen`; `KBV_VS_AW_Hausbesuch_Besuchszonen`; `KBV_PR_AW_Hausbesuch` export target | Crosswalk, no separate local profile | Distance comes from `Patient.EntfernungZurPraxis` in km. Zone comes from per-case `Schein.Zonenkennzeichen`, falling back to `Patient.Zonenkennzeichen`. Downstream editors may edit the extension and write back per ADR-002. Wegegeld billing codes such as WT2 remain `ChargeItem` / `Claim.item`. |
 | Stationary treatment | Local administrative workflow where present | `KBV_PR_AW_Stationaere_Behandlung` | Adapter/export crosswalk | No immediate local parent/profile change. |
-| Diagnosis | `PraxisConditionDE`, older `PraxisCondition`, `DauerdiagnoseExt` | `KBV_PR_AW_Diagnose` | Crosswalk, no parent | Keep `asserter` and `evidence.detail`. Map AW flags such as duration and billing relevance on export/import. |
+| Diagnosis | `PraxisConditionDE`, older `PraxisCondition`, `DauerdiagnoseExt`; quarterly billing projection on `Claim.diagnosis` | `KBV_PR_AW_Diagnose` | Crosswalk, no parent | Keep `asserter` and `evidence.detail`. Confirmed by `fpde-mub`: KBV-AWS Diagnosesicherheit maps to `Condition.verificationStatus`/`clinicalStatus` as `A -> refuted`, `G -> confirmed/active`, `V -> provisional or differential/active`, `Z -> confirmed/resolved`. Claim diagnosis dedupe is exact billing tuple only. |
 | Accident | Local BG/accident context and `Procedure`/`Condition` links | `KBV_PR_AW_Unfall`, `KBV_PR_AW_Unfall_Ort` | Crosswalk | Use AW as export target; do not collapse accident handling into diagnosis profile inheritance. |
 | Anamnesis freetext | `PraxisAnamneseFreeTextObservationDE` | `KBV_PR_AW_Observation_Anamnese` | Implemented | `PraxisAnamneseFreeTextObservationDE` — lightweight `Observation.valueString` (category=survey, LOINC 10164-2) for card-file anamnesis lines. Structured questionnaire responses remain in `PraxisAnamneseQuestionnaireResponse`. |
 | Finding freetext | `PraxisBefundFreeTextObservationDE` | `KBV_PR_AW_Observation_Befund` | Implemented | `PraxisBefundFreeTextObservationDE` — lightweight `Observation.valueString` (category=exam, LOINC 11506-3) for unstructured finding notes. Structured reports (lab, imaging) remain in separate profiles. |
@@ -132,6 +135,16 @@ Invariants maintained:
 - No `Parent: KBV_PR_AW_*` anywhere in `input/fsh/`
 - `PASClaimDE` unchanged (prior-auth only)
 - `ChargeItem`, `Claim`, and `Invoice` remain separate layers
+- `AccountPraxisSchein` and `EncounterPraxis` remain local profiles, not AW
+  children; AW vocabulary and codes are reused where they fit local semantics.
+
+## Related Decisions and Beads
+
+- ADR-003: `docs/adr/ADR-003-aw-sst-crosswalk.md`
+- ADR-005: `docs/adr/ADR-005-account-centered-billing-case-model.md`
+- `fpde-cj3`: AccountPraxisSchein profile and EncounterPraxis clinical-contact re-scope
+- `fpde-mub`: Claim.diagnosis quarterly Behandlungsdiagnosen and KBV-AWS diagnosis certainty mapping
+- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision
 
 ## Non-Goals
 

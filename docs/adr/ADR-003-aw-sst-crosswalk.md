@@ -76,9 +76,21 @@ practice documentation, imaging/laboratory traceability, and AI-assisted
 documentation review.
 
 For encounters, `KBV_PR_AW_Begegnung` is a completed consultation encounter.
-`EncounterPraxis` is closer to the PVS "Schein" / billing case anchor and carries
-local Schein identifiers and Scheinart coding. Those are different concepts and
-should not be forced into one inheritance path.
+After ADR-005 and bead `fpde-cj3`, `EncounterPraxis` is also a clinical contact,
+not the PVS Schein or billing-case anchor. The billing case is
+`AccountPraxisSchein`.
+
+`EncounterPraxis` therefore crosswalks cleanly to `KBV_PR_AW_Begegnung` at the
+concept level, but it still does not inherit from AW. FHIR derivation can only
+tighten constraints; deriving the live contact profile from archive-shaped
+`KBV_PR_AW_Begegnung` would force archive-completeness constraints onto
+in-flight contacts. Examples include completed/finalized encounter assumptions,
+required narrative/export metadata, and other archive handover requirements.
+Additionally, the inspected `kbv.ita.aws@1.2.0` package brings old base-package
+dependency pressure.
+
+This decision may be re-evaluated only after inspecting the current
+AW_Begegnung mandatory element set and confirming base-package compatibility.
 
 ### The published package stack is older than this IG stack
 
@@ -104,6 +116,8 @@ local inheritance layer.
 - Publish an AW-SST crosswalk page that maps local domains to AW targets and
   records intentional divergence.
 - Add local profiles only where the crosswalk identifies real operational gaps.
+- Keep `AccountPraxisSchein` and `EncounterPraxis` as local operational
+  profiles while reusing AW vocabulary and codes where they exist.
 
 ### Required implementation follow-up
 
@@ -156,3 +170,8 @@ would miss useful billing and archive structure, especially around Claim.
 - INA/gematik AWST efficiency working group:
   https://www.ina.gematik.de/mitwirken/arbeitskreise/analyse-der-effizienz-der-archiv-und-wechselschnittstelle-awst
 - IG crosswalk page: `input/pagecontent/aw-sst-crosswalk.md`
+- ADR-005 Account-centered billing case model:
+  `docs/adr/ADR-005-account-centered-billing-case-model.md`
+- `fpde-cj3`: AccountPraxisSchein profile and EncounterPraxis clinical-contact re-scope
+- `fpde-mub`: Claim.diagnosis quarterly diagnosis contract
+- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision
