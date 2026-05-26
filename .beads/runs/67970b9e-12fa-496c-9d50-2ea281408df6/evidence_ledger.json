@@ -128,6 +128,17 @@
       "id": "artifact:evidence-ledger",
       "path": ".beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/evidence_ledger.json",
       "description": "Command evidence and skipped-check ledger."
+    },
+    {
+      "id": "artifact:related-links",
+      "label": "Cross-links to fpde-cj3, fpde-mub, and external 59tj/ADR-039",
+      "description": "Cross-link presence verified in ADR-003, ADR-005, aw-sst-crosswalk.md, and claim-diagnosis-contract.md via grep.",
+      "files": [
+        "docs/adr/ADR-003-aw-sst-crosswalk.md",
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md",
+        "input/pagecontent/claim-diagnosis-contract.md"
+      ]
     }
   ]
 }
