@@ -5,8 +5,14 @@
     {
       "id": "AK-1",
       "status": "done",
-      "changed_files": ["docs/adr/ADR-005-account-centered-billing-case-model.md"],
-      "evidence_refs": ["cmd:git-diff-check", "cmd:git-log", "artifact:adr-005"]
+      "changed_files": [
+        "docs/adr/ADR-005-account-centered-billing-case-model.md"
+      ],
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "cmd:git-log",
+        "artifact:adr-005"
+      ]
     },
     {
       "id": "AK-2",
@@ -16,19 +22,34 @@
         "docs/adr/ADR-005-account-centered-billing-case-model.md",
         "input/pagecontent/aw-sst-crosswalk.md"
       ],
-      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-003", "artifact:crosswalk-page"]
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "artifact:adr-003",
+        "artifact:crosswalk-page"
+      ]
     },
     {
       "id": "AK-3",
       "status": "done",
-      "changed_files": ["docs/adr/ADR-003-aw-sst-crosswalk.md", "docs/adr/ADR-005-account-centered-billing-case-model.md"],
-      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-003"]
+      "changed_files": [
+        "docs/adr/ADR-003-aw-sst-crosswalk.md",
+        "docs/adr/ADR-005-account-centered-billing-case-model.md"
+      ],
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "artifact:adr-003"
+      ]
     },
     {
       "id": "AK-4",
       "status": "done",
-      "changed_files": ["input/pagecontent/aw-sst-crosswalk.md"],
-      "evidence_refs": ["cmd:git-diff-check", "artifact:crosswalk-page"]
+      "changed_files": [
+        "input/pagecontent/aw-sst-crosswalk.md"
+      ],
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "artifact:crosswalk-page"
+      ]
     },
     {
       "id": "AK-5",
@@ -37,7 +58,12 @@
         "docs/adr/ADR-005-account-centered-billing-case-model.md",
         "input/pagecontent/aw-sst-crosswalk.md"
       ],
-      "evidence_refs": ["cmd:no-aw-parent", "cmd:base-parent-confirmation", "artifact:adr-005", "artifact:crosswalk-page"]
+      "evidence_refs": [
+        "cmd:no-aw-parent",
+        "cmd:base-parent-confirmation",
+        "artifact:adr-005",
+        "artifact:crosswalk-page"
+      ]
     },
     {
       "id": "AK-6",
@@ -47,7 +73,12 @@
         "input/pagecontent/aw-sst-crosswalk.md",
         "input/pagecontent/claim-diagnosis-contract.md"
       ],
-      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-005", "artifact:crosswalk-page", "artifact:claim-diagnosis-page"]
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "artifact:adr-005",
+        "artifact:crosswalk-page",
+        "artifact:claim-diagnosis-page"
+      ]
     },
     {
       "id": "AK-7",
@@ -58,7 +89,10 @@
         "input/pagecontent/aw-sst-crosswalk.md",
         "input/pagecontent/claim-diagnosis-contract.md"
       ],
-      "evidence_refs": ["cmd:git-diff-check", "artifact:related-links"]
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "artifact:related-links"
+      ]
     },
     {
       "id": "AK-8",
@@ -67,7 +101,11 @@
         "docs/adr/ADR-005-account-centered-billing-case-model.md",
         "input/fsh/profiles/encounter-praxis-hzv.fsh"
       ],
-      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-005", "artifact:encounter-hzv-profile"]
+      "evidence_refs": [
+        "cmd:git-diff-check",
+        "artifact:adr-005",
+        "artifact:encounter-hzv-profile"
+      ]
     },
     {
       "id": "AK-9",
@@ -78,7 +116,12 @@
         "input/pagecontent/aw-sst-crosswalk.md",
         "docs/adr/ADR-005-account-centered-billing-case-model.md"
       ],
-      "evidence_refs": ["cmd:explicit-extension-slices", "cmd:git-diff-check", "artifact:wegegeld-extension", "artifact:encounter-profile"]
+      "evidence_refs": [
+        "cmd:explicit-extension-slices",
+        "cmd:git-diff-check",
+        "artifact:wegegeld-extension",
+        "artifact:encounter-profile"
+      ]
     },
     {
       "id": "AK-10",
@@ -87,7 +130,10 @@
         "docs/adr/ADR-005-account-centered-billing-case-model.md",
         "input/pagecontent/aw-sst-crosswalk.md"
       ],
-      "evidence_refs": ["cmd:base-parent-confirmation", "artifact:encounter-profile"]
+      "evidence_refs": [
+        "cmd:base-parent-confirmation",
+        "artifact:encounter-profile"
+      ]
     }
   ],
   "changed_files": [
@@ -103,12 +149,32 @@
   ],
   "commits": [
     {
-      "sha": "a0c4b9a",
-      "subject": "docs: record account-centered billing model"
+      "sha": "31e9cf8",
+      "subject": "fix(fpde-hms): add missing artifact:related-links to evidence ledger"
+    },
+    {
+      "sha": "b8c7387",
+      "subject": "fix(fpde-hms): remove vendor codename from wegegeld zone ^definition"
+    },
+    {
+      "sha": "d24053c",
+      "subject": "fix(fpde-hms): add ^short/^definition to Wegegeld extension slices per repo convention"
+    },
+    {
+      "sha": "195e4c9",
+      "subject": "chore: use vendor-neutral public references"
+    },
+    {
+      "sha": "da2fa4d",
+      "subject": "chore: record fpde-hms evidence"
     },
     {
       "sha": "0241d70",
       "subject": "feat: add Wegegeld home visit extension"
+    },
+    {
+      "sha": "a0c4b9a",
+      "subject": "docs: record account-centered billing model"
     }
   ],
   "tests": [
