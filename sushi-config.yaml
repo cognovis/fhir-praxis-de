@@ -88,6 +88,8 @@ pages:
     title: Vererbungsarchitektur
   multi-coverage.md:
     title: Multi-Coverage Linking Pattern
+  claim-diagnosis-contract.md:
+    title: Claim Diagnosis Contract
 
 menu:
   Home: index.html
@@ -108,5 +110,6 @@ menu:
     Imaging Billing: imaging-billing-architecture.html
     Vererbungsarchitektur: inheritance-architecture.html
     Multi-Coverage: multi-coverage.html
+    Claim Diagnosis Contract: claim-diagnosis-contract.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html

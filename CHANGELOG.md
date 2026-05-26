@@ -4,6 +4,15 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Added
+
+- **Claim.diagnosis quarter-diagnosis contract**: All five Praxis Claim profiles (`PraxisGkvClaim`, `PraxisPrivateClaim`, `PraxisBgClaim`, `PraxisSelectiveContractClaim`, `PraxisPreliminaryBillingClaim`) now carry quarterly `Behandlungsdiagnosen` via `Claim.diagnosis`, referencing source `PraxisCondition` resources via `diagnosisReference`.
+  - Diagnosesicherheit (`G`/`V`/`Z`/`A`) follows KBV-AWS semantics mapped to `Condition.verificationStatus` + `Condition.clinicalStatus`.
+  - Deduplication key is the exact billing tuple (ICD code + Diagnosesicherheit + Seitenlokalisation + Mehrfachcodierungskennzeichen) — naked-ICD dedup is explicitly prohibited; no generic `G > V > Z > A` precedence rule applies.
+  - `Z` (Zustand nach) means resolved/state-after for the specific tuple, not a generic Dauerdiagnose marker.
+  - Source Conditions are retained as clinical documentation and never deleted or merged for Claim projection purposes.
+- **Claim Diagnosis Contract page** (`claim-diagnosis-contract.md`): new Architecture section page documenting the carrier, billing-tuple uniqueness semantics, Diagnosesicherheit resolution table, and downstream implementation contract.
+
 ### BREAKING CHANGES
 
 - `EncounterPraxis`: re-scoped to clinical contact. ScheinNummer identifier and Scheinart type slices removed. Use `AccountPraxisSchein` for billing-case identity.

@@ -1,0 +1,35 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-mub",
+  "commands": [
+    {
+      "command": "git diff --stat",
+      "purpose": "verify changed files",
+      "exit_code": 0,
+      "observed_result": "8 files changed, 243 insertions"
+    },
+    {
+      "command": "git commit",
+      "purpose": "commit implementation",
+      "exit_code": 0,
+      "observed_result": "commit f4cd9ef936f9acd940e70efd276f9d9baaa72491"
+    },
+    {
+      "command": "sushi .",
+      "purpose": "compile FSH to FHIR JSON and verify the laterality+certainty Condition examples build cleanly after the extension authoring fix (findings AK-2/AK-6)",
+      "exit_code": 0,
+      "observed_result": "0 Errors, 0 Warnings. 72 Profiles, 198 Extensions, 50 ValueSets, 55 CodeSystems, 240 Instances exported. SUSHI v3.19.0 at /opt/homebrew/bin/sushi."
+    },
+    {
+      "command": "python3 -c read code.coding[0].extension on Condition-BillingClaimQuarterBackPainRightCondition.json and Condition-BillingClaimQuarterBackPainLeftCondition.json",
+      "purpose": "confirm BOTH diagnosesicherheit (G) AND seitenlokalisation (R/L) extensions emit on the ICD-10-GM coding (verify the prior extension[+] soft-index clobbering is resolved)",
+      "exit_code": 0,
+      "observed_result": "Right: [icd-10-gm-diagnosesicherheit G, seitenlokalisation R]; Left: [icd-10-gm-diagnosesicherheit G, seitenlokalisation L]. Both extensions present on each Condition; diagnosesicherheit no longer dropped."
+    }
+  ],
+  "skipped_checks": [],
+  "artifacts": [
+    "fsh-generated/resources/Condition-BillingClaimQuarterBackPainRightCondition.json",
+    "fsh-generated/resources/Condition-BillingClaimQuarterBackPainLeftCondition.json"
+  ]
+}

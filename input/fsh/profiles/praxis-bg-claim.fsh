@@ -59,6 +59,21 @@ Description: "Finaler BG-Abrechnungsanspruch (Berufsgenossenschaft / Unfallversi
 * insurance.focal MS
 * insurance.coverage MS
 
+// Echoed treatment diagnoses:
+// Final claims may echo the billing-tuple diagnosis list resolved on the
+// preliminary claim. Dedupe is exact-tuple only: ICD code + Diagnosesicherheit +
+// Seitenlokalisation + Mehrfachcodierungskennzeichen.
+* diagnosis 0..* MS
+* diagnosis ^short = "Echoed quarterly treatment diagnoses for billing"
+* diagnosis ^definition = "Optional echoed Behandlungsdiagnosen from the preliminary billing claim. Each entry references one source PraxisCondition when available; otherwise diagnosisCodeableConcept may carry the billing diagnosis. Dedupe is over the exact billing tuple only: ICD code, Diagnosesicherheit, Seitenlokalisation, and Mehrfachcodierungskennzeichen."
+* diagnosis.sequence MS
+* diagnosis.sequence ^short = "Stable diagnosis sequence within the final claim"
+* diagnosis.diagnosisReference MS
+* diagnosis.diagnosisReference only Reference(PraxisCondition)
+* diagnosis.diagnosisReference ^short = "Source PraxisCondition for this billing diagnosis tuple"
+* diagnosis.diagnosisCodeableConcept MS
+* diagnosis.diagnosisCodeableConcept ^short = "Billing diagnosis code when no source Condition reference is available"
+
 // Preliminary claim reference: exactly one (1..1) — typed to PraxisPreliminaryBillingClaimDE
 * related 1..1 MS
 * related ^short = "Exactly one reference to PraxisPreliminaryBillingClaimDE — required"
