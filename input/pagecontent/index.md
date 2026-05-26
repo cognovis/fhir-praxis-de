@@ -19,7 +19,7 @@ FHIR R4 profiles and extensions for German ambulatory practice management (Vertr
 
 ## HZV/Selektivvertrags-Leistungskontext
 
-HZV-Verträge werden nicht in dieser IG enumeriert — die konkreten Vertragsausprägungen (AOK Bayern, TK, etc.) werden durch den jeweiligen PVS-Adapter als `Contract`-Ressourcen erzeugt und via `Encounter.extension[hzv-rechnungsschema]` referenziert. Die IG definiert nur die Struktur, nicht den Inhalt der Verträge.
+HZV-Verträge werden nicht in dieser IG enumeriert — die konkreten Vertragsausprägungen (AOK Bayern, TK, etc.) werden durch den jeweiligen PVS-Adapter als `Contract`-Ressourcen erzeugt und via `Account.coverage -> Coverage(HZV)` referenziert (die `EXT_HZV.rechnungsschema` Extension wurde in Version 0.69.0 retired; der Vertragskontext liegt jetzt auf dem `AccountPraxisSchein`). Die IG definiert nur die Struktur, nicht den Inhalt der Verträge.
 
 Bei Leistungen im Rahmen eines Hausarztvertrags (§73b SGB V) oder Facharztvertrags (§73c/§140a SGB V)
 gilt folgender Codierungs-Contract:

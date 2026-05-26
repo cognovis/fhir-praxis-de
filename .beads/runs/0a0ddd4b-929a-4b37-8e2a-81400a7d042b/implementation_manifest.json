@@ -1,0 +1,152 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-cj3",
+  "acceptance_criteria": [
+    {
+      "id": "AK-1",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/profiles/account-praxis-schein.fsh"
+      ],
+      "evidence_refs": [
+        "cmd:sushi-tail-zero-errors"
+      ]
+    },
+    {
+      "id": "AK-2",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/profiles/account-praxis-schein.fsh",
+        "input/fsh/examples/example-account-schein-gkv.fsh",
+        "input/fsh/examples/example-account-schein-hzv.fsh"
+      ],
+      "evidence_refs": [
+        "review:account-identifier-servicePeriod"
+      ]
+    },
+    {
+      "id": "AK-3",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/profiles/account-praxis-schein.fsh",
+        "input/fsh/examples/example-account-schein-gkv.fsh",
+        "input/fsh/examples/example-account-schein-hzv.fsh"
+      ],
+      "evidence_refs": [
+        "review:account-type-coverage-status"
+      ]
+    },
+    {
+      "id": "AK-4",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/profiles/EncounterPraxis.fsh",
+        "input/fsh/examples/example-encounter-ambulant.fsh",
+        "input/fsh/examples/example-hzv-encounter.fsh"
+      ],
+      "evidence_refs": [
+        "review:encounter-contact-rescope"
+      ]
+    },
+    {
+      "id": "AK-5",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/profiles/EncounterPraxis.fsh",
+        "input/fsh/examples/example-encounter-ambulant.fsh",
+        "input/fsh/examples/example-hzv-encounter.fsh",
+        "input/fsh/examples/example-hzv-scenario.fsh"
+      ],
+      "evidence_refs": [
+        "cmd:stale-encounter-schein-scan",
+        "review:encounter-account-reference"
+      ]
+    },
+    {
+      "id": "AK-6",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/profiles/encounter-praxis-hzv.fsh",
+        "input/fsh/extensions/hzv-rechnungsschema.fsh",
+        "input/fsh/examples/example-hzv-encounter.fsh",
+        "input/fsh/examples/example-hzv-scenario.fsh"
+      ],
+      "evidence_refs": [
+        "review:hzv-retirement"
+      ]
+    },
+    {
+      "id": "AK-7",
+      "status": "done",
+      "changed_files": [
+        "CHANGELOG.md"
+      ],
+      "evidence_refs": [
+        "review:changelog-migration"
+      ]
+    },
+    {
+      "id": "AK-8",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/examples/example-account-schein-gkv.fsh",
+        "input/fsh/examples/example-account-schein-hzv.fsh",
+        "input/fsh/examples/example-encounter-ambulant.fsh",
+        "input/fsh/examples/example-hzv-encounter.fsh",
+        "input/fsh/examples/example-hzv-scenario.fsh"
+      ],
+      "evidence_refs": [
+        "cmd:sushi-tail-zero-errors"
+      ]
+    }
+  ],
+  "changed_files": [
+    "CHANGELOG.md",
+    "input/fsh/profiles/account-praxis-schein.fsh",
+    "input/fsh/profiles/EncounterPraxis.fsh",
+    "input/fsh/profiles/encounter-praxis-hzv.fsh",
+    "input/fsh/extensions/hzv-rechnungsschema.fsh",
+    "input/fsh/examples/example-account-schein-gkv.fsh",
+    "input/fsh/examples/example-account-schein-hzv.fsh",
+    "input/fsh/examples/example-encounter-ambulant.fsh",
+    "input/fsh/examples/example-hzv-encounter.fsh",
+    "input/fsh/examples/example-hzv-scenario.fsh",
+    ".beads/runs/0a0ddd4b-929a-4b37-8e2a-81400a7d042b/implementation_manifest.json",
+    ".beads/runs/0a0ddd4b-929a-4b37-8e2a-81400a7d042b/evidence_ledger.json"
+  ],
+  "commits": [
+    {
+      "subject": "feat(fpde-cj3): AccountPraxisSchein + re-scope EncounterPraxis to clinical contact",
+      "status": "planned-final-implementation-commit"
+    }
+  ],
+  "tests": [
+    {
+      "command": "sushi . 2>&1 | tail -20",
+      "result": "0 Errors, 5 Warnings"
+    }
+  ],
+  "external_resources": [],
+  "scope_changes": [
+    {
+      "description": "Used the R4 standard structuredefinition-standards-status extension with valueCode=deprecated instead of literal ^deprecated=true because StructureDefinition.deprecated is not an R4 element and SUSHI rejects it.",
+      "reason": "Required to represent retirement while satisfying AK-1 zero SUSHI errors."
+    }
+  ],
+  "downstream_impacts": [
+    "Breaking change: EncounterPraxis no longer carries ScheinNummer or Scheinart.",
+    "Downstream data reset/migration creates AccountPraxisSchein resources and sets Encounter.account.",
+    "HZV contract context moves to Account.coverage -> Coverage(HZV); EXT_HZV.rechnungsschema is retained only for backward compatibility on EpisodeOfCare."
+  ],
+  "evidence_refs": [
+    "cmd:bd-show-fpde-cj3",
+    "cmd:stale-encounter-schein-scan",
+    "cmd:sushi-tail-zero-errors",
+    "review:account-identifier-servicePeriod",
+    "review:account-type-coverage-status",
+    "review:encounter-contact-rescope",
+    "review:encounter-account-reference",
+    "review:hzv-retirement",
+    "review:changelog-migration"
+  ]
+}

@@ -1,28 +1,17 @@
-// HZV-Encounter Beispiel — Abrechnungsschein hausarztzentrierte Versorgung
-// Demonstriert: EncounterPraxisHZV mit lokaler Praxis-Scheinart hzv und HZV-Rechnungsschema-Extension
+// HZV Hausbesuch contact — demonstrates HZV clinical contact with class=HH (home visit)
+// The billing case (HZV Account) is linked via Encounter.account.
+// The HZV enrollment is tracked via Encounter.episodeOfCare -> EpisodeOfCare(HZV).
 
 Instance: hzv-encounter-example
 InstanceOf: EncounterPraxisHZV
-Title: "HZV-Abrechnungsschein AOK Bayern"
-Description: "Beispiel-Abrechnungsschein fuer die hausarztzentrierte Versorgung (HZV). Lokale Praxis-Scheinart hzv, Rechnungsschema AOK Bayern."
+Title: "HZV Home Visit Clinical Contact"
+Description: "Example HZV home visit clinical contact (class=HH). The billing case is linked through Encounter.account. HZV enrollment tracked via episodeOfCare."
 Usage: #example
 
-* identifier[scheinNummer].system = "https://fhir.cognovis.de/praxis/sid/scheinNummer"
-* identifier[scheinNummer].value = "HZV-2026-00042"
-
 * status = #finished
-
-* class = http://terminology.hl7.org/CodeSystem/v3-ActCode#AMB "ambulatory"
-
-* type[praxis-scheinart].coding.system = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
-* type[praxis-scheinart].coding.code = #hzv
-* type[praxis-scheinart].coding.display = "HZV"
-
+* class = http://terminology.hl7.org/CodeSystem/v3-ActCode#HH "home health"
 * subject = Reference(example-patient)
-
 * period.start = "2026-04-10"
 * period.end = "2026-04-10"
-
 * participant[0].individual = Reference(example-practitioner)
-
-* extension[hzv-rechnungsschema].valueReference = Reference(ExampleHzvBayernVertrag)
+* account[0] = Reference(example-account-schein-hzv)

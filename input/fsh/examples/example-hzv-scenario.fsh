@@ -1,5 +1,5 @@
 // HZV/Selektivvertrag billing scenario
-// Demonstrates: Coverage with HZV class, Contract with hvg-kennung identifier, EncounterPraxisHZV with Reference(Contract), ChargeItem with HZV catalog CodeSystem
+// Demonstrates: Coverage with HZV class, Contract with hvg-kennung identifier, AccountPraxisSchein as billing case, EncounterPraxisHZV as clinical contact, ChargeItem with HZV catalog CodeSystem
 // Key contract: ChargeItem.code.coding.system carries the concrete HZV contract catalog, NOT EBM.
 // HVG-Kennung is modeled as Contract.identifier (system: hvg-kennung NamingSystem), not as Extension.
 
@@ -51,25 +51,20 @@ Usage: #example
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/hvg-datum"
 * extension[=].valueDate = "2024-01-01"
 
-// --- EncounterPraxisHZV: HZV Abrechnungsschein referencing the Contract ---
+// --- EncounterPraxisHZV: HZV clinical contact referencing the HZV Account ---
 
 Instance: ExampleEncounterHzvBayern
 InstanceOf: EncounterPraxisHZV
-Title: "HZV-Abrechnungsschein AOK Bayern"
-Description: "Beispiel-Abrechnungsschein fuer die hausarztzentrierte Versorgung (HZV) AOK Bayern. extension[hzv-rechnungsschema] referenziert den Contract per Reference(ExampleHzvBayernVertrag)."
+Title: "HZV Clinical Contact AOK Bayern"
+Description: "Example clinical contact for HZV AOK Bayern. Encounter.account references the HZV Account; the HZV Coverage carries the contract catalog context."
 Usage: #example
-* identifier[scheinNummer].system = "https://fhir.cognovis.de/praxis/sid/scheinNummer"
-* identifier[scheinNummer].value = "HZV-2026-00099"
 * status = #finished
 * class = http://terminology.hl7.org/CodeSystem/v3-ActCode#AMB "ambulatory"
-* type[praxis-scheinart].coding.system = "https://fhir.cognovis.de/praxis/CodeSystem/scheinart"
-* type[praxis-scheinart].coding.code = #hzv
-* type[praxis-scheinart].coding.display = "HZV"
 * subject = Reference(example-patient)
 * period.start = "2026-04-10"
 * period.end = "2026-04-10"
 * participant[0].individual = Reference(example-practitioner)
-* extension[hzv-rechnungsschema].valueReference = Reference(ExampleHzvBayernVertrag)
+* account[0] = Reference(example-account-schein-hzv)
 
 // --- ChargeItem: HZV service billed against the HZV contract catalog, NOT EBM ---
 

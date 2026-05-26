@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### BREAKING CHANGES
+
+- `EncounterPraxis`: re-scoped to clinical contact. ScheinNummer identifier and Scheinart type slices removed. Use `AccountPraxisSchein` for billing-case identity.
+- `EncounterPraxisHZV`: removed Scheinart fixation. Now represents HZV clinical contact linked via `Encounter.account`.
+- `EXT_HZV.rechnungsschema` retired: `Account.coverage -> Coverage(HZV)` carries the contract.
+
+### Added
+
+- `AccountPraxisSchein`: new Account profile as billing-case anchor (Schein). Carries ScheinNummer, Scheinart, servicePeriod, and coverage.
+
+### Migration
+
+Data migration: aidbox-reset (no live migration required). Move ScheinNummer and Scheinart from Encounter to Account. Create AccountPraxisSchein instances. Set Encounter.account to reference AccountPraxisSchein.
+
 ## [0.67.0] - 2026-05-22
 
 ### Changed

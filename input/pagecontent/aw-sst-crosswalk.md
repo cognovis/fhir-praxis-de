@@ -36,7 +36,7 @@ archive export:
 |---|---|
 | Billing layers | Separates `ChargeItem` service lines, `Claim` submission, `Invoice` fiscal/tax invoices, `ChargeItemDefinition` catalog entries, and plan-library templates. |
 | Diagnoses | Preserves clinical `asserter` and `evidence.detail` links for laboratory, imaging, reports, and AI-assisted review. |
-| Encounters | Models the PVS billing-case/Schein anchor with local Schein identifiers and Scheinart coding. |
+| Encounters | `EncounterPraxis` models a single clinical contact (AMB/HH). `AccountPraxisSchein` anchors the billing case (Schein) with ScheinNummer identifier, Scheinart type, and servicePeriod. |
 | Imaging | Adds IHE IMR, DICOM identifiers, imaging workflow, and radiation-protection traceability. |
 | Tax | Models German invoice tax classification and small-business notice requirements outside AW Claim semantics. |
 | PVS operation | Supports queue management, PVS writeback status, private billing review, multi-coverage routing, and local adapter semantics. |
@@ -64,7 +64,7 @@ of PVS data areas.
 | Organization and location | `PraxisOrganizationDE`, local identifiers and PVS organization types | `KBV_PR_AW_Betriebsstaette`, `KBV_PR_AW_Organisation`, `KBV_PR_AW_Betriebsstaette_Ort`, `KBV_PR_AW_Hausbesuch_Ort`, `KBV_PR_AW_Unfall_Ort` | Crosswalk | Keep local organization profile; add export mappings for BSNR/IK/location roles. |
 | Coverage | `FPDECoverageGKV`, `FPDECoveragePrivat`, multi-coverage Account pattern | `KBV_PR_AW_Krankenversicherungsverhaeltnis` | Crosswalk | Preserve local multi-coverage routing and private billing assignment; map to AW coverage when exporting. |
 | Selective contracts | `Contract`, HZV/HVG extensions, `InsurancePlanDE` where needed | `KBV_PR_AW_Selektivvertrag` | Crosswalk | Keep contract identifier and tariff model; export to AW selective-contract representation. |
-| Encounter / Schein | `EncounterPraxis` as billing-case/Schein anchor | `KBV_PR_AW_Begegnung` | Partial crosswalk | Do not parent. AW Begegnung is a completed consultation; local Schein remains the billing-case anchor. |
+| Encounter / Schein | `EncounterPraxis` (clinical contact, class AMB/HH) + `AccountPraxisSchein` (billing-case anchor, R4 Account) | `KBV_PR_AW_Begegnung` | Partial crosswalk | Do not parent. AW Begegnung is a completed consultation. Local billing-case anchor is `AccountPraxisSchein`; `EncounterPraxis` is the clinical contact referencing the Account. |
 | Home visit | Appointment/Encounter context, local visit semantics where available | `KBV_PR_AW_Hausbesuch`, `KBV_PR_AW_Hausbesuch_Ort` | Crosswalk | If explicit home-visit Encounter profile is needed, align it to AW as export target without changing `EncounterPraxis`. |
 | Stationary treatment | Local administrative workflow where present | `KBV_PR_AW_Stationaere_Behandlung` | Adapter/export crosswalk | No immediate local parent/profile change. |
 | Diagnosis | `PraxisConditionDE`, older `PraxisCondition`, `DauerdiagnoseExt` | `KBV_PR_AW_Diagnose` | Crosswalk, no parent | Keep `asserter` and `evidence.detail`. Map AW flags such as duration and billing relevance on export/import. |
