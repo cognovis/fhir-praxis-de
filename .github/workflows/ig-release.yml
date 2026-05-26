@@ -15,7 +15,7 @@ jobs:
   build-and-release:
     runs-on: [self-hosted, Linux, X64, docker, atlas, fhir-publisher]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
         with:
           fetch-depth: 0
 
@@ -150,7 +150,7 @@ jobs:
     needs: build-and-release
     runs-on: [self-hosted, Linux, ARM64, netbird]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Read version
         id: version

@@ -23,7 +23,7 @@ jobs:
   sync:
     runs-on: [self-hosted, Linux, ARM64, netbird]
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@v5
 
       - name: Update package-list.json on fhir.cognovis.de
         env:
