@@ -4,6 +4,20 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.70.1] - 2026-05-26
+
+### Bug Fixes
+
+- **fpde-kbv**: Correct KBV Diagnosesicherheit code `V` display name from "Verdachtsdiagnose" to "Verdacht auf / zum Ausschluss von" — fixes broken 0.70.0 release that failed the fhir-publish preflight QA gate
+
+### CI/CD
+
+- Run IG validate on main only; drop redundant per-PR run that gated nothing
+- Gate PRs on vendor-leak-check; add paths-ignore denylist for doc/artifact paths
+- Bump `checkout` and `deploy-pages` GitHub Actions to v5 (Node 24); tracking bead fpde-pv0 for remaining actions with no Node 24 release yet (deadline 2026-09-16)
+
+## [0.70.0] - 2026-05-26
+
 ### Bug Fixes
 
 - **fpde-mub**: Fix FSH extension authoring for laterality+certainty Conditions
@@ -11,13 +25,6 @@ All notable changes to this project will be documented in this file.
 - **fpde-hms**: Add ^short/^definition to Wegegeld extension slices per repo convention
 - **fpde-hms**: Remove vendor codename from wegegeld zone ^definition
 - **fpde-hms**: Add missing artifact:related-links to evidence ledger
-
-### CI/CD
-
-- Retrigger checks
-- Retrigger vendor-leak-check
-- Retrigger checks
-- Trigger vendor-leak-check
 
 ### Documentation
 
@@ -33,11 +40,9 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
-- Bump version to 0.69.1
 - **fpde-mub**: Add implementation manifest and evidence ledger
-- **fpde-mub**: Bump version to 0.69.1
-- Record fpde-hms evidence
 - Use vendor-neutral public references
+- Record fpde-hms evidence
 - **fpde-hms**: Update manifest with full 7-commit history
 
 ## [0.69.0] - 2026-05-26
