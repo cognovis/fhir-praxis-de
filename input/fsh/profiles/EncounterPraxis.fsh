@@ -14,6 +14,12 @@ Description: "Clinical contact in ambulatory practice (consultation, home visit)
 * subject 1..1 MS
 * subject only Reference(Patient)
 
+* serviceProvider 1..1 MS
+* serviceProvider only Reference(Organization)
+
+* partOf 0..1 MS
+* partOf only Reference(Encounter)
+
 * period MS
 * period.start MS
 

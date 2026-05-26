@@ -11,6 +11,7 @@ Usage: #example
 * status = #finished
 * class = http://terminology.hl7.org/CodeSystem/v3-ActCode#HH "home health"
 * subject = Reference(example-patient)
+* serviceProvider = Reference(example-praxis)
 * period.start = "2026-04-10"
 * period.end = "2026-04-10"
 * participant[0].individual = Reference(example-practitioner)
