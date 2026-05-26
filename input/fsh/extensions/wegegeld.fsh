@@ -22,7 +22,7 @@ Description: "Local home-visit zone value set mirroring KBV_VS_AW_Hausbesuch_Bes
 Extension: WegegeldHausbesuchExt
 Id: wegegeld-hausbesuch
 Title: "Wegegeld Hausbesuch"
-Description: "Distance and zone for home visits (Wegegeld). Sourced from Patient.EntfernungZurPraxis (distance km) and Schein.Zonenkennzeichen/Patient.Zonenkennzeichen (per ADR-002). MIRA-editable with writeback."
+Description: "Distance and zone for home visits (Wegegeld). Sourced from Patient.EntfernungZurPraxis (distance km) and Schein.Zonenkennzeichen/Patient.Zonenkennzeichen (per ADR-002). Editable by downstream systems with writeback."
 Context: Encounter
 * extension contains distance 0..1 MS and zone 0..1 MS
 * extension[distance].url = "distance"

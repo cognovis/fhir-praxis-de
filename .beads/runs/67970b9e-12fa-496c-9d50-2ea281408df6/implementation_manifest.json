@@ -131,11 +131,16 @@
       "name": "Wegegeld extension slice syntax check",
       "command": "rg -n \"extension\\\\[(distance|zone)\\\\]|extension\\\\[\\\\+\\\\]|extension\\\\[=\\\\]\" input/fsh/extensions/wegegeld.fsh",
       "result": "explicit distance/zone slice paths present; no soft-index matches"
+    },
+    {
+      "name": "vendor leak guard",
+      "command": "scripts/check-ig-vendor-leaks.sh",
+      "result": "passed"
     }
   ],
   "external_resources": [
     "kbv.ita.aws@1.2.0 local package inspection as recorded in bead notes",
-    "polaris-59tj / Polaris ADR-039 as cross-repo decision reference",
+    "external bead 59tj / ADR-039 as cross-repo decision reference",
     "fpde-cj3 and fpde-mub bead records"
   ],
   "scope_changes": [
@@ -143,9 +148,9 @@
     "No SUSHI build was run per explicit bead constraint."
   ],
   "downstream_impacts": [
-    "Polaris/MIRA should treat AccountPraxisSchein as the billing-case anchor and EncounterPraxis as a billing-agnostic contact.",
+    "Downstream adapters should treat AccountPraxisSchein as the billing-case anchor and EncounterPraxis as a billing-agnostic contact.",
     "AW export must decompose AccountPraxisSchein into AW encounter context, coverage, and Claim resources.",
-    "MIRA may edit Wegegeld distance/zone on class=HH EncounterPraxis and write back to the configured source columns."
+    "Downstream editors may edit Wegegeld distance/zone on class=HH EncounterPraxis and write back to the configured source columns."
   ],
   "evidence_refs": [
     "cmd:git-diff-check",
@@ -153,6 +158,7 @@
     "cmd:base-parent-confirmation",
     "cmd:explicit-extension-slices",
     "cmd:git-log",
+    "cmd:vendor-leak-guard",
     "artifact:adr-003",
     "artifact:adr-005",
     "artifact:crosswalk-page",

@@ -57,6 +57,20 @@
       "purpose": "Check remaining worktree state before writing evidence artifacts.",
       "exit_code": 0,
       "observed_result": "Only .beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/ remained untracked before artifact creation."
+    },
+    {
+      "id": "cmd:initial-git-push",
+      "command": "git push -u origin worktree-bead-fpde-hms",
+      "purpose": "Attempt to push the implementation branch.",
+      "exit_code": 1,
+      "observed_result": "Pre-push vendor-leak guard blocked product-specific downstream names in public IG/evidence surfaces. References were changed to vendor-neutral external bead/ADR wording before retry."
+    },
+    {
+      "id": "cmd:vendor-leak-guard",
+      "command": "scripts/check-ig-vendor-leaks.sh",
+      "purpose": "Verify public IG/evidence surfaces use vendor-neutral wording after the push-blocking guard finding.",
+      "exit_code": 0,
+      "observed_result": "Vendor leak guard passed."
     }
   ],
   "skipped_checks": [
@@ -88,7 +102,7 @@
     {
       "id": "artifact:claim-diagnosis-page",
       "path": "input/pagecontent/claim-diagnosis-contract.md",
-      "description": "Related decision links for fpde-cj3, fpde-mub, and polaris-59tj/ADR-039."
+      "description": "Related decision links for fpde-cj3, fpde-mub, and external bead 59tj/ADR-039."
     },
     {
       "id": "artifact:wegegeld-extension",

@@ -3,7 +3,7 @@
 **Status:** Accepted
 **Date:** 2026-05-26
 **Deciders:** Malte, Codex
-**Affected systems:** `fhir-praxis-de`, downstream PVS adapters, downstream MIRA/Polaris mapping, AW-SST export tooling
+**Affected systems:** `fhir-praxis-de`, downstream PVS adapters, downstream mapping, AW-SST export tooling
 
 ## Context
 
@@ -19,7 +19,7 @@ lifecycles:
 - HZV, HVG, and DMP enrollment describe a care-program relationship that may
   cover many contacts and billing cases.
 
-The cross-repo keystone is Polaris bead `polaris-59tj` and Polaris ADR-039. The
+The cross-repo keystone is external bead `59tj` and external ADR-039. The
 matching `fhir-praxis-de` implementation work is tracked by `fpde-cj3`
 (`AccountPraxisSchein` plus `EncounterPraxis` re-scope) and `fpde-mub`
 (`Claim.diagnosis` quarterly diagnosis contract).
@@ -41,7 +41,7 @@ similar program.
 For HZV/HVG enrollment, this IG uses base R4 `EpisodeOfCare` with documented
 type, status, period, managing organization, care manager, and existing HZV/HVG
 extensions where needed. This ADR does not introduce an HZV-only
-`EpisodeOfCarePraxisHZV` profile for MIRA/Polaris. A future generic
+`EpisodeOfCarePraxisHZV` profile for downstream adapters. A future generic
 `PraxisProgramEnrollment` profile may be considered if multiple program types
 need shared constraints that cannot be expressed clearly with base
 `EpisodeOfCare` conventions.
@@ -118,7 +118,7 @@ operational profiles.
 
 ### Introduce an HZV-only EpisodeOfCarePraxisHZV profile now
 
-Rejected. Base R4 `EpisodeOfCare` is sufficient for current MIRA/Polaris HZV/HVG
+Rejected. Base R4 `EpisodeOfCare` is sufficient for current downstream HZV/HVG
 enrollment needs when paired with type/status/period/organization/care-manager
 conventions and existing HZV/HVG extensions. If a reusable program-enrollment
 constraint set becomes necessary, the next profile should be generic rather than
@@ -142,5 +142,5 @@ other care programs need shared profile constraints beyond base
 - Claim diagnosis contract page: `input/pagecontent/claim-diagnosis-contract.md`
 - `fpde-cj3`: AccountPraxisSchein profile and EncounterPraxis clinical-contact re-scope
 - `fpde-mub`: Claim.diagnosis quarterly Behandlungsdiagnosen and KBV-AWS diagnosis certainty mapping
-- `polaris-59tj` / Polaris ADR-039: downstream Account-centered billing-case decision
-- `polaris-sa2j`: Wegegeld billing code remains ChargeItem/Claim.item
+- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision
+- External service-line bead: Wegegeld billing code remains ChargeItem/Claim.item

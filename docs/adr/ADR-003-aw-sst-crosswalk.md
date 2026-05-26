@@ -174,4 +174,4 @@ would miss useful billing and archive structure, especially around Claim.
   `docs/adr/ADR-005-account-centered-billing-case-model.md`
 - `fpde-cj3`: AccountPraxisSchein profile and EncounterPraxis clinical-contact re-scope
 - `fpde-mub`: Claim.diagnosis quarterly diagnosis contract
-- `polaris-59tj` / Polaris ADR-039: downstream Account-centered billing-case decision
+- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision
