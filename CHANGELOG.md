@@ -13,6 +13,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - `AccountPraxisSchein`: new Account profile as billing-case anchor (Schein). Carries ScheinNummer, Scheinart, servicePeriod, and coverage.
+- `EncounterPraxis`: `serviceProvider` 1..1 MS (Reference to Organisation/BSNR) and `partOf` 0..1 MS added for AW_Begegnung lean alignment.
 
 ### Migration
 
