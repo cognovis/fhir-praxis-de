@@ -1,0 +1,165 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-hms",
+  "acceptance_criteria": [
+    {
+      "id": "AK-1",
+      "status": "done",
+      "changed_files": ["docs/adr/ADR-005-account-centered-billing-case-model.md"],
+      "evidence_refs": ["cmd:git-diff-check", "cmd:git-log", "artifact:adr-005"]
+    },
+    {
+      "id": "AK-2",
+      "status": "done",
+      "changed_files": [
+        "docs/adr/ADR-003-aw-sst-crosswalk.md",
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md"
+      ],
+      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-003", "artifact:crosswalk-page"]
+    },
+    {
+      "id": "AK-3",
+      "status": "done",
+      "changed_files": ["docs/adr/ADR-003-aw-sst-crosswalk.md", "docs/adr/ADR-005-account-centered-billing-case-model.md"],
+      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-003"]
+    },
+    {
+      "id": "AK-4",
+      "status": "done",
+      "changed_files": ["input/pagecontent/aw-sst-crosswalk.md"],
+      "evidence_refs": ["cmd:git-diff-check", "artifact:crosswalk-page"]
+    },
+    {
+      "id": "AK-5",
+      "status": "done",
+      "changed_files": [
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md"
+      ],
+      "evidence_refs": ["cmd:no-aw-parent", "cmd:base-parent-confirmation", "artifact:adr-005", "artifact:crosswalk-page"]
+    },
+    {
+      "id": "AK-6",
+      "status": "done",
+      "changed_files": [
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md",
+        "input/pagecontent/claim-diagnosis-contract.md"
+      ],
+      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-005", "artifact:crosswalk-page", "artifact:claim-diagnosis-page"]
+    },
+    {
+      "id": "AK-7",
+      "status": "done",
+      "changed_files": [
+        "docs/adr/ADR-003-aw-sst-crosswalk.md",
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md",
+        "input/pagecontent/claim-diagnosis-contract.md"
+      ],
+      "evidence_refs": ["cmd:git-diff-check", "artifact:related-links"]
+    },
+    {
+      "id": "AK-8",
+      "status": "done",
+      "changed_files": [
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/fsh/profiles/encounter-praxis-hzv.fsh"
+      ],
+      "evidence_refs": ["cmd:git-diff-check", "artifact:adr-005", "artifact:encounter-hzv-profile"]
+    },
+    {
+      "id": "AK-9",
+      "status": "done",
+      "changed_files": [
+        "input/fsh/extensions/wegegeld.fsh",
+        "input/fsh/profiles/EncounterPraxis.fsh",
+        "input/pagecontent/aw-sst-crosswalk.md",
+        "docs/adr/ADR-005-account-centered-billing-case-model.md"
+      ],
+      "evidence_refs": ["cmd:explicit-extension-slices", "cmd:git-diff-check", "artifact:wegegeld-extension", "artifact:encounter-profile"]
+    },
+    {
+      "id": "AK-10",
+      "status": "done",
+      "changed_files": [
+        "docs/adr/ADR-005-account-centered-billing-case-model.md",
+        "input/pagecontent/aw-sst-crosswalk.md"
+      ],
+      "evidence_refs": ["cmd:base-parent-confirmation", "artifact:encounter-profile"]
+    }
+  ],
+  "changed_files": [
+    "docs/adr/ADR-003-aw-sst-crosswalk.md",
+    "docs/adr/ADR-005-account-centered-billing-case-model.md",
+    "input/pagecontent/aw-sst-crosswalk.md",
+    "input/pagecontent/claim-diagnosis-contract.md",
+    "input/fsh/extensions/wegegeld.fsh",
+    "input/fsh/profiles/EncounterPraxis.fsh",
+    "input/fsh/profiles/encounter-praxis-hzv.fsh",
+    ".beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/implementation_manifest.json",
+    ".beads/runs/67970b9e-12fa-496c-9d50-2ea281408df6/evidence_ledger.json"
+  ],
+  "commits": [
+    {
+      "sha": "a0c4b9a",
+      "subject": "docs: record account-centered billing model"
+    },
+    {
+      "sha": "0241d70",
+      "subject": "feat: add Wegegeld home visit extension"
+    }
+  ],
+  "tests": [
+    {
+      "name": "git diff whitespace check",
+      "command": "git diff --check HEAD~2..HEAD",
+      "result": "passed"
+    },
+    {
+      "name": "AW parent inheritance grep",
+      "command": "rg -n \"^Parent: KBV_PR_AW_\" input/fsh",
+      "result": "no matches; rg exit code 1"
+    },
+    {
+      "name": "Account and Encounter base parent confirmation",
+      "command": "rg -n \"^Profile: (AccountPraxisSchein|EncounterPraxis)$|^Parent: (Account|Encounter)$\" input/fsh/profiles/account-praxis-schein.fsh input/fsh/profiles/EncounterPraxis.fsh",
+      "result": "AccountPraxisSchein parents Account; EncounterPraxis parents Encounter"
+    },
+    {
+      "name": "Wegegeld extension slice syntax check",
+      "command": "rg -n \"extension\\\\[(distance|zone)\\\\]|extension\\\\[\\\\+\\\\]|extension\\\\[=\\\\]\" input/fsh/extensions/wegegeld.fsh",
+      "result": "explicit distance/zone slice paths present; no soft-index matches"
+    }
+  ],
+  "external_resources": [
+    "kbv.ita.aws@1.2.0 local package inspection as recorded in bead notes",
+    "polaris-59tj / Polaris ADR-039 as cross-repo decision reference",
+    "fpde-cj3 and fpde-mub bead records"
+  ],
+  "scope_changes": [
+    "AK-9 was implemented in this bead rather than split to a follow-up.",
+    "No SUSHI build was run per explicit bead constraint."
+  ],
+  "downstream_impacts": [
+    "Polaris/MIRA should treat AccountPraxisSchein as the billing-case anchor and EncounterPraxis as a billing-agnostic contact.",
+    "AW export must decompose AccountPraxisSchein into AW encounter context, coverage, and Claim resources.",
+    "MIRA may edit Wegegeld distance/zone on class=HH EncounterPraxis and write back to the configured source columns."
+  ],
+  "evidence_refs": [
+    "cmd:git-diff-check",
+    "cmd:no-aw-parent",
+    "cmd:base-parent-confirmation",
+    "cmd:explicit-extension-slices",
+    "cmd:git-log",
+    "artifact:adr-003",
+    "artifact:adr-005",
+    "artifact:crosswalk-page",
+    "artifact:claim-diagnosis-page",
+    "artifact:wegegeld-extension",
+    "artifact:encounter-profile",
+    "artifact:encounter-hzv-profile",
+    "artifact:related-links"
+  ]
+}
