@@ -14,11 +14,14 @@ AI provenance (EU AI Act), and administrative workflows.
 ## Session Start
 
 Always load these skills at the beginning of every session:
-- `/samurai-skills:aidbox-ig-development` — IG development lifecycle, validation, IG Publisher, SUSHI/FSH
-- `/samurai-skills:aidbox` — Aidbox FHIR API, $validate, $fhir-package-install
-- `/samurai-skills:aidbox-sql-on-fhir` — SQL on FHIR, ViewDefinitions, $materialize
-- `/samurai-skills:hs-search` — Search health-samurai.io docs, blog, examples
-- `/samurai-skills:atomic-generate-types` — FHIR type generation with @atomic-ehr/codegen
+- `/aidbox-ig-development` - IG development lifecycle, validation, IG Publisher, SUSHI/FSH
+- `/aidbox` - Aidbox FHIR API, $validate, $fhir-package-install
+- `/aidbox-sql-on-fhir` - SQL on FHIR, ViewDefinitions, $materialize
+- `/hs-search` - Search health-samurai.io docs, blog, examples
+- `/atomic-generate-types` - FHIR type generation with @atomic-ehr/codegen
+- `/fhir-validation` - FHIR Schema, $validate responses, and OperationOutcome debugging
+- `/fhir-publish-ig` - trusted preflight, release tag handoff, and publish/watch workflows
+- `/fhir-sync-versions` - downstream fhir-* version pin reconciliation
 
 ## Build
 
