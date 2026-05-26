@@ -6,6 +6,18 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
+- **ADR-005: Account-centered billing case model** (`docs/adr/ADR-005-account-centered-billing-case-model.md`): Formal architectural decision recording the three-layer model — `AccountPraxisSchein` as billing-case anchor (Schein), `EncounterPraxis` as clinical contact, and base R4 `EpisodeOfCare` as care-program enrollment (HZV, HVG, DMP). Rejected alternatives documented: Schein-as-Encounter, EpisodeOfCare-for-billing-case, AW-SST parent inheritance, and premature HZV-only profile.
+- **`WegegeldHausbesuchExt` extension** (`input/fsh/extensions/wegegeld.fsh`): New complex extension on `EncounterPraxis` for home-visit contacts (`class = HH`). Carries `distance` (Quantity in km, sourced from `Patient.EntfernungZurPraxis`) and `zone` (Coding from `PraxisHausbesuchBesuchszonenVS`, sourced from `Schein.Zonenkennzeichen` or `Patient.Zonenkennzeichen`). Wegegeld billing codes (WT2 etc.) remain on `ChargeItem` / `Claim.item`, not on the extension.
+- **`PraxisHausbesuchBesuchszonenCS` / `PraxisHausbesuchBesuchszonenVS`**: New CodeSystem and ValueSet mirroring KBV AW home-visit zone codes (Zone A 0–2 km, Zone B 2–5 km, Zone C > 5 km) for Wegegeld zone classification.
+
+### Changed
+
+- **ADR-003 amended** (`docs/adr/ADR-003-aw-sst-crosswalk.md`): Rationale for `EncounterPraxis → KBV_PR_AW_Begegnung` crosswalk updated to reflect ADR-005: `EncounterPraxis` is now explicitly the clinical contact (not the billing anchor); `AccountPraxisSchein` is the Schein anchor. References to ADR-005 and `fpde-cj3` added.
+- **AW-SST crosswalk page** (`input/pagecontent/aw-sst-crosswalk.md`): `EncounterPraxis` row split into two entries — clinical contact crosswalk to `KBV_PR_AW_Begegnung`, and a new `AccountPraxisSchein` row documenting that no `KBV_PR_AW_Account` equivalent exists and that AW export decomposes the Account layer into encounter context, coverage, and per-area Claims. Home-visit Wegegeld row added referencing `WegegeldHausbesuchExt`. ADR-005 link added to decision section.
+- **Claim diagnosis contract page** (`input/pagecontent/claim-diagnosis-contract.md`): Added ADR-005 to related decisions section; cross-references to downstream Account-centered model recorded.
+
+### Added
+
 - **Claim.diagnosis quarter-diagnosis contract**: All five Praxis Claim profiles (`PraxisGkvClaim`, `PraxisPrivateClaim`, `PraxisBgClaim`, `PraxisSelectiveContractClaim`, `PraxisPreliminaryBillingClaim`) now carry quarterly `Behandlungsdiagnosen` via `Claim.diagnosis`, referencing source `PraxisCondition` resources via `diagnosisReference`.
   - Diagnosesicherheit (`G`/`V`/`Z`/`A`) follows KBV-AWS semantics mapped to `Condition.verificationStatus` + `Condition.clinicalStatus`.
   - Deduplication key is the exact billing tuple (ICD code + Diagnosesicherheit + Seitenlokalisation + Mehrfachcodierungskennzeichen) — naked-ICD dedup is explicitly prohibited; no generic `G > V > Z > A` precedence rule applies.
