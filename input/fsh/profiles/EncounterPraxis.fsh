@@ -7,9 +7,9 @@ Description: "Clinical contact in ambulatory practice (consultation, home visit)
 * status 1..1 MS
 
 * class 1..1 MS
-* class from http://terminology.hl7.org/ValueSet/v3-ActEncounterCode (extensible)
+* class from https://fhir.cognovis.de/praxis/ValueSet/encounter-praxis-class (required)
 * class ^short = "AMB | HH — ambulatory contact or home visit"
-* class ^comment = "For ambulatory practice contacts, use AMB (ambulatory) or HH (home health / home visit). Other v3 encounter classes (IMP, EMER, etc.) are outside scope for this clinical contact profile."
+* class ^comment = "For ambulatory practice contacts, use AMB (ambulatory) or HH (home health / home visit). Binding is required to enforce clinical contact scope."
 
 * subject 1..1 MS
 * subject only Reference(Patient)
