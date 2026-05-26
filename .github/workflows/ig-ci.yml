@@ -1,11 +1,27 @@
 name: IG CI — Validate & Build
 
 on:
+  # validate is the release gate: auto-tag (release tag) and deploy (GitHub
+  # Pages) both `needs: validate`. It therefore runs only on main, not per PR.
+  # PRs are gated by the independent vendor-leak-check workflow (`check`), which
+  # is the sole required status check. The full IG Publisher validation is
+  # intentionally not re-run on every PR — it is a scarce self-hosted-runner job
+  # and provided no merge gate (it was never a required check).
+  #
+  # paths-ignore is a denylist (not an allowlist) on purpose: because this push
+  # trigger also drives the Pages deploy, anything that is not explicitly listed
+  # here still triggers a rebuild. That way narrative/image/config changes can
+  # never silently skip a republish; only clearly IG-irrelevant files are ignored.
   push:
     branches: [main]
     tags-ignore: ['v*']
-  pull_request:
-    branches: [main]
+    paths-ignore:
+      - 'CHANGELOG.md'
+      - 'README.md'
+      - 'CLAUDE.md'
+      - 'AGENTS.md'
+      - 'LICENSE'
+      - 'docs/**'
 
 permissions:
   contents: write
