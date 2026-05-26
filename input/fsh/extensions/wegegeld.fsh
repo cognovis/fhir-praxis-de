@@ -33,7 +33,7 @@ Context: Encounter
 * extension[distance].valueQuantity.system = "http://unitsofmeasure.org"
 * extension[distance].valueQuantity.code = #km
 * extension[zone] ^short = "Home visit Besuchszone"
-* extension[zone] ^definition = "Zone coding for Wegegeld, sourced from Schein.Zonenkennzeichen with Patient.Zonenkennzeichen as default per ADR-002. MIRA-editable with writeback to the configured source columns."
+* extension[zone] ^definition = "Zone coding for Wegegeld, sourced from Schein.Zonenkennzeichen with Patient.Zonenkennzeichen as default per ADR-002. Editable by downstream systems with writeback to the configured source columns per ADR-002."
 * extension[zone].url = "zone"
 * extension[zone].value[x] only Coding
 * extension[zone].valueCoding from PraxisHausbesuchBesuchszonenVS (required)
