@@ -1,0 +1,25 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-mub",
+  "commands": [
+    {
+      "command": "git diff --stat",
+      "purpose": "verify changed files",
+      "exit_code": 0,
+      "observed_result": "8 files changed, 243 insertions"
+    },
+    {
+      "command": "git commit",
+      "purpose": "commit implementation",
+      "exit_code": 0,
+      "observed_result": "commit f4cd9ef936f9acd940e70efd276f9d9baaa72491"
+    }
+  ],
+  "skipped_checks": [
+    {
+      "check": "SUSHI build",
+      "reason": "CI only; no local SUSHI installation in worktree"
+    }
+  ],
+  "artifacts": []
+}

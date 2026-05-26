@@ -1,0 +1,59 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-mub",
+  "run_id": "c4a3a56f-9c38-4dc7-b246-ef87c3fabd14",
+  "acceptance_criteria": [
+    {
+      "id": "AK-1",
+      "status": "done",
+      "changed_files": ["input/fsh/profiles/praxis-gkv-claim.fsh", "input/fsh/profiles/praxis-private-claim.fsh", "input/fsh/profiles/praxis-bg-claim.fsh", "input/fsh/profiles/praxis-selective-contract-claim.fsh", "input/fsh/profiles/praxis-preliminary-billing-claim.fsh"],
+      "evidence_refs": ["Claim.diagnosis 0..* MS on all 5 profiles, diagnosisReference -> PraxisCondition"]
+    },
+    {
+      "id": "AK-2",
+      "status": "done",
+      "changed_files": ["input/pagecontent/claim-diagnosis-contract.md"],
+      "evidence_refs": ["KBV-AWS table in claim-diagnosis-contract.md: G->confirmed/active, V->provisional/active, Z->confirmed/resolved, A->refuted"]
+    },
+    {
+      "id": "AK-3",
+      "status": "done",
+      "changed_files": ["input/pagecontent/claim-diagnosis-contract.md"],
+      "evidence_refs": ["Billing tuple section: ICD+Diagnosesicherheit+Seitenlokalisation+Mehrfachcodierungskennzeichen; explicit: G vs V and R vs L must not collapse; no generic precedence"]
+    },
+    {
+      "id": "AK-4",
+      "status": "done",
+      "changed_files": ["input/pagecontent/claim-diagnosis-contract.md"],
+      "evidence_refs": ["Implementation contract: source Conditions retained; rule predicates derived, not deletions"]
+    },
+    {
+      "id": "AK-5",
+      "status": "done",
+      "changed_files": ["input/pagecontent/claim-diagnosis-contract.md"],
+      "evidence_refs": ["Z meaning section: Z is resolved/state-after for specific tuple; Dauerdiagnose handled separately"]
+    },
+    {
+      "id": "AK-6",
+      "status": "done",
+      "changed_files": ["input/fsh/examples/example-billing-claims.fsh"],
+      "evidence_refs": ["6 source Conditions + PraxisPreliminaryBillingClaimExample with 5 diagnosis entries: E11.90 G, E11.90 V, M54.4 R, M54.4 L, M54.4 G (exact-tuple collapse)"]
+    }
+  ],
+  "changed_files": [
+    "input/fsh/profiles/praxis-gkv-claim.fsh",
+    "input/fsh/profiles/praxis-private-claim.fsh",
+    "input/fsh/profiles/praxis-bg-claim.fsh",
+    "input/fsh/profiles/praxis-selective-contract-claim.fsh",
+    "input/fsh/profiles/praxis-preliminary-billing-claim.fsh",
+    "input/fsh/examples/example-billing-claims.fsh",
+    "input/pagecontent/claim-diagnosis-contract.md",
+    "sushi-config.yaml"
+  ],
+  "commits": ["f4cd9ef936f9acd940e70efd276f9d9baaa72491"],
+  "tests": [],
+  "external_resources": [],
+  "scope_changes": [],
+  "downstream_impacts": ["polaris: implements resolution contract documented in claim-diagnosis-contract.md"],
+  "evidence_refs": ["SUSHI build (CI)", "profile constraints", "example instances"]
+}
