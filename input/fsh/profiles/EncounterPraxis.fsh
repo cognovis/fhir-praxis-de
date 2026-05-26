@@ -29,3 +29,7 @@ Description: "Clinical contact in ambulatory practice (consultation, home visit)
 
 * account 0..* MS
 * account only Reference(AccountPraxisSchein)
+
+* extension contains WegegeldHausbesuchExt named wegegeldHausbesuch 0..1 MS
+* extension[wegegeldHausbesuch] ^short = "Home-visit distance and zone for class=HH contacts"
+* extension[wegegeldHausbesuch] ^comment = "Use only for home-visit contacts (class=HH). Distance is sourced from Patient.EntfernungZurPraxis in km. Zone is sourced from Schein.Zonenkennzeichen, with Patient.Zonenkennzeichen as the default. MIRA edits write back to those source columns per ADR-002. The Wegegeld billing code remains ChargeItem/Claim.item."
