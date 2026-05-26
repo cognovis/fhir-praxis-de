@@ -328,7 +328,7 @@ jobs:
 
       - name: Upload QA Report artifact
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: qa-report
           path: |
@@ -336,7 +336,7 @@ jobs:
             output/qa/
 
       - name: Upload package artifact
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: ig-package
           path: |
@@ -345,7 +345,7 @@ jobs:
 
       - name: Setup Pages
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: actions/configure-pages@v5
+        uses: actions/configure-pages@v6
 
       - name: Upload Pages artifact
         if: github.ref == 'refs/heads/main' && github.event_name == 'push'

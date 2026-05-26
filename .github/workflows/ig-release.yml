@@ -94,7 +94,7 @@ jobs:
 
       - name: Upload fhir-publish diagnostics
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v6
         with:
           name: fhir-publish-release-diagnostics
           path: |
@@ -104,7 +104,7 @@ jobs:
             output/qa/
 
       - name: Create GitHub Release
-        uses: softprops/action-gh-release@v2
+        uses: softprops/action-gh-release@v3
         with:
           tag_name: ${{ github.ref_name }}
           name: ${{ github.ref_name }}
