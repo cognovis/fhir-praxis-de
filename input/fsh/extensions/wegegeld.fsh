@@ -25,11 +25,15 @@ Title: "Wegegeld Hausbesuch"
 Description: "Distance and zone for home visits (Wegegeld). Sourced from Patient.EntfernungZurPraxis (distance km) and Schein.Zonenkennzeichen/Patient.Zonenkennzeichen (per ADR-002). Editable by downstream systems with writeback."
 Context: Encounter
 * extension contains distance 0..1 MS and zone 0..1 MS
+* extension[distance] ^short = "Home visit distance in kilometres"
+* extension[distance] ^definition = "Distance to the patient home in km, sourced from Patient.EntfernungZurPraxis. Used for Wegegeld billing code determination per EBM chapter 40."
 * extension[distance].url = "distance"
 * extension[distance].value[x] only Quantity
 * extension[distance].valueQuantity.unit = "km"
 * extension[distance].valueQuantity.system = "http://unitsofmeasure.org"
 * extension[distance].valueQuantity.code = #km
+* extension[zone] ^short = "Home visit Besuchszone"
+* extension[zone] ^definition = "Zone coding for Wegegeld, sourced from Schein.Zonenkennzeichen with Patient.Zonenkennzeichen as default per ADR-002. MIRA-editable with writeback to the configured source columns."
 * extension[zone].url = "zone"
 * extension[zone].value[x] only Coding
 * extension[zone].valueCoding from PraxisHausbesuchBesuchszonenVS (required)
