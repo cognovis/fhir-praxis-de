@@ -37,7 +37,7 @@
       "id": "AK-6",
       "status": "done",
       "changed_files": ["input/fsh/examples/example-billing-claims.fsh"],
-      "evidence_refs": ["6 source Conditions + PraxisPreliminaryBillingClaimExample with 5 diagnosis entries: E11.90 G, E11.90 V, M54.4 R, M54.4 L, M54.4 G (exact-tuple collapse)"]
+      "evidence_refs": ["6 source Conditions + PraxisPreliminaryBillingClaimExample with 5 diagnosis entries: E11.90 G, E11.90 V, M54.4 R, M54.4 L, M54.4 G (exact-tuple collapse)", "M54.4 laterality Conditions (Right/Left) now emit the FULL billing tuple: extension[seitenlokalisation] authored with explicit .url + .valueCoding instead of extension[+] soft-index, so diagnosesicherheit#G is no longer clobbered. Verified in generated JSON: both icd-10-gm-diagnosesicherheit and seitenlokalisation extensions present on each Condition."]
     }
   ],
   "changed_files": [
@@ -50,10 +50,16 @@
     "input/pagecontent/claim-diagnosis-contract.md",
     "sushi-config.yaml"
   ],
-  "commits": ["f4cd9ef936f9acd940e70efd276f9d9baaa72491"],
-  "tests": [],
+  "commits": ["f4cd9ef936f9acd940e70efd276f9d9baaa72491", "PENDING_LATERALITY_FIX"],
+  "tests": [
+    {
+      "name": "sushi .",
+      "result": "pass",
+      "detail": "0 Errors, 0 Warnings (SUSHI v3.19.0). Generated JSON confirms both diagnosesicherheit and seitenlokalisation extensions emit on M54.4 laterality Conditions."
+    }
+  ],
   "external_resources": [],
   "scope_changes": [],
   "downstream_impacts": ["polaris: implements resolution contract documented in claim-diagnosis-contract.md"],
-  "evidence_refs": ["SUSHI build (CI)", "profile constraints", "example instances"]
+  "evidence_refs": ["SUSHI build verified locally (0 Errors, 0 Warnings)", "profile constraints", "example instances", "laterality+certainty extension authoring fix verified in generated Condition JSON"]
 }

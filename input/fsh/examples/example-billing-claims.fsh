@@ -93,8 +93,8 @@ Usage: #example
 * code.coding[icd10gm].code = #M54.4
 * code.coding[icd10gm].display = "Lumboischialgie"
 * code.coding[icd10gm].extension[diagnosesicherheit].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_DIAGNOSESICHERHEIT#G "gesicherte Diagnose"
-* code.coding[icd10gm].extension[+].url = "http://fhir.de/StructureDefinition/seitenlokalisation"
-* code.coding[icd10gm].extension[=].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION#R "rechts"
+* code.coding[icd10gm].extension[seitenlokalisation].url = "http://fhir.de/StructureDefinition/seitenlokalisation"
+* code.coding[icd10gm].extension[seitenlokalisation].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION#R "rechts"
 * subject = Reference(BillingClaimPatientExample)
 
 Instance: BillingClaimQuarterBackPainLeftCondition
@@ -108,8 +108,8 @@ Usage: #example
 * code.coding[icd10gm].code = #M54.4
 * code.coding[icd10gm].display = "Lumboischialgie"
 * code.coding[icd10gm].extension[diagnosesicherheit].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_DIAGNOSESICHERHEIT#G "gesicherte Diagnose"
-* code.coding[icd10gm].extension[+].url = "http://fhir.de/StructureDefinition/seitenlokalisation"
-* code.coding[icd10gm].extension[=].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION#L "links"
+* code.coding[icd10gm].extension[seitenlokalisation].url = "http://fhir.de/StructureDefinition/seitenlokalisation"
+* code.coding[icd10gm].extension[seitenlokalisation].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_SEITENLOKALISATION#L "links"
 * subject = Reference(BillingClaimPatientExample)
 
 // Exact duplicate tuple sources remain as source Conditions, but collapse to one Claim.diagnosis entry.
