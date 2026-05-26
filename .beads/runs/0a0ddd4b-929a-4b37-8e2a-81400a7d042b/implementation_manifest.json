@@ -4,7 +4,7 @@
   "acceptance_criteria": [
     {
       "id": "AK-1",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/profiles/account-praxis-schein.fsh"
       ],
@@ -14,7 +14,7 @@
     },
     {
       "id": "AK-2",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/profiles/account-praxis-schein.fsh",
         "input/fsh/examples/example-account-schein-gkv.fsh",
@@ -26,7 +26,7 @@
     },
     {
       "id": "AK-3",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/profiles/account-praxis-schein.fsh",
         "input/fsh/examples/example-account-schein-gkv.fsh",
@@ -38,7 +38,7 @@
     },
     {
       "id": "AK-4",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/profiles/EncounterPraxis.fsh",
         "input/fsh/examples/example-encounter-ambulant.fsh",
@@ -50,7 +50,7 @@
     },
     {
       "id": "AK-5",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/profiles/EncounterPraxis.fsh",
         "input/fsh/examples/example-encounter-ambulant.fsh",
@@ -64,7 +64,7 @@
     },
     {
       "id": "AK-6",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/profiles/encounter-praxis-hzv.fsh",
         "input/fsh/extensions/hzv-rechnungsschema.fsh",
@@ -77,7 +77,7 @@
     },
     {
       "id": "AK-7",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "CHANGELOG.md"
       ],
@@ -87,7 +87,7 @@
     },
     {
       "id": "AK-8",
-      "status": "passed",
+      "status": "done",
       "changed_files": [
         "input/fsh/examples/example-account-schein-gkv.fsh",
         "input/fsh/examples/example-account-schein-hzv.fsh",
