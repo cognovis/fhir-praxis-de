@@ -4,69 +4,153 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
-### Added
-
-- **ADR-005: Account-centered billing case model** (`docs/adr/ADR-005-account-centered-billing-case-model.md`): Formal architectural decision recording the three-layer model — `AccountPraxisSchein` as billing-case anchor (Schein), `EncounterPraxis` as clinical contact, and base R4 `EpisodeOfCare` as care-program enrollment (HZV, HVG, DMP). Rejected alternatives documented: Schein-as-Encounter, EpisodeOfCare-for-billing-case, AW-SST parent inheritance, and premature HZV-only profile.
-- **`WegegeldHausbesuchExt` extension** (`input/fsh/extensions/wegegeld.fsh`): New complex extension on `EncounterPraxis` for home-visit contacts (`class = HH`). Carries `distance` (Quantity in km, sourced from `Patient.EntfernungZurPraxis`) and `zone` (Coding from `PraxisHausbesuchBesuchszonenVS`, sourced from `Schein.Zonenkennzeichen` or `Patient.Zonenkennzeichen`). Wegegeld billing codes (WT2 etc.) remain on `ChargeItem` / `Claim.item`, not on the extension.
-- **`PraxisHausbesuchBesuchszonenCS` / `PraxisHausbesuchBesuchszonenVS`**: New CodeSystem and ValueSet mirroring KBV AW home-visit zone codes (Zone A 0–2 km, Zone B 2–5 km, Zone C > 5 km) for Wegegeld zone classification.
-
-### Changed
-
-- **ADR-003 amended** (`docs/adr/ADR-003-aw-sst-crosswalk.md`): Rationale for `EncounterPraxis → KBV_PR_AW_Begegnung` crosswalk updated to reflect ADR-005: `EncounterPraxis` is now explicitly the clinical contact (not the billing anchor); `AccountPraxisSchein` is the Schein anchor. References to ADR-005 and `fpde-cj3` added.
-- **AW-SST crosswalk page** (`input/pagecontent/aw-sst-crosswalk.md`): `EncounterPraxis` row split into two entries — clinical contact crosswalk to `KBV_PR_AW_Begegnung`, and a new `AccountPraxisSchein` row documenting that no `KBV_PR_AW_Account` equivalent exists and that AW export decomposes the Account layer into encounter context, coverage, and per-area Claims. Home-visit Wegegeld row added referencing `WegegeldHausbesuchExt`. ADR-005 link added to decision section.
-- **Claim diagnosis contract page** (`input/pagecontent/claim-diagnosis-contract.md`): Added ADR-005 to related decisions section; cross-references to downstream Account-centered model recorded.
-
-### Added
-
-- **Claim.diagnosis quarter-diagnosis contract**: All five Praxis Claim profiles (`PraxisGkvClaim`, `PraxisPrivateClaim`, `PraxisBgClaim`, `PraxisSelectiveContractClaim`, `PraxisPreliminaryBillingClaim`) now carry quarterly `Behandlungsdiagnosen` via `Claim.diagnosis`, referencing source `PraxisCondition` resources via `diagnosisReference`.
-  - Diagnosesicherheit (`G`/`V`/`Z`/`A`) follows KBV-AWS semantics mapped to `Condition.verificationStatus` + `Condition.clinicalStatus`.
-  - Deduplication key is the exact billing tuple (ICD code + Diagnosesicherheit + Seitenlokalisation + Mehrfachcodierungskennzeichen) — naked-ICD dedup is explicitly prohibited; no generic `G > V > Z > A` precedence rule applies.
-  - `Z` (Zustand nach) means resolved/state-after for the specific tuple, not a generic Dauerdiagnose marker.
-  - Source Conditions are retained as clinical documentation and never deleted or merged for Claim projection purposes.
-- **Claim Diagnosis Contract page** (`claim-diagnosis-contract.md`): new Architecture section page documenting the carrier, billing-tuple uniqueness semantics, Diagnosesicherheit resolution table, and downstream implementation contract.
-
-### BREAKING CHANGES
-
-- `EncounterPraxis`: re-scoped to clinical contact. ScheinNummer identifier and Scheinart type slices removed. Use `AccountPraxisSchein` for billing-case identity.
-- `EncounterPraxisHZV`: removed Scheinart fixation. Now represents HZV clinical contact linked via `Encounter.account`.
-- `EXT_HZV.rechnungsschema` retired: `Account.coverage -> Coverage(HZV)` carries the contract.
-
-### Added
-
-- `AccountPraxisSchein`: new Account profile as billing-case anchor (Schein). Carries ScheinNummer, Scheinart, servicePeriod, and coverage.
-- `EncounterPraxis`: `serviceProvider` 1..1 MS (Reference to Organisation/BSNR) and `partOf` 0..1 MS added for AW_Begegnung lean alignment.
-
-### Migration
-
-Data migration: aidbox-reset (no live migration required). Move ScheinNummer and Scheinart from Encounter to Account. Create AccountPraxisSchein instances. Set Encounter.account to reference AccountPraxisSchein.
-
-## [0.67.0] - 2026-05-22
-
-### Changed
-
-- **fpde-ehh**: Remove local `KvFachgruppeCS`/`KvFachgruppeVS` terminology and bind Fachgruppe/WBO surfaces directly to KBV BAR2-WBO via `de.cognovis.terminology.kbv`.
-- **fpde-ehh**: Correct QA-blocking examples: use official WOP displays/codes and model HZV through local `ScheinartCS#hzv` instead of invalid KBV Scheinart `#50`.
-
-## [0.66.1] - 2026-05-22
-
-### Changed
-
-- **fhir-term-d4z.5**: Flip `de.cognovis.terminology.imaging` dependency pin from `2026.0.0` to `1.0.0` in `sushi-config.yaml` (ADR-006 Step 4). Update CI workflow pre-fetch scripts to fetch `imaging@1.0.0`.
-
-
 ### Bug Fixes
 
-- Remove vendor-specific bead IDs from historical CHANGELOG entries
-- **fpde-46j**: Correct DMP canonical — Coverage.dmpIndicator tracked in downstream adapter
+- **fpde-mub**: Fix FSH extension authoring for laterality+certainty Conditions
+- **fpde-mub**: Remove vendor-specific terms from IG content and manifest
+- **fpde-hms**: Add ^short/^definition to Wegegeld extension slices per repo convention
+- **fpde-hms**: Remove vendor codename from wegegeld zone ^definition
+- **fpde-hms**: Add missing artifact:related-links to evidence ledger
+
+### CI/CD
+
+- Retrigger checks
+- Retrigger vendor-leak-check
+- Retrigger checks
+- Trigger vendor-leak-check
+
+### Documentation
+
+- **fpde-mub**: Add changelog entry for Claim.diagnosis quarter-diagnosis contract
+- Record account-centered billing model
+- **fpde-hms**: Add changelog entry for Account-centered billing model and Wegegeld extension
 
 ### Features
 
-- **fhir-term-e24 follow-up**: Expand genehmigung-leistungsbereich CS with labor + AO blocks (0.65.1)
+- **fpde-03c**: Add serviceProvider + partOf to EncounterPraxis, update examples
+- **fpde-mub**: Add Claim.diagnosis quarter-diagnosis contract to praxis Claim profiles
+- Add Wegegeld home visit extension
+
+### Miscellaneous
+
+- Bump version to 0.69.1
+- **fpde-mub**: Add implementation manifest and evidence ledger
+- **fpde-mub**: Bump version to 0.69.1
+- Record fpde-hms evidence
+- Use vendor-neutral public references
+- **fpde-hms**: Update manifest with full 7-commit history
+
+## [0.69.0] - 2026-05-26
+
+### Bug Fixes
+
+- Verify public package list sync
+- Scan served package list paths
+- Skip unreadable package list roots
+- Deploy package list to public host
+- Sync package list on netbird runner
+- Limit package list sync to public path
+- Harden FHIR release verification
+- **fpde-cj3**: Normalize manifest AC status to schema values
+- **fpde-cj3**: Address pair-loop findings iteration 1 - HZV example HH class and unique title
+- **fpde-cj3**: Update aw-sst-crosswalk.md to reflect AccountPraxisSchein as billing-case anchor
+- **fpde-cj3**: Update index.md HZV contract reference from retired extension to AccountPraxisSchein
+- **fpde-cj3**: Address codex adversarial findings - close identifier slicing, add class AMB/HH signal
+- **fpde-cj3**: Narrow Encounter.class binding to required AMB/HH ValueSet
+
+### Features
+
+- **fpde-cj3**: AccountPraxisSchein + re-scope EncounterPraxis to clinical contact
+
+### Miscellaneous
+
+- **clc-3gmp**: Install samurai aidbox skills
+- Bump version to 0.69.0
+- Bump version to 0.69.0
+
+## [0.68.0] - 2026-05-23
+
+### Bug Fixes
+
+- **fpde-c7f**: Correct flag-bemerkung extension context from Flag.extension to Flag
+- **ci**: Vendor FHIR publish helper
+
+### CI/CD
+
+- Move IG release build to self-hosted fhir publish
+- Use shared fhir publish runner cache
+- Run IG validation on fhir publisher runners
+- Avoid duplicate PR branch validation
+- Pin FHIR publish jobs to atlas runners
+
+### Features
+
+- **fpde-c7f**: Add flag-bemerkung Extension StructureDefinition
+
+### Miscellaneous
+
+- Vendor fhir sync library artifacts
+- Normalize library lock paths
+
+## [0.66.1] - 2026-05-22
+
+### Bug Fixes
+
+- **fhir-term-d4z.5**: Address review findings iteration 1
+- Remove vendor-specific references from public IG surfaces
+
+### CI/CD
+
+- Add vendor-leak-guard workflow on push + PR to main
+
+### Documentation
+
+- **fhir-term-d4z.5**: Add changelog entry for imaging pin flip to 1.0.0
+- Document PR-based merge workflow + vendor-leak hard-fail policy
+
+### Features
+
+- **fhir-term-d4z.5**: Flip terminology.imaging pin to 1.0.0
+- **fhir-term-e24 follow-up**: Add interventionelle-radiologie + mrt-mamma to genehmigung-leistungsbereich
+
+### Miscellaneous
+
+- Untrack dist/ build artifacts and gitignore them
+- Release praxis 0.66.1
+
+## [0.66.0] - 2026-05-19
+
+### Bug Fixes
+
+- **adapter-7ihe**: Replace fabricated hvg-vertrag codes with actual YAML-derived slugs (24 entries)
+
+### Features
+
+- **adapter-7ihe**: Add hvg-vertrag and hvg-vertragsart CodeSystems
+
+### Miscellaneous
+
+- **fpde-yw5**: Update changelog for 0.66.0
+- Bump version to 0.66.0
+
+### Merge
+
+- Worktree-bead-fpde-yw5
 
 ### Task
 
 - **fpde-yw5**: Add SGB V legal basis comment to ZulassungStatusConcepts ruleset
-- **fpde-bh6**: Release corrected package metadata for the imaging dependency pin.
+
+## [0.65.1] - 2026-05-19
+
+### Bug Fixes
+
+- Remove vendor-specific bead IDs from historical CHANGELOG entries
+- **fpde-46j**: Correct DMP canonical — Coverage.dmpIndicator tracked in adapter-0x2a.3
+
+### Features
+
+- **fhir-term-e24 follow-up**: Expand genehmigung-leistungsbereich CS with labor + AO blocks (0.65.1)
 
 ## [0.64.2] - 2026-05-19
 
@@ -138,7 +222,7 @@ Data migration: aidbox-reset (no live migration required). Move ScheinNummer and
 
 ### Features
 
-- **genehmigung**: Add cockpit-item-id sub-extension
+- **genehmigung**: Add cockpit-item-id sub-extension (adapter-5yeg)
 
 ## [0.62.2] - 2026-05-17
 
@@ -151,11 +235,11 @@ Data migration: aidbox-reset (no live migration required). Move ScheinNummer and
 ### Bug Fixes
 
 - **fpde-hcq**: Remove hardcoded system URI from ZANR definition prose
-- Vendor-neutral wording in PvsWritebackStatusCS description
+- **adapter-d1vy**: Vendor-neutral wording in PvsWritebackStatusCS description
 
 ### Features
 
-- Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
+- **adapter-d1vy**: Add PvsWritebackStatusCS — pvs-writeback-error tag for adapter writeback failures
 
 ### Miscellaneous
 
@@ -169,7 +253,7 @@ Data migration: aidbox-reset (no live migration required). Move ScheinNummer and
 
 ### Merge
 
-- Add PvsWritebackStatusCS
+- Feat/adapter-d1vy-pvs-writeback-status — add PvsWritebackStatusCS
 
 ## [0.62.0] - 2026-05-16
 
@@ -448,7 +532,6 @@ Data migration: aidbox-reset (no live migration required). Move ScheinNummer and
 - Remove remaining PVS product name from IG spec surfaces
 - **ci**: Use _auth base64 token for Verdaccio instead of _password+username
 - **fpde-daz**: Address review findings iteration 1
-- Replace vendor-specific terms in external-repos doc
 
 ### Documentation
 
@@ -713,3 +796,5 @@ Data migration: aidbox-reset (no live migration required). Move ScheinNummer and
 ### Miscellaneous
 
 - Vendor-clear public baseline v0.41.1
+
+
