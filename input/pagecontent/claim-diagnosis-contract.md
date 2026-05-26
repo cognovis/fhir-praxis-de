@@ -46,12 +46,13 @@ The KBV-AWS diagnosis certainty semantics resolve to Condition status as follows
 | `A` | ausgeschlossen | `refuted` | not required |
 
 `Z` means resolved or state-after for the specific diagnosis tuple. It is not a
-generic long-term diagnosis marker. The x.isynet `Dauerdiagnose` concept is
-handled separately and must not be inferred from `Z`.
+generic long-term diagnosis marker. The `Dauerdiagnose` concept (permanent/long-term
+diagnosis flag used in some PVS systems) is handled separately and must not be
+inferred from `Z`.
 
 ## Implementation Contract
 
-Downstream resolution logic, including Polaris import/export logic, must:
+Downstream resolution logic must:
 
 - Preserve source Conditions.
 - Build the Claim diagnosis list from exact billing tuples.

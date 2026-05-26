@@ -60,6 +60,6 @@
   ],
   "external_resources": [],
   "scope_changes": [],
-  "downstream_impacts": ["polaris: implements resolution contract documented in claim-diagnosis-contract.md"],
+  "downstream_impacts": ["downstream adapters: implements resolution contract documented in claim-diagnosis-contract.md"],
   "evidence_refs": ["SUSHI build verified locally (0 Errors, 0 Warnings)", "profile constraints", "example instances", "laterality+certainty extension authoring fix verified in generated Condition JSON"]
 }
