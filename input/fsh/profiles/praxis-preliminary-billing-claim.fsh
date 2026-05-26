@@ -51,6 +51,22 @@ Description: "Vorlaeufigerabrechnung fuer die deutsche ambulante Praxis. Traegt 
 * insurance.focal MS
 * insurance.coverage MS
 
+// Quarterly treatment diagnoses:
+// Claim.diagnosis carries the quarter diagnosis list for billing resolution.
+// Dedupe is only by the billing tuple: ICD code + Diagnosesicherheit +
+// Seitenlokalisation + Mehrfachcodierungskennzeichen. Different certainty,
+// laterality, or marker values must remain separate entries.
+* diagnosis 0..* MS
+* diagnosis ^short = "Quarterly treatment diagnoses for billing"
+* diagnosis ^definition = "Optional quarterly Behandlungsdiagnosen. Each entry references one source PraxisCondition when available; otherwise diagnosisCodeableConcept may carry the billing diagnosis. Dedupe is over the exact billing tuple only: ICD code, Diagnosesicherheit, Seitenlokalisation, and Mehrfachcodierungskennzeichen."
+* diagnosis.sequence MS
+* diagnosis.sequence ^short = "Stable diagnosis sequence within the claim"
+* diagnosis.diagnosisReference MS
+* diagnosis.diagnosisReference only Reference(PraxisCondition)
+* diagnosis.diagnosisReference ^short = "Source PraxisCondition for this billing diagnosis tuple"
+* diagnosis.diagnosisCodeableConcept MS
+* diagnosis.diagnosisCodeableConcept ^short = "Billing diagnosis code when no source Condition reference is available"
+
 // Item lines: REQUIRED (1..*) — this profile is the item carrier for the AW billing split
 * item 1..* MS
 * item ^short = "Billable service line items (from ChargeItem) — at least one required"
