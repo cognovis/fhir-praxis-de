@@ -78,7 +78,7 @@ Usage: #example
 * code.coding[icd10gm].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
 * code.coding[icd10gm].code = #E11.90
 * code.coding[icd10gm].display = "Diabetes mellitus, Typ 2, ohne Komplikationen"
-* code.coding[icd10gm].extension[diagnosesicherheit].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_DIAGNOSESICHERHEIT#V "Verdachtsdiagnose"
+* code.coding[icd10gm].extension[diagnosesicherheit].valueCoding = https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_ICD_DIAGNOSESICHERHEIT#V "Verdacht auf / zum Ausschluss von"
 * subject = Reference(BillingClaimPatientExample)
 
 // Same naked ICD and Diagnosesicherheit with different Seitenlokalisation stays separate.
