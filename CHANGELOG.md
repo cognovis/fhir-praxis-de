@@ -11,6 +11,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **fpde-q6l**: Add scripts/release-fhir-ig.sh — ADR-006 Script 3: local IG website build (IG Publisher), QA-gate (verify-and-refuse), rsync deploy to /opt/fhir-proxy/html/<ig>/, and post-deploy version verify; --dry-run for build+gate without deploy
 - **release-sync**: Add scripts/sync-release-versions.sh — ADR-006 step-0 automation: discover IG versions, bump lock anchors, key-based + range-operator-preserving dependency propagation, drift-guard gate, commit/push
 - **fpde-x8r**: Make fhir-praxis-de the canonical home of fhir-versions.lock.yaml
 

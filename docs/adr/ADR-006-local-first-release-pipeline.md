@@ -185,3 +185,19 @@ the active downstream SDK/codegen cleanup bead (cross-repo terminology cleanup);
 this bead only establishes the hub as canonical and points the hub's own Script 1
 at it. The fallback (4) keeps every consumer working until that bead repoints to
 the hub.
+
+## Addendum (fpde-q6l): Script 3 deploy target — rsync to local web root (not GitHub Pages)
+
+Script 3 (`scripts/release-fhir-ig.sh`) deploys the rendered IG website by rsyncing
+the IG Publisher `output/` directory to a local web root (`/opt/fhir-proxy/html/<ig>/`),
+served by the fhir-proxy. This is intentionally NOT a GitHub Pages deploy.
+
+**Rationale:** GitHub Pages deployment requires a git tag push and a CI run, which
+reintroduces the runner-contention and silent-failure failure modes that ADR-006 was
+designed to eliminate. Rsync to the local web root is direct, fast, and requires no
+external secret or CI dispatch. The releaser machine has local access to the web root.
+
+**Deploy target:** `/opt/fhir-proxy/html/<ig>/` (default: `praxis`; dental via `--ig dental`)
+**Controlled by:** `FHIR_IG_DEPLOY_BASE` env var (default: `/opt/fhir-proxy/html`)
+**Post-deploy verify:** script fetches `https://fhir.cognovis.de/<ig>/package.json` and
+confirms the served version matches `output/package.json`.
