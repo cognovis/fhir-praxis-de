@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **fpde-x8r**: Make fhir-praxis-de the canonical home of fhir-versions.lock.yaml
+
+## [0.73.0] - 2026-05-30
+
 ### Bug Fixes
 
 - **fpde-qsc**: Set PACKAGE_LIST_EXACT_PATH_ONLY=true in local advance
@@ -12,6 +18,11 @@ All notable changes to this project will be documented in this file.
 
 - **fpde-9go**: Local-first FHIR release pipeline (ADR-006)
 - **fpde-qsc**: Move package-list advance from CI to verify-before-write local step
+- **fpde-qsc**: Move package-list advance from CI to local verify-before-write step
+
+### Miscellaneous
+
+- Bump version to 0.73.0
 
 ## [0.72.0] - 2026-05-30
 

@@ -7,8 +7,8 @@
 #   - IG repos (praxis, dental): scripts/build-package.sh (SUSHI) → publish tgz
 #   - terminology repo:          scripts/build.sh (ETL) → scripts/publish.sh
 #
-# Driven by fhir-versions.lock.yaml in the fhir-terminology-de sibling checkout
-# as the single source of truth for IG version pins.
+# Driven by fhir-versions.lock.yaml, which lives in THIS repo (the orchestration
+# hub, ADR-006/fpde-x8r), as the single source of truth for IG version pins.
 #
 # Idempotent: packages already on npm.cognovis.de at the pinned version are
 # skipped (IG: authenticated `npm view`; terminology: publish.sh's own
@@ -27,7 +27,8 @@
 #                     also exports it as NODE_AUTH_TOKEN for the terminology
 #                     publish.sh delegate).
 #   CODE_ROOT         Optional. Parent dir of sibling repos. Default: parent of this repo.
-#   LOCK_FILE         Optional. Path to fhir-versions.lock.yaml. Default: derived from CODE_ROOT.
+#   LOCK_FILE / FHIR_LOCK_FILE  Optional. Path to fhir-versions.lock.yaml.
+#                     Default: this repo's local copy (the hub).
 #
 # This script NEVER runs git commit, git tag, or git push.
 # "Publishing" = npm publish to npm.cognovis.de ONLY.
@@ -54,7 +55,20 @@ fi
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 CODE_ROOT="${CODE_ROOT:-$(dirname "$REPO_ROOT")}"
-LOCK_FILE="${LOCK_FILE:-$CODE_ROOT/fhir-terminology-de/fhir-versions.lock.yaml}"
+# Lock resolution (ADR-006/fpde-x8r: canonical home is THIS hub repo).
+#   1. $LOCK_FILE / $FHIR_LOCK_FILE override
+#   2. local hub copy ($REPO_ROOT/fhir-versions.lock.yaml) — canonical
+#   3. legacy fhir-terminology-de sibling (transition fallback)
+if [[ -z "${LOCK_FILE:-}" ]]; then
+  LOCK_FILE="${FHIR_LOCK_FILE:-}"
+fi
+if [[ -z "$LOCK_FILE" ]]; then
+  if [[ -f "$REPO_ROOT/fhir-versions.lock.yaml" ]]; then
+    LOCK_FILE="$REPO_ROOT/fhir-versions.lock.yaml"
+  else
+    LOCK_FILE="$CODE_ROOT/fhir-terminology-de/fhir-versions.lock.yaml"
+  fi
+fi
 TERM_REPO="$CODE_ROOT/fhir-terminology-de"
 NPM_REGISTRY="https://npm.cognovis.de"
 DRY_RUN=false
@@ -145,7 +159,7 @@ check_tree_clean() {
 # ───────── Pre-flight ─────────
 if [[ ! -f "$LOCK_FILE" ]]; then
   log_err "Lock file not found: $LOCK_FILE"
-  log_err "Expected: $CODE_ROOT/fhir-terminology-de/fhir-versions.lock.yaml"
+  log_err "Expected: $REPO_ROOT/fhir-versions.lock.yaml (hub) or set \$FHIR_LOCK_FILE."
   log_err "Ensure the fhir-terminology-de sibling repo is checked out."
   exit 1
 fi
