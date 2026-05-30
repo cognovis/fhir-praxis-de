@@ -1,4 +1,20 @@
-name: IG Release — Publish & Deploy
+# IG Release — Create GitHub Release (ADR-006)
+#
+# Triggered by a v* tag push. Creates a GitHub Release and updates the
+# public package-list.json on fhir.cognovis.de.
+#
+# FHIR package publishing is now done locally via scripts/release-fhir-packages.sh
+# (Script 1 per ADR-006). The downstream-notify machinery
+# downstream-notify machinery has been retired (ADR-006).
+#
+# Release sequence:
+#   0. Bump + commit version pins (fhir-sync-versions).
+#   1. scripts/release-fhir-packages.sh — publish FHIR packages locally.
+#   2. Push the release tag: git tag v<VERSION> && git push origin v<VERSION>
+#      → triggers this workflow.
+#   3. Optionally: scripts/build-local-ig.sh — build IG HTML site locally.
+
+name: IG Release — Create GitHub Release
 
 on:
   push:
@@ -12,142 +28,40 @@ concurrency:
   cancel-in-progress: false
 
 jobs:
-  build-and-release:
-    runs-on: [self-hosted, Linux, X64, docker, atlas, fhir-publisher]
+  create-release:
+    name: Create GitHub Release
+    runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
 
       - name: Read version
         id: version
-        run: echo "version=$(tr -d '[:space:]' < VERSION)" >> "$GITHUB_OUTPUT"
+        run: |
+          TAG="${GITHUB_REF_NAME}"
+          echo "version=${TAG#v}" >> "$GITHUB_OUTPUT"
+          echo "tag=$TAG" >> "$GITHUB_OUTPUT"
 
       - name: Verify tag matches VERSION file
-        env:
-          TAG_NAME: ${{ github.ref_name }}
         run: |
-          TAG_VERSION="${TAG_NAME#v}"
+          TAG_VERSION="${GITHUB_REF_NAME#v}"
           FILE_VERSION=$(tr -d '[:space:]' < VERSION)
           if [ "$TAG_VERSION" != "$FILE_VERSION" ]; then
-            echo "ERROR: Tag ${TAG_VERSION} does not match VERSION file ${FILE_VERSION}"
+            echo "::error::Tag ${TAG_VERSION} does not match VERSION file ${FILE_VERSION}"
             exit 1
           fi
           echo "Version match confirmed: ${FILE_VERSION}"
 
-      - name: Verify self-hosted FHIR publish toolchain
-        run: |
-          for command in java node npm npx python3 ruby gem curl; do
-            if ! command -v "$command" >/dev/null 2>&1; then
-              echo "::error::Missing required self-hosted runner command: ${command}"
-              exit 1
-            fi
-          done
-          java -version
-          node --version
-          npm --version
-          python3 --version
-          ruby --version
-
-      - name: Ensure SUSHI
-        run: |
-          if ! command -v sushi >/dev/null 2>&1; then
-            npm install -g fsh-sushi
-          fi
-          sushi --version
-
-      - name: Ensure Jekyll
-        run: |
-          if ! command -v jekyll >/dev/null 2>&1; then
-            gem install --user-install jekyll
-            GEM_BIN="$(ruby -rrubygems -e 'print Gem.user_dir + "/bin"')"
-            echo "$GEM_BIN" >> "$GITHUB_PATH"
-            export PATH="$GEM_BIN:$PATH"
-          fi
-          jekyll --version
-
-      - name: Ensure Python dependencies
-        run: |
-          if ! python3 -c 'import yaml' >/dev/null 2>&1; then
-            python3 -m pip install --user pyyaml
-          fi
-
-      - name: Generate KBV Basis snapshots
-        uses: ./.github/actions/generate-kbv-basis-snapshots
-
-      - name: fhir-publish doctor
-        run: |
-          python3 scripts/fhir-publish-ig.py \
-            doctor \
-            --repo "$GITHUB_WORKSPACE" \
-            --json
-
-      - name: fhir-publish preflight
-        env:
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
-        run: |
-          python3 scripts/fhir-publish-ig.py \
-            preflight \
-            --repo "$GITHUB_WORKSPACE" \
-            --handoff-file "$GITHUB_WORKSPACE/.fhir-publish/preflight.json" \
-            --json
-
-      - name: Upload fhir-publish diagnostics
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: fhir-publish-release-diagnostics
-          path: |
-            .fhir-publish/preflight.json
-            .fhir-publish/logs/
-            output/qa.html
-            output/qa/
-
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v3
         with:
-          tag_name: ${{ github.ref_name }}
-          name: ${{ github.ref_name }}
-          files: |
-            dist/*.tgz
-            output/full-ig.zip
+          tag_name: ${{ steps.version.outputs.tag }}
+          name: ${{ steps.version.outputs.tag }}
           generate_release_notes: true
           make_latest: true
 
-      - name: Publish to FHIR Package Registry
-        env:
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
-        run: |
-          # FHIR packages have non-npm dependencies that confuse npm publish.
-          # Use npm pack + publish with --ignore-scripts to skip dependency resolution.
-          PKG="$(find dist -maxdepth 1 -name '*.tgz' -print -quit)"
-          if [ -z "$PKG" ]; then
-            echo "::error::No FHIR package found in dist/"
-            exit 1
-          fi
-          echo "Publishing ${PKG} to npm.cognovis.de..."
-
-          # Create minimal .npmrc with auth
-          echo "//npm.cognovis.de/:_auth=$(echo -n "cognovis:${VERDACCIO_TOKEN}" | base64)" >> ~/.npmrc
-          echo "//npm.cognovis.de/:always-auth=true" >> ~/.npmrc
-
-          # Use absolute path — npm can misinterpret relative paths as package specs
-          ABSPKG="$(pwd)/${PKG}"
-          npm publish "${ABSPKG}" --registry https://npm.cognovis.de --ignore-scripts 2>&1 | tee /tmp/npm-publish.log
-          EXIT=${PIPESTATUS[0]}
-          if [ "$EXIT" -ne 0 ]; then
-            if grep -q "EPUBLISHCONFLICT\|already_published\|409\|cannot publish over" /tmp/npm-publish.log; then
-              echo "::warning::Package version already exists in registry — skipping"
-            else
-              cat /tmp/npm-publish.log
-              exit "$EXIT"
-            fi
-          fi
-
-      # Pages deployment handled by ig-ci.yml on main push — not needed here
-
   update-package-list:
-    needs: build-and-release
+    name: Update package-list.json on fhir.cognovis.de
+    needs: create-release
     runs-on: [self-hosted, Linux, ARM64, netbird]
     steps:
       - uses: actions/checkout@v5
@@ -169,46 +83,11 @@ jobs:
           GITHUB_TOKEN: ${{ github.token }}
         run: |
           set -euo pipefail
-
           TODAY=$(date -u +%Y-%m-%d)
-
           python3 .github/scripts/update-package-list-remote.py \
             "$IG_VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$REMOTE_PACKAGE_LIST"
-
           python3 .github/scripts/verify-fhir-release-publication.py \
             --version "$IG_VERSION" \
             --package-id "$PACKAGE_ID" \
             --public-ig-path "$PUBLIC_IG_PATH" \
             --repository "$GITHUB_REPOSITORY"
-
-  dispatch:
-    needs: build-and-release
-    runs-on: ubuntu-latest
-    steps:
-      - name: Read version
-        id: version
-        env:
-          TAG_NAME: ${{ github.ref_name }}
-        run: echo "version=${TAG_NAME#v}" >> "$GITHUB_OUTPUT"
-
-      - name: Send repository_dispatch to downstream consumers
-        env:
-          DOWNSTREAM_DISPATCH_TOKEN: ${{ secrets.DOWNSTREAM_DISPATCH_TOKEN }}
-          IG_VERSION: ${{ steps.version.outputs.version }}
-        run: |
-          if [ -z "${DOWNSTREAM_DISPATCH_TOKEN}" ]; then
-            echo "::warning::DOWNSTREAM_DISPATCH_TOKEN not configured — skipping dispatch"
-            exit 0
-          fi
-
-          DOWNSTREAM_REPOS="cognovis/fhir-dental-de cognovis/fhir-terminology-de"
-
-          for REPO in $DOWNSTREAM_REPOS; do
-            echo "Sending repository_dispatch to ${REPO}..."
-            curl -sf -X POST \
-              -H "Authorization: token ${DOWNSTREAM_DISPATCH_TOKEN}" \
-              -H "Accept: application/vnd.github.v3+json" \
-              "https://api.github.com/repos/${REPO}/dispatches" \
-              -d "{\"event_type\": \"ig-published\", \"client_payload\": {\"version\": \"${IG_VERSION}\", \"package_id\": \"de.cognovis.fhir.praxis\"}}"
-            echo "repository_dispatch sent to ${REPO}"
-          done
