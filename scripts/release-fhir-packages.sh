@@ -296,11 +296,31 @@ while IFS= read -r pkg_id; do
     exit 1
   fi
 
+  # Clear stale tarballs first. build-package.sh only clears dist/package/, not
+  # dist/*.tgz, so a leftover tarball from a prior build could otherwise be
+  # selected and published (advisory BLOCKER #1).
+  rm -f "$repo_dir/dist"/*.tgz 2>/dev/null || true
+
   (cd "$repo_dir" && bash scripts/build-package.sh)
 
   tgz=$(find "$repo_dir/dist" -maxdepth 1 -name '*.tgz' -print -quit 2>/dev/null || true)
   if [[ -z "$tgz" ]]; then
     log_err "No .tgz in $repo_dir/dist/ after build-package.sh"
+    exit 1
+  fi
+
+  # Verify the freshly built tarball actually carries the pinned package id and
+  # version before publishing it (advisory BLOCKER #1: never publish content that
+  # does not match what verify-and-refuse approved).
+  tgz_meta=$(tar -xzO -f "$tgz" package/package.json 2>/dev/null \
+    | python3 -c "import json,sys; d=json.load(sys.stdin); print(d['name'], d['version'])" 2>/dev/null || true)
+  tgz_name="${tgz_meta% *}"
+  tgz_ver="${tgz_meta#* }"
+  if [[ "$tgz_name" != "$pkg_id" || "$tgz_ver" != "$lock_ver" ]]; then
+    log_err "Built tarball metadata mismatch for $pkg_id @ $lock_ver"
+    log_err "  tarball   : ${tgz_name:-<none>}@${tgz_ver:-<none>}  ($tgz)"
+    log_err "  expected  : $pkg_id@$lock_ver"
+    log_err "  Refusing to publish a tarball that does not match the pinned id/version."
     exit 1
   fi
 

@@ -9,6 +9,13 @@
 #
 # Required PR status check: vendor-leak-check / check (vendor-leak-check.yml)
 # This workflow provides additional compile and lint coverage.
+#
+# Praxis depends on private Verdaccio packages (de.cognovis.terminology.imaging,
+# de.cognovis.terminology.kbv, kbv.mio.impfpass.vocab) that public FHIR mirrors
+# return as 404, and on kbv.basis which ships without snapshots. The validate job
+# therefore preloads the authenticated private packages and generates KBV Basis
+# snapshots before the SUSHI compile. Fork PRs (no VERDACCIO_TOKEN) skip the
+# compile gate and rely on vendor-leak-check; same-repo PRs get the full gate.
 
 name: IG CI — Validate
 
@@ -57,5 +64,31 @@ jobs:
           npm install -g fsh-sushi
           sushi --version
 
+      # The SUSHI compile gate needs private Verdaccio dependencies in the FHIR
+      # package cache. Only same-repo PRs/pushes have the VERDACCIO_TOKEN secret;
+      # detect it and gate the compile accordingly.
+      - name: Check private-registry access
+        id: regaccess
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+        run: |
+          if [ -n "${VERDACCIO_TOKEN:-}" ]; then
+            echo "available=true" >> "$GITHUB_OUTPUT"
+          else
+            echo "available=false" >> "$GITHUB_OUTPUT"
+            echo "::notice::VERDACCIO_TOKEN not available (fork PR) — SUSHI compile gate skipped; vendor-leak-check still gates this PR."
+          fi
+
+      - name: Preload private FHIR packages
+        if: steps.regaccess.outputs.available == 'true'
+        env:
+          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
+        run: bash scripts/preload-private-fhir-packages.sh
+
+      - name: Generate KBV Basis snapshots
+        if: steps.regaccess.outputs.available == 'true'
+        uses: ./.github/actions/generate-kbv-basis-snapshots
+
       - name: SUSHI compile (structural validation)
+        if: steps.regaccess.outputs.available == 'true'
         run: sushi . --snapshot
