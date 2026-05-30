@@ -14,12 +14,12 @@
 #   5. (--commit) commit each changed repo, surgically (only version-pin files).
 #
 # Scope: the FHIR repos only (praxis, dental, deid, terminology). The downstream
-# SDK/codegen cascade (polaris) is owned by that repo's Script 2 — NOT here.
+# SDK/codegen cascade is owned by that repo's Script 2 — NOT here.
 #
 # Transition note: while the lock's canonical home (the hub) and the legacy
 # fhir-terminology-de copy coexist (fpde-x8r), this script updates BOTH so the
 # drift guard + terminology ETL stay consistent until the downstream cleanup
-# bead repoints them to the hub.
+# cleanup bead repoints them to the hub.
 #
 # Usage:
 #   scripts/sync-release-versions.sh [--dry-run] [--commit] [--push]
