@@ -4,6 +4,11 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### CI/CD
+
+- **Automated downstream pin-bump dispatch**: The release workflow now sends `ig-published` `repository_dispatch` events to both `cognovis/fhir-dental-de` and `cognovis/fhir-terminology-de` after each release, replacing the single configurable `DOWNSTREAM_REPOSITORY` variable. Receiver workflows in each downstream repo open version-pin PRs automatically — no manual `fhir-sync-versions` invocation needed for normal releases.
+- **`fhir-sync-versions` skill role**: Now documented as a diagnostic and recovery tool (for auditing drift or recovering from automation failures), not the primary post-release sync path.
+
 ## [0.70.2] - 2026-05-30
 
 ### Bug Fixes
