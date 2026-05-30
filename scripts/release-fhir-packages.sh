@@ -91,28 +91,34 @@ declare -A IG_REPO_DIR=(
 )
 
 # ───────── Credentials ─────────
-if [[ -z "${VERDACCIO_TOKEN:-}" ]]; then
-  echo "ERROR: VERDACCIO_TOKEN is not set." >&2
-  echo "Supply it as an environment variable — not from 1Password:" >&2
-  echo "  VERDACCIO_TOKEN=<token> $0" >&2
-  exit 1
+# Two auth modes:
+#   (a) VERDACCIO_TOKEN set  -> write a temp .npmrc (CI / explicit token).
+#   (b) no token             -> use the ambient ~/.npmrc (the normal local case;
+#                               npm view/publish read it automatically). We verify
+#                               it actually authenticates before proceeding.
+if [[ -n "${VERDACCIO_TOKEN:-}" ]]; then
+  NPMRC_TMP=$(mktemp)
+  trap 'rm -f "$NPMRC_TMP"' EXIT
+  {
+    echo "//npm.cognovis.de/:_auth=$(printf '%s' "cognovis:${VERDACCIO_TOKEN}" | base64 | tr -d '\n')"
+    echo "//npm.cognovis.de/:_authToken=${VERDACCIO_TOKEN}"
+    echo "//npm.cognovis.de/:always-auth=true"
+  } > "$NPMRC_TMP"
+  export NPM_CONFIG_USERCONFIG="$NPMRC_TMP"
+  export NODE_AUTH_TOKEN="$VERDACCIO_TOKEN"
+else
+  # Fall back to the ambient ~/.npmrc. Do NOT override NPM_CONFIG_USERCONFIG —
+  # let npm read the user's existing config. Probe a known private package to
+  # confirm the registry actually authenticates (a read-protected registry
+  # would otherwise make every package look unpublished).
+  if npm view de.cognovis.fhir.praxis version --registry "$NPM_REGISTRY" >/dev/null 2>&1; then
+    echo "[release-fhir-packages] VERDACCIO_TOKEN not set — using ambient ~/.npmrc (authenticated)."
+  else
+    echo "ERROR: no VERDACCIO_TOKEN and ~/.npmrc does not authenticate to $NPM_REGISTRY." >&2
+    echo "  Either run 'npm login --registry $NPM_REGISTRY' or pass VERDACCIO_TOKEN=<token>." >&2
+    exit 1
+  fi
 fi
-
-# Write auth to a temp .npmrc — never modify the global one. Both the _auth
-# (Basic) and _authToken forms are written so that `npm view` / `npm publish`
-# authenticate for reads AND writes (critique #2: reads must be authenticated,
-# otherwise a read-protected registry returns non-200 and every package looks
-# unpublished).
-NPMRC_TMP=$(mktemp)
-trap 'rm -f "$NPMRC_TMP"' EXIT
-{
-  echo "//npm.cognovis.de/:_auth=$(printf '%s' "cognovis:${VERDACCIO_TOKEN}" | base64 | tr -d '\n')"
-  echo "//npm.cognovis.de/:_authToken=${VERDACCIO_TOKEN}"
-  echo "//npm.cognovis.de/:always-auth=true"
-} > "$NPMRC_TMP"
-export NPM_CONFIG_USERCONFIG="$NPMRC_TMP"
-# The terminology publish.sh delegate authenticates via NODE_AUTH_TOKEN.
-export NODE_AUTH_TOKEN="$VERDACCIO_TOKEN"
 
 # ───────── Logging helpers ─────────
 log()         { echo "[release-fhir-packages] $*"; }
