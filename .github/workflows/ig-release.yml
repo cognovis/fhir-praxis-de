@@ -191,20 +191,24 @@ jobs:
           TAG_NAME: ${{ github.ref_name }}
         run: echo "version=${TAG_NAME#v}" >> "$GITHUB_OUTPUT"
 
-      - name: Send repository_dispatch to downstream consumer
+      - name: Send repository_dispatch to downstream consumers
         env:
           DOWNSTREAM_DISPATCH_TOKEN: ${{ secrets.DOWNSTREAM_DISPATCH_TOKEN }}
-          DOWNSTREAM_REPOSITORY: ${{ vars.DOWNSTREAM_REPOSITORY }}
           IG_VERSION: ${{ steps.version.outputs.version }}
         run: |
-          if [ -z "${DOWNSTREAM_REPOSITORY}" ] || [ -z "${DOWNSTREAM_DISPATCH_TOKEN}" ]; then
-            echo "::warning::Downstream dispatch not configured — skipping"
+          if [ -z "${DOWNSTREAM_DISPATCH_TOKEN}" ]; then
+            echo "::warning::DOWNSTREAM_DISPATCH_TOKEN not configured — skipping dispatch"
             exit 0
           fi
 
-          curl -sf -X POST \
-            -H "Authorization: token ${DOWNSTREAM_DISPATCH_TOKEN}" \
-            -H "Accept: application/vnd.github.v3+json" \
-            "https://api.github.com/repos/${DOWNSTREAM_REPOSITORY}/dispatches" \
-            -d "{\"event_type\": \"ig-published\", \"client_payload\": {\"version\": \"${IG_VERSION}\", \"package_id\": \"de.cognovis.fhir.praxis\"}}"
-          echo "repository_dispatch sent to downstream consumer"
+          DOWNSTREAM_REPOS="cognovis/fhir-dental-de cognovis/fhir-terminology-de"
+
+          for REPO in $DOWNSTREAM_REPOS; do
+            echo "Sending repository_dispatch to ${REPO}..."
+            curl -sf -X POST \
+              -H "Authorization: token ${DOWNSTREAM_DISPATCH_TOKEN}" \
+              -H "Accept: application/vnd.github.v3+json" \
+              "https://api.github.com/repos/${REPO}/dispatches" \
+              -d "{\"event_type\": \"ig-published\", \"client_payload\": {\"version\": \"${IG_VERSION}\", \"package_id\": \"de.cognovis.fhir.praxis\"}}"
+            echo "repository_dispatch sent to ${REPO}"
+          done
