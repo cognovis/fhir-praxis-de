@@ -261,6 +261,29 @@ else
   fail "No error message found in output: $ERR_OUTPUT"
 fi
 
+
+# ────────────────────────────────────────────────
+# AC-1 (IG guard): --ig mismatch vs sushi-config.yaml exits non-zero
+# ────────────────────────────────────────────────
+run_test "AC-1 (IG guard): --ig mismatch with sushi-config.yaml id"
+
+set +e
+IG_MISMATCH_OUTPUT=$(bash "$SCRIPT" --ig dental 2>&1)
+IG_MISMATCH_EXIT=$?
+set -e
+
+if [[ "$IG_MISMATCH_EXIT" -ne 0 ]]; then
+  pass "Script exits non-zero when --ig dental doesn't match repo IG id"
+else
+  fail "Script should fail when --ig doesn't match sushi-config.yaml id, got exit 0"
+fi
+
+if echo "$IG_MISMATCH_OUTPUT" | grep -qi "does not match"; then
+  pass "Clear mismatch error message emitted"
+else
+  fail "No mismatch error message in: $IG_MISMATCH_OUTPUT"
+fi
+
 # ────────────────────────────────────────────────
 # Summary
 # ────────────────────────────────────────────────

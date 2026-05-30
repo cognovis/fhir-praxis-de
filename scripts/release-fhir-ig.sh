@@ -80,6 +80,23 @@ log() {
   echo "[release-fhir-ig] $*"
 }
 
+# ───────── IG name validation ─────────
+# Verify that --ig matches the sushi-config.yaml `id` field (last dot-segment)
+# so that a mismatch (e.g. running fhir-praxis-de's script with --ig dental)
+# is caught early rather than deploying the wrong IG to the wrong web root.
+SUSHI_CONFIG="${REPO_ROOT}/sushi-config.yaml"
+if [[ -f "$SUSHI_CONFIG" ]]; then
+  SUSHI_ID=$(grep -E '^id:[[:space:]]+' "$SUSHI_CONFIG" | head -1 | awk '{print $2}')
+  # Derive the short IG name from the package id (last dot-segment)
+  # e.g. de.cognovis.fhir.praxis → praxis
+  SUSHI_SHORT="${SUSHI_ID##*.}"
+  if [[ -n "$SUSHI_SHORT" && "$SUSHI_SHORT" != "$IG_NAME" ]]; then
+    echo "ERROR: --ig '$IG_NAME' does not match this repo's IG id '$SUSHI_ID' (short: '$SUSHI_SHORT')." >&2
+    echo "Run this script from the '${IG_NAME}' IG repository, or omit --ig to use the repo default." >&2
+    exit 1
+  fi
+fi
+
 log "IG: $IG_NAME | dry-run: $DRY_RUN"
 log "Deploy target: $DEPLOY_TARGET"
 log "Public URL:    $PUBLIC_URL"
@@ -196,29 +213,44 @@ if [[ "$HTTP_CODE" == "405" ]]; then
 fi
 
 if [[ ! "$HTTP_CODE" =~ ^(2|3) ]]; then
-  echo "WARNING: Could not reach $PUBLIC_PACKAGE_URL (HTTP $HTTP_CODE)." >&2
-  echo "The rsync completed successfully — verify the public URL manually." >&2
-  log "Step 4: SKIPPED (unreachable)"
-  log "Release deployed (verify manually): $IG_NAME@$EXPECTED_VERSION → $DEPLOY_TARGET/"
-  exit 0
+  echo "ERROR: Could not reach $PUBLIC_PACKAGE_URL (HTTP $HTTP_CODE)." >&2
+  echo "Post-deploy verify failed — confirm the public URL is reachable and retry." >&2
+  echo "To skip verify, set FHIR_IG_SKIP_VERIFY=1 (only for development/staging use)." >&2
+  if [[ "${FHIR_IG_SKIP_VERIFY:-0}" == "1" ]]; then
+    echo "WARNING: FHIR_IG_SKIP_VERIFY=1 — skipping verify (rsync succeeded)." >&2
+    log "Step 4: SKIPPED (FHIR_IG_SKIP_VERIFY=1)"
+    log "Release deployed (verify manually): $IG_NAME@$EXPECTED_VERSION → $DEPLOY_TARGET/"
+    exit 0
+  fi
+  exit 1
 fi
 
 SERVED_JSON=$(curl -sf --max-time 15 "$PUBLIC_PACKAGE_URL" 2>/dev/null || echo "")
 if [[ -z "$SERVED_JSON" ]]; then
-  echo "WARNING: $PUBLIC_PACKAGE_URL returned an empty body." >&2
-  log "Step 4: SKIPPED (empty response)"
-  log "Release deployed (verify manually): $IG_NAME@$EXPECTED_VERSION → $DEPLOY_TARGET/"
-  exit 0
+  echo "ERROR: $PUBLIC_PACKAGE_URL returned an empty body." >&2
+  echo "Post-deploy verify failed — the web server may not have picked up the new files yet." >&2
+  if [[ "${FHIR_IG_SKIP_VERIFY:-0}" == "1" ]]; then
+    echo "WARNING: FHIR_IG_SKIP_VERIFY=1 — skipping verify (rsync succeeded)." >&2
+    log "Step 4: SKIPPED (FHIR_IG_SKIP_VERIFY=1)"
+    log "Release deployed (verify manually): $IG_NAME@$EXPECTED_VERSION → $DEPLOY_TARGET/"
+    exit 0
+  fi
+  exit 1
 fi
 
 SERVED_VERSION=$(echo "$SERVED_JSON" | python3 -c \
   "import json, sys; d=json.load(sys.stdin); print(d.get('version', ''))" 2>/dev/null || echo "")
 
 if [[ -z "$SERVED_VERSION" ]]; then
-  echo "WARNING: Could not parse 'version' from $PUBLIC_PACKAGE_URL." >&2
-  log "Step 4: SKIPPED (parse failure)"
-  log "Release deployed (verify manually): $IG_NAME@$EXPECTED_VERSION → $DEPLOY_TARGET/"
-  exit 0
+  echo "ERROR: Could not parse 'version' from $PUBLIC_PACKAGE_URL." >&2
+  echo "Post-deploy verify failed — the served file may not be valid JSON." >&2
+  if [[ "${FHIR_IG_SKIP_VERIFY:-0}" == "1" ]]; then
+    echo "WARNING: FHIR_IG_SKIP_VERIFY=1 — skipping verify (rsync succeeded)." >&2
+    log "Step 4: SKIPPED (FHIR_IG_SKIP_VERIFY=1)"
+    log "Release deployed (verify manually): $IG_NAME@$EXPECTED_VERSION → $DEPLOY_TARGET/"
+    exit 0
+  fi
+  exit 1
 fi
 
 if [[ "$SERVED_VERSION" == "$EXPECTED_VERSION" ]]; then
