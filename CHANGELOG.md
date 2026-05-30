@@ -4,47 +4,70 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
-### CI/CD
+### Bug Fixes
 
-- **Local-first FHIR release pipeline (ADR-006)**: Replace CI-built heavy releases with
-  deliberate local scripts. `scripts/release-fhir-packages.sh` builds (SUSHI) and
-  `npm publish`es all FHIR packages across sibling checkouts, driven by
-  `fhir-versions.lock.yaml` as the single source of truth. Idempotent (skip already-published
-  versions). Verify-and-refuse on version mismatch. No git operations.
-- **CI reduced to cheap validation**: `ig-ci.yml` now runs only version-sync check,
-  vendor-leak check, and SUSHI compile on `ubuntu-latest`. Self-hosted runner jobs,
-  Aidbox services, IG Publisher, and the auto-tag step removed from CI.
-- **`repository_dispatch` machinery retired**: Removed `dispatch` job and
-  `DOWNSTREAM_DISPATCH_TOKEN` from `ig-release.yml`. Downstream pin-bump coordination
-  is now handled locally via the downstream SDK/codegen orchestrator (Script 2).
-- See `docs/adr/ADR-006-local-first-release-pipeline.md` for the full decision record.
+- **fpde-9go**: Use sushi binary directly in ig-ci.yml SUSHI compile step
+- **fpde-9go**: Delegate per-repo build/publish; fix 5 review findings
+- **fpde-9go**: Move delegate-existence checks into verify-and-refuse
+- **fpde-9go**: Address INFRA pre-push advisory blockers
+- **fpde-9go**: Prevent base64 line-wrap in npmrc auth (preload + release)
 
+### Documentation
+
+- **fpde-9go**: Add ADR-006 local-first release pivot; scan ADRs in vendor-leak guard
+- **fpde-9go**: Note terminology-import seeding constraint in ADR-006
+
+### Features
+
+- **fpde-9go**: Local-first FHIR release pipeline (ADR-006)
 
 ## [0.71.0] - 2026-05-30
 
-### CI/CD
+### Features
 
-- **Automated downstream pin-bump dispatch**: The release workflow now sends `ig-published` `repository_dispatch` events to both `cognovis/fhir-dental-de` and `cognovis/fhir-terminology-de` after each release, replacing the single configurable `DOWNSTREAM_REPOSITORY` variable. Receiver workflows in each downstream repo open version-pin PRs automatically — no manual `fhir-sync-versions` invocation needed for normal releases.
-- **`fhir-sync-versions` skill role**: Now documented as a diagnostic and recovery tool (for auditing drift or recovering from automation failures), not the primary post-release sync path.
+- **fpde-9j1**: Dispatch ig-published to fhir-dental-de and fhir-terminology-de
+
+### Miscellaneous
+
+- **fpde-9j1**: Add implementation manifest and evidence ledger
+- **fpde-9j1**: Add changelog entry and run artifacts
+- Release 0.71.0
 
 ## [0.70.2] - 2026-05-30
 
 ### Bug Fixes
 
-- **fpde-60x**: Open `AccountPraxisSchein` identifier slicing (`#closed` → `#open`), relax `scheinNummer` cardinality to `0..1`, add `abrechnungsquartal` NamingSystem, and add pre-writeback HZV Account example
-- Rename extension Id `kvbm-qzv-gops` → `kv-benchmark-qzv-gops` to match the canonical IG naming convention and fix the URL mismatch between IG source and live consumers
+- **fpde-60x**: Open identifier slicing, relax scheinNummer to 0..1, add abrechnungsquartal NamingSystem and pre-writeback example
+- **fpde-60x**: Remove vendor term from pre-writeback example description
+- Rename kvbm-qzv-gops → kv-benchmark-qzv-gops to match canonical IG naming convention
+
+### CI/CD
+
+- **fpde-pv0**: Bump node20 actions to node24 (upload-artifact v6, configure-pages v6, action-gh-release v3)
+
+### Documentation
+
+- Add 0.70.1 and 0.70.0 changelog entries
+
+### Miscellaneous
+
+- Release 0.70.2
+- Remove vendor term from 0.70.2 changelog entry
 
 ## [0.70.1] - 2026-05-26
 
 ### Bug Fixes
 
-- **fpde-kbv**: Correct KBV Diagnosesicherheit code `V` display name from "Verdachtsdiagnose" to "Verdacht auf / zum Ausschluss von" — fixes broken 0.70.0 release that failed the fhir-publish preflight QA gate
+- **examples**: Correct KBV Diagnosesicherheit #V display name
 
 ### CI/CD
 
-- Run IG validate on main only; drop redundant per-PR run that gated nothing
-- Gate PRs on vendor-leak-check; add paths-ignore denylist for doc/artifact paths
-- Bump `checkout` and `deploy-pages` GitHub Actions to v5 (Node 24); tracking bead fpde-pv0 for remaining actions with no Node 24 release yet (deadline 2026-09-16)
+- Run IG validate on main only, drop redundant PR run
+- Bump checkout and deploy-pages to v5 (Node 24)
+
+### Miscellaneous
+
+- Bump version to 0.70.1
 
 ## [0.70.0] - 2026-05-26
 
@@ -55,12 +78,21 @@ All notable changes to this project will be documented in this file.
 - **fpde-hms**: Add ^short/^definition to Wegegeld extension slices per repo convention
 - **fpde-hms**: Remove vendor codename from wegegeld zone ^definition
 - **fpde-hms**: Add missing artifact:related-links to evidence ledger
+- **fpde-hms**: Remove explicit .url assignments from Wegegeld extension slices
+
+### CI/CD
+
+- Retrigger checks
+- Retrigger vendor-leak-check
+- Retrigger checks
+- Trigger vendor-leak-check
 
 ### Documentation
 
 - **fpde-mub**: Add changelog entry for Claim.diagnosis quarter-diagnosis contract
 - Record account-centered billing model
 - **fpde-hms**: Add changelog entry for Account-centered billing model and Wegegeld extension
+- **fpde-hms**: Update CHANGELOG for account-centered billing model and Wegegeld
 
 ### Features
 
@@ -70,10 +102,13 @@ All notable changes to this project will be documented in this file.
 
 ### Miscellaneous
 
+- Bump version to 0.69.1
 - **fpde-mub**: Add implementation manifest and evidence ledger
-- Use vendor-neutral public references
+- **fpde-mub**: Bump version to 0.69.1
 - Record fpde-hms evidence
+- Use vendor-neutral public references
 - **fpde-hms**: Update manifest with full 7-commit history
+- Bump version to 0.70.0
 
 ## [0.69.0] - 2026-05-26
 
