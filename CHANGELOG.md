@@ -4,8 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **release**: Script 1 (release-fhir-packages.sh) falls back to ambient ~/.npmrc when VERDACCIO_TOKEN is unset
+- **release-sync**: Neutralize downstream project codename in script comments (vendor-leak guard)
+
 ### Features
 
+- **release-sync**: Add scripts/sync-release-versions.sh — ADR-006 step-0 automation: discover IG versions, bump lock anchors, key-based + range-operator-preserving dependency propagation, drift-guard gate, commit/push
 - **fpde-x8r**: Make fhir-praxis-de the canonical home of fhir-versions.lock.yaml
 
 ## [0.73.0] - 2026-05-30
