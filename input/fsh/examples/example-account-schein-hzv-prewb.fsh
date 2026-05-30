@@ -1,7 +1,7 @@
 Instance: example-account-schein-hzv-prewb
 InstanceOf: AccountPraxisSchein
 Title: "HZV Account Praxis Schein (Pre-Writeback)"
-Description: "Pre-writeback HZV billing case Account. No scheinNummer yet -- assigned by PVS after Schein creation. Used for polaris Schein-as-Account writeback architecture (ADR-039)."
+Description: "Pre-writeback HZV billing case Account. No scheinNummer yet -- assigned by the PVS after Schein creation. Demonstrates Schein-as-Account writeback pattern."
 Usage: #example
 * meta.profile = "https://fhir.cognovis.de/praxis/StructureDefinition/account-praxis-schein"
 * status = #active
