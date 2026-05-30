@@ -284,6 +284,61 @@ else
   fail "No mismatch error message in: $IG_MISMATCH_OUTPUT"
 fi
 
+
+# ────────────────────────────────────────────────
+# AC-6: Post-deploy verify gates
+# ────────────────────────────────────────────────
+run_test "AC-6: unreachable public URL exits non-zero (strict gate)"
+
+TMPDIR_AC6="$(mktemp -d)"
+
+mkdir -p "$TMPDIR_AC6/output" "$TMPDIR_AC6/html/praxis"
+make_passing_qa_html "$TMPDIR_AC6/output"
+make_package_json "$TMPDIR_AC6/output" "0.74.0"
+
+TMP_REPO6="$TMPDIR_AC6/repo"
+mkdir -p "$TMP_REPO6/scripts" "$TMP_REPO6/.github"
+cp "$SCRIPT" "$TMP_REPO6/scripts/release-fhir-ig.sh"
+cp "$REPO_ROOT/scripts/qa_gate.py" "$TMP_REPO6/scripts/qa_gate.py"
+cp "$REPO_ROOT/.github/qa-allowlist.yml" "$TMP_REPO6/.github/qa-allowlist.yml"
+printf "id: de.cognovis.fhir.praxis\nversion: 0.74.0\n" > "$TMP_REPO6/sushi-config.yaml"
+
+cat > "$TMP_REPO6/scripts/build-local-ig.sh" << STUB
+#!/usr/bin/env bash
+cp -r "$TMPDIR_AC6/output" "\$(cd "\$(dirname "\$0")/.." && pwd)/output"
+STUB
+chmod +x "$TMP_REPO6/scripts/build-local-ig.sh"
+
+FAKE_BIN6="$TMPDIR_AC6/bin"
+mkdir -p "$FAKE_BIN6"
+printf "#!/usr/bin/env bash\nexit 0\n" > "$FAKE_BIN6/rsync"
+chmod +x "$FAKE_BIN6/rsync"
+
+# Unreachable public URL with no skip-verify should exit non-zero
+set +e
+FHIR_IG_DEPLOY_BASE="$TMPDIR_AC6/html"   FHIR_IG_PUBLIC_BASE="http://localhost:0"   PATH="$FAKE_BIN6:$PATH"   bash "$TMP_REPO6/scripts/release-fhir-ig.sh" --ig praxis > /dev/null 2>&1
+EXIT_AC6A=$?
+set -e
+
+if [[ "$EXIT_AC6A" -ne 0 ]]; then
+  pass "Unreachable public URL exits non-zero (AC-6 strict gate)"
+else
+  fail "Should exit non-zero when public URL unreachable, got 0"
+fi
+
+run_test "AC-6: FHIR_IG_SKIP_VERIFY=1 allows exit 0 when URL unreachable"
+
+set +e
+FHIR_IG_DEPLOY_BASE="$TMPDIR_AC6/html"   FHIR_IG_PUBLIC_BASE="http://localhost:0"   FHIR_IG_SKIP_VERIFY=1   PATH="$FAKE_BIN6:$PATH"   bash "$TMP_REPO6/scripts/release-fhir-ig.sh" --ig praxis > /dev/null 2>&1
+EXIT_AC6B=$?
+set -e
+
+if [[ "$EXIT_AC6B" -eq 0 ]]; then
+  pass "FHIR_IG_SKIP_VERIFY=1 exits 0 (escape hatch works)"
+else
+  fail "FHIR_IG_SKIP_VERIFY=1 should exit 0, got $EXIT_AC6B"
+fi
+
 # ────────────────────────────────────────────────
 # Summary
 # ────────────────────────────────────────────────
