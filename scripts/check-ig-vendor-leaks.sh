@@ -52,16 +52,13 @@ while IFS= read -r -d '' path; do
   fi
 done < <(git ls-files -z -- "${PATHS[@]}")
 
-# Exclude internal architecture documents — ADRs and research notes may name downstream systems
-# for context; they are not published IG surfaces.
-FILTERED_PATHS=()
-for path in "${TRACKED_PATHS[@]}"; do
-  case "$path" in
-    docs/adr/*|docs/research/*) ;;
-    *) FILTERED_PATHS+=("$path") ;;
-  esac
-done
-TRACKED_PATHS=("${FILTERED_PATHS[@]}")
+# NOTE: ADRs (docs/adr/) and research notes (docs/research/) are intentionally
+# NOT exempt. They are committed to this public repository and its history, so
+# vendor/product/project codenames must not appear there either — an exemption
+# would let leaks in through the back door. Existing history is grandfathered
+# (we do not rewrite it); this guard only gates NEW content on a PR's tree.
+# Architecture docs that genuinely need concrete downstream system names belong
+# in a private tracker, not on a public IG surface.
 
 if [ "${#TRACKED_PATHS[@]}" -eq 0 ]; then
   echo "Vendor leak guard skipped: no tracked public repository surfaces found."
