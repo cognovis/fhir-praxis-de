@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
-- **fpde-60x**: Open `AccountPraxisSchein` identifier slicing (`#closed` → `#open`), relax `scheinNummer` cardinality to `0..1`, add `abrechnungsquartal` NamingSystem, and add pre-writeback HZV Account example — unblocks polaris Schein-as-Account writeback (ADR-039)
+- **fpde-60x**: Open `AccountPraxisSchein` identifier slicing (`#closed` → `#open`), relax `scheinNummer` cardinality to `0..1`, add `abrechnungsquartal` NamingSystem, and add pre-writeback HZV Account example
 - Rename extension Id `kvbm-qzv-gops` → `kv-benchmark-qzv-gops` to match the canonical IG naming convention and fix the URL mismatch between IG source and live consumers
 
 ## [0.70.1] - 2026-05-26
