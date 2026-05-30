@@ -57,7 +57,7 @@ Usage: #example
 * extension[=].valueDecimal = 51.30
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-qzv-bereiche"
 * extension[=].valueString = "QZV Diabetes, QZV Hypertonie, QZV Psychosomatik"
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kvbm-qzv-gops"
+* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/kv-benchmark-qzv-gops"
 * extension[=].valueString = "03220, 03221, 03230, 35100, 35110"
 
 Instance: ExampleGenehmigung

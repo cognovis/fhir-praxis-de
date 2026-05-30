@@ -76,7 +76,7 @@ Context: Basic
 * value[x] only string
 
 Extension: KvBenchmarkQzvGopsExt
-Id: kvbm-qzv-gops
+Id: kv-benchmark-qzv-gops
 Title: "KV-Benchmark QZV-GOP-Zuordnung"
 Description: "Zuordnung von QZV-Bereichen zu EBM-Gebührenordnungspositionen (GOPs). Format: Bereichsname:gop1,gop2|Bereichsname:gop3,gop4"
 Context: Basic
