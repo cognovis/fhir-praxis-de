@@ -90,6 +90,13 @@ repo. The meta-packages (`de.cognovis.bundle.praxis-billing-de`,
 This collapses two pins into one source of truth and **deletes the drift class
 that caused the `0.71.0`-did-not-reach-Aidbox incident.**
 
+The lock-driven Aidbox seeding must load private IG CodeSystems through Aidbox's
+**terminology-import (FHIR-package) path, not plain FHIR REST PUT** — REST PUT does
+not populate Aidbox's concept index, leaving private code systems unresolvable by
+the local terminology engine and breaking validation of value-set bindings such
+as `Account.type`. Restoring the package-import path for private CodeSystems is
+part of the installer refactor.
+
 ### 3. CI is reduced to cheap validation
 
 CI keeps only fast PR gates on `ubuntu-latest` (vendor-leak, lint, structural /
