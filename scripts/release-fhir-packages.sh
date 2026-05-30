@@ -36,7 +36,10 @@
 #   0. Bump + commit version pins (fhir-sync-versions skill) — done BEFORE this script.
 #   1. Run this script → FHIR packages live on npm.cognovis.de.
 #   2. Run Script 2 (downstream SDK/codegen repo) → SDK + Aidbox (separate bead).
-#   3. Optionally run scripts/build-local-ig.sh → IG Publisher HTML site for one IG.
+#   3. Run scripts/advance-package-list.sh → verify-on-npm, then advance the public
+#      package-list.json pointer on fhir.cognovis.de (verify-before-write). This is
+#      a SEPARATE explicit step — this script does NOT advance the pointer itself.
+#   4. Optionally run scripts/build-local-ig.sh → IG Publisher HTML site for one IG.
 
 set -euo pipefail
 

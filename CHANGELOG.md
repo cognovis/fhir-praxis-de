@@ -6,6 +6,17 @@ All notable changes to this project will be documented in this file.
 
 ### Bug Fixes
 
+- **fpde-qsc**: Set PACKAGE_LIST_EXACT_PATH_ONLY=true in local advance
+
+### Features
+
+- **fpde-9go**: Local-first FHIR release pipeline (ADR-006)
+- **fpde-qsc**: Move package-list advance from CI to verify-before-write local step
+
+## [0.72.0] - 2026-05-30
+
+### Bug Fixes
+
 - **fpde-9go**: Use sushi binary directly in ig-ci.yml SUSHI compile step
 - **fpde-9go**: Delegate per-repo build/publish; fix 5 review findings
 - **fpde-9go**: Move delegate-existence checks into verify-and-refuse
@@ -20,6 +31,11 @@ All notable changes to this project will be documented in this file.
 ### Features
 
 - **fpde-9go**: Local-first FHIR release pipeline (ADR-006)
+
+### Miscellaneous
+
+- **fpde-9go**: Session-close changelog update
+- Bump version to 0.72.0
 
 ## [0.71.0] - 2026-05-30
 
