@@ -89,7 +89,7 @@ fi
 NPMRC_TMP=$(mktemp)
 trap 'rm -f "$NPMRC_TMP"' EXIT
 {
-  echo "//npm.cognovis.de/:_auth=$(printf '%s' "cognovis:${VERDACCIO_TOKEN}" | base64)"
+  echo "//npm.cognovis.de/:_auth=$(printf '%s' "cognovis:${VERDACCIO_TOKEN}" | base64 | tr -d '\n')"
   echo "//npm.cognovis.de/:_authToken=${VERDACCIO_TOKEN}"
   echo "//npm.cognovis.de/:always-auth=true"
 } > "$NPMRC_TMP"

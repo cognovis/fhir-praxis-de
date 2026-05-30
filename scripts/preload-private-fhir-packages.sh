@@ -24,7 +24,7 @@ make_npm_config() {
   NPM_CONFIG_FILE="$(mktemp /tmp/fpde-npmrc.XXXXXX)"
   if [ -n "${VERDACCIO_TOKEN:-}" ]; then
     {
-      printf "//npm.cognovis.de/:_auth=%s\n" "$(printf "cognovis:%s" "$VERDACCIO_TOKEN" | base64)"
+      printf "//npm.cognovis.de/:_auth=%s\n" "$(printf "cognovis:%s" "$VERDACCIO_TOKEN" | base64 | tr -d '\n')"
       printf "//npm.cognovis.de/:always-auth=true\n"
     } > "$NPM_CONFIG_FILE"
   else
