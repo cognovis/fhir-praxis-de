@@ -1,16 +1,31 @@
 #!/usr/bin/env bash
 # Script 1 (ADR-006): Build and publish all FHIR packages to npm.cognovis.de.
 #
-# Driven by fhir-versions.lock.yaml in the fhir-terminology-de sibling checkout.
-# Idempotent: packages already on npm.cognovis.de at the pinned version are skipped.
-# Verify-and-refuse: if ANY sibling checkout version != lock pin, exits non-zero
-# before publishing ANYTHING.
+# fhir-praxis-de is the orchestration hub. This script does NOT reimplement
+# per-repo build/publish logic — it delegates to each sibling repo's existing,
+# tested chain:
+#   - IG repos (praxis, dental): scripts/build-package.sh (SUSHI) → publish tgz
+#   - terminology repo:          scripts/build.sh (ETL) → scripts/publish.sh
+#
+# Driven by fhir-versions.lock.yaml in the fhir-terminology-de sibling checkout
+# as the single source of truth for IG version pins.
+#
+# Idempotent: packages already on npm.cognovis.de at the pinned version are
+# skipped (IG: authenticated `npm view`; terminology: publish.sh's own
+# already-published check).
+#
+# Verify-and-refuse: if ANY in-scope sibling checkout fails its pre-publish
+# guard (version mismatch OR dirty working tree), exits non-zero before
+# publishing ANYTHING.
 #
 # Usage:
-#   VERDACCIO_TOKEN=<token> ./scripts/release-fhir-packages.sh [--dry-run]
+#   VERDACCIO_TOKEN=<token> ./scripts/release-fhir-packages.sh [--dry-run] [--allow-dirty]
 #
 # Environment:
-#   VERDACCIO_TOKEN   Required. npm.cognovis.de auth token (cognovis:<token>, base64-encoded).
+#   VERDACCIO_TOKEN   Required. npm.cognovis.de auth token (raw token; the script
+#                     base64-encodes "cognovis:<token>" for the temp .npmrc and
+#                     also exports it as NODE_AUTH_TOKEN for the terminology
+#                     publish.sh delegate).
 #   CODE_ROOT         Optional. Parent dir of sibling repos. Default: parent of this repo.
 #   LOCK_FILE         Optional. Path to fhir-versions.lock.yaml. Default: derived from CODE_ROOT.
 #
@@ -25,14 +40,38 @@
 
 set -euo pipefail
 
+# Associative arrays (IG_REPO_DIR) require bash 4+. macOS ships bash 3.2 as
+# /bin/bash; this script expects a modern bash (homebrew bash, or Linux).
+if (( BASH_VERSINFO[0] < 4 )); then
+  echo "ERROR: this script requires bash 4+ (found ${BASH_VERSION}). On macOS: brew install bash." >&2
+  exit 1
+fi
+
 # ───────── Configuration ─────────
 SCRIPT_DIR="$(cd "$(dirname "$0")" && pwd)"
 REPO_ROOT="$(cd "$SCRIPT_DIR/.." && pwd)"
 CODE_ROOT="${CODE_ROOT:-$(dirname "$REPO_ROOT")}"
 LOCK_FILE="${LOCK_FILE:-$CODE_ROOT/fhir-terminology-de/fhir-versions.lock.yaml}"
+TERM_REPO="$CODE_ROOT/fhir-terminology-de"
 NPM_REGISTRY="https://npm.cognovis.de"
 DRY_RUN=false
-[[ "${1:-}" == "--dry-run" ]] && DRY_RUN=true
+ALLOW_DIRTY=false
+for arg in "$@"; do
+  case "$arg" in
+    --dry-run)     DRY_RUN=true ;;
+    --allow-dirty) ALLOW_DIRTY=true ;;
+    *) echo "Unknown argument: $arg" >&2; exit 2 ;;
+  esac
+done
+
+# Explicit IG id → sibling repo directory map. Avoids fragile prefix stripping
+# that silently no-ops for ids outside the de.cognovis.fhir.* namespace
+# (critique #3). Only ids listed here are treated as IG checkouts; any IG in the
+# lock without a mapping is a hard error in verify-and-refuse.
+declare -A IG_REPO_DIR=(
+  [de.cognovis.fhir.praxis]="$CODE_ROOT/fhir-praxis-de"
+  [de.cognovis.fhir.dental]="$CODE_ROOT/fhir-dental-de"
+)
 
 # ───────── Credentials ─────────
 if [[ -z "${VERDACCIO_TOKEN:-}" ]]; then
@@ -42,14 +81,21 @@ if [[ -z "${VERDACCIO_TOKEN:-}" ]]; then
   exit 1
 fi
 
-# Write auth to a temp .npmrc — never modify the global one.
+# Write auth to a temp .npmrc — never modify the global one. Both the _auth
+# (Basic) and _authToken forms are written so that `npm view` / `npm publish`
+# authenticate for reads AND writes (critique #2: reads must be authenticated,
+# otherwise a read-protected registry returns non-200 and every package looks
+# unpublished).
 NPMRC_TMP=$(mktemp)
 trap 'rm -f "$NPMRC_TMP"' EXIT
 {
   echo "//npm.cognovis.de/:_auth=$(printf '%s' "cognovis:${VERDACCIO_TOKEN}" | base64)"
+  echo "//npm.cognovis.de/:_authToken=${VERDACCIO_TOKEN}"
   echo "//npm.cognovis.de/:always-auth=true"
 } > "$NPMRC_TMP"
 export NPM_CONFIG_USERCONFIG="$NPMRC_TMP"
+# The terminology publish.sh delegate authenticates via NODE_AUTH_TOKEN.
+export NODE_AUTH_TOKEN="$VERDACCIO_TOKEN"
 
 # ───────── Logging helpers ─────────
 log()         { echo "[release-fhir-packages] $*"; }
@@ -62,44 +108,33 @@ log_err()     { echo "[release-fhir-packages] ERROR $*" >&2; }
 # ───────── Helpers ─────────
 
 # Returns 0 (true) if pkg@version is already published on the registry.
+# Uses authenticated `npm view` against the temp .npmrc (critique #2) so that a
+# read-protected Verdaccio still answers correctly instead of always reporting
+# "not published".
 is_published() {
-  local pkg="$1" ver="$2"
-  local http_code
-  http_code=$(curl -sf -o /dev/null -w "%{http_code}" \
-    --max-time 15 "$NPM_REGISTRY/$pkg/$ver" 2>/dev/null || echo "000")
-  [[ "$http_code" == "200" ]]
+  local pkg="$1" ver="$2" found
+  found=$(npm view "$pkg@$ver" version --registry "$NPM_REGISTRY" --silent 2>/dev/null || true)
+  [[ "$found" == "$ver" ]]
 }
 
-# Pack and publish a pre-built package directory.
-# Idempotent: EPUBLISHCONFLICT / 409 treated as success.
-publish_dir() {
-  local pkg_dir="$1" pkg_id="$2" ver="$3"
-  local tmpdir pub_log pub_exit tgz
-  tmpdir=$(mktemp -d)
-
-  npm pack "$pkg_dir" --pack-destination "$tmpdir" --ignore-scripts >/dev/null 2>&1
-  tgz=$(find "$tmpdir" -maxdepth 1 -name '*.tgz' -print -quit)
-  if [[ -z "$tgz" ]]; then
-    log_err "npm pack produced no tgz for $pkg_id@$ver (dir: $pkg_dir)"
-    rm -rf "$tmpdir"
+# Verify-and-refuse guard for a single git checkout: working tree must be clean
+# (critique #5 — a dirty tree at the right version number would publish
+# uncommitted content). Honors --allow-dirty for local iteration.
+check_tree_clean() {
+  local repo_dir="$1" label="$2"
+  if [[ "$ALLOW_DIRTY" == "true" ]]; then
+    return 0
+  fi
+  if ! git -C "$repo_dir" rev-parse --git-dir >/dev/null 2>&1; then
+    log_err "$label: not a git checkout: $repo_dir"
     return 1
   fi
-
-  pub_log=$(npm publish "$tgz" --registry "$NPM_REGISTRY" --ignore-scripts 2>&1) \
-    && pub_exit=0 || pub_exit=$?
-
-  rm -rf "$tmpdir"
-
-  if [[ "$pub_exit" -eq 0 ]]; then
-    log_pub "$pkg_id@$ver"
-    return 0
+  if [[ -n "$(git -C "$repo_dir" status --porcelain)" ]]; then
+    log_err "$label: working tree is dirty at $repo_dir"
+    log_err "  Commit or stash changes (or pass --allow-dirty for a local test). Refusing to publish uncommitted content."
+    return 1
   fi
-  if echo "$pub_log" | grep -qE "EPUBLISHCONFLICT|already_published|409|cannot publish over"; then
-    log_skip "$pkg_id@$ver (conflict — already on registry)"
-    return 0
-  fi
-  log_err "npm publish failed for $pkg_id@$ver: $pub_log"
-  return "$pub_exit"
+  return 0
 }
 
 # ───────── Pre-flight ─────────
@@ -113,46 +148,51 @@ fi
 log "Lock file : $LOCK_FILE"
 log "Registry  : $NPM_REGISTRY"
 log "Code root : $CODE_ROOT"
-[[ "$DRY_RUN" == "true" ]] && log "DRY RUN   : no packages will be published"
+[[ "$DRY_RUN" == "true" ]]     && log "DRY RUN   : no packages will be published"
+[[ "$ALLOW_DIRTY" == "true" ]] && log "ALLOW-DIRTY: clean-tree guard disabled"
 echo ""
 
-# ───────── Parse lock file ─────────
-LOCK_JSON=$(python3 - <<PYEOF
-import yaml, json, sys
-
-with open("$LOCK_FILE") as f:
+# ───────── Parse lock file (IG pins only; terminology owns its own versions) ─────────
+IG_IDS=$(python3 - "$LOCK_FILE" <<'PYEOF'
+import yaml, sys
+with open(sys.argv[1]) as f:
     lock = yaml.safe_load(f)
-
-# Bundles are being eliminated per ADR-006 (downstream bead) — skip them.
-output = {
-    "igs": lock.get("igs", {}),
-    "packages": lock.get("packages", {}),
-}
-print(json.dumps(output))
+for k in lock.get("igs", {}):
+    print(k)
 PYEOF
 )
 
+ig_lock_version() {
+  python3 - "$LOCK_FILE" "$1" <<'PYEOF'
+import yaml, sys
+with open(sys.argv[1]) as f:
+    lock = yaml.safe_load(f)
+print(lock["igs"][sys.argv[2]]["version"])
+PYEOF
+}
+
 # ─────────────────────────────────────────────────────────────────────────────
-# PHASE 1 — Verify-and-refuse: check ALL versions before publishing ANYTHING.
+# PHASE 1 — Verify-and-refuse: check ALL guards before publishing ANYTHING.
 # ─────────────────────────────────────────────────────────────────────────────
-log "=== Phase 1: Verify-and-refuse (all version checks before any publish) ==="
+log "=== Phase 1: Verify-and-refuse (all guards before any publish) ==="
 ERRORS=0
 
-# --- Check IG checkouts ---
+# --- IG checkouts: explicit repo map + version pin + clean tree ---
 while IFS= read -r pkg_id; do
-  lock_ver=$(echo "$LOCK_JSON" | python3 -c \
-    "import json,sys; d=json.load(sys.stdin); print(d['igs']['$pkg_id']['version'])")
+  [[ -z "$pkg_id" ]] && continue
+  lock_ver=$(ig_lock_version "$pkg_id")
+  repo_dir="${IG_REPO_DIR[$pkg_id]:-}"
 
-  # Naming convention: de.cognovis.fhir.X → ~/code/fhir-X-de
-  repo_suffix="${pkg_id#de.cognovis.fhir.}"
-  repo_dir="$CODE_ROOT/fhir-${repo_suffix}-de"
-
+  if [[ -z "$repo_dir" ]]; then
+    log_err "No sibling-repo mapping for IG '$pkg_id'. Add it to IG_REPO_DIR in this script."
+    ERRORS=$((ERRORS + 1))
+    continue
+  fi
   if [[ ! -d "$repo_dir" ]]; then
     log_err "Sibling checkout not found: $repo_dir  (for $pkg_id)"
     ERRORS=$((ERRORS + 1))
     continue
   fi
-
   if [[ ! -f "$repo_dir/sushi-config.yaml" ]]; then
     log_err "sushi-config.yaml missing in $repo_dir"
     ERRORS=$((ERRORS + 1))
@@ -167,73 +207,64 @@ while IFS= read -r pkg_id; do
     log_err "  Fix: run fhir-sync-versions skill, commit, then re-run this script."
     ERRORS=$((ERRORS + 1))
   else
-    log_ok  "$pkg_id @ $lock_ver  ($repo_dir)"
-  fi
-done < <(echo "$LOCK_JSON" | python3 -c \
-  "import json,sys; d=json.load(sys.stdin); [print(k) for k in d['igs']]")
-
-# --- Check terminology packages ---
-TERM_REPO="$CODE_ROOT/fhir-terminology-de"
-while IFS= read -r pkg_id; do
-  lock_ver=$(echo "$LOCK_JSON" | python3 -c \
-    "import json,sys; d=json.load(sys.stdin); print(d['packages']['$pkg_id']['version'])")
-  pkg_dir="$TERM_REPO/packages/$pkg_id"
-
-  if [[ ! -d "$pkg_dir" ]]; then
-    # ETL-generated packages have no committed package dir — note and skip check.
-    log_note "$pkg_id — no committed package dir (ETL-generated); version check skipped"
-    continue
+    log_ok  "$pkg_id @ $lock_ver  ($(basename "$repo_dir"))"
   fi
 
-  if [[ ! -f "$pkg_dir/package.json" ]]; then
-    log_err "package.json missing: $pkg_dir/package.json"
-    ERRORS=$((ERRORS + 1))
-    continue
-  fi
+  check_tree_clean "$repo_dir" "$pkg_id" || ERRORS=$((ERRORS + 1))
+done <<< "$IG_IDS"
 
-  checkout_ver=$(python3 -c \
-    "import json; print(json.load(open('$pkg_dir/package.json'))['version'])")
-  if [[ "$checkout_ver" != "$lock_ver" ]]; then
-    log_err "VERSION MISMATCH: $pkg_id"
-    log_err "  lock pin   : $lock_ver"
-    log_err "  package.json: $checkout_ver  ($pkg_dir/package.json)"
-    ERRORS=$((ERRORS + 1))
+# --- Terminology repo: clean tree + drift guard (its own source of truth) ---
+if [[ ! -d "$TERM_REPO" ]]; then
+  log_err "Terminology repo not found: $TERM_REPO"
+  ERRORS=$((ERRORS + 1))
+else
+  check_tree_clean "$TERM_REPO" "fhir-terminology-de" || ERRORS=$((ERRORS + 1))
+
+  # The terminology repo owns its package versions (build.sh + write_bundle_packages)
+  # and ships check-fhir-version-drift.sh to assert committed files match the lock.
+  # Delegate the version-pin verification to it instead of re-deriving it here.
+  DRIFT_GUARD="$TERM_REPO/scripts/check-fhir-version-drift.sh"
+  if [[ -x "$DRIFT_GUARD" ]]; then
+    if (cd "$TERM_REPO" && bash scripts/check-fhir-version-drift.sh) >/tmp/fhir-drift.log 2>&1; then
+      log_ok "fhir-terminology-de version drift guard passed"
+    else
+      log_err "fhir-terminology-de version drift guard FAILED (see /tmp/fhir-drift.log):"
+      tail -20 /tmp/fhir-drift.log >&2 || true
+      ERRORS=$((ERRORS + 1))
+    fi
   else
-    log_ok  "$pkg_id @ $lock_ver"
+    log_note "check-fhir-version-drift.sh not found/executable in terminology repo; skipping drift guard"
   fi
-done < <(echo "$LOCK_JSON" | python3 -c \
-  "import json,sys; d=json.load(sys.stdin); [print(k) for k in d['packages']]")
+fi
 
 if [[ "$ERRORS" -gt 0 ]]; then
   echo ""
-  log_err "=== VERIFY-AND-REFUSE: $ERRORS mismatch(es). NOTHING was published. ==="
+  log_err "=== VERIFY-AND-REFUSE: $ERRORS guard failure(s). NOTHING was published. ==="
   exit 1
 fi
 
 echo ""
-log "=== All versions verified OK. ==="
+log "=== All guards passed. ==="
 echo ""
 
 # ─────────────────────────────────────────────────────────────────────────────
 # PHASE 2 — Publish
 # ─────────────────────────────────────────────────────────────────────────────
 log "=== Phase 2: Publish ==="
-PUBLISHED=0
-SKIPPED=0
+IG_PUBLISHED=0
+IG_SKIPPED=0
 
-# --- Publish IG packages (SUSHI build required) ---
+# --- IG packages: SUSHI build via each repo's build-package.sh, then publish tgz ---
 while IFS= read -r pkg_id; do
-  lock_ver=$(echo "$LOCK_JSON" | python3 -c \
-    "import json,sys; d=json.load(sys.stdin); print(d['igs']['$pkg_id']['version'])")
+  [[ -z "$pkg_id" ]] && continue
+  lock_ver=$(ig_lock_version "$pkg_id")
+  repo_dir="${IG_REPO_DIR[$pkg_id]}"
 
   if is_published "$pkg_id" "$lock_ver"; then
-    log_skip "$pkg_id @ $lock_ver"
-    SKIPPED=$((SKIPPED + 1))
+    log_skip "$pkg_id @ $lock_ver (already on registry)"
+    IG_SKIPPED=$((IG_SKIPPED + 1))
     continue
   fi
-
-  repo_suffix="${pkg_id#de.cognovis.fhir.}"
-  repo_dir="$CODE_ROOT/fhir-${repo_suffix}-de"
 
   log "Building $pkg_id @ $lock_ver via SUSHI ($(basename "$repo_dir"))..."
   if [[ "$DRY_RUN" == "true" ]]; then
@@ -254,48 +285,38 @@ while IFS= read -r pkg_id; do
     exit 1
   fi
 
-  pub_log=$(npm publish "$tgz" --registry "$NPM_REGISTRY" --ignore-scripts 2>&1) \
+  pub_log=$(npm publish "$tgz" --registry "$NPM_REGISTRY" --ignore-scripts --tag latest 2>&1) \
     && pub_exit=0 || pub_exit=$?
 
   if [[ "$pub_exit" -eq 0 ]]; then
     log_pub "$pkg_id @ $lock_ver"
-    PUBLISHED=$((PUBLISHED + 1))
+    IG_PUBLISHED=$((IG_PUBLISHED + 1))
   elif echo "$pub_log" | grep -qE "EPUBLISHCONFLICT|already_published|409|cannot publish over"; then
-    log_skip "$pkg_id @ $lock_ver (conflict)"
-    SKIPPED=$((SKIPPED + 1))
+    log_skip "$pkg_id @ $lock_ver (conflict — already on registry)"
+    IG_SKIPPED=$((IG_SKIPPED + 1))
   else
     log_err "npm publish failed for $pkg_id @ $lock_ver: $pub_log"
     exit "$pub_exit"
   fi
-done < <(echo "$LOCK_JSON" | python3 -c \
-  "import json,sys; d=json.load(sys.stdin); [print(k) for k in d['igs']]")
+done <<< "$IG_IDS"
 
-# --- Publish terminology packages (pre-built, pack from packages/ dir) ---
-while IFS= read -r pkg_id; do
-  lock_ver=$(echo "$LOCK_JSON" | python3 -c \
-    "import json,sys; d=json.load(sys.stdin); print(d['packages']['$pkg_id']['version'])")
-  pkg_dir="$TERM_REPO/packages/$pkg_id"
-
-  if [[ ! -d "$pkg_dir" ]]; then
-    log_note "$pkg_id — no committed package dir (ETL-generated); skipping publish"
-    continue
+# --- Terminology packages: delegate to the terminology repo's ETL build + publish.
+#     build.sh materializes ALL packages (including ETL-generated leaves that have
+#     no committed packages/<id>/ dir — critique #1). publish.sh is itself
+#     idempotent and authenticated (critique #2, #4). ---
+log "Building + publishing terminology packages via fhir-terminology-de chain..."
+if [[ "$DRY_RUN" == "true" ]]; then
+  log "DRY RUN: would run fhir-terminology-de scripts/build.sh && scripts/publish.sh"
+else
+  if [[ ! -f "$TERM_REPO/scripts/build.sh" ]] || [[ ! -f "$TERM_REPO/scripts/publish.sh" ]]; then
+    log_err "Terminology repo is missing scripts/build.sh or scripts/publish.sh"
+    exit 1
   fi
-
-  if is_published "$pkg_id" "$lock_ver"; then
-    log_skip "$pkg_id @ $lock_ver"
-    SKIPPED=$((SKIPPED + 1))
-    continue
-  fi
-
-  if [[ "$DRY_RUN" == "true" ]]; then
-    log "DRY RUN: would publish $pkg_id @ $lock_ver from $pkg_dir"
-    continue
-  fi
-
-  publish_dir "$pkg_dir" "$pkg_id" "$lock_ver"
-  PUBLISHED=$((PUBLISHED + 1))
-done < <(echo "$LOCK_JSON" | python3 -c \
-  "import json,sys; d=json.load(sys.stdin); [print(k) for k in d['packages']]")
+  (cd "$TERM_REPO" && bash scripts/build.sh)
+  # publish.sh reports its own per-package PUB/SKIP lines and is idempotent.
+  (cd "$TERM_REPO" && bash scripts/publish.sh)
+  log_ok "Terminology packages built and published via fhir-terminology-de chain"
+fi
 
 echo ""
-log "=== Done. Published: $PUBLISHED  Skipped (already on registry): $SKIPPED ==="
+log "=== Done. IG published: $IG_PUBLISHED  IG skipped: $IG_SKIPPED  Terminology: delegated to fhir-terminology-de ==="
