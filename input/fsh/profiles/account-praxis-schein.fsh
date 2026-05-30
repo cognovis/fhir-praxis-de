@@ -14,9 +14,9 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 * identifier 1..* MS
 * identifier ^slicing.discriminator.type = #value
 * identifier ^slicing.discriminator.path = "system"
-* identifier ^slicing.rules = #closed
-* identifier ^short = "ScheinNummer (source-PK, ADR-002) — only this slice is permitted"
-* identifier contains scheinNummer 1..1 MS
+* identifier ^slicing.rules = #open
+* identifier ^short = "ScheinNummer (source-PK, ADR-002) with additional identifier slices allowed"
+* identifier contains scheinNummer 0..1 MS
 * identifier[scheinNummer].system 1..1 MS
 * identifier[scheinNummer].system = "https://fhir.cognovis.de/praxis/sid/scheinNummer"
 * identifier[scheinNummer].value 1..1 MS

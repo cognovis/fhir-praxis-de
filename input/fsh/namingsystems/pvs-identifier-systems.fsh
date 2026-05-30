@@ -140,3 +140,16 @@ Usage: #definition
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/sid/scheinNummer"
 * uniqueId[0].preferred = true
+
+Instance: abrechnungsquartal
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "Abrechnungsquartal"
+* status = #draft
+* kind = #identifier
+* date = "2026-05-30"
+* publisher = "cognovis GmbH"
+* description = "Abrechnungsquartal-Identifier (YYYY-QN, z.B. 2026-Q2) fuer Account.identifier auf AccountPraxisSchein"
+* uniqueId[0].type = #uri
+* uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/abrechnungsquartal"
+* uniqueId[0].preferred = true
