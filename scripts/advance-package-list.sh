@@ -106,7 +106,12 @@ echo ""
 # ─────────────────────────────────────────────────────────────────────────────
 TODAY="$(date -u +%Y-%m-%d)"
 log "Step 2: advancing package-list.json → $VERSION ($TODAY)..."
-python3 "$UPDATE" "$VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$PACKAGE_LIST"
+# PACKAGE_LIST_EXACT_PATH_ONLY=true: update ONLY the explicit --package-list path.
+# Without it, update-package-list-remote.py scans nginx config + filesystem roots
+# (/var/www, /srv, /opt, /home/fhir, ...) and rewrites every package-list.json it
+# finds — unacceptable for a local run. The old CI job set this; preserve it.
+PACKAGE_LIST_EXACT_PATH_ONLY=true \
+  python3 "$UPDATE" "$VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$PACKAGE_LIST"
 log "Step 2 OK: pointer advanced."
 echo ""
 
