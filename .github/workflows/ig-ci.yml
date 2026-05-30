@@ -58,4 +58,4 @@ jobs:
           sushi --version
 
       - name: SUSHI compile (structural validation)
-        run: npx sushi . --snapshot
+        run: sushi . --snapshot
