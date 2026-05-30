@@ -4,15 +4,22 @@
 # public package-list.json on fhir.cognovis.de.
 #
 # FHIR package publishing is now done locally via scripts/release-fhir-packages.sh
-# (Script 1 per ADR-006). The downstream-notify machinery
-# downstream-notify machinery has been retired (ADR-006).
+# (Script 1 per ADR-006). The downstream-notify machinery has been retired.
+#
+# The public package-list.json advance on fhir.cognovis.de is ALSO done locally,
+# AFTER Script 1 confirms the npm publish, via scripts/advance-package-list.sh
+# (verify-before-write). It is intentionally NOT a CI step: advancing the public
+# pointer from CI on tag-push could lead the registry (pointer written before the
+# package is confirmed on npm).
 #
 # Release sequence:
 #   0. Bump + commit version pins (fhir-sync-versions).
 #   1. scripts/release-fhir-packages.sh — publish FHIR packages locally.
 #   2. Push the release tag: git tag v<VERSION> && git push origin v<VERSION>
 #      → triggers this workflow.
-#   3. Optionally: scripts/build-local-ig.sh — build IG HTML site locally.
+#   3. scripts/advance-package-list.sh — verify-on-npm then advance the public
+#      package-list.json pointer (after Script 1 confirms publish).
+#   4. Optionally: scripts/build-local-ig.sh — build IG HTML site locally.
 
 name: IG Release — Create GitHub Release
 
@@ -58,36 +65,3 @@ jobs:
           name: ${{ steps.version.outputs.tag }}
           generate_release_notes: true
           make_latest: true
-
-  update-package-list:
-    name: Update package-list.json on fhir.cognovis.de
-    needs: create-release
-    runs-on: [self-hosted, Linux, ARM64, netbird]
-    steps:
-      - uses: actions/checkout@v5
-
-      - name: Read version
-        id: version
-        env:
-          TAG_NAME: ${{ github.ref_name }}
-        run: echo "version=${TAG_NAME#v}" >> "$GITHUB_OUTPUT"
-
-      - name: Update package-list.json on fhir.cognovis.de
-        env:
-          IG_VERSION: ${{ steps.version.outputs.version }}
-          PACKAGE_ID: de.cognovis.fhir.praxis
-          PUBLIC_IG_PATH: https://fhir.cognovis.de/praxis
-          REMOTE_PACKAGE_LIST: /opt/fhir-proxy/html/praxis/package-list.json
-          PACKAGE_LIST_EXACT_PATH_ONLY: "true"
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
-          GITHUB_TOKEN: ${{ github.token }}
-        run: |
-          set -euo pipefail
-          TODAY=$(date -u +%Y-%m-%d)
-          python3 .github/scripts/update-package-list-remote.py \
-            "$IG_VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$REMOTE_PACKAGE_LIST"
-          python3 .github/scripts/verify-fhir-release-publication.py \
-            --version "$IG_VERSION" \
-            --package-id "$PACKAGE_ID" \
-            --public-ig-path "$PUBLIC_IG_PATH" \
-            --repository "$GITHUB_REPOSITORY"
