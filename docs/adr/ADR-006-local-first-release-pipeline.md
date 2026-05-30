@@ -163,3 +163,25 @@ exactly what the committed pins declare.
   and meta-package pin lag — the incident that motivated this ADR.
 - `fhir-versions.lock.yaml` (single source of truth for pinned FHIR versions).
 - `fhir-publish-ig` skill (trusted local preflight → publish model).
+
+
+## Addendum (fpde-x8r): canonical home of fhir-versions.lock.yaml
+
+The lock manifest's canonical home is **`fhir-praxis-de`** (the orchestration hub),
+not `fhir-terminology-de`. Rationale: the hub drives releases (Script 1) and is the
+natural owner of the single source of truth; keeping the manifest beside the
+consumed terminology repo was an accident of history.
+
+Resolution order for all consumers (Script 1, the downstream SDK/codegen Script 2,
+terminology ETL, the `fhir-sync-versions` skill):
+
+1. `$FHIR_LOCK_FILE` (explicit override)
+2. the local hub copy (`fhir-praxis-de/fhir-versions.lock.yaml`)
+3. the sibling hub path (`../fhir-praxis-de/fhir-versions.lock.yaml`) for non-hub repos
+4. legacy `fhir-terminology-de/fhir-versions.lock.yaml` (transition fallback only)
+
+The terminology-local copy removal and its ETL/CI consumer repointing are owned by
+the active downstream SDK/codegen cleanup bead (cross-repo terminology cleanup);
+this bead only establishes the hub as canonical and points the hub's own Script 1
+at it. The fallback (4) keeps every consumer working until that bead repoints to
+the hub.
