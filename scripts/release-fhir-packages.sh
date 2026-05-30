@@ -122,12 +122,14 @@ is_published() {
 # uncommitted content). Honors --allow-dirty for local iteration.
 check_tree_clean() {
   local repo_dir="$1" label="$2"
-  if [[ "$ALLOW_DIRTY" == "true" ]]; then
-    return 0
-  fi
+  # Always validate the path is a real git checkout — even under --allow-dirty,
+  # which only relaxes the dirty-tree check, not the is-it-git check (fail closed).
   if ! git -C "$repo_dir" rev-parse --git-dir >/dev/null 2>&1; then
     log_err "$label: not a git checkout: $repo_dir"
     return 1
+  fi
+  if [[ "$ALLOW_DIRTY" == "true" ]]; then
+    return 0
   fi
   if [[ -n "$(git -C "$repo_dir" status --porcelain)" ]]; then
     log_err "$label: working tree is dirty at $repo_dir"
@@ -211,6 +213,13 @@ while IFS= read -r pkg_id; do
   fi
 
   check_tree_clean "$repo_dir" "$pkg_id" || ERRORS=$((ERRORS + 1))
+
+  # Verify the delegate build script exists NOW (Phase 1), not mid-publish, so a
+  # missing delegate cannot cause a partial release after earlier IGs published.
+  if [[ ! -f "$repo_dir/scripts/build-package.sh" ]]; then
+    log_err "$pkg_id: delegate scripts/build-package.sh missing in $repo_dir"
+    ERRORS=$((ERRORS + 1))
+  fi
 done <<< "$IG_IDS"
 
 # --- Terminology repo: clean tree + drift guard (its own source of truth) ---
@@ -233,8 +242,18 @@ else
       ERRORS=$((ERRORS + 1))
     fi
   else
-    log_note "check-fhir-version-drift.sh not found/executable in terminology repo; skipping drift guard"
+    log_err "check-fhir-version-drift.sh not found/executable in terminology repo ($DRIFT_GUARD)."
+    log_err "  Cannot verify terminology version pins — refusing to publish. Reinstall the terminology repo's scripts."
+    ERRORS=$((ERRORS + 1))
   fi
+
+  # Verify the terminology delegate chain exists NOW (Phase 1), not mid-publish.
+  for delegate in build.sh publish.sh; do
+    if [[ ! -f "$TERM_REPO/scripts/$delegate" ]]; then
+      log_err "fhir-terminology-de: delegate scripts/$delegate missing"
+      ERRORS=$((ERRORS + 1))
+    fi
+  done
 fi
 
 if [[ "$ERRORS" -gt 0 ]]; then
