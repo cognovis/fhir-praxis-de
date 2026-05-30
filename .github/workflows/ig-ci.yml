@@ -1,20 +1,20 @@
-name: IG CI — Validate & Build
+# IG CI — Cheap PR Validation (ADR-006)
+#
+# Runs only fast validation gates on ubuntu-latest.
+# No self-hosted runners. No IG Publisher. No Aidbox.
+#
+# Heavy IG Publisher builds and npm publishing are handled locally:
+#   - FHIR package publishing → scripts/release-fhir-packages.sh (Script 1)
+#   - IG HTML build         → scripts/build-local-ig.sh (Script 3)
+#
+# Required PR status check: vendor-leak-check / check (vendor-leak-check.yml)
+# This workflow provides additional compile and lint coverage.
+
+name: IG CI — Validate
 
 on:
-  # validate is the release gate: auto-tag (release tag) and deploy (GitHub
-  # Pages) both `needs: validate`. It therefore runs only on main, not per PR.
-  # PRs are gated by the independent vendor-leak-check workflow (`check`), which
-  # is the sole required status check. The full IG Publisher validation is
-  # intentionally not re-run on every PR — it is a scarce self-hosted-runner job
-  # and provided no merge gate (it was never a required check).
-  #
-  # paths-ignore is a denylist (not an allowlist) on purpose: because this push
-  # trigger also drives the Pages deploy, anything that is not explicitly listed
-  # here still triggers a rebuild. That way narrative/image/config changes can
-  # never silently skip a republish; only clearly IG-irrelevant files are ignored.
   push:
     branches: [main]
-    tags-ignore: ['v*']
     paths-ignore:
       - 'CHANGELOG.md'
       - 'README.md'
@@ -22,11 +22,10 @@ on:
       - 'AGENTS.md'
       - 'LICENSE'
       - 'docs/**'
-
-permissions:
-  contents: write
-  pages: write
-  id-token: write
+      - 'output/**'
+      - 'fsh-generated/**'
+  pull_request:
+    branches: [main]
 
 concurrency:
   group: "ig-ci-${{ github.workflow }}-${{ github.event.pull_request.head.repo.full_name || github.repository }}-${{ github.event.pull_request.head.ref || github.ref_name }}"
@@ -34,361 +33,29 @@ concurrency:
 
 jobs:
   validate:
-    if: github.event_name != 'pull_request' || github.event.pull_request.head.repo.full_name == github.repository
-    runs-on: [self-hosted, Linux, X64, docker, atlas, fhir-publisher]
-
-    services:
-      postgres:
-        image: postgres:17
-        env:
-          POSTGRES_DB: aidbox
-          POSTGRES_USER: aidbox
-          POSTGRES_PASSWORD: aidbox
-        options: >-
-          --health-cmd "pg_isready -U aidbox"
-          --health-interval 5s
-          --health-timeout 5s
-          --health-retries 10
-
-      aidbox:
-        image: healthsamurai/aidboxone:edge
-        ports:
-          - 8080/tcp
-        env:
-          AIDBOX_PORT: 8080
-          AIDBOX_FHIR_VERSION: 4.0.1
-          PGHOST: postgres
-          PGPORT: 5432
-          PGDATABASE: aidbox
-          PGUSER: aidbox
-          PGPASSWORD: aidbox
-          AIDBOX_CLIENT_ID: basic
-          AIDBOX_CLIENT_SECRET: secret
-          AIDBOX_ADMIN_ID: admin
-          AIDBOX_ADMIN_PASSWORD: password
-          AIDBOX_COMPLIANCE: enabled
-          AIDBOX_CORRECT_AIDBOX_FORMAT: true
-          BOX_FHIR_TERMINOLOGY_ENGINE: hybrid
-          BOX_FHIR_TERMINOLOGY_ENGINE_HYBRID_EXTERNAL_TX_SERVER: https://tx.health-samurai.io/fhir
-          BOX_BOOTSTRAP_FHIR_PACKAGES: hl7.fhir.r4.core#4.0.1:hl7.terminology.r4#6.4.0
-          AIDBOX_LICENSE_KEY: ${{ secrets.AIDBOX_LICENSE_KEY }}
+    name: Validate (lint + SUSHI compile)
+    runs-on: ubuntu-latest
 
     steps:
       - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0  # Need tags for auto-tag step
 
-      - name: Verify version sync
+      - name: Verify version sync (VERSION vs sushi-config.yaml)
         run: |
           VERSION=$(tr -d '[:space:]' < VERSION)
           SUSHI_VERSION=$(grep '^version:' sushi-config.yaml | awk '{print $2}')
           if [ "$VERSION" != "$SUSHI_VERSION" ]; then
-            echo "::error::VERSION ($VERSION) and sushi-config.yaml ($SUSHI_VERSION) are out of sync!"
+            echo "::error::VERSION ($VERSION) and sushi-config.yaml ($SUSHI_VERSION) are out of sync."
             exit 1
           fi
-          echo "Versions in sync: $VERSION"
+          echo "Version sync OK: $VERSION"
 
-      - name: Configure Aidbox endpoint
-        run: |
-          echo "AIDBOX_BASE_URL=http://localhost:${{ job.services.aidbox.ports['8080'] }}" >> "$GITHUB_ENV"
+      - name: Vendor-leak check
+        run: bash scripts/check-ig-vendor-leaks.sh
 
-      - name: Verify self-hosted FHIR CI toolchain
+      - name: Install SUSHI
         run: |
-          for command in java node npm npx python3 ruby gem curl jq; do
-            if ! command -v "$command" >/dev/null 2>&1; then
-              echo "::error::Missing required self-hosted runner command: ${command}"
-              exit 1
-            fi
-          done
-          java -version
-          node --version
-          npm --version
-          python3 --version
-          ruby --version
-
-      - name: Ensure SUSHI
-        run: |
-          if ! command -v sushi >/dev/null 2>&1; then
-            npm install -g fsh-sushi
-          fi
+          npm install -g fsh-sushi
           sushi --version
 
-      - name: Wait for Aidbox
-        run: |
-          echo "Waiting for Aidbox to be ready..."
-          for i in $(seq 1 24); do
-            if curl -sf "${AIDBOX_BASE_URL}/health" > /dev/null 2>&1; then
-              echo "Aidbox is ready after $((i * 5))s"
-              break
-            fi
-            if [ "$i" -eq 24 ]; then
-              echo "Aidbox did not start within 120s"
-              exit 1
-            fi
-            sleep 5
-          done
-
-      - name: POST init-bundle.json to Aidbox
-        run: |
-          # Aidbox /health can return OK before it's fully ready to process requests.
-          # Retry the POST a few times to handle this race condition.
-          for attempt in 1 2 3 4 5; do
-            HTTP_CODE=$(curl -s -o /tmp/aidbox-response.json -w "%{http_code}" \
-              -X POST "${AIDBOX_BASE_URL}/" \
-              -u "basic:secret" \
-              -H "Content-Type: application/json" \
-              -d @init-bundle.json)
-            if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
-              echo "init-bundle POSTed successfully (attempt $attempt, HTTP $HTTP_CODE)"
-              exit 0
-            fi
-            echo "Attempt $attempt failed (HTTP $HTTP_CODE):"
-            cat /tmp/aidbox-response.json 2>/dev/null || true
-            echo ""
-            sleep 10
-          done
-          echo "init-bundle POST failed after 5 attempts"
-          exit 1
-
-      - name: Pre-load private FHIR packages from npm.cognovis.de
-        env:
-          VERDACCIO_TOKEN: ${{ secrets.VERDACCIO_TOKEN }}
-        run: |
-          # Praxis depends on de.cognovis.terminology.imaging, which is published
-          # only to the private Verdaccio at npm.cognovis.de (auth required;
-          # public FHIR mirrors return 404). Authenticate and fetch the tarball
-          # with npm pack, then extract into the FHIR package cache so SUSHI/IG
-          # Publisher resolve it locally. Auth pattern matches the publish step
-          # in ig-release.yml (.github/workflows/ig-release.yml).
-          if [ -z "${VERDACCIO_TOKEN:-}" ]; then
-            echo "::error::VERDACCIO_TOKEN secret is not configured — cannot fetch private FHIR packages"
-            exit 1
-          fi
-          {
-            echo "//npm.cognovis.de/:_auth=$(echo -n "cognovis:${VERDACCIO_TOKEN}" | base64)"
-            echo "//npm.cognovis.de/:always-auth=true"
-          } >> ~/.npmrc
-
-          fetch_to_fhir_cache() {
-            local pkg="$1" version="$2"
-            local cache_dir="${HOME}/.fhir/packages/${pkg}#${version}"
-            if [ -d "$cache_dir/package" ] && [ -f "$cache_dir/package/package.json" ]; then
-              echo "$pkg#$version already cached — skipping"
-              return
-            fi
-            echo "Fetching $pkg@$version from npm.cognovis.de..."
-            local pack_dir
-            pack_dir=$(mktemp -d)
-            ( cd "$pack_dir" && npm pack "${pkg}@${version}" --registry https://npm.cognovis.de >/dev/null )
-            local tgz
-            tgz=$(find "$pack_dir" -maxdepth 1 -name '*.tgz' -print -quit)
-            mkdir -p "$cache_dir"
-            tar xzf "$tgz" -C "$cache_dir"
-            echo "  Installed $(find "$cache_dir/package" -mindepth 1 -maxdepth 1 | wc -l) files into $cache_dir"
-          }
-          fetch_to_fhir_cache "de.cognovis.terminology.imaging" "1.0.0"
-          fetch_to_fhir_cache "de.cognovis.terminology.kbv" "1.0.0"
-          # KBV-MIO-Impfpass vocabulary repackage (cognovis-private; npm.cognovis.de only)
-          fetch_to_fhir_cache "kbv.mio.impfpass.vocab" "1.1.0-cognovis.1"
-
-      - name: Generate KBV Basis snapshots
-        uses: ./.github/actions/generate-kbv-basis-snapshots
-
-      - name: Build FHIR package
-        run: bash scripts/build-package.sh
-
-      - name: Install StructureDefinitions into Aidbox
-        run: |
-          echo "Building StructureDefinition transaction bundle..."
-          # Build a FHIR transaction bundle from all generated StructureDefinitions
-          ENTRIES=""
-          COUNT=0
-          for f in fsh-generated/resources/StructureDefinition-*.json; do
-            ID=$(jq -r '.id' "$f")
-            RESOURCE=$(<"$f")
-            if [ -n "$ENTRIES" ]; then ENTRIES="$ENTRIES,"; fi
-            ENTRIES="$ENTRIES{\"resource\":$RESOURCE,\"request\":{\"method\":\"PUT\",\"url\":\"StructureDefinition/$ID\"}}"
-            COUNT=$((COUNT + 1))
-          done
-          echo "{\"resourceType\":\"Bundle\",\"type\":\"transaction\",\"entry\":[$ENTRIES]}" > /tmp/sd-bundle.json
-          echo "Uploading $COUNT StructureDefinitions as transaction bundle..."
-          HTTP_CODE=$(curl -s -o /tmp/sd-response.json -w "%{http_code}" \
-            -X POST "${AIDBOX_BASE_URL}/" \
-            -u "basic:secret" \
-            -H "Content-Type: application/json" \
-            -d @/tmp/sd-bundle.json)
-          if [ "$HTTP_CODE" -ge 200 ] && [ "$HTTP_CODE" -lt 300 ]; then
-            echo "All $COUNT StructureDefinitions uploaded successfully (HTTP $HTTP_CODE)"
-          else
-            echo "StructureDefinition bundle upload failed (HTTP $HTTP_CODE):"
-            jq . /tmp/sd-response.json 2>/dev/null || cat /tmp/sd-response.json 2>/dev/null || true
-            exit 1
-          fi
-
-      - name: Ensure httpyac CLI
-        run: |
-          if ! command -v httpyac >/dev/null 2>&1; then
-            npm install -g httpyac
-          fi
-          httpyac --version
-
-      - name: Run CodeSystem tests
-        run: |
-          # CS expansion tests call tx.health-samurai.io (external terminology server).
-          # This service is rate-limited/unavailable in CI. Run informatively only.
-          httpyac run test/CS/ --all --output short --var baseUrl="${AIDBOX_BASE_URL}" \
-            && echo "::notice::CS tests passed" \
-            || echo "::warning::CS tests had failures (terminology server unavailable in CI — informational only)"
-
-      - name: Run ValueSet tests
-        run: |
-          # VS expansion tests call tx.health-samurai.io (external terminology server).
-          # This service is rate-limited/unavailable in CI. Run informatively only.
-          httpyac run test/VS/ --all --output short --var baseUrl="${AIDBOX_BASE_URL}" \
-            && echo "::notice::VS tests passed" \
-            || echo "::warning::VS tests had failures (terminology server unavailable in CI — informational only)"
-
-      - name: Run Profile validation tests
-        run: |
-          # Profile validation tests — some negative tests fail on Aidbox edge
-          # due to changed validation behavior. Run informatively until tests
-          # are updated for the new Aidbox version.
-          httpyac run test/Profile/ --all --output short --var baseUrl="${AIDBOX_BASE_URL}" \
-            && echo "::notice::Profile tests passed" \
-            || echo "::warning::Profile tests had failures (10 negative tests need updating for Aidbox edge — see cognovis/fhir-praxis-de backlog)"
-
-      - name: Ensure Jekyll
-        run: |
-          if ! command -v jekyll >/dev/null 2>&1; then
-            gem install --user-install jekyll
-            GEM_BIN="$(ruby -rrubygems -e 'print Gem.user_dir + "/bin"')"
-            echo "$GEM_BIN" >> "$GITHUB_PATH"
-            export PATH="$GEM_BIN:$PATH"
-          fi
-          jekyll --version
-
-      - name: Verify IG Publisher
-        run: |
-          PUBLISHER_JAR="/opt/fhir-ig-publisher/publisher-2.2.7.jar"
-          if [ ! -f "$PUBLISHER_JAR" ]; then
-            echo "::error::Missing pinned IG Publisher jar: ${PUBLISHER_JAR}"
-            exit 1
-          fi
-          echo "94dff8e4b8faecda0bebbf93d3a14fdddc52020a0a7e8f5225807727b0281661  ${PUBLISHER_JAR}" | sha256sum -c -
-          echo "PUBLISHER_JAR=${PUBLISHER_JAR}" >> "$GITHUB_ENV"
-
-      - name: Pre-load previous FHIR package from private registry
-        run: |
-          CURRENT=$(tr -d '[:space:]' < VERSION)
-          REGISTRY_DATA=$(curl -sf "https://npm.cognovis.de/de.cognovis.fhir.praxis" || echo '{}')
-          PREV_VERSION=$(echo "$REGISTRY_DATA" | python3 -c "
-          import json, sys
-          data = json.load(sys.stdin)
-          current = tuple(int(x) for x in '${CURRENT}'.split('.'))
-          versions = list(data.get('versions', {}).keys())
-          older = [v for v in versions if tuple(int(x) for x in v.split('.')) < current]
-          older.sort(key=lambda v: tuple(int(x) for x in v.split('.')))
-          print(older[-1] if older else '')
-          ")
-          if [ -z "$PREV_VERSION" ]; then
-            echo "No previous version found on npm.cognovis.de — skipping pre-load"
-            exit 0
-          fi
-          echo "Pre-loading de.cognovis.fhir.praxis#${PREV_VERSION} into FHIR cache..."
-          CACHE_DIR="${HOME}/.fhir/packages/de.cognovis.fhir.praxis#${PREV_VERSION}"
-          mkdir -p "$CACHE_DIR"
-          curl -sL "https://npm.cognovis.de/de.cognovis.fhir.praxis/-/de.cognovis.fhir.praxis-${PREV_VERSION}.tgz" \
-            | tar -xz -C "$CACHE_DIR"
-          echo "Installed $(find "$CACHE_DIR/package" -mindepth 1 -maxdepth 1 | wc -l) files to $CACHE_DIR"
-
-      - name: Run IG Publisher
-        run: |
-          set +eo pipefail
-          java -jar "$PUBLISHER_JAR" -ig . -no-sushi 2>&1 | tee /tmp/ig-publisher.log
-          IG_EXIT=${PIPESTATUS[0]}
-          set -eo pipefail
-          if [ "$IG_EXIT" -ne 0 ]; then
-            # PublicationChecker NPE is a known IG Publisher bug when the remote
-            # package-list.json is unreachable. The build output is already complete
-            # at that point (zip built, HTML checked).
-            if grep -q "Publishing Content Failed" /tmp/ig-publisher.log && [ -f output/full-ig.zip ]; then
-              echo "::warning::PublicationChecker failed (known NPE) — build output is complete, continuing"
-            else
-              echo "IG Publisher failed with unexpected error:"
-              tail -30 /tmp/ig-publisher.log
-              exit "$IG_EXIT"
-            fi
-          fi
-
-      - name: QA Gate — fail if internal errors > 0 (blocks auto-tag)
-        run: |
-          python3 scripts/qa_gate.py \
-            --qa-html output/qa.html \
-            --allowlist .github/qa-allowlist.yml
-
-      - name: Upload QA Report artifact
-        if: always()
-        uses: actions/upload-artifact@v6
-        with:
-          name: qa-report
-          path: |
-            output/qa.html
-            output/qa/
-
-      - name: Upload package artifact
-        uses: actions/upload-artifact@v6
-        with:
-          name: ig-package
-          path: |
-            dist/*.tgz
-            output/full-ig.zip
-
-      - name: Setup Pages
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: actions/configure-pages@v6
-
-      - name: Upload Pages artifact
-        if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-        uses: actions/upload-pages-artifact@v3
-        with:
-          path: output
-
-  deploy:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: validate
-    runs-on: ubuntu-latest
-    environment:
-      name: github-pages
-      url: ${{ steps.deployment.outputs.page_url }}
-    permissions:
-      pages: write
-      id-token: write
-    steps:
-      - name: Deploy to GitHub Pages
-        id: deployment
-        uses: actions/deploy-pages@v5
-
-  auto-tag:
-    if: github.ref == 'refs/heads/main' && github.event_name == 'push'
-    needs: validate
-    runs-on: ubuntu-latest
-    permissions:
-      contents: write
-    steps:
-      - uses: actions/checkout@v5
-        with:
-          fetch-depth: 0
-          token: ${{ secrets.RELEASE_PAT }}
-
-      - name: Create release tag if VERSION is newer
-        run: |
-          VERSION=$(tr -d '[:space:]' < VERSION)
-          TAG="v${VERSION}"
-          if git rev-parse "$TAG" >/dev/null 2>&1; then
-            echo "Tag $TAG already exists — skipping"
-          else
-            echo "Creating tag $TAG..."
-            git tag "$TAG"
-            git push origin "$TAG"
-            echo "Tag $TAG pushed — ig-release.yml will handle the release"
-          fi
+      - name: SUSHI compile (structural validation)
+        run: npx sushi . --snapshot

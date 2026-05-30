@@ -4,6 +4,22 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### CI/CD
+
+- **Local-first FHIR release pipeline (ADR-006)**: Replace CI-built heavy releases with
+  deliberate local scripts. `scripts/release-fhir-packages.sh` builds (SUSHI) and
+  `npm publish`es all FHIR packages across sibling checkouts, driven by
+  `fhir-versions.lock.yaml` as the single source of truth. Idempotent (skip already-published
+  versions). Verify-and-refuse on version mismatch. No git operations.
+- **CI reduced to cheap validation**: `ig-ci.yml` now runs only version-sync check,
+  vendor-leak check, and SUSHI compile on `ubuntu-latest`. Self-hosted runner jobs,
+  Aidbox services, IG Publisher, and the auto-tag step removed from CI.
+- **`repository_dispatch` machinery retired**: Removed `dispatch` job and
+  `DOWNSTREAM_DISPATCH_TOKEN` from `ig-release.yml`. Downstream pin-bump coordination
+  is now handled locally via the downstream SDK/codegen orchestrator (Script 2).
+- See `docs/adr/ADR-006-local-first-release-pipeline.md` for the full decision record.
+
+
 ## [0.71.0] - 2026-05-30
 
 ### CI/CD
