@@ -20,6 +20,12 @@ action_boundary:
 
 # fhir-sync-versions
 
+> **Diagnostic and recovery tool.** As of fhir-praxis-de v0.70.x, downstream version-pin
+> updates are automated via receiver workflows in `fhir-dental-de` and `fhir-terminology-de`
+> that trigger on the `ig-published` `repository_dispatch` event. Use this skill to
+> diagnose drift, audit release chains, or recover when automation fails — not as the
+> primary post-release sync path.
+
 Reconcile fhir-* version pins across all locally-checked-out repos against the `fhir-versions.lock.yaml` manifest.
 
 ## Usage
