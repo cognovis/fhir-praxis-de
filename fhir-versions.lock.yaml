@@ -4,7 +4,7 @@
 format_version: 1
 igs:
   de.cognovis.fhir.praxis:
-    version: 0.70.2
+    version: 0.74.0
     consumers:
     - praxis-billing
     - de.cognovis.terminology.kbv-ldt
@@ -32,7 +32,7 @@ packages:
     consumers:
     - praxis-billing
     cross_pins:
-      de.cognovis.fhir.praxis: 0.70.2
+      de.cognovis.fhir.praxis: 0.74.0
   de.cognovis.terminology.imaging:
     version: 1.0.0
     consumers:
@@ -172,7 +172,7 @@ adapter_sets:
       hzv.vertraege, bak.goae (private billing), and the fhir-praxis-de IG.
     license: Proprietary
     dependencies:
-      de.cognovis.fhir.praxis: 0.70.2
+      de.cognovis.fhir.praxis: 0.74.0
       de.cognovis.terminology.bfarm: 1.0.0
       de.cognovis.terminology.kbv: 1.0.0
       de.cognovis.terminology.kbv-ebm: 1.0.0
@@ -196,7 +196,7 @@ adapter_sets:
       root canal configuration, and pulp exposure.'
     license: Proprietary
     dependencies:
-      de.cognovis.fhir.praxis: 0.70.2
+      de.cognovis.fhir.praxis: 0.74.0
       de.cognovis.terminology.bfarm: 1.0.0
       de.cognovis.terminology.kbv: 1.0.0
       de.cognovis.terminology.kbv-ebm: 1.0.0
