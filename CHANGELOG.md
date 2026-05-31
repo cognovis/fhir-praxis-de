@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **release**: Add `scripts/release.sh` — single, idempotent, drift-safe release orchestrator wiring `release-fhir-packages.sh` → `advance-package-list.sh` → `release-fhir-ig.sh` in one enforced, no-git sequence (ADR-006). Each step gates the next; re-runs are safe (publish skips already-on-registry, pointer re-set, site rebuilt). `--ig`, `--skip-site`, `--dry-run`.
+
 ## [0.74.1] - 2026-05-31
 
 ### Bug Fixes
