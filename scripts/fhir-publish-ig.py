@@ -1,4 +1,11 @@
 #!/usr/bin/env python3
+# DEPRECATED (fmgt-5ff): This script managed release/publish operations
+# that are now owned by fhir-management. Use fhir-management commands instead:
+#   uv run fhir-release publish
+#   uv run fhir-release update-package-list
+# See fhir-management docs/release-migration.md for the migration map.
+# This script is kept for reference during the transition period.
+
 """Orchestrate trusted FHIR IG preflight, publish handoff, and registry watch."""
 
 # Vendored from cognovis/library-core@7589f980e00435e051e5a2bb417f129cde929786.

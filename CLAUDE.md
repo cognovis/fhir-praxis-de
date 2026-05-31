@@ -20,8 +20,6 @@ Always load these skills at the beginning of every session:
 - `/hs-search` - Search health-samurai.io docs, blog, examples
 - `/atomic-generate-types` - FHIR type generation with @atomic-ehr/codegen
 - `/fhir-validation` - FHIR Schema, $validate responses, and OperationOutcome debugging
-- `/fhir-publish-ig` - trusted preflight, release tag handoff, and publish/watch workflows
-- `/fhir-sync-versions` - downstream fhir-* version pin reconciliation
 
 ## Build
 
@@ -108,9 +106,17 @@ When bumping the version, update BOTH files. If they diverge, the published pack
 
 ## Downstream Dependencies
 
-When publishing a new version of fhir-praxis-de:
-- **fhir-dental-de** pins `de.cognovis.fhir.praxis` in `sushi-config.yaml` → must be updated to the new version
-- Downstream TypeScript codegen fetches `@latest` from GitHub Pages → picks up new version automatically after IG Publisher deploys, but codegen must be re-run to regenerate TypeScript types
+Release orchestration (version bumps, package publishing, package-list updates) is now
+owned by `fhir-management`. Use the following commands from `~/code/fhir/fhir-management`:
+
+```bash
+uv run fhir-release plan --dry-run
+uv run fhir-release publish
+uv run fhir-release update-package-list --package-id de.cognovis.fhir.praxis ...
+```
+
+Downstream TypeScript codegen fetches `@latest` from GitHub Pages → picks up new version
+automatically after IG Publisher deploys, but codegen must be re-run to regenerate TypeScript types.
 
 ## Conventions
 
