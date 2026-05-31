@@ -6,6 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Features
 
+- **release**: `scripts/release.sh` now tags the release as its final step (Step 4) — after publish/pointer/site succeed it creates + pushes `v<version>` (idempotent: skipped if the tag already exists), which triggers `ig-release.yml` → "Create GitHub Release". Closes the gap where local-first releases published to npm but never produced a git tag / GitHub release. Tags are separate refs (not subject to branch protection), keeping the no-source-commit philosophy intact.
 - **release**: `FHIR_PROXY_SSH` env var enables deploying the public package-list pointer + IG website over ssh/netbird, so `release.sh` runs from any machine (e.g. the local releaser laptop) — not only on the host where `/opt/fhir-proxy` is local. `advance-package-list.sh` fetches the public package-list, updates it locally, and `scp`s it back; `release-fhir-ig.sh` uses `rsync -e ssh`. Unset = unchanged local-path behaviour (run on the proxy host).
 
 ### Bug Fixes

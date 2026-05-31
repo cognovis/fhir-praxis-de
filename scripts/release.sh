@@ -14,6 +14,9 @@
 #      the public package-list.json pointer (verify-before-write). Idempotent.
 #   3. release-fhir-ig.sh        — build the IG website (IG Publisher) + QA-gate
 #      (refuse on internal errors) + rsync deploy to the public web root.
+#   4. git tag v<version>        — tag the IG repo (idempotent) → triggers
+#      ig-release.yml → "Create GitHub Release". The only git this orchestrator
+#      does, and only to MARK an already-published, already-committed version.
 #
 # Idempotency: a re-run with nothing changed is safe — publish skips (already on
 # registry), the pointer is re-set to the same version, the site is rebuilt and
@@ -108,7 +111,7 @@ log "Orchestrating release: ig=$IG package=$PKG_ID version=$IG_VERSION dry-run=$
 # ─────────────────────────────────────────────────────────────────────────────
 # Step 1 — Build + publish ALL FHIR packages (idempotent; verify-and-refuse).
 # ─────────────────────────────────────────────────────────────────────────────
-log "Step 1/3: release-fhir-packages.sh"
+log "Step 1/4: release-fhir-packages.sh"
 if [[ "$DRY_RUN" == "true" ]]; then
   bash "$REL_PKGS" --dry-run
 else
@@ -120,9 +123,9 @@ fi
 #          Skipped in dry-run (it has no dry-run mode and mutates the proxy).
 # ─────────────────────────────────────────────────────────────────────────────
 if [[ "$DRY_RUN" == "true" ]]; then
-  log "Step 2/3: advance-package-list.sh — SKIPPED (--dry-run)"
+  log "Step 2/4: advance-package-list.sh — SKIPPED (--dry-run)"
 else
-  log "Step 2/3: advance-package-list.sh ($PKG_ID@$IG_VERSION)"
+  log "Step 2/4: advance-package-list.sh ($PKG_ID@$IG_VERSION)"
   bash "$ADVANCE" \
     --package-id "$PKG_ID" \
     --version "$IG_VERSION" \
@@ -134,14 +137,33 @@ fi
 # Step 3 — Build + deploy the IG website.
 # ─────────────────────────────────────────────────────────────────────────────
 if [[ "$SKIP_SITE" == "true" ]]; then
-  log "Step 3/3: release-fhir-ig.sh — SKIPPED (--skip-site)"
+  log "Step 3/4: release-fhir-ig.sh — SKIPPED (--skip-site)"
 else
-  log "Step 3/3: release-fhir-ig.sh --ig $IG"
+  log "Step 3/4: release-fhir-ig.sh --ig $IG"
   if [[ "$DRY_RUN" == "true" ]]; then
     bash "$REL_IG" --ig "$IG" --dry-run
   else
     bash "$REL_IG" --ig "$IG"
   fi
+fi
+
+# ─────────────────────────────────────────────────────────────────────────────
+# Step 4 — Tag the release (idempotent). A pushed v<version> tag triggers
+#          ig-release.yml → "Create GitHub Release". Tags are separate refs (not
+#          subject to branch protection); this only MARKS an already-published,
+#          already-committed version, so it stays consistent with the
+#          no-source-commit philosophy of the other scripts.
+# ─────────────────────────────────────────────────────────────────────────────
+TAG="v$IG_VERSION"
+if [[ "$DRY_RUN" == "true" ]]; then
+  log "Step 4/4: TAG — would create + push $TAG in $(basename "$IG_REPO_DIR") (--dry-run)"
+elif git -C "$IG_REPO_DIR" rev-parse -q --verify "refs/tags/$TAG" >/dev/null 2>&1 \
+  || git -C "$IG_REPO_DIR" ls-remote --exit-code --tags origin "$TAG" >/dev/null 2>&1; then
+  log "Step 4/4: TAG — $TAG already exists (local or origin) — skipping"
+else
+  log "Step 4/4: TAG — creating + pushing $TAG ($(basename "$IG_REPO_DIR"))"
+  git -C "$IG_REPO_DIR" tag -a "$TAG" -m "Release $IG_VERSION"
+  git -C "$IG_REPO_DIR" push origin "$TAG"
 fi
 
 log "Release complete: $PKG_ID@$IG_VERSION (ig=$IG)"
