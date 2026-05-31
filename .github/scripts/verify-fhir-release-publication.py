@@ -57,11 +57,44 @@ def basic_auth_value(token: str, username: str = "cognovis") -> str:
     return "Basic " + base64.b64encode(f"{username}:{token}".encode("utf-8")).decode("ascii")
 
 
-def registry_headers(env: dict[str, str]) -> dict[str, str]:
+def npmrc_auth_header(registry: str) -> str:
+    """Read auth for `registry` from the ambient ~/.npmrc.
+
+    So a local releaser who is logged in via ~/.npmrc does NOT need to also export
+    VERDACCIO_TOKEN — matching release-fhir-packages.sh, which uses npm (and thus
+    ~/.npmrc) directly. Without this, an env-token-only header meant every
+    advance-package-list run with only ~/.npmrc hit a 401 on the private registry.
+    """
+    npmrc = os.path.expanduser("~/.npmrc")
+    if not os.path.isfile(npmrc):
+        return ""
+    host = registry.split("://", 1)[-1].rstrip("/")
+    auth = ""
+    token = ""
+    try:
+        with open(npmrc, encoding="utf-8") as handle:
+            for raw in handle:
+                line = raw.strip()
+                if line.startswith(f"//{host}/:_auth="):
+                    auth = line.split("=", 1)[1].strip()
+                elif line.startswith(f"//{host}/:_authToken="):
+                    token = line.split("=", 1)[1].strip()
+    except OSError:
+        return ""
+    if auth:  # already base64("user:pass") as npm stores it
+        return f"Basic {auth}"
+    if token:
+        return f"Bearer {token}"
+    return ""
+
+
+def registry_headers(env: dict[str, str], registry: str = DEFAULT_REGISTRY) -> dict[str, str]:
     token = env.get("VERDACCIO_TOKEN") or env.get("NODE_AUTH_TOKEN") or env.get("NPM_TOKEN")
-    if not token:
-        return {}
-    value = basic_auth_value(token)
+    if token:
+        value = basic_auth_value(token)
+        return {"Authorization": value} if value else {}
+    # No env token — fall back to the ambient ~/.npmrc (the normal local case).
+    value = npmrc_auth_header(registry)
     return {"Authorization": value} if value else {}
 
 
@@ -97,7 +130,7 @@ def verify_registry(
 ) -> tuple[CheckResult, str | None]:
     url = registry_metadata_url(registry, package_id)
     try:
-        data = http_json(url, registry_headers(env), timeout)
+        data = http_json(url, registry_headers(env, registry), timeout)
     except (HTTPError, URLError, TimeoutError, json.JSONDecodeError) as error:
         return (
             CheckResult(

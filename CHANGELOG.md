@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Bug Fixes
+
+- **release**: `verify-fhir-release-publication.py` now falls back to the ambient `~/.npmrc` when no `VERDACCIO_TOKEN`/`NODE_AUTH_TOKEN`/`NPM_TOKEN` env var is set — previously the registry check used an env-token-only auth header, so `advance-package-list.sh` / `release.sh` step 2 hit a 401 on the private registry on every local run despite a logged-in `~/.npmrc`
+
 ### Features
 
 - **release**: Add `scripts/release.sh` — single, idempotent, drift-safe release orchestrator wiring `release-fhir-packages.sh` → `advance-package-list.sh` → `release-fhir-ig.sh` in one enforced, no-git sequence (ADR-006). Each step gates the next; re-runs are safe (publish skips already-on-registry, pointer re-set, site rebuilt). `--ig`, `--skip-site`, `--dry-run`.
