@@ -93,6 +93,31 @@ else
   echo "Warning: Using SUSHI output (no snapshots) — run IG Publisher first for full packages"
 fi
 
+# Guard against a STALE IG Publisher output/ that is missing conformance resources
+# present in the fresh SUSHI output. A stale output/ (older than the FSH source) silently
+# dropped wegegeld-hausbesuch from the published praxis 0.74.0 package. Verify-and-refuse:
+# if output/ lacks any conformance resource that fsh-generated has, the IG Publisher run is
+# stale — refuse rather than ship an incomplete package.
+if [ "$RESOURCE_DIR" = "$ROOT/output" ] && [ -d "$ROOT/fsh-generated/resources" ]; then
+  missing=()
+  for f in "$ROOT/fsh-generated/resources/"StructureDefinition-*.json \
+           "$ROOT/fsh-generated/resources/"CodeSystem-*.json \
+           "$ROOT/fsh-generated/resources/"ValueSet-*.json \
+           "$ROOT/fsh-generated/resources/"NamingSystem-*.json; do
+    [ -e "$f" ] || continue
+    base=$(basename "$f")
+    [ -f "$ROOT/output/$base" ] || missing+=("$base")
+  done
+  if [ ${#missing[@]} -gt 0 ]; then
+    echo "ERROR: IG Publisher output/ is STALE — missing ${#missing[@]} resource(s) present in fresh SUSHI output:" >&2
+    printf '  - %s\n' "${missing[@]}" >&2
+    echo "  Rebuild the IG first (scripts/build-local-ig.sh) so output/ includes all current resources," >&2
+    echo "  then re-run this script. Refusing to publish an incomplete package" >&2
+    echo "  (wegegeld-hausbesuch 0.74.0 regression guard)." >&2
+    exit 1
+  fi
+fi
+
 for f in "$RESOURCE_DIR/"*.json; do
   basename=$(basename "$f")
   # Skip ImplementationGuide resource and non-conformance resources

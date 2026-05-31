@@ -4,8 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.74.1] - 2026-05-31
+
 ### Bug Fixes
 
+- **release**: Republish praxis 0.74.1 with `WegegeldHausbesuchExtProfile` — 0.74.0 shipped from a stale IG Publisher `output/` that silently dropped the wegegeld-hausbesuch conformance resource
+- **build-package.sh**: Add stale-`output/` verify-and-refuse guard — refuse to pack if `output/` is missing conformance resources present in fresh SUSHI output (the wegegeld-hausbesuch 0.74.0 regression guard)
 - **release**: Script 1 (release-fhir-packages.sh) falls back to ambient ~/.npmrc when VERDACCIO_TOKEN is unset
 - **release-sync**: Neutralize downstream project codename in script comments (vendor-leak guard)
 
