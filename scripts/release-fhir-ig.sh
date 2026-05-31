@@ -113,6 +113,10 @@ if [[ ! -f "$BUILD_SCRIPT" ]]; then
   exit 1
 fi
 
+# Clean output/ before the build so stale rendered files from a previous build
+# (removed profiles, an old version's pages) can never linger and get deployed.
+rm -rf "$OUTPUT_DIR"
+
 "$BUILD_SCRIPT"
 
 if [[ ! -d "$OUTPUT_DIR" ]]; then
@@ -179,7 +183,11 @@ mkdir -p "$DEPLOY_TARGET"
 # rsync: trailing slash on source sends contents of output/ into $DEPLOY_TARGET/
 # --delete removes stale files from previous builds.
 # --checksum avoids serving stale content when mtimes differ but content is unchanged.
-if ! rsync -av --delete --checksum "${OUTPUT_DIR}/" "${DEPLOY_TARGET}/"; then
+# --exclude package-list.json: the IG Publisher emits a ci-build stub package-list.json
+#   into output/, but the public release-history package-list.json on the proxy is curated
+#   separately (advance-package-list.sh). Without this exclude, --delete would overwrite
+#   or delete the curated history with the build stub on every deploy.
+if ! rsync -av --delete --checksum --exclude 'package-list.json' "${OUTPUT_DIR}/" "${DEPLOY_TARGET}/"; then
   echo "" >&2
   echo "ERROR: rsync failed — deploy target may be unreachable or permission denied." >&2
   exit 1
