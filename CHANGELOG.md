@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+### Features
+
+- **release**: `FHIR_PROXY_SSH` env var enables deploying the public package-list pointer + IG website over ssh/netbird, so `release.sh` runs from any machine (e.g. the local releaser laptop) — not only on the host where `/opt/fhir-proxy` is local. `advance-package-list.sh` fetches the public package-list, updates it locally, and `scp`s it back; `release-fhir-ig.sh` uses `rsync -e ssh`. Unset = unchanged local-path behaviour (run on the proxy host).
+
 ### Bug Fixes
 
 - **release**: `verify-fhir-release-publication.py` now falls back to the ambient `~/.npmrc` when no `VERDACCIO_TOKEN`/`NODE_AUTH_TOKEN`/`NPM_TOKEN` env var is set — previously the registry check used an env-token-only auth header, so `advance-package-list.sh` / `release.sh` step 2 hit a 401 on the private registry on every local run despite a logged-in `~/.npmrc`

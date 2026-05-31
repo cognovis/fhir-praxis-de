@@ -37,6 +37,12 @@
 #                    and advance-package-list.sh fall back to the ambient ~/.npmrc
 #                    when unset. Supplied locally; never from 1Password.
 #   CODE_ROOT        Parent dir of sibling repos. Default: parent of this repo.
+#   FHIR_PROXY_SSH   Optional. ssh destination of the public web-root host (e.g.
+#                    user@fhir-proxy, reachable via netbird). When set, steps 2+3
+#                    deploy to it over ssh (package-list via curl→update→scp, site
+#                    via rsync -e ssh) — so the release runs from any machine. When
+#                    unset, they write the local /opt/fhir-proxy path (run on the
+#                    proxy host). Inherited by the sub-scripts.
 
 set -euo pipefail
 

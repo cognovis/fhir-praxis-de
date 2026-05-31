@@ -168,29 +168,40 @@ if [[ "$DRY_RUN" == "true" ]]; then
   exit 0
 fi
 
-log "Step 3: DEPLOY — rsyncing output/ to $DEPLOY_TARGET/"
+log "Step 3: DEPLOY — rsyncing output/ to ${FHIR_PROXY_SSH:+$FHIR_PROXY_SSH:}$DEPLOY_TARGET/"
 
-# Verify the deploy root exists before attempting rsync.
-if [[ ! -d "$FHIR_IG_DEPLOY_BASE" ]]; then
-  echo "ERROR: deploy root not found: $FHIR_IG_DEPLOY_BASE" >&2
-  echo "Ensure the fhir-proxy path is mounted and writable on this machine." >&2
-  exit 1
-fi
+# Shared rsync flags: trailing slash sends the CONTENTS of output/ into the target;
+# --delete prunes stale files from prior builds; --checksum avoids serving stale
+# content on equal mtimes; --exclude package-list.json keeps the curated public
+# release-history (owned by advance-package-list.sh) from being overwritten/deleted
+# by the IG Publisher's ci-build stub.
+RSYNC_FLAGS=(-av --delete --checksum --exclude 'package-list.json')
 
-# Create the per-IG subdirectory if it does not yet exist.
-mkdir -p "$DEPLOY_TARGET"
-
-# rsync: trailing slash on source sends contents of output/ into $DEPLOY_TARGET/
-# --delete removes stale files from previous builds.
-# --checksum avoids serving stale content when mtimes differ but content is unchanged.
-# --exclude package-list.json: the IG Publisher emits a ci-build stub package-list.json
-#   into output/, but the public release-history package-list.json on the proxy is curated
-#   separately (advance-package-list.sh). Without this exclude, --delete would overwrite
-#   or delete the curated history with the build stub on every deploy.
-if ! rsync -av --delete --checksum --exclude 'package-list.json' "${OUTPUT_DIR}/" "${DEPLOY_TARGET}/"; then
-  echo "" >&2
-  echo "ERROR: rsync failed — deploy target may be unreachable or permission denied." >&2
-  exit 1
+if [[ -n "${FHIR_PROXY_SSH:-}" ]]; then
+  # Remote mode: the web root lives on another host (ssh / netbird). Deploy over
+  # ssh so this can run from any machine (e.g. the local releaser laptop).
+  if ! ssh "$FHIR_PROXY_SSH" "mkdir -p '$DEPLOY_TARGET'"; then
+    echo "ERROR: could not create $DEPLOY_TARGET on $FHIR_PROXY_SSH (is it reachable via ssh/netbird?)." >&2
+    exit 1
+  fi
+  if ! rsync "${RSYNC_FLAGS[@]}" -e ssh "${OUTPUT_DIR}/" "${FHIR_PROXY_SSH}:${DEPLOY_TARGET}/"; then
+    echo "" >&2
+    echo "ERROR: rsync over ssh to $FHIR_PROXY_SSH:$DEPLOY_TARGET failed." >&2
+    exit 1
+  fi
+else
+  # Local mode: the web root is on THIS host (run on the proxy host or a mount).
+  if [[ ! -d "$FHIR_IG_DEPLOY_BASE" ]]; then
+    echo "ERROR: deploy root not found: $FHIR_IG_DEPLOY_BASE" >&2
+    echo "Set FHIR_PROXY_SSH=<user@host> to deploy over ssh, or mount the fhir-proxy path here." >&2
+    exit 1
+  fi
+  mkdir -p "$DEPLOY_TARGET"
+  if ! rsync "${RSYNC_FLAGS[@]}" "${OUTPUT_DIR}/" "${DEPLOY_TARGET}/"; then
+    echo "" >&2
+    echo "ERROR: rsync failed — deploy target may be unreachable or permission denied." >&2
+    exit 1
+  fi
 fi
 
 log "Step 3 complete: output/ rsynced to $DEPLOY_TARGET/"
