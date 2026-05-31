@@ -11,7 +11,15 @@ on:
   workflow_dispatch:
     inputs:
       reason:
-        description: Manual trigger reason
+        description: Manual trigger reason (workflow deprecated — use fhir-management)
+        required: false
+        type: string
+      version:
+        description: '[deprecated] Release version'
+        required: false
+        type: string
+      date:
+        description: '[deprecated] Release date YYYY-MM-DD'
         required: false
         type: string
 permissions:
