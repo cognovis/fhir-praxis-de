@@ -106,12 +106,31 @@ echo ""
 # ─────────────────────────────────────────────────────────────────────────────
 TODAY="$(date -u +%Y-%m-%d)"
 log "Step 2: advancing package-list.json → $VERSION ($TODAY)..."
-# PACKAGE_LIST_EXACT_PATH_ONLY=true: update ONLY the explicit --package-list path.
-# Without it, update-package-list-remote.py scans nginx config + filesystem roots
-# (/var/www, /srv, /opt, /home/fhir, ...) and rewrites every package-list.json it
-# finds — unacceptable for a local run. The old CI job set this; preserve it.
-PACKAGE_LIST_EXACT_PATH_ONLY=true \
-  python3 "$UPDATE" "$VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$PACKAGE_LIST"
+# PACKAGE_LIST_EXACT_PATH_ONLY=true: update ONLY the explicit path (otherwise
+# update-package-list-remote.py scans nginx config + filesystem roots and rewrites
+# every package-list.json it finds).
+if [[ -n "${FHIR_PROXY_SSH:-}" ]]; then
+  # Remote mode: the web root lives on another host (ssh / netbird), not here.
+  # Fetch the current PUBLIC package-list, update it locally, push it back over ssh
+  # — no privileged local /opt path needed, so this runs from any machine.
+  tmp_pl=$(mktemp)
+  if ! curl -fsS --max-time 30 "$PUBLIC_IG_PATH/package-list.json" -o "$tmp_pl"; then
+    echo "[advance-package-list] ERROR: could not fetch $PUBLIC_IG_PATH/package-list.json" >&2
+    rm -f "$tmp_pl"; exit 1
+  fi
+  PACKAGE_LIST_EXACT_PATH_ONLY=true \
+    python3 "$UPDATE" "$VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$tmp_pl"
+  log "Pushing updated package-list to $FHIR_PROXY_SSH:$PACKAGE_LIST ..."
+  if ! scp -q "$tmp_pl" "$FHIR_PROXY_SSH:$PACKAGE_LIST"; then
+    echo "[advance-package-list] ERROR: scp to $FHIR_PROXY_SSH:$PACKAGE_LIST failed (ssh/netbird reachable?)." >&2
+    rm -f "$tmp_pl" "$tmp_pl.bak"; exit 1
+  fi
+  rm -f "$tmp_pl" "$tmp_pl.bak"
+else
+  # Local mode: the web root is on THIS host (run on the proxy host or a mount).
+  PACKAGE_LIST_EXACT_PATH_ONLY=true \
+    python3 "$UPDATE" "$VERSION" "$TODAY" "$PACKAGE_ID" "$PUBLIC_IG_PATH" "$PACKAGE_LIST"
+fi
 log "Step 2 OK: pointer advanced."
 echo ""
 
