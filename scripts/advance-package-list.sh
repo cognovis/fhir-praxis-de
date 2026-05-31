@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# DEPRECATED (fmgt-5ff): This script managed release/publish/version-sync operations
+# that are now owned by fhir-management. Use fhir-management commands instead:
+#   uv run fhir-release publish
+#   uv run fhir-release update-package-list
+#   uv run fhir-graph lock
+# See fhir-management docs/release-migration.md for the migration map.
+# This script is kept for reference during the transition period.
+
 # Advance the public package-list.json pointer on fhir.cognovis.de — locally,
 # AFTER an npm publish, in strict verify-before-write order (ADR-006, fpde-qsc).
 #

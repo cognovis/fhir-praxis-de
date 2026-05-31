@@ -1,10 +1,19 @@
+# DEPRECATED (fmgt-5ff): This workflow managed release/publish/sync operations that
+# are now owned by fhir-management. Automatic triggers have been removed.
+# Kept for reference; activate manually via workflow_dispatch if needed during transition.
+# See fhir-management docs/release-migration.md for the replacement commands.
+#
+# Original trigger replaced with workflow_dispatch-only below.
+
 name: Public Release Watchdog
 
 on:
-  schedule:
-    - cron: "17 6 * * *"
   workflow_dispatch:
-
+    inputs:
+      reason:
+        description: Manual trigger reason
+        required: false
+        type: string
 permissions:
   contents: read
 

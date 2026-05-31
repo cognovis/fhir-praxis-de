@@ -1,6 +1,7 @@
-# CANONICAL HOME: fhir-praxis-de (orchestration hub, ADR-006). Moved from
-# fhir-terminology-de in fpde-x8r. Consumers resolve via $FHIR_LOCK_FILE or the
-# sibling ../fhir-praxis-de/ path.
+# NOTE (fmgt-5ff): This file is superseded by fhir-management/fhir-versions.lock.yaml.
+# The canonical lock is now generated and owned by fhir-management:
+#   uv run fhir-graph lock  (from ~/code/fhir/fhir-management)
+# This copy is kept for compatibility during the transition period.
 format_version: 1
 igs:
   de.cognovis.fhir.praxis:

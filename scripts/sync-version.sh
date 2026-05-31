@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# DEPRECATED (fmgt-5ff): This script managed release/publish/version-sync operations
+# that are now owned by fhir-management. Use fhir-management commands instead:
+#   uv run fhir-release publish
+#   uv run fhir-release update-package-list
+#   uv run fhir-graph lock
+# See fhir-management docs/release-migration.md for the migration map.
+# This script is kept for reference during the transition period.
+
 # Sync sushi-config.yaml version from VERSION file.
 # Exits 0 if already in sync, exits 1 if it had to fix a mismatch.
 set -euo pipefail

@@ -1,4 +1,12 @@
 #!/usr/bin/env bash
+# DEPRECATED (fmgt-5ff): This script managed release/publish/version-sync operations
+# that are now owned by fhir-management. Use fhir-management commands instead:
+#   uv run fhir-release publish
+#   uv run fhir-release update-package-list
+#   uv run fhir-graph lock
+# See fhir-management docs/release-migration.md for the migration map.
+# This script is kept for reference during the transition period.
+
 # Step 0 (ADR-006): sync FHIR version pins to the current IG checkouts so the tree
 # is ready to build + publish. This is the deliberate "step 0" pin-bump+commit,
 # automated. Script 1 (release-fhir-packages.sh) stays commit-free and publishes
