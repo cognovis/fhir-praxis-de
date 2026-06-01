@@ -11,6 +11,12 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 
 * obeys account-praxis-schein-status
 
+* extension contains
+    AccountAbrechnungssperreExt named abrechnungssperre 0..1 MS and
+    AccountErsatzverfahrenExt named ersatzverfahren 0..1 MS
+* extension[abrechnungssperre] ^short = "Abrechnungssperre flag (Schein.Abrechnungssperre)"
+* extension[ersatzverfahren] ^short = "Ersatzverfahren flag (Schein.Ersatzverfahren)"
+
 * identifier 1..* MS
 * identifier ^slicing.discriminator.type = #value
 * identifier ^slicing.discriminator.path = "system"
