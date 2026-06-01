@@ -201,3 +201,34 @@ external secret or CI dispatch. The releaser machine has local access to the web
 **Controlled by:** `FHIR_IG_DEPLOY_BASE` env var (default: `/opt/fhir-proxy/html`)
 **Post-deploy verify:** script fetches `https://fhir.cognovis.de/<ig>/package.json` and
 confirms the served version matches `output/package.json`.
+
+## Addendum (eop7): downstream consumer is verify-only — readiness from the lock closure
+
+The original Decision (§1) gave Script 2 an Aidbox-installer responsibility: "install
+pinned leaves into Aidbox **directly from the lock**" plus an optional reload. That
+installer responsibility has since been **retired** on the downstream side. The
+downstream SDK/codegen consumer no longer installs, seeds, or reloads Aidbox at all:
+
+- **Seeding** is owned by a single pre-built Aidbox seed image produced by the
+  release/management tooling. The consumer consumes that image; it never runs
+  `$fhir-package-install`, never PUTs CodeSystems, and holds no `npm.cognovis.de`
+  credentials at adapter runtime.
+- **Readiness, not installation.** Each adapter verifies — on startup — that the
+  seeded Aidbox carries its required FHIR packages, and fails fast otherwise. It does
+  not remediate.
+- **The required set is the lock's adapter-set closure.** This realises §2's
+  "adapter → package-set selection moves to a lock-derived filter": each adapter's
+  package set is resolved from `fhir-versions.lock.yaml` by inverting the per-package
+  `consumers` lists (the lock-native closure), generated into a committed manifest at
+  release time. No `de.cognovis.bundle.*` meta-package is read — confirming §2's
+  elimination end-to-end, including at the consumer.
+
+Net effect on this ADR: §1's Script 2 row "install pinned leaves into Aidbox … +
+optional Aidbox reload" is superseded for the consumer — Script 2 stops at
+codegen + publish + commit/push; Aidbox state is delivered by the seed image and only
+*verified* by the adapters. The two-pin drift class (§ Context) stays closed because
+the verified closure is resolved from the same lock anchor that drives codegen.
+
+Downstream system names, adapter codenames, and repository paths remain intentionally
+omitted per this document's public-surface convention; the cross-repo consumer change
+is tracked in the downstream private tracker.
