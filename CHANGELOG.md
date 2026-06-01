@@ -4,6 +4,18 @@ All notable changes to this project will be documented in this file.
 
 ## [unreleased]
 
+## [0.76.0] - 2026-06-01
+
+### Features
+
+- **account/TSVG**: move `AccountTsvgVermittlungsartExt` and `AccountTerminvermittlungsdatumExt` to `AccountPraxisSchein` — TSVG case-level qualifiers now live on the Schein (Account), not on Claim.
+
+### Removed
+
+- **claim/TSVG**: removed `ClaimTsvgVermittlungsartExt` and `ClaimTerminvermittlungsdatumExt` from `PraxisPreliminaryBillingClaimDE` and deleted `claim-tsvg.fsh`.
+
+## [unreleased-release-scripts]
+
 ### Features
 
 - **release**: `scripts/release.sh` now tags the release as its final step (Step 4) — after publish/pointer/site succeed it creates + pushes `v<version>` (idempotent: skipped if the tag already exists), which triggers `ig-release.yml` → "Create GitHub Release". Closes the gap where local-first releases published to npm but never produced a git tag / GitHub release. Tags are separate refs (not subject to branch protection), keeping the no-source-commit philosophy intact.
