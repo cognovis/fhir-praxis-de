@@ -13,7 +13,7 @@ Design principles:
     - An error not in the allowlist is always counted as internal
     - Empty allowlist pattern list → all errors are internal (no pass-through)
 
-See docs/release-process.md for a full explanation of the gate and allowlist format.
+The allowlist format is documented inline in .github/qa-allowlist.yml.
 """
 from __future__ import annotations
 

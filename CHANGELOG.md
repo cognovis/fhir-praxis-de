@@ -17,6 +17,34 @@ All notable changes to this project will be documented in this file.
 
 - **release**: Add `scripts/release.sh` — single, idempotent, drift-safe release orchestrator wiring `release-fhir-packages.sh` → `advance-package-list.sh` → `release-fhir-ig.sh` in one enforced, no-git sequence (ADR-006). Each step gates the next; re-runs are safe (publish skips already-on-registry, pointer re-set, site rebuilt). `--ig`, `--skip-site`, `--dry-run`.
 
+## [0.75.0] - 2026-06-01
+
+### Features
+
+- **billing/TSVG**: new `tsvg-vermittlungsart` CodeSystem + ValueSet and the
+  `claim-tsvg-vermittlungsart` / `claim-terminvermittlungsdatum` extensions to
+  model TSVG Vermittlungsart on Claim.
+- **account**: new Schein flag extensions on `AccountPraxisSchein` —
+  `account-abrechnungssperre`, `account-ersatzverfahren`, `account-nachzuegler`,
+  `account-arzt-patienten-kontakt`, `account-egk-lesedatum`, and a coded
+  `account-scheinuntergruppe` extension.
+- **coverage**: new `coverage-kt-abrechnungsbereich` extension.
+- **referral**: new `praxis-referral-de` profile.
+- **billing**: model Schein non-Account fields on Coverage, Claim, and
+  ServiceRequest (preliminary billing claim).
+
+### Changed
+
+- **terminology**: retire the local `Scheinuntergruppe` CodeSystem and ValueSet;
+  rebind ConceptMaps and the Scheinuntergruppe coding to the KBV
+  `KBV_VS_SFHIR_KBV_SCHEINART` ValueSet (extensible). **Breaking** for consumers
+  referencing the local `kvdt-scheinuntergruppe` ValueSet URL.
+
+### Fixed
+
+- **privacy**: redact the PVS vendor name from the Scheinuntergruppe extension
+  (vendor-leak guard).
+
 ## [0.74.1] - 2026-05-31
 
 ### Bug Fixes
