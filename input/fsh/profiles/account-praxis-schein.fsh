@@ -13,9 +13,15 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 
 * extension contains
     AccountAbrechnungssperreExt named abrechnungssperre 0..1 MS and
-    AccountErsatzverfahrenExt named ersatzverfahren 0..1 MS
-* extension[abrechnungssperre] ^short = "Abrechnungssperre flag (Schein.Abrechnungssperre)"
+    AccountErsatzverfahrenExt named ersatzverfahren 0..1 MS and
+    AccountNachzueglerExt named nachzuegler 0..1 MS and
+    AccountArztPatientenKontaktExt named arztPatientenKontakt 0..1 MS and
+    AccountEgkLesedatumExt named egkLesedatum 0..1 MS
+* extension[abrechnungssperre] ^short = "Abrechnungssperre flag (Schein.Abrechnungssperre); identisch zu 'Nicht abrechnen'"
 * extension[ersatzverfahren] ^short = "Ersatzverfahren flag (Schein.Ersatzverfahren)"
+* extension[nachzuegler] ^short = "Nachzuegler flag (Schein.Nachzuegler)"
+* extension[arztPatientenKontakt] ^short = "Arzt-Patienten-Kontakte count (Schein.ArztPatientenKontakt)"
+* extension[egkLesedatum] ^short = "eGK/VSDM read date (Schein.Chipkartenlesedatum); absent = card not read"
 
 * identifier 1..* MS
 * identifier ^slicing.discriminator.type = #value
@@ -29,6 +35,16 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 
 * type 1..1 MS
 * type from https://fhir.cognovis.de/praxis/ValueSet/scheinart (required)
+// Scheinuntergruppe (KVDT FK 4239, KBV S_KBV_SCHEINART) rides as a second coding on
+// the same CodeableConcept — same axis as Scheinart, just finer. Reuses the local
+// kvdt-scheinuntergruppe mirror; Scheinart stays the primary required coding.
+* type.coding ^slicing.discriminator.type = #value
+* type.coding ^slicing.discriminator.path = "system"
+* type.coding ^slicing.rules = #open
+* type.coding contains scheinuntergruppe 0..1 MS
+* type.coding[scheinuntergruppe] from https://fhir.cognovis.de/praxis/ValueSet/kvdt-scheinuntergruppe (required)
+* type.coding[scheinuntergruppe].system = "https://fhir.cognovis.de/praxis/CodeSystem/kvdt-scheinuntergruppe"
+* type.coding[scheinuntergruppe] ^short = "Scheinuntergruppe (KVDT FK 4239)"
 
 * servicePeriod 1..1 MS
 
