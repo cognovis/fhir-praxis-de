@@ -17,12 +17,16 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
     AccountNachzueglerExt named nachzuegler 0..1 MS and
     AccountArztPatientenKontaktExt named arztPatientenKontakt 0..1 MS and
     AccountEgkLesedatumExt named egkLesedatum 0..1 MS and
+    AccountTsvgVermittlungsartExt named tsvgVermittlungsart 0..1 MS and
+    AccountTerminvermittlungsdatumExt named terminvermittlungsdatum 0..1 MS and
     AccountScheinuntergruppeExt named scheinuntergruppe 0..1 MS
 * extension[abrechnungssperre] ^short = "Abrechnungssperre flag (Schein.Abrechnungssperre); identisch zu 'Nicht abrechnen'"
 * extension[ersatzverfahren] ^short = "Ersatzverfahren flag (Schein.Ersatzverfahren)"
 * extension[nachzuegler] ^short = "Nachzuegler flag (Schein.Nachzuegler)"
 * extension[arztPatientenKontakt] ^short = "Arzt-Patienten-Kontakte count (Schein.ArztPatientenKontakt)"
 * extension[egkLesedatum] ^short = "eGK/VSDM read date (Schein.Chipkartenlesedatum); absent = card not read"
+* extension[tsvgVermittlungsart] ^short = "TSVG Vermittlungs-/Kontaktart (Schein.Vermittlungsart)"
+* extension[terminvermittlungsdatum] ^short = "Tag der Terminvermittlung (Schein.TagDerTerminvermittlung)"
 * extension[scheinuntergruppe] ^short = "Scheinuntergruppe (KVDT FK 4239), extensible KBV binding (Schein.Scheinuntergruppe)"
 
 * identifier 1..* MS
