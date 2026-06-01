@@ -10,6 +10,14 @@ Id: praxis-preliminary-billing-claim-de
 Title: "Praxis Preliminary Billing Claim DE"
 Description: "Vorlaeufigerabrechnung fuer die deutsche ambulante Praxis. Traegt die tatsaechlichen Abrechnungspositionen (ChargeItem-Zeilen). Wird von finalen Claim-Profilen (GKV, privat, BG, Selektivvertrag) per Claim.related referenziert. Item-Zeilen Pflicht (1..*). Entspricht KBV_PR_AW_Abrechnung_Vorlaeufig semantisch."
 
+// TSVG case-level qualifiers (FK 4103 + Tag der Terminvermittlung) — drive
+// extrabudgetary remuneration. Carried on the preliminary (item-carrier) claim.
+* extension contains
+    ClaimTsvgVermittlungsartExt named tsvgVermittlungsart 0..1 MS and
+    ClaimTerminvermittlungsdatumExt named terminvermittlungsdatum 0..1 MS
+* extension[tsvgVermittlungsart] ^short = "TSVG Vermittlungs-/Kontaktart (Schein.Vermittlungsart)"
+* extension[terminvermittlungsdatum] ^short = "Tag der Terminvermittlung (Schein.TagDerTerminvermittlung)"
+
 * status 1..1 MS
 * status ^short = "Status of the claim"
 
