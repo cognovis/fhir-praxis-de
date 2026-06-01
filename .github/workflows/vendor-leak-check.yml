@@ -37,7 +37,6 @@ jobs:
           for root in (
               Path(".github/scripts"),
               Path("scripts"),
-              Path(".agents/skills/fhir-sync-versions/scripts"),
           ):
               if root.is_dir():
                   paths.extend(sorted(root.glob("*.py")))

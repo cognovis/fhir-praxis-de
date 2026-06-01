@@ -32,8 +32,6 @@ PATHS=(
   README.md
   CHANGELOG.md
   CLAUDE.md
-  AGENTS.md
-  .beads
   docs
   input/fsh
   input/pagecontent

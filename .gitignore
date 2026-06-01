@@ -9,7 +9,7 @@ template/
 input-cache/
 txCache/
 .fhir-publish/
-!.fhir-publish.yml
+.fhir-publish.yml
 __pycache__/
 *.py[cod]
 
@@ -25,19 +25,12 @@ logs/
 .claude/*
 !.claude/commands/
 
-# Beads context files
-.beads/PRIME.md
-.beads/dolt.disabled/
-.beads/embeddeddolt/
+# Beads task tracker — internal, not part of the IG.
+# Data lives on the Dolt remote; the local working copy stays untracked.
+.beads/
+
+# Local Aidbox / IG Publisher config
 config.yaml
-
-# Local Dolt-sync artifact — beads sync via Dolt remote, not git
-.beads/issues.jsonl
-
-# Dolt backup artifacts (corruption recovery, local snapshots)
-.beads/backup.corrupt-*/
-.beads/dolt-backup.json
-.beads/dolt-backup-state.json
 
 # IG Publisher artifacts in root
 Requirements-fromNarrative.json
@@ -49,3 +42,14 @@ Requirements-fromNarrative.json
 
 # playwright-cli local cache
 .playwright-cli/
+
+# Non-IG tooling — kept locally but not tracked on the public IG repo.
+# Agent/skill tooling, release orchestration (moved to fhir-management),
+# and local dev convenience files.
+.agents/
+.library.lock
+AGENTS.md
+cliff.toml
+fhir-versions.lock.yaml
+docker-compose.yaml
+init-bundle.json
