@@ -8,6 +8,9 @@ Id: fpde-coverage-gkv
 Title: "FPDE Coverage GKV"
 Description: "GKV-Versicherung. Basiert auf coverage-de-gkv aus de.basisprofil.r4 (inkl. WOP und KrankenversichertenID)."
 
+* extension contains CoverageKtAbrechnungsbereichExt named ktAbrechnungsbereich 0..1 MS
+* extension[ktAbrechnungsbereich] ^short = "KT-Abrechnungsbereich (Schein.KT-Abrechnungsbereich)"
+
 Invariant: fpde-coverage-privat-type
 Description: "Coverage.type muss eine VersicherungsartDeBasis-Kodierung mit PKV oder SEL enthalten."
 Expression: "type.coding.where(system = 'http://fhir.de/CodeSystem/versicherungsart-de-basis').where(code = 'PKV' or code = 'SEL').exists()"

@@ -11,6 +11,20 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 
 * obeys account-praxis-schein-status
 
+* extension contains
+    AccountAbrechnungssperreExt named abrechnungssperre 0..1 MS and
+    AccountErsatzverfahrenExt named ersatzverfahren 0..1 MS and
+    AccountNachzueglerExt named nachzuegler 0..1 MS and
+    AccountArztPatientenKontaktExt named arztPatientenKontakt 0..1 MS and
+    AccountEgkLesedatumExt named egkLesedatum 0..1 MS and
+    AccountScheinuntergruppeExt named scheinuntergruppe 0..1 MS
+* extension[abrechnungssperre] ^short = "Abrechnungssperre flag (Schein.Abrechnungssperre); identisch zu 'Nicht abrechnen'"
+* extension[ersatzverfahren] ^short = "Ersatzverfahren flag (Schein.Ersatzverfahren)"
+* extension[nachzuegler] ^short = "Nachzuegler flag (Schein.Nachzuegler)"
+* extension[arztPatientenKontakt] ^short = "Arzt-Patienten-Kontakte count (Schein.ArztPatientenKontakt)"
+* extension[egkLesedatum] ^short = "eGK/VSDM read date (Schein.Chipkartenlesedatum); absent = card not read"
+* extension[scheinuntergruppe] ^short = "Scheinuntergruppe (KVDT FK 4239), extensible KBV binding (Schein.Scheinuntergruppe)"
+
 * identifier 1..* MS
 * identifier ^slicing.discriminator.type = #value
 * identifier ^slicing.discriminator.path = "system"
@@ -23,6 +37,7 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 
 * type 1..1 MS
 * type from https://fhir.cognovis.de/praxis/ValueSet/scheinart (required)
+* type ^short = "Scheinart (coarse). Scheinuntergruppe (FK 4239) is on extension[scheinuntergruppe]."
 
 * servicePeriod 1..1 MS
 
