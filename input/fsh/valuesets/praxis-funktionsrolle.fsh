@@ -16,4 +16,4 @@ Description: "Practice function ValueSet for PractitionerRole.code. Includes loc
 * ^experimental = false
 
 * include codes from system PraxisFunktionsrolleCS
-* include codes from valueset https://fhir.cognovis.de/terminology/ValueSet/esco-praxis-occupations
+* include codes from valueset https://fhir.cognovis.de/ValueSet/esco-practice-functions
