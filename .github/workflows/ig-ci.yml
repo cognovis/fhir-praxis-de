@@ -79,6 +79,10 @@ jobs:
             echo "::notice::VERDACCIO_TOKEN not available (fork PR) — SUSHI compile gate skipped; vendor-leak-check still gates this PR."
           fi
 
+      - name: Install uv
+        if: steps.regaccess.outputs.available == 'true'
+        uses: astral-sh/setup-uv@v5
+
       - name: Preload private FHIR packages
         if: steps.regaccess.outputs.available == 'true'
         env:
