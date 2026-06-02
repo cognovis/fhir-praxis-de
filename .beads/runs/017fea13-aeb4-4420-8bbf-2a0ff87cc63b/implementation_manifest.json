@@ -18,9 +18,13 @@
   ],
   "commits": [
     "3fad0d5 feat(fpde-970): add PraxisFunktionsrolleCS, VS, PractitionerRole.code binding and IG guidance",
-    "chore(fpde-970): add implementation manifest and evidence ledger"
+    "chore(fpde-970): add implementation manifest and evidence ledger",
+    "fix(fpde-970): remove vendor names from IG guidance page (vendor-leak-check)"
   ],
-  "tests": [{"type": "sushi-compile", "command": "sushi .", "result": "exit 0"}],
+  "tests": [
+    {"type": "sushi-compile", "command": "sushi .", "result": "exit 0"},
+    {"type": "vendor-leak-check", "command": "bash scripts/check-ig-vendor-leaks.sh", "result": "exit 0 — Vendor leak guard passed"}
+  ],
   "external_resources": [],
   "scope_changes": [],
   "downstream_impacts": ["PraxisPractitionerRoleDE consumers should use PraxisFunktionsrolleVS for code validation"],

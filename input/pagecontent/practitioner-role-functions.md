@@ -77,5 +77,6 @@ practice organization:
 }
 ```
 
-Note: This example uses only the local CodeSystem code. MIRA, Keycloak, or other
-system-specific claim projections are out of scope for this IG.
+Note: This example uses only the local CodeSystem code. System-specific claim
+projections (identity providers, EHR-specific RBAC attributes, etc.) are out of
+scope for this IG.
