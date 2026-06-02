@@ -84,7 +84,11 @@ fetch_to_fhir_cache() {
 
   (
     cd "$pack_dir"
-    npm pack "${pkg}@${version}" --registry "$REGISTRY" --silent "${npm_extra[@]}" >/dev/null
+    if [ "${#npm_extra[@]}" -gt 0 ]; then
+      npm pack "${pkg}@${version}" --registry "$REGISTRY" --silent "${npm_extra[@]}" >/dev/null
+    else
+      npm pack "${pkg}@${version}" --registry "$REGISTRY" --silent >/dev/null
+    fi
   )
 
   local tgz
@@ -120,8 +124,12 @@ previous_praxis_version() {
     npm_extra+=("$arg")
   done < <(npm_args)
 
-  npm view de.cognovis.fhir.praxis versions --registry "$REGISTRY" --json "${npm_extra[@]}" \
-    | CURRENT_VERSION="$current" python3 -c '
+  if [ "${#npm_extra[@]}" -gt 0 ]; then
+    npm view de.cognovis.fhir.praxis versions --registry "$REGISTRY" --json "${npm_extra[@]}"
+  else
+    npm view de.cognovis.fhir.praxis versions --registry "$REGISTRY" --json
+  fi \
+    | CURRENT_VERSION="$current" uv run python -c '
 import json
 import os
 import sys
@@ -148,6 +156,7 @@ make_npm_config
 
 private_fhir_packages=(
   "de.cognovis.terminology.imaging"
+  "de.cognovis.terminology.esco"
   "de.cognovis.terminology.kbv"
   "kbv.mio.impfpass.vocab"
 )
