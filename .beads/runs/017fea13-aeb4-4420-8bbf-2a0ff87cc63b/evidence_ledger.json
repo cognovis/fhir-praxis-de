@@ -1,0 +1,16 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-970",
+  "commands": [
+    {"command": "sushi .", "purpose": "Compile FSH to FHIR JSON and validate", "exit_code": 0, "result": "SUSHI compilation successful, no errors"}
+  ],
+  "skipped_checks": [
+    {"check": "IG Publisher validation", "reason": "IG Publisher runs in CI only, not locally per project convention"},
+    {"check": "ESCO ValueSet resolve", "reason": "fhir-term-34z (fhir-terminology-de ESCO subset) is in_progress; canonical URL included but not resolvable until package published"}
+  ],
+  "artifacts": [
+    {"type": "fhir-json", "path": "fsh-generated/resources/CodeSystem-praxis-funktionsrolle.json"},
+    {"type": "fhir-json", "path": "fsh-generated/resources/ValueSet-praxis-funktionsrolle.json"},
+    {"type": "fhir-json", "path": "fsh-generated/resources/StructureDefinition-praxis-practitioner-role-de.json"}
+  ]
+}

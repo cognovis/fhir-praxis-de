@@ -1,0 +1,28 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-970",
+  "acceptance_criteria": [
+    {"id": "AC1", "status": "done", "files": ["input/fsh/valuesets/praxis-funktionsrolle.fsh"], "evidence_refs": ["PraxisFunktionsrolleVS includes codes from ESCO canonical URL"]},
+    {"id": "AC2", "status": "done", "files": ["input/fsh/codesystems/praxis-funktionsrolle.fsh"], "evidence_refs": ["PraxisFunktionsrolleCS contains only billing-lead and application-administration"]},
+    {"id": "AC3", "status": "done", "files": ["input/fsh/profiles/PraxisPractitionerRoleDE.fsh"], "evidence_refs": ["PraxisPractitionerRoleDE.code bound to PraxisFunktionsrolleVS (extensible)"]},
+    {"id": "AC4", "status": "done", "files": ["input/pagecontent/practitioner-role-functions.md"], "evidence_refs": ["IG guidance page documents PractitionerRole.organization + Organization.partOf semantics"]},
+    {"id": "AC5", "status": "done", "files": ["input/pagecontent/practitioner-role-functions.md"], "evidence_refs": ["No MIRA/Keycloak examples; only minimal FHIR conformance example"]},
+    {"id": "AC6", "status": "done", "files": [], "evidence_refs": ["sushi . exit 0 — SUSHI compilation successful"]}
+  ],
+  "changed_files": [
+    "input/fsh/codesystems/praxis-funktionsrolle.fsh",
+    "input/fsh/valuesets/praxis-funktionsrolle.fsh",
+    "input/fsh/profiles/PraxisPractitionerRoleDE.fsh",
+    "input/pagecontent/practitioner-role-functions.md",
+    "sushi-config.yaml"
+  ],
+  "commits": [
+    "3fad0d5 feat(fpde-970): add PraxisFunktionsrolleCS, VS, PractitionerRole.code binding and IG guidance",
+    "chore(fpde-970): add implementation manifest and evidence ledger"
+  ],
+  "tests": [{"type": "sushi-compile", "command": "sushi .", "result": "exit 0"}],
+  "external_resources": [],
+  "scope_changes": [],
+  "downstream_impacts": ["PraxisPractitionerRoleDE consumers should use PraxisFunktionsrolleVS for code validation"],
+  "evidence_refs": []
+}
