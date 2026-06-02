@@ -58,6 +58,8 @@ pages:
     title: Home
   profiles.md:
     title: Profiles
+  practitioner-role-functions.md:
+    title: Practice Role Functions
   extensions.md:
     title: Extensions
   codesystems.md:
