@@ -1,0 +1,18 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-970",
+  "commands": [
+    {"command": "sushi .", "purpose": "Compile FSH to FHIR JSON and validate", "exit_code": 0, "result": "SUSHI compilation successful, no errors"},
+    {"command": "bash scripts/check-ig-vendor-leaks.sh", "purpose": "Verify IG surfaces contain no third-party vendor names or internal codenames (mandatory CI gate)", "exit_code": 0, "result": "Vendor leak guard passed."},
+    {"command": "sushi .", "purpose": "Re-confirm 0 errors after vendor-name removal from practitioner-role-functions.md", "exit_code": 0, "result": "0 Errors 0 Warnings; 73 profiles, 208 extensions, 52 valuesets, 57 codesystems, 242 instances"}
+  ],
+  "skipped_checks": [
+    {"check": "IG Publisher validation", "reason": "IG Publisher runs in CI only, not locally per project convention"},
+    {"check": "ESCO ValueSet resolve", "reason": "fhir-term-34z (fhir-terminology-de ESCO subset) is in_progress; canonical URL included but not resolvable until package published"}
+  ],
+  "artifacts": [
+    {"type": "fhir-json", "path": "fsh-generated/resources/CodeSystem-praxis-funktionsrolle.json"},
+    {"type": "fhir-json", "path": "fsh-generated/resources/ValueSet-praxis-funktionsrolle.json"},
+    {"type": "fhir-json", "path": "fsh-generated/resources/StructureDefinition-praxis-practitioner-role-de.json"}
+  ]
+}

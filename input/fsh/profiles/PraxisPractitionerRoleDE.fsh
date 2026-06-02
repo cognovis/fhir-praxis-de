@@ -9,6 +9,10 @@ Id: praxis-practitioner-role-de
 Title: "Praxis PractitionerRole DE"
 Description: "PractitionerRole fuer Arzt-Standort-Zuordnung mit WB-Befugnis, Genehmigungen und Sitz-Zuordnung. Basisschicht fuer spezialisierte Arzt-Standort-Profile."
 
+* code from PraxisFunktionsrolleVS (extensible)
+* code ^short = "Practice function on PractitionerRole.code"
+* code ^definition = "Practice function for this practitioner in this organizational scope. Use PractitionerRole.code for function (what the practitioner does in this role), not for qualification or location. Qualification/profession goes on Practitioner.qualification.code. Location routing goes on PractitionerRole.location (not authorization). Organization-scoped authorization is via PractitionerRole.organization and Organization.partOf descendants."
+
 // WB-Befugnis: Weiterbildungsbefugnis des Arztes an diesem Standort
 * extension contains
     WbBefugnisExt named wbBefugnis 0..* MS and
