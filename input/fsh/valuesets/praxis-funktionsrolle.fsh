@@ -1,10 +1,8 @@
 // praxis-funktionsrolle.fsh
 // Practice function ValueSet for PractitionerRole.code.
 // Combines local gap codes and ESCO standard occupations from fhir-terminology-de.
-// Note: fhir-terminology-de ESCO subset (fhir-term-34z) is pending publication.
-// The canonical URL reference is included now; SUSHI generates the compose
-// structure. IG Publisher may warn about the unresolvable URL until fhir-term-34z
-// is published -- this is expected and does not fail the build.
+// The ESCO subset is resolved through the de.cognovis.terminology.esco package
+// dependency declared in sushi-config.yaml.
 // Bead: fpde-970
 
 ValueSet: PraxisFunktionsrolleVS

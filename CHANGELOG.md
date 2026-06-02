@@ -6,7 +6,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **practitioner-role**: Added `PraxisFunktionsrolleCS` (gap codes: `billing-lead`, `application-administration`) and `PraxisFunktionsrolleVS` (includes local codes + ESCO subset reference from fhir-terminology-de). `PraxisPractitionerRoleDE.code` now bound extensible to `PraxisFunktionsrolleVS` with three-axis separation guidance.
+- **practitioner-role**: Added `PraxisFunktionsrolleCS` (gap codes: `billing-lead`, `application-administration`) and `PraxisFunktionsrolleVS` (includes local codes + ESCO subset reference from fhir-terminology-de via `de.cognovis.terminology.esco@1.0.0`). `PraxisPractitionerRoleDE.code` now bound extensible to `PraxisFunktionsrolleVS` with three-axis separation guidance.
 - **docs**: Added IG guidance page *Practice Role Functions* documenting qualification/function/scope axis separation and organization-scoped function semantics via `PractitionerRole.organization` + `Organization.partOf` descendants.
 
 
@@ -963,5 +963,4 @@ All notable changes to this project will be documented in this file.
 ### Miscellaneous
 
 - Vendor-clear public baseline v0.41.1
-
 

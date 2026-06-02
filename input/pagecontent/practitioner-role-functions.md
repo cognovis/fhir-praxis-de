@@ -47,10 +47,10 @@ receptionist, healthcare manager, ICT system administrator, doctors' surgery ass
 are referenced from the fhir-terminology-de ESCO subset
 (`https://fhir.cognovis.de/ValueSet/esco-practice-functions`).
 
-The ESCO subset is published via bead `fhir-term-34z` in the `fhir-terminology-de`
-project. Until that package is published, only local gap codes are available. The
-`PraxisFunktionsrolleVS` ValueSet already includes the canonical reference; no
-further changes are needed when the ESCO package becomes available.
+The ESCO subset is provided by the `de.cognovis.terminology.esco` dependency
+declared in `sushi-config.yaml`. `PraxisFunktionsrolleVS` includes the canonical
+ValueSet reference so IG Publisher can resolve the ESCO practice-function codes
+without copying ESCO CodeSystem content into this IG.
 
 ## Conformance Example
 
