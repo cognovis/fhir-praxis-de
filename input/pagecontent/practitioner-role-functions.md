@@ -45,7 +45,7 @@ Local gap codes are defined in `PraxisFunktionsrolleCS`
 Standard occupations (billing clerk, medical administrative assistant, practice manager,
 receptionist, healthcare manager, ICT system administrator, doctors' surgery assistant)
 are referenced from the fhir-terminology-de ESCO subset
-(`https://fhir.cognovis.de/terminology/ValueSet/esco-praxis-occupations`).
+(`https://fhir.cognovis.de/ValueSet/esco-practice-functions`).
 
 The ESCO subset is published via bead `fhir-term-34z` in the `fhir-terminology-de`
 project. Until that package is published, only local gap codes are available. The
