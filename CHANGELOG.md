@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.77.0] - 2026-06-03
+
 ### Added
 
 - **vulnerable-patient-status**: Added `VulnerablePatientStatusDE` Patient extension with sub-extensions for Pflegegrad status (PG1–PG5, SGB XI), Eingliederungshilfe status (active/inactive/physical/cognitive/psychological, SGB IX), and Kooperationsvertrag status (§ 119b SGB V), plus optional referenced facility and temporal validity (validFrom/validUntil). Three accompanying CodeSystems and ValueSets published. SNOMED CT and ICF domain cross-maps included. Dental BEMA trigger interpretation explicitly delegated to `fhir-dental-de` (bead fdde-xht).
