@@ -8,6 +8,11 @@ All notable changes to this project will be documented in this file.
 
 - **vulnerable-patient-status**: Added `VulnerablePatientStatusDE` Patient extension with sub-extensions for Pflegegrad status (PG1–PG5, SGB XI), Eingliederungshilfe status (active/inactive/physical/cognitive/psychological, SGB IX), and Kooperationsvertrag status (§ 119b SGB V), plus optional referenced facility and temporal validity (validFrom/validUntil). Three accompanying CodeSystems and ValueSets published. SNOMED CT and ICF domain cross-maps included. Dental BEMA trigger interpretation explicitly delegated to `fhir-dental-de` (bead fdde-xht).
 
+### Changed
+
+- **codesystems/CorrectionRuleCS**: Backport seed from 7 to 16 KVB prefixes (`kvb-richtigstellung`); legacy codes `PL`, `WP`, `ST`, `KO` preserved with annotation. CodeSystem now contains 20 codes total.
+- **docs/codesystems.md**: Added `category` and `direction` columns to the CorrectionRuleCS table; added runtime-growth contract paragraph documenting that additional codes are added at runtime via Aidbox (no SUSHI rebuild needed).
+
 ## [0.76.1] - 2026-06-02
 
 ### Added
