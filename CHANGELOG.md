@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file.
 
+## [Unreleased]
+
+### Changed
+
+- **codesystems/CorrectionRuleCS**: Backport seed from 7 to 16 KVB prefixes (`kvb-richtigstellung`); legacy codes `PL`, `WP`, `ST`, `KO` preserved with annotation. CodeSystem now contains 20 codes total.
+- **docs/codesystems.md**: Added `category` and `direction` columns to the CorrectionRuleCS table; added runtime-growth contract paragraph documenting that additional codes are added at runtime via Aidbox (no SUSHI rebuild needed).
+
 ## [0.76.1] - 2026-06-02
 
 ### Added

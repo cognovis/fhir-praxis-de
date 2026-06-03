@@ -21,8 +21,8 @@ Description: "Codes für KV-Richtigstellungen im Honorarbescheid"
 * #MS "Mengensteuerung/Fachgebiet" "Runtime correction rule with debit direction"
 * #ZHO "Zusatz-Honorarordnung" "Runtime correction rule with debit direction"
 * #SKV "Kostenträger-Validierung" "Runtime correction rule with debit direction"
-// Legacy documented KVB codes that are not currently observed in the MIRA runtime corpus.
-* #PL "Plausibilitätsprüfung" "Documented KVB code; not currently observed in MIRA runtime corpus"
-* #WP "Wirtschaftlichkeitsprüfung" "Documented KVB code; not currently observed in MIRA runtime corpus"
-* #ST "Storno" "Documented KVB code; not currently observed in MIRA runtime corpus"
-* #KO "Korrektur" "Documented KVB code; not currently observed in MIRA runtime corpus"
+// Legacy documented KVB codes that are not currently observed in production runtime corpora.
+* #PL "Plausibilitätsprüfung" "Documented KVB code; not currently observed in known runtime corpora"
+* #WP "Wirtschaftlichkeitsprüfung" "Documented KVB code; not currently observed in known runtime corpora"
+* #ST "Storno" "Documented KVB code; not currently observed in known runtime corpora"
+* #KO "Korrektur" "Documented KVB code; not currently observed in known runtime corpora"

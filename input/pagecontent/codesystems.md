@@ -73,12 +73,12 @@ Codes für KV-Richtigstellungen im Honorarbescheid.
 | `MS` | Mengensteuerung/Fachgebiet | runtime | debit | Mengensteuerung/Fachgebiet |
 | `ZHO` | Zusatz-Honorarordnung | runtime | debit | Zusatz-Honorarordnung |
 | `SKV` | Kostenträger-Validierung | runtime | debit | Kostenträger-Validierung |
-| `PL` | Plausibilitätsprüfung | legacy | documented | Documented KVB code; not currently observed in MIRA runtime corpus |
-| `WP` | Wirtschaftlichkeitsprüfung | legacy | documented | Documented KVB code; not currently observed in MIRA runtime corpus |
-| `ST` | Storno | legacy | documented | Documented KVB code; not currently observed in MIRA runtime corpus |
-| `KO` | Korrektur | legacy | documented | Documented KVB code; not currently observed in MIRA runtime corpus |
+| `PL` | Plausibilitätsprüfung | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+| `WP` | Wirtschaftlichkeitsprüfung | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+| `ST` | Storno | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+| `KO` | Korrektur | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
 
-**Runtime-Wachstums-Vertrag:** Die im IG definierten Codes bilden den dokumentierten Startbestand auf Basis bekannter KVB-Konventionen. Laufzeitsysteme (z.B. MIRA `codesystem-sync.ts`) können das Aidbox-CodeSystem um neue Codes erweitern, wenn ein Honorarbescheid einen bisher nicht geseedeten Richtigstellungsgrund enthält. Sobald ein neuer Code als kanonische KVB-Konvention anerkannt ist, wird er mit dem nächsten IG-Release in den Seed aufgenommen.
+**Runtime-Wachstums-Vertrag:** Die im IG definierten Codes bilden den dokumentierten Startbestand auf Basis bekannter KVB-Konventionen. Laufzeitsysteme können das Aidbox-CodeSystem um neue Codes erweitern, wenn ein Honorarbescheid einen bisher nicht geseedeten Richtigstellungsgrund enthält. Sobald ein neuer Code als kanonische KVB-Konvention anerkannt ist, wird er mit dem nächsten IG-Release in den Seed aufgenommen.
 
 ### BehandlerRolleCS — Behandler-Rolle
 
