@@ -55,15 +55,30 @@ Roles that describe how an agent contributed to a structured clinical proposal l
 
 Codes für KV-Richtigstellungen im Honorarbescheid.
 
-| Code | Display | Beschreibung |
-|------|---------|--------------|
-| `UV` | UV | Überschreitung Volumen |
-| `HO` | HO | Honoraroptimierung |
-| `GHO` | GHO | Gruppenhonorar-Optimierung |
-| `PL` | PL | Plausibilitätsprüfung |
-| `WP` | WP | Wirtschaftlichkeitsprüfung |
-| `ST` | ST | Storno |
-| `KO` | KO | Korrektur |
+| Code | Display | Kategorie | Direction | Beschreibung |
+|------|---------|-----------|-----------|--------------|
+| `ZF` | Zufügung | runtime | credit | Zufügung |
+| `HO` | Honorarordnung | runtime | debit | Honorarordnung |
+| `ER` | Ersetzung/Umsetzung | runtime | neutral | Ersetzung/Umsetzung |
+| `UV` | Übergreifende Validierung | runtime | debit | Übergreifende Validierung |
+| `WU` | Wechselseitige Unverträglichkeit | runtime | debit | Wechselseitige Unverträglichkeit |
+| `GHO` | Gruppen-Honorarordnung | runtime | debit | Gruppen-Honorarordnung |
+| `SFX` | Sonderfall/Richtlinie | runtime | debit | Sonderfall/Richtlinie |
+| `ZS` | Zusammenhangsprüfung | runtime | debit | Zusammenhangsprüfung |
+| `MF` | Meldefehler | runtime | debit | Meldefehler |
+| `HW` | Höchstwert-Ersetzung | runtime | neutral | Höchstwert-Ersetzung |
+| `AT` | Automatische Technik | runtime | credit | Automatische Technik |
+| `MZ` | Manuelle Zufügung | runtime | credit | Manuelle Zufügung |
+| `MU` | Manuelle Umsetzung | runtime | neutral | Manuelle Umsetzung |
+| `MS` | Mengensteuerung/Fachgebiet | runtime | debit | Mengensteuerung/Fachgebiet |
+| `ZHO` | Zusatz-Honorarordnung | runtime | debit | Zusatz-Honorarordnung |
+| `SKV` | Kostenträger-Validierung | runtime | debit | Kostenträger-Validierung |
+| `PL` | Plausibilitätsprüfung | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+| `WP` | Wirtschaftlichkeitsprüfung | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+| `ST` | Storno | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+| `KO` | Korrektur | legacy | documented | Documented KVB code; not currently observed in known runtime corpora |
+
+**Runtime-Wachstums-Vertrag:** Die im IG definierten Codes bilden den dokumentierten Startbestand auf Basis bekannter KVB-Konventionen. Laufzeitsysteme können das Aidbox-CodeSystem um neue Codes erweitern, wenn ein Honorarbescheid einen bisher nicht geseedeten Richtigstellungsgrund enthält. Sobald ein neuer Code als kanonische KVB-Konvention anerkannt ist, wird er mit dem nächsten IG-Release in den Seed aufgenommen.
 
 ### BehandlerRolleCS — Behandler-Rolle
 
