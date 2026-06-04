@@ -8,7 +8,7 @@ All notable changes to this project will be documented in this file.
 
 ### Added
 
-- **nursing-home-residency**: Added `NursingHomeStationExt`, `NursingHomeRoomNumberExt`, `NursingHomeSeatingGroupExt`, and `NursingHomeLocationExt` for nursing-home placement fields. Added `PraxisNursingHomeResidencyDE` EpisodeOfCare profile linking patient residency to a nursing-home Location with room, station, and seating-group extensions.
+- **nursing-home-residency**: Added `PraxisNursingHomeLocationDE` (ISiK Standort-aligned `Location` profile: `physicalType` bu/wa/ro with a facility -> ward -> room `partOf` hierarchy) and the `PraxisNursingHomeResidencyDE` EpisodeOfCare profile, which links a patient residency to the most-specific nursing-home `Location` via the `NursingHomeLocationExt` extension (ward/facility resolve through `partOf`). Added ISiK-style `Encounter.location` to `EncounterPraxis` as the Hausbesuch-to-Heim link for nursing-home EBM code and Mitbesuch (EBM 01413) detection. Placement uses the structured `Location` hierarchy rather than free-text station/room/seating-group fields.
 
 ## [0.77.0] - 2026-06-03
 
