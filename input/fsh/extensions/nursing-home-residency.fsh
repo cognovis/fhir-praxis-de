@@ -1,11 +1,10 @@
 // nursing-home-residency.fsh
-// Bead: polaris-9siq
-// Extensions for x.isynet PatientPflegeheime room, station, and seating group fields.
+// Extensions for nursing-home room, station, and seating group placement.
 
 Extension: NursingHomeStationExt
 Id: nursing-home-station
 Title: "Nursing Home Station"
-Description: "Station or ward name for a patient residency in a nursing home (x.isynet PatientPflegeheime.Station)."
+Description: "Station or ward name for a patient residency in a nursing home."
 Context: EpisodeOfCare
 * value[x] only string
 * valueString ^maxLength = 50
@@ -13,7 +12,7 @@ Context: EpisodeOfCare
 Extension: NursingHomeRoomNumberExt
 Id: nursing-home-room-number
 Title: "Nursing Home Room Number"
-Description: "Room number for a patient residency in a nursing home (x.isynet PatientPflegeheime.Zimmernummer)."
+Description: "Room number for a patient residency in a nursing home."
 Context: EpisodeOfCare
 * value[x] only string
 * valueString ^maxLength = 10
@@ -21,7 +20,7 @@ Context: EpisodeOfCare
 Extension: NursingHomeSeatingGroupExt
 Id: nursing-home-seating-group
 Title: "Nursing Home Seating Group"
-Description: "Seating group for a patient residency in a nursing home (x.isynet PatientPflegeheime.Sitzgruppe)."
+Description: "Seating group for a patient residency in a nursing home."
 Context: EpisodeOfCare
 * value[x] only string
 * valueString ^maxLength = 50

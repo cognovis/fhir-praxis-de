@@ -1,12 +1,11 @@
 // nursing-home-residency.fsh
-// Bead: polaris-9siq
 // EpisodeOfCare profile for patient residency in a nursing home.
 
 Profile: PraxisNursingHomeResidencyDE
 Parent: EpisodeOfCare
 Id: praxis-nursing-home-residency-de
 Title: "Praxis Nursing Home Residency DE"
-Description: "Patient residency in a nursing home. Links the patient to a nursing-home Location and carries room, station, and seating-group placement details from x.isynet PatientPflegeheime."
+Description: "Patient residency in a nursing home. Links the patient to a nursing-home Location and carries room, station, and seating-group placement details."
 
 * patient 1..1 MS
 * status 1..1 MS

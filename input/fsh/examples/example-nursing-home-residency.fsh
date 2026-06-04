@@ -1,10 +1,9 @@
 // example-nursing-home-residency.fsh
-// Bead: polaris-9siq
 
 Instance: ExampleNursingHomeLocation
 InstanceOf: Location
 Title: "Example Nursing Home Location"
-Description: "Nursing-home address imported from x.isynet Adresse."
+Description: "Nursing-home address for a care facility."
 Usage: #example
 * status = #active
 * name = "Sonnenschein Care Home"
@@ -19,7 +18,7 @@ Usage: #example
 Instance: ExampleNursingHomeResidency
 InstanceOf: PraxisNursingHomeResidencyDE
 Title: "Example Nursing Home Residency"
-Description: "Patient residency with room, station, and seating group from PatientPflegeheime."
+Description: "Patient residency with room, station, and seating group placement."
 Usage: #example
 * meta.profile[0] = "https://fhir.cognovis.de/praxis/StructureDefinition/praxis-nursing-home-residency-de"
 * status = #active
