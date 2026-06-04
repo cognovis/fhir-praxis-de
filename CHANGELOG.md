@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.78.0] - 2026-06-04
+
+### Added
+
+- **nursing-home-residency**: Added `NursingHomeStationExt`, `NursingHomeRoomNumberExt`, `NursingHomeSeatingGroupExt`, and `NursingHomeLocationExt` for x.isynet `PatientPflegeheime` placement fields. Added `PraxisNursingHomeResidencyDE` EpisodeOfCare profile linking patient residency to a nursing-home Location with room, station, and seating-group extensions.
+
 ## [0.77.0] - 2026-06-03
 
 ### Added
