@@ -12,15 +12,15 @@ Usage: #example
 Instance: ExampleNursingHomeFacility
 InstanceOf: Location
 Title: "Example Nursing Home Facility"
-Description: "Nursing-home facility node (ISiKStandort, type NURS)."
+Description: "Nursing-home facility node (ISiKStandort, type NCCF)."
 Usage: #example
-* meta.profile[0] = "https://gematik.de/fhir/isik/StructureDefinition/ISiKStandort"
+* meta.profile[0] = ISiKStandort
 * status = #active
 * mode = #instance
 * name = "Sonnenschein Care Home"
 * type[0].coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-RoleCode"
-* type[0].coding[0].code = #NURS
-* type[0].coding[0].display = "Nursing home"
+* type[0].coding[0].code = #NCCF
+* type[0].coding[0].display = "Nursing or custodial care facility"
 * physicalType.coding[0].system = "http://terminology.hl7.org/CodeSystem/location-physical-type"
 * physicalType.coding[0].code = #si
 * physicalType.coding[0].display = "Site"
@@ -35,7 +35,7 @@ InstanceOf: Location
 Title: "Example Nursing Home Ward"
 Description: "Ward/station node (ISiKStandort, physicalType wa), part of the facility."
 Usage: #example
-* meta.profile[0] = "https://gematik.de/fhir/isik/StructureDefinition/ISiKStandort"
+* meta.profile[0] = ISiKStandort
 * status = #active
 * mode = #instance
 * name = "North Wing"
@@ -50,7 +50,7 @@ InstanceOf: Location
 Title: "Example Nursing Home Room"
 Description: "Room node (ISiKStandortRaum), part of the ward."
 Usage: #example
-* meta.profile[0] = "https://gematik.de/fhir/isik/StructureDefinition/ISiKStandortRaum"
+* meta.profile[0] = ISiKStandortRaum
 * status = #active
 * mode = #instance
 * name = "214"

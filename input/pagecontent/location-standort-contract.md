@@ -30,7 +30,7 @@ Canonical URLs: `https://gematik.de/fhir/isik/StructureDefinition/{profile}`.
 Typical hierarchy:
 
 ```
-ISiKStandort (facility, type NURS)
+ISiKStandort (facility, type NCCF)
   └── ISiKStandort (ward, physicalType wa)
         └── ISiKStandortRaum (room, physicalType ro)
 ```
