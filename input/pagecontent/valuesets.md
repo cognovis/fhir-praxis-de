@@ -52,6 +52,14 @@ PVS-agnostic ambulatory service-offering categories.
 - **Binding:** Used by `PraxisHealthcareServiceDE.type` (extensible)
 - **Usage:** Classifies publishable service offerings (general practice, radiology, psychosomatic basic care)
 
+### PraxisWorkplaceFunctionVS — Praxis Workplace Function
+
+Hybrid catalog for ambulatory workplace operational functions on `Location.type`.
+
+- **Includes:** All codes from [PraxisWorkplaceFunctionCS](CodeSystem-praxis-workplace-function.html) plus selected HL7 v3 `ServiceDeliveryLocationRoleType` codes (`PROFF`, `OF`, `DX`, `LAB`, `RADDX`, `RADO`, `DENT`, `OPS`)
+- **Binding:** Documented guidance on ISiK `Location.type` (extensible; no local Location profile)
+- **Usage:** Classifies how a practice room or area is used operationally. See [Location / ISiK Standort Contract](location-standort-contract.html#workplace-function-terminology).
+
 ### PraxisHealthcareServiceSpecialtyVS — Praxis Healthcare Service Specialty
 
 Ambulatory Fachgruppe for service offerings.
