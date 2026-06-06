@@ -62,6 +62,8 @@ pages:
     title: Profiles
   practitioner-role-functions.md:
     title: Practice Role Functions
+  healthcare-service-contract.md:
+    title: HealthcareService Contract
   extensions.md:
     title: Extensions
   codesystems.md:
@@ -116,5 +118,6 @@ menu:
     Multi-Coverage: multi-coverage.html
     Claim Diagnosis Contract: claim-diagnosis-contract.html
     Practice Role Functions: practitioner-role-functions.html
+    HealthcareService Contract: healthcare-service-contract.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html

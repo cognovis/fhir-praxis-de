@@ -25,3 +25,12 @@ Description: "PractitionerRole fuer Arzt-Standort-Zuordnung mit WB-Befugnis, Gen
 * extension[sitzAnteil] ^definition = "Anteil des Arztes am KV-Sitz als Dezimalzahl (0.0-1.0)."
 * extension[stundenProWoche] ^short = "Vertraglich vereinbarte Arbeitsstunden pro Woche"
 * extension[arztSitzStatus] ^short = "Arzt-Status in der Sitz-Zuordnung (Facharzt, WBA, Sicherstellung, Vertreter)"
+
+// Service offering link (fpde-ir8)
+* healthcareService 0..* MS
+* healthcareService only Reference(PraxisHealthcareServiceDE)
+* healthcareService ^short = "Healthcare service offerings at this role"
+* healthcareService ^definition = "Ambulatory service offerings this practitioner role operates under at the referenced organization and location. Links PractitionerRole to PraxisHealthcareServiceDE for service-offering publication and downstream configuration."
+* location 0..* MS
+* location ^short = "Practice locations for this role"
+* location ^definition = "Physical routing context for this practitioner role. Align with HealthcareService.location when the role serves a specific service offering at a site."
