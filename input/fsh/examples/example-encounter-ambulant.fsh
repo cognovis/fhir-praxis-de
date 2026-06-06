@@ -15,7 +15,7 @@ Usage: #example
 Instance: example-encounter-hausbesuch
 InstanceOf: EncounterPraxis
 Title: "Home Visit Clinical Contact"
-Description: "Home visit clinical contact linked to a GKV billing case Account."
+Description: "Home visit to a nursing-home resident at the patient's ISiK room Location, linked to a GKV billing case Account."
 Usage: #example
 * status = #finished
 * class = http://terminology.hl7.org/CodeSystem/v3-ActCode#HH "home health"
@@ -26,3 +26,7 @@ Usage: #example
 * period.end = "2026-04-12"
 * participant[0].individual = Reference(example-practitioner)
 * account[0] = Reference(example-account-schein-gkv)
+* location[0].location = Reference(ExampleNursingHomeRoom)
+* location[0].physicalType.coding[0].system = "http://terminology.hl7.org/CodeSystem/location-physical-type"
+* location[0].physicalType.coding[0].code = #ro
+* location[0].physicalType.coding[0].display = "Room"

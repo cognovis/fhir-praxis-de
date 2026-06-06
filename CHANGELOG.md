@@ -4,6 +4,19 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **location-standort** (fpde-d4f): Declared `de.gematik.isik-basismodul@4.0.3` dependency. Nursing-home placement and `EncounterPraxis.location` now target gematik ISiK Location profiles (`ISiKStandort`, `ISiKStandortRaum`, `ISiKStandortBettenstellplatz`) directly. Added IG page *Location / ISiK Standort Contract* with migration guidance and downstream handoff rules. Updated examples for nursing-home facility/ward/room, residency, home-visit Encounter, practice sites, and treatment room.
+- **healthcare-service** (fpde-ir8): Added `PraxisHealthcareServiceDE` profile aligned with ISiK `ISiKMedizinischeBehandlungseinheit` without ISiK package dependency (ADR-007). Added `PraxisHealthcareServiceTypeCS/VS` for PVS-agnostic service-offering categories and `PraxisHealthcareServiceSpecialtyVS` (KBV BAR2-WBO). Extended `PraxisPractitionerRoleDE` with `healthcareService` and `location` Must Support. Added examples for general practice, radiology, psychosomatic basic care, and shared-location MVZ scenario. Added IG page *HealthcareService Contract* with downstream handoff rules.
+
+### Changed
+
+- **location-standort** (fpde-d4f): `NursingHomeLocationExt` and `EncounterPraxis.location.location` `targetProfile` constraints now reference ISiK Location profiles instead of the local shadow profile.
+
+### Removed
+
+- **location-standort** (fpde-d4f, BREAKING): Removed `PraxisNursingHomeLocationDE`. Consumers must migrate `meta.profile` and validation to `https://gematik.de/fhir/isik/StructureDefinition/ISiKStandort` or `ISiKStandortRaum`. See *Location / ISiK Standort Contract* for downstream adapter and worklist-consumer follow-up.
+
 ## [0.80.0] - 2026-06-06
 
 ### Changed

@@ -32,10 +32,10 @@ Description: "Clinical contact in ambulatory practice (consultation, home visit)
 
 * location 0..* MS
 * location.location 1..1 MS
-* location.location only Reference(PraxisNursingHomeLocationDE or Location)
+* location.location only Reference(ISiKStandort or ISiKStandortRaum or ISiKStandortBettenstellplatz)
 * location.physicalType MS
-* location ^short = "Place the contact occurred at; for nursing-home home visits (class=HH) reference the PraxisNursingHomeLocationDE"
-* location ^comment = "ISiK Standort-aligned. For a Hausbesuch to a nursing-home resident, set location.location to the nursing-home Location. Combined with an active PraxisNursingHomeResidencyDE this signals nursing-home EBM codes, and a shared Location across patients on the same day enables Mitbesuch (EBM 01413) detection."
+* location ^short = "Place the contact occurred at; use ISiK Location profiles for nursing-home home visits and in-practice sites"
+* location ^comment = "For a Hausbesuch to a nursing-home resident, set location.location to the patient's ISiK nursing-home Location. For in-practice contacts, reference the relevant ISiKStandort (site/ward) or ISiKStandortRaum (treatment room). Combined with an active PraxisNursingHomeResidencyDE this signals nursing-home EBM codes, and a shared Location across patients on the same day enables Mitbesuch (EBM 01413) detection."
 
 * extension contains WegegeldHausbesuchExt named wegegeldHausbesuch 0..1 MS
 * extension[wegegeldHausbesuch] ^short = "Home-visit distance and zone for class=HH contacts"
