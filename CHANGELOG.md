@@ -4,6 +4,10 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+### Added
+
+- **healthcare-service** (fpde-ir8): Added `PraxisHealthcareServiceDE` profile aligned with ISiK `ISiKMedizinischeBehandlungseinheit` without ISiK package dependency (ADR-007). Added `PraxisHealthcareServiceTypeCS/VS` for PVS-agnostic service-offering categories and `PraxisHealthcareServiceSpecialtyVS` (KBV BAR2-WBO). Extended `PraxisPractitionerRoleDE` with `healthcareService` and `location` Must Support. Added examples for general practice, radiology, psychosomatic basic care, and shared-location MVZ scenario. Added IG page *HealthcareService Contract* with downstream handoff rules.
+
 ## [0.80.0] - 2026-06-06
 
 ### Changed

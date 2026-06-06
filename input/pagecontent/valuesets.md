@@ -42,7 +42,23 @@ KV-regulierte Leistungsbereiche mit Genehmigungspflicht.
 
 - **Includes:** All codes from [GenehmigungenLeistungsbereichCS](CodeSystem-genehmigung-leistungsbereich.html)
 - **Binding:** Used by `GenehmigungenExt.leistungsbereich`
-- **Usage:** Identifies which medical service area requires a KV approval (e.g. Chirotherapie, Sonographie, Psychotherapie)
+- **Usage:** Identifies which medical service area requires a KV approval (e.g. Chirotherapie, Sonographie, Psychotherapie). **Not** used for `HealthcareService.type` — see [HealthcareService Contract](healthcare-service-contract.html).
+
+### PraxisHealthcareServiceTypeVS — Praxis Healthcare Service Type
+
+PVS-agnostic ambulatory service-offering categories.
+
+- **Includes:** All codes from [PraxisHealthcareServiceTypeCS](CodeSystem-praxis-healthcare-service-type.html)
+- **Binding:** Used by `PraxisHealthcareServiceDE.type` (extensible)
+- **Usage:** Classifies publishable service offerings (general practice, radiology, psychosomatic basic care)
+
+### PraxisHealthcareServiceSpecialtyVS — Praxis Healthcare Service Specialty
+
+Ambulatory Fachgruppe for service offerings.
+
+- **Includes:** All codes from `https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_BAR2_WBO`
+- **Binding:** Used by `PraxisHealthcareServiceDE.specialty` (extensible)
+- **Usage:** KBV BAR2-WBO specialty on HealthcareService; map to IHE XDS for ISiK exchange per healthcare-service-contract.md
 
 ### GenehmigungenTypVS — Genehmigungstyp
 

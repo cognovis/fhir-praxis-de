@@ -55,6 +55,8 @@ The IG therefore combines reusable extensions and terminology with a small numbe
 | **[FPDECoverageGKV](StructureDefinition-fpde-coverage-gkv.html)** | GKV insurance with Wohnortprinzip (WOP) | gkv/wop |
 | **[FPDECoveragePrivat](StructureDefinition-fpde-coverage-privat.html)** | PKV / self-pay coverage with optional PVS routing | billingAssignment |
 | **PractitionerRole** | WB-Assistent / Sicherstellungsassistent | WbRolleExt, WbSupervisorRoleExt |
+| **[PraxisHealthcareServiceDE](StructureDefinition-praxis-healthcare-service-de.html)** | Ambulatory service offerings | — (type/specialty ValueSet bindings) |
+| **[PraxisPractitionerRoleDE](StructureDefinition-praxis-practitioner-role-de.html)** | Arzt-Standort-Zuordnung with service-offering link | WbBefugnisExt, healthcareService |
 | **Consent** | Patient consent management | EinwilligungKuerzelExt, EinwilligungWiderrufMoeglichExt, EinwilligungAuswahlExt |
 
 ## PraxisCondition — ICD-10-GM mit Diagnosesicherheit

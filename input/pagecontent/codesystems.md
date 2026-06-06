@@ -118,6 +118,17 @@ Typen für Praxis-Aufgaben in der Aufgabenverwaltung.
 | `recipe` | Rezept | Rezeptanforderung |
 | `referral` | Überweisung | Überweisungsanforderung |
 
+### PraxisHealthcareServiceTypeCS — Praxis Healthcare Service Type
+
+PVS-agnostic categories for ambulatory service offerings on `HealthcareService.type`. Distinct from GenehmigungenLeistungsbereichCS (KV authorization evidence on Basic resources).
+
+| Code | Display | Description |
+|------|---------|-------------|
+| `general-practice` | General Practice | Primary care / general medicine service offering |
+| `internal-medicine` | Internal Medicine | Internal medicine ambulatory service offering |
+| `radiology` | Radiology | Radiology and diagnostic imaging service offering |
+| `psychosomatic-basic-care` | Psychosomatic Basic Care | Psychosomatische Grundversorgung service offering |
+
 ### GenehmigungenLeistungsbereichCS — KV-regulierte Leistungsbereiche
 
 Leistungsbereiche, die einer KV-Genehmigung bedürfen.
