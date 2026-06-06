@@ -11,8 +11,9 @@ canonical `HealthcareService` contract. gematik ISiK Terminplanung Stufe 5 defin
 `ISiKMedizinischeBehandlungseinheit` (`https://gematik.de/fhir/isik/StructureDefinition/ISiKMedizinischeBehandlungseinheit`)
 as the hospital-oriented treatment-unit profile on `HealthcareService`.
 
-fhir-praxis-de already avoids undeclared ISiK package dependencies where registry resolution
-is unreliable (see nursing-home Location modelling, CHANGELOG 0.79.0).
+fhir-praxis-de declares `de.gematik.isik-basismodul@4.0.3` for Location (ISiK Standort) usage
+(fpde-d4f). HealthcareService remains structurally aligned without `de.gematik.isik-terminplanung`
+because that package is not resolvable from the public FHIR package registry.
 
 ## Decision
 

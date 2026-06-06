@@ -51,6 +51,7 @@ dependencies:
   # .github/actions/generate-kbv-basis-snapshots/README.md). The
   # generate-kbv-basis-snapshots CI action injects them before SUSHI runs.
   kbv.basis: 1.8.0
+  de.gematik.isik-basismodul: 4.0.3
 
 parameters:
   auto-oid-root: 2.16.840.1.113883.3.7985
@@ -64,6 +65,8 @@ pages:
     title: Practice Role Functions
   healthcare-service-contract.md:
     title: HealthcareService Contract
+  location-standort-contract.md:
+    title: Location / ISiK Standort Contract
   extensions.md:
     title: Extensions
   codesystems.md:
@@ -119,5 +122,6 @@ menu:
     Claim Diagnosis Contract: claim-diagnosis-contract.html
     Practice Role Functions: practitioner-role-functions.html
     HealthcareService Contract: healthcare-service-contract.html
+    Location / ISiK Standort: location-standort-contract.html
   International Interoperability: international-interoperability.html
   Artifacts: artifacts.html

@@ -5,7 +5,7 @@
 Extension: NursingHomeLocationExt
 Id: nursing-home-location
 Title: "Nursing Home Location"
-Description: "Reference to the most-specific PraxisNursingHomeLocationDE where the patient resides (room, else ward, else facility). Facility and ward are resolved via Location.partOf."
+Description: "Reference to the most-specific gematik ISiK Location where the patient resides (ISiKStandortRaum if room is known, else ISiKStandort ward/facility node). Parent places resolve via Location.partOf."
 Context: EpisodeOfCare
-* value[x] only Reference(PraxisNursingHomeLocationDE)
+* value[x] only Reference(ISiKStandort or ISiKStandortRaum or ISiKStandortBettenstellplatz)
 * valueReference.reference 1..1 MS
