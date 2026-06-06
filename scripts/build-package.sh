@@ -52,7 +52,7 @@ rm -rf "$DIST"
 mkdir -p "$DIST"
 
 # 6. Create package.json (FHIR package format) — deps derived from sushi-config.yaml
-DEPS_JSON=$(python3 - <<'PYEOF'
+DEPS_JSON=$(uv run --with pyyaml python - <<'PYEOF'
 import json, yaml
 
 with open("sushi-config.yaml") as f:

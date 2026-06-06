@@ -4,18 +4,37 @@
 Instance: ExampleSharedPracticeLocation
 InstanceOf: Location
 Title: "Shared practice site — Gibitzenhof"
-Description: "Physical practice location shared by general medicine and radiology service offerings at the same organization."
+Description: "ISiKStandort practice site shared by general medicine and radiology service offerings at the same organization."
 Usage: #example
+* meta.profile[0] = "https://gematik.de/fhir/isik/StructureDefinition/ISiKStandort"
 * status = #active
 * name = "Praxis Gibitzenhof — Hauptstandort"
 * mode = #instance
 * type[0].coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-RoleCode"
 * type[0].coding[0].code = #PROFF
 * type[0].coding[0].display = "Provider's Office"
+* physicalType.coding[0].system = "http://terminology.hl7.org/CodeSystem/location-physical-type"
+* physicalType.coding[0].code = #si
+* physicalType.coding[0].display = "Site"
 * address.line[0] = "Gibitzenhofstrasse 12"
 * address.city = "Nuernberg"
 * address.postalCode = "90459"
 * address.country = "DE"
+* managingOrganization = Reference(ExamplePraxisOrganizationHs)
+
+Instance: ExampleTreatmentRoomGibitzenhof
+InstanceOf: Location
+Title: "Treatment room — Gibitzenhof"
+Description: "In-practice treatment room (ISiKStandortRaum) within the shared Gibitzenhof site."
+Usage: #example
+* meta.profile[0] = "https://gematik.de/fhir/isik/StructureDefinition/ISiKStandortRaum"
+* status = #active
+* mode = #instance
+* name = "Treatment Room 3"
+* physicalType.coding[0].system = "http://terminology.hl7.org/CodeSystem/location-physical-type"
+* physicalType.coding[0].code = #ro
+* physicalType.coding[0].display = "Room"
+* partOf = Reference(ExampleSharedPracticeLocation)
 * managingOrganization = Reference(ExamplePraxisOrganizationHs)
 
 Instance: ExamplePraxisOrganizationHs
@@ -89,13 +108,17 @@ Usage: #example
 Instance: ExamplePsychosomatikLocation
 InstanceOf: Location
 Title: "Psychosomatik practice site — Nord"
-Description: "Standalone location for psychosomatic basic care offering."
+Description: "Standalone ISiKStandort for psychosomatic basic care offering."
 Usage: #example
+* meta.profile[0] = "https://gematik.de/fhir/isik/StructureDefinition/ISiKStandort"
 * status = #active
 * name = "Praxis Psychosomatik Nord — Hauptstandort"
 * mode = #instance
 * type[0].coding[0].system = "http://terminology.hl7.org/CodeSystem/v3-RoleCode"
 * type[0].coding[0].code = #PROFF
+* physicalType.coding[0].system = "http://terminology.hl7.org/CodeSystem/location-physical-type"
+* physicalType.coding[0].code = #si
+* physicalType.coding[0].display = "Site"
 * address.line[0] = "Nordring 8"
 * address.city = "Erlangen"
 * address.postalCode = "91054"
