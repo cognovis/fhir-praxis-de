@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.0] - 2026-06-06
+
+### Changed
+
+- **basisprofil** (fpde-8n4): Downgraded `de.basisprofil.r4` from `1.6.0-ballot2` to `1.5.4` to restore ISiK / kbv.basis 1.5.x ecosystem compatibility (kbv.basis 1.8.0 pins exactly 1.5.4). This removes the ballot2-only `required` binding on `Coverage.identifier:KrankenversichertenID.type` — which referenced the `identifier-type-kvid-de-basis` ValueSet absent from 1.5.x and dangled for any downstream consumer combining this package with a 1.5.x base. The inherited snapshot binding is restored to `extensible` → `identifier-type-de-basis`. No FHIR profile content changed; `coverage.fsh` comments translated to English.
+
 ## [0.79.0] - 2026-06-04
 
 ### Changed
