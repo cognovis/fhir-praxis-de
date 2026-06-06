@@ -434,7 +434,7 @@ See examples: `example-coverage-gkv-wop`, `example-coverage-gkv-wop-west`.
 
 The `FPDECoveragePrivat` profile constrains `Coverage` for private billing scenarios where routing to an external billing service (PVS) is decided per Coverage. This is the critical modeling choice: a patient can have multiple Coverage resources, and only some of them may route receivables to a third-party biller.
 
-`de.basisprofil.r4` version `1.6.0-ballot2` does not currently publish a dedicated `coverage-de-pkv` profile. This IG therefore derives `FPDECoveragePrivat` from `coverage-de-basis` and requires a German insurance type coding of `PKV` or `SEL`.
+`de.basisprofil.r4` version `1.5.4` does not currently publish a dedicated `coverage-de-pkv` profile. This IG therefore derives `FPDECoveragePrivat` from `coverage-de-basis` and requires a German insurance type coding of `PKV` or `SEL`.
 
 ### Core Elements
 
