@@ -129,6 +129,28 @@ PVS-agnostic categories for ambulatory service offerings on `HealthcareService.t
 | `radiology` | Radiology | Radiology and diagnostic imaging service offering |
 | `psychosomatic-basic-care` | Psychosomatic Basic Care | Psychosomatische Grundversorgung service offering |
 
+### PraxisWorkplaceFunctionCS — Praxis Workplace Function
+
+PVS-agnostic operational workplace functions for `Location.type` on ambulatory practice rooms and areas. Distinct from `Location.physicalType` (shape), `HealthcareService` (offered service), and practitioner qualification. See [Location / ISiK Standort Contract](location-standort-contract.html#workplace-function-terminology).
+
+| Code | Display | Description |
+|------|---------|-------------|
+| `reception-check-in` | Reception / Check-in | Patient arrival and front-desk check-in |
+| `waiting-area` | Waiting Area | Patient waiting space |
+| `consultation-room` | Consultation Room | Examination and consultation room |
+| `treatment-procedure-room` | Treatment / Procedure Room | General treatment or minor procedure room |
+| `blood-draw` | Blood Draw | Phlebotomy workplace |
+| `vaccination-injection` | Vaccination / Injection | Immunization and injection workplace |
+| `ecg-room` | ECG Room | Electrocardiography workplace |
+| `ultrasound-room` | Ultrasound Room | Ultrasound examination workplace |
+| `wound-care` | Wound Care | Wound care and dressing workplace |
+| `specimen-lab-handling` | Specimen / Lab Handling | Specimen collection and pre-analytic handling |
+| `imaging-radiology-room` | Imaging / Radiology Room | In-practice diagnostic imaging room |
+| `dental-treatment-room` | Dental Treatment Room | Dental operatory |
+| `sterilization-utility` | Sterilization / Utility | Instrument reprocessing or utility room |
+| `back-office` | Back Office | Administrative workplace without direct patient care |
+| `telehealth-virtual-workspace` | Telehealth / Virtual Workspace | Virtual care endpoint (non-physical) |
+
 ### GenehmigungenLeistungsbereichCS — KV-regulierte Leistungsbereiche
 
 Leistungsbereiche, die einer KV-Genehmigung bedürfen.
