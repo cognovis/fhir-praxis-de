@@ -9,7 +9,7 @@ description: >-
   Built on German base profiles (de.basisprofil.r4, KBV, DGUV) with documented
   international interoperability mappings.
 status: active
-version: 0.79.0
+version: 0.80.0
 fhirVersion: 4.0.1
 copyrightYear: 2026+
 releaseLabel: STU1
@@ -22,7 +22,7 @@ jurisdiction: urn:iso:std:iso:3166#DE "Germany"
 
 dependencies:
   de.basisprofil.r4:
-    version: 1.6.0-ballot2
+    version: 1.5.4
     uri: http://fhir.de/ImplementationGuide/basisprofil-de-r4
   hl7.terminology.r4: 7.1.0
   fhir.dicom: 2022.4.20221006
@@ -34,8 +34,9 @@ dependencies:
   # KBV-MIO-Impfpass vocabulary repackage (cognovis-internal):
   # Subset of kbv.mio.impfpass@1.1.0 with the dimdi-tainted ValueSets/ConceptMaps
   # removed, so it carries no de.basisprofil.r4@0.9.12 transitive dependency.
-  # The 0.9.12 → 1.6.0-ballot2 namespace rename (dimdi/* → bfarm/*) made the
-  # upstream package incompatible with our basisprofil pinning. We only need
+  # The dimdi/* → bfarm/* namespace rename (introduced in the 0.9.x → 1.x jump,
+  # already in effect at 1.5.x) made the upstream package incompatible with our
+  # basisprofil pinning. We only need
   # the SNOMED-/KBV-internal vocab (KBV_VS_MIO_Vaccination_Vaccine_List et al.)
   # for extensible bindings on PraxisImmunization.vaccineCode — no profile
   # inheritance from KBV-MIO. Provenance + included resource list:

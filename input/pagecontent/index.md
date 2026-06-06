@@ -59,7 +59,7 @@ Contract mit hvg-kennung, ChargeItem mit HZV-Katalog-CodeSystem).
 This IG builds on the German and international FHIR packages declared in
 `sushi-config.yaml`, including:
 
-- [de.basisprofil.r4](https://simplifier.net/basisprofil-de-r4) (1.6.0-ballot2) - German base profiles
+- [de.basisprofil.r4](https://simplifier.net/basisprofil-de-r4) (1.5.4) - German base profiles
 - [kbv.basis](https://simplifier.net/packages/kbv.basis) (1.8.0) - KBV base profiles
 - [IHE RAD IMR](https://profiles.ihe.net/RAD/IMR/) - imaging request workflow
 - [HL7 IPS](https://hl7.org/fhir/uv/ips/) - international patient-summary baseline patterns

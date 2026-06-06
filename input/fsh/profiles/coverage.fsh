@@ -1,6 +1,6 @@
-// FPDECoverageGKV — GKV-Versicherung
-// Parent: coverage-de-gkv aus de.basisprofil.r4 1.6.0-ballot2
-// Die WOP-Extension ist bereits im Parent definiert — keine lokale Neudefinition noetig.
+// FPDECoverageGKV — GKV coverage
+// Parent: coverage-de-gkv from de.basisprofil.r4 1.5.4
+// The WOP extension is already defined in the parent — no local redefinition needed.
 
 Profile: FPDECoverageGKV
 Parent: http://fhir.de/StructureDefinition/coverage-de-gkv
@@ -16,9 +16,9 @@ Description: "Coverage.type muss eine VersicherungsartDeBasis-Kodierung mit PKV 
 Expression: "type.coding.where(system = 'http://fhir.de/CodeSystem/versicherungsart-de-basis').where(code = 'PKV' or code = 'SEL').exists()"
 Severity: #error
 
-// FPDECoveragePrivat — PKV-/Selbstzahler-Coverage mit optionaler Fremdabrechnung
-// de.basisprofil.r4 1.6.0-ballot2 liefert kein spezialisiertes coverage-de-pkv-Profil.
-// Daher leitet dieses Profil direkt vom deutschen Coverage-Basisprofil ab.
+// FPDECoveragePrivat — PKV/self-payer coverage with optional third-party billing
+// de.basisprofil.r4 1.5.4 does not ship a specialized coverage-de-pkv profile.
+// Therefore this profile derives directly from the German Coverage base profile.
 
 Profile: FPDECoveragePrivat
 Parent: http://fhir.de/StructureDefinition/coverage-de-basis
