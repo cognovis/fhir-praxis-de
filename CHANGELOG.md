@@ -4,6 +4,14 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.5] - 2026-06-07
+
+> Note: `0.80.4` was tagged but never published to the registry; `0.80.5` is the released version of this change set.
+
+### Changed
+
+- **ig-pages** (fpde-8nu): Removed all ADR links and references from published IG pages per the no-ADR-links-in-IG policy — decision outcomes are now stated inline; ADRs remain internal records under `docs/adr/`. Added a build guard preventing reintroduction.
+
 ## [0.80.3] - 2026-06-07
 
 ### Added
