@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.3] - 2026-06-07
+
 ### Added
 
 - **workplace-function** (fpde-b74): Added `PraxisWorkplaceFunctionCS/VS` hybrid catalog for ambulatory `Location.type` workplace functions (local codes plus selected v3 `ServiceDeliveryLocationRoleType` codes). Extended *Location / ISiK Standort Contract* with terminology decision, five-axis guidance, shared-reception pattern, and adapter-repository / worklist-consumer handoff. Added workplace location examples (site, rooms, shared reception, telehealth endpoint).
