@@ -63,10 +63,12 @@ Downstream resolution logic must:
   `Mehrfachcodierungskennzeichen` on the source ICD coding and, when using
   `diagnosisCodeableConcept`, on the Claim diagnosis coding.
 
-## Related Decisions and Beads
+## Related IG Pages and Beads
 
-- ADR-005: `docs/adr/ADR-005-account-centered-billing-case-model.md`
-- AW-SST crosswalk: `input/pagecontent/aw-sst-crosswalk.md`
+- Account-centered billing case: `AccountPraxisSchein` anchors the Schein;
+  `EncounterPraxis` models clinical contacts; quarterly diagnoses project onto
+  `Claim.diagnosis` on the preliminary billing claim. See
+  [Architecture Overview](architecture.html) and [AW-SST Crosswalk](aw-sst-crosswalk.html).
 - `fpde-cj3`: AccountPraxisSchein and EncounterPraxis contact re-scope
 - `fpde-mub`: this Claim.diagnosis contract and KBV-AWS diagnosis certainty mapping
-- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision
+- External bead `59tj`: downstream Account-centered billing-case coordination
