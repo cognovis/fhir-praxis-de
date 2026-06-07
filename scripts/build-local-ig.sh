@@ -26,5 +26,6 @@ EOF
   exit 1
 fi
 
+"$ROOT/scripts/check-ig-pagecontent-no-adr-links.sh"
 "$ROOT/scripts/preload-private-fhir-packages.sh"
 "$ROOT/_genonce.sh" "$@"

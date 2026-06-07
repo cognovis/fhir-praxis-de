@@ -1,8 +1,11 @@
-# Architecture Decisions
+# Architecture Overview
 
-This page documents the architectural decisions (ADRs) that shape the design of this Implementation Guide.
+This page documents the normative architecture decisions that shape the design
+of this Implementation Guide. Published IG pages are self-contained contracts;
+decision outcomes are stated here rather than delegated to internal repository
+documents.
 
-## ADR-003: AW-SST as Crosswalk Target, Not Profile Parent
+## AW-SST as Crosswalk Target, Not Profile Parent
 
 **Status:** Accepted | **Date:** 2026-05-18
 
@@ -12,8 +15,6 @@ must not derive from `KBV_PR_AW_*`, and `kbv.ita.aws` remains outside direct
 package dependencies. The main implementation follow-up is an AW-aligned local
 Claim profile set while preserving the local `ChargeItem`/`Claim`/`Invoice`
 separation.
-
-**Full ADR:** [ADR-003-aw-sst-crosswalk.md](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-003-aw-sst-crosswalk.md)
 
 **Crosswalk:** [AW-SST Crosswalk](aw-sst-crosswalk.html)
 
@@ -27,7 +28,7 @@ separation.
 | Claim implementation required | AW's preliminary/final Claim split is useful and should be reflected in local billing Claim profiles |
 | Scope kept narrow | Follow-up is tracked as one AW bead, not a broad profile-harmonization program |
 
-## ADR-001: Plan-Library vs. Rule-Execution — Boundary, Profile-Strategy, CPG-Reuse
+## Plan-Library vs. Rule-Execution Boundary
 
 **Status:** Accepted | **Date:** 2026-04-27
 
@@ -35,8 +36,6 @@ separation.
 emitted by PVS adapters into FHIR servers) from downstream Rule-Execution services. Computability
 slots (`condition`, `applicability`, `dynamicValue`) are intentionally not populated in plan-library
 resources. Plan variants are differentiated via the `praxis-plan-topic` CodeSystem, not separate profiles.
-
-**Full ADR:** [ADR-001-plan-library-vs-rule-execution.md](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-001-plan-library-vs-rule-execution.md)
 
 ### Key Decisions
 
@@ -56,6 +55,5 @@ resources. Plan variants are differentiated via the `praxis-plan-topic` CodeSyst
 
 ### Cross-References
 
-- Internal adapter architecture: plan-chargeitem linkage
-- Internal rule-execution architecture: Plan-Library vs. Rule-Execution
-- Open-brain sessions: 18715, 18716, 18691 (Plan-Library boundary 2026-04-24); 18751 (3-layer billing 2026-04-25)
+- [Plan-Library vs. Rule-Execution — IG Boundary](plan-library-boundary.html)
+- [AW-SST Crosswalk](aw-sst-crosswalk.html)

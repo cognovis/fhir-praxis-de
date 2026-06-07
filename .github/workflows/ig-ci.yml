@@ -59,6 +59,9 @@ jobs:
       - name: Vendor-leak check
         run: bash scripts/check-ig-vendor-leaks.sh
 
+      - name: IG pagecontent ADR-link check
+        run: bash scripts/check-ig-pagecontent-no-adr-links.sh
+
       - name: Install SUSHI
         run: |
           npm install -g fsh-sushi

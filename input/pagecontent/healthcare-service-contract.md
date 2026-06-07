@@ -1,7 +1,6 @@
 # HealthcareService Contract
 
 This page defines the canonical ambulatory `HealthcareService` contract for fhir-praxis-de.
-Profile decision: see [ADR-007](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-007-healthcare-service-isik-alignment.md).
 
 ## Profile Decision Summary
 
