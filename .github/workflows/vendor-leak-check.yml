@@ -47,3 +47,5 @@ jobs:
           PY
       - name: Run vendor-leak guard
         run: bash scripts/check-ig-vendor-leaks.sh
+      - name: Run IG pagecontent ADR-link guard
+        run: bash scripts/check-ig-pagecontent-no-adr-links.sh

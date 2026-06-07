@@ -28,6 +28,7 @@ fi
 
 # 3. Block product-/adapter-specific names in published IG source
 "$ROOT/scripts/check-ig-vendor-leaks.sh"
+"$ROOT/scripts/check-ig-pagecontent-no-adr-links.sh"
 
 # 4. Run SUSHI (unless --skip-sushi, e.g. when called after IG Publisher)
 if [ "$SKIP_SUSHI" = false ]; then

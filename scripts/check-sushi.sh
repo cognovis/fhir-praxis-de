@@ -63,6 +63,7 @@ echo "$CHANGED" | grep -qE '^input/pagecontent/' && NEEDS_CHECK=1
 echo "$CHANGED" | grep -qE '^test/Profile/' && NEEDS_CHECK=1
 echo "$CHANGED" | grep -qE '^(sushi-config\.yaml|VERSION)$' && NEEDS_CHECK=1
 echo "$CHANGED" | grep -qE '^scripts/check-ig-vendor-leaks\.sh$' && NEEDS_CHECK=1
+echo "$CHANGED" | grep -qE '^scripts/check-ig-pagecontent-no-adr-links\.sh$' && NEEDS_CHECK=1
 
 if [ "$NEEDS_CHECK" -eq 0 ]; then
   exit 0
@@ -73,6 +74,7 @@ echo "🔍 pre-push: changes touch FSH/sushi-config — verifying sushi build is
 echo ""
 
 "$REPO_ROOT/scripts/check-ig-vendor-leaks.sh"
+"$REPO_ROOT/scripts/check-ig-pagecontent-no-adr-links.sh"
 echo ""
 
 # Version sync check (cheap, do first)

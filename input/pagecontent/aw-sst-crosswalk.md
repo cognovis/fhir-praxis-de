@@ -13,10 +13,15 @@ AW-SST is a reference and crosswalk target because it is the closest official
 FHIR model for PVS archive/change export. It is not a direct dependency or live
 PVS synchronization contract.
 
-See ADR-003:
-[AW-SST as Crosswalk Target, Not Profile Parent](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-003-aw-sst-crosswalk.md).
-See ADR-005:
-[Account-Centered Billing Case Model](https://github.com/cognovis/fhir-praxis-de/blob/main/docs/adr/ADR-005-account-centered-billing-case-model.md).
+Normative architecture outcomes:
+
+- AW-SST is a semantic crosswalk and export reference only. Local profiles must
+  not derive from `KBV_PR_AW_*`, and `kbv.ita.aws` stays outside direct package
+  dependencies.
+- Billing cases use `AccountPraxisSchein` as the Schein anchor. Clinical contacts
+  use `EncounterPraxis` (class `AMB` or `HH`) and remain billing-agnostic.
+  Care programs such as HZV, HVG, and DMP use base R4 `EpisodeOfCare`.
+  See [Architecture Overview](architecture.html) for the full decision tables.
 
 ## Sources Checked
 
@@ -68,7 +73,7 @@ of PVS data areas.
 | Selective contracts | `Contract`, HZV/HVG extensions, `InsurancePlanDE` where needed | `KBV_PR_AW_Selektivvertrag` | Crosswalk | Keep contract identifier and tariff model; export to AW selective-contract representation. |
 | EncounterPraxis contact | `EncounterPraxis` (clinical contact, class AMB/HH; billing-agnostic) | `KBV_PR_AW_Begegnung`; home-visit contacts also crosswalk to `KBV_PR_AW_Hausbesuch` where export requires the AW home-visit profile | Clean crosswalk, no parent | `EncounterPraxis` is now the clinical contact and crosswalks cleanly to AW Begegnung. Do not parent: live contacts must not inherit archive-completeness constraints, and `kbv.ita.aws@1.2.0` adds old base-package pressure. Keep Scheinart and coverage on Account. |
 | AccountPraxisSchein billing case | `AccountPraxisSchein` (R4 Account; Schein billing-case anchor) | No `KBV_PR_AW_Account` equivalent. Export decomposes into AW encounter context (`KBV_PR_AW_Begegnung` / `KBV_PR_AW_Hausbesuch`), `KBV_PR_AW_Krankenversicherungsverhaeltnis`, and `KBV_PR_AW_Abrechnung_*` Claim resources. | Local operational layer, no AW parent | Account carries ScheinNummer, Scheinart, servicePeriod, coverage, and open/closed case status. AW export materializes the relevant coverage and per-area Claims rather than exporting Account directly. |
-| Home visit Wegegeld | `EncounterPraxis` with class `HH` plus `WegegeldHausbesuchExt` distance and zone | `KBV_EX_AW_Hausbesuch_Entfernungsinformationen`; `KBV_VS_AW_Hausbesuch_Besuchszonen`; `KBV_PR_AW_Hausbesuch` export target | Crosswalk, no separate local profile | Distance comes from `Patient.EntfernungZurPraxis` in km. Zone comes from per-case `Schein.Zonenkennzeichen`, falling back to `Patient.Zonenkennzeichen`. Downstream editors may edit the extension and write back per ADR-002. Wegegeld billing codes such as WT2 remain `ChargeItem` / `Claim.item`. |
+| Home visit Wegegeld | `EncounterPraxis` with class `HH` plus `WegegeldHausbesuchExt` distance and zone | `KBV_EX_AW_Hausbesuch_Entfernungsinformationen`; `KBV_VS_AW_Hausbesuch_Besuchszonen`; `KBV_PR_AW_Hausbesuch` export target | Crosswalk, no separate local profile | Distance comes from `Patient.EntfernungZurPraxis` in km. Zone comes from per-case `Schein.Zonenkennzeichen`, falling back to `Patient.Zonenkennzeichen`. Downstream editors may edit the extension and write distance or zone values back to the patient or Schein context. Wegegeld billing codes such as WT2 remain `ChargeItem` / `Claim.item`. |
 | Stationary treatment | Local administrative workflow where present | `KBV_PR_AW_Stationaere_Behandlung` | Adapter/export crosswalk | No immediate local parent/profile change. |
 | Diagnosis | `PraxisConditionDE`, older `PraxisCondition`, `DauerdiagnoseExt`; quarterly billing projection on `Claim.diagnosis` | `KBV_PR_AW_Diagnose` | Crosswalk, no parent | Keep `asserter` and `evidence.detail`. Confirmed by `fpde-mub`: KBV-AWS Diagnosesicherheit maps to `Condition.verificationStatus`/`clinicalStatus` as `A -> refuted`, `G -> confirmed/active`, `V -> provisional or differential/active`, `Z -> confirmed/resolved`. Claim diagnosis dedupe is exact billing tuple only. |
 | Accident | Local BG/accident context and `Procedure`/`Condition` links | `KBV_PR_AW_Unfall`, `KBV_PR_AW_Unfall_Ort` | Crosswalk | Use AW as export target; do not collapse accident handling into diagnosis profile inheritance. |
@@ -90,7 +95,7 @@ of PVS data areas.
 | Billing claim | `PraxisPreliminaryBillingClaimDE`, `PraxisGKVClaimDE`, `PraxisPrivateClaimDE`, `PraxisBGClaimDE`, `PraxisSelectiveContractClaimDE`; `PASClaimDE` remains prior-auth only; `ChargeItemPraxisDe`; `PraxisInvoiceDE` | `KBV_PR_AW_Abrechnung_Vorlaeufig`, `_vertragsaerztlich`, `_privat`, `_BG`, `_HzV_BesondereVersorgung_Selektiv` | Implemented | Five local billing Claim profiles added. Preliminary claim carries item lines (use=predetermination). Final claims (GKV/private/BG/selective, use=claim) reference the preliminary claim via `Claim.related`. |
 | Billing service lines | `ChargeItemPraxisDe`, billing extensions, `ChargeItemDefinition` catalog | AW preliminary Claim item lines and item categories | Crosswalk | Keep ChargeItem as operational source. Export service lines into preliminary AW-style Claim items. |
 | Fiscal invoice | `PraxisInvoiceDE` with tax categories, exemption reason, small-business notice | AW private/BG/final Claim with invoice-like metadata | Intentional divergence | Keep Invoice separate. Link or map to private/BG Claim where needed; do not treat AW Claim as tax invoice. |
-| Billing patterns | `PraxisBillingPattern`, `PraxisBillingActivity`, `ChargeItemDefinition` | `KBV_PR_AW_Behandlungsbaustein_Definition`, `_Leistungsziffern`, `_Diagnose`, `_Verordnung`, `_Textvorlage`, `_OMIMCode`, `_Sonstige` | Crosswalk, no parent | Keep plan-library/rule-execution boundary from ADR-001. Export or import AW Behandlungsbaustein semantics through mapping. |
+| Billing patterns | `PraxisBillingPattern`, `PraxisBillingActivity`, `ChargeItemDefinition` | `KBV_PR_AW_Behandlungsbaustein_Definition`, `_Leistungsziffern`, `_Diagnose`, `_Verordnung`, `_Textvorlage`, `_OMIMCode`, `_Sonstige` | Crosswalk, no parent | Keep the Plan-Library vs. Rule-Execution boundary: plan templates stay declarative; validation rules live outside FHIR. Export or import AW Behandlungsbaustein semantics through mapping. |
 | Documents and attachments | `PraxisComposition`; no broad local DocumentReference profile yet | `KBV_PR_AW_Anlage`, `KBV_PR_AW_Gesundheitspass` | Gap/crosswalk | Add archive-oriented DocumentReference profile only if examples/export need attachment metadata beyond Composition. |
 | Consents and directives | Local Consent extensions | `KBV_PR_AW_Patientenverfuegung`, `KBV_PR_AW_Vorsorgevollmacht`, `KBV_PR_AW_Notfallbenachrichtigter` | Crosswalk | Keep local consent model; map directive/notification use cases on export. |
 | Provenance and audit | Local AI Provenance extensions and Provenance usage | `KBV_PR_AW_Provenienz`, `KBV_PR_AW_Report_Import`, `KBV_PR_AW_Report_Export`, `KBV_PR_AW_Hersteller_Software` | Crosswalk/gap | Add AW archive import/export AuditEvent support if the export pipeline needs explicit reports. |
@@ -138,13 +143,12 @@ Invariants maintained:
 - `AccountPraxisSchein` and `EncounterPraxis` remain local profiles, not AW
   children; AW vocabulary and codes are reused where they fit local semantics.
 
-## Related Decisions and Beads
+## Related IG Pages and Beads
 
-- ADR-003: `docs/adr/ADR-003-aw-sst-crosswalk.md`
-- ADR-005: `docs/adr/ADR-005-account-centered-billing-case-model.md`
+- [Architecture Overview](architecture.html): AW-SST crosswalk boundary and account-centered billing-case model
 - `fpde-cj3`: AccountPraxisSchein profile and EncounterPraxis clinical-contact re-scope
 - `fpde-mub`: Claim.diagnosis quarterly Behandlungsdiagnosen and KBV-AWS diagnosis certainty mapping
-- External bead `59tj` / ADR-039: downstream Account-centered billing-case decision
+- External bead `59tj`: downstream Account-centered billing-case coordination
 
 ## Non-Goals
 

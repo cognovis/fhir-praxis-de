@@ -76,4 +76,4 @@ This returns all `RoentgenProcedurePraxisDe` instances for a given organization 
 
 ## Reference
 
-See `architecture.md` (ADR-001) for the Plan-Library vs. Rule-Execution boundary decision that governs how `ChargeItemPraxisDe` integrates with the billing workflow.
+See [Plan-Library vs. Rule-Execution — IG Boundary](plan-library-boundary.html) for the boundary that governs how `ChargeItemPraxisDe` integrates with the billing workflow: plan templates and catalog references stay in Plan-Library resources; validation and frequency rules run in downstream rule-execution services, not in FHIR computability slots.
