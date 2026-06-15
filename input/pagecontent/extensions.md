@@ -21,6 +21,8 @@ Queue management extensions for patient flow in the practice.
 | `EncounterCreatedAtExt` | dateTime | Erstellungszeitpunkt des Scheins im PVS |
 | `ScheintypExt` | Coding | Scheinart (GKV, PKV, BG, IGeL, etc.) |
 | `LinkedDocumentExt` | Reference | Referenz auf ein verlinktes Dokument (Verlinktes Dokument) |
+| `TreatmentContextExt` | complex | Treatment context for check-in (workplaceFunction, checkInTimestamp); used by `EncounterPraxisPoPP` |
+| `PoPPTokenAnchorExt` | Identifier | Adapter-boundary stub anchor for a PoPP token identifier; cryptographic validation deferred to TI connector |
 
 ## Billing / Ziffernketten
 
