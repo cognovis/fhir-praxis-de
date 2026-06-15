@@ -36,6 +36,7 @@ The IG therefore combines reusable extensions and terminology with a small numbe
 | Resource | Usage | Key Extensions |
 |----------|-------|----------------|
 | **Encounter** | Patient visit with queue management | ArrivalTimeExt, EncounterCalledExt, EncounterCreatedAtExt |
+| **[EncounterPraxisPoPP](StructureDefinition-encounter-praxis-popp.html)** | PoPP-supported patient check-in (adapter-boundary stub) | TreatmentContextExt, PoPPTokenAnchorExt |
 | **Condition** | Diagnoses with German-specific metadata | DauerdiagnoseExt |
 | **ServiceRequest** | Überweisungen (referrals) | ReferralSugTypeExt, ReferralOptimizationStatusExt |
 | **Communication** | Einweisungen (hospital admissions) | KheBelegarztExt, KheNotfallExt, KheUnfallExt |
