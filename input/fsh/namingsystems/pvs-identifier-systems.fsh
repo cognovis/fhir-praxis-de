@@ -153,3 +153,16 @@ Usage: #definition
 * uniqueId[0].type = #uri
 * uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/abrechnungsquartal"
 * uniqueId[0].preferred = true
+
+Instance: popp-token-id
+InstanceOf: NamingSystem
+Usage: #definition
+* name = "PoPPTokenIdentifier"
+* status = #draft
+* kind = #identifier
+* date = "2026-06-15"
+* publisher = "cognovis GmbH"
+* description = "Local identifier system for PoPP token anchors. Used as a stub adapter-boundary anchor until cryptographic PoPP token validation is available via the TI connector."
+* uniqueId[0].type = #uri
+* uniqueId[0].value = "https://fhir.cognovis.de/praxis/NamingSystem/popp-token-id"
+* uniqueId[0].preferred = true
