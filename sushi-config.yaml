@@ -99,6 +99,8 @@ pages:
     title: Multi-Coverage Linking Pattern
   claim-diagnosis-contract.md:
     title: Claim Diagnosis Contract
+  popp-checkin-workflow.md:
+    title: PoPP Check-in Workflow
 
 menu:
   Home: index.html
@@ -120,6 +122,7 @@ menu:
     Vererbungsarchitektur: inheritance-architecture.html
     Multi-Coverage: multi-coverage.html
     Claim Diagnosis Contract: claim-diagnosis-contract.html
+    PoPP Check-in Workflow: popp-checkin-workflow.html
     Practice Role Functions: practitioner-role-functions.html
     HealthcareService Contract: healthcare-service-contract.html
     Location / ISiK Standort: location-standort-contract.html
