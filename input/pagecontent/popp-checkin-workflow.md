@@ -66,7 +66,7 @@ online consultation or
 online check-in precedes an in-practice visit.
 
 Consent handling remains separate from the PoPP token anchor. Existing local
-[`Consent`](profiles.html#consent) modeling and
+[`Consent`](extensions.html#consent--einwilligung) modeling and
 [`Consent` extensions](extensions.html#consent--einwilligung) continue to cover
 ePA release or other authorization contexts. This workflow does not modify
 Consent definitions, Appointment mode terminology, Appointment readiness
