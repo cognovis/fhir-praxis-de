@@ -4,9 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.6] - 2026-06-15
+
 ### Added
 
 - **popp-checkin-workflow** (fpde-blo): Added `EncounterPraxisPoPP` profile for PoPP-supported patient check-in workflows. The profile extends `EncounterPraxis` and requires the `treatment-context` extension (workplace function fixed to `reception-check-in`, optional check-in timestamp) and allows the `popp-token-anchor` extension as an adapter-boundary stub. Cryptographic PoPP token validation is deferred until TI connector availability and the productive Gematik PoPP service (spec V1.0.0 RC, draft). A `NamingSystem` for the local PoPP token identifier system (`https://fhir.cognovis.de/praxis/NamingSystem/popp-token-id`) is included as the adapter hand-off anchor. Added IG narrative page *PoPP Check-in Workflow* describing both Phase 1 (eGK) and Phase 2 (GesundheitsID) check-in paths and the adapter boundary.
+- **schein-untergruppe** (fpde-c7b): Added `schein-untergruppe` CodeSystem and ValueSet for cognovis semantic Scheinuntergruppe codes (KVDT FK 4239), with extensible binding on the `account-scheinuntergruppe` extension.
 
 ## [0.80.5] - 2026-06-07
 
