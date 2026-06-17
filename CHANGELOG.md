@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.8] - 2026-06-17
+
+### Added
+
+- **account-ueberweisung-von**: Added `AccountUeberweisungVonBsnrExt` (`account-ueberweisung-von-bsnr`, string) and `AccountUeberweisungVonLanrExt` (`account-ueberweisung-von-lanr`, string) on `AccountPraxisSchein`. On an Überweisungsschein (Scheinart Überweisung) these carry the referring practice BSNR (`Schein.ÜberweisungVon`) and the referring physician LANR (`Schein.ÜberweisungVonLANR`) as raw source strings — the Account-side counterpart to the ServiceRequest-based referral modelled on the requesting side. Both are optional (`0..1 MS`) slices on the billing-case profile.
+
 ## [0.80.7] - 2026-06-17
 
 ### Added
