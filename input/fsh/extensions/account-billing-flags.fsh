@@ -36,3 +36,10 @@ Title: "eGK Lesedatum"
 Description: "Datum des letzten eGK-/VSDM-Einlesens im Quartal. Fehlt das Datum, wurde die Karte im Quartal nicht eingelesen (vgl. Ersatzverfahren). Quelle: Schein.Chipkartenlesedatum (Sentinel-Wert wird als fehlend abgebildet)"
 Context: Account
 * value[x] only date
+
+Extension: AccountCreatedAtExt
+Id: account-created-at
+Title: "Account Anlagedatum"
+Description: "Zeitpunkt der Anlage des Scheins (Abrechnungsfall) im PVS. Fachliches Anlagedatum aus dem Quellsystem, getrennt von den technischen Stempeln (meta.lastUpdated / Server-createdAt) und typischerweise abweichend vom servicePeriod (Quartalsgrenzen) und vom eGK-Lesedatum. Quelle: Schein.DatumAnlage"
+Context: Account
+* value[x] only dateTime

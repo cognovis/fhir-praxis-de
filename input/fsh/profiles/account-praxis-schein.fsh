@@ -19,7 +19,8 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
     AccountEgkLesedatumExt named egkLesedatum 0..1 MS and
     AccountTsvgVermittlungsartExt named tsvgVermittlungsart 0..1 MS and
     AccountTerminvermittlungsdatumExt named terminvermittlungsdatum 0..1 MS and
-    AccountScheinuntergruppeExt named scheinuntergruppe 0..1 MS
+    AccountScheinuntergruppeExt named scheinuntergruppe 0..1 MS and
+    AccountCreatedAtExt named createdAt 0..1 MS
 * extension[abrechnungssperre] ^short = "Abrechnungssperre flag (Schein.Abrechnungssperre); identisch zu 'Nicht abrechnen'"
 * extension[ersatzverfahren] ^short = "Ersatzverfahren flag (Schein.Ersatzverfahren)"
 * extension[nachzuegler] ^short = "Nachzuegler flag (Schein.Nachzuegler)"
@@ -28,6 +29,7 @@ Description: "Billing case (Schein) for ambulatory practice. Account.identifier 
 * extension[tsvgVermittlungsart] ^short = "TSVG Vermittlungs-/Kontaktart (Schein.Vermittlungsart)"
 * extension[terminvermittlungsdatum] ^short = "Tag der Terminvermittlung (Schein.TagDerTerminvermittlung)"
 * extension[scheinuntergruppe] ^short = "Scheinuntergruppe (KVDT FK 4239), extensible KBV binding (Schein.Scheinuntergruppe)"
+* extension[createdAt] ^short = "Anlagedatum des Scheins im PVS (Schein.DatumAnlage); fachliches Quelldatum, abweichend von servicePeriod und egkLesedatum"
 
 * identifier 1..* MS
 * identifier ^slicing.discriminator.type = #value
