@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.7] - 2026-06-17
+
+### Added
+
+- **account-created-at**: Added `AccountCreatedAtExt` (`account-created-at`, dateTime) on `AccountPraxisSchein` carrying the case creation timestamp from the source PVS (`Schein.DatumAnlage`). This is the business creation date ("Anlagedatum"), kept distinct from server-managed technical timestamps (`meta.lastUpdated` / server `createdAt`) and typically diverging from `servicePeriod` (quarter boundaries) and `egkLesedatum`. Mirrors the existing `encounter-created-at` extension on the Account billing-case resource.
+
 ## [0.80.6] - 2026-06-15
 
 ### Added
