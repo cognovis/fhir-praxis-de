@@ -4,7 +4,7 @@
   "acceptance_criteria": [
     {
       "id": "AC1",
-      "status": "completed",
+      "status": "done",
       "summary": "PraxisChargeItemDefinitionDE allows standard R4 propertyGroup.priceComponent with type, code, amount, and factor; PVS EBM Hausbesuch example validates with Punktwert and informational Steigerungsfaktor.",
       "changed_files": [
         "input/fsh/profiles/praxis-chargeitemdefinition.fsh",
@@ -17,7 +17,7 @@
     },
     {
       "id": "AC2",
-      "status": "completed",
+      "status": "done",
       "summary": "PraxisBillingPattern marks effectivePeriod Must Support and adds a standard useContext[jurisdiction] slice; the BillingPattern example validates with a 2026 version period and DE-BW jurisdiction.",
       "changed_files": [
         "input/fsh/profiles/praxis-billingpattern.fsh",
@@ -30,7 +30,7 @@
     },
     {
       "id": "AC3",
-      "status": "completed",
+      "status": "done",
       "summary": "PraxisContractDE binds Contract.type to PvsRegimeTypeVS for EBM, GOÄ, UV-GOÄ, HZV, and DMP; examples validate for all five regimes.",
       "changed_files": [
         "input/fsh/codesystems/billing-type.fsh",
@@ -45,7 +45,7 @@
     },
     {
       "id": "AC4",
-      "status": "completed",
+      "status": "done",
       "summary": "Final SUSHI and check-sushi validations are green; no new Extension definitions were added in the new PVS files; changelog and bead artifacts were written.",
       "changed_files": [
         "CHANGELOG.md",
