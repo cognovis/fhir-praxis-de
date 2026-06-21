@@ -11,6 +11,9 @@ Description: "Profil fuer Abrechnungsmuster (Ziffernketten) in der deutschen amb
 // Title is required
 * title 1..1
 
+// Standard validity window for versioned billing pattern contracts
+* effectivePeriod MS
+
 // Identifier: optional source-system billing pattern ID
 * identifier MS
 * identifier ^slicing.discriminator.type = #value
@@ -20,15 +23,17 @@ Description: "Profil fuer Abrechnungsmuster (Ziffernketten) in der deutschen amb
 * identifier[billingPatternId].system = "https://fhir.cognovis.de/praxis/sid/billing-pattern-id"
 * identifier[billingPatternId].value 1..1
 
-// useContext slicing: practitioner + icdFocus
+// useContext slicing: practitioner + icdFocus + jurisdiction
 * useContext ^slicing.discriminator.type = #pattern
 * useContext ^slicing.discriminator.path = "code"
 * useContext ^slicing.rules = #open
-* useContext contains practitioner 0..1 and icdFocus 0..*
+* useContext contains practitioner 0..1 and icdFocus 0..* and jurisdiction 0..*
 * useContext[practitioner].code = http://terminology.hl7.org/CodeSystem/usage-context-type#user
 * useContext[practitioner].value[x] only CodeableConcept
 * useContext[icdFocus].code = http://terminology.hl7.org/CodeSystem/usage-context-type#focus
 * useContext[icdFocus].value[x] only CodeableConcept
+* useContext[jurisdiction].code = http://terminology.hl7.org/CodeSystem/usage-context-type#jurisdiction
+* useContext[jurisdiction].value[x] only CodeableConcept
 
 // Stopfield extension
 * extension contains BillingPatternStopfield named stopfield 0..*

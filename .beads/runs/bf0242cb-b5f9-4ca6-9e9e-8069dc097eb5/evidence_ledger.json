@@ -1,0 +1,101 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-87z",
+  "commands": [
+    {
+      "id": "cmd-sushi-ac1-profile",
+      "command": "sushi .",
+      "purpose": "Validate the new PraxisChargeItemDefinitionDE profile.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings; converted 293 StructureDefinitions, 63 CodeSystems, 59 ValueSets, and 277 instances."
+    },
+    {
+      "id": "cmd-sushi-ac1-example",
+      "command": "sushi .",
+      "purpose": "Validate the PVS ChargeItemDefinition example with Punktwert and Steigerungsfaktor components.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings; converted 278 instances."
+    },
+    {
+      "id": "cmd-sushi-ac2-profile",
+      "command": "sushi .",
+      "purpose": "Validate PraxisBillingPattern effectivePeriod and useContext[jurisdiction] profile changes.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings."
+    },
+    {
+      "id": "cmd-sushi-ac2-example",
+      "command": "sushi .",
+      "purpose": "Validate the BillingPattern example with effectivePeriod and DE-BW jurisdiction.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings."
+    },
+    {
+      "id": "cmd-sushi-ac3-profile",
+      "command": "sushi .",
+      "purpose": "Validate PvsRegimeTypeVS, added BillingTypeCS codes, and PraxisContractDE profile binding.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings; converted 294 StructureDefinitions and 60 ValueSets."
+    },
+    {
+      "id": "cmd-sushi-ac3-examples",
+      "command": "sushi .",
+      "purpose": "Validate PVS Contract examples for EBM, GOÄ, UV-GOÄ, HZV, and DMP.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings; converted 283 instances."
+    },
+    {
+      "id": "cmd-sushi-final",
+      "command": "sushi .",
+      "purpose": "Final full IG source build validation after all source and changelog changes.",
+      "exit_code": 0,
+      "observed_result": "SUSHI completed with 0 Errors and 0 Warnings; exported 697 FHIR resources and assembled ImplementationGuide-de.cognovis.fhir.praxis.json."
+    },
+    {
+      "id": "cmd-source-guard",
+      "command": "rg -n \"^Extension:\" input/fsh/profiles/praxis-chargeitemdefinition.fsh input/fsh/examples/example-pvs-chargeitemdefinition.fsh input/fsh/profiles/praxis-contract.fsh input/fsh/examples/example-pvs-contracts.fsh input/fsh/valuesets/pvs-regime-type.fsh",
+      "purpose": "Verify no new Extension definitions were introduced in the new PVS import foundation files.",
+      "exit_code": 1,
+      "observed_result": "No matches; exit 1 is ripgrep's no-match result."
+    },
+    {
+      "id": "cmd-check-sushi",
+      "command": "bash scripts/check-sushi.sh",
+      "purpose": "Run the repository SUSHI check wrapper.",
+      "exit_code": 0,
+      "observed_result": "Command exited 0 with no output."
+    },
+    {
+      "id": "cmd-metrics-log",
+      "command": "UV_CACHE_DIR=/tmp/codex-uv-cache uv run python - <<'PY'\nimport os, sys\nsys.path.insert(0, os.path.join('/Users/malte/.agents/skills/beads', 'lib', 'orchestrator'))\nfrom metrics import insert_agent_call\ninsert_agent_call(\n    run_id='bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5',\n    bead_id='fpde-87z',\n    phase_label='p5-impl',\n    agent_label='impl-codex-gpt5.5',\n    model='gpt-5.5',\n    iteration=1,\n    input_tokens=0, cached_input_tokens=0, output_tokens=0,\n    reasoning_output_tokens=0, total_tokens=0, duration_ms=0, exit_code=0\n)\nPY",
+      "purpose": "Log required bead metrics entry.",
+      "exit_code": 1,
+      "observed_result": "Failed with sqlite3.OperationalError: attempt to write a readonly database. The canonical metrics database is outside the writable sandbox."
+    }
+  ],
+  "skipped_checks": [
+    {
+      "name": "Standalone IG Publisher QA",
+      "reason": "The bead task specified SUSHI as the executable build validation path; no standalone IG Publisher command was requested or run in this implementation pass."
+    },
+    {
+      "name": "Metrics DB write",
+      "reason": "Attempted the requested metrics insert, but the canonical SQLite database is read-only in this sandbox. A writable override would not contain the requested run_id row."
+    }
+  ],
+  "artifacts": [
+    {
+      "path": ".beads/runs/bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5/implementation_manifest.json",
+      "kind": "implementation_manifest"
+    },
+    {
+      "path": ".beads/runs/bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5/evidence_ledger.json",
+      "kind": "evidence_ledger"
+    },
+    {
+      "path": "fsh-generated/",
+      "kind": "sushi_generated_output",
+      "note": "Regenerated locally by SUSHI; directory is not tracked by git in this worktree."
+    }
+  ]
+}

@@ -8,6 +8,8 @@ Usage: #example
 * type = http://terminology.hl7.org/CodeSystem/plan-definition-type#order-set
 * title = "Hausbesuch — Allgemeinmedizin (EBM)"
 * description = "Standardisierte Ziffernkette fuer den allgemeinmedizinischen Hausbesuch gemaess EBM."
+* effectivePeriod.start = "2026-01-01"
+* effectivePeriod.end = "2026-12-31"
 
 // Source-system billing pattern identifier
 * identifier[billingPatternId].system = "https://fhir.cognovis.de/praxis/sid/billing-pattern-id"
@@ -24,6 +26,12 @@ Usage: #example
 * useContext[icdFocus].valueCodeableConcept.coding[0].system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
 * useContext[icdFocus].valueCodeableConcept.coding[0].code = #I10
 * useContext[icdFocus].valueCodeableConcept.coding[0].display = "Essentielle (primaere) Hypertonie"
+
+// useContext: Jurisdiction-Slice (Baden-Wuerttemberg contract region)
+* useContext[jurisdiction].code = http://terminology.hl7.org/CodeSystem/usage-context-type#jurisdiction
+* useContext[jurisdiction].valueCodeableConcept.coding[0].system = "urn:iso:std:iso:3166:-2"
+* useContext[jurisdiction].valueCodeableConcept.coding[0].code = #DE-BW
+* useContext[jurisdiction].valueCodeableConcept.coding[0].display = "Baden-Wuerttemberg"
 
 // Stopfield 1: Text — Befundbeschreibung
 * extension[stopfield][0].extension[label].valueString = "Befundbeschreibung"
