@@ -1,0 +1,140 @@
+{
+  "contract_version": "1",
+  "bead_id": "fpde-87z",
+  "acceptance_criteria": [
+    {
+      "id": "AC1",
+      "status": "completed",
+      "summary": "PraxisChargeItemDefinitionDE allows standard R4 propertyGroup.priceComponent with type, code, amount, and factor; PVS EBM Hausbesuch example validates with Punktwert and informational Steigerungsfaktor.",
+      "changed_files": [
+        "input/fsh/profiles/praxis-chargeitemdefinition.fsh",
+        "input/fsh/examples/example-pvs-chargeitemdefinition.fsh"
+      ],
+      "evidence_refs": [
+        "cmd-sushi-ac1-profile",
+        "cmd-sushi-ac1-example"
+      ]
+    },
+    {
+      "id": "AC2",
+      "status": "completed",
+      "summary": "PraxisBillingPattern marks effectivePeriod Must Support and adds a standard useContext[jurisdiction] slice; the BillingPattern example validates with a 2026 version period and DE-BW jurisdiction.",
+      "changed_files": [
+        "input/fsh/profiles/praxis-billingpattern.fsh",
+        "input/fsh/examples/example-billingpattern.fsh"
+      ],
+      "evidence_refs": [
+        "cmd-sushi-ac2-profile",
+        "cmd-sushi-ac2-example"
+      ]
+    },
+    {
+      "id": "AC3",
+      "status": "completed",
+      "summary": "PraxisContractDE binds Contract.type to PvsRegimeTypeVS for EBM, GOÄ, UV-GOÄ, HZV, and DMP; examples validate for all five regimes.",
+      "changed_files": [
+        "input/fsh/codesystems/billing-type.fsh",
+        "input/fsh/valuesets/pvs-regime-type.fsh",
+        "input/fsh/profiles/praxis-contract.fsh",
+        "input/fsh/examples/example-pvs-contracts.fsh"
+      ],
+      "evidence_refs": [
+        "cmd-sushi-ac3-profile",
+        "cmd-sushi-ac3-examples"
+      ]
+    },
+    {
+      "id": "AC4",
+      "status": "completed",
+      "summary": "Final SUSHI and check-sushi validations are green; no new Extension definitions were added in the new PVS files; changelog and bead artifacts were written.",
+      "changed_files": [
+        "CHANGELOG.md",
+        ".beads/runs/bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5/implementation_manifest.json",
+        ".beads/runs/bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5/evidence_ledger.json"
+      ],
+      "evidence_refs": [
+        "cmd-sushi-final",
+        "cmd-check-sushi",
+        "cmd-source-guard"
+      ]
+    }
+  ],
+  "changed_files": [
+    "CHANGELOG.md",
+    "input/fsh/codesystems/billing-type.fsh",
+    "input/fsh/examples/example-billingpattern.fsh",
+    "input/fsh/examples/example-pvs-chargeitemdefinition.fsh",
+    "input/fsh/examples/example-pvs-contracts.fsh",
+    "input/fsh/profiles/praxis-billingpattern.fsh",
+    "input/fsh/profiles/praxis-chargeitemdefinition.fsh",
+    "input/fsh/profiles/praxis-contract.fsh",
+    "input/fsh/valuesets/pvs-regime-type.fsh",
+    ".beads/runs/bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5/implementation_manifest.json",
+    ".beads/runs/bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5/evidence_ledger.json"
+  ],
+  "commits": [
+    {
+      "hash": "d60c996",
+      "message": "feat(fpde-87z): ChargeItemDefinitionDE profile - priceComponent/Punktwert"
+    },
+    {
+      "hash": "de7793b",
+      "message": "feat(fpde-87z): ChargeItemDefinitionDE example - Punktwert/Steigerungsfaktor"
+    },
+    {
+      "hash": "6f54020",
+      "message": "feat(fpde-87z): PraxisBillingPattern - effectivePeriod + useContext/jurisdiction"
+    },
+    {
+      "hash": "f2012c9",
+      "message": "feat(fpde-87z): BillingPattern example - version period and region"
+    },
+    {
+      "hash": "8e85553",
+      "message": "feat(fpde-87z): Contract profile and PVS regime typing"
+    },
+    {
+      "hash": "7588b5a",
+      "message": "feat(fpde-87z): PVS Contract regime examples"
+    },
+    {
+      "hash": "3da28ef",
+      "message": "docs(fpde-87z): document PVS import foundation"
+    }
+  ],
+  "tests": [
+    {
+      "name": "SUSHI final build",
+      "command": "sushi .",
+      "result": "exit 0; 0 Errors; 0 Warnings; exported 697 FHIR resources"
+    },
+    {
+      "name": "SUSHI wrapper",
+      "command": "bash scripts/check-sushi.sh",
+      "result": "exit 0"
+    },
+    {
+      "name": "Source guard",
+      "command": "rg -n \"^Extension:\" input/fsh/profiles/praxis-chargeitemdefinition.fsh input/fsh/examples/example-pvs-chargeitemdefinition.fsh input/fsh/profiles/praxis-contract.fsh input/fsh/examples/example-pvs-contracts.fsh input/fsh/valuesets/pvs-regime-type.fsh",
+      "result": "exit 1; no Extension definitions found in new PVS files"
+    }
+  ],
+  "external_resources": [],
+  "scope_changes": [],
+  "downstream_impacts": [
+    "Consumers can resolve Coverage billing regime to a typed Contract by matching Contract.type.coding.code against BillingTypeCS regime codes.",
+    "PVS importers can populate ChargeItemDefinition.propertyGroup.priceComponent directly for point value and factor catalog data without adding extensions.",
+    "BillingPattern consumers can use PlanDefinition.effectivePeriod and useContext[jurisdiction] directly for version and regional selection."
+  ],
+  "evidence_refs": [
+    "cmd-sushi-ac1-profile",
+    "cmd-sushi-ac1-example",
+    "cmd-sushi-ac2-profile",
+    "cmd-sushi-ac2-example",
+    "cmd-sushi-ac3-profile",
+    "cmd-sushi-ac3-examples",
+    "cmd-sushi-final",
+    "cmd-check-sushi",
+    "cmd-source-guard"
+  ]
+}
