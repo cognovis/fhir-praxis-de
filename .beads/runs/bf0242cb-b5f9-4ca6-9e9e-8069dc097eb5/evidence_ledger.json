@@ -64,12 +64,23 @@
       "purpose": "Run the repository SUSHI check wrapper.",
       "exit_code": 0,
       "observed_result": "Command exited 0 with no output."
+    },
+    {
+      "id": "cmd-metrics-log",
+      "command": "UV_CACHE_DIR=/tmp/codex-uv-cache uv run python - <<'PY'\nimport os, sys\nsys.path.insert(0, os.path.join('/Users/malte/.agents/skills/beads', 'lib', 'orchestrator'))\nfrom metrics import insert_agent_call\ninsert_agent_call(\n    run_id='bf0242cb-b5f9-4ca6-9e9e-8069dc097eb5',\n    bead_id='fpde-87z',\n    phase_label='p5-impl',\n    agent_label='impl-codex-gpt5.5',\n    model='gpt-5.5',\n    iteration=1,\n    input_tokens=0, cached_input_tokens=0, output_tokens=0,\n    reasoning_output_tokens=0, total_tokens=0, duration_ms=0, exit_code=0\n)\nPY",
+      "purpose": "Log required bead metrics entry.",
+      "exit_code": 1,
+      "observed_result": "Failed with sqlite3.OperationalError: attempt to write a readonly database. The canonical metrics database is outside the writable sandbox."
     }
   ],
   "skipped_checks": [
     {
       "name": "Standalone IG Publisher QA",
       "reason": "The bead task specified SUSHI as the executable build validation path; no standalone IG Publisher command was requested or run in this implementation pass."
+    },
+    {
+      "name": "Metrics DB write",
+      "reason": "Attempted the requested metrics insert, but the canonical SQLite database is read-only in this sandbox. A writable override would not contain the requested run_id row."
     }
   ],
   "artifacts": [
