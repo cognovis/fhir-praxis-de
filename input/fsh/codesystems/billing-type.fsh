@@ -8,12 +8,14 @@ Description: "Codes für Abrechnungsarten in der ambulanten Versorgung. Dient al
 // Bundesweite Gebührenordnungen
 * #ebm "EBM" "Einheitlicher Bewertungsmaßstab (GKV)"
 * #goae "GOÄ" "Gebührenordnung für Ärzte (PKV)"
+* #uv-goae "UV-GOÄ" "Unfallversicherungs-Gebührenordnung für Ärzte (BGU/DGUV)"
 * #bema "BEMA" "Bewertungsmaßstab für zahnärztliche Leistungen (GKV)"
 * #goz "GOZ" "Gebührenordnung für Zahnärzte (PKV)"
 * #bgt2001 "BGT2001" "Berufsgenossenschaftliche Gebühren-Tarifpositionen (DGUV)"
 // Selektivverträge (§73b/§73c SGB V) — regionsneutral
 * #hzv "HZV" "Hausarztzentrierte Versorgung (§73b SGB V)"
 * #facharztvertrag "Facharztvertrag" "Facharztvertrag / Besondere Versorgung (§73c/§140a SGB V)"
+* #dmp "DMP" "Disease Management Programme (§137f SGB V)"
 // Sonstige
 * #igel "IGeL" "Individuelle Gesundheitsleistung"
 * #bg "BG" "Berufsgenossenschaft (sonstige BG-Abrechnung)"
