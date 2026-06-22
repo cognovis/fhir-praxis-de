@@ -4,6 +4,8 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.10] - 2026-06-22
+
 ### Added
 
 - **pvs-import-foundation** (fpde-87z): Added `PraxisChargeItemDefinitionDE` with standard R4 `propertyGroup.priceComponent` support for Punktwert/Steigerungsfaktor imports, extended `PraxisBillingPattern` with standard `effectivePeriod` and `useContext[jurisdiction]`, and added `PraxisContractDE` plus `PvsRegimeTypeVS` for uniform EBM/GOÄ/UV-GOÄ/HZV/DMP Contract typing.
