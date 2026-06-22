@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.11] - 2026-06-22
+
+### Added
+
+- **dmp-enrollment-de**: Added `CodeSystem/dmp-enrollment-de` (DMP enrollment program types: diabetes type 1/2, coronary heart disease, asthma, COPD, depression, back pain) for use on `EpisodeOfCare.type`. Vendor-neutral clinical terminology, previously shipped by a separate package.
+
 ## [0.80.10] - 2026-06-22
 
 ### Added
