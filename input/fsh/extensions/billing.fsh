@@ -149,6 +149,13 @@ Description: "KBV-Prüfzeit in Minuten für die Plausibilitätsprüfung"
 Context: ChargeItemDefinition
 * value[x] only integer
 
+Extension: BillingKalkzeitwertExt
+Id: billing-kalkzeitwert
+Title: "Kalkulationszeit"
+Description: "KBV-Kalkulationszeit in Minuten (Zeitprofil / Plausibilitätsprüfung); Gegenstück zur Prüfzeit"
+Context: ChargeItemDefinition
+* value[x] only integer
+
 Extension: BillingRlvRelevanzExt
 Id: billing-rlv-relevanz
 Title: "RLV-Relevanz"

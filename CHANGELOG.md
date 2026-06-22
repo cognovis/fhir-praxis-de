@@ -7,6 +7,7 @@ All notable changes to this project will be documented in this file.
 ### Added
 
 - **pvs-import-foundation** (fpde-87z): Added `PraxisChargeItemDefinitionDE` with standard R4 `propertyGroup.priceComponent` support for Punktwert/Steigerungsfaktor imports, extended `PraxisBillingPattern` with standard `effectivePeriod` and `useContext[jurisdiction]`, and added `PraxisContractDE` plus `PvsRegimeTypeVS` for uniform EBM/GOÄ/UV-GOÄ/HZV/DMP Contract typing.
+- **billing-kalkzeitwert**: Added `BillingKalkzeitwertExt` (`billing-kalkzeitwert`, integer) on `ChargeItemDefinition` carrying the KBV Kalkulationszeit in minutes (time-profile / plausibility budget) — the counterpart to the existing `billing-pruefzeit`.
 
 ## [0.80.8] - 2026-06-17
 
