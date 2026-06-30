@@ -38,7 +38,9 @@ The IG therefore combines reusable extensions and terminology with a small numbe
 | **Encounter** | Patient visit with queue management | ArrivalTimeExt, EncounterCalledExt, EncounterCreatedAtExt |
 | **[EncounterPraxisPoPP](StructureDefinition-encounter-praxis-popp.html)** | PoPP-supported patient check-in (adapter-boundary stub) | TreatmentContextExt, PoPPTokenAnchorExt |
 | **Condition** | Diagnoses with German-specific metadata | DauerdiagnoseExt |
-| **ServiceRequest** | Überweisungen (referrals) | ReferralSugTypeExt, ReferralOptimizationStatusExt |
+| **ServiceRequest** | Überweisungen (referrals), Heilmittelverordnungen (remedy orders) | ReferralSugTypeExt, ReferralOptimizationStatusExt |
+| **[PraxisReferralDE](StructureDefinition-praxis-referral-de.html)** | Überweisung in die Praxis | Referral extensions on requester |
+| **[PraxisTherapeuticRemedyDE](StructureDefinition-praxis-therapeutic-remedy-de.html)** | Heilmittelverordnung (Muster 13) | category discriminator, gevko EVO_VS_HLM_* bindings |
 | **Communication** | Einweisungen (hospital admissions) | KheBelegarztExt, KheNotfallExt, KheUnfallExt |
 | **CareTeam** | Treatment team (interdisciplinary care coordination) | — |
 | **[ProcedureAmbulantDE](StructureDefinition-procedure-ambulant-de.html)** | Ambulante Eingriffe mit OPS-Kodierung | — (OPS via CodingOPS from de.basisprofil.r4) |
@@ -824,6 +826,26 @@ When capturing lab reports in a PVS:
 See examples: `example-lab-dr-blutbild`, `example-lab-dr-urinkultur`, `example-lab-dr-histologie`, `example-lab-dr-preliminary`, `example-lab-dr-hba1c-jan`, `example-lab-dr-hba1c-apr`, `example-lab-dr-hba1c-q3`.
 
 ## Note on Resource Choice
+
+### PraxisTherapeuticRemedyDE — Heilmittelverordnung (Muster 13)
+
+The `PraxisTherapeuticRemedyDE` profile models a German statutory **Heilmittelverordnung** (therapeutic remedy prescription, form Muster 13) as a `ServiceRequest` with `intent = order`. This is a **remedy order** — prescribing physiotherapy, occupational therapy, speech therapy, podiatry, or nutritional therapy — and is intentionally **distinct from** `PraxisReferralDE` (referral into the practice) and from laboratory or imaging `ServiceRequest` variants.
+
+| Element | Cardinality | Notes |
+|---------|-------------|-------|
+| `category[therapeuticRemedy]` | 1..1 | Fixed discriminator (`EVO_CS_FOR_FormularArt#e13`) identifying eHLM remedy orders |
+| `intent` | 1..1 | Fixed to `order` |
+| `subject` | 1..1 | Reference(Patient) |
+| `requester` | 0..1 MS | Prescribing physician or practice (LANR/BSNR) |
+| `authoredOn` | 0..1 MS | Prescription date |
+| `reasonCode[icd10gm]` | 0..* MS | ICD-10-GM indication |
+| `code` | 0..1 MS | Heilmittelkatalog position (`EVO_CS_HLM_Katalog` system + per-record code; example binding only) |
+| `orderDetail` | 0..* MS | Sliced details: Diagnosegruppe (KBV), Leitsymptomatik, AnlageTyp, Heilmittelbereich, Hausbesuch (gevko) |
+| `quantity[x]` | 0..1 MS | Prescribed units (e.g. treatment sessions) |
+| `occurrence[x]` | 0..1 MS | Treatment frequency / schedule |
+| `insurance` | 0..* MS | Optional Reference(FPDECoverageGKV or FPDECoveragePrivat) |
+
+Terminology dependencies: `de.cognovis.terminology.heilmittel` (gevko `EVO_VS_HLM_*` mirror) and `de.cognovis.terminology.kbv` (`KBV_VS_SFHIR_HM_DIAGNOSEGRUPPE`). See `example-therapeutic-remedy-physio` for a complete instance.
 
 The choice of base resource follows FHIR R4 semantics:
 

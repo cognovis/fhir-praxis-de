@@ -44,6 +44,9 @@ dependencies:
   kbv.mio.impfpass.vocab: 1.1.0-cognovis.1
   # KBV Schluesseltabellen mirror used for BAR2-WBO specialty bindings.
   de.cognovis.terminology.kbv: 1.0.0
+  # gevko eHeilmittelverordnung (Muster 13) terminology mirror — EVO_CS_HLM_* / EVO_VS_HLM_*
+  # canonical URLs remain https://fhir.gevko.de/. Source: de.gevko.evo.hlm@1.3.0 via fhir-terminology-de.
+  de.cognovis.terminology.heilmittel: 1.0.0
   # kbv.mio.laborbefund removed: v1.0.0-kommentierung.2 has snapshot bugs
   # (Unknown path in Patient.gender.extension). Our profiles don't inherit
   # from KBV MIO — re-add when KBV fixes their package.
