@@ -1,4 +1,4 @@
-// Heilmittelverordnung (Muster 13) — Physiotherapie example for PraxisTherapeuticRemedyDE
+// Therapeutic remedy prescription (Muster 13) — physiotherapy example for PraxisTherapeuticRemedyDE
 
 Instance: example-therapeutic-remedy-physio
 InstanceOf: PraxisTherapeuticRemedyDE

@@ -1,7 +1,7 @@
-// PraxisTherapeuticRemedyDE — Heilmittelverordnung (Muster 13) remedy order.
+// PraxisTherapeuticRemedyDE — therapeutic remedy prescription (Muster 13 form).
 // Models HMV as ServiceRequest (not MedicationRequest, not PraxisReferralDE).
 // Terminology: gevko EVO_VS_HLM_* via de.cognovis.terminology.heilmittel mirror;
-// Diagnosegruppe via KBV_VS_SFHIR_HM_DIAGNOSEGRUPPE (de.cognovis.terminology.kbv).
+// diagnosis group via KBV_VS_SFHIR_HM_DIAGNOSEGRUPPE (de.cognovis.terminology.kbv).
 // ServiceRequest.code uses stable EVO_CS_HLM_Katalog system + per-record position code;
 // required binding against EVO_VS_HLM_Katalog is intentionally avoided (no backing CodeSystem).
 
@@ -49,7 +49,7 @@ Description: "Heilmittelverordnung (Muster 13) als ServiceRequest — Verordnung
 * reasonCode[icd10gm].coding.system = "http://fhir.de/CodeSystem/bfarm/icd-10-gm"
 * reasonCode[icd10gm].coding.code 1..1 MS
 
-// Heilmittelkatalog position: stable system + per-record code (example binding only)
+// Therapeutic remedy catalog position: stable system + per-record code (example binding only)
 * code MS
 * code ^short = "Verordnetes Heilmittel / Positionsnummer aus Heilmittelkatalog"
 * code.coding 1..* MS
