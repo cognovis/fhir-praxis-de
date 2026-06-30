@@ -72,18 +72,28 @@ Description: "Heilmittelverordnung (Muster 13) als ServiceRequest — Verordnung
     hausbesuch 0..1 MS
 
 * orderDetail[diagnosegruppe] ^short = "Heilmittel-Diagnosegruppe (KBV Schluesseltabelle)"
+* orderDetail[diagnosegruppe].coding 1..* MS
+* orderDetail[diagnosegruppe].coding.system = "https://fhir.kbv.de/CodeSystem/KBV_CS_SFHIR_HM_DIAGNOSEGRUPPE"
 * orderDetail[diagnosegruppe] from https://fhir.kbv.de/ValueSet/KBV_VS_SFHIR_HM_DIAGNOSEGRUPPE (required)
 
 * orderDetail[leitsymptomatik] ^short = "Leitsymptomatik nach Heilmittelkatalog"
+* orderDetail[leitsymptomatik].coding 1..* MS
+* orderDetail[leitsymptomatik].coding.system = "https://fhir.gevko.de/CodeSystem/EVO_CS_HLM_Leitsymptomatik"
 * orderDetail[leitsymptomatik] from https://fhir.gevko.de/ValueSet/EVO_VS_HLM_Leitsymptomatik (required)
 
 * orderDetail[anlageTyp] ^short = "Heilmittel oder ergaenzendes Heilmittel"
+* orderDetail[anlageTyp].coding 1..* MS
+* orderDetail[anlageTyp].coding.system = "https://fhir.gevko.de/CodeSystem/EVO_CS_HLM_Section_Type"
 * orderDetail[anlageTyp] from https://fhir.gevko.de/ValueSet/EVO_VS_HLM_ergaenzendesHLM (required)
 
 * orderDetail[heilmittelbereich] ^short = "Heilmittelbereich (Physio, Ergo, Logo, Podo, Ernaehrung)"
+* orderDetail[heilmittelbereich].coding 1..* MS
+* orderDetail[heilmittelbereich].coding.system = "https://fhir.gevko.de/CodeSystem/EVO_CS_HLM_Heilmittelbereich"
 * orderDetail[heilmittelbereich] from https://fhir.gevko.de/ValueSet/EVO_VS_HLM_Heilmittelbereich (required)
 
 * orderDetail[hausbesuch] ^short = "Hausbesuch angezeigt"
+* orderDetail[hausbesuch].coding 1..* MS
+* orderDetail[hausbesuch].coding.system = "https://fhir.gevko.de/CodeSystem/EVO_CS_HLM_Hausbesuch"
 * orderDetail[hausbesuch] from https://fhir.gevko.de/ValueSet/EVO_VS_HLM_Hausbesuch (extensible)
 
 * quantity[x] MS
