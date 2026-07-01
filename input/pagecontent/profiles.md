@@ -12,7 +12,7 @@ The IG therefore combines reusable extensions and terminology with a small numbe
 |----------|-------|----------------|
 | **[PraxisBillingPattern](StructureDefinition-praxis-billingpattern.html)** | Abrechnungsmuster / Ziffernketten | BillingPatternStopfield |
 | **ChargeItem** | Individual billable service (EBM-Ziffer, GOÄ-Leistung) | BillingSystem, BillingCode, BillingPoints, GoaeFaktor, BillingRlvRelevanz |
-| **ChargeItemDefinition** | Billing catalog entry (EBM/GOÄ catalog) | MultiplierMin/Default/Max, BillingRequirements, BillingExclusions, BillingPruefzeit, BillingFachgruppen |
+| **ChargeItemDefinition** | Billing catalog entry (EBM/GOÄ catalog) | GoaeRegelhoechstsatzFaktor, BillingRequirements, BillingExclusions, BillingPruefzeit, BillingFachgruppen |
 | **Claim** | Submitted billing claim per Schein | AbrechnungsquartalExt, ScheinPositionExt, RabStatusExt |
 | **ClaimResponse** | KV response to submitted claims | HonorarbescheidCorrectionSign |
 | **Account** | Offene Posten / accounts receivable | RechnungsbetragExt, MahnstufeExt, FaelligkeitsdatumExt |

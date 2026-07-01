@@ -171,13 +171,6 @@ Usage: #example
 * extension[=].valueInteger = 1
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/max-per-quarter"
 * extension[=].valueInteger = 1
-// GOÄ-spezifisch (Multiplikatoren)
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/multiplier-min"
-* extension[=].valueDecimal = 1.0
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/multiplier-default"
-* extension[=].valueDecimal = 2.3
-* extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/multiplier-max"
-* extension[=].valueDecimal = 3.5
 // BGT-Katalog
 * extension[+].url = "https://fhir.cognovis.de/praxis/StructureDefinition/bgt-punkte"
 * extension[=].valueDecimal = 0

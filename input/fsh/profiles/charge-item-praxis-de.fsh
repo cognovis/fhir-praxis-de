@@ -9,6 +9,11 @@ Description: "ChargeItem mit Strahlenschutz-relevantem Abrechnungscode muss Char
 Expression: "code.coding.where(memberOf('https://fhir.cognovis.de/imaging/ValueSet/radiation-relevant-billing-codes')).empty() or service.where(resolve() is Procedure).exists()"
 Severity: #error
 
+Invariant: goae-factor-reason-recommended
+Description: "Wenn ein GOÄ-Faktor dokumentiert wird, sollte ein Begründungstext gemäß §12 Abs. 3 GOÄ vorhanden sein."
+Expression: "extension.where(url = 'https://fhir.cognovis.de/praxis/StructureDefinition/goae-faktor').empty() or extension.where(url = 'https://fhir.cognovis.de/praxis/StructureDefinition/goae-begruendung').exists()"
+Severity: #warning
+
 Profile: ChargeItemPraxisDe
 Parent: ChargeItem
 Id: charge-item-praxis-de
@@ -16,6 +21,7 @@ Title: "ChargeItem (Praxis DE)"
 Description: "ChargeItem-Profil fuer die deutsche ambulante Praxis. Stellt sicher, dass strahlenrelevante Abrechnungscodes (GOAe/EBM Bildgebung) per ChargeItem.service auf eine RoentgenProcedurePraxisDe-Prozedur verweisen (Strahlenschutz-Compliance gemaess SS85 StrlSchG). FHIRPath-Invariante: radiation-service-required."
 
 * obeys radiation-service-required
+* obeys goae-factor-reason-recommended
 
 // status: Pflichtfeld (von FHIR R4 required)
 * status MS
