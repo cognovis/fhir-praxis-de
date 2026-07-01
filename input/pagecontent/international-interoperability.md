@@ -16,6 +16,7 @@ This page documents how `de.cognovis.fhir.praxis` concepts map to international 
 | KV Benchmark | Basic resource extensions | No international equivalent | German KV regulatory concept |
 | Accounts Receivable | Account extensions | FHIR Account (R4) | Dunning levels (Mahnstufe) are DE-specific |
 | Condition Extensions | Condition extensions | FHIR Condition (R4) | Dauerdiagnose has no direct equivalent |
+| Therapeutic remedy (Heilmittel) | `PraxisTherapeuticRemedyDE` on `ServiceRequest` | FHIR `ServiceRequest` (R4) | Remedy order (`intent=order`), distinct from referral; gevko eHLM alignment |
 
 ## Detailed Mapping
 
@@ -121,3 +122,14 @@ The dunning workflow is not unique to Germany but the specific Mahnstufen struct
 **Dauerdiagnose** (permanent diagnosis): A German concept marking a diagnosis as permanently relevant across quarters. FHIR `Condition.clinicalStatus = active` is similar but not identical — a Dauerdiagnose is specifically an administrative marker that ensures the diagnosis appears on every Abrechnungsschein without re-entry. The clinical status may change independently.
 
 **DiagnoseSeite** (laterality): The custom `DiagnoseSeiteExt` was removed in v0.31.0 in favour of `http://fhir.de/StructureDefinition/seitenlokalisation` from `de.basisprofil.r4`. The `DiagnoseSeiteCS` / `DiagnoseSeiteVS` vocabulary assets are retained for mapping purposes and remain mappable to SNOMED CT laterality qualifiers (`7771000` left, `24028007` right, `51440002` bilateral).
+
+### Therapeutic Remedy Prescription (Heilmittelverordnung)
+
+**International basis:** FHIR R4 `ServiceRequest` with `intent = order` is the natural resource for ordering a course of care or therapy. International IGs (e.g. US Da Vinci) use `ServiceRequest` for referrals and orders; there is no separate "prescription" resource for non-medication therapies.
+
+**What we model:**
+- `PraxisTherapeuticRemedyDE` — A **remedy order** for statutory therapeutic remedies (physiotherapy, occupational therapy, speech/swallowing therapy, podiatry, nutritional therapy) under German form Muster 13
+- Explicit `category` discriminator so remedy orders are not confused with `PraxisReferralDE` (referral into the practice) or laboratory/imaging `ServiceRequest` profiles
+- Terminology bindings to gevko eHeilmittelverordnung ValueSets (`EVO_VS_HLM_*`) and KBV Heilmittel-Diagnosegruppe
+
+**Distinction from referral:** A referral (`PraxisReferralDE`) transfers care responsibility or requests another physician's opinion. A therapeutic remedy order authorizes a defined course of remedy treatments for the patient — same `ServiceRequest` resource type, different clinical and regulatory semantics. Do not nest remedy orders under referral profiles.

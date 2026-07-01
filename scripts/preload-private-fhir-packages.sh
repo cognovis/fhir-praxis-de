@@ -158,6 +158,7 @@ private_fhir_packages=(
   "de.cognovis.terminology.imaging"
   "de.cognovis.terminology.esco"
   "de.cognovis.terminology.kbv"
+  "de.cognovis.terminology.heilmittel"
   "kbv.mio.impfpass.vocab"
 )
 
