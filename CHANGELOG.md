@@ -4,13 +4,17 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.14] - 2026-07-01
+
+> Corrects npm latest after 0.80.13 was published from stale source without the GOÄ billing artifacts.
+
 ### Added
 
-- **billing-conformance** (fpde-4b6): Added `CodeSystem/uvgoae` as a system definition, `CodeSystem/heilbehandlungsart` with AHB/BHB, `goae-regelhoechstsatz-faktor` on `ChargeItemDefinition`, and `goae-begruendung` on `ChargeItem`/`Claim`. Added a warning-level `ChargeItemPraxisDe` invariant recommending a GOÄ §12 Abs. 3 justification whenever `goae-faktor` is present.
+- **billing-conformance**: Added `CodeSystem/uvgoae` as a system definition, `CodeSystem/heilbehandlungsart` with AHB/BHB, `goae-regelhoechstsatz-faktor` on `ChargeItemDefinition`, and `goae-begruendung` on `ChargeItem`/`Claim`. Added a warning-level `ChargeItemPraxisDe` invariant recommending a GOÄ §12 Abs. 3 justification whenever `goae-faktor` is present.
 
 ### Removed
 
-- **billing-conformance** (fpde-4b6): Removed the unused `multiplier-min`, `multiplier-default`, and `multiplier-max` extensions.
+- **billing-conformance**: Removed the unused `multiplier-min`, `multiplier-default`, and `multiplier-max` extensions.
 
 ## [0.80.11] - 2026-06-22
 
