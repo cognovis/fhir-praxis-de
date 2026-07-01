@@ -37,27 +37,6 @@ Description: "Euro-Wert der Leistungsziffer"
 Context: ChargeItemDefinition
 * value[x] only decimal
 
-Extension: MultiplierMinExt
-Id: multiplier-min
-Title: "Mindestfaktor"
-Description: "Minimaler Steigerungsfaktor für die Leistungsziffer"
-Context: ChargeItemDefinition
-* value[x] only decimal
-
-Extension: MultiplierDefaultExt
-Id: multiplier-default
-Title: "Standardfaktor"
-Description: "Standard-Steigerungsfaktor für die Leistungsziffer"
-Context: ChargeItemDefinition
-* value[x] only decimal
-
-Extension: MultiplierMaxExt
-Id: multiplier-max
-Title: "Maximalfaktor"
-Description: "Maximaler Steigerungsfaktor für die Leistungsziffer"
-Context: ChargeItemDefinition
-* value[x] only decimal
-
 Extension: BillingRequirementsExt
 Id: billing-requirements
 Title: "Abrechnungsvoraussetzungen"
