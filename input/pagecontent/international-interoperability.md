@@ -61,7 +61,7 @@ This page documents how `de.cognovis.fhir.praxis` concepts map to international 
 - **Factor range 1.0--3.5** — The GOÄ Steigerungsfaktor system is unique to Germany
 - **Schwellenwert 2.3** — Factors above 2.3x require written justification (Begründungspflicht)
 - **Höchstsatz 3.5** — Maximum factor, exceeding requires patient consent
-- Our `MultiplierMin/Default/MaxExt` extensions on ChargeItemDefinition encode these regulatory boundaries
+- Our `GoaeRegelhoechstsatzFaktorExt` extension on ChargeItemDefinition encodes the regulatory Regelhöchstsatz threshold
 
 The multiplier pattern itself maps well to `Claim.item.factor` in international FHIR — only the specific regulatory rules around the factor values are DE-specific.
 

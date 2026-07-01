@@ -72,9 +72,8 @@ Extensions specific to GOÄ (private fee schedule) billing.
 |-----------|------|-------------|
 | `GoaeFaktorExt` | decimal | GOÄ-Steigerungsfaktor (1,0 - 3,5) |
 | `GoaePunkteExt` | integer | GOÄ-Punktzahl |
-| `MultiplierMinExt` | decimal | Minimaler Steigerungsfaktor (1,0) |
-| `MultiplierDefaultExt` | decimal | Schwellenwert (z.B. 2,3) |
-| `MultiplierMaxExt` | decimal | Höchstsatz (z.B. 3,5) |
+| `GoaeRegelhoechstsatzFaktorExt` | decimal | Regelhöchstsatz-Faktor gemäß §12 Abs. 3 GOÄ (ChargeItemDefinition) |
+| `GoaeBegruendungExt` | string | Begründungstext gemäß §12 Abs. 3 GOÄ (ChargeItem, Claim) |
 | `RabStatusExt` | code | Status der rechnerischen Abrechnung |
 | `RabRefExt` | Reference | Referenz auf den RAB-Vorgang |
 | `RechFormArtExt` | code | Rechnungsformart |
