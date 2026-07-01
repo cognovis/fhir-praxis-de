@@ -221,6 +221,20 @@ Description: "GOÄ-Steigerungsfaktor (1,0 bis 3,5 bzw. darüber mit Begründung)
 Context: Claim, ChargeItem
 * value[x] only decimal
 
+Extension: GoaeRegelhoechstsatzFaktorExt
+Id: goae-regelhoechstsatz-faktor
+Title: "GOÄ-Regelhöchstsatz-Faktor"
+Description: "Regelhöchstsatz-Faktor gemäß §12 Abs. 3 GOÄ für die Leistungsziffer. Dieser Schwellenwert ist unabhängig vom angewendeten Tarif-Faktor."
+Context: ChargeItemDefinition
+* value[x] only decimal
+
+Extension: GoaeBegruendungExt
+Id: goae-begruendung
+Title: "GOÄ-Begründung"
+Description: "Begründungstext gemäß §12 Abs. 3 GOÄ für einen angewendeten GOÄ-Faktor."
+Context: ChargeItem, Claim
+* value[x] only string
+
 Extension: GoaePunkteExt
 Id: goae-punkte
 Title: "GOÄ-Punkte"
