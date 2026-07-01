@@ -4,6 +4,12 @@ All notable changes to this project will be documented in this file.
 
 ## [Unreleased]
 
+## [0.80.12] - 2026-07-01
+
+### Added
+
+- **therapeutic-remedy** (fpde-11u): Added `PraxisTherapeuticRemedyDE` for German statutory therapeutic remedy prescriptions (Muster 13) as a `ServiceRequest` order profile, including the physiotherapy example and IG narrative. The IG now depends on `de.cognovis.terminology.heilmittel@1.0.0` for gevko eHeilmittelverordnung bindings.
+
 ## [0.80.11] - 2026-06-22
 
 ### Added
